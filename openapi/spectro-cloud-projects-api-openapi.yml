@@ -1,0 +1,862 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations projects API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: projects
+  x-displayName: Projects
+paths:
+  /v1/projects:
+    get:
+      description: 'Deprecated: Use POST /v1/dashboard/projects'
+      operationId: v1ProjectsList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of projects
+          schema:
+            $ref: '#/definitions/v1Projects'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of projects
+      tags:
+      - projects
+    post:
+      operationId: v1ProjectsCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ProjectEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a project
+      tags:
+      - projects
+  /v1/projects/alerts:
+    get:
+      operationId: v1ProjectsAlerts
+      responses:
+        '200':
+          description: An array of alert components
+          schema:
+            $ref: '#/definitions/v1ProjectAlertComponents'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of supported alerts for a project
+      tags:
+      - projects
+  /v1/projects/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1ProjectsUidDelete
+      parameters:
+      - in: query
+        name: cleanupProjectResources
+        type: boolean
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ProjectCleanup'
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified project
+      tags:
+      - projects
+    get:
+      operationId: v1ProjectsUidGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Project'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified project
+      tags:
+      - projects
+    put:
+      operationId: v1ProjectsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ProjectEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified project
+      tags:
+      - projects
+  /v1/projects/{uid}/alerts/{component}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: path
+      name: component
+      required: true
+      type: string
+    delete:
+      operationId: v1ProjectsUidAlertDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified alert to the specified project
+      tags:
+      - projects
+    post:
+      operationId: v1ProjectsUidAlertCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Channel'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create the specified alert to the specified project
+      tags:
+      - projects
+    put:
+      operationId: v1ProjectsUidAlertUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AlertEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Upsert the specified alert to the specified project
+      tags:
+      - projects
+  /v1/projects/{uid}/alerts/{component}/{alertUid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: path
+      name: component
+      required: true
+      type: string
+    - in: path
+      name: alertUid
+      required: true
+      type: string
+    delete:
+      operationId: v1ProjectsUidAlertsUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified alert of the specified project
+      tags:
+      - projects
+    get:
+      operationId: v1ProjectsUidAlertsUidGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Channel'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the specified alert of the specified project
+      tags:
+      - projects
+    put:
+      operationId: v1ProjectsUidAlertsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Channel'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified alert of the specified project
+      tags:
+      - projects
+  /v1/projects/{uid}/macros:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1ProjectsUidMacrosDeleteByMacroName
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Delete the macros for the specified project by macro name
+      tags:
+      - projects
+    get:
+      operationId: v1ProjectsUidMacrosList
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Macros'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: List the macros of the specified project
+      tags:
+      - projects
+    patch:
+      operationId: v1ProjectsUidMacrosUpdateByMacroName
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the macros for the specified project by macro name
+      tags:
+      - projects
+    post:
+      operationId: v1ProjectsUidMacrosCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create or add new macros for the specified project
+      tags:
+      - projects
+    put:
+      operationId: v1ProjectsUidMacrosUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the macros of the specified project
+      tags:
+      - projects
+  /v1/projects/{uid}/meta:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1ProjectsUidMetaUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ObjectMeta'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the metadata of the specified project
+      tags:
+      - projects
+  /v1/projects/{uid}/preferences/clusterSettings:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1ProjectClusterSettingsGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1ProjectClusterSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get project cluster settings
+      tags:
+      - projects
+  /v1/projects/{uid}/preferences/clusterSettings/nodesAutoRemediationSetting:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1ProjectClustersNodesAutoRemediationSettingUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1NodesAutoRemediationSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update project clusters nodes auto remediation setting
+      tags:
+      - projects
+  /v1/projects/{uid}/teams:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1ProjectsUidTeamsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ProjectTeamsEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the teams association to the specified project
+      tags:
+      - projects
+  /v1/projects/{uid}/users:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1ProjectsUidUsersUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ProjectUsersEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the users association to the specified project
+      tags:
+      - projects
+  /v1/projects/{uid}/validate:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1ProjectsUidValidate
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1ProjectActiveResources'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validate and returns active resource of project before delete
+      tags:
+      - projects
+definitions:
+  v1ProjectEntitySpec:
+    description: Project specifications
+    properties:
+      logoUid:
+        type: string
+      teams:
+        items:
+          $ref: '#/definitions/v1TeamRoleMap'
+        type: array
+        uniqueItems: true
+      users:
+        items:
+          $ref: '#/definitions/v1UserRoleMap'
+        type: array
+        uniqueItems: true
+  v1ProjectClusterSettings:
+    properties:
+      nodesAutoRemediationSetting:
+        $ref: '#/definitions/v1NodesAutoRemediationSettings'
+      tenantClusterSettings:
+        $ref: '#/definitions/v1TenantClusterSettings'
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1Projects:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1Project'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1ProjectCleanUpStatus:
+    description: Project cleanup status
+    properties:
+      cleanedResources:
+        items:
+          type: string
+        type: array
+      msg:
+        type: string
+      state:
+        type: string
+    type: object
+  v1Channel:
+    properties:
+      alertAllUsers:
+        type: boolean
+        x-omitempty: false
+      createdBy:
+        type: string
+      http:
+        properties:
+          body:
+            type: string
+          headers:
+            additionalProperties:
+              type: string
+          method:
+            type: string
+          url:
+            type: string
+        type: object
+      identifiers:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      isActive:
+        type: boolean
+        x-omitempty: false
+      status:
+        $ref: '#/definitions/v1AlertNotificationStatus'
+      type:
+        enum:
+        - email
+        - app
+        - http
+        type: string
+      uid:
+        type: string
+    type: object
+  v1Project:
+    description: Project information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ProjectSpec'
+      status:
+        $ref: '#/definitions/v1ProjectStatus'
+    type: object
+  v1ProjectAlertComponent:
+    description: Project alert component
+    properties:
+      description:
+        type: string
+      name:
+        type: string
+      supportedChannels:
+        items:
+          type: string
+        type: array
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1AlertEntity:
+    properties:
+      channels:
+        items:
+          $ref: '#/definitions/v1Channel'
+        type: array
+    type: object
+  v1ProjectCleanup:
+    description: Project delete request payload
+    properties:
+      deletingClusterDurationThresholdInMin:
+        format: int32
+        type: integer
+      provisioningClusterDurationThresholdInMin:
+        format: int32
+        type: integer
+  v1UserRoleMap:
+    properties:
+      roles:
+        items:
+          type: string
+        type: array
+      userId:
+        type: string
+  v1Macros:
+    properties:
+      macros:
+        items:
+          $ref: '#/definitions/v1Macro'
+        type: array
+        uniqueItems: true
+  v1Macro:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  v1Alert:
+    properties:
+      channels:
+        items:
+          $ref: '#/definitions/v1Channel'
+        type: array
+      component:
+        type: string
+    type: object
+  v1ProjectEntity:
+    description: Project information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ProjectEntitySpec'
+    type: object
+  v1ProjectActiveClusters:
+    description: Active clusters
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1ProjectActiveCluster'
+        type: array
+      count:
+        format: int32
+        type: integer
+    type: object
+  v1ProjectActiveAppDeployments:
+    description: Active app deployment
+    properties:
+      apps:
+        items:
+          $ref: '#/definitions/v1ProjectActiveAppDeployment'
+        type: array
+      count:
+        format: int32
+        type: integer
+    type: object
+  v1ProjectAlertComponents:
+    description: Supported project alerts component
+    properties:
+      components:
+        items:
+          $ref: '#/definitions/v1ProjectAlertComponent'
+        type: array
+    type: object
+  v1TeamRoleMap:
+    properties:
+      roles:
+        items:
+          type: string
+        type: array
+      teamId:
+        type: string
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1ProjectUsersEntity:
+    properties:
+      users:
+        items:
+          $ref: '#/definitions/v1UserRoleMap'
+        type: array
+        uniqueItems: true
+  v1ObjectEntity:
+    description: Object identity meta
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ProjectTeamsEntity:
+    properties:
+      teams:
+        items:
+          $ref: '#/definitions/v1TeamRoleMap'
+        type: array
+        uniqueItems: true
+  v1AlertNotificationStatus:
+    properties:
+      isSucceeded:
+        type: boolean
+        x-omitempty: false
+      message:
+        type: string
+      time:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1ProjectActiveResources:
+    description: Active project resources
+    properties:
+      appDeployments:
+        $ref: '#/definitions/v1ProjectActiveAppDeployments'
+      clusters:
+        $ref: '#/definitions/v1ProjectActiveClusters'
+      virtualClusters:
+        $ref: '#/definitions/v1ProjectActiveClusters'
+    type: object
+  v1ProjectSpec:
+    description: Project specifications
+    properties:
+      alerts:
+        items:
+          $ref: '#/definitions/v1Alert'
+        type: array
+        uniqueItems: true
+      logoUrl:
+        type: string
+      teams:
+        items:
+          $ref: '#/definitions/v1TeamRoleMap'
+        type: array
+        uniqueItems: true
+      users:
+        items:
+          $ref: '#/definitions/v1UserRoleMap'
+        type: array
+        uniqueItems: true
+  v1ProjectActiveCluster:
+    description: Active clusters
+    properties:
+      clusterRef:
+        $ref: '#/definitions/v1ObjectEntity'
+      state:
+        type: string
+    type: object
+  v1ProjectActiveAppDeployment:
+    description: Active app deployment
+    properties:
+      appRef:
+        $ref: '#/definitions/v1ObjectEntity'
+      state:
+        type: string
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1TenantClusterSettings:
+    properties:
+      nodesAutoRemediationSetting:
+        $ref: '#/definitions/v1NodesAutoRemediationSettings'
+  v1ProjectStatus:
+    description: Project status
+    properties:
+      cleanUpStatus:
+        $ref: '#/definitions/v1ProjectCleanUpStatus'
+      isDisabled:
+        type: boolean
+  v1NodesAutoRemediationSettings:
+    properties:
+      disableNodesAutoRemediation:
+        type: boolean
+        x-omitempty: false
+      isEnabled:
+        type: boolean
+        x-omitempty: false
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

@@ -1,0 +1,941 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations appDeployments API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: appDeployments
+  x-displayName: App Deployments
+paths:
+  /v1/appDeployments:
+    post:
+      operationId: v1AppDeploymentsVirtualClusterCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppDeploymentVirtualClusterEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a application deployment in the virtual cluster
+      tags:
+      - appDeployments
+  /v1/appDeployments/clusterGroup:
+    post:
+      operationId: v1AppDeploymentsClusterGroupCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppDeploymentClusterGroupEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a application deployment in one of virtual clusters in the cluster group
+      tags:
+      - appDeployments
+  /v1/appDeployments/{uid}:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1AppDeploymentsUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified application deployment
+      tags:
+      - appDeployments
+    get:
+      operationId: v1AppDeploymentsUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppDeployment'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified application deployment
+      tags:
+      - appDeployments
+  /v1/appDeployments/{uid}/profile:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1AppDeploymentsUidProfileGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppDeploymentProfileSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns profile of the specified application deployment
+      tags:
+      - appDeployments
+    put:
+      operationId: v1AppDeploymentsUidProfileUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppDeploymentProfileEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified application deployment profile
+      tags:
+      - appDeployments
+  /v1/appDeployments/{uid}/profile/apply:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application deployment notification uid
+      in: query
+      name: notify
+      type: string
+    patch:
+      operationId: v1AppDeploymentsUidProfileApply
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Apply the application deployment profile updates
+      tags:
+      - appDeployments
+  /v1/appDeployments/{uid}/profile/tiers/{tierUid}:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application deployment tier uid
+      in: path
+      name: tierUid
+      required: true
+      type: string
+    get:
+      operationId: v1AppDeploymentsProfileTiersUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppTier'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified application deployment profile tier information
+      tags:
+      - appDeployments
+    put:
+      operationId: v1AppDeploymentsProfileTiersUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppTierUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified application deployment profile tier information
+      tags:
+      - appDeployments
+  /v1/appDeployments/{uid}/profile/tiers/{tierUid}/manifests:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application deployment tier uid
+      in: path
+      name: tierUid
+      required: true
+      type: string
+    get:
+      operationId: v1AppDeploymentsProfileTiersUidManifestsGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppTierManifests'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of manifests of the specified application deployment profile tier
+      tags:
+      - appDeployments
+  /v1/appDeployments/{uid}/profile/tiers/{tierUid}/manifests/{manifestUid}:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application deployment tier uid
+      in: path
+      name: tierUid
+      required: true
+      type: string
+    - description: Application deployment tier manifest uid
+      in: path
+      name: manifestUid
+      required: true
+      type: string
+    get:
+      operationId: v1AppDeploymentsProfileTiersManifestsUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Manifest'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified application deployment tier manifest information
+      tags:
+      - appDeployments
+    put:
+      operationId: v1AppDeploymentsProfileTiersManifestsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ManifestRefUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified application deployment tier manifest information
+      tags:
+      - appDeployments
+  /v1/appDeployments/{uid}/profile/versions:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1AppDeploymentsUidProfileVersionsGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppDeploymentProfileVersions'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of profile versions of the specified application deployment
+      tags:
+      - appDeployments
+definitions:
+  v1AppTier:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1AppTierSpec'
+  v1LifecycleStatus:
+    properties:
+      msg:
+        description: error or success msg of lifecycle
+        type: string
+      status:
+        description: lifecycle status
+        enum:
+        - Pausing
+        - Paused
+        - Resuming
+        - Running
+        - Error
+        type: string
+  v1AppDeploymentClusterGroupTargetSpec:
+    description: Application deployment cluster group target spec
+    properties:
+      clusterGroupUid:
+        description: Application deployment cluster group uid
+        type: string
+      clusterLimits:
+        $ref: '#/definitions/v1AppDeploymentTargetClusterLimits'
+      clusterName:
+        description: Application deployment virtual cluster name
+        type: string
+    required:
+    - clusterName
+    - clusterGroupUid
+    type: object
+  v1AppTierProperty:
+    description: Application tier property object
+    properties:
+      format:
+        description: Application tier property format
+        type: string
+      name:
+        description: Application tier property name
+        type: string
+      type:
+        description: Application tier property data type
+        type: string
+      value:
+        description: Application tier property value
+        type: string
+  v1AppDeploymentClusterRef:
+    description: Application deployment cluster reference
+    properties:
+      deploymentClusterType:
+        description: Application deployment source cluster type[ "virtualCluster", "hostCluster" ]
+        enum:
+        - virtual
+        - host
+        type: string
+      name:
+        description: Application deployment cluster name
+        type: string
+      uid:
+        description: Application deployment cluster uid
+        type: string
+    type: object
+  v1Manifest:
+    description: Manifest object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ManifestPublishedSpec'
+  v1AppDeploymentVirtualClusterSpec:
+    description: Application deployment virtual cluster spec
+    properties:
+      config:
+        $ref: '#/definitions/v1AppDeploymentVirtualClusterConfigEntity'
+      profile:
+        $ref: '#/definitions/v1AppDeploymentProfileEntity'
+    type: object
+  v1AppDeploymentProfile:
+    description: Application deployment profile
+    properties:
+      metadata:
+        $ref: '#/definitions/v1AppDeploymentProfileMeta'
+      template:
+        $ref: '#/definitions/v1AppProfileTemplate'
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1AppDeploymentConfig:
+    description: Application deployment config response
+    properties:
+      target:
+        $ref: '#/definitions/v1AppDeploymentTargetConfig'
+    type: object
+  v1AppDeploymentStatus:
+    description: Application deployment status
+    properties:
+      appTiers:
+        description: Application deployment tiers
+        items:
+          $ref: '#/definitions/v1ClusterPackStatus'
+        type: array
+      lifecycleStatus:
+        $ref: '#/definitions/v1LifecycleStatus'
+      state:
+        description: Application deployment state [ "Pending", "Deploying", "Deployed", "Updating" ]
+        type: string
+    type: object
+  v1AppDeploymentSpec:
+    description: Application deployment spec
+    properties:
+      config:
+        $ref: '#/definitions/v1AppDeploymentConfig'
+      profile:
+        $ref: '#/definitions/v1AppDeploymentProfile'
+    type: object
+  v1AppDeploymentClusterGroupSpec:
+    description: Application deployment cluster group spec
+    properties:
+      config:
+        $ref: '#/definitions/v1AppDeploymentClusterGroupConfigEntity'
+      profile:
+        $ref: '#/definitions/v1AppDeploymentProfileEntity'
+    type: object
+  v1ClusterPackStatus:
+    properties:
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+      endTime:
+        $ref: '#/definitions/v1Time'
+      manifests:
+        items:
+          $ref: '#/definitions/v1ClusterPackManifestStatus'
+        type: array
+      name:
+        type: string
+      profileUid:
+        type: string
+      services:
+        items:
+          $ref: '#/definitions/v1LoadBalancerService'
+        type: array
+      startTime:
+        $ref: '#/definitions/v1Time'
+      type:
+        type: string
+      version:
+        type: string
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1AppDeploymentClusterGroupConfigEntity:
+    description: Application deployment cluster group config
+    properties:
+      targetSpec:
+        $ref: '#/definitions/v1AppDeploymentClusterGroupTargetSpec'
+    type: object
+  v1AppDeploymentTargetConfig:
+    description: Application deployment target config response
+    properties:
+      clusterRef:
+        $ref: '#/definitions/v1AppDeploymentClusterRef'
+      envRef:
+        $ref: '#/definitions/v1AppDeploymentTargetEnvironmentRef'
+    type: object
+  v1AppDeploymentClusterGroupEntity:
+    description: Application deployment cluster group request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1AppDeploymentClusterGroupSpec'
+    type: object
+  v1AppDeploymentProfileVersion:
+    description: Application deployment profile version
+    properties:
+      uid:
+        description: Application deployment profile uid
+        type: string
+      version:
+        description: Application deployment profile version
+        type: string
+    type: object
+  v1AppDeploymentProfileEntity:
+    description: Application deployment profile request payload
+    properties:
+      appProfileUid:
+        description: Application deployment profile uid
+        type: string
+    required:
+    - appProfileUid
+    type: object
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1LoadBalancerService:
+    properties:
+      host:
+        description: IP or Host from svc.Status.LoadBalancerStatus.Ingress
+        type: string
+      name:
+        description: name of the loadbalancer service
+        type: string
+      ports:
+        description: port this service exposed
+        items:
+          $ref: '#/definitions/v1ServicePort'
+        type: array
+    type: object
+  v1AppDeployment:
+    description: Application deployment response
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1AppDeploymentSpec'
+      status:
+        $ref: '#/definitions/v1AppDeploymentStatus'
+    type: object
+  v1AppTierManifests:
+    description: Application tier manifests data
+    properties:
+      manifests:
+        description: Application tier manifests array
+        items:
+          $ref: '#/definitions/v1Manifest'
+        type: array
+  v1AppDeploymentTargetClusterLimits:
+    description: Application deployment target cluster limits
+    properties:
+      cpu:
+        description: CPU cores
+        format: int32
+        type: integer
+      memoryMiB:
+        description: Memory in MiB
+        format: int32
+        type: integer
+      storageGiB:
+        description: Storage in GiB
+        format: int32
+        type: integer
+  v1ClusterPackManifestStatus:
+    properties:
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ManifestPublishedSpec:
+    description: Manifest spec
+    properties:
+      published:
+        $ref: '#/definitions/v1ManifestData'
+  v1AppProfileTemplate:
+    description: Application profile template information
+    properties:
+      appTiers:
+        description: Application profile tiers
+        items:
+          $ref: '#/definitions/v1AppTierRef'
+        type: array
+        uniqueItems: true
+      registryRefs:
+        description: Application profile registries reference
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+    type: object
+  v1ManifestData:
+    description: Published manifest object
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      digest:
+        description: Manifest digest
+        type: string
+    type: object
+  v1AppDeploymentProfileMeta:
+    description: Application deployment profile metadata
+    properties:
+      name:
+        description: Application deployment profile name
+        type: string
+      uid:
+        description: Application deployment profile uid
+        type: string
+      version:
+        description: Application deployment profile version
+        type: string
+    type: object
+  v1AppTierPropertyEntity:
+    description: Application tier property object
+    properties:
+      name:
+        description: Application tier property name
+        type: string
+      value:
+        description: Application tier property value
+        type: string
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1AppDeploymentProfileVersions:
+    description: Application deployment profile versions
+    properties:
+      availableVersions:
+        description: Application deployment profile available versions
+        items:
+          $ref: '#/definitions/v1AppDeploymentProfileVersion'
+        type: array
+      latestVersions:
+        description: Application deployment profile latest versions
+        items:
+          $ref: '#/definitions/v1AppDeploymentProfileVersion'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1AppDeploymentProfileMeta'
+    type: object
+  v1AppTierType:
+    default: manifest
+    enum:
+    - manifest
+    - helm
+    - operator-instance
+    - container
+    type: string
+  v1ManifestRefUpdateEntity:
+    description: Manifest update request payload
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      name:
+        description: Manifest name
+        type: string
+      uid:
+        description: Manifest uid
+        type: string
+    required:
+    - name
+  v1ClusterCondition:
+    properties:
+      lastProbeTime:
+        $ref: '#/definitions/v1Time'
+      lastTransitionTime:
+        $ref: '#/definitions/v1Time'
+      message:
+        description: Human-readable message indicating details about last transition.
+        type: string
+      reason:
+        description: Unique, one-word, CamelCase reason for the condition's last transition.
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+    required:
+    - type
+    - status
+    type: object
+  v1AppDeploymentProfileSpec:
+    description: Application deployment profile spec
+    properties:
+      metadata:
+        $ref: '#/definitions/v1AppDeploymentProfileMeta'
+      template:
+        $ref: '#/definitions/v1AppProfileTemplateSpec'
+    type: object
+  v1AppDeploymentVirtualClusterConfigEntity:
+    description: Application deployment virtual cluster config
+    properties:
+      targetSpec:
+        $ref: '#/definitions/v1AppDeploymentVirtualClusterTargetSpec'
+    type: object
+  v1AppDeploymentVirtualClusterTargetSpec:
+    description: Application deployment virtual cluster target spec
+    properties:
+      clusterUid:
+        description: Application deployment virtual cluster uid
+        type: string
+    required:
+    - clusterUid
+    type: object
+  v1AppProfileTemplateSpec:
+    description: Application profile template specs
+    properties:
+      appTiers:
+        description: Application profile tiers
+        items:
+          $ref: '#/definitions/v1AppTier'
+        type: array
+        uniqueItems: true
+      registryRefs:
+        description: Application profile registries reference
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+    type: object
+  v1ServicePort:
+    properties:
+      port:
+        description: The port that will be exposed by this service.
+        format: int32
+        type: integer
+      protocol:
+        type: string
+    required:
+    - port
+    type: object
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or modify the referred object.
+    properties:
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1AppDeploymentTargetEnvironmentRef:
+    description: Application deployment target environment reference
+    properties:
+      name:
+        description: Application deployment target resource name
+        type: string
+      type:
+        description: Application deployment target resource type [ "nestedCluster", "clusterGroup" ]
+        type: string
+      uid:
+        description: Application deployment target resource uid
+        type: string
+    type: object
+  v1AppTierRef:
+    description: Application tier reference
+    properties:
+      name:
+        description: Application tier name
+        type: string
+      type:
+        $ref: '#/definitions/v1AppTierType'
+      uid:
+        description: Application tier uid to uniquely identify the tier
+        type: string
+      version:
+        description: Application tier version
+        type: string
+    type: object
+  v1AppTierSpec:
+    description: Application tier specs
+    properties:
+      containerRegistryUid:
+        description: Application tier container registry uid
+        type: string
+      installOrder:
+        description: Application tier installation order
+        format: int32
+        type: integer
+      manifests:
+        description: Application tier attached manifest content in yaml format
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      properties:
+        description: Application tier properties
+        items:
+          $ref: '#/definitions/v1AppTierProperty'
+        type: array
+      registryUid:
+        description: Registry uid
+        type: string
+      sourceAppTierUid:
+        description: Application tier source pack uid
+        type: string
+      type:
+        $ref: '#/definitions/v1AppTierType'
+        description: Application tier type
+      values:
+        description: Application tier configuration values in yaml format
+        type: string
+      version:
+        description: Application tier version
+        type: string
+    type: object
+  v1AppTierUpdateEntity:
+    description: Application tier update request payload
+    properties:
+      containerRegistryUid:
+        description: Application tier container registry uid
+        type: string
+      installOrder:
+        description: Application tier installation order
+        format: int32
+        type: integer
+      manifests:
+        description: Application tier manifests
+        items:
+          $ref: '#/definitions/v1ManifestRefUpdateEntity'
+        type: array
+      name:
+        description: Application tier name
+        type: string
+      properties:
+        description: Application tier properties
+        items:
+          $ref: '#/definitions/v1AppTierPropertyEntity'
+        type: array
+      values:
+        description: Application tier configuration values in yaml format
+        type: string
+      version:
+        description: Application tier version
+        type: string
+    type: object
+  v1AppDeploymentVirtualClusterEntity:
+    description: Application deployment virtual cluster request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1AppDeploymentVirtualClusterSpec'
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

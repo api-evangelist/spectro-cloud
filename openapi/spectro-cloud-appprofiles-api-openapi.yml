@@ -1,0 +1,1007 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations appProfiles API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: appProfiles
+  x-displayName: App Profiles
+paths:
+  /v1/appProfiles:
+    post:
+      operationId: v1AppProfilesCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppProfileEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a application profile
+      tags:
+      - appProfiles
+  /v1/appProfiles/macros:
+    get:
+      operationId: v1AppProfilesMacrosList
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Macros'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of application profile macros
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1AppProfilesUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified application profile
+      tags:
+      - appProfiles
+    get:
+      operationId: v1AppProfilesUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppProfile'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified application profile
+      tags:
+      - appProfiles
+    put:
+      operationId: v1AppProfilesUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppProfileEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified application profile
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/clone:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1AppProfilesUidClone
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppProfileCloneEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Clones the specified application profile
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/clone/validate:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1AppProfilesUidCloneValidate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppProfileCloneMetaInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates the specified application profile clone
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/metadata:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1AppProfilesUidMetadataUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppProfileMetaEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified application profile metadata
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/tiers:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1AppProfilesUidTiersGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppProfileTiers'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of tiers of the specified application profile
+      tags:
+      - appProfiles
+    patch:
+      operationId: v1AppProfilesUidTiersPatch
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppTierPatchEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates app tier of the specified application profile
+      tags:
+      - appProfiles
+    post:
+      operationId: v1AppProfilesUidTiersCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppTierEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds tier to the specified application profile
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/tiers/{tierUid}:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application profile tier uid
+      in: path
+      name: tierUid
+      required: true
+      type: string
+    delete:
+      operationId: v1AppProfilesUidTiersUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified application profile tier
+      tags:
+      - appProfiles
+    get:
+      operationId: v1AppProfilesUidTiersUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppTier'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified application profile tier information
+      tags:
+      - appProfiles
+    put:
+      operationId: v1AppProfilesUidTiersUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppTierUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified application profile tier
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/tiers/{tierUid}/manifests:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application profile tier uid
+      in: path
+      name: tierUid
+      required: true
+      type: string
+    get:
+      operationId: v1AppProfilesUidTiersUidManifestsGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppTierManifests'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of manifests of the specified application profile tier
+      tags:
+      - appProfiles
+    post:
+      operationId: v1AppProfilesUidTiersUidManifestsCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ManifestInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds manifest to the specified application profile tier
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/tiers/{tierUid}/manifests/{manifestUid}:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application profile tier uid
+      in: path
+      name: tierUid
+      required: true
+      type: string
+    - description: Application profile tier manifest uid
+      in: path
+      name: manifestUid
+      required: true
+      type: string
+    delete:
+      operationId: v1AppProfilesUidTiersUidManifestsUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified application profile tier manifest
+      tags:
+      - appProfiles
+    get:
+      operationId: v1AppProfilesUidTiersUidManifestsUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Manifest'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified application profile tier manifest information
+      tags:
+      - appProfiles
+    put:
+      operationId: v1AppProfilesUidTiersUidManifestsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ManifestRefUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified application profile tier manifest information
+      tags:
+      - appProfiles
+  /v1/appProfiles/{uid}/tiers/{tierUid}/resolvedValues:
+    parameters:
+    - description: Application profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Application profile tier uid
+      in: path
+      name: tierUid
+      required: true
+      type: string
+    get:
+      operationId: v1AppProfilesUidTiersUidResolvedValuesGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AppTierResolvedValues'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified application profile tier resolved values
+      tags:
+      - appProfiles
+definitions:
+  v1ManifestInputEntity:
+    description: Manifest request payload
+    properties:
+      content:
+        description: Manifest content
+        type: string
+      name:
+        description: Manifest name
+        type: string
+  v1AppTier:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1AppTierSpec'
+  v1AppProfileCloneTarget:
+    description: Application profile clone target
+    properties:
+      projectUid:
+        description: Application profile clone target project uid
+        type: string
+    type: object
+  v1AppTierProperty:
+    description: Application tier property object
+    properties:
+      format:
+        description: Application tier property format
+        type: string
+      name:
+        description: Application tier property name
+        type: string
+      type:
+        description: Application tier property data type
+        type: string
+      value:
+        description: Application tier property value
+        type: string
+  v1AppTierResolvedValues:
+    description: Application tier resolved macro values
+    properties:
+      resolved:
+        additionalProperties:
+          type: string
+        description: Application tier resolved macro values map
+        type: object
+  v1Manifest:
+    description: Manifest object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ManifestPublishedSpec'
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1AppTierPatchEntity:
+    description: Application tier patch request payload
+    properties:
+      appTier:
+        $ref: '#/definitions/v1AppTierEntity'
+      replaceWithAppTier:
+        description: Application tier UID to be replaced with new tier
+        type: string
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1AppProfileTiers:
+    description: Application profile tiers information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1AppProfileTiersSpec'
+    type: object
+  v1AppTierEntity:
+    description: Application tier request payload
+    properties:
+      containerRegistryUid:
+        description: Application tier container registry uid
+        type: string
+      installOrder:
+        description: Application tier installation order
+        format: int32
+        type: integer
+      manifests:
+        description: Application tier manifests
+        items:
+          $ref: '#/definitions/v1ManifestInputEntity'
+        type: array
+      name:
+        description: Application tier name
+        type: string
+      properties:
+        description: Application tier properties
+        items:
+          $ref: '#/definitions/v1AppTierPropertyEntity'
+        type: array
+      registryUid:
+        description: Application tier registry uid
+        type: string
+      sourceAppTierUid:
+        description: Application tier source pack uid
+        type: string
+      type:
+        $ref: '#/definitions/v1AppTierType'
+      values:
+        description: Application tier configuration values in yaml format
+        type: string
+      version:
+        description: Application tier version
+        type: string
+    required:
+    - name
+    type: object
+  v1AppProfileMetaEntity:
+    description: Application profile metadata request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1AppProfileMetaUpdateEntity'
+      version:
+        description: Application profile version
+        type: string
+    required:
+    - metadata
+    type: object
+  v1Macros:
+    properties:
+      macros:
+        items:
+          $ref: '#/definitions/v1Macro'
+        type: array
+        uniqueItems: true
+  v1Macro:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  v1AppTierManifests:
+    description: Application tier manifests data
+    properties:
+      manifests:
+        description: Application tier manifests array
+        items:
+          $ref: '#/definitions/v1Manifest'
+        type: array
+  v1AppProfileTemplateEntity:
+    description: Application profile template spec
+    properties:
+      appTiers:
+        description: Application profile tiers
+        items:
+          $ref: '#/definitions/v1AppTierEntity'
+        type: array
+        uniqueItems: true
+    type: object
+  v1AppProfileEntity:
+    description: Application profile request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        description: Application profile spec
+        properties:
+          template:
+            $ref: '#/definitions/v1AppProfileTemplateEntity'
+          version:
+            description: Application profile version
+            type: string
+        type: object
+    type: object
+  v1ManifestPublishedSpec:
+    description: Manifest spec
+    properties:
+      published:
+        $ref: '#/definitions/v1ManifestData'
+  v1AppProfileTemplate:
+    description: Application profile template information
+    properties:
+      appTiers:
+        description: Application profile tiers
+        items:
+          $ref: '#/definitions/v1AppTierRef'
+        type: array
+        uniqueItems: true
+      registryRefs:
+        description: Application profile registries reference
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+    type: object
+  v1ManifestData:
+    description: Published manifest object
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      digest:
+        description: Manifest digest
+        type: string
+    type: object
+  v1AppProfile:
+    description: Application profile response
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          parentUid:
+            description: Application profile parent profile uid
+            type: string
+          template:
+            $ref: '#/definitions/v1AppProfileTemplate'
+          version:
+            description: Application profile version
+            type: string
+          versions:
+            description: Application profile versions list
+            items:
+              $ref: '#/definitions/v1AppProfileVersion'
+            type: array
+        type: object
+      status:
+        description: Application profile status
+        properties:
+          inUseApps:
+            description: Application profile apps array
+            items:
+              $ref: '#/definitions/v1ObjectResReference'
+            type: array
+        type: object
+    type: object
+  v1AppTierPropertyEntity:
+    description: Application tier property object
+    properties:
+      name:
+        description: Application tier property name
+        type: string
+      value:
+        description: Application tier property value
+        type: string
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1AppProfileMetaUpdateEntity:
+    description: Application profile metadata update request payload
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: Application profile annotations
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: Application profile labels
+        type: object
+    type: object
+  v1AppTierType:
+    default: manifest
+    enum:
+    - manifest
+    - helm
+    - operator-instance
+    - container
+    type: string
+  v1AppProfileCloneEntity:
+    description: Application profile clone request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1AppProfileCloneMetaInputEntity'
+    type: object
+  v1ManifestRefUpdateEntity:
+    description: Manifest update request payload
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      name:
+        description: Manifest name
+        type: string
+      uid:
+        description: Manifest uid
+        type: string
+    required:
+    - name
+  v1AppProfileTiersSpec:
+    description: Application profile tiers information
+    properties:
+      appTiers:
+        description: Application profile tiers
+        items:
+          $ref: '#/definitions/v1AppTier'
+        type: array
+        uniqueItems: true
+    type: object
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or modify the referred object.
+    properties:
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1AppProfileVersion:
+    description: Application profile version
+    properties:
+      uid:
+        type: string
+      version:
+        type: string
+    type: object
+  v1AppTierRef:
+    description: Application tier reference
+    properties:
+      name:
+        description: Application tier name
+        type: string
+      type:
+        $ref: '#/definitions/v1AppTierType'
+      uid:
+        description: Application tier uid to uniquely identify the tier
+        type: string
+      version:
+        description: Application tier version
+        type: string
+    type: object
+  v1AppTierSpec:
+    description: Application tier specs
+    properties:
+      containerRegistryUid:
+        description: Application tier container registry uid
+        type: string
+      installOrder:
+        description: Application tier installation order
+        format: int32
+        type: integer
+      manifests:
+        description: Application tier attached manifest content in yaml format
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      properties:
+        description: Application tier properties
+        items:
+          $ref: '#/definitions/v1AppTierProperty'
+        type: array
+      registryUid:
+        description: Registry uid
+        type: string
+      sourceAppTierUid:
+        description: Application tier source pack uid
+        type: string
+      type:
+        $ref: '#/definitions/v1AppTierType'
+        description: Application tier type
+      values:
+        description: Application tier configuration values in yaml format
+        type: string
+      version:
+        description: Application tier version
+        type: string
+    type: object
+  v1AppProfileCloneMetaInputEntity:
+    description: Application profile clone metadata
+    properties:
+      name:
+        description: Application profile name
+        type: string
+      target:
+        $ref: '#/definitions/v1AppProfileCloneTarget'
+      version:
+        description: Application profile version
+        type: string
+    required:
+    - name
+    type: object
+  v1AppTierUpdateEntity:
+    description: Application tier update request payload
+    properties:
+      containerRegistryUid:
+        description: Application tier container registry uid
+        type: string
+      installOrder:
+        description: Application tier installation order
+        format: int32
+        type: integer
+      manifests:
+        description: Application tier manifests
+        items:
+          $ref: '#/definitions/v1ManifestRefUpdateEntity'
+        type: array
+      name:
+        description: Application tier name
+        type: string
+      properties:
+        description: Application tier properties
+        items:
+          $ref: '#/definitions/v1AppTierPropertyEntity'
+        type: array
+      values:
+        description: Application tier configuration values in yaml format
+        type: string
+      version:
+        description: Application tier version
+        type: string
+    type: object
+  v1ObjectResReference:
+    description: Object resource reference
+    properties:
+      kind:
+        type: string
+      name:
+        type: string
+      projectUid:
+        type: string
+      tenantUid:
+        type: string
+      uid:
+        type: string
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

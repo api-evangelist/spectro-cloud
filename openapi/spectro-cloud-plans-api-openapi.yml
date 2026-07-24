@@ -1,0 +1,663 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations plans API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: plans
+  x-displayName: Plans
+paths:
+  /v1/plans:
+    get:
+      operationId: v1PlansList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Plans'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of plans
+      tags:
+      - plans
+    post:
+      operationId: v1PlansCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Plan'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a user plan
+      tags:
+      - plans
+  /v1/plans/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1PlansUidGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Plan'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified plan
+      tags:
+      - plans
+  /v1/plans/{uid}/credits/{creditUid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: path
+      name: creditUid
+      required: true
+      type: string
+    delete:
+      operationId: v1PlansUidCreditsUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified Plan's credit data
+      tags:
+      - plans
+    put:
+      operationId: v1PlansUidCreditsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanCreditUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified Plan's credit data
+      tags:
+      - plans
+  /v1/plans/{uid}/expiry:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1PlansUidExpiryPatch
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanExpiry'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified plan's expiry
+      tags:
+      - plans
+  /v1/plans/{uid}/freeCredit:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1PlansUidFreeCreditAdd
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanAddFreeCreditUpdate'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds free credit to the specified plan
+      tags:
+      - plans
+  /v1/plans/{uid}/planLimit:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1PlansUidPlanLimitUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanLimitUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified plan's limit
+      tags:
+      - plans
+  /v1/plans/{uid}/planType:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1PlansUidPlanTypeUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanChangeUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Changes the plan type for the specified plan
+      tags:
+      - plans
+  /v1/plans/{uid}/renewal:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1PlansUidRenewal
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanRenewalUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds renewal data to the existing plan
+      tags:
+      - plans
+  /v1/plans/{uid}/slaCredit:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1PlansUidSlaCreditAdd
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanAddSlaCreditUpdate'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds sla breach credit to the specified plan
+      tags:
+      - plans
+definitions:
+  v1PlanRenewal:
+    description: Plan Renewal
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: credit expiry time
+      planLimit:
+        $ref: '#/definitions/v1PlanLimit'
+      start:
+        $ref: '#/definitions/v1Time'
+        description: credit start time
+      type:
+        enum:
+        - Trial
+        - MonthlyOnDemand
+        - AnnualSubscription
+        type: string
+    required:
+    - type
+    - start
+    - expiry
+  v1PlanExpiry:
+    description: Plan expiry
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: plan expiry time
+    required:
+    - expiry
+  v1PlanSpec:
+    description: Plan specifications
+    properties:
+      cost:
+        $ref: '#/definitions/v1PlanCost'
+      developerCredits:
+        $ref: '#/definitions/v1DeveloperCredit'
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: plan expiry time
+      freeCredits:
+        items:
+          $ref: '#/definitions/v1PlanCredit'
+        type: array
+      planLimit:
+        $ref: '#/definitions/v1PlanLimit'
+      renewal:
+        $ref: '#/definitions/v1PlanRenewal'
+      slaCredits:
+        items:
+          $ref: '#/definitions/v1PlanCredit'
+        type: array
+      start:
+        $ref: '#/definitions/v1Time'
+        description: plan start time
+      tierPricing:
+        $ref: '#/definitions/v1TierPrice'
+      type:
+        enum:
+        - Trial
+        - MonthlyOnDemand
+        - AnnualSubscription
+        type: string
+    required:
+    - type
+    - start
+    - expiry
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1PlanAddFreeCreditUpdate:
+    description: Plan add free credit update entity
+    properties:
+      credit:
+        $ref: '#/definitions/v1PlanCreditEntity'
+  v1TierPrice:
+    description: tier price
+    properties:
+      alloyPricing:
+        items:
+          $ref: '#/definitions/v1PriceRange'
+        type: array
+        uniqueItems: true
+      purePricing:
+        items:
+          $ref: '#/definitions/v1PriceRange'
+        type: array
+        uniqueItems: true
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1PlanLimitUpdate:
+    description: Plan limit change update entity
+    properties:
+      planLimit:
+        $ref: '#/definitions/v1PlanLimit'
+    required:
+    - planLimit
+  v1PlanRenewalUpdate:
+    description: Plan add renawal update entity
+    properties:
+      renewal:
+        $ref: '#/definitions/v1PlanRenewal'
+  v1PlanCreditUpdate:
+    description: Plan credit update entity
+    properties:
+      credit:
+        $ref: '#/definitions/v1PlanCreditEntity'
+  v1PlanLimitSpec:
+    description: Monthly Plan Limit spec
+    properties:
+      cpuCoreHours:
+        description: cpu cores hours
+        format: int64
+        type: integer
+        x-omitempty: false
+      overageLimitPercentage:
+        default: 25
+        description: overage limit in percentage
+        format: int8
+        type: integer
+        x-omitempty: false
+      warnLimitPercentage:
+        default: 90
+        description: warning limit in percentage
+        format: int8
+        type: integer
+        x-omitempty: false
+  v1PlanCredit:
+    description: Plan Credit
+    properties:
+      cpuCoreHours:
+        format: int64
+        type: number
+        x-omitempty: false
+      creditUid:
+        type: string
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: credit expiry time
+      name:
+        type: string
+      start:
+        $ref: '#/definitions/v1Time'
+        description: credit start time
+      type:
+        enum:
+        - Pure
+        - Alloy
+        type: string
+    required:
+    - type
+  v1DeveloperCredit:
+    description: Credits allocated for each tenant/user
+    properties:
+      cpu:
+        description: cpu in cores
+        format: int32
+        type: number
+        x-omitempty: false
+      memoryGiB:
+        description: memory in GiB
+        format: int32
+        type: number
+        x-omitempty: false
+      storageGiB:
+        description: storage in GiB
+        format: int32
+        type: integer
+        x-omitempty: false
+      virtualClustersLimit:
+        description: number of active virtual clusters
+        format: int32
+        type: number
+        x-omitempty: false
+  v1PlanAddSlaCreditUpdate:
+    description: Plan add sla credit update entity
+    properties:
+      credit:
+        $ref: '#/definitions/v1PlanCreditEntity'
+  v1PlanChangeUpdate:
+    description: Plan change update entity
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: plan expiry time
+      isPaymentGateway:
+        type: boolean
+      planLimit:
+        $ref: '#/definitions/v1PlanLimit'
+      start:
+        $ref: '#/definitions/v1Time'
+        description: plan start time
+      tierPrice:
+        $ref: '#/definitions/v1TierPrice'
+      type:
+        enum:
+        - Trial
+        - MonthlyOnDemand
+        - AnnualSubscription
+        type: string
+    required:
+    - type
+    - start
+    - expiry
+  v1PlanStatus:
+    properties:
+      changeLogs:
+        items:
+          type: string
+        type: array
+    type: object
+  v1Plan:
+    description: Plan
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PlanSpec'
+      status:
+        $ref: '#/definitions/v1PlanStatus'
+  v1PlanCost:
+    description: Plan Cost
+    properties:
+      discount:
+        format: float
+        type: number
+        x-omitempty: false
+      price:
+        format: float
+        type: number
+        x-omitempty: false
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1Plans:
+    description: Array of Plans
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1Plan'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1PlanLimit:
+    description: Monthly Plan Limit
+    properties:
+      alloy:
+        $ref: '#/definitions/v1PlanLimitSpec'
+      isOnDemand:
+        description: is onDemand plan and has no limit
+        type: boolean
+        x-omitempty: false
+      isUnlimited:
+        description: is unlimited cpu core hours
+        type: boolean
+        x-omitempty: false
+      pure:
+        $ref: '#/definitions/v1PlanLimitSpec'
+  v1PlanCreditEntity:
+    description: Plan Credit entity for create/update request
+    properties:
+      cpuCoreHours:
+        format: int64
+        type: number
+        x-omitempty: false
+      expiry:
+        $ref: '#/definitions/v1Time'
+      name:
+        type: string
+      start:
+        $ref: '#/definitions/v1Time'
+      type:
+        enum:
+        - Pure
+        - Alloy
+        type: string
+    required:
+    - type
+  v1PriceRange:
+    description: tier price range
+    properties:
+      discount:
+        format: int64
+        type: number
+      startFrom:
+        format: float64
+        type: number
+      unitAmount:
+        format: float64
+        type: number
+      upTo:
+        format: float64
+        type: number
+      upToInfinity:
+        type: boolean
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

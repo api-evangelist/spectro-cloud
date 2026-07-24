@@ -1,0 +1,1801 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations registries API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: registries
+  x-displayName: Registries
+paths:
+  /v1/registries/helm:
+    parameters:
+    - default: all
+      enum:
+      - system
+      - tenant
+      - all
+      in: query
+      name: scope
+      type: string
+    get:
+      operationId: v1RegistriesHelmList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of registry items
+          schema:
+            $ref: '#/definitions/v1HelmRegistries'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of Helm registries
+      tags:
+      - registries
+    post:
+      operationId: v1RegistriesHelmCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1HelmRegistryEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a helm registry
+      tags:
+      - registries
+  /v1/registries/helm/summary:
+    parameters:
+    - default: all
+      enum:
+      - system
+      - tenant
+      - all
+      in: query
+      name: scope
+      type: string
+    get:
+      operationId: v1RegistriesHelmSummaryList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of registry items
+          schema:
+            $ref: '#/definitions/v1HelmRegistriesSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of helm registries as summary
+      tags:
+      - registries
+  /v1/registries/helm/validate:
+    post:
+      description: Returns no contents if helm registry is valid else error.
+      operationId: V1RegistriesHelmValidate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1HelmRegistrySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Check if helm registry is valid
+      tags:
+      - registries
+  /v1/registries/helm/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1RegistriesHelmUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified helm registry
+      tags:
+      - registries
+    get:
+      operationId: v1RegistriesHelmUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1HelmRegistry'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified Helm registry
+      tags:
+      - registries
+    put:
+      operationId: v1RegistriesHelmUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1HelmRegistry'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified helm registry
+      tags:
+      - registries
+  /v1/registries/helm/{uid}/sync:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - default: false
+      in: query
+      name: forceSync
+      type: boolean
+    post:
+      description: Sync all the helm charts from the registry
+      operationId: v1RegistriesHelmUidSync
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '202':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Sync Helm registry
+      tags:
+      - registries
+  /v1/registries/helm/{uid}/sync/status:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      description: Get the sync status for the specified helm registry
+      operationId: v1RegistriesHelmUidSyncStatus
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Helm registry sync status
+          schema:
+            $ref: '#/definitions/v1RegistrySyncStatus'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get helm registry sync status
+      tags:
+      - registries
+  /v1/registries/metadata:
+    parameters:
+    - default: all
+      enum:
+      - system
+      - tenant
+      - all
+      in: query
+      name: scope
+      type: string
+    get:
+      operationId: v1RegistriesMetadata
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of registry metadata items
+          schema:
+            $ref: '#/definitions/v1RegistriesMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of registries metadata
+      tags:
+      - registries
+  /v1/registries/oci/basic:
+    post:
+      operationId: v1BasicOciRegistriesCreate
+      parameters:
+      - default: false
+        in: query
+        name: skipPackSync
+        type: boolean
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1BasicOciRegistry'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a basic oci registry
+      tags:
+      - registries
+  /v1/registries/oci/basic/validate:
+    post:
+      description: Returns no contents if oci registry is valid else error.
+      operationId: v1BasicOciRegistriesValidate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1BasicOciRegistrySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Check if oci registry is valid
+      tags:
+      - registries
+  /v1/registries/oci/ecr:
+    post:
+      operationId: v1EcrRegistriesCreate
+      parameters:
+      - default: false
+        in: query
+        name: skipPackSync
+        type: boolean
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EcrRegistry'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a ecr registry
+      tags:
+      - registries
+  /v1/registries/oci/ecr/validate:
+    post:
+      description: Returns no contents if ecr registry is valid else error.
+      operationId: v1EcrRegistriesValidate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1EcrRegistrySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Check if ecr registry is valid
+      tags:
+      - registries
+  /v1/registries/oci/image:
+    get:
+      operationId: v1OciImageRegistryGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1OciImageRegistry'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a image registry
+      tags:
+      - registries
+  /v1/registries/oci/summary:
+    get:
+      operationId: v1OciRegistriesSummary
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of oci registry items
+          schema:
+            $ref: '#/definitions/v1OciRegistries'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a oci registries summary
+      tags:
+      - registries
+  /v1/registries/oci/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: query
+      name: clusterUid
+      type: string
+    get:
+      operationId: v1OciRegistriesGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1OciRegistryEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the information of specified oci registry
+      tags:
+      - registries
+  /v1/registries/oci/{uid}/basic:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1BasicOciRegistriesUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified basic oci registry
+      tags:
+      - registries
+    get:
+      operationId: v1BasicOciRegistriesUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1BasicOciRegistry'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the basic oci registry
+      tags:
+      - registries
+    put:
+      operationId: v1BasicOciRegistriesUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1BasicOciRegistry'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified basic oci registry
+      tags:
+      - registries
+  /v1/registries/oci/{uid}/basic/sync:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - default: false
+      in: query
+      name: forceSync
+      type: boolean
+    post:
+      description: Sync all the content from the oci registry
+      operationId: v1BasicOciRegistriesUidSync
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '202':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Sync oci registry
+      tags:
+      - registries
+  /v1/registries/oci/{uid}/basic/sync/status:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      description: Get sync status for the oci specified registry
+      operationId: v1BasicOciRegistriesUidSyncStatus
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Oci registry sync status
+          schema:
+            $ref: '#/definitions/v1RegistrySyncStatus'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get oci registry sync status
+      tags:
+      - registries
+  /v1/registries/oci/{uid}/ecr:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1EcrRegistriesUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified ecr registry
+      tags:
+      - registries
+    get:
+      operationId: v1EcrRegistriesUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1EcrRegistry'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified ecr registry
+      tags:
+      - registries
+    put:
+      operationId: v1EcrRegistriesUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EcrRegistry'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified ecr registry
+      tags:
+      - registries
+  /v1/registries/oci/{uid}/ecr/sync:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - default: false
+      in: query
+      name: forceSync
+      type: boolean
+    post:
+      description: Sync all the content from the ecr registry
+      operationId: v1EcrRegistriesUidSync
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '202':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Sync ecr registry
+      tags:
+      - registries
+  /v1/registries/oci/{uid}/ecr/sync/status:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      description: Get sync status for the ecr specified registry
+      operationId: v1EcrRegistriesUidSyncStatus
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Ecr registry sync status
+          schema:
+            $ref: '#/definitions/v1RegistrySyncStatus'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get ecr registry sync status
+      tags:
+      - registries
+  /v1/registries/pack:
+    parameters:
+    - default: all
+      enum:
+      - system
+      - tenant
+      - all
+      in: query
+      name: scope
+      type: string
+    get:
+      operationId: v1RegistriesPackList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of registry items
+          schema:
+            $ref: '#/definitions/v1PackRegistries'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of Pack registries
+      tags:
+      - registries
+    post:
+      operationId: v1RegistriesPackCreate
+      parameters:
+      - default: false
+        in: query
+        name: skipPackSync
+        type: boolean
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PackRegistry'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a pack registry
+      tags:
+      - registries
+  /v1/registries/pack/summary:
+    parameters:
+    - default: all
+      enum:
+      - system
+      - tenant
+      - all
+      in: query
+      name: scope
+      type: string
+    get:
+      operationId: v1RegistriesPackSummaryList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of registry items
+          schema:
+            $ref: '#/definitions/v1PackRegistriesSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of pack registries as summary
+      tags:
+      - registries
+  /v1/registries/pack/validate:
+    post:
+      description: Returns no contents if pack registry is valid else error.
+      operationId: V1RegistriesPackValidate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1PackRegistrySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Check if pack registry is valid
+      tags:
+      - registries
+  /v1/registries/pack/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1RegistriesPackUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified pack registry
+      tags:
+      - registries
+    get:
+      operationId: v1RegistriesPackUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1PackRegistry'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified Pack registry
+      tags:
+      - registries
+    put:
+      operationId: v1RegistriesPackUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PackRegistry'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified pack registry
+      tags:
+      - registries
+  /v1/registries/pack/{uid}/sync:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - default: false
+      in: query
+      name: forceSync
+      type: boolean
+    post:
+      description: Sync all the packs from the registry
+      operationId: v1RegistriesPackUidSync
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '202':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Sync Pack registry
+      tags:
+      - registries
+  /v1/registries/pack/{uid}/sync/status:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      description: Get sync status for the pack specified registry
+      operationId: v1RegistriesPackUidSyncStatus
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Pack registry sync status
+          schema:
+            $ref: '#/definitions/v1RegistrySyncStatus'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get pack registry sync status
+      tags:
+      - registries
+  /v1/registries/{registryName}/config:
+    parameters:
+    - in: path
+      name: registryName
+      required: true
+      type: string
+    get:
+      operationId: v1RegistriesNameConfigGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1RegistryConfigEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified system scope registry configuration
+      tags:
+      - registries
+  /v1/registries/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1RegistriesUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified registry
+      tags:
+      - registries
+definitions:
+  v1OciImageRegistry:
+    description: Oci Image Registry
+    properties:
+      baseContentPath:
+        description: baseContentPath is the root path for the registry content
+        type: string
+      caCert:
+        type: string
+      endpoint:
+        type: string
+      insecureSkipVerify:
+        type: boolean
+      mirrorRegistries:
+        description: mirrorRegistries contains the array of image sources like gcr.io, ghcr.io, docker.io
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  v1OciRegistryEntity:
+    description: Oci registry credentials
+    properties:
+      auth:
+        $ref: '#/definitions/v1RegistryAuth'
+      defaultRegion:
+        type: string
+      endpoint:
+        type: string
+      providerType:
+        type: string
+      scope:
+        type: string
+      type:
+        type: string
+    type: object
+  v1AwsCloudAccountCredentialType:
+    default: secret
+    description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+    enum:
+    - secret
+    - sts
+    - pod-identity
+    type: string
+  v1RegistryMetadata:
+    description: Registry meta
+    properties:
+      isDefault:
+        type: boolean
+        x-omitempty: false
+      isPrivate:
+        type: boolean
+        x-omitempty: false
+      kind:
+        type: string
+      name:
+        type: string
+      scope:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1AwsCloudAccount:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+    properties:
+      accessKey:
+        description: AWS account access key
+        type: string
+      credentialType:
+        $ref: '#/definitions/v1AwsCloudAccountCredentialType'
+      partition:
+        default: aws
+        description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+        enum:
+        - aws
+        - aws-us-gov
+        - aws-iso
+        - aws-iso-b
+        type: string
+      podIdentity:
+        $ref: '#/definitions/v1AwsPodIdentityCredentials'
+        description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
+      policyARNs:
+        description: List of policy ARNs required in case of credentialType sts.
+        items:
+          type: string
+        type: array
+      secretKey:
+        description: AWS account secret key
+        type: string
+      secretSpec:
+        $ref: '#/definitions/v1AwsSecretSpec'
+      secretToken:
+        description: AWS account secret token; in case of aws-iso and aws-iso-b
+        type: string
+      sts:
+        $ref: '#/definitions/v1AwsStsCredentials'
+        description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
+    type: object
+  v1OciRegistrySpec:
+    description: Image registry spec
+    properties:
+      containsSpectroManifest:
+        type: boolean
+        x-omitempty: false
+      defaultRegion:
+        type: string
+      endpoint:
+        type: string
+      isPrivate:
+        type: boolean
+      providerType:
+        type: string
+      registryType:
+        type: string
+      scope:
+        type: string
+    type: object
+  v1HelmRegistrySpecEntity:
+    description: Helm registry credentials spec
+    properties:
+      auth:
+        $ref: '#/definitions/v1RegistryAuth'
+      createOption:
+        $ref: '#/definitions/v1HelmRegistryCreateOption'
+      endpoint:
+        type: string
+      isPrivate:
+        type: boolean
+      name:
+        type: string
+      scope:
+        type: string
+    required:
+    - endpoint
+    - auth
+    type: object
+  v1HelmRegistrySummary:
+    description: Helm Registry summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1HelmRegistrySpecSummary'
+      status:
+        $ref: '#/definitions/v1HelmRegistryStatusSummary'
+    type: object
+  v1TlsConfiguration:
+    description: TLS configuration
+    properties:
+      ca:
+        type: string
+      certificate:
+        type: string
+      enabled:
+        type: boolean
+        x-omitempty: false
+      insecureSkipVerify:
+        type: boolean
+        x-omitempty: false
+      key:
+        type: string
+    type: object
+  v1AwsSecretTlsConfig:
+    description: TLS configuration for the AWS secret
+    properties:
+      ca:
+        description: CA certificate
+        type: string
+      cert:
+        description: Certificate
+        type: string
+      key:
+        description: Key
+        type: string
+    type: object
+  v1PackRegistrySummary:
+    description: Pack Registry summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PackRegistrySpecSummary'
+      status:
+        $ref: '#/definitions/v1PackRegistryStatusSummary'
+    type: object
+  v1HelmRegistryEntity:
+    description: Helm registry information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1HelmRegistrySpecEntity'
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1RegistryConfiguration:
+    description: Registry configuration
+    properties:
+      auth:
+        $ref: '#/definitions/v1RegistryAuth'
+      endpoint:
+        type: string
+      name:
+        type: string
+    type: object
+  v1PackRegistrySpec:
+    description: Pack registry credentials spec
+    properties:
+      auth:
+        $ref: '#/definitions/v1RegistryAuth'
+      endpoint:
+        type: string
+      name:
+        type: string
+      private:
+        type: boolean
+        x-omitempty: false
+      registryUid:
+        description: Pack registry uid
+        type: string
+      scope:
+        type: string
+    required:
+    - endpoint
+    - auth
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1HelmRegistrySpec:
+    description: Helm registry credentials spec
+    properties:
+      auth:
+        $ref: '#/definitions/v1RegistryAuth'
+      endpoint:
+        type: string
+      isPrivate:
+        type: boolean
+        x-omitempty: false
+      name:
+        type: string
+      registryUid:
+        description: Helm registry uid
+        type: string
+      scope:
+        type: string
+    required:
+    - endpoint
+    - auth
+    type: object
+  v1RegistryAuth:
+    description: Auth credentials of the registry
+    properties:
+      password:
+        format: password
+        type: string
+      tls:
+        $ref: '#/definitions/v1TlsConfiguration'
+      token:
+        format: password
+        type: string
+      type:
+        enum:
+        - noAuth
+        - basic
+        - token
+        type: string
+      username:
+        type: string
+    type: object
+  v1RegistryConfigEntity:
+    description: Registry configuration entity
+    properties:
+      config:
+        $ref: '#/definitions/v1RegistryConfiguration'
+    type: object
+  v1PackRegistries:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1PackRegistry'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1HelmRegistry:
+    description: Helm registry information
+    properties:
+      apiVersion:
+        type: string
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1HelmRegistrySpec'
+      status:
+        $ref: '#/definitions/v1HelmRegistryStatus'
+    type: object
+  v1AwsStsCredentials:
+    description: Aws sts credentials
+    properties:
+      arn:
+        description: Arn for the aws sts credentials in cloud account
+        type: string
+      externalId:
+        description: ExternalId for the aws sts credentials in cloud account
+        type: string
+    type: object
+  v1PackRegistriesSummary:
+    description: Pack Registries Summary
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1PackRegistrySummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1OciRegistry:
+    description: Oci registry information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1OciRegistrySpec'
+      status:
+        $ref: '#/definitions/v1OciRegistryStatusSummary'
+    type: object
+  v1SyncRecovery:
+    description: Sync recovery lifecycle details set by the orphan-recovery scheduler
+    properties:
+      message:
+        description: Recovery-specific failure message, if any
+        type: string
+      syncRecoveryState:
+        description: 'Sync recovery state: Interrupted, Recovering, or Recovered'
+        enum:
+        - Interrupted
+        - Recovering
+        - Recovered
+        type: string
+    type: object
+  v1PackRegistryStatus:
+    description: Status of the pack registry
+    properties:
+      packSyncStatus:
+        $ref: '#/definitions/v1RegistrySyncStatus'
+    type: object
+  v1RegistrySyncStatus:
+    description: Status of the registry sync
+    properties:
+      isSyncSupported:
+        type: boolean
+        x-omitempty: false
+      lastRunTime:
+        $ref: '#/definitions/v1Time'
+      lastSyncedTime:
+        $ref: '#/definitions/v1Time'
+      message:
+        type: string
+      status:
+        type: string
+      syncRecovery:
+        $ref: '#/definitions/v1SyncRecovery'
+    type: object
+  v1EcrRegistry:
+    description: Ecr registry information
+    properties:
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1EcrRegistrySpec'
+      status:
+        $ref: '#/definitions/v1OciRegistryStatus'
+    type: object
+  v1OciRegistries:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1OciRegistry'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1OciRegistryStatus:
+    description: Status of the oci registry
+    properties:
+      syncStatus:
+        $ref: '#/definitions/v1RegistrySyncStatus'
+    type: object
+  v1HelmRegistrySpecSummary:
+    description: Helm Registry spec summary
+    properties:
+      endpoint:
+        type: string
+      isPrivate:
+        type: boolean
+        x-omitempty: false
+      scope:
+        type: string
+    type: object
+  v1EcrRegistrySpec:
+    description: Ecr registry spec
+    properties:
+      baseContentPath:
+        description: OCI ecr registry content base path
+        type: string
+      containsSpectroManifest:
+        type: boolean
+        x-omitempty: false
+      credentials:
+        $ref: '#/definitions/v1AwsCloudAccount'
+      defaultRegion:
+        type: string
+      endpoint:
+        type: string
+      isPrivate:
+        type: boolean
+      isSyncSupported:
+        type: boolean
+      providerType:
+        default: helm
+        enum:
+        - helm
+        - pack
+        - zarf
+        type: string
+      registryUid:
+        description: Ecr registry uid
+        type: string
+      scope:
+        type: string
+      tls:
+        $ref: '#/definitions/v1TlsConfiguration'
+    required:
+    - endpoint
+    - isPrivate
+    type: object
+  v1BasicOciRegistrySpec:
+    description: Basic oci registry spec
+    properties:
+      auth:
+        $ref: '#/definitions/v1RegistryAuth'
+      baseContentPath:
+        description: OCI registry content base path
+        type: string
+      basePath:
+        description: OCI registry api base path
+        type: string
+      containsSpectroManifest:
+        type: boolean
+        x-omitempty: false
+      endpoint:
+        description: OCI registry endpoint
+        type: string
+      isSyncSupported:
+        type: boolean
+      providerType:
+        default: helm
+        enum:
+        - helm
+        - zarf
+        - pack
+        type: string
+      registryUid:
+        description: Basic oci registry uid
+        type: string
+      scope:
+        type: string
+    required:
+    - endpoint
+    - auth
+    type: object
+  v1AwsSecretSpec:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+    properties:
+      accountName:
+        description: AWS secret accountName; only for aws-iso-b environment
+        type: string
+      agency:
+        description: AWS secret agency
+        type: string
+      isCapValidationEnabled:
+        description: Flag to rotate the secret region credentials
+        type: boolean
+      mission:
+        description: AWS secret mission; only for aws-iso environment
+        type: string
+      namePrefix:
+        description: Policy Boundary
+        type: string
+      permissionBoundary:
+        description: Role or Policy Prefix
+        type: string
+      policy:
+        description: AWS secret policy; JSON string
+        type: string
+      role:
+        description: AWS secret role
+        type: string
+      tls:
+        $ref: '#/definitions/v1AwsSecretTlsConfig'
+        description: TLS configuration for the AWS secret
+    type: object
+  v1HelmChartOption:
+    description: If chart options are provided then the specified chart is validated first and synced immediately. If the specified chart is not found in the specified registry then creation is cancelled.
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+    type: object
+  v1AwsPodIdentityCredentials:
+    description: AWS EKS Pod Identity credentials for role assumption
+    properties:
+      permissionBoundaryArn:
+        description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+        type: string
+      roleArn:
+        description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+        type: string
+    type: object
+  v1PackRegistryStatusSummary:
+    description: Pack registry status summary
+    properties:
+      sync:
+        $ref: '#/definitions/v1RegistrySyncStatus'
+    type: object
+  v1HelmRegistries:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1HelmRegistry'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1HelmRegistryStatus:
+    description: Status of the helm registry
+    properties:
+      helmSyncStatus:
+        $ref: '#/definitions/v1RegistrySyncStatus'
+    type: object
+  v1PackRegistry:
+    description: Pack registry information
+    properties:
+      apiVersion:
+        type: string
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PackRegistrySpec'
+      status:
+        $ref: '#/definitions/v1PackRegistryStatus'
+    type: object
+  v1HelmRegistryCreateOption:
+    description: Helm registry create options
+    properties:
+      charts:
+        items:
+          $ref: '#/definitions/v1HelmChartOption'
+        type: array
+        uniqueItems: true
+      skipSync:
+        type: boolean
+    type: object
+  v1OciRegistryStatusSummary:
+    description: OCI registry status summary
+    properties:
+      sync:
+        $ref: '#/definitions/v1RegistrySyncStatus'
+  v1PackRegistrySpecSummary:
+    description: Pack Registry spec summary
+    properties:
+      endpoint:
+        type: string
+      private:
+        type: boolean
+        x-omitempty: false
+      scope:
+        type: string
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1RegistriesMetadata:
+    description: Pack Registries Metadata
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1RegistryMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1HelmRegistriesSummary:
+    description: Helm Registries Summary
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1HelmRegistrySummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1HelmRegistryStatusSummary:
+    description: Helm registry status summary
+    properties:
+      sync:
+        $ref: '#/definitions/v1RegistrySyncStatus'
+  v1BasicOciRegistry:
+    description: Basic oci registry information
+    properties:
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1BasicOciRegistrySpec'
+      status:
+        $ref: '#/definitions/v1OciRegistryStatus'
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

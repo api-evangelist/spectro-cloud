@@ -1,0 +1,371 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations events API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: events
+  x-displayName: Events
+paths:
+  /v1/events/components:
+    get:
+      description: Returns a paginated list of component events based on request parameters
+      operationId: v1EventsComponentsList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of component events items
+          schema:
+            $ref: '#/definitions/v1Events'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a paginated list of component events based on request parameters
+      tags:
+      - events
+    post:
+      description: Creates a component event
+      operationId: v1EventsComponentsCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Event'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a component event
+      tags:
+      - events
+  /v1/events/components/bulk:
+    post:
+      description: Creates the component events in bulk
+      operationId: v1EventsComponentsCreateBulk
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1BulkEvents'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          schema:
+            $ref: '#/definitions/v1Uids'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates the component events in bulk
+      tags:
+      - events
+  /v1/events/components/{objectKind}/{objectUid}:
+    parameters:
+    - description: Describes the related object uid for which events has to be fetched
+      enum:
+      - spectrocluster
+      - edgehost
+      in: path
+      name: objectKind
+      required: true
+      type: string
+    - description: Describes the related object kind for which events has to be fetched
+      in: path
+      name: objectUid
+      required: true
+      type: string
+    delete:
+      operationId: v1EventsComponentsObjTypeUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Delete all the components events for the specified related object
+      tags:
+      - events
+    get:
+      description: Returns a list of components events for the specified related object
+      operationId: v1EventsComponentsObjTypeUidList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of component event items
+          schema:
+            $ref: '#/definitions/v1Events'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a list of components events for the specified related object
+      tags:
+      - events
+definitions:
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1EventRelatedObject:
+    description: Object for which the event is related
+    properties:
+      kind:
+        enum:
+        - spectrocluster
+        - edgehost
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1Uids:
+    items:
+      $ref: '#/definitions/v1Uid'
+    type: array
+    uniqueItems: true
+  v1EventSource:
+    description: Describes the origin for the event
+    properties:
+      component:
+        description: Describes the component where event originated
+        type: string
+      host:
+        description: Describes the host where event originated
+        type: string
+    type: object
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or modify the referred object.
+    properties:
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1BulkEvents:
+    description: Describes a list component events' details
+    items:
+      $ref: '#/definitions/v1Event'
+    type: array
+    uniqueItems: true
+  v1Events:
+    description: An array of component events items
+    properties:
+      items:
+        description: Describes a list of returned component events
+        items:
+          $ref: '#/definitions/v1Event'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+        description: Describes the meta information about the component event lists
+    required:
+    - items
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1Event:
+    description: Describes the component event details
+    properties:
+      involvedObject:
+        $ref: '#/definitions/v1ObjectReference'
+        description: Describes object involved in event generation
+        type: object
+      message:
+        description: Describes message associated with the event
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+        type: object
+      reason:
+        description: Describes the reason for the event
+        type: string
+      relatedObject:
+        $ref: '#/definitions/v1EventRelatedObject'
+        description: Describes object related to the event
+        type: object
+      severity:
+        description: Describes the gravitas for the event
+        type: string
+      source:
+        $ref: '#/definitions/v1EventSource'
+        description: Describes the origin for the event
+        type: object
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

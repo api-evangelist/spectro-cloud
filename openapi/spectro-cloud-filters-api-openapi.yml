@@ -1,0 +1,357 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations filters API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: filters
+  x-displayName: Filters
+paths:
+  /v1/filters:
+    get:
+      operationId: v1FiltersList
+      parameters:
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of filters
+          schema:
+            $ref: '#/definitions/v1FiltersSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a list of Filters
+      tags:
+      - filters
+  /v1/filters/metadata:
+    get:
+      operationId: v1FiltersMetadata
+      parameters:
+      - description: filterType can be - [tag, meta, resource]
+        in: query
+        name: filterType
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of filters
+          schema:
+            $ref: '#/definitions/v1FiltersMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a list of Filters metadata
+      tags:
+      - filters
+  /v1/filters/tag:
+    post:
+      operationId: v1TagFiltersCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TagFilter'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a Tag filter
+      tags:
+      - filters
+  /v1/filters/tag/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1TagFilterUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Delete the specified Filter object
+      tags:
+      - filters
+    get:
+      operationId: v1TagFilterUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: A Filter object
+          schema:
+            $ref: '#/definitions/v1TagFilterSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified Filter object
+      tags:
+      - filters
+    put:
+      operationId: v1TagFilterUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TagFilter'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates a Tag filter
+      tags:
+      - filters
+definitions:
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1FiltersSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1FilterSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1FilterSummarySpec:
+    properties:
+      filterType:
+        type: string
+  v1FilterMetadata:
+    description: Filter metadata object
+    properties:
+      filterType:
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1FilterSummary:
+    description: Filter summary object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1FilterSummarySpec'
+    type: object
+  v1TagFilterSpec:
+    description: Filter create spec
+    properties:
+      filterGroup:
+        $ref: '#/definitions/v1TagFilterGroup'
+    type: object
+  v1FiltersMetadata:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1FilterMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1SearchFilterConjunctionOperator:
+    enum:
+    - and
+    - or
+    type: string
+    x-nullable: true
+  v1TagFilterSummary:
+    description: Filter summary object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1TagFilterSpec'
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1TagFilter:
+    description: Tag Filter create spec
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1TagFilterSpec'
+    type: object
+  v1SearchFilterKeyValueOperator:
+    enum:
+    - eq
+    type: string
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1TagFilterGroup:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      filters:
+        items:
+          $ref: '#/definitions/v1TagFilterItem'
+        type: array
+        uniqueItems: true
+  v1TagFilterItem:
+    properties:
+      key:
+        type: string
+      negation:
+        type: boolean
+      operator:
+        $ref: '#/definitions/v1SearchFilterKeyValueOperator'
+      values:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

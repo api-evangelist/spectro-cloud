@@ -1,0 +1,205 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations datasinks API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: datasinks
+  x-displayName: Datasinks
+paths:
+  /v1/datasinks/cloudwatch:
+    post:
+      description: Sync data to cloud watch
+      operationId: V1DataSinksCloudWatchSink
+      parameters:
+      - description: Request payload for cloud watch config
+        in: body
+        name: dataSinkCloudWatchConfig
+        required: true
+        schema:
+          $ref: '#/definitions/v1.DataSinkCloudWatchConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: sync data to cloud watch
+      tags:
+      - datasinks
+definitions:
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1AwsSecretSpec:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+    properties:
+      accountName:
+        description: AWS secret accountName; only for aws-iso-b environment
+        type: string
+      agency:
+        description: AWS secret agency
+        type: string
+      isCapValidationEnabled:
+        description: Flag to rotate the secret region credentials
+        type: boolean
+      mission:
+        description: AWS secret mission; only for aws-iso environment
+        type: string
+      namePrefix:
+        description: Policy Boundary
+        type: string
+      permissionBoundary:
+        description: Role or Policy Prefix
+        type: string
+      policy:
+        description: AWS secret policy; JSON string
+        type: string
+      role:
+        description: AWS secret role
+        type: string
+      tls:
+        $ref: '#/definitions/v1AwsSecretTlsConfig'
+        description: TLS configuration for the AWS secret
+    type: object
+  v1AwsCloudAccountCredentialType:
+    default: secret
+    description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+    enum:
+    - secret
+    - sts
+    - pod-identity
+    type: string
+  v1AwsCloudAccount:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+    properties:
+      accessKey:
+        description: AWS account access key
+        type: string
+      credentialType:
+        $ref: '#/definitions/v1AwsCloudAccountCredentialType'
+      partition:
+        default: aws
+        description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+        enum:
+        - aws
+        - aws-us-gov
+        - aws-iso
+        - aws-iso-b
+        type: string
+      podIdentity:
+        $ref: '#/definitions/v1AwsPodIdentityCredentials'
+        description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
+      policyARNs:
+        description: List of policy ARNs required in case of credentialType sts.
+        items:
+          type: string
+        type: array
+      secretKey:
+        description: AWS account secret key
+        type: string
+      secretSpec:
+        $ref: '#/definitions/v1AwsSecretSpec'
+      secretToken:
+        description: AWS account secret token; in case of aws-iso and aws-iso-b
+        type: string
+      sts:
+        $ref: '#/definitions/v1AwsStsCredentials'
+        description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
+    type: object
+  v1.DataSinkPayload:
+    additionalProperties:
+      type: object
+    description: Data sink payload entity
+    properties:
+      refUid:
+        description: RefUid of the data sink payload
+        type: string
+      timestamp:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1.CloudWatchConfig:
+    description: Cloud watch config entity
+    properties:
+      credentials:
+        $ref: '#/definitions/v1AwsCloudAccount'
+      group:
+        description: Name of the group
+        type: string
+      region:
+        description: Name of the region
+        type: string
+      stream:
+        description: Name of the stream
+        type: string
+    type: object
+  v1AwsPodIdentityCredentials:
+    description: AWS EKS Pod Identity credentials for role assumption
+    properties:
+      permissionBoundaryArn:
+        description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+        type: string
+      roleArn:
+        description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+        type: string
+    type: object
+  v1.DataSinkCloudWatchConfig:
+    description: Data sink cloud watch config
+    properties:
+      payload:
+        $ref: '#/definitions/v1.DataSinkPayloads'
+      spec:
+        $ref: '#/definitions/v1.CloudWatchConfig'
+    type: object
+  v1.DataSinkPayloads:
+    description: List of data sink payload entities
+    items:
+      $ref: '#/definitions/v1.DataSinkPayload'
+    type: array
+    uniqueItems: true
+  v1AwsSecretTlsConfig:
+    description: TLS configuration for the AWS secret
+    properties:
+      ca:
+        description: CA certificate
+        type: string
+      cert:
+        description: Certificate
+        type: string
+      key:
+        description: Key
+        type: string
+    type: object
+  v1AwsStsCredentials:
+    description: Aws sts credentials
+    properties:
+      arn:
+        description: Arn for the aws sts credentials in cloud account
+        type: string
+      externalId:
+        description: ExternalId for the aws sts credentials in cloud account
+        type: string
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

@@ -1,0 +1,400 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations notifications API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: notifications
+  x-displayName: Notifications
+paths:
+  /v1/notifications/:
+    get:
+      description: Returns a paginated list of notifications based on request parameters
+      operationId: v1NotificationsList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      responses:
+        '200':
+          description: An array of notification items
+          schema:
+            $ref: '#/definitions/v1Notifications'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a paginated list of notifications based on request parameters
+      tags:
+      - notifications
+  /v1/notifications/events:
+    post:
+      description: Creates a notification event
+      operationId: v1NotificationsEventCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1NotificationEvent'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a notification event
+      tags:
+      - notifications
+  /v1/notifications/{objectKind}/{objectUid}:
+    parameters:
+    - description: Describes the related object kind for which notifications have to be fetched
+      enum:
+      - spectrocluster
+      - clusterprofile
+      - appdeployment
+      in: path
+      name: objectKind
+      required: true
+      type: string
+    - description: Describes the related object uid for which notifications have to be fetched
+      in: path
+      name: objectUid
+      required: true
+      type: string
+    - description: Describes a way to fetch "done" notifications
+      in: query
+      name: isDone
+      type: string
+    get:
+      description: Returns a list of notifications for the specified related object
+      operationId: v1NotificationsObjTypeUidList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      responses:
+        '200':
+          description: An array of component event items
+          schema:
+            $ref: '#/definitions/v1Notifications'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a list of notifications for the specified related object
+      tags:
+      - notifications
+  /v1/notifications/{uid}/ack:
+    parameters:
+    - description: Describes acknowledging notification uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      description: Updates the specified notification for the acknowledgment
+      operationId: v1NotificationsUidAck
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified notification for the acknowledgment
+      tags:
+      - notifications
+  /v1/notifications/{uid}/done:
+    parameters:
+    - description: Describes notification uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      description: Updates the specified notification action as done
+      operationId: v1NotificationsUidDone
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified notification action as done
+      tags:
+      - notifications
+definitions:
+  v1Notification:
+    description: Describes event notification and action definition
+    properties:
+      action:
+        $ref: '#/definitions/v1NotificationAction'
+        description: Describes actions for the notification
+        type: object
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+        type: object
+      relatedObject:
+        $ref: '#/definitions/v1RelatedObject'
+        type: object
+      source:
+        $ref: '#/definitions/v1NotificationSource'
+        description: Describes origin info for the notification
+        type: object
+      type:
+        description: Describes type of notification. Possible values [NotificationPackUpdate, NotificationPackRegistryUpdate, NotificationNone]
+        enum:
+        - NotificationPackUpdate
+        - NotificationPackRegistryUpdate
+        - NotificationNone
+        type: string
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1NotificationSource:
+    description: Describes origin info for the notification
+    properties:
+      component:
+        description: Describes component where notification originated
+        type: string
+    type: object
+  v1NotificationAction:
+    description: Describes actions for the notification
+    properties:
+      ack:
+        description: Describes the acknowledgement status for the notification
+        type: boolean
+        x-omitempty: false
+      actionMessage:
+        description: Describes information related to notification action
+        type: string
+      actionType:
+        description: Describes action type for the notification. Possible Values [NotifyActionPacksUpdate, NotifyActionClusterProfileUpdate, NotifyActionPackRegistryUpdate, NotifyActionClusterUpdate, NotifyActionNone]
+        enum:
+        - NotifyActionPacksUpdate
+        - NotifyActionClusterProfileUpdate
+        - NotifyActionPackRegistryUpdate
+        - NotifyActionClusterUpdate
+        - NotifyActionNone
+        type: string
+      events:
+        additionalProperties:
+          additionalProperties:
+            type: string
+          type: object
+        description: Describes the events happened for the notifications
+        type: object
+      isDone:
+        description: Describes the "Done" status for the notification
+        type: boolean
+        x-omitempty: false
+      isInfo:
+        description: Describes the notification as a information
+        type: boolean
+        x-omitempty: false
+      link:
+        type: string
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1NotificationEvent:
+    description: Describes notification event details
+    properties:
+      component:
+        description: Describes component of notification event
+        type: string
+      digest:
+        description: Describes notification event digest
+        type: string
+      message:
+        description: Describes a information for the notification event
+        type: string
+      meta:
+        additionalProperties:
+          type: string
+        description: Describes a event messages with meta digest as the key
+        type: object
+      type:
+        description: Describes notification event type
+        enum:
+        - NotificationPackSync
+        - NotificationClusterProfileSync
+        type: string
+    type: object
+  v1RelatedObject:
+    description: Object for which the resource is related
+    properties:
+      kind:
+        enum:
+        - spectrocluster
+        - machine
+        - cloudconfig
+        - clusterprofile
+        - pack
+        - appprofile
+        - appdeployment
+        - edgehost
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1Notifications:
+    description: Describe a list of generated notifications
+    properties:
+      items:
+        description: Describe a list of generated notifications
+        items:
+          $ref: '#/definitions/v1Notification'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+        description: Describes the meta information about the notification lists
+    required:
+    - items
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

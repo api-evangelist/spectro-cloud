@@ -1,0 +1,71 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations grpc API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: grpc
+  x-displayName: Grpc
+paths:
+  /v1/grpc/config:
+    get:
+      description: Returns Grpc Configuration
+      operationId: V1GrpcConfiguration
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1GrpcConfiguration'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get Grpc Configuration
+      tags:
+      - grpc
+definitions:
+  v1GrpcEndpoint:
+    properties:
+      endpoint:
+        description: Describes the URL where the client has to connect to the grpc server
+        type: string
+      tls:
+        description: Describes the Grpc tls config which client will use to make a request to the grpc server
+        properties:
+          caCert:
+            type: string
+          enabled:
+            type: boolean
+          insecureSkipVerify:
+            type: boolean
+        type: object
+    type: object
+  v1GrpcConfiguration:
+    description: Describes the response that contains the grpc configuration to establish connection
+    properties:
+      preferredServer:
+        $ref: '#/definitions/v1GrpcEndpoint'
+      servers:
+        items:
+          $ref: '#/definitions/v1GrpcEndpoint'
+        type: array
+        uniqueItems: true
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

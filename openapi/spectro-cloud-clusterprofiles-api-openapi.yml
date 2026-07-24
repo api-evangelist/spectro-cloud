@@ -1,0 +1,2402 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations clusterprofiles API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: clusterprofiles
+  x-displayName: Clusterprofiles
+paths:
+  /v1/clusterprofiles:
+    post:
+      operationId: v1ClusterProfilesCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileEntity'
+      - description: If true then cluster profile will be created and published in a single transaction
+        in: query
+        name: publish
+        type: boolean
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/bulk:
+    delete:
+      operationId: v1ClusterProfilesBulkDelete
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1BulkDeleteRequest'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1BulkDeleteResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes list of cluster profiles
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/import:
+    post:
+      operationId: v1ClusterProfilesImport
+      parameters:
+      - description: If true then cluster profile will be published post successful import
+        in: query
+        name: publish
+        type: boolean
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileImportEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Imports a cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/import/file:
+    post:
+      consumes:
+      - multipart/form-data
+      operationId: v1ClusterProfilesImportFile
+      parameters:
+      - description: If true then cluster profile will be published post successful import
+        in: query
+        name: publish
+        type: boolean
+      - description: Cluster profile import file
+        in: formData
+        name: importFile
+        type: file
+      - default: json
+        description: Cluster profile import file format ["yaml", "json"]
+        enum:
+        - yaml
+        - json
+        in: query
+        name: format
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Imports a cluster profile via file
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/import/validate:
+    post:
+      operationId: v1ClusterProfilesImportValidate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileImportEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Cluster profile import validated response
+          schema:
+            $ref: '#/definitions/v1ClusterProfileImportEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates cluster profile import
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/macros:
+    get:
+      operationId: v1MacrosList
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Macros'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of macros
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/validate/name:
+    get:
+      description: Validates the cluster profile name and version
+      operationId: v1ClusterProfilesValidateNameVersion
+      parameters:
+      - description: Cluster profile name
+        in: query
+        name: name
+        type: string
+      - description: Cluster profile version
+        in: query
+        name: version
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates the cluster profile metadata
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/validate/packs:
+    post:
+      operationId: v1ClusterProfilesValidatePacks
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileTemplateDraft'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Cluster profile packs validation response
+          schema:
+            $ref: '#/definitions/v1ClusterProfileValidatorResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates cluster profile packs
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Comma seperated pack meta such as schema, presets
+      in: query
+      name: includePackMeta
+      type: string
+    - description: Filter cluster profiles by target resource type - 'spectrocluster' for profiles suitable to launch/update clusters, 'clustertemplate' for profiles suitable to create/edit cluster template
+      enum:
+      - spectrocluster
+      - clustertemplate
+      in: query
+      name: resourceType
+      type: string
+    - description: If true, includes pack annotations like OCI registry provider type and OCI pack archive URL
+      in: query
+      name: includePackAnnotations
+      type: boolean
+    delete:
+      operationId: v1ClusterProfilesDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified cluster profile
+      tags:
+      - clusterprofiles
+    get:
+      operationId: v1ClusterProfilesGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterProfile'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a specified cluster profile
+      tags:
+      - clusterprofiles
+    put:
+      operationId: v1ClusterProfilesUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/clone:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1ClusterProfilesUidClone
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileCloneEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a clone of the specified cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/clone/validate:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      description: Validates the cloned cluster profile name, version and target project uid
+      operationId: v1ClusterProfilesUidCloneValidate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileCloneMetaInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates the cluster profile clone
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/export:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - default: json
+      description: Cluster profile export file format [ "yaml", "json" ]
+      enum:
+      - yaml
+      - json
+      in: query
+      name: format
+      type: string
+    get:
+      operationId: V1ClusterProfilesUidExport
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: Exports cluster profile as a file
+          headers:
+            Content-Disposition:
+              type: string
+          schema:
+            format: binary
+            type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Export the specified cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/export/terraform:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - default: yaml
+      description: Cluster profile export file format [ "yaml", "json" ]
+      enum:
+      - yaml
+      - json
+      in: query
+      name: format
+      type: string
+    get:
+      operationId: V1ClusterProfilesUidExportTerraform
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: Downloads cluster profile export file
+          headers:
+            Content-Disposition:
+              type: string
+          schema:
+            format: binary
+            type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Downloads the specified cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/metadata:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1ClusterProfilesUidMetadataUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ProfileMetaEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified cluster profile metadata
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packRefs:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Cluster profile notification uid
+      in: query
+      name: notify
+      type: string
+    - in: body
+      name: body
+      schema:
+        $ref: '#/definitions/v1ClusterProfileNotificationUpdateEntity'
+    patch:
+      operationId: v1ClusterProfilesPacksRefUpdate
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates cluster profile packs ref
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packs:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Comma seperated pack meta such as schema, presets
+      in: query
+      name: includePackMeta
+      type: string
+    get:
+      operationId: v1ClusterProfilesUidPacksGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterProfilePacksEntities'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster profile packs
+      tags:
+      - clusterprofiles
+    post:
+      operationId: v1ClusterProfilesUidPacksAdd
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PackInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds a new pack to the specified cluster profile and returns the created pack uid
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packs/manifests:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Comma seperated pack meta such as schema, presets
+      in: query
+      name: includePackMeta
+      type: string
+    get:
+      operationId: v1ClusterProfilesUidPacksManifestsGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterProfilePacksManifests'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster profile pack manifests
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packs/resolvedValues:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - in: body
+      name: body
+      schema:
+        $ref: '#/definitions/v1PackParamsEntity'
+    get:
+      operationId: v1ClusterProfilesUidPacksResolvedValuesGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1PackResolvedValues'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster profile packs resolved values
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packs/{packName}:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Cluster profile pack name
+      in: path
+      name: packName
+      required: true
+      type: string
+    delete:
+      operationId: v1ClusterProfilesUidPacksNameDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified pack information in the cluster profile
+      tags:
+      - clusterprofiles
+    get:
+      operationId: V1ClusterProfilesUidPacksNameGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1PackRefSummaryResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster profile pack
+      tags:
+      - clusterprofiles
+    put:
+      operationId: v1ClusterProfilesUidPacksNameUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PackUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified pack information in the cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packs/{packName}/config:
+    get:
+      operationId: v1ClusterProfilesUidPacksConfigGet
+      parameters:
+      - description: cluster profile uid
+        in: path
+        name: uid
+        required: true
+        type: string
+      - description: Cluster profile pack name
+        in: path
+        name: packName
+        required: true
+        type: string
+      - description: Cluster profile pack uid
+        in: query
+        name: packUid
+        required: true
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster profile pack configurations
+          schema:
+            $ref: '#/definitions/v1ClusterProfilePackConfigList'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster profile pack configuration
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packs/{packName}/manifests:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Cluster profile pack name
+      in: path
+      name: packName
+      required: true
+      type: string
+    get:
+      operationId: v1ClusterProfilesUidPacksUidManifests
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ManifestEntities'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the associated manifests for the specified profile's pack
+      tags:
+      - clusterprofiles
+    post:
+      operationId: v1ClusterProfilesUidPacksNameManifestsAdd
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ManifestInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds manifest to the profiles packs and returns the added manifests uid
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/packs/{packName}/manifests/{manifestUid}:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Cluster profile pack name
+      in: path
+      name: packName
+      required: true
+      type: string
+    - description: Cluster profile pack manifest uid
+      in: path
+      name: manifestUid
+      required: true
+      type: string
+    delete:
+      operationId: v1ClusterProfilesUidPacksNameManifestsUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified cluster profile pack manifest
+      tags:
+      - clusterprofiles
+    get:
+      operationId: v1ClusterProfilesUidPacksNameManifestsUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ManifestEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster profile pack manifest
+      tags:
+      - clusterprofiles
+    put:
+      operationId: v1ClusterProfilesUidPacksNameManifestsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ManifestInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified manifest of the profile's pack
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/publish:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      description: 'Publish the draft cluster profile with next revision, the current draft cluster profile will be marked to published
+
+        and the draft cluster profile will be set to null in the cluster profile template.
+
+        '
+      operationId: v1ClusterProfilesPublish
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Cluster profile published successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Publishes the specified cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/spc/download:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1ClusterProfilesUidSpcDownload
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: Download cluster profile archive file
+          headers:
+            Content-Disposition:
+              type: string
+          schema:
+            format: binary
+            type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Downloads the specified cluster profile
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/validate/packs:
+    post:
+      operationId: v1ClusterProfilesUidValidatePacks
+      parameters:
+      - description: Cluster profile uid
+        in: path
+        name: uid
+        required: true
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfileTemplateDraft'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Cluster profile packs validation response
+          schema:
+            $ref: '#/definitions/v1ClusterProfileValidatorResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates specified cluster profile packs
+      tags:
+      - clusterprofiles
+  /v1/clusterprofiles/{uid}/variables:
+    parameters:
+    - description: Cluster profile uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: V1ClusterProfilesUidVariablesDelete
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1VariableNames'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified cluster profile variables
+      tags:
+      - clusterprofiles
+    get:
+      operationId: V1ClusterProfilesUidVariablesGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Variables'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieve a list of variables defined for the cluster profile
+      tags:
+      - clusterprofiles
+    patch:
+      operationId: V1ClusterProfilesUidVariablesPatch
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Variables'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update specific variables defined for a cluster profile
+      tags:
+      - clusterprofiles
+    put:
+      operationId: V1ClusterProfilesUidVariablesPut
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Variables'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the variables defined for a cluster profile
+      tags:
+      - clusterprofiles
+definitions:
+  v1ManifestInputEntity:
+    description: Manifest request payload
+    properties:
+      content:
+        description: Manifest content
+        type: string
+      name:
+        description: Manifest name
+        type: string
+  v1RegistryMetadata:
+    description: Registry meta
+    properties:
+      isDefault:
+        type: boolean
+        x-omitempty: false
+      isPrivate:
+        type: boolean
+        x-omitempty: false
+      kind:
+        type: string
+      name:
+        type: string
+      scope:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1Variables:
+    properties:
+      variables:
+        description: List of unique variable fields with schema constraints
+        items:
+          $ref: '#/definitions/v1Variable'
+        type: array
+        uniqueItems: true
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1PackTemplateParameters:
+    description: Pack template parameters
+    properties:
+      inputParameters:
+        description: Pack template input parameters array
+        items:
+          $ref: '#/definitions/v1PackTemplateParameter'
+        type: array
+      outputParameters:
+        description: Pack template output parameters array
+        items:
+          $ref: '#/definitions/v1PackTemplateParameter'
+        type: array
+  v1ClusterProfilePackConfigList:
+    properties:
+      items:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackConfig'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ClusterProfileStatus:
+    description: ClusterProfileStatus defines the observed state of ClusterProfile
+    properties:
+      hasUserMacros:
+        description: If it is true then profile pack values has a reference to user defined macros
+        type: boolean
+        x-omitempty: false
+      inUseClusterTemplates:
+        items:
+          $ref: '#/definitions/v1ProjectResourceReference'
+        type: array
+      inUseClusterUids:
+        description: Deprecated. Use inUseClusters
+        items:
+          type: string
+        type: array
+      inUseClusters:
+        items:
+          $ref: '#/definitions/v1ObjectResReference'
+        type: array
+      isPublished:
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1ManifestEntity:
+    description: Manifest object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ManifestSpec'
+  v1Macro:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  v1PackRef:
+    description: PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml
+        type: object
+      digest:
+        description: digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade
+        type: string
+      inValidReason:
+        type: string
+      isInvalid:
+        description: pack is invalid when the associated tag is deleted from the registry
+        type: boolean
+      layer:
+        enum:
+        - kernel
+        - os
+        - k8s
+        - cni
+        - csi
+        - addon
+        type: string
+      logo:
+        description: path to the pack logo
+        type: string
+      manifests:
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      name:
+        description: pack name
+        type: string
+      packUid:
+        description: PackUID is Hubble packUID, not palette Pack.UID It is used by Hubble only.
+        type: string
+      params:
+        additionalProperties:
+          type: string
+        description: params passed as env variables to be consumed at installation time
+        type: object
+      presets:
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      registryUid:
+        description: pack registry uid
+        type: string
+      schema:
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      server:
+        description: pack registry server or helm repo
+        type: string
+      tag:
+        description: pack tag
+        type: string
+      type:
+        description: type of the pack
+        enum:
+        - spectro
+        - helm
+        - manifest
+        - oci
+        type: string
+      values:
+        description: values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+      version:
+        description: pack version
+        type: string
+    required:
+    - layer
+    - name
+    type: object
+  v1ManifestData:
+    description: Published manifest object
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      digest:
+        description: Manifest digest
+        type: string
+    type: object
+  v1ManifestSummary:
+    description: Manifest object
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      digest:
+        description: Manifest digest
+        type: string
+      name:
+        description: Manifest name
+        type: string
+      uid:
+        description: Manifest uid
+        type: string
+  v1PackManifestImportEntity:
+    description: Pack manifest import objct
+    properties:
+      content:
+        description: Pack manifest content in yaml
+        type: string
+      name:
+        description: Pack manifest name
+        type: string
+    type: object
+  v1PackSummarySpec:
+    description: Pack object
+    properties:
+      addonSubType:
+        description: Pack add-on sub type such as monitoring, db etc
+        type: string
+      addonType:
+        description: Pack add-on type such as logging, monitoring, security etc
+        type: string
+      annotations:
+        additionalProperties:
+          type: string
+        description: Pack annotations is used to allow pack to add more arbitrary configurations
+        type: object
+      cloudTypes:
+        description: Pack supported cloud types
+        items:
+          type: string
+        type: array
+      digest:
+        description: Pack digest
+        type: string
+      displayName:
+        description: Pack display name
+        type: string
+      eol:
+        description: 'Pack end of life, date format: yyyy-MM-dd'
+        type: string
+      group:
+        description: Pack group
+        type: string
+      layer:
+        $ref: '#/definitions/v1PackLayer'
+      logoUrl:
+        description: Pack logo url
+        type: string
+      manifests:
+        description: Pack manifests are additional content as part of the cluster profile
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      presets:
+        description: Pack presets are the set of configurations applied on user selection of presets
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      registryUid:
+        description: Pack registry uid
+        type: string
+      schema:
+        description: Pack schema contains constraints such as data type, format, hints for the pack values
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      template:
+        $ref: '#/definitions/v1PackTemplate'
+      type:
+        $ref: '#/definitions/v1PackType'
+      values:
+        description: Pack values
+        type: string
+      version:
+        description: Pack version
+        type: string
+    type: object
+  v1PackDependency:
+    description: Pack template dependency
+    properties:
+      layer:
+        description: Pack template dependency pack layer
+        type: string
+      name:
+        description: Pack template dependency pack name
+        type: string
+      readOnly:
+        description: If true then dependency pack values can't be overridden
+        type: boolean
+    type: object
+  v1ClusterProfileSpecEntity:
+    description: Cluster profile update spec
+    properties:
+      version:
+        description: Cluster profile version
+        type: string
+    type: object
+  v1ClusterProfilePacksManifests:
+    description: Cluster profile pack manifests
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          packs:
+            description: Cluster profile packs array
+            items:
+              $ref: '#/definitions/v1ClusterProfilePackManifests'
+            type: array
+            uniqueItems: true
+        type: object
+    type: object
+  v1ManifestRefUpdateEntity:
+    description: Manifest update request payload
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      name:
+        description: Manifest name
+        type: string
+      uid:
+        description: Manifest uid
+        type: string
+    required:
+    - name
+  v1ClusterProfilePacksEntities:
+    description: List of cluster profile packs
+    properties:
+      items:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1ClusterProfilePacksEntity'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1PackLayer:
+    enum:
+    - kernel
+    - os
+    - k8s
+    - cni
+    - csi
+    - addon
+    type: string
+  v1PackType:
+    default: spectro
+    enum:
+    - spectro
+    - helm
+    - manifest
+    - oci
+    type: string
+  v1ObjectResReference:
+    description: Object resource reference
+    properties:
+      kind:
+        type: string
+      name:
+        type: string
+      projectUid:
+        type: string
+      tenantUid:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1VariableOption:
+    description: Option for dropdown variable input type
+    properties:
+      default:
+        description: Mark this option as the default selection
+        type: boolean
+        x-omitempty: false
+      description:
+        description: Optional tooltip/description for the option
+        type: string
+      label:
+        description: Display text for the option
+        type: string
+      value:
+        description: Actual value for the option
+        type: string
+    required:
+    - value
+    type: object
+  v1PackManifestUpdateEntity:
+    description: Pack input entity with values to overwrite and manifests for the intial creation
+    properties:
+      layer:
+        description: Pack layer
+        type: string
+      manifests:
+        description: Pack manifests are additional content as part of the profile
+        items:
+          $ref: '#/definitions/v1ManifestRefUpdateEntity'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      registryUid:
+        description: Pack registry uid
+        type: string
+      tag:
+        description: Pack tag
+        type: string
+      type:
+        $ref: '#/definitions/v1PackType'
+      uid:
+        description: Pack uid
+        type: string
+      values:
+        description: Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+    required:
+    - name
+    type: object
+  v1PackUpdateEntity:
+    description: Pack update request payload
+    properties:
+      pack:
+        $ref: '#/definitions/v1PackEntity'
+  v1PackRegistryImportEntity:
+    description: Pack registry import entity
+    properties:
+      matchingRegistries:
+        items:
+          $ref: '#/definitions/v1PackRegistryMetadata'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1PackRegistryMetadata'
+    type: object
+  v1ClusterProfileSpec:
+    description: ClusterProfileTemplate can be in draft mode, or published mode User only see the latest published template, and (or) the draft template User can apply either the draft version or the latest published version to a cluster when user create a draft version, just copy the Published template, increment the version, and keep changing the draft template without increment the draft version when user publish a draft, the version is fixed, and won't be able to make any modification on published template For each clusterprofile that has a published version, there will be a ClusterProfileArchive automatically created when user publish a draft, the published version will also be copied over to the corresponding ClusterProfileArchive it is just in case in the future for whatever reason we may want to expose earlier versions
+    properties:
+      draft:
+        $ref: '#/definitions/v1ClusterProfileTemplate'
+      published:
+        $ref: '#/definitions/v1ClusterProfileTemplate'
+      version:
+        type: string
+      versions:
+        description: Cluster profile's list of all the versions
+        items:
+          $ref: '#/definitions/v1ClusterProfileVersion'
+        type: array
+    type: object
+  v1ClusterProfilePacksEntity:
+    description: Cluster profile packs object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PackSummarySpec'
+      status:
+        $ref: '#/definitions/v1PackSummaryStatus'
+    type: object
+  v1ClusterProfileTemplateDraft:
+    description: Cluster profile template spec
+    properties:
+      cloudType:
+        type: string
+      packs:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackManifestEntity'
+        type: array
+        uniqueItems: true
+      type:
+        $ref: '#/definitions/v1ProfileType'
+    type: object
+  v1ClusterProfilePackManifests:
+    description: Cluster profile pack manifests
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PackManifestsSpec'
+      status:
+        $ref: '#/definitions/v1PackSummaryStatus'
+    type: object
+  v1PackTemplateParameterOption:
+    description: Pack template parameter option
+    properties:
+      dependencies:
+        description: Pack template parameter dependencies
+        items:
+          $ref: '#/definitions/v1PackDependency'
+        type: array
+      description:
+        description: Pack template parameter description
+        type: string
+      label:
+        description: Pack template parameter label
+        type: string
+    type: object
+  v1ConstraintValidatorResponse:
+    description: Constraint validator response
+    properties:
+      results:
+        items:
+          $ref: '#/definitions/v1ConstraintValidatorResult'
+        type: array
+        uniqueItems: true
+    type: object
+  v1Variable:
+    description: Unique variable field with schema definition
+    properties:
+      defaultValue:
+        description: The default value of the variable
+        type: string
+        x-omitempty: false
+      description:
+        description: Variable description
+        type: string
+      displayName:
+        description: Unique display name of the variable
+        type: string
+      format:
+        $ref: '#/definitions/v1VariableFormat'
+      hidden:
+        description: If true, then variable will be hidden for overriding the value. By default the hidden flag will be set to false
+        type: boolean
+        x-omitempty: false
+      immutable:
+        description: If true, then variable value can't be editable. By default the immutable flag will be set to false
+        type: boolean
+        x-omitempty: false
+      inputType:
+        $ref: '#/definitions/v1VariableInputType'
+        description: Input type for the variable - text or dropdown. Defaults to text for backward compatibility
+      isSensitive:
+        description: If true, then default value will be masked. By default the isSensitive flag will be set to false
+        type: boolean
+        x-omitempty: false
+      name:
+        description: Variable name
+        type: string
+      options:
+        description: Available options for dropdown input type
+        items:
+          $ref: '#/definitions/v1VariableOption'
+        type: array
+      regex:
+        description: Regular expression pattern which the variable value must match
+        type: string
+      required:
+        description: Flag to specify if the variable is optional or mandatory. If it is mandatory then default value must be provided
+        type: boolean
+        x-omitempty: false
+    required:
+    - name
+    type: object
+  v1Macros:
+    properties:
+      macros:
+        items:
+          $ref: '#/definitions/v1Macro'
+        type: array
+        uniqueItems: true
+  v1ClusterProfileTemplate:
+    description: ClusterProfileTemplate contains details of a clusterprofile definition
+    properties:
+      cloudType:
+        type: string
+      name:
+        type: string
+      packServerRefs:
+        description: PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      packServerSecret:
+        description: This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette
+        type: string
+      packs:
+        description: Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge
+        items:
+          $ref: '#/definitions/v1PackRef'
+        type: array
+      profileVersion:
+        description: version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster
+        type: string
+      relatedObject:
+        $ref: '#/definitions/v1ObjectReference'
+        description: RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with
+      type:
+        type: string
+      uid:
+        type: string
+      version:
+        description: Deprecated. Use profileVersion
+        format: int32
+        type: integer
+    type: object
+  v1VariableFormat:
+    default: string
+    description: Format type of the variable value
+    enum:
+    - string
+    - number
+    - boolean
+    - ipv4
+    - ipv4cidr
+    - ipv6
+    - version
+    - base64
+    type: string
+  v1ClusterProfileCloneMetaInputEntity:
+    description: Cluster profile clone metadata
+    properties:
+      name:
+        description: Cloned cluster profile name
+        type: string
+      target:
+        $ref: '#/definitions/v1ClusterProfileCloneTarget'
+      version:
+        description: Cloned cluster profile version
+        type: string
+    required:
+    - name
+    type: object
+  v1PackImportEntity:
+    description: Pack import request payload
+    properties:
+      layer:
+        description: Pack layer [ "os", "k8s", "cni", "csi", "addon" ]
+        type: string
+      manifests:
+        description: Pack manifests array
+        items:
+          $ref: '#/definitions/v1PackManifestImportEntity'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      registry:
+        $ref: '#/definitions/v1PackRegistryImportEntity'
+      tag:
+        description: Pack version tag
+        type: string
+      type:
+        description: Pack type [ "spectro", "helm", "manifest", "oci" ]
+        type: string
+      values:
+        description: Pack values are the customizable configurations for the pack
+        type: string
+      version:
+        description: Pack version
+        type: string
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1BulkDeleteFailure:
+    properties:
+      errMsg:
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+  v1ClusterProfileMetadataImportEntity:
+    description: Cluster profile import metadata
+    properties:
+      description:
+        description: Cluster profile description
+        type: string
+      labels:
+        additionalProperties:
+          type: string
+        description: Cluster profile labels
+        type: object
+      name:
+        description: Cluster profile name
+        type: string
+    type: object
+  v1ClusterProfileTemplateImportEntity:
+    description: Cluster profile import template
+    properties:
+      cloudType:
+        description: Cluster profile cloud type
+        type: string
+      packs:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackImportEntity'
+        type: array
+        uniqueItems: true
+      type:
+        description: Cluster profile type [ "cluster", "infra", "add-on", "system" ]
+        type: string
+    type: object
+  v1PackPreset:
+    description: PackPreset defines the preset pack values
+    properties:
+      add:
+        type: string
+        x-omitempty: false
+      displayName:
+        type: string
+        x-omitempty: false
+      group:
+        type: string
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      remove:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1PackRefSummarySpec:
+    description: Pack summary spec
+    properties:
+      macros:
+        $ref: '#/definitions/v1PackResolvedValues'
+      pack:
+        $ref: '#/definitions/v1PackSummarySpec'
+      registry:
+        $ref: '#/definitions/v1RegistryMetadata'
+  v1ClusterProfileCloneTarget:
+    description: Cluster profile clone meta input entity
+    properties:
+      projectUid:
+        description: Cloned cluster profile project uid
+        type: string
+      scope:
+        $ref: '#/definitions/v1Scope'
+    required:
+    - scope
+    type: object
+  v1ProjectResourceReference:
+    description: Project-scoped resource reference
+    properties:
+      kind:
+        description: Kind of the referenced resource
+        type: string
+      name:
+        description: Name of the referenced resource
+        type: string
+      projectUid:
+        description: UID of the Project that scopes this resource
+        type: string
+      uid:
+        description: UID of the referenced resource
+        type: string
+    type: object
+  v1PackSummaryStatus:
+    description: Pack status
+    type: object
+  v1BulkDeleteRequest:
+    properties:
+      uids:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    required:
+    - uids
+  v1PackParamsEntity:
+    description: Pack params request payload
+    properties:
+      references:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  v1ProfileType:
+    default: cluster
+    enum:
+    - cluster
+    - infra
+    - add-on
+    - system
+    type: string
+  v1ManifestSpec:
+    description: Manifest spec
+    properties:
+      draft:
+        $ref: '#/definitions/v1ManifestData'
+      published:
+        $ref: '#/definitions/v1ManifestData'
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1ClusterProfileVersion:
+    description: Cluster profile with version
+    properties:
+      uid:
+        type: string
+      version:
+        type: string
+  v1VariableInputType:
+    default: text
+    description: Input type for the variable
+    enum:
+    - text
+    - dropdown
+    - multiline
+    type: string
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1PackConfig:
+    description: Pack configuration
+    properties:
+      spec:
+        $ref: '#/definitions/v1PackConfigSpec'
+    type: object
+  v1ClusterProfileUpdateEntity:
+    description: Cluster profile update request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        description: Cluster profile update spec
+        properties:
+          template:
+            $ref: '#/definitions/v1ClusterProfileTemplateUpdate'
+          version:
+            description: Cluster profile version
+            type: string
+        type: object
+    type: object
+  v1ClusterProfileTemplateUpdate:
+    description: Cluster profile template update spec
+    properties:
+      packs:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackManifestUpdateEntity'
+        type: array
+        uniqueItems: true
+      type:
+        $ref: '#/definitions/v1ProfileType'
+    type: object
+  v1ProfileMetaEntity:
+    description: Cluster profile metadata request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1ClusterProfileSpecEntity'
+    required:
+    - metadata
+    type: object
+  v1ClusterProfileValidatorResponse:
+    description: Cluster profile validator response
+    properties:
+      packs:
+        $ref: '#/definitions/v1ConstraintValidatorResponse'
+    type: object
+  v1PackManifestRef:
+    properties:
+      digest:
+        type: string
+      isOverridden:
+        type: boolean
+        x-omitempty: false
+      name:
+        type: string
+      parentUid:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ManifestEntities:
+    properties:
+      items:
+        description: Manifests array
+        items:
+          $ref: '#/definitions/v1ManifestEntity'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1PackSchema:
+    description: PackSchema defines the schema definition, hints for the pack values
+    properties:
+      format:
+        type: string
+        x-omitempty: false
+      hints:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      listOptions:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      readonly:
+        type: boolean
+        x-omitempty: false
+      regex:
+        type: string
+        x-omitempty: false
+      required:
+        type: boolean
+        x-omitempty: false
+      type:
+        type: string
+        x-omitempty: false
+    type: object
+  v1VariableNames:
+    properties:
+      variables:
+        description: Array of variable names
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    required:
+    - variables
+  v1PackInputEntity:
+    description: Pack request payload
+    properties:
+      pack:
+        $ref: '#/definitions/v1PackManifestEntity'
+  v1PackManifestsSpec:
+    description: Pack manifests spec
+    properties:
+      addonType:
+        description: Pack add-on type such as logging, monitoring, security etc
+        type: string
+      annotations:
+        additionalProperties:
+          type: string
+        description: Pack annotations is used to allow pack to add more arbitrary configurations
+        type: object
+      cloudTypes:
+        description: Pack supported cloud types
+        items:
+          type: string
+        type: array
+      digest:
+        description: Pack digest
+        type: string
+      displayName:
+        description: Pack display name
+        type: string
+      eol:
+        description: 'Pack end of life, date format: yyyy-MM-dd'
+        type: string
+      group:
+        description: Pack group
+        type: string
+      layer:
+        $ref: '#/definitions/v1PackLayer'
+      logoUrl:
+        description: Pack logo url
+        type: string
+      manifests:
+        description: Pack manifests are additional content as part of the cluster profile
+        items:
+          $ref: '#/definitions/v1ManifestSummary'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      presets:
+        description: Pack presets are the set of configurations applied on user selection of presets
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      registryUid:
+        description: Pack registry uid
+        type: string
+      schema:
+        description: Pack schema contains constraints such as data type, format, hints for the pack values
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      type:
+        $ref: '#/definitions/v1PackType'
+      values:
+        description: Pack values
+        type: string
+      version:
+        description: Pack version
+        type: string
+    type: object
+  v1ClusterProfile:
+    description: ClusterProfile is the Schema for the clusterprofiles API
+    properties:
+      apiVersion:
+        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+        type: string
+      kind:
+        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ClusterProfileSpec'
+      status:
+        $ref: '#/definitions/v1ClusterProfileStatus'
+    type: object
+  v1ClusterProfileNotificationUpdateEntity:
+    description: Cluster profile notification update request payload
+    properties:
+      packs:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackManifestUpdateEntity'
+        type: array
+        uniqueItems: true
+      uid:
+        description: Cluster profile uid
+        type: string
+    type: object
+  v1Scope:
+    enum:
+    - system
+    - tenant
+    - project
+    - resource
+    type: string
+  v1ClusterProfileImportEntity:
+    description: Cluster profile import request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterProfileMetadataImportEntity'
+      spec:
+        $ref: '#/definitions/v1ClusterProfileSpecImportEntity'
+    type: object
+  v1ClusterProfileEntity:
+    description: Cluster profile request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          template:
+            $ref: '#/definitions/v1ClusterProfileTemplateDraft'
+          variables:
+            description: List of unique variable fields defined for a cluster profile with schema constraints
+            items:
+              $ref: '#/definitions/v1Variable'
+            type: array
+            uniqueItems: true
+          version:
+            description: Cluster profile version
+            type: string
+        type: object
+    type: object
+  v1PackResolvedValues:
+    description: Pack resolved values
+    properties:
+      resolved:
+        additionalProperties:
+          type: string
+        description: Pack resolved values map
+        type: object
+  v1PackRegistryMetadata:
+    description: Pack registry metadata
+    properties:
+      isPrivate:
+        description: If true then helm registry is private and is not accessible for the content sync
+        type: boolean
+        x-omitempty: false
+      isSyncSupported:
+        description: If true the registry sync is supported
+        type: boolean
+        x-omitempty: false
+      kind:
+        description: Pack registry kind [ "pack", "helm", "oci" ]
+        type: string
+      name:
+        description: Pack registry name
+        type: string
+      providerType:
+        description: OCI registry provider type [ "helm", "pack", "zarf" ]
+        type: string
+      uid:
+        description: Pack registry uid
+        type: string
+    type: object
+  v1ConstraintError:
+    properties:
+      code:
+        type: string
+      message:
+        type: string
+    type: object
+  v1PackTemplateParameter:
+    description: Pack template parameter
+    properties:
+      description:
+        description: Pack template parameter description
+        type: string
+      displayName:
+        description: Pack template parameter display name
+        type: string
+      format:
+        description: Pack template parameter format
+        type: string
+      hidden:
+        description: Pack template parameter hidden flag, if true then the parameter is hidden in the UI
+        type: boolean
+      listOptions:
+        description: Pack template parameter list options as string array
+        items:
+          type: string
+        type: array
+      name:
+        description: Pack template parameter name
+        type: string
+      optional:
+        description: Pack template parameter optional flag, if true then the parameter value is not mandatory
+        type: boolean
+      options:
+        additionalProperties:
+          $ref: '#/definitions/v1PackTemplateParameterOption'
+          type: object
+        description: Pack template parameter options array
+        type: object
+      readOnly:
+        description: Pack template parameter readonly flag, if true then the parameter value can't be overridden
+        type: boolean
+      regex:
+        description: Pack template parameter regex, if set then parameter value must match with specified regex
+        type: string
+      targetKey:
+        description: Pack template parameter target key which is mapped to the key defined in the pack values
+        type: string
+      type:
+        description: Pack template parameter data type
+        type: string
+      value:
+        description: Pack template parameter value
+        type: string
+  v1PackConfigSpec:
+    properties:
+      associatedObject:
+        type: string
+      isValuesOverridden:
+        type: boolean
+        x-omitempty: false
+      manifests:
+        items:
+          $ref: '#/definitions/v1PackManifestRef'
+        type: array
+      name:
+        type: string
+      packUid:
+        type: string
+      scope:
+        type: string
+      tag:
+        type: string
+      type:
+        type: string
+      values:
+        type: string
+      version:
+        type: string
+    type: object
+  v1ConstraintValidatorResult:
+    description: Constraint validator result
+    properties:
+      displayName:
+        type: string
+      errors:
+        items:
+          $ref: '#/definitions/v1ConstraintError'
+        type: array
+        uniqueItems: true
+      name:
+        type: string
+    type: object
+  v1BulkDeleteResponse:
+    properties:
+      deletedCount:
+        type: integer
+        x-omitempty: false
+      failures:
+        items:
+          $ref: '#/definitions/v1BulkDeleteFailure'
+        type: array
+        uniqueItems: true
+        x-omitempty: false
+      isSucceeded:
+        type: boolean
+        x-omitempty: false
+      message:
+        type: string
+        x-omitempty: false
+  v1PackTemplate:
+    description: Pack template configuration
+    properties:
+      manifest:
+        description: Pack template manifest content
+        type: string
+      parameters:
+        $ref: '#/definitions/v1PackTemplateParameters'
+      values:
+        description: Pack template values
+        type: string
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or modify the referred object.
+    properties:
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1ClusterProfileCloneEntity:
+    description: Cluster profile clone request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterProfileCloneMetaInputEntity'
+    type: object
+  v1PackEntity:
+    description: Pack object
+    properties:
+      layer:
+        description: Pack layer
+        type: string
+      name:
+        description: Pack name
+        type: string
+      tag:
+        description: Pack tag
+        type: string
+      type:
+        $ref: '#/definitions/v1PackType'
+      uid:
+        description: Pack uid
+        type: string
+      values:
+        description: values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+    required:
+    - uid
+    - name
+    type: object
+  v1ClusterProfileSpecImportEntity:
+    description: Cluster profile import spec
+    properties:
+      template:
+        $ref: '#/definitions/v1ClusterProfileTemplateImportEntity'
+      variables:
+        description: List of unique variable fields defined for a cluster profile with schema constraints
+        items:
+          $ref: '#/definitions/v1Variable'
+        type: array
+        uniqueItems: true
+      version:
+        description: Cluster profile version
+        type: string
+    type: object
+  v1PackRefSummaryResponse:
+    description: Pack summary response
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PackRefSummarySpec'
+    type: object
+  v1PackManifestEntity:
+    description: Pack request payload
+    properties:
+      layer:
+        description: Pack layer
+        type: string
+      manifests:
+        description: Pack manifests are additional content as part of the profile
+        items:
+          $ref: '#/definitions/v1ManifestInputEntity'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      registryUid:
+        description: Pack registry uid
+        type: string
+      tag:
+        description: Pack tag
+        type: string
+      type:
+        $ref: '#/definitions/v1PackType'
+      uid:
+        description: Pack uid
+        type: string
+      values:
+        description: Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+    required:
+    - name
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

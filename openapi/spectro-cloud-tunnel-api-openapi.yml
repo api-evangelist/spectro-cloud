@@ -1,0 +1,71 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations tunnel API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: tunnel
+  x-displayName: Tunnel
+paths:
+  /v1/tunnel/config:
+    get:
+      description: Returns Tunnel Configuration
+      operationId: V1TunnelConfiguration
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1TunnelConfiguration'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get Tunnel Configuration
+      tags:
+      - tunnel
+definitions:
+  v1TunnelConfiguration:
+    description: Describes the response that contains the tunnel configuration to establish connection
+    properties:
+      preferredServer:
+        $ref: '#/definitions/v1TunnelEndpoint'
+      servers:
+        items:
+          $ref: '#/definitions/v1TunnelEndpoint'
+        type: array
+        uniqueItems: true
+    type: object
+  v1TunnelEndpoint:
+    properties:
+      endpoint:
+        description: Describes the URL where the client has to connect to the tunnel server
+        type: string
+      tls:
+        description: Describes the Tunnel tls config which client will use to make a request to the tunnel server
+        properties:
+          caCert:
+            type: string
+          enabled:
+            type: boolean
+          insecureSkipVerify:
+            type: boolean
+        type: object
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

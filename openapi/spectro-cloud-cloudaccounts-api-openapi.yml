@@ -1,0 +1,2696 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations cloudaccounts API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: cloudaccounts
+  x-displayName: Cloudaccounts
+paths:
+  /v1/cloudaccounts/apache-cloudstack:
+    get:
+      operationId: v1CloudAccountsCloudStackList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of CloudStack cloud account items
+          schema:
+            $ref: '#/definitions/v1CloudStackAccounts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of CloudStack cloud accounts
+      tags:
+      - cloudaccounts
+      x-Features:
+      - ApacheCloudstack
+    post:
+      operationId: v1CloudAccountsCloudStackCreate
+      parameters:
+      - description: Request payload to validate CloudStack cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1CloudStackAccountInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a CloudStack cloud account
+      tags:
+      - cloudaccounts
+      x-Features:
+      - ApacheCloudstack
+  /v1/cloudaccounts/apache-cloudstack/{uid}:
+    parameters:
+    - description: CloudStack cloud account uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1CloudAccountsCloudStackDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified CloudStack account
+      tags:
+      - cloudaccounts
+    get:
+      operationId: v1CloudAccountsCloudStackGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1CloudStackAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified CloudStack account
+      tags:
+      - cloudaccounts
+    put:
+      operationId: v1CloudAccountsCloudStackUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1CloudStackAccountUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified CloudStack account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/diskofferings:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidDiskofferings
+      parameters:
+      - description: Zone for which CloudStack disk offerings are requested
+        in: query
+        name: zone
+        type: string
+      - description: Project ID for which CloudStack disk offerings are requested
+        in: query
+        name: projectId
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackDiskOfferings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack disk offerings for a given account and zone
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/domains:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidDomains
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackDomains'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack domains for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/keypairs:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidKeypairs
+      parameters:
+      - description: Domain ID for which CloudStack SSH key pairs are requested
+        in: query
+        name: domainId
+        type: string
+      - description: Project ID for which CloudStack SSH key pairs are requested
+        in: query
+        name: projectId
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackKeypairs'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack SSH key pairs for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/networks:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidNetworks
+      parameters:
+      - description: Zone for which CloudStack networks are requested
+        in: query
+        name: zone
+        type: string
+      - description: Project ID for which CloudStack networks are requested
+        in: query
+        name: projectId
+        type: string
+      - description: VPC ID for which CloudStack networks are requested
+        in: query
+        name: vpcId
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackNetworks'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack networks for a given account and zone
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/offerings:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidOfferings
+      parameters:
+      - description: Zone for which CloudStack offerings are requested
+        in: query
+        name: zone
+        type: string
+      - description: Project ID for which CloudStack offerings are requested
+        in: query
+        name: projectId
+        type: string
+      - description: Template ID for which CloudStack offerings are requested
+        in: query
+        name: templateId
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackOfferings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack compute offerings for a given account and zone
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/projects:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidProjects
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackProjects'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack projects for a given account and domain
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/templates:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidTemplates
+      parameters:
+      - description: Zone for which CloudStack templates are requested
+        in: query
+        name: zone
+        type: string
+      - description: Project ID for which CloudStack templates are requested
+        in: query
+        name: projectId
+        type: string
+      - description: Template IDs for which CloudStack templates are requested
+        in: query
+        items:
+          type: string
+        name: templateIds
+        type: array
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackTemplates'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack templates for a given account and zone
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/vpcs:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidVpcs
+      parameters:
+      - description: Zone ID for which CloudStack VPCs are requested
+        in: query
+        name: zoneId
+        type: string
+      - description: Project ID for which CloudStack VPCs are requested
+        in: query
+        name: projectId
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackVpcs'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack VPCs for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/apache-cloudstack/{uid}/properties/zones:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1CloudstackAccountsUidZones
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1CloudStackZones'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the cloudstack zones for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/aws:
+    get:
+      operationId: v1CloudAccountsAwsList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cloud account items
+          schema:
+            $ref: '#/definitions/v1AwsAccounts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of AWS cloud accounts
+      tags:
+      - cloudaccounts
+    post:
+      operationId: v1CloudAccountsAwsCreate
+      parameters:
+      - description: Request payload to validate AWS cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AwsAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates an AWS cloud account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/aws/{uid}:
+    parameters:
+    - description: AWS cloud account uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1CloudAccountsAwsDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified AWS account
+      tags:
+      - cloudaccounts
+    get:
+      operationId: v1CloudAccountsAwsGet
+      parameters:
+      - default: false
+        in: query
+        name: assumeCredentials
+        type: boolean
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AwsAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified AWS account
+      tags:
+      - cloudaccounts
+    put:
+      operationId: v1CloudAccountsAwsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AwsAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified AWS account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/azure:
+    get:
+      operationId: v1CloudAccountsAzureList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of azure cloud account items
+          schema:
+            $ref: '#/definitions/v1AzureAccounts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of azure cloud accounts
+      tags:
+      - cloudaccounts
+    post:
+      operationId: v1CloudAccountsAzureCreate
+      parameters:
+      - description: Request payload to validate Azure cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AzureAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create azure cloud account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/azure/{uid}:
+    parameters:
+    - description: Azure cloud account uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1CloudAccountsAzureDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified azure account
+      tags:
+      - cloudaccounts
+    get:
+      operationId: v1CloudAccountsAzureGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AzureAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified azure cloud account
+      tags:
+      - cloudaccounts
+    put:
+      operationId: v1CloudAccountsAzureUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AzureAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified azure account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/cloudTypes/{cloudType}:
+    parameters:
+    - description: Custom cloud type
+      in: path
+      name: cloudType
+      required: true
+      type: string
+    get:
+      operationId: v1CloudAccountsCustomList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cloud account by specified cloud type items
+          schema:
+            $ref: '#/definitions/v1CustomAccounts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cloud accounts by cloud type
+      tags:
+      - cloudaccounts
+    post:
+      operationId: v1CloudAccountsCustomCreate
+      parameters:
+      - description: Request payload to validate Custom cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1CustomAccountEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates an cloud account of specific cloud type
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/cloudTypes/{cloudType}/{uid}:
+    parameters:
+    - description: Custom cloud account uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Custom cloud type
+      in: path
+      name: cloudType
+      required: true
+      type: string
+    delete:
+      operationId: v1CloudAccountsCustomDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified account by cloud type
+      tags:
+      - cloudaccounts
+    get:
+      operationId: v1CloudAccountsCustomGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1CustomAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified account by cloud type
+      tags:
+      - cloudaccounts
+    put:
+      operationId: v1CloudAccountsCustomUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1CustomAccountEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified account by cloud type
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/gcp:
+    get:
+      operationId: v1CloudAccountsGcpList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of gcp cloud account items
+          schema:
+            $ref: '#/definitions/v1GcpAccounts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of gcp cloud accounts
+      tags:
+      - cloudaccounts
+    post:
+      operationId: v1CloudAccountsGcpCreate
+      parameters:
+      - description: Request payload to validate GCP cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1GcpAccountEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a GCP cloud account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/gcp/{uid}:
+    parameters:
+    - description: GCP cloud account uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1CloudAccountsGcpDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified GCP account
+      tags:
+      - cloudaccounts
+    get:
+      operationId: v1CloudAccountsGcpGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1GcpAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified GCP cloud account
+      tags:
+      - cloudaccounts
+    put:
+      operationId: v1CloudAccountsGcpUpdate
+      parameters:
+      - description: Request payload to validate GCP cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1GcpAccountEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified GCP account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/maas:
+    get:
+      operationId: v1CloudAccountsMaasList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cloud account items
+          schema:
+            $ref: '#/definitions/v1MaasAccounts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of Maas cloud accounts
+      tags:
+      - cloudaccounts
+    post:
+      operationId: v1CloudAccountsMaasCreate
+      parameters:
+      - description: Request payload to validate Maas cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1MaasAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates an Maas cloud account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/maas/{uid}:
+    parameters:
+    - description: Maas cloud account uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1CloudAccountsMaasDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified Maas account
+      tags:
+      - cloudaccounts
+    get:
+      operationId: v1CloudAccountsMaasGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1MaasAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified Maas account
+      tags:
+      - cloudaccounts
+    patch:
+      operationId: v1CloudAccountsMaasPatch
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1CloudAccountsPatch'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Patches the specified CloudAccount Maas
+      tags:
+      - cloudaccounts
+    put:
+      operationId: v1CloudAccountsMaasUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1MaasAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified Maas account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/maas/{uid}/properties/azs:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1MaasAccountsUidAzs
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1MaasZones'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the maas azs for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/maas/{uid}/properties/domains:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1MaasAccountsUidDomains
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1MaasDomains'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the maas domains for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/maas/{uid}/properties/resourcePools:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1MaasAccountsUidPools
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1MaasPools'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the maas pools for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/maas/{uid}/properties/subnets:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1MaasAccountsUidSubnets
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1MaasSubnets'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the maas subnets for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/maas/{uid}/properties/tags:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1MaasAccountsUidTags
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1MaasTags'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the maas tags for a given account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/summary:
+    get:
+      operationId: v1CloudAccountsListSummary
+      parameters:
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cloud account summary items
+          schema:
+            $ref: '#/definitions/v1CloudAccountsSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cloud accounts summary
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/vsphere:
+    get:
+      operationId: v1CloudAccountsVsphereList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cloud account items
+          schema:
+            $ref: '#/definitions/v1VsphereAccounts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of vSphere cloud accounts
+      tags:
+      - cloudaccounts
+    post:
+      operationId: v1CloudAccountsVsphereCreate
+      parameters:
+      - description: Request payload to validate VSphere cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1VsphereAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a vSphere cloud account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/vsphere/{uid}:
+    parameters:
+    - description: VSphere cloud account uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1CloudAccountsVsphereDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified vSphere account
+      tags:
+      - cloudaccounts
+    get:
+      operationId: v1CloudAccountsVsphereGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1VsphereAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified vSphere account
+      tags:
+      - cloudaccounts
+    put:
+      operationId: v1CloudAccountsVsphereUpdate
+      parameters:
+      - description: Request payload to validate VSphere cloud account
+        in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1VsphereAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified VSphere account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/vsphere/{uid}/properties/computecluster/resources:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: query
+      name: datacenter
+      required: true
+      type: string
+    - in: query
+      name: computecluster
+      required: true
+      type: string
+    - in: query
+      name: useQualifiedNetworkName
+      type: boolean
+    get:
+      operationId: v1VsphereAccountsUidClusterRes
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1VsphereComputeClusterResources'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the vSphere computecluster resources for the given overlord account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/vsphere/{uid}/properties/datacenters:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1VsphereAccountsUidDatacenters
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1VsphereDatacenters'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the vSphere datacenters & datacluster for the given overlord account
+      tags:
+      - cloudaccounts
+  /v1/cloudaccounts/{uid}/geoLocation:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1AccountsGeolocationPatch
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1GeolocationLatlong'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the geolocation annotation
+      tags:
+      - cloudaccounts
+definitions:
+  v1AwsCloudAccountCredentialType:
+    default: secret
+    description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+    enum:
+    - secret
+    - sts
+    - pod-identity
+    type: string
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1CustomCloudAccount:
+    properties:
+      credentials:
+        additionalProperties:
+          type: string
+        description: Cloud account credentials
+        type: object
+    required:
+    - credentials
+    type: object
+  v1CloudStackNetwork:
+    description: CloudStack network
+    properties:
+      cidr:
+        description: CIDR block for the network
+        type: string
+      displayText:
+        description: Display text for the network
+        type: string
+      gateway:
+        description: Gateway IP address for the network
+        type: string
+      id:
+        description: Network ID
+        type: string
+      isDefault:
+        description: Whether this is the default network
+        type: boolean
+      isShared:
+        description: Whether the network is shared across accounts
+        type: boolean
+      name:
+        description: Network name
+        type: string
+      netmask:
+        description: Network mask for the network
+        type: string
+      networkDomain:
+        description: Network domain
+        type: string
+      networkOffering:
+        description: Network offering name
+        type: string
+      state:
+        description: Current state of the network (Setup, Allocated, etc.)
+        type: string
+      trafficType:
+        description: Traffic type of the network (Guest, Management, etc.)
+        type: string
+      type:
+        description: Network type - Isolated, Shared, etc.
+        type: string
+      zoneId:
+        description: Zone ID where the network is located
+        type: string
+      zoneName:
+        description: Zone name where the network is located
+        type: string
+    type: object
+  v1CloudStackDomain:
+    description: CloudStack domain
+    properties:
+      id:
+        description: Domain ID
+        type: string
+      name:
+        description: Domain name
+        type: string
+    type: object
+  v1CloudStackVpc:
+    description: CloudStack Vpc
+    properties:
+      cidr:
+        description: Vpc Cidr
+        type: string
+      domainId:
+        description: Domain Id associated with Vpc
+        type: string
+      id:
+        description: Vpc id
+        type: string
+      name:
+        description: Vpc name
+        type: string
+      offeringId:
+        description: Vpc offering Id
+        type: string
+      projectId:
+        description: Project Id associated with Vpc
+        type: string
+      zoneId:
+        description: Zone Id associated with Vpc
+        type: string
+    type: object
+  v1CloudStackOffering:
+    description: CloudStack compute offering
+    properties:
+      cpuNumber:
+        description: Number of CPU cores
+        format: int32
+        type: integer
+      cpuSpeed:
+        description: CPU speed in MHz
+        format: int32
+        type: integer
+      displayText:
+        description: Display text for the offering
+        type: string
+      hypervisorSnapshotReserve:
+        description: Hypervisor snapshot reserve space as percentage
+        format: int32
+        type: integer
+      id:
+        description: Offering ID
+        type: string
+      isCustomized:
+        description: Whether the offering allows customization of CPU and memory
+        type: boolean
+      isCustomizedIops:
+        description: Whether the offering allows customization of IOPS
+        type: boolean
+      isVolatile:
+        description: Whether the VM is volatile (data is lost on stop/restart)
+        type: boolean
+      limitCpuUse:
+        description: Whether CPU usage is limited
+        type: boolean
+      maxIops:
+        description: Maximum IOPS for customized offerings
+        format: int64
+        type: integer
+      memory:
+        description: Memory size in MB
+        format: int64
+        type: integer
+      minIops:
+        description: Minimum IOPS for customized offerings
+        format: int64
+        type: integer
+      name:
+        description: Offering name
+        type: string
+      offerHA:
+        description: Whether the offering supports high availability
+        type: boolean
+      storageType:
+        description: Storage type (local or shared)
+        type: string
+    type: object
+  v1CustomAccountEntity:
+    description: Custom account information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1CustomCloudAccount'
+    type: object
+  v1CustomAccount:
+    description: Custom account information
+    properties:
+      apiVersion:
+        description: Cloud account api version
+        type: string
+      kind:
+        description: Cloud account kind
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1CustomCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1GeolocationLatlong:
+    description: Geolocation Latlong entity
+    properties:
+      latitude:
+        description: Latitude of a resource
+        format: float64
+        type: number
+        x-omitempty: false
+      longitude:
+        description: Longitude of a resource
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1CustomAccounts:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1CustomAccount'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1MaasPools:
+    description: List of Maas pools
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MaasPool'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1AzureSecretTlsConfig:
+    description: TLS configuration for the AWS secret
+    properties:
+      cert:
+        description: Certificate is the TLS certificate used to authenticate the Azure secret
+        type: string
+    type: object
+  v1VsphereAccounts:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1VsphereAccount'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1HttpPatch:
+    properties:
+      from:
+        description: A path to the pointer from which reference will be taken
+        type: string
+      op:
+        description: The operation to be performed
+        enum:
+        - add
+        - remove
+        - replace
+        - move
+        - copy
+        type: string
+      path:
+        description: A path to the pointer on which operation will be done
+        type: string
+      value:
+        description: The value to be used within the operations.
+        type: object
+    required:
+    - op
+    - path
+    type: object
+  v1MaasTags:
+    description: List of Maas tags
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MaasTag'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1MaasSubnets:
+    description: List of Maas subnets
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MaasSubnet'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1CloudStackAccountUpdateEntity:
+    description: CloudStack account update entity
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaUpdateEntity'
+      spec:
+        $ref: '#/definitions/v1CloudStackCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1CloudStackCloudAccount:
+    description: CloudStack cloud account credentials
+    properties:
+      apiKey:
+        description: API Key for CloudStack authentication
+        type: string
+      apiUrl:
+        description: API URL for CloudStack management server
+        type: string
+      domain:
+        description: Cloudstack domain
+        type: string
+      insecure:
+        description: 'Skip SSL certificate verification (default: false)'
+        type: boolean
+      secretKey:
+        description: Secret Key for CloudStack authentication
+        type: string
+    required:
+    - apiUrl
+    - apiKey
+    - secretKey
+    type: object
+  v1AwsCloudAccount:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+    properties:
+      accessKey:
+        description: AWS account access key
+        type: string
+      credentialType:
+        $ref: '#/definitions/v1AwsCloudAccountCredentialType'
+      partition:
+        default: aws
+        description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+        enum:
+        - aws
+        - aws-us-gov
+        - aws-iso
+        - aws-iso-b
+        type: string
+      podIdentity:
+        $ref: '#/definitions/v1AwsPodIdentityCredentials'
+        description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
+      policyARNs:
+        description: List of policy ARNs required in case of credentialType sts.
+        items:
+          type: string
+        type: array
+      secretKey:
+        description: AWS account secret key
+        type: string
+      secretSpec:
+        $ref: '#/definitions/v1AwsSecretSpec'
+      secretToken:
+        description: AWS account secret token; in case of aws-iso and aws-iso-b
+        type: string
+      sts:
+        $ref: '#/definitions/v1AwsStsCredentials'
+        description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
+    type: object
+  v1VsphereCloudAccount:
+    properties:
+      insecure:
+        description: Insecure is a flag that controls whether or not to validate the vSphere server's certificate.
+        type: boolean
+        x-omitempty: false
+      password:
+        type: string
+      username:
+        type: string
+      vcenterServer:
+        description: VcenterServer is the address of the vSphere endpoint
+        type: string
+    required:
+    - vcenterServer
+    - username
+    - password
+    type: object
+  v1CloudStackZone:
+    description: CloudStack zone
+    properties:
+      id:
+        description: Zone ID
+        type: string
+      name:
+        description: Zone name
+        type: string
+    type: object
+  v1GcpAccountEntitySpec:
+    properties:
+      jsonCredentials:
+        description: Gcp cloud account json credentials
+        type: string
+    type: object
+  v1AzureAccounts:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1AzureAccount'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1CloudStackVpcs:
+    description: List of CloudStack SSH key pairs
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1CloudStackVpc'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1CloudStackProject:
+    description: CloudStack project
+    properties:
+      id:
+        description: Project ID
+        type: string
+      name:
+        description: Project name
+        type: string
+    type: object
+  v1CloudStackZones:
+    description: List of CloudStack zones
+    properties:
+      zones:
+        items:
+          $ref: '#/definitions/v1CloudStackZone'
+        type: array
+        uniqueItems: true
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1MaasCloudAccount:
+    properties:
+      apiEndpoint:
+        type: string
+      apiKey:
+        type: string
+      preferredSubnets:
+        description: list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet "10.11.130.0/24,10.10.10.0/24"
+        items:
+          type: string
+        type: array
+    required:
+    - apiKey
+    - apiEndpoint
+    type: object
+  v1GcpAccount:
+    description: GCP account information
+    properties:
+      apiVersion:
+        description: Cloud account api version
+        type: string
+      kind:
+        description: Cloud account kind
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1GcpAccountSpec'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1CloudStackDomains:
+    description: List of CloudStack domains
+    properties:
+      domains:
+        items:
+          $ref: '#/definitions/v1CloudStackDomain'
+        type: array
+        uniqueItems: true
+    type: object
+  v1VsphereDatacenters:
+    description: List of Datacenters with computeclusters
+    properties:
+      items:
+        description: List of associated datacenters
+        items:
+          $ref: '#/definitions/v1VsphereDatacenter'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1AwsPodIdentityCredentials:
+    description: AWS EKS Pod Identity credentials for role assumption
+    properties:
+      permissionBoundaryArn:
+        description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+        type: string
+      roleArn:
+        description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+        type: string
+    type: object
+  v1MaasTag:
+    description: Maas tag
+    properties:
+      comment:
+        description: Comment on Maas tag
+        type: string
+      definition:
+        description: Definition of Maas tag
+        type: string
+      kernelOpts:
+        description: Kernel Opts on Maas tag
+        type: string
+      name:
+        description: Name of Maas tag
+        type: string
+      resourceUri:
+        description: Description of Maas tag
+        type: string
+    type: object
+  v1MaasZones:
+    description: List of Maas zones
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MaasZone'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1VsphereAccount:
+    description: VSphere account information
+    properties:
+      apiVersion:
+        description: Cloud account api version
+        type: string
+      kind:
+        description: Cloud account kind
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1VsphereCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1VsphereComputeCluster:
+    description: Vsphere compute cluster
+    properties:
+      datastores:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      name:
+        type: string
+      networks:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      resourcePools:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1CloudStackTemplate:
+    description: CloudStack template
+    properties:
+      id:
+        description: Template ID
+        type: string
+      name:
+        description: Template name
+        type: string
+    type: object
+  v1MaasDomains:
+    description: List of Maas domains
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MaasDomain'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1CloudStackNetworks:
+    description: List of CloudStack networks
+    properties:
+      networks:
+        items:
+          $ref: '#/definitions/v1CloudStackNetwork'
+        type: array
+        uniqueItems: true
+    type: object
+  v1CloudStackKeypair:
+    description: CloudStack SSH key pair
+    properties:
+      fingerprint:
+        description: SSH key pair fingerprint
+        type: string
+      name:
+        description: SSH key pair name
+        type: string
+    type: object
+  v1MaasPool:
+    description: Maas pool
+    properties:
+      description:
+        description: Description of Maas domain
+        type: string
+      name:
+        description: Name of Maas pool
+        type: string
+    type: object
+  v1CloudAccountsPatch:
+    items:
+      $ref: '#/definitions/v1HttpPatch'
+    type: array
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1AzureCloudAccount:
+    properties:
+      azureEnvironment:
+        default: AzurePublicCloud
+        description: Contains configuration for Azure cloud
+        enum:
+        - AzureChinaCloud
+        - AzurePublicCloud
+        - AzureUSGovernment
+        - AzureUSGovernmentCloud
+        - AzureUSSecretCloud
+        type: string
+      clientId:
+        description: Client ID(Directory ID) is a unique identifier generated by Azure AD that is tied to an application
+        type: string
+      clientSecret:
+        description: ClientSecret is the secret associated with Client
+        type: string
+      settings:
+        $ref: '#/definitions/v1CloudAccountSettings'
+        description: Palette internal cloud settings
+      tenantId:
+        description: Tenant ID is the ID for the Azure AD tenant that the user belongs to.
+        type: string
+      tenantName:
+        description: Tenant ID is the ID for the Azure AD tenant that the user belongs to.
+        type: string
+      tls:
+        $ref: '#/definitions/v1AzureSecretTlsConfig'
+        description: TLS configuration for the Azure secret
+    required:
+    - tenantId
+    - clientId
+    - clientSecret
+    type: object
+  v1CloudStackDiskOfferings:
+    description: List of CloudStack disk offerings
+    properties:
+      diskOfferings:
+        items:
+          $ref: '#/definitions/v1CloudStackDiskOffering'
+        type: array
+        uniqueItems: true
+    type: object
+  v1AwsAccounts:
+    description: List of AWS accounts
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1AwsAccount'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1ObjectMetaUpdateEntity:
+    description: ObjectMeta update entity with uid as input
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1CloudStackProjects:
+    description: List of CloudStack projects
+    properties:
+      projects:
+        items:
+          $ref: '#/definitions/v1CloudStackProject'
+        type: array
+        uniqueItems: true
+    type: object
+  v1AwsStsCredentials:
+    description: Aws sts credentials
+    properties:
+      arn:
+        description: Arn for the aws sts credentials in cloud account
+        type: string
+      externalId:
+        description: ExternalId for the aws sts credentials in cloud account
+        type: string
+    type: object
+  v1MaasZone:
+    description: Maas zone
+    properties:
+      description:
+        description: Description of Maas domain
+        type: string
+      name:
+        description: Name of Maas zone
+        type: string
+    type: object
+  v1GcpAccountSpec:
+    properties:
+      jsonCredentials:
+        description: Gcp cloud account json credentials
+        type: string
+    type: object
+  v1AwsSecretSpec:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+    properties:
+      accountName:
+        description: AWS secret accountName; only for aws-iso-b environment
+        type: string
+      agency:
+        description: AWS secret agency
+        type: string
+      isCapValidationEnabled:
+        description: Flag to rotate the secret region credentials
+        type: boolean
+      mission:
+        description: AWS secret mission; only for aws-iso environment
+        type: string
+      namePrefix:
+        description: Policy Boundary
+        type: string
+      permissionBoundary:
+        description: Role or Policy Prefix
+        type: string
+      policy:
+        description: AWS secret policy; JSON string
+        type: string
+      role:
+        description: AWS secret role
+        type: string
+      tls:
+        $ref: '#/definitions/v1AwsSecretTlsConfig'
+        description: TLS configuration for the AWS secret
+    type: object
+  v1AwsAccount:
+    description: Aws cloud account information
+    properties:
+      apiVersion:
+        type: string
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1AwsCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1CloudStackAccount:
+    description: CloudStack account information
+    properties:
+      apiVersion:
+        description: Cloud account api version
+        type: string
+      kind:
+        description: Cloud account kind
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1CloudStackCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1MaasAccounts:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MaasAccount'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1CloudStackAccounts:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1CloudStackAccount'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1CloudStackAccountInputEntity:
+    description: CloudStack account input entity
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1CloudStackCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1CloudAccountStatus:
+    description: Status of the account
+    properties:
+      state:
+        description: Cloud account status
+        type: string
+      tokenExpiry:
+        $ref: '#/definitions/v1Time'
+        description: Token expiry time
+      tokenGenerationTime:
+        $ref: '#/definitions/v1Time'
+        description: Token generation time
+    type: object
+  v1AwsSecretTlsConfig:
+    description: TLS configuration for the AWS secret
+    properties:
+      ca:
+        description: CA certificate
+        type: string
+      cert:
+        description: Certificate
+        type: string
+      key:
+        description: Key
+        type: string
+    type: object
+  v1CloudStackTemplates:
+    description: List of CloudStack templates
+    properties:
+      templates:
+        items:
+          $ref: '#/definitions/v1CloudStackTemplate'
+        type: array
+        uniqueItems: true
+    type: object
+  v1CloudStackDiskOffering:
+    description: CloudStack disk offering
+    properties:
+      id:
+        description: Disk offering ID
+        type: string
+      name:
+        description: Disk offering name
+        type: string
+    type: object
+  v1VsphereDatacenter:
+    description: List of Datacenter with computeclusters
+    properties:
+      computeclusters:
+        description: List  of the VSphere compute clusters in datacenter
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      datacenter:
+        description: name of the datacenter of the VSphere
+        type: string
+      folders:
+        description: List  of the VSphere folders in datacenter
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1AzureAccount:
+    description: Azure account information
+    properties:
+      apiVersion:
+        description: Cloud account api version
+        type: string
+      kind:
+        description: Cloud account kind
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1AzureCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1MaasDomain:
+    description: Maas domain
+    properties:
+      name:
+        description: Name of Maas domain
+        type: string
+    type: object
+  v1CloudStackKeypairs:
+    description: List of CloudStack SSH key pairs
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1CloudStackKeypair'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1MaasAccount:
+    description: Maas cloud account information
+    properties:
+      apiVersion:
+        type: string
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1MaasCloudAccount'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1MaasSubnet:
+    description: Maas subnet
+    properties:
+      id:
+        description: Id of Maas subnet
+        type: integer
+      name:
+        description: Name of Maas subnet
+        type: string
+      space:
+        description: Space associated with Maas subnet
+        type: string
+      vlans:
+        $ref: '#/definitions/v1MaasVlan'
+    type: object
+  v1VsphereComputeClusterResources:
+    description: Datacenter and its resources like datastore, resoucepool, folders
+    properties:
+      computecluster:
+        $ref: '#/definitions/v1VsphereComputeCluster'
+      datacenter:
+        description: Name of the datacenter
+        type: string
+    type: object
+  v1MaasVlan:
+    description: Maas vlan entity
+    properties:
+      fabric:
+        description: Fabric associated with Maas Vlan
+        type: string
+      id:
+        description: Id of Maas Vlan
+        type: integer
+      name:
+        description: Name of Maas Vlan
+        type: string
+    type: object
+  v1GcpAccounts:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1GcpAccount'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1GcpAccountEntity:
+    description: GCP account information
+    properties:
+      apiVersion:
+        description: Cloud account api version
+        type: string
+      kind:
+        description: Cloud account kind
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1GcpAccountEntitySpec'
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1CloudAccountsSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1CloudAccountSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1CloudAccountSummary:
+    description: Cloud account summary
+    properties:
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      specSummary:
+        description: Cloud account spec summary
+        properties:
+          accountId:
+            type: string
+        type: object
+      status:
+        $ref: '#/definitions/v1CloudAccountStatus'
+    type: object
+  v1CloudStackOfferings:
+    description: List of CloudStack compute offerings
+    properties:
+      offerings:
+        items:
+          $ref: '#/definitions/v1CloudStackOffering'
+        type: array
+        uniqueItems: true
+    type: object
+  v1CloudAccountSettings:
+    description: Cloud account settings
+    properties:
+      disablePropertiesRequest:
+        description: Will disable certain properties request to cloud and the input is collected directly from the user
+        type: boolean
+        x-omitempty: false
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

@@ -1,0 +1,6176 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations dashboard API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: dashboard
+  x-displayName: Dashboard
+paths:
+  /v1/dashboard/appDeployments:
+    post:
+      operationId: v1DashboardAppDeployments
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppDeploymentsFilterSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of application deployment summary items
+          schema:
+            $ref: '#/definitions/v1AppDeploymentsSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of application deployments filter summary Supported filter fields - ["appDeploymentName", "clusterUid", "tags"] Supported sort fields - ["appDeploymentName", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/appProfiles:
+    post:
+      operationId: v1DashboardAppProfiles
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppProfilesFilterSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of application profiles summary items
+          schema:
+            $ref: '#/definitions/v1AppProfilesSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of application profiles filter summary Supported filter fields - ["profileName", "tags"] Supported sort fields - ["profileName", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/appProfiles/metadata:
+    get:
+      operationId: v1DashboardAppProfilesMetadata
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of application profile summary items
+          schema:
+            $ref: '#/definitions/v1AppProfilesMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of application profile metadata
+      tags:
+      - dashboard
+  /v1/dashboard/appliances/metadata:
+    post:
+      operationId: v1EdgeHostsMetadata
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostsMetadataFilter'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of edgenative pair summary items
+          schema:
+            $ref: '#/definitions/v1EdgeHostsMetadataSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of edgehosts summary
+      tags:
+      - dashboard
+  /v1/dashboard/cloudaccounts/metadata:
+    get:
+      operationId: v1DashboardCloudAccountsMetadata
+      parameters:
+      - in: query
+        name: environment
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cloud accounts summary items
+          schema:
+            $ref: '#/definitions/v1CloudAccountsMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cloud accounts metadata
+      tags:
+      - dashboard
+  /v1/dashboard/clusterTemplates:
+    post:
+      operationId: v1ClusterTemplatesFilterSummary
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterTemplatesFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster template summary items
+          schema:
+            $ref: '#/definitions/v1ClusterTemplatesSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster templates filter summary Supported filter fields - ["clusterTemplateName", "tags", "cloudType","projectUid", "policyUid"] Supported sort fields - ["clusterTemplateName", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/clusterTemplates/metadata:
+    get:
+      operationId: v1ClusterTemplatesMetadataGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster template metadata
+          schema:
+            $ref: '#/definitions/v1ClusterTemplatesMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of all cluster template metadata.
+      tags:
+      - dashboard
+  /v1/dashboard/clusterTemplates/{uid}/spectroclusters/meta:
+    get:
+      operationId: v1ClusterTemplatesUidSpectroclustersMetaGet
+      parameters:
+      - description: The UID of the cluster template
+        in: path
+        name: uid
+        required: true
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of spectrocluster meta information
+          schema:
+            $ref: '#/definitions/v1SpectroClustersMeta'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves spectroclusters meta information for clusters launched using the specified cluster template.
+      tags:
+      - dashboard
+  /v1/dashboard/clustergroups/{uid}/hostClusters:
+    post:
+      operationId: v1ClusterGroupUidHostClustersSummary
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SearchFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster summary for a given cluster group
+      tags:
+      - dashboard
+  /v1/dashboard/clustergroups/{uid}/virtualClusters:
+    post:
+      operationId: v1ClusterGroupUidVirtualClustersSummary
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SearchFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster summary for a given cluster group
+      tags:
+      - dashboard
+  /v1/dashboard/clusterprofiles:
+    post:
+      operationId: v1ClusterProfilesFilterSummary
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterProfilesFilterSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster profiles summary items
+          schema:
+            $ref: '#/definitions/v1ClusterProfilesSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster profiles filter summary Supported filter fields - ['profileName', 'tags', 'profileType', 'environment', 'resourceType'] Supported sort fields - ['profileName', 'environment', 'profileType', 'creationTimestamp', 'lastModifiedTimestamp']
+      tags:
+      - dashboard
+  /v1/dashboard/clusterprofiles/metadata:
+    get:
+      operationId: v1ClusterProfilesMetadata
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1ClusterProfilesMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster profiles metadata
+      tags:
+      - dashboard
+  /v1/dashboard/clusterprofiles/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1ClusterProfilesUidSummary
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Cluster profile summary response
+          schema:
+            $ref: '#/definitions/v1ClusterProfileSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a specified cluster profile summary
+      tags:
+      - dashboard
+  /v1/dashboard/edgehosts/search:
+    post:
+      operationId: v1DashboardEdgehostsSearch
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SearchFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of edgenative pair summary items
+          schema:
+            $ref: '#/definitions/v1EdgeHostsSearchSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of Edgehosts summary with provided search filter. Supported fields as per schema /v1/dashboard/edgehosts/search/schema
+      tags:
+      - dashboard
+  /v1/dashboard/edgehosts/search/schema:
+    get:
+      operationId: v1DashboardEdgehostsSearchSchemaGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of schema items
+          schema:
+            $ref: '#/definitions/v1SearchFilterSchemaSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a schema for the Edgehost search filter
+      tags:
+      - dashboard
+  /v1/dashboard/pcgs/search:
+    post:
+      operationId: v1DashboardPcgsSearchSummary
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SearchFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1PcgsSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of PCG summary with provided search filter. Supported fields as per schema /v1/dashboard/pcgs/search/schema
+      tags:
+      - dashboard
+  /v1/dashboard/pcgs/search/schema:
+    get:
+      operationId: v1DashboardPcgSearchSchemaGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of schema items
+          schema:
+            $ref: '#/definitions/v1SearchFilterSchemaSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a schema for the PCG search filter
+      tags:
+      - dashboard
+  /v1/dashboard/projects:
+    get:
+      description: 'Deprecated: Use POST /v1/dashboard/projects'
+      operationId: v1ProjectsSummary
+      parameters:
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - default: 60
+        description: Metric period in minutes defines latest metrics by period
+        format: int32
+        in: query
+        name: metricPeriod
+        type: integer
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of project summary items
+          schema:
+            $ref: '#/definitions/v1ProjectsSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of project summary
+      tags:
+      - dashboard
+    post:
+      operationId: v1ProjectsFilterSummary
+      parameters:
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ProjectsFilterSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of project filter summary items
+          schema:
+            $ref: '#/definitions/v1ProjectsSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      tags:
+      - dashboard
+  /v1/dashboard/projects/metadata:
+    get:
+      operationId: v1ProjectsMetadata
+      parameters:
+      - description: Name of the project
+        in: query
+        name: name
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of project metadata items
+          schema:
+            $ref: '#/definitions/v1ProjectsMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of projects metadata
+      tags:
+      - dashboard
+  /v1/dashboard/spcPolicies:
+    post:
+      operationId: v1SpcPoliciesFilterSummary
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpcPoliciesFilterSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of spc policies summary items
+          schema:
+            $ref: '#/definitions/v1SpcPoliciesSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of spc policies filter summary Supported filter fields - ["policyName", "tags", "policyType"] Supported sort fields - ["policyName", "policyType", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/spcPolicies/metadata:
+    get:
+      operationId: v1SpcPoliciesMetadataGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of spc policies metadata
+          schema:
+            $ref: '#/definitions/v1SpcPoliciesMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of all spc policies metadata.
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters:
+    post:
+      description: 'Deprecated: Use POST /v1/dashboard/spectroclusters/search'
+      operationId: v1SpectroClustersFilterSummary
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpectroClusterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster summary with provided filter spec Supported filter fields - ["cpuUsage", "memoryUsage", "clusterName", "tags", "healthState", "clusterStates", "isDeleted", "environments", "metricPeriod"] Supported sort fields - ["environment", "clusterName", "memoryUsage", "healthState", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/cost:
+    post:
+      operationId: v1DashboardSpectroClustersCostSummary
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpectroClusterCloudCostSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of resources cloud cost summary items
+          schema:
+            $ref: '#/definitions/v1ResourcesCloudCostSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves spectro clusters cloud cost summary information
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/filters/workspace:
+    get:
+      operationId: v1SpectroClustersFiltersWorkspace
+      parameters:
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of running, non rbac configured clusters in a workspace
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/meta:
+    get:
+      description: Returns metadata information for all clusters
+      operationId: v1SpectroClustersMetaGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster metadata items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersMeta'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get all clusters metadata
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/metadata:
+    get:
+      operationId: v1SpectroClustersMetadataGet
+      parameters:
+      - enum:
+        - hostclusters
+        - strictHostclusters
+        - hypershiftClusters
+        in: query
+        name: quickFilter
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster summary metadata
+      tags:
+      - dashboard
+    post:
+      operationId: v1SpectroClustersMetadata
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpectroClusterMetadataSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster summary
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/metadata/search:
+    post:
+      operationId: v1SpectroClustersMetadataSearch
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SearchFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary meta items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersMetadataSearch'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster metadata with provided search filter spec Supported sort fields - ["environment", "clusterName", "clusterState", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/metadata/search/schema:
+    get:
+      operationId: v1SpectroClustersMetadataSearchSchema
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster meta schema items
+          schema:
+            $ref: '#/definitions/v1SearchFilterSchemaSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a schema for the cluster metadata search filter
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/repaveStatus:
+    get:
+      operationId: v1DashboardSpectroClustersRepaveList
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - default: Pending
+        enum:
+        - Pending
+        - Approved
+        - Reverted
+        in: query
+        name: repaveState
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of clusters with the desired repave state
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/resources/consumption:
+    post:
+      operationId: v1SpectroClustersResourcesConsumption
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ResourceConsumptionSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of resource consumption data items
+          schema:
+            $ref: '#/definitions/v1ResourcesConsumption'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves spectro clusters resource consumption
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/resources/cost:
+    post:
+      operationId: v1SpectroClustersResourcesCostSummary
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ResourceCostSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of resources cost summary items
+          schema:
+            $ref: '#/definitions/v1ResourcesCostSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves spectro clusters resources cost summary information
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/resources/usage:
+    post:
+      operationId: v1SpectroClustersResourcesUsageSummary
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ResourceUsageSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of resources usage summary items
+          schema:
+            $ref: '#/definitions/v1ResourcesUsageSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves spectro clusters resources usage summary information
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/search:
+    post:
+      operationId: v1SpectroClustersSearchFilterSummary
+      parameters:
+      - description: 'limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        maximum: 50
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SearchFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster summary items
+          schema:
+            $ref: '#/definitions/v1SpectroClustersSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster summary with provided search filter spec Supported sort fields - ["environment", "clusterName", "memoryUsage", "healthState", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/search/export:
+    get:
+      operationId: v1DashboardClustersSearchSummaryExportGet
+      parameters:
+      - in: query
+        name: encodedFilter
+        type: string
+      - default: csv
+        enum:
+        - csv
+        in: query
+        name: format
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Disposition:
+              type: string
+            Content-Type:
+              type: string
+          schema:
+            type: file
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Export and download the list of cluster summary with matching search filter and download as a file(csv)
+      tags:
+      - dashboard
+    post:
+      operationId: v1DashboardClustersSearchSummaryExport
+      parameters:
+      - default: csv
+        enum:
+        - csv
+        in: query
+        name: format
+        type: string
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SearchFilterSummarySpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: download file
+          headers:
+            Content-Disposition:
+              type: string
+          schema:
+            format: binary
+            type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Export the list of cluster summary with matching search filter and download as a file(csv) Supported sort fields - ["environment", "clusterName", "healthState", "creationTimestamp", "lastModifiedTimestamp"]
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/search/input:
+    get:
+      operationId: v1DashboardSpectroClustersSearchInput
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster search filter input items
+          schema:
+            $ref: '#/definitions/v1ClusterSearchInputSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a supported input values for the cluster search filter
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/search/schema:
+    get:
+      operationId: v1SpectroClustersSearchSchema
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster filter schema items
+          schema:
+            $ref: '#/definitions/v1SearchFilterSchemaSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a schema for the cluster search filter
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/vms:
+    get:
+      operationId: V1DashboardVMEnabledClustersList
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of schema items
+          schema:
+            $ref: '#/definitions/v1VMClusters'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of Virtual machine enabled clusters
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1SpectroClustersSummaryUid
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An spectro cluster summary
+          schema:
+            $ref: '#/definitions/v1SpectroClusterUidSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster summary
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/cost:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1SpectroClustersUidCostSummary
+      parameters:
+      - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+        format: date-time
+        in: query
+        name: startTime
+        type: string
+      - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+        format: date-time
+        in: query
+        name: endTime
+        type: string
+      - description: period in minutes, group the data point by the specified period
+        format: int32
+        in: query
+        minimum: 60
+        name: period
+        type: integer
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An spectro cluster cost summary
+          schema:
+            $ref: '#/definitions/v1SpectroClusterCostSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves the specified cluster cost summary
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/overview:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1SpectroClustersSummaryUidOverview
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An spectro cluster summary overview
+          schema:
+            $ref: '#/definitions/v1SpectroClusterUidSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster summary overview
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/resources/consumption:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1SpectroClustersUidResourcesConsumption
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ResourceConsumptionSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of resource consumption data items
+          schema:
+            $ref: '#/definitions/v1ResourcesConsumption'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified spectro cluster resource consumption
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloads
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workloads
+          schema:
+            $ref: '#/definitions/v1ClusterWorkload'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workloads
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/clusterrolebinding:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsClusterRoleBinding
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload clusterrolebindings
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadRoleBindings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload clusterrolebindings
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/cronjob:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsCronJob
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload cronjobs
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadCronJobs'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload cronjobs
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/daemonset:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsDaemonSet
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload daemonsets
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadDaemonSets'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload daemonsets
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/deployment:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsDeployment
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload deployments
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadDeployments'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload deployments
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/job:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsJob
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload jobs
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadJobs'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload jobs
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/namespace:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsNamespace
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload namespaces
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadNamespaces'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload namespaces
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/pod:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsPod
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload pods
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadPods'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload pods
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/rolebinding:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsRoleBinding
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload rolebindings
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadRoleBindings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload rolebindings
+      tags:
+      - dashboard
+  /v1/dashboard/spectroclusters/{uid}/workloads/statefulset:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardSpectroClustersUidWorkloadsStatefulSet
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster workload statefulsets
+          schema:
+            $ref: '#/definitions/v1ClusterWorkloadStatefulSets'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified cluster workload statefulsets
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces:
+    get:
+      operationId: v1DashboardWorkspacesList
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of workspace
+          schema:
+            $ref: '#/definitions/v1DashboardWorkspaces'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of workspace
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/clusterrolebinding:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsClusterRoleBinding
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload clusterrolebindings
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadRoleBindings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload clusterrolebindings
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/cronjob:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsCronJob
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload cronjobs
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadCronJobs'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload cronjobs
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/daemonset:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsDaemonSet
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload daemonsets
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadDaemonSets'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload daemonsets
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/deployment:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsDeployment
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload deployments
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadDeployments'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload deployments
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/job:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsJob
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload jobs
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadJobs'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload jobs
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/namespace:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsNamespace
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload namespaces
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadNamespaces'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload namespaces
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/pod:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsPod
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload pods
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadPods'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload pods
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/rolebinding:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsRoleBinding
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload rolebindings
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadRoleBindings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload rolebindings
+      tags:
+      - dashboard
+  /v1/dashboard/workspaces/{uid}/spectroclusters/workloads/statefulset:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1DashboardWorkspacesUidSpectroClustersWorkloadsStatefulSet
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceWorkloadsSpec'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of clusters workload statefulsets
+          schema:
+            $ref: '#/definitions/v1WorkspaceClustersWorkloadStatefulSets'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves specified workspace clusters workload statefulsets
+      tags:
+      - dashboard
+definitions:
+  v1GpuConfig:
+    description: GPU configuration for resource allocation
+    properties:
+      limit:
+        description: GPU resource limit
+        format: int32
+        minimum: -1
+        type: integer
+        x-omitempty: false
+      provider:
+        default: nvidia
+        description: GPU provider (only nvidia is supported currently)
+        enum:
+        - nvidia
+        type: string
+  v1MachinePoolMeta:
+    properties:
+      cloudType:
+        type: string
+      healthy:
+        description: number of healthy machines
+        format: int32
+        type: integer
+        x-omitempty: false
+      infraProfileTemplate:
+        $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+        description: InfraClusterProfile contains OS/Kernel for this NodePool
+      isControlPlane:
+        description: whether this pool is for control plane
+        type: boolean
+        x-omitempty: false
+      labels:
+        description: 'labels for this pool, example: control-plane/worker, gpu, windows'
+        items:
+          type: string
+        type: array
+      maintenanceMode:
+        description: number of machines under maintenance
+        format: int32
+        type: integer
+        x-omitempty: false
+      size:
+        description: size of the pool, number of machines
+        format: int32
+        type: integer
+        x-omitempty: false
+    type: object
+  v1ResourcesConsumption:
+    description: Resources consumption information
+    properties:
+      cpuUnit:
+        type: string
+      memoryUnit:
+        type: string
+      resources:
+        items:
+          $ref: '#/definitions/v1ResourceConsumption'
+        type: array
+      total:
+        $ref: '#/definitions/v1ResourceTotalConsumptionData'
+    type: object
+  v1SearchFilterSummarySpec:
+    description: Spectro cluster search filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1SearchFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1SearchFilterSortSpec'
+        type: array
+        uniqueItems: true
+  v1ClusterProfileTemplateSummary:
+    description: Cluster profile template summary
+    properties:
+      cloudType:
+        type: string
+      packs:
+        items:
+          $ref: '#/definitions/v1PackRefSummary'
+        type: array
+      type:
+        type: string
+    type: object
+  v1DashboardWorkspaceStatus:
+    description: Workspace status
+    properties:
+      namespaces:
+        items:
+          $ref: '#/definitions/v1DashboardWorkspaceNamespaceAllocation'
+        type: array
+        uniqueItems: true
+      total:
+        $ref: '#/definitions/v1DashboardWorkspaceAllocation'
+  v1ClusterWorkloadRoleBindings:
+    description: Cluster workload rbac bindings summary
+    properties:
+      bindings:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadRoleBinding'
+        type: array
+    type: object
+  v1ClusterWorkloadJobStatus:
+    description: Cluster workload job status
+    properties:
+      completionTime:
+        $ref: '#/definitions/v1Time'
+      conditions:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadCondition'
+        type: array
+      startTime:
+        $ref: '#/definitions/v1Time'
+      succeeded:
+        format: int32
+        type: integer
+    type: object
+  v1ProjectsMetadata:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ProjectMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ProjectFilterSortFields:
+    enum:
+    - name
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1ResourceUsageDataPoint:
+    description: Resource usage data point
+    properties:
+      baremetal:
+        $ref: '#/definitions/v1ResourceUsageMeteringDataPoint'
+      cpu:
+        format: float64
+        type: number
+        x-omitempty: false
+      edgehost:
+        $ref: '#/definitions/v1ResourceUsageMeteringDataPoint'
+      memory:
+        format: float64
+        type: number
+        x-omitempty: false
+      timestamp:
+        format: int64
+        type: number
+    type: object
+  v1ClusterWorkloadNamespace:
+    description: Cluster workload namespace summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadMetadata'
+      status:
+        $ref: '#/definitions/v1ClusterWorkloadNamespaceStatus'
+    type: object
+  v1AppDeploymentClusterStatus:
+    description: Application deployment cluster status
+    properties:
+      health:
+        $ref: '#/definitions/v1AppDeploymentClusterHealth'
+      state:
+        type: string
+  v1SearchFilterBoolCondition:
+    properties:
+      value:
+        type: boolean
+  v1ClusterImport:
+    properties:
+      importLink:
+        description: import link to download and install ally-lite, palette-lite
+        type: string
+      isBrownfield:
+        description: Deprecated. Use the 'spec.clusterType'
+        type: boolean
+        x-omitempty: false
+      state:
+        description: cluster import status
+        type: string
+    type: object
+  v1ObjectEntity:
+    description: Object identity meta
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1AppProfileTemplateSummary:
+    description: Application profile template summary
+    properties:
+      appTiers:
+        items:
+          $ref: '#/definitions/v1AppTierSummary'
+        type: array
+    type: object
+  v1ServicePort:
+    properties:
+      port:
+        description: The port that will be exposed by this service.
+        format: int32
+        type: integer
+      protocol:
+        type: string
+    required:
+    - port
+    type: object
+  v1ProjectUsageSummary:
+    description: Project usage summary
+    properties:
+      alloyCpuCores:
+        type: number
+        x-omitempty: false
+      clusters:
+        items:
+          $ref: '#/definitions/v1ClusterUsageSummary'
+        type: array
+      pureCpuCores:
+        type: number
+        x-omitempty: false
+    type: object
+  v1SearchFilterDateCondition:
+    properties:
+      match:
+        $ref: '#/definitions/v1SearchFilterDateConditionMatch'
+      negation:
+        type: boolean
+      operator:
+        $ref: '#/definitions/v1SearchFilterDateOperator'
+  v1ClusterTemplateSummaryStatus:
+    description: Provides status information for cluster templates like in use cluster which are launched using the template
+    properties:
+      inUseClusters:
+        items:
+          $ref: '#/definitions/v1ObjectEntity'
+        type: array
+      state:
+        description: The reconciliation state of the cluster template
+        type: string
+    type: object
+  v1ResourceCloudCostSummary:
+    description: Resource cloud cost summary information
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/v1CloudCostDataPoint'
+        type: array
+        uniqueItems: true
+      entity:
+        $ref: '#/definitions/v1ResourceReference'
+      total:
+        $ref: '#/definitions/v1ResourceTotalCloudCost'
+    type: object
+  v1ClusterMetaStatusCost:
+    description: Cluster meta Cost information
+    properties:
+      total:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1SpectroClustersMetadataSearch:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1SpectroClusterMetaSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1SpcPolicyType:
+    default: maintenance
+    enum:
+    - maintenance
+    type: string
+  v1SpcApply:
+    properties:
+      actionType:
+        enum:
+        - DownloadAndInstall
+        - DownloadAndInstallLater
+        type: string
+      canBeApplied:
+        description: If it is true then Agent can apply the changes to the palette
+        type: boolean
+        x-omitempty: false
+      crdDigest:
+        type: string
+      lastModifiedTime:
+        $ref: '#/definitions/v1Time'
+      patchAppliedTime:
+        $ref: '#/definitions/v1Time'
+      spcHash:
+        type: string
+      spcInfraHash:
+        type: string
+    type: object
+  v1ResourceCostSummaryOptions:
+    description: Resource cost summary options
+    properties:
+      enableSummaryView:
+        default: true
+        type: boolean
+      groupBy:
+        default: cluster
+        enum:
+        - tenant
+        - project
+        - workspace
+        - cluster
+        - namespace
+        - deployment
+        - cloud
+        type: string
+      period:
+        default: 60
+        format: int32
+        type: integer
+    type: object
+  v1SpectroClusterMeta:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1SpectroClusterMetaSpec'
+      status:
+        $ref: '#/definitions/v1SpectroClusterMetaStatus'
+    type: object
+  v1AppDeploymentSummary:
+    description: Application deployment summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        description: Application deployment spec summary
+        properties:
+          config:
+            $ref: '#/definitions/v1AppDeploymentConfigSummary'
+          profile:
+            $ref: '#/definitions/v1AppDeploymentProfileSummary'
+        type: object
+      status:
+        $ref: '#/definitions/v1AppDeploymentStatusSummary'
+    type: object
+  v1FilterString:
+    properties:
+      beginsWith:
+        type: string
+        x-nullable: true
+      contains:
+        type: string
+        x-nullable: true
+      eq:
+        type: string
+        x-nullable: true
+      ignoreCase:
+        default: true
+        type: boolean
+      ne:
+        type: string
+        x-nullable: true
+    type: object
+  v1ClusterProfilePackSummary:
+    description: Cluster profile packs summary about the deprecated, disabled, deleted packs count
+    properties:
+      deleted:
+        description: Total count of deleted packs in a cluster profile
+        type: number
+        x-omitempty: false
+      deprecated:
+        description: Total count of deprecated packs in a cluster profile
+        type: number
+        x-omitempty: false
+      disabled:
+        description: Total count of disabled packs in a cluster profile
+        type: number
+        x-omitempty: false
+    type: object
+  v1ProjectMetadata:
+    description: Project metadata
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectEntity'
+  v1SpectroClusterFilterSpec:
+    description: Spectro cluster filter spec
+    properties:
+      cloudAccounts:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      clusterName:
+        $ref: '#/definitions/v1FilterString'
+      clusterProfiles:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      clusterState:
+        $ref: '#/definitions/v1ClusterState'
+        description: Deprecated. Use clusterStates
+      clusterStates:
+        items:
+          $ref: '#/definitions/v1ClusterState'
+        type: array
+        uniqueItems: true
+      clusterTemplates:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      cpuUsage:
+        $ref: '#/definitions/v1FilterIntRange'
+      environment:
+        description: Deprecated. Use environments
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      environments:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      healthState:
+        default: all
+        enum:
+        - all
+        - Healthy
+        - UnHealthy
+        type: string
+      isDeleted:
+        default: false
+        type: boolean
+      isHostCluster:
+        default: false
+        type: boolean
+        x-omitempty: false
+      memoryUsage:
+        $ref: '#/definitions/v1FilterNumberRange'
+      metricPeriod:
+        default: 60
+        description: Metric period in minutes defines latest metrics by period
+        format: int32
+        type: integer
+      projectUids:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      tags:
+        $ref: '#/definitions/v1FilterArray'
+  v1ClusterWorkloadDaemonSet:
+    description: Cluster workload daemonset summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadMetadata'
+      status:
+        $ref: '#/definitions/v1ClusterWorkloadDaemonSetStatus'
+    type: object
+  v1AppProfileSortFields:
+    enum:
+    - profileName
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1WorkspaceClustersWorkloadRoleBindings:
+    description: Workspace clusters workload rbac bindings summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadRoleBindings'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1PackPreset:
+    description: PackPreset defines the preset pack values
+    properties:
+      add:
+        type: string
+        x-omitempty: false
+      displayName:
+        type: string
+        x-omitempty: false
+      group:
+        type: string
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      remove:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1SearchFilterIntegerConditionMatch:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      values:
+        items:
+          type: integer
+        type: array
+        uniqueItems: true
+  v1EdgeHostHealth:
+    description: EdgeHostHealth defines the desired health state of EdgeHostDevice
+    properties:
+      agentVersion:
+        type: string
+      message:
+        type: string
+      state:
+        enum:
+        - healthy
+        - unhealthy
+        type: string
+  v1ClusterRepaveStatus:
+    description: Cluster repave status
+    properties:
+      state:
+        $ref: '#/definitions/v1ClusterRepaveState'
+  v1SpectroClusterSortFields:
+    enum:
+    - environment
+    - clusterName
+    - healthState
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1ClusterTemplatesFilterSpec:
+    description: Cluster template filter spec
+    properties:
+      cloudType:
+        items:
+          $ref: '#/definitions/v1CloudType'
+        type: array
+        uniqueItems: true
+      clusterTemplateName:
+        $ref: '#/definitions/v1FilterString'
+      policyUid:
+        $ref: '#/definitions/v1FilterString'
+      projectUid:
+        $ref: '#/definitions/v1FilterString'
+      tags:
+        $ref: '#/definitions/v1FilterArray'
+  v1AppProfilesSummary:
+    properties:
+      appProfiles:
+        items:
+          $ref: '#/definitions/v1AppProfileSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    type: object
+  v1APIEndpoint:
+    description: APIEndpoint represents a reachable Kubernetes API endpoint.
+    properties:
+      host:
+        description: The hostname on which the API server is serving.
+        type: string
+      port:
+        description: The port on which the API server is serving.
+        format: int32
+        type: integer
+    required:
+    - host
+    - port
+    type: object
+  v1SpectroClustersHealth:
+    description: Spectro Clusters health data
+    properties:
+      errored:
+        format: int32
+        type: integer
+        x-omitempty: false
+      healthy:
+        format: int32
+        type: integer
+        x-omitempty: false
+      running:
+        format: int32
+        type: integer
+        x-omitempty: false
+      unhealthy:
+        format: int32
+        type: integer
+        x-omitempty: false
+    type: object
+  v1ProjectFilterSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1ProjectFilterSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1IpPoolStatus:
+    description: IP Pool status
+    properties:
+      allottedIps:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      associatedClusters:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      availableIps:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      inUse:
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1ClusterWorkloadDeploymentStatus:
+    description: Cluster workload deployment status
+    properties:
+      replicas:
+        $ref: '#/definitions/v1ClusterWorkloadReplicaStatus'
+    type: object
+  v1SpcPoliciesFilterSpec:
+    description: Spc policies filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1SpcPolicyFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1SpcPolicySortSpec'
+        type: array
+        uniqueItems: true
+  v1SearchFilterSchemaSpecProperties:
+    properties:
+      properties:
+        items:
+          $ref: '#/definitions/v1SearchFilterSchemaSpecProperty'
+        type: array
+  v1ClusterProfileSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1ClusterProfileSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1DashboardWorkspaceSpec:
+    description: Workspace spec summary
+    properties:
+      clusterRefs:
+        items:
+          $ref: '#/definitions/v1DashboardWorkspaceClusterRef'
+        type: array
+        uniqueItems: true
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      quota:
+        $ref: '#/definitions/v1DashboardWorkspaceQuota'
+  v1ProjectsSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ProjectSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1SpectroClusterMetrics:
+    description: Spectro cluster metrics
+    properties:
+      cpu:
+        $ref: '#/definitions/v1ComputeMetrics'
+      memory:
+        $ref: '#/definitions/v1ComputeMetrics'
+  v1PackSchema:
+    description: PackSchema defines the schema definition, hints for the pack values
+    properties:
+      format:
+        type: string
+        x-omitempty: false
+      hints:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      listOptions:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      readonly:
+        type: boolean
+        x-omitempty: false
+      regex:
+        type: string
+        x-omitempty: false
+      required:
+        type: boolean
+        x-omitempty: false
+      type:
+        type: string
+        x-omitempty: false
+    type: object
+  v1AppDeploymentStatusSummary:
+    description: Application deployment status summary
+    properties:
+      cluster:
+        $ref: '#/definitions/v1AppDeploymentClusterStatus'
+      notifications:
+        $ref: '#/definitions/v1AppDeploymentNotifications'
+      state:
+        type: string
+    type: object
+  v1SpectroClusterCloudCost:
+    description: Spectro cluster cloud cost information
+    properties:
+      cost:
+        $ref: '#/definitions/v1ResourceCost'
+      data:
+        items:
+          $ref: '#/definitions/v1CloudCostDataPoint'
+        type: array
+    type: object
+  v1ResourceUsageSummaryOptions:
+    description: Resource usage summary options
+    properties:
+      enableSummaryView:
+        default: true
+        type: boolean
+      groupBy:
+        default: cluster
+        enum:
+        - tenant
+        - project
+        - workspace
+        - cluster
+        - namespace
+        - deployment
+        - statefulset
+        - daemonset
+        - pod
+        - cloud
+        type: string
+      includeMeteringInfo:
+        default: false
+        type: boolean
+      period:
+        default: 60
+        format: int32
+        type: integer
+    type: object
+  v1ResourceUsageSummaryFilter:
+    description: Resource usage summary filter
+    properties:
+      clouds:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      clusters:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      endTime:
+        $ref: '#/definitions/v1Time'
+      includeControlPlaneMachines:
+        type: boolean
+      includeMasterMachines:
+        description: Deprecated. Use includeControlPlaneMachines
+        type: boolean
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      pods:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      projects:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      startTime:
+        $ref: '#/definitions/v1Time'
+      workload:
+        $ref: '#/definitions/v1ResourceWorkloadFilter'
+      workspaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1AppProfileSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1AppProfileSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1OS:
+    properties:
+      family:
+        type: string
+      kernel:
+        type: string
+      kernelVersion:
+        type: string
+      version:
+        type: string
+    type: object
+  v1DashboardWorkspaces:
+    properties:
+      cpuUnit:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/v1DashboardWorkspace'
+        type: array
+        uniqueItems: true
+      memoryUnit:
+        type: string
+    required:
+    - items
+    type: object
+  v1Upgrades:
+    description: Upgrades represent the reason of the last upgrade that took place
+    properties:
+      reason:
+        items:
+          type: string
+        type: array
+      timestamp:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1WorkspaceWorkloadsFilter:
+    description: Workspace workloads filter
+    properties:
+      clusters:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1SpectroClusterHealthCondition:
+    description: Spectro cluster health condition
+    properties:
+      message:
+        type: string
+      relatedObject:
+        $ref: '#/definitions/v1RelatedObject'
+        type: object
+      type:
+        type: string
+  v1EdgeClusterObjectEntity:
+    description: Object identity meta of the cluster
+    properties:
+      hybridCluster:
+        $ref: '#/definitions/v1HybridClusterMeta'
+        description: In case of hybrid edge clusters, it provides the object identity meta of hybrid cluster
+      name:
+        description: Name of the cluster
+        type: string
+      uid:
+        description: Uid of the cluster
+        type: string
+    type: object
+  v1ResourceCostSummarySpec:
+    description: Resource cost summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1ResourceCostSummaryFilter'
+      options:
+        $ref: '#/definitions/v1ResourceCostSummaryOptions'
+    type: object
+  v1ClusterPackManifestStatus:
+    properties:
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ClusterWorkloadDaemonSets:
+    description: Cluster workload daemonset summary
+    properties:
+      daemonSets:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadDaemonSet'
+        type: array
+    type: object
+  v1ClusterTemplateSummary:
+    description: Cluster template summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ClusterTemplateSummarySpec'
+      status:
+        $ref: '#/definitions/v1ClusterTemplateSummaryStatus'
+    type: object
+  v1ClusterUsageSummary:
+    description: Cluster usage summary
+    properties:
+      cpuCores:
+        type: number
+        x-omitempty: false
+      isAlloy:
+        type: boolean
+        x-omitempty: false
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1PackRefSummary:
+    description: Pack ref summary
+    properties:
+      addonType:
+        type: string
+      annotations:
+        additionalProperties:
+          type: string
+        type: object
+      displayName:
+        type: string
+      layer:
+        $ref: '#/definitions/v1PackLayer'
+      logoUrl:
+        type: string
+      name:
+        type: string
+      packUid:
+        type: string
+      tag:
+        type: string
+      type:
+        type: string
+      version:
+        type: string
+  v1ClusterWorkloadCronJobStatus:
+    description: Cluster workload cronjob status
+    properties:
+      lastScheduleTime:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1ClusterWorkloadPodContainer:
+    description: Cluster workload pod container
+    properties:
+      image:
+        type: string
+      name:
+        type: string
+      resources:
+        $ref: '#/definitions/v1ClusterWorkloadPodContainerResources'
+    type: object
+  v1WorkspaceClusterWorkloadRoleBindings:
+    description: Workspace cluster workload rbac bindings summary
+    properties:
+      bindings:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadRoleBinding'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+    type: object
+  v1FilterIntRange:
+    properties:
+      eq:
+        format: int32
+        type: integer
+        x-nullable: true
+      gt:
+        format: int32
+        type: integer
+        x-nullable: true
+      gte:
+        format: int32
+        type: integer
+        x-nullable: true
+      lt:
+        format: int32
+        type: integer
+        x-nullable: true
+      lte:
+        format: int32
+        type: integer
+        x-nullable: true
+      ne:
+        format: int32
+        type: integer
+        x-nullable: true
+    type: object
+  v1AppDeploymentFilterSpec:
+    description: Application deployment filter spec
+    properties:
+      appDeploymentName:
+        $ref: '#/definitions/v1FilterString'
+      clusterUids:
+        $ref: '#/definitions/v1FilterArray'
+      tags:
+        $ref: '#/definitions/v1FilterArray'
+  v1AppDeploymentsSummary:
+    properties:
+      appDeployments:
+        items:
+          $ref: '#/definitions/v1AppDeploymentSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    type: object
+  v1WorkspaceClusterWorkloadPods:
+    description: Workspace cluster workload pods summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+      pods:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadPod'
+        type: array
+    type: object
+  v1SearchFilterKeyValueConditionMatch:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      values:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  v1ResourceConsumptionData:
+    description: Resource cosumption data
+    properties:
+      cpu:
+        format: float64
+        type: number
+        x-omitempty: false
+      memory:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1ClusterWorkloadPodMetadata:
+    description: Cluster workload pod metadata
+    properties:
+      associatedRefs:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadRef'
+        type: array
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+      entity:
+        $ref: '#/definitions/v1ClusterWorkloadRef'
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      machineUid:
+        type: string
+      namespace:
+        type: string
+      nodename:
+        type: string
+    type: object
+  v1DeviceSpec:
+    description: DeviceSpec defines the desired state of Device
+    properties:
+      archType:
+        default: amd64
+        description: Architecture type of the edge host
+        enum:
+        - arm64
+        - amd64
+        type: string
+      cpu:
+        $ref: '#/definitions/v1CPU'
+      disks:
+        items:
+          $ref: '#/definitions/v1Disk'
+        type: array
+      gpus:
+        items:
+          $ref: '#/definitions/v1GPUDeviceSpec'
+        type: array
+      hostState:
+        default: registration
+        description: State of edge host device
+        enum:
+        - registration
+        - cluster
+        - recovery
+        type: string
+      hostType:
+        default: appliance
+        description: Type of the edge host device
+        enum:
+        - appliance
+        - agent-mode
+        type: string
+      memory:
+        $ref: '#/definitions/v1Memory'
+      nics:
+        items:
+          $ref: '#/definitions/v1Nic'
+        type: array
+      os:
+        $ref: '#/definitions/v1OS'
+      secureBoot:
+        default: false
+        description: Secure boot configuration
+        type: boolean
+    type: object
+  v1EdgeHostState:
+    enum:
+    - ready
+    - unpaired
+    - in-use
+    type: string
+  v1SpectroClusterCloudCostSummarySpec:
+    description: Spectro cluster cloud cost summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1SpectroClusterCloudCostSummaryFilter'
+      options:
+        $ref: '#/definitions/v1SpectroClusterCloudCostSummaryOptions'
+    type: object
+  v1ClusterWorkloadJob:
+    description: Cluster workload job summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadMetadata'
+      status:
+        $ref: '#/definitions/v1ClusterWorkloadJobStatus'
+    type: object
+  v1ClusterRbacSubjects:
+    description: Cluster role ref
+    properties:
+      name:
+        type: string
+      namespace:
+        type: string
+      type:
+        enum:
+        - User
+        - Group
+        - ServiceAccount
+        type: string
+    type: object
+  v1ClusterRoleRef:
+    description: Cluster role ref
+    properties:
+      kind:
+        enum:
+        - Role
+        - ClusterRole
+        type: string
+      name:
+        type: string
+    type: object
+  v1SpectroClusterUidStatusSummary:
+    description: Spectro cluster status summary
+    properties:
+      abortTimestamp:
+        $ref: '#/definitions/v1Time'
+      addOnServices:
+        items:
+          $ref: '#/definitions/v1SpectroClusterAddOnServiceSummary'
+        type: array
+      apiEndpoints:
+        items:
+          $ref: '#/definitions/v1APIEndpoint'
+        type: array
+      clusterImport:
+        $ref: '#/definitions/v1ClusterImport'
+      conditions:
+        items:
+          $ref: '#/definitions/v1ClusterCondition'
+        type: array
+      cost:
+        $ref: '#/definitions/v1ResourceCost'
+      fips:
+        $ref: '#/definitions/v1ClusterFips'
+      health:
+        $ref: '#/definitions/v1SpectroClusterHealthStatus'
+      hourlyRate:
+        $ref: '#/definitions/v1ResourceCost'
+      kubeMeta:
+        $ref: '#/definitions/v1KubeMeta'
+      location:
+        $ref: '#/definitions/v1ClusterMetaSpecLocation'
+      metrics:
+        $ref: '#/definitions/v1SpectroClusterMetrics'
+      notifications:
+        $ref: '#/definitions/v1ClusterNotificationStatus'
+      packs:
+        items:
+          $ref: '#/definitions/v1ClusterPackStatus'
+        type: array
+      services:
+        items:
+          $ref: '#/definitions/v1LoadBalancerService'
+        type: array
+      spcApply:
+        $ref: '#/definitions/v1SpcApply'
+      state:
+        description: current operational state
+        type: string
+      upgrades:
+        items:
+          $ref: '#/definitions/v1Upgrades'
+        type: array
+      virtual:
+        $ref: '#/definitions/v1Virtual'
+      workspaces:
+        items:
+          $ref: '#/definitions/v1ResourceReference'
+        type: array
+  v1CloudAccountMetadata:
+    description: Cloud account metadata summary
+    properties:
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+  v1ClusterWorkloadNamespaceStatus:
+    description: Cluster workload namespace status
+    properties:
+      phase:
+        type: string
+    type: object
+  v1SpcPolicySummary:
+    description: Spc policy summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          kind:
+            description: The kind of the spc policy eg maintenance.
+            type: string
+        type: object
+      status:
+        $ref: '#/definitions/v1SpcPolicyStatusSummary'
+    type: object
+  v1OverloadStatus:
+    description: Overload status
+    properties:
+      health:
+        $ref: '#/definitions/v1SpectroClusterHealthStatus'
+      isActive:
+        type: boolean
+        x-omitempty: false
+      isReady:
+        type: boolean
+        x-omitempty: false
+      kubectlCommands:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      notifications:
+        $ref: '#/definitions/v1ClusterNotificationStatus'
+      state:
+        type: string
+    type: object
+  v1EdgeHostsMetadataSpec:
+    properties:
+      clusterProfileTemplates:
+        items:
+          $ref: '#/definitions/v1ProfileTemplateSummary'
+        type: array
+      device:
+        $ref: '#/definitions/v1DeviceSpec'
+      host:
+        $ref: '#/definitions/v1EdgeHostSpecHost'
+      projectMeta:
+        $ref: '#/definitions/v1ProjectMeta'
+      type:
+        type: string
+    type: object
+  v1PackLayer:
+    enum:
+    - kernel
+    - os
+    - k8s
+    - cni
+    - csi
+    - addon
+    type: string
+  v1ProjectFilterSpec:
+    description: Project filter spec
+    properties:
+      name:
+        $ref: '#/definitions/v1FilterString'
+  v1ClusterWorkloadJobs:
+    description: Cluster workload jobs summary
+    properties:
+      jobs:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadJob'
+        type: array
+    type: object
+  v1SearchFilterSchemaSpec:
+    properties:
+      schema:
+        $ref: '#/definitions/v1SearchFilterSchemaSpecProperties'
+  v1ClusterProfileSummary:
+    description: Cluster profile summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      specSummary:
+        description: Cluster profile spec summary
+        properties:
+          draft:
+            $ref: '#/definitions/v1ClusterProfileTemplateSummary'
+          published:
+            $ref: '#/definitions/v1ClusterProfileTemplateSummary'
+          version:
+            description: Cluster profile's latest version
+            type: string
+          versions:
+            description: Cluster profile's list of all the versions
+            items:
+              $ref: '#/definitions/v1ClusterProfileVersion'
+            type: array
+        type: object
+      status:
+        $ref: '#/definitions/v1ClusterProfileStatusSummary'
+    type: object
+  v1CloudConfigMeta:
+    properties:
+      cloudType:
+        type: string
+      hybridMachinePools:
+        description: Hybrid Machine pools meta information
+        items:
+          $ref: '#/definitions/v1MachinePoolMeta'
+        type: array
+      machinePools:
+        description: Machine pools meta information
+        items:
+          $ref: '#/definitions/v1MachinePoolMeta'
+        type: array
+      uid:
+        description: Cluster's cloud config uid
+        type: string
+    type: object
+  v1SortOrder:
+    default: asc
+    enum:
+    - asc
+    - desc
+    type: string
+  v1ClusterTemplateSummarySpec:
+    properties:
+      cloudType:
+        $ref: '#/definitions/v1CloudType'
+      clusters:
+        items:
+          $ref: '#/definitions/v1ClusterTemplateSpectroClusterMeta'
+        type: array
+        uniqueItems: true
+    type: object
+  v1ResourceTotalCloudCost:
+    description: Resource total cloud cost information
+    properties:
+      compute:
+        format: float64
+        type: number
+        x-omitempty: false
+      storage:
+        format: float64
+        type: number
+        x-omitempty: false
+      total:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1ClusterWorkloadPodContainerResources:
+    description: Cluster workload pod container resources
+    properties:
+      limits:
+        $ref: '#/definitions/v1ClusterWorkloadPodContainerResource'
+      requests:
+        $ref: '#/definitions/v1ClusterWorkloadPodContainerResource'
+    type: object
+  v1GPUDeviceSpec:
+    properties:
+      addresses:
+        additionalProperties:
+          type: string
+        description: 'Addresses is a map of PCI device entry name to its addresses.
+
+          Example entry would be "11:00.0 VGA compatible controller [0300]: NVIDIA
+
+          Corporation Device [10de:1eb1] (rev a1)"- > 0000_11_00_0" The address is
+
+          BDF (Bus Device Function) identifier format seperated by underscores. The
+
+          first 4 bits are almost always 0000. In the above example 11 is Bus, 00
+
+          is Device,0 is function. The values of these addreses are expected in hexadecimal
+
+          format
+
+          '
+        type: object
+      gpuCount:
+        description: Number of GPUs
+        format: int32
+        type: integer
+      memory:
+        description: GPU memory specification
+        type: string
+      migCapable:
+        description: MIG capability flag
+        type: boolean
+      migStrategy:
+        description: MIG strategy configuration
+        type: string
+      model:
+        description: Model is the model of GPU, for a given vendor, for eg., TU104GL [Tesla T4]
+        type: string
+      vendor:
+        description: Vendor is the GPU vendor, for eg., NVIDIA or AMD
+        type: string
+    type: object
+  v1VMCluster:
+    description: VM Dashboard enabled Spectro cluster
+    properties:
+      metadata:
+        properties:
+          name:
+            type: string
+          projectUid:
+            type: string
+          uid:
+            type: string
+      spec:
+        description: Spectro cluster spec
+        properties:
+          cloudType:
+            type: string
+        type: object
+      status:
+        description: Spectro cluster status
+        properties:
+          clusterState:
+            type: string
+    type: object
+  v1DashboardWorkspaceAllocation:
+    description: Workspace allocation
+    properties:
+      cpu:
+        $ref: '#/definitions/v1DashboardWorkspaceResourceAllocation'
+      memory:
+        $ref: '#/definitions/v1DashboardWorkspaceResourceAllocation'
+  v1SpectroClusterCost:
+    description: Spectro cluster cost information
+    properties:
+      cloud:
+        $ref: '#/definitions/v1SpectroClusterCloudCost'
+      cost:
+        $ref: '#/definitions/v1ResourceCost'
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1SearchFilterIntegerOperator:
+    enum:
+    - eq
+    - gt
+    - gte
+    - lt
+    - lte
+    type: string
+  v1SpcPolicyStatusSummary:
+    description: Provides status information for SpcPolicy like in use templates using the policy
+    properties:
+      inUseClusterTemplates:
+        items:
+          $ref: '#/definitions/v1ObjectStateEntity'
+        type: array
+    type: object
+  v1ResourceTotalCost:
+    description: Resource total cost information
+    properties:
+      cpu:
+        format: float64
+        type: number
+        x-omitempty: false
+      memory:
+        format: float64
+        type: number
+        x-omitempty: false
+      storage:
+        format: float64
+        type: number
+        x-omitempty: false
+      total:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1SearchFilterSchemaSpecProperty:
+    properties:
+      default:
+        type: string
+        x-order: 6
+      displayName:
+        type: string
+        x-order: 2
+      enum:
+        items:
+          type: string
+        type: array
+        x-omitempty: true
+        x-order: 4
+      enumValues:
+        items:
+          $ref: '#/definitions/v1SearchFilterSchemaSpecEnumValue'
+        type: array
+        x-omitempty: true
+        x-order: 5
+      hideDisplay:
+        type: boolean
+        x-order: 1
+      isDeprecated:
+        type: boolean
+        x-omitempty: false
+        x-order: 11
+      maxFloatVal:
+        format: float64
+        type: number
+        x-order: 10
+      maxIntVal:
+        format: int32
+        type: integer
+        x-order: 8
+      minFloatVal:
+        format: float64
+        type: number
+        x-order: 9
+      minIntVal:
+        format: int32
+        type: integer
+        x-order: 7
+      name:
+        type: string
+        x-order: 0
+      type:
+        type: string
+        x-order: 3
+  v1AppProfileFilterSpec:
+    description: Application profile filter spec
+    properties:
+      profileName:
+        $ref: '#/definitions/v1FilterString'
+      tags:
+        $ref: '#/definitions/v1FilterArray'
+      version:
+        $ref: '#/definitions/v1FilterVersionString'
+  v1ClusterWorkloadPodContainerState:
+    description: Cluster workload pod container state
+    properties:
+      exitCode:
+        format: int32
+        type: integer
+        x-omitempty: false
+      finishedAt:
+        $ref: '#/definitions/v1Time'
+      reason:
+        type: string
+      startedAt:
+        $ref: '#/definitions/v1Time'
+      state:
+        type: string
+    type: object
+  v1ClusterWorkloadRoleBinding:
+    description: Cluster workload rbac binding summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadMetadata'
+      spec:
+        $ref: '#/definitions/v1ClusterRbacBinding'
+    type: object
+  v1SpectroClusterSummary:
+    description: Spectro cluster summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      specSummary:
+        description: Spectro cluster spec summary
+        properties:
+          archTypes:
+            description: Architecture type of the cluster
+            items:
+              $ref: '#/definitions/v1ArchType'
+            type: array
+          cloudAccountMeta:
+            $ref: '#/definitions/v1CloudAccountMeta'
+          cloudConfig:
+            $ref: '#/definitions/v1CloudConfigMeta'
+          clusterConfig:
+            $ref: '#/definitions/v1ClusterConfigResponse'
+          clusterProfileTemplate:
+            $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+          clusterProfileTemplates:
+            items:
+              $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+            type: array
+          projectMeta:
+            $ref: '#/definitions/v1ProjectMeta'
+        type: object
+      status:
+        description: Spectro cluster status summary
+        properties:
+          clusterImport:
+            $ref: '#/definitions/v1ClusterImport'
+          cost:
+            $ref: '#/definitions/v1ResourceCost'
+          fips:
+            $ref: '#/definitions/v1ClusterFips'
+          health:
+            $ref: '#/definitions/v1SpectroClusterHealthStatus'
+          hourlyRate:
+            $ref: '#/definitions/v1ResourceCost'
+          location:
+            $ref: '#/definitions/v1ClusterMetaSpecLocation'
+          metrics:
+            $ref: '#/definitions/v1SpectroClusterMetrics'
+          notifications:
+            $ref: '#/definitions/v1ClusterNotificationStatus'
+          repave:
+            $ref: '#/definitions/v1ClusterRepaveStatus'
+          state:
+            type: string
+          virtual:
+            $ref: '#/definitions/v1Virtual'
+    type: object
+  v1ProfileType:
+    default: cluster
+    enum:
+    - cluster
+    - infra
+    - add-on
+    - system
+    type: string
+  v1ClusterWorkloadPodSpec:
+    description: Cluster workload pod spec
+    properties:
+      containers:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadPodContainer'
+        type: array
+      volumes:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadPodVolume'
+        type: array
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1ClusterWorkloadsSpec:
+    description: Cluster workloads spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1ClusterWorkloadsFilter'
+    type: object
+  v1ClusterTemplatesFilterSummarySpec:
+    description: Cluster templates filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1ClusterTemplatesFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1ClusterTemplatesSortSpec'
+        type: array
+        uniqueItems: true
+  v1ResourcesCloudCostSummary:
+    description: Resources cloud cost summary information
+    properties:
+      resources:
+        items:
+          $ref: '#/definitions/v1ResourceCloudCostSummary'
+        type: array
+      total:
+        $ref: '#/definitions/v1ResourceTotalCloudCost'
+    type: object
+  v1EdgeHostsMetadataFilter:
+    description: Edge host metadata spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1EdgeHostsMetadataFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1EdgeHostsMetadataSortSpec'
+        type: array
+        uniqueItems: true
+  v1ArchType:
+    default: amd64
+    enum:
+    - amd64
+    - arm64
+    type: string
+  v1ClusterMetaSpecLocation:
+    description: Cluster location information
+    properties:
+      coordinates:
+        items:
+          format: float64
+          type: number
+        type: array
+      countryCode:
+        type: string
+      countryName:
+        type: string
+      regionCode:
+        type: string
+      regionName:
+        type: string
+    type: object
+  v1AppTierSourceSummary:
+    description: Application profile's tier source information
+    properties:
+      addonSubType:
+        type: string
+      addonType:
+        type: string
+      logoUrl:
+        type: string
+      name:
+        type: string
+      type:
+        type: string
+      uid:
+        type: string
+  v1DashboardWorkspaceResourceAllocation:
+    description: Workspace resource allocation
+    properties:
+      allocated:
+        format: float64
+        type: number
+        x-omitempty: false
+      usage:
+        format: float64
+        type: number
+        x-omitempty: false
+  v1ResourceConsumptionDataPoint:
+    description: Resource cosumption data point
+    properties:
+      allotted:
+        $ref: '#/definitions/v1ResourceConsumptionData'
+      timestamp:
+        format: int64
+        type: number
+      usage:
+        $ref: '#/definitions/v1ResourceConsumptionData'
+    type: object
+  v1SpectroClustersSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1SpectroClusterSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1ClusterWorkloadPods:
+    description: Cluster workload pods summary
+    properties:
+      pods:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadPod'
+        type: array
+  v1EdgeHostsMetadataSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1EdgeHostsMetadataSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1SpectroClusterMetaSpec:
+    description: Spectro cluster meta summary
+    properties:
+      archType:
+        description: Architecture type of the cluster
+        items:
+          $ref: '#/definitions/v1ArchType'
+        type: array
+      cloudAccountUid:
+        description: Unique identifier for the cloud account used by this cluster
+        type: string
+      cloudRegion:
+        description: Geographic region where the cluster is deployed
+        type: string
+      cloudType:
+        description: Infrastructure provider type for the cluster
+        type: string
+      clusterType:
+        description: Type classification of the cluster
+        type: string
+      location:
+        $ref: '#/definitions/v1ClusterMetaSpecLocation'
+        description: Geographical location metadata for the cluster
+      tags:
+        description: User-defined labels associated with this cluster
+        items:
+          type: string
+        type: array
+    type: object
+  v1ClusterWorkloadStatefulSetStatus:
+    description: Cluster workload statefulset status
+    properties:
+      replicas:
+        $ref: '#/definitions/v1ClusterWorkloadReplicaStatus'
+    type: object
+  v1SearchFilterFloatConditionMatch:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      values:
+        items:
+          format: float64
+          type: number
+        type: array
+        uniqueItems: true
+  v1ClusterWorkloadStatefulSet:
+    description: Cluster workload statefulset summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadMetadata'
+      status:
+        $ref: '#/definitions/v1ClusterWorkloadStatefulSetStatus'
+    type: object
+  v1CPU:
+    properties:
+      cores:
+        description: number of cpu cores
+        format: int32
+        type: integer
+    type: object
+  v1SearchFilterIntegerCondition:
+    properties:
+      match:
+        $ref: '#/definitions/v1SearchFilterIntegerConditionMatch'
+      negation:
+        type: boolean
+      operator:
+        $ref: '#/definitions/v1SearchFilterIntegerOperator'
+  v1ClusterTemplatesSortFields:
+    enum:
+    - clusterTemplateName
+    - cloudType
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1AppDeploymentClusterRefSummary:
+    description: Application deployment cluster reference
+    properties:
+      deploymentClusterType:
+        description: Application deployment source cluster type[ "virtualCluster", "hostCluster" ]
+        enum:
+        - virtual
+        - host
+        type: string
+      name:
+        description: Application deployment source cluster name
+        type: string
+      uid:
+        description: Application deployment source cluster uid
+        type: string
+  v1SpectroClusterSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1SpectroClusterSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1ClusterProfileScope:
+    enum:
+    - system
+    - tenant
+    - project
+    type: string
+  v1ResourcesUsageSummary:
+    description: Resources usage summary information
+    properties:
+      cpuUnit:
+        type: string
+      memoryUnit:
+        type: string
+      resources:
+        items:
+          $ref: '#/definitions/v1ResourceUsageSummary'
+        type: array
+    type: object
+  v1AppDeploymentClusterHealth:
+    description: Application deployment cluster health status
+    properties:
+      state:
+        type: string
+  v1EdgeHostsSearchSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1EdgeHostsMetadata'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1SearchFilterConjunctionOperator:
+    enum:
+    - and
+    - or
+    type: string
+    x-nullable: true
+  v1WorkspaceClustersWorkloadPods:
+    description: Workspace clusters workload pods summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadPods'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1SpectroClusterMetaSummary:
+    description: Spectro cluster meta summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      specSummary:
+        description: Spectro cluster meta summary
+        properties:
+          archType:
+            description: Architecture type of the cluster
+            items:
+              default: amd64
+              enum:
+              - arm64
+              - amd64
+              type: string
+            type: array
+          cloudAccountUid:
+            type: string
+          cloudRegion:
+            type: string
+          cloudType:
+            type: string
+          clusterType:
+            type: string
+          importMode:
+            type: string
+          location:
+            $ref: '#/definitions/v1ClusterMetaSpecLocation'
+          projectMeta:
+            $ref: '#/definitions/v1ProjectMeta'
+          tags:
+            items:
+              type: string
+            type: array
+        type: object
+      status:
+        description: Spectro cluster meta status summary
+        properties:
+          cost:
+            $ref: '#/definitions/v1ClusterMetaStatusCost'
+          fips:
+            $ref: '#/definitions/v1ClusterFips'
+          health:
+            $ref: '#/definitions/v1ClusterMetaStatusHealth'
+          state:
+            type: string
+          updates:
+            $ref: '#/definitions/v1ClusterMetaStatusUpdates'
+    type: object
+  v1WorkspaceClustersWorkloadStatefulSets:
+    description: Workspace clusters workload statefulsets summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadStatefulSets'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1ClusterWorkloadsFilter:
+    description: Cluster workloads filter
+    properties:
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1ClusterSearchInputSpecProperty:
+    properties:
+      values:
+        items:
+          $ref: '#/definitions/v1ObjectEntity'
+        type: array
+        x-omitempty: true
+  v1SearchSortFields:
+    enum:
+    - environment
+    - clusterName
+    - clusterState
+    - healthState
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1EdgeHostsMetadataSortFields:
+    enum:
+    - name
+    - state
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1SearchFilterDateOperator:
+    enum:
+    - eq
+    - gt
+    - gte
+    - lt
+    - lte
+    - range
+    type: string
+  v1ResourceCostSummary:
+    description: Resource cost summary information
+    properties:
+      associatedResources:
+        items:
+          $ref: '#/definitions/v1ResourceReference'
+        type: array
+      data:
+        items:
+          $ref: '#/definitions/v1ResourceCostDataPoint'
+        type: array
+        uniqueItems: true
+      entity:
+        $ref: '#/definitions/v1ResourceReference'
+      total:
+        $ref: '#/definitions/v1ResourceTotalCost'
+    type: object
+  v1SpectroClusterUidSummary:
+    description: Spectro cluster summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        description: Spectro cluster spec summary
+        properties:
+          archTypes:
+            description: Architecture types of the cluster
+            items:
+              $ref: '#/definitions/v1ArchType'
+            type: array
+          cloudConfig:
+            $ref: '#/definitions/v1CloudConfigMeta'
+          cloudaccount:
+            $ref: '#/definitions/v1CloudAccountMeta'
+          clusterProfileTemplate:
+            $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+          clusterProfileTemplates:
+            items:
+              $ref: '#/definitions/v1ClusterProfileTemplateMeta'
+            type: array
+        type: object
+      status:
+        $ref: '#/definitions/v1SpectroClusterUidStatusSummary'
+    type: object
+  v1ProjectStatus:
+    description: Project status
+    properties:
+      cleanUpStatus:
+        $ref: '#/definitions/v1ProjectCleanUpStatus'
+      isDisabled:
+        type: boolean
+  v1SpectroClusterAddOnServiceSummary:
+    description: Spectro cluster status summary
+    properties:
+      endpoint:
+        type: string
+      name:
+        type: string
+  v1Partition:
+    properties:
+      fileSystemType:
+        type: string
+      freeSpace:
+        format: int32
+        type: integer
+      mountPoint:
+        type: string
+      totalSpace:
+        format: int32
+        type: integer
+      usedSpace:
+        format: int32
+        type: integer
+    type: object
+  v1AppProfileSummary:
+    description: Application profile summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        description: Application profile spec summary
+        properties:
+          parentUid:
+            type: string
+          template:
+            $ref: '#/definitions/v1AppProfileTemplateSummary'
+          version:
+            type: string
+          versions:
+            description: Application profile's list of all the versions
+            items:
+              $ref: '#/definitions/v1AppProfileVersion'
+            type: array
+        type: object
+    type: object
+  v1ClusterWorkloadSpec:
+    description: Cluster workload spec
+    properties:
+      clusterroleBindings:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadRoleBinding'
+        type: array
+      cronJobs:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadCronJob'
+        type: array
+      daemonSets:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadDaemonSet'
+        type: array
+      deployments:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadDeployment'
+        type: array
+      jobs:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadJob'
+        type: array
+      pods:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadPod'
+        type: array
+      roleBindings:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadRoleBinding'
+        type: array
+      statefulSets:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadStatefulSet'
+        type: array
+    type: object
+  v1ClusterProfileStatusSummary:
+    description: ClusterProfileStatusSummary defines the observed state of ClusterProfile
+    properties:
+      fips:
+        $ref: '#/definitions/v1ClusterProfileFips'
+      inUseClusterTemplates:
+        items:
+          $ref: '#/definitions/v1ObjectEntity'
+        type: array
+      inUseClusterUids:
+        description: Deprecated. Use inUseClusters
+        items:
+          type: string
+        type: array
+      inUseClusters:
+        items:
+          $ref: '#/definitions/v1ObjectEntity'
+        type: array
+      isPublished:
+        type: boolean
+        x-omitempty: false
+      pack:
+        $ref: '#/definitions/v1ClusterProfilePackSummary'
+    type: object
+  v1ObjectStateEntity:
+    description: Object identity meta
+    properties:
+      name:
+        description: Name of the object
+        type: string
+      state:
+        description: State of the object
+        type: string
+        x-omitempty: false
+      uid:
+        description: Uid of the object
+        type: string
+    type: object
+  v1SearchFilterCondition:
+    properties:
+      bool:
+        $ref: '#/definitions/v1SearchFilterBoolCondition'
+      date:
+        $ref: '#/definitions/v1SearchFilterDateCondition'
+      float:
+        $ref: '#/definitions/v1SearchFilterFloatCondition'
+      int:
+        $ref: '#/definitions/v1SearchFilterIntegerCondition'
+      keyValue:
+        $ref: '#/definitions/v1SearchFilterKeyValueCondition'
+      string:
+        $ref: '#/definitions/v1SearchFilterStringCondition'
+  v1SearchFilterItem:
+    properties:
+      condition:
+        $ref: '#/definitions/v1SearchFilterCondition'
+      property:
+        type: string
+      type:
+        $ref: '#/definitions/v1SearchFilterPropertyType'
+  v1ClusterWorkloadMetadata:
+    description: Cluster workload metadata
+    properties:
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+      entity:
+        $ref: '#/definitions/v1ClusterWorkloadRef'
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      namespace:
+        type: string
+    type: object
+  v1ClusterFipsMode:
+    default: none
+    enum:
+    - full
+    - none
+    - partial
+    - unknown
+    type: string
+  v1EdgeHostsMetadataFilterSpec:
+    description: Edge hosts metadata filter spec
+    properties:
+      name:
+        $ref: '#/definitions/v1FilterString'
+      states:
+        items:
+          $ref: '#/definitions/v1EdgeHostState'
+        type: array
+        uniqueItems: true
+  v1ClusterTemplateMetadata:
+    properties:
+      name:
+        description: The name of the cluster template
+        type: string
+      projectUid:
+        description: The project UID of the cluster template
+        type: string
+      uid:
+        description: The uid of the cluster template
+        type: string
+    type: object
+  v1WorkspaceClustersWorkloadNamespaces:
+    description: Workspace clusters workload namespaces summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadNamespaces'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1PackRef:
+    description: PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml
+        type: object
+      digest:
+        description: digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade
+        type: string
+      inValidReason:
+        type: string
+      isInvalid:
+        description: pack is invalid when the associated tag is deleted from the registry
+        type: boolean
+      layer:
+        enum:
+        - kernel
+        - os
+        - k8s
+        - cni
+        - csi
+        - addon
+        type: string
+      logo:
+        description: path to the pack logo
+        type: string
+      manifests:
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      name:
+        description: pack name
+        type: string
+      packUid:
+        description: PackUID is Hubble packUID, not palette Pack.UID It is used by Hubble only.
+        type: string
+      params:
+        additionalProperties:
+          type: string
+        description: params passed as env variables to be consumed at installation time
+        type: object
+      presets:
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      registryUid:
+        description: pack registry uid
+        type: string
+      schema:
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      server:
+        description: pack registry server or helm repo
+        type: string
+      tag:
+        description: pack tag
+        type: string
+      type:
+        description: type of the pack
+        enum:
+        - spectro
+        - helm
+        - manifest
+        - oci
+        type: string
+      values:
+        description: values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+      version:
+        description: pack version
+        type: string
+    required:
+    - layer
+    - name
+    type: object
+  v1ClusterWorkloadRef:
+    description: Cluster workload ref
+    properties:
+      kind:
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ClusterProfileResourceType:
+    description: Filter cluster profiles by target resource type - 'spectrocluster' for profiles suitable to launch clusters, 'clustertemplate' for profiles suitable to create/edit cluster template
+    enum:
+    - spectrocluster
+    - clustertemplate
+    type: string
+  v1AppDeploymentNotifications:
+    description: Application deployment notifications
+    properties:
+      isAvailable:
+        type: boolean
+        x-omitempty: false
+  v1Disk:
+    properties:
+      controller:
+        type: string
+      partitions:
+        items:
+          $ref: '#/definitions/v1Partition'
+        type: array
+      size:
+        description: Size in GB
+        format: int32
+        type: integer
+      vendor:
+        type: string
+    type: object
+  v1ResourceTotalConsumptionData:
+    description: Resource total cosumption data
+    properties:
+      allotted:
+        $ref: '#/definitions/v1ResourceConsumptionData'
+      usage:
+        $ref: '#/definitions/v1ResourceConsumptionData'
+    type: object
+  v1ClusterWorkloadPodStatus:
+    description: Cluster workload pod status
+    properties:
+      containers:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadPodContainerStatus'
+        type: array
+      phase:
+        type: string
+      podIp:
+        type: string
+      qosClass:
+        type: string
+    type: object
+  v1SearchFilterStringConditionMatch:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      values:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  v1ObjectResReference:
+    description: Object resource reference
+    properties:
+      kind:
+        type: string
+      name:
+        type: string
+      projectUid:
+        type: string
+      tenantUid:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1SpectroClusterMetaStatus:
+    properties:
+      state:
+        description: Current state of the cluster
+        type: string
+    required:
+    - state
+    type: object
+  v1SpectroClusterCostSummary:
+    properties:
+      cluster:
+        $ref: '#/definitions/v1SpectroClusterCost'
+      endTime:
+        $ref: '#/definitions/v1Time'
+      period:
+        format: int32
+        type: integer
+      startTime:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1WorkspaceClustersWorkloadJobs:
+    description: Workspace clusters workload jobs summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadJobs'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1AppDeploymentSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1AppDeploymentSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1ResourceConsumption:
+    description: Resource consumption information
+    properties:
+      associatedResources:
+        items:
+          $ref: '#/definitions/v1ResourceReference'
+        type: array
+      data:
+        items:
+          $ref: '#/definitions/v1ResourceConsumptionDataPoint'
+        type: array
+        uniqueItems: true
+      entity:
+        $ref: '#/definitions/v1ResourceReference'
+      total:
+        $ref: '#/definitions/v1ResourceTotalConsumptionData'
+    type: object
+  v1IpPoolEntity:
+    description: IP Pool entity definition
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          pool:
+            $ref: '#/definitions/v1Pool'
+          priavetGatewayUid:
+            type: string
+          restrictToSingleCluster:
+            description: if true, restricts this IP pool to be used by single cluster at any time
+            type: boolean
+            x-omitempty: false
+        type: object
+      status:
+        $ref: '#/definitions/v1IpPoolStatus'
+    type: object
+  v1ClusterWorkloadPod:
+    description: Cluster workload pod summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadPodMetadata'
+      spec:
+        $ref: '#/definitions/v1ClusterWorkloadPodSpec'
+      status:
+        $ref: '#/definitions/v1ClusterWorkloadPodStatus'
+    type: object
+  v1SpcPolicySortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1SpcPolicySortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1LoadBalancerService:
+    properties:
+      host:
+        description: IP or Host from svc.Status.LoadBalancerStatus.Ingress
+        type: string
+      name:
+        description: name of the loadbalancer service
+        type: string
+      ports:
+        description: port this service exposed
+        items:
+          $ref: '#/definitions/v1ServicePort'
+        type: array
+    type: object
+  v1ClusterSearchInputSpec:
+    properties:
+      inputs:
+        additionalProperties:
+          $ref: '#/definitions/v1ClusterSearchInputSpecProperty'
+        type: object
+  v1ProjectSpecSummary:
+    properties:
+      logoUrl:
+        type: string
+      teams:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      users:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+    type: object
+  v1DashboardWorkspaceQuota:
+    description: Workspace resource quota
+    properties:
+      resourceAllocation:
+        $ref: '#/definitions/v1DashboardWorkspaceQuotaResourceAllocation'
+  v1SpcPolicyFilterSpec:
+    description: Spc policy filter spec
+    properties:
+      policyName:
+        $ref: '#/definitions/v1FilterString'
+      policyType:
+        items:
+          $ref: '#/definitions/v1SpcPolicyType'
+        type: array
+        uniqueItems: true
+      tags:
+        $ref: '#/definitions/v1FilterArray'
+  v1RelatedObject:
+    description: Object for which the resource is related
+    properties:
+      kind:
+        enum:
+        - spectrocluster
+        - machine
+        - cloudconfig
+        - clusterprofile
+        - pack
+        - appprofile
+        - appdeployment
+        - edgehost
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ClusterNotificationStatus:
+    description: Cluster notifications status
+    properties:
+      isAvailable:
+        type: boolean
+        x-omitempty: false
+      isTemplateVariableResolutionPending:
+        type: boolean
+        x-omitempty: false
+  v1ClusterWorkloadStatefulSets:
+    description: Cluster workload statefulsets summary
+    properties:
+      statefulSets:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadStatefulSet'
+        type: array
+    type: object
+  v1ResourceConsumptionSpec:
+    description: Resource consumption spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1ResourceConsumptionFilter'
+      options:
+        $ref: '#/definitions/v1ResourceConsumptionOptions'
+    type: object
+  v1CloudAccountMeta:
+    description: Cloud account meta information
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1SearchFilterKeyValueCondition:
+    properties:
+      ignoreCase:
+        type: boolean
+      key:
+        type: string
+      match:
+        $ref: '#/definitions/v1SearchFilterKeyValueConditionMatch'
+      negation:
+        type: boolean
+      operator:
+        $ref: '#/definitions/v1SearchFilterStringOperator'
+  v1Nameserver:
+    description: Nameserver define search domains and nameserver addresses
+    properties:
+      addresses:
+        items:
+          type: string
+        type: array
+      search:
+        items:
+          type: string
+        type: array
+    type: object
+  v1ProjectMeta:
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ResourceUsageSummary:
+    description: Resource usage summary information
+    properties:
+      associatedResources:
+        items:
+          $ref: '#/definitions/v1ResourceReference'
+        type: array
+      data:
+        items:
+          $ref: '#/definitions/v1ResourceUsageDataPoint'
+        type: array
+        uniqueItems: true
+      entity:
+        $ref: '#/definitions/v1ResourceReference'
+    type: object
+  v1AppDeploymentSortFields:
+    enum:
+    - appDeploymentName
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1ClusterFips:
+    properties:
+      mode:
+        $ref: '#/definitions/v1ClusterFipsMode'
+  v1ClusterProfileTemplateMeta:
+    description: Cluster profile template meta information
+    properties:
+      cloudType:
+        type: string
+      name:
+        description: Cluster profile name
+        type: string
+      packs:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackRef'
+        type: array
+      scope:
+        description: scope or context(system, tenant or project)
+        type: string
+      type:
+        description: Cluster profile type [ "cluster", "infra", "add-on", "system" ]
+        type: string
+      uid:
+        description: Cluster profile uid
+        type: string
+      version:
+        format: int32
+        type: integer
+    type: object
+  v1ClusterProfileSortFields:
+    enum:
+    - profileName
+    - environment
+    - profileType
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1FilterNumberRange:
+    properties:
+      eq:
+        type: number
+        x-nullable: true
+      gt:
+        type: number
+        x-nullable: true
+      gte:
+        type: number
+        x-nullable: true
+      lt:
+        type: number
+        x-nullable: true
+      lte:
+        type: number
+        x-nullable: true
+      ne:
+        type: number
+        x-nullable: true
+    type: object
+  v1AppTierSummary:
+    description: Application profile's tier summary
+    properties:
+      name:
+        type: string
+      source:
+        $ref: '#/definitions/v1AppTierSourceSummary'
+      type:
+        type: string
+      uid:
+        type: string
+      version:
+        type: string
+  v1SearchFilterStringCondition:
+    properties:
+      ignoreCase:
+        type: boolean
+      match:
+        $ref: '#/definitions/v1SearchFilterStringConditionMatch'
+      negation:
+        type: boolean
+      operator:
+        $ref: '#/definitions/v1SearchFilterStringOperator'
+  v1LifecycleStatus:
+    properties:
+      msg:
+        description: error or success msg of lifecycle
+        type: string
+      status:
+        description: lifecycle status
+        enum:
+        - Pausing
+        - Paused
+        - Resuming
+        - Running
+        - Error
+        type: string
+  v1ProjectsFilterSpec:
+    description: Project filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1ProjectFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1ProjectFilterSortSpec'
+        type: array
+        uniqueItems: true
+  v1EdgeHostSpecHost:
+    description: Host specifications
+    properties:
+      hostAddress:
+        description: HostAddress is a FQDN or IP address of the Host
+        type: string
+      macAddress:
+        type: string
+  v1ClusterProfileFips:
+    description: Cluster profile fips compliance status
+    properties:
+      mode:
+        $ref: '#/definitions/v1ClusterFipsMode'
+  v1ClusterTemplatesMetadata:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ClusterTemplateMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ClusterState:
+    enum:
+    - Pending
+    - Provisioning
+    - Running
+    - Deleting
+    - Deleted
+    - Error
+    - Importing
+    type: string
+  v1ClusterProfileVersion:
+    description: Cluster profile with version
+    properties:
+      uid:
+        type: string
+      version:
+        type: string
+  v1SpcPoliciesSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1SpcPolicySummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1SpectroClusterSummarySpec:
+    description: Spectro cluster filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1SpectroClusterFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1SpectroClusterSortSpec'
+        type: array
+        uniqueItems: true
+  v1HostClusterConfigResponse:
+    properties:
+      clusterGroup:
+        $ref: '#/definitions/v1ObjectReference'
+        description: cluster group reference
+  v1WorkspaceClusterWorkloadNamespaces:
+    description: Workspace cluster workload namespaces summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+      namespaces:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadNamespace'
+        type: array
+    type: object
+  v1CloudType:
+    default: all
+    enum:
+    - all
+    - aws
+    - azure
+    - gcp
+    - vsphere
+    - maas
+    - nested
+    - baremetal
+    - eks
+    - aks
+    - edge
+    - apache-cloudstack
+    - edge-native
+    - generic
+    - gke
+    type: string
+  v1ClusterRbacBinding:
+    description: Cluster RBAC binding
+    properties:
+      namespace:
+        type: string
+      role:
+        $ref: '#/definitions/v1ClusterRoleRef'
+      subjects:
+        items:
+          $ref: '#/definitions/v1ClusterRbacSubjects'
+        type: array
+        uniqueItems: true
+      type:
+        enum:
+        - RoleBinding
+        - ClusterRoleBinding
+        type: string
+    type: object
+  v1DashboardWorkspaceQuotaResourceAllocation:
+    description: Workspace quota resource allocation
+    properties:
+      cpu:
+        exclusiveMinimum: true
+        minimum: 0
+        type: number
+      gpuConfig:
+        $ref: '#/definitions/v1GpuConfig'
+      memory:
+        exclusiveMinimum: true
+        minimum: 0
+        type: number
+  v1SpectroClusterCloudCostSummaryFilter:
+    description: Spectro cluster cloud cost summary filter
+    properties:
+      clouds:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      endTime:
+        $ref: '#/definitions/v1Time'
+      projects:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      startTime:
+        $ref: '#/definitions/v1Time'
+      workspaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1Nic:
+    properties:
+      dns:
+        items:
+          type: string
+        type: array
+      gateway:
+        type: string
+      ip:
+        type: string
+      isDefault:
+        type: boolean
+      macAddr:
+        type: string
+      nicName:
+        type: string
+      subnet:
+        type: string
+    type: object
+  v1AppDeploymentProfileSummary:
+    description: Application deployment profile summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1AppDeploymentProfileMetadataSummary'
+      template:
+        $ref: '#/definitions/v1AppProfileTemplateSummary'
+  v1ResourceReference:
+    properties:
+      kind:
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1SpectroClusterCloudCostSummaryOptions:
+    description: Spectro cluster cloud cost summary options
+    properties:
+      groupBy:
+        default: project
+        enum:
+        - tenant
+        - project
+        - cloud
+        - cluster
+        type: string
+      period:
+        default: 1440
+        format: int32
+        type: integer
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1ProfileTemplateSummary:
+    description: Edge host clusterprofile template summary
+    properties:
+      cloudType:
+        type: string
+      name:
+        type: string
+      packs:
+        items:
+          $ref: '#/definitions/v1PackRefSummary'
+        type: array
+      type:
+        type: string
+      uid:
+        type: string
+      version:
+        type: string
+    type: object
+  v1SearchFilterDateConditionMatch:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      values:
+        items:
+          $ref: '#/definitions/v1Time'
+        type: array
+        uniqueItems: true
+  v1AppDeploymentProfileMetadataSummary:
+    description: Application deployment profile metadata summary
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+      version:
+        type: string
+  v1DashboardWorkspaceClusterRef:
+    description: Workspace cluster reference
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+  v1WorkspaceClustersWorkloadCronJobs:
+    description: Workspace clusters workload cronjobs summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadCronJobs'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1SpectroClustersMeta:
+    items:
+      $ref: '#/definitions/v1SpectroClusterMeta'
+    type: array
+  v1ClusterWorkloadPodContainerStatus:
+    description: Cluster workload pod container status
+    properties:
+      image:
+        type: string
+      name:
+        type: string
+      ready:
+        type: boolean
+        x-omitempty: false
+      restartCount:
+        format: int32
+        type: integer
+        x-omitempty: false
+      started:
+        type: boolean
+        x-omitempty: false
+      state:
+        $ref: '#/definitions/v1ClusterWorkloadPodContainerState'
+    type: object
+  v1WorkspaceClusterWorkloadDaemonSets:
+    description: Workspace cluster workload daemonsets summary
+    properties:
+      daemonSets:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadDaemonSet'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+    type: object
+  v1KubeMeta:
+    description: Spectro cluster kube meta
+    properties:
+      hasKubeConfig:
+        type: boolean
+        x-omitempty: false
+      hasKubeConfigClient:
+        type: boolean
+        x-omitempty: false
+      hasManifest:
+        type: boolean
+        x-omitempty: false
+      kubernetesVersion:
+        type: string
+    type: object
+  v1CloudCostDataPoint:
+    description: Cloud cost data point information
+    properties:
+      compute:
+        format: float64
+        type: number
+        x-omitempty: false
+      storage:
+        format: float64
+        type: number
+        x-omitempty: false
+      timestamp:
+        format: int64
+        type: number
+      total:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1ProjectSummary:
+    description: Project summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      specSummary:
+        $ref: '#/definitions/v1ProjectSpecSummary'
+        description: Project spec summary
+      status:
+        $ref: '#/definitions/v1ProjectStatusSummary'
+        description: Project status summary
+    type: object
+  v1AppDeploymentConfigSummary:
+    description: Application deployment config summary
+    properties:
+      target:
+        $ref: '#/definitions/v1AppDeploymentTargetConfigSummary'
+  v1ClusterWorkloadDeployments:
+    description: Cluster workload deployments summary
+    properties:
+      deployments:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadDeployment'
+        type: array
+    type: object
+  v1ClusterWorkloadPodVolume:
+    description: Cluster workload pod volume
+    properties:
+      name:
+        type: string
+    type: object
+  v1ClusterMetaStatusHealth:
+    description: Cluster meta health information
+    properties:
+      isHeartBeatFailed:
+        type: boolean
+        x-omitempty: false
+      state:
+        type: string
+    type: object
+  v1EdgeHostsMetadata:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1EdgeHostsMetadataSpec'
+      status:
+        $ref: '#/definitions/v1EdgeHostsMetadataStatus'
+    type: object
+  v1ClusterTemplatesSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ClusterTemplateSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1DashboardWorkspaceNamespaceAllocation:
+    description: Workspace namespace allocation
+    properties:
+      name:
+        type: string
+      total:
+        $ref: '#/definitions/v1DashboardWorkspaceAllocation'
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or modify the referred object.
+    properties:
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1AppProfileVersion:
+    description: Application profile version
+    properties:
+      uid:
+        type: string
+      version:
+        type: string
+    type: object
+  v1SearchFilterStringOperator:
+    enum:
+    - eq
+    - contains
+    - beginsWith
+    type: string
+  v1AppDeploymentsFilterSpec:
+    description: Application deployment filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1AppDeploymentFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1AppDeploymentSortSpec'
+        type: array
+        uniqueItems: true
+  v1ResourceUsageSummarySpec:
+    description: Resource usage summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1ResourceUsageSummaryFilter'
+      options:
+        $ref: '#/definitions/v1ResourceUsageSummaryOptions'
+    type: object
+  v1ClusterProfilesMetadata:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ClusterProfileMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ResourceCost:
+    description: Resource Cost information
+    properties:
+      cloud:
+        $ref: '#/definitions/v1CloudCost'
+      total:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1Pool:
+    description: Pool defines IP ranges or with CIDR for available IPs Gateway, Prefix and Nameserver if provided, will overwrite values in IPPool
+    properties:
+      end:
+        description: End is the last IP address that can be rendered. It is used as a validation that the rendered IP is in bound.
+        type: string
+      gateway:
+        description: Gateway is the gateway ip address
+        type: string
+      nameserver:
+        $ref: '#/definitions/v1Nameserver'
+        description: Nameserver provide information for dns resolvation
+      prefix:
+        description: Prefix is the mask of the network as integer (max 128)
+        format: int32
+        type: integer
+      start:
+        description: Start is the first ip address that can be rendered
+        type: string
+      subnet:
+        description: 'Subnet is used to validate that the rendered IP is in bounds. eg: 192.168.0.0/24 If Start value is not given, start value is derived from the subnet ip incremented by 1 (start value is `192.168.0.1` for subnet `192.168.0.0/24`)'
+        type: string
+    type: object
+  v1ClusterTemplateSpectroClusterMeta:
+    properties:
+      name:
+        description: The name of the spectro cluster
+        type: string
+      projectUid:
+        description: The project UID of the spectro cluster
+        type: string
+      uid:
+        description: The UID of the spectro cluster
+        type: string
+    type: object
+  v1CloudAccountsMetadata:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1CloudAccountMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1SearchFilterSpec:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      filterGroups:
+        items:
+          $ref: '#/definitions/v1SearchFilterGroup'
+        type: array
+        uniqueItems: true
+  v1ClusterWorkloadDaemonSetStatus:
+    description: Cluster workload daemonset status
+    properties:
+      available:
+        format: int32
+        type: integer
+      currentScheduled:
+        format: int32
+        type: integer
+      desiredScheduled:
+        format: int32
+        type: integer
+      misScheduled:
+        format: int32
+        type: integer
+      ready:
+        format: int32
+        type: integer
+      updatedScheduled:
+        format: int32
+        type: integer
+    type: object
+  v1ClusterWorkload:
+    description: Cluster workload summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1ClusterWorkloadSpec'
+    type: object
+  v1ClusterWorkloadCondition:
+    description: Cluster workload condition
+    properties:
+      lastTransitionTime:
+        $ref: '#/definitions/v1Time'
+      lastUpdateTime:
+        $ref: '#/definitions/v1Time'
+      message:
+        type: string
+      reason:
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+    type: object
+  v1VMClusters:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1VMCluster'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ResourceCostSummaryFilter:
+    description: Resource cost summary filter
+    properties:
+      clouds:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      clusters:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      endTime:
+        $ref: '#/definitions/v1Time'
+      includeControlPlaneMachines:
+        type: boolean
+      includeMasterMachines:
+        description: Deprecated. Use includeControlPlaneMachines
+        type: boolean
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      projects:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      startTime:
+        $ref: '#/definitions/v1Time'
+      workspaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1WorkspaceClusterWorkloadCronJobs:
+    description: Workspace cluster workload cronjobs summary
+    properties:
+      cronjobs:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadCronJob'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+    type: object
+  v1ClusterCondition:
+    properties:
+      lastProbeTime:
+        $ref: '#/definitions/v1Time'
+      lastTransitionTime:
+        $ref: '#/definitions/v1Time'
+      message:
+        description: Human-readable message indicating details about last transition.
+        type: string
+      reason:
+        description: Unique, one-word, CamelCase reason for the condition's last transition.
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+    required:
+    - type
+    - status
+    type: object
+  v1SpcPolicySortFields:
+    enum:
+    - policyName
+    - policyType
+    - creationTimestamp
+    - lastModifiedTimestamp
+    type: string
+    x-nullable: true
+  v1DashboardWorkspaceMeta:
+    description: Deprecated. Workspace meta data
+    properties:
+      clusterNames:
+        description: Deprecated. Use clusterRefs
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      clusterRefs:
+        items:
+          $ref: '#/definitions/v1DashboardWorkspaceClusterRef'
+        type: array
+        uniqueItems: true
+      creationTime:
+        $ref: '#/definitions/v1Time'
+      name:
+        type: string
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      uid:
+        type: string
+  v1SpcPolicyMetadata:
+    properties:
+      kind:
+        description: The kind of the spc policy eg maintenance.
+        type: string
+      name:
+        description: The name of the spc policy
+        type: string
+      projectUid:
+        description: The project UID of the spc policy
+        type: string
+      uid:
+        description: The UID of the spc policy
+        type: string
+    type: object
+  v1ClusterProfilesFilterSpec:
+    description: Spectro cluster filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1ClusterProfileFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1ClusterProfileSortSpec'
+        type: array
+        uniqueItems: true
+  v1ClusterProfilesSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ClusterProfileSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1Memory:
+    properties:
+      sizeInMB:
+        description: memory size in bytes
+        format: int64
+        type: integer
+    type: object
+  v1SpectroClusterMetadataSpec:
+    description: Spectro cluster metadata spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1SpectroClusterMetadataFilterSpec'
+      sort:
+        enum:
+        - environment
+        - state
+        - name
+        type: string
+        x-nullable: true
+  v1ClusterRepaveState:
+    default: Pending
+    enum:
+    - Pending
+    - Approved
+    - Reverted
+    type: string
+  v1ComputeMetrics:
+    description: Compute metrics
+    properties:
+      lastUpdatedTime:
+        $ref: '#/definitions/v1Time'
+      limit:
+        type: number
+        x-omitempty: false
+      request:
+        type: number
+        x-omitempty: false
+      total:
+        type: number
+        x-omitempty: false
+      unit:
+        type: string
+      usage:
+        type: number
+        x-omitempty: false
+    type: object
+  v1ClusterWorkloadCronJob:
+    description: Cluster workload cronjob summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadMetadata'
+      spec:
+        $ref: '#/definitions/v1ClusterWorkloadCronJobSpec'
+      status:
+        $ref: '#/definitions/v1ClusterWorkloadCronJobStatus'
+    type: object
+  v1SearchFilterFloatCondition:
+    properties:
+      match:
+        $ref: '#/definitions/v1SearchFilterFloatConditionMatch'
+      negation:
+        type: boolean
+      operator:
+        $ref: '#/definitions/v1SearchFilterIntegerOperator'
+  v1CloudCost:
+    description: Cloud cost information
+    properties:
+      compute:
+        format: float64
+        type: number
+        x-omitempty: false
+      storage:
+        format: float64
+        type: number
+        x-omitempty: false
+      total:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1SpectroClustersMetadata:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ObjectMeta'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1SearchFilterSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1SearchSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1Virtual:
+    properties:
+      appDeployments:
+        description: list of apps deployed on the virtual cluster
+        items:
+          $ref: '#/definitions/v1ObjectResReference'
+        type: array
+      clusterGroup:
+        $ref: '#/definitions/v1ObjectResReference'
+        description: cluster group details of virtual cluster
+      hostCluster:
+        $ref: '#/definitions/v1ObjectResReference'
+        description: host cluster reference
+      lifecycleStatus:
+        $ref: '#/definitions/v1LifecycleStatus'
+        description: cluster life cycle status of virtual cluster
+      state:
+        description: cluster virtual host status
+        type: string
+      virtualClusters:
+        description: list of virtual clusters deployed on the cluster
+        items:
+          $ref: '#/definitions/v1ObjectResReference'
+        type: array
+  v1DashboardWorkspace:
+    description: Workspace information
+    properties:
+      meta:
+        $ref: '#/definitions/v1DashboardWorkspaceMeta'
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1DashboardWorkspaceSpec'
+      status:
+        $ref: '#/definitions/v1DashboardWorkspaceStatus'
+  v1WorkspaceClustersWorkloadDeployments:
+    description: Workspace clusters workload deployments summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadDeployments'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1ProjectStatusSummary:
+    description: Project status summary
+    properties:
+      clustersHealth:
+        $ref: '#/definitions/v1SpectroClustersHealth'
+      status:
+        $ref: '#/definitions/v1ProjectStatus'
+      usage:
+        $ref: '#/definitions/v1ProjectUsageSummary'
+    type: object
+  v1ClusterWorkloadCronJobs:
+    description: Cluster workload cronjobs summary
+    properties:
+      cronJobs:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadCronJob'
+        type: array
+    type: object
+  v1FilterVersionString:
+    properties:
+      beginsWith:
+        type: string
+        x-nullable: true
+      eq:
+        type: string
+        x-nullable: true
+      gt:
+        type: string
+        x-nullable: true
+      lt:
+        type: string
+        x-nullable: true
+      ne:
+        type: string
+        x-nullable: true
+    type: object
+  v1SearchFilterSchemaSpecEnumValue:
+    properties:
+      displayValue:
+        type: string
+      value:
+        type: string
+  v1ClusterProfileMetadata:
+    description: Cluster profile filter spec
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectEntity'
+      spec:
+        properties:
+          cloudType:
+            type: string
+          version:
+            type: string
+  v1SpcPoliciesMetadata:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1SpcPolicyMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1WorkspaceWorkloadsSpec:
+    description: Workspace workloads spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1WorkspaceWorkloadsFilter'
+    type: object
+  v1ResourceUsageMeteringDataPoint:
+    description: min and max count for machines & edgehost for the given period
+    properties:
+      activeEdgehosts:
+        format: int64
+        type: number
+      activeMachines:
+        format: int64
+        type: number
+      maxEdgehosts:
+        format: int64
+        type: number
+      maxMachines:
+        format: int64
+        type: number
+    type: object
+  v1ClusterWorkloadDeployment:
+    description: Cluster workload deployment summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ClusterWorkloadMetadata'
+      status:
+        $ref: '#/definitions/v1ClusterWorkloadDeploymentStatus'
+    type: object
+  v1ClusterWorkloadNamespaces:
+    description: Cluster workload namespaces summary
+    properties:
+      namespaces:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadNamespace'
+        type: array
+  v1WorkspaceClusterWorkloadDeployments:
+    description: Workspace cluster workload deployments summary
+    properties:
+      deployments:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadDeployment'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+    type: object
+  v1WorkspaceClustersWorkloadDaemonSets:
+    description: Workspace clusters workload statefulsets summary
+    properties:
+      clusters:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterWorkloadDaemonSets'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    type: object
+  v1ResourceConsumptionOptions:
+    description: Resource consumption options
+    properties:
+      enableSummaryView:
+        default: true
+        type: boolean
+      groupBy:
+        default: namespace
+        enum:
+        - tenant
+        - project
+        - workspace
+        - cluster
+        - namespace
+        - cloud
+        type: string
+      period:
+        default: 60
+        format: int32
+        type: integer
+    type: object
+  v1WorkspaceClusterWorkloadJobs:
+    description: Workspace cluster workload jobs summary
+    properties:
+      jobs:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadJob'
+        type: array
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+    type: object
+  v1SearchFilterGroup:
+    properties:
+      conjunction:
+        $ref: '#/definitions/v1SearchFilterConjunctionOperator'
+      filters:
+        items:
+          $ref: '#/definitions/v1SearchFilterItem'
+        type: array
+        uniqueItems: true
+  v1ClusterWorkloadReplicaStatus:
+    description: Cluster workload replica status
+    properties:
+      available:
+        format: int32
+        type: integer
+        x-omitempty: false
+      ready:
+        format: int32
+        type: integer
+        x-omitempty: false
+      total:
+        format: int32
+        type: integer
+        x-omitempty: false
+      updated:
+        format: int32
+        type: integer
+        x-omitempty: false
+    type: object
+  v1ClusterProfileFilterSpec:
+    description: Cluster profile filter spec
+    properties:
+      environment:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      fips:
+        $ref: '#/definitions/v1ClusterFipsMode'
+      profileName:
+        $ref: '#/definitions/v1FilterString'
+      profileType:
+        items:
+          $ref: '#/definitions/v1ProfileType'
+        type: array
+        uniqueItems: true
+      resourceType:
+        $ref: '#/definitions/v1ClusterProfileResourceType'
+      scope:
+        $ref: '#/definitions/v1ClusterProfileScope'
+      tags:
+        $ref: '#/definitions/v1FilterArray'
+      version:
+        $ref: '#/definitions/v1FilterVersionString'
+  v1EdgeHostsMetadataStatus:
+    properties:
+      health:
+        $ref: '#/definitions/v1EdgeHostHealth'
+      inUseClusters:
+        description: Deprecated. Use inUseClustersRef
+        items:
+          $ref: '#/definitions/v1ObjectEntity'
+        type: array
+      inUseClustersRef:
+        items:
+          $ref: '#/definitions/v1EdgeClusterObjectEntity'
+        type: array
+      state:
+        $ref: '#/definitions/v1EdgeHostState'
+    type: object
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1AppProfilesMetadata:
+    properties:
+      appProfiles:
+        items:
+          $ref: '#/definitions/v1AppProfileMetadata'
+        type: array
+        uniqueItems: true
+    type: object
+  v1HybridClusterMeta:
+    description: Object identity meta of hybrid cluster
+    properties:
+      name:
+        description: Name of the hybrid cluster
+        type: string
+      uid:
+        description: Uid of the hybrid cluster
+        type: string
+  v1PcgsSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1Overlord'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1ClusterMetaStatusUpdates:
+    description: Cluster meta updates information
+    properties:
+      isUpdatesPending:
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1SpectroClusterMetadataFilterSpec:
+    description: Spectro cluster filter spec
+    properties:
+      environment:
+        type: string
+      includeVirtual:
+        default: false
+        type: boolean
+      isAlloy:
+        default: false
+        description: isAlloy is renamed to isImported
+        type: boolean
+      isImportReadOnly:
+        default: true
+        type: boolean
+      isImported:
+        default: false
+        type: boolean
+      name:
+        $ref: '#/definitions/v1FilterString'
+      state:
+        type: string
+  v1WorkspaceClusterWorkloadStatefulSets:
+    description: Workspace cluster workload statefulsets summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1RelatedObject'
+      statefulSets:
+        items:
+          $ref: '#/definitions/v1ClusterWorkloadStatefulSet'
+        type: array
+    type: object
+  v1AppDeploymentTargetConfigSummary:
+    description: Application deployment target config summary
+    properties:
+      clusterRef:
+        $ref: '#/definitions/v1AppDeploymentClusterRefSummary'
+  v1ProjectCleanUpStatus:
+    description: Project cleanup status
+    properties:
+      cleanedResources:
+        items:
+          type: string
+        type: array
+      msg:
+        type: string
+      state:
+        type: string
+    type: object
+  v1ClusterWorkloadPodContainerResource:
+    description: Cluster workload pod container resource
+    properties:
+      cpu:
+        format: int32
+        type: integer
+        x-omitempty: false
+      cpuUnit:
+        type: string
+      memory:
+        format: int64
+        type: integer
+        x-omitempty: false
+      memoryUnit:
+        type: string
+    type: object
+  v1ResourceConsumptionFilter:
+    description: Resource consumption filter
+    properties:
+      clouds:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      clusters:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      endTime:
+        $ref: '#/definitions/v1Time'
+      includeControlPlaneMachines:
+        type: boolean
+      includeMasterMachines:
+        description: Deprecated. Use includeControlPlaneMachines
+        type: boolean
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      projects:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      startTime:
+        $ref: '#/definitions/v1Time'
+      workspaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1Overlord:
+    description: Overlord defintiion
+    properties:
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1OverloadSpec'
+      status:
+        $ref: '#/definitions/v1OverloadStatus'
+    type: object
+  v1ClusterPackStatus:
+    properties:
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+      endTime:
+        $ref: '#/definitions/v1Time'
+      manifests:
+        items:
+          $ref: '#/definitions/v1ClusterPackManifestStatus'
+        type: array
+      name:
+        type: string
+      profileUid:
+        type: string
+      services:
+        items:
+          $ref: '#/definitions/v1LoadBalancerService'
+        type: array
+      startTime:
+        $ref: '#/definitions/v1Time'
+      type:
+        type: string
+      version:
+        type: string
+    type: object
+  v1ClusterConfigResponse:
+    properties:
+      hostClusterConfig:
+        $ref: '#/definitions/v1HostClusterConfigResponse'
+        description: HostClusterConfig defines the configuration entity of host clusters config entity
+      timezone:
+        description: Timezone of a cluster in IANA standard format. It is mandatory field if cluster is deployed through template, else it is optional
+        type: string
+    type: object
+  v1SearchFilterPropertyType:
+    enum:
+    - string
+    - int
+    - float
+    - bool
+    - date
+    - keyValue
+    type: string
+  v1OverloadSpec:
+    description: Overload spec
+    properties:
+      cloudAccountUid:
+        type: string
+        x-omitempty: false
+      ipAddress:
+        type: string
+      ipPools:
+        items:
+          $ref: '#/definitions/v1IpPoolEntity'
+        type: array
+      isSelfHosted:
+        type: boolean
+      isSystem:
+        type: boolean
+      spectroClusterUid:
+        type: string
+        x-omitempty: false
+      tenantUid:
+        type: string
+    type: object
+  v1FilterArray:
+    properties:
+      beginsWith:
+        items:
+          type: string
+        type: array
+        x-nullable: true
+      eq:
+        items:
+          type: string
+        type: array
+        x-nullable: true
+      ignoreCase:
+        default: true
+        type: boolean
+      ne:
+        items:
+          type: string
+        type: array
+        x-nullable: true
+    type: object
+  v1SpectroClusterHealthStatus:
+    description: Spectro cluster health status
+    properties:
+      agentVersion:
+        type: string
+      conditions:
+        items:
+          $ref: '#/definitions/v1SpectroClusterHealthCondition'
+        type: array
+        uniqueItems: true
+      lastHeartBeatTimestamp:
+        $ref: '#/definitions/v1Time'
+      state:
+        type: string
+  v1UidSummary:
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ResourceCostDataPoint:
+    description: Resource cost data point
+    properties:
+      cpu:
+        format: float64
+        type: number
+        x-omitempty: false
+      memory:
+        format: float64
+        type: number
+        x-omitempty: false
+      storage:
+        format: float64
+        type: number
+        x-omitempty: false
+      timestamp:
+        format: int64
+        type: number
+      total:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1ClusterTemplatesSortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1ClusterTemplatesSortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1EdgeHostsMetadataSummary:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1EdgeHostsMetadata'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ResourcesCostSummary:
+    description: Resources cost summary information
+    properties:
+      resources:
+        items:
+          $ref: '#/definitions/v1ResourceCostSummary'
+        type: array
+      total:
+        $ref: '#/definitions/v1ResourceTotalCost'
+    type: object
+  v1AppProfileMetadata:
+    description: Application profile metadata summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectEntity'
+      spec:
+        properties:
+          version:
+            type: string
+    type: object
+  v1ClusterWorkloadCronJobSpec:
+    description: Cluster workload cronjob spec
+    properties:
+      schedule:
+        type: string
+    type: object
+  v1ResourceWorkloadFilter:
+    description: Workload resource filter
+    properties:
+      names:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      type:
+        default: all
+        enum:
+        - deployment
+        - statefulset
+        - daemonset
+        - all
+        type: string
+    type: object
+  v1AppProfilesFilterSpec:
+    description: Application profile filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1AppProfileFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1AppProfileSortSpec'
+        type: array
+        uniqueItems: true
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

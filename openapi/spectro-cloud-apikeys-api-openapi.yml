@@ -1,0 +1,288 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations apiKeys API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: apiKeys
+  x-displayName: Api Keys
+paths:
+  /v1/apiKeys:
+    get:
+      operationId: v1ApiKeysList
+      responses:
+        '200':
+          description: Retrieves a list of API keys
+          schema:
+            $ref: '#/definitions/v1ApiKeys'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of API keys
+      tags:
+      - apiKeys
+    post:
+      operationId: v1ApiKeysCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ApiKeyEntity'
+      responses:
+        '201':
+          description: APIKey Created successfully
+          schema:
+            $ref: '#/definitions/v1ApiKeyCreateResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create an API key
+      tags:
+      - apiKeys
+  /v1/apiKeys/{uid}:
+    parameters:
+    - description: Specify API key uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1ApiKeysUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified API key
+      tags:
+      - apiKeys
+    get:
+      operationId: v1ApiKeysUidGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1ApiKey'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified API key
+      tags:
+      - apiKeys
+    patch:
+      operationId: v1ApiKeysUidActiveState
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ApiKeyActiveState'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Activate or de-active the specified API key
+      tags:
+      - apiKeys
+    put:
+      operationId: v1ApiKeysUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ApiKeyUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified API key
+      tags:
+      - apiKeys
+  /v1/apiKeys/{uid}/state:
+    parameters:
+    - description: Specify API key uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1ApiKeysUidState
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ApiKeyActiveState'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Revoke or re-activate the API key access
+      tags:
+      - apiKeys
+definitions:
+  v1ApiKeyActiveState:
+    properties:
+      isActive:
+        description: API key active state
+        type: boolean
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1ApiKeySpecEntity:
+    description: API key specification
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: API key expiry date
+      userUid:
+        description: User to whom the API key has to be created
+        type: string
+    type: object
+  v1ApiKeySpec:
+    description: API key specification
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: API key expiry date
+      key:
+        description: 'Deprecated: API key field will be no longer available'
+        type: string
+      user:
+        $ref: '#/definitions/v1ApiKeyUser'
+        description: User to whom the API key is created
+    type: object
+  v1ApiKeyEntity:
+    description: API key request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ApiKeySpecEntity'
+    type: object
+  v1ApiKey:
+    description: API key information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ApiKeySpec'
+      status:
+        $ref: '#/definitions/v1ApiKeyStatus'
+    type: object
+  v1ApiKeyStatus:
+    description: API key status
+    properties:
+      isActive:
+        description: API key active state
+        type: boolean
+    type: object
+  v1ApiKeySpecUpdate:
+    description: API key update request specification
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: API key expiry date
+  v1ApiKeyUpdate:
+    description: API key update request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ApiKeySpecUpdate'
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1ApiKeys:
+    properties:
+      items:
+        description: List of API keys
+        items:
+          $ref: '#/definitions/v1ApiKey'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ApiKeyUser:
+    description: API key user information
+    properties:
+      firstName:
+        description: First name of user
+        type: string
+      lastName:
+        description: Last name of user
+        type: string
+      uid:
+        description: User uid
+        type: string
+    type: object
+  v1ApiKeyCreateResponse:
+    description: Response of create API key
+    properties:
+      apiKey:
+        description: Api key is used for authentication
+        type: string
+      uid:
+        description: User uid
+        type: string
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

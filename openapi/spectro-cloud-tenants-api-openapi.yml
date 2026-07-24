@@ -1,0 +1,3520 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations tenants API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: tenants
+  x-displayName: Tenants
+paths:
+  /v1/tenants:
+    get:
+      operationId: v1TenantsList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of tenants
+          schema:
+            $ref: '#/definitions/v1Tenants'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of tenants
+      tags:
+      - tenants
+    post:
+      operationId: v1TenantsCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a tenant
+      tags:
+      - tenants
+  /v1/tenants/marketplace/aws/setup:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      operationId: v1MarketplaceAwsSetup
+      parameters:
+      - description: Temporary registration token from AWS Marketplace
+        in: formData
+        name: x-amzn-marketplace-token
+        required: true
+        type: string
+      responses:
+        '303':
+          description: Redirects to the UI setup page with an encrypted token
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates the AWS Marketplace token and redirects the browser to the UI setup page
+      tags:
+      - tenants
+  /v1/tenants/marketplace/register:
+    post:
+      description: 'Called after a user completes a SaaS contract purchase on a marketplace (e.g., AWS Marketplace) and is redirected to the Palette registration landing page. The flow resolves the temporary registration token to obtain the user''s account identifier and product code, fetches the user''s entitlements and creates a new tenant with the corresponding plan and admin user. The registration token is short-lived and must be resolved promptly.
+
+        '
+      operationId: v1MarketplaceRegister
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1MarketplaceRegisterEntity'
+      responses:
+        '201':
+          description: Registration completed — tenant provisioned, entitlements applied to plan
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1MarketplaceRegisterResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Registers a marketplace user by resolving the registration token, verifying entitlements, and provisioning a tenant
+      tags:
+      - tenants
+  /v1/tenants/signup:
+    post:
+      operationId: v1TenantsSelfSignUp
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantSelfSignUpSpec'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Self signing up
+      tags:
+      - tenants
+  /v1/tenants/signup/{signupToken}/activate:
+    parameters:
+    - in: path
+      name: signupToken
+      required: true
+      type: string
+    post:
+      operationId: v1TenantsSelfSignUpActivate
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Activates the self signed tenant using the password token
+      tags:
+      - tenants
+  /v1/tenants/validate:
+    post:
+      operationId: v1TenantsValidate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantBasicEntity'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validate tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    delete:
+      operationId: v1TenantsDelete
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified tenant
+      tags:
+      - tenants
+    get:
+      operationId: v1TenantsGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Tenant'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/activate:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    patch:
+      operationId: V1TenantsUidActivate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantActivate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: activates the specified tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/address:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    patch:
+      operationId: v1PatchTenantAddress
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantAddressPatch'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant address
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/assets/certs:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantUIdAssetsCertsList
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantAssetCerts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: lists the certificates for the tenant
+      tags:
+      - tenants
+    post:
+      operationId: V1TenantUidAssetsCertsCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantAssetCert'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create the tenant certificate
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/assets/certs/{certificateUid}:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    - in: path
+      name: certificateUid
+      required: true
+      type: string
+    delete:
+      operationId: V1TenantUidAssetsCertsUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: deletes the tenant certificate
+      tags:
+      - tenants
+    get:
+      operationId: V1TenantUidAssetsCertsUidGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantAssetCert'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the ca certificate for the tenant
+      tags:
+      - tenants
+    put:
+      operationId: V1TenantUidAssetsCertsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantAssetCert'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the tenant certificate
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/assets/dataSinks:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    delete:
+      operationId: V1TenantUidAssetsDataSinksDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: deletes the tenant data sink config
+      tags:
+      - tenants
+    get:
+      operationId: V1TenantUidAssetsDataSinksGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1DataSinkConfig'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns data sink config of tenant
+      tags:
+      - tenants
+    post:
+      operationId: V1TenantUidAssetsDataSinksCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1DataSinkConfig'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create data sink config
+      tags:
+      - tenants
+    put:
+      operationId: V1TenantUidAssetsDataSinksUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1DataSinkConfig'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the tenant data sink config
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/authTokenSettings:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantUidAuthTokenSettingsGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AuthTokenSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant auth token settings
+      tags:
+      - tenants
+    put:
+      operationId: v1TenantUidAuthTokenSettingsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AuthTokenSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant auth token settings
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/cleanUp:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    - in: query
+      name: useTenantCtx
+      type: boolean
+    - in: query
+      name: forceDelete
+      type: boolean
+    delete:
+      operationId: v1TenantsCleanUp
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Clean up tenant resources
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/contract:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    put:
+      operationId: v1TenantsUidContractUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantContractSpec'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the tenant contract settings
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/contract/accept:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    patch:
+      operationId: v1TenantsUidContractAccept
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Tenant to accept the contract agreement
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/creditAccount/aws:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    delete:
+      operationId: v1TenantsCreditAccountDelete
+      parameters:
+      - default: false
+        in: query
+        name: forceDelete
+        type: boolean
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the aws credit account for tenants
+      tags:
+      - tenants
+    get:
+      operationId: v1TenantsCreditAccountGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AwsCreditAccountEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the credit accounts for the tenants with free tier access
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/datasinks/splunk:
+    post:
+      operationId: V1TenantUidDatasinksSplunkCreate
+      parameters:
+      - in: path
+        name: tenantUid
+        required: true
+        type: string
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SplunkSinkEntity'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+        '400':
+          description: Invalid request data
+          schema:
+            $ref: '#/definitions/v1Error'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1Error'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/v1Error'
+        '409':
+          description: Sink already exists for tenant + kind (runtime code=SinkAlreadyExists)
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates the Splunk HEC data sink for the specified tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/datasinks/splunk/validate:
+    post:
+      operationId: V1TenantUidDatasinksSplunkValidate
+      parameters:
+      - in: path
+        name: tenantUid
+        required: true
+        type: string
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SplunkSinkSpec'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+        '400':
+          description: Invalid request data
+          schema:
+            $ref: '#/definitions/v1Error'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1Error'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/v1Error'
+        '504':
+          description: Network/TLS/timeout error
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates the Splunk HEC data sink connection for the specified tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/datasinks/splunk/{uid}:
+    delete:
+      operationId: V1TenantUidDatasinksSplunkDelete
+      parameters:
+      - in: path
+        name: tenantUid
+        required: true
+        type: string
+      - in: path
+        name: uid
+        required: true
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1Error'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/v1Error'
+        '404':
+          description: The specified resource was not found
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the Splunk HEC data sink for the specified tenant
+      tags:
+      - tenants
+    get:
+      operationId: V1TenantUidDatasinksSplunkGet
+      parameters:
+      - in: path
+        name: tenantUid
+        required: true
+        type: string
+      - in: path
+        name: uid
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1SplunkSink'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1Error'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/v1Error'
+        '404':
+          description: The specified resource was not found
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the Splunk HEC data sink for the specified tenant
+      tags:
+      - tenants
+    put:
+      operationId: V1TenantUidDatasinksSplunkUpdate
+      parameters:
+      - in: path
+        name: tenantUid
+        required: true
+        type: string
+      - in: path
+        name: uid
+        required: true
+        type: string
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SplunkSinkEntity'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+        '400':
+          description: Invalid request data
+          schema:
+            $ref: '#/definitions/v1Error'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1Error'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/v1Error'
+        '404':
+          description: The specified resource was not found
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the Splunk HEC data sink for the specified tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/datasinks/summary:
+    get:
+      operationId: V1TenantUidDatasinksSummaryGet
+      parameters:
+      - in: path
+        name: tenantUid
+        required: true
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1DataSinksSummary'
+        '401':
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/v1Error'
+        '403':
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a summary of all data sinks configured for the specified tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/domains:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantUidDomainsGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1TenantDomains'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: retrieves the domains for tenant
+      tags:
+      - tenants
+    post:
+      operationId: V1TenantUidDomainsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantDomains'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: creates or updates domains for tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/emailId:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    patch:
+      operationId: v1PatchTenantEmailId
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantEmailPatch'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant emailId
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/freemium:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantFreemiumGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1TenantFreemium'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant level freemium configuration
+      tags:
+      - tenants
+    put:
+      operationId: v1TenantFreemiumUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantFreemium'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant freemium configuration
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/freemiumUsage:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantFreemiumUsageGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantFreemiumUsage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant freemium usage
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/idp/palette/config:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantUidIdpPaletteConfigGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantPaletteIdpConfigSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the Palette IDP config for the tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/invoices/{invoiceUid}:
+    parameters:
+    - description: Specify the tenant uid
+      in: path
+      name: tenantUid
+      required: true
+      type: string
+    - description: Specify the invoice uid
+      in: path
+      name: invoiceUid
+      required: true
+      type: string
+    get:
+      operationId: v1InvoicesUidGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Invoice'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns a specified invoice
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/invoices/{invoiceUid}/report/invoice/pdf:
+    parameters:
+    - description: Specify the tenant uid
+      in: path
+      name: tenantUid
+      required: true
+      type: string
+    - description: Specify the invoice uid
+      in: path
+      name: invoiceUid
+      required: true
+      type: string
+    get:
+      operationId: V1InvoiceUidReportInvoicePdf
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Disposition:
+              type: string
+            Content-Type:
+              type: string
+          schema:
+            type: file
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Downloads the specified invoice report
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/invoices/{invoiceUid}/report/pdf:
+    parameters:
+    - description: Specify the tenant uid
+      in: path
+      name: tenantUid
+      required: true
+      type: string
+    - description: Specify the invoice uid
+      in: path
+      name: invoiceUid
+      required: true
+      type: string
+    get:
+      operationId: V1InvoiceUidReportPdf
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Disposition:
+              type: string
+            Content-Type:
+              type: string
+          schema:
+            type: file
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Downloads the specified monthly invoice report
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/invoices/{invoiceUid}/report/usage/pdf:
+    parameters:
+    - description: Specify the tenant uid
+      in: path
+      name: tenantUid
+      required: true
+      type: string
+    - description: Specify the invoice uid
+      in: path
+      name: invoiceUid
+      required: true
+      type: string
+    get:
+      operationId: V1InvoiceUidReportUsagePdf
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: OK
+          headers:
+            Content-Disposition:
+              type: string
+            Content-Type:
+              type: string
+          schema:
+            type: file
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Downloads the specified tenant usage
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/isCleanedUp:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantsIsCleanedUp
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1CleanUpResource'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get cleaned up tenant resources
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/loginBanner:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantUidLoginBannerGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1LoginBannerSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant login banner settings
+      tags:
+      - tenants
+    put:
+      operationId: v1TenantUidLoginBannerUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1LoginBannerSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant login banner settings
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/macros:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    delete:
+      operationId: v1TenantsUidMacrosDeleteByMacroName
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Delete the macros for the specified tenant by given macro name
+      tags:
+      - tenants
+    get:
+      operationId: v1TenantsUidMacrosList
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Macros'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: List the macros of the specified tenant
+      tags:
+      - tenants
+    patch:
+      operationId: v1TenantsUidMacrosUpdateByMacroName
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the macros for the specified tenant by given macro name
+      tags:
+      - tenants
+    post:
+      operationId: v1TenantsUidMacrosCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create or add new macros for the specified tenant
+      tags:
+      - tenants
+    put:
+      operationId: v1TenantsUidMacrosUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Macros'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the macros of the specified tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/oidc/config:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantUidOidcConfigGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantOidcClientSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the oidc Spec for tenant
+      tags:
+      - tenants
+    post:
+      operationId: V1TenantUidOidcConfigUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantOidcClientSpec'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Associates the  oidc Spec for the tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/password/policy:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantUidPasswordPolicyGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1TenantPasswordPolicyEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: retrieves the password policy for tenant
+      tags:
+      - tenants
+    post:
+      operationId: V1TenantUidPasswordPolicyUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantPasswordPolicyEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: creates or updates a password policy for tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/plan:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantsUidPlanGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Plan'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the current tenant's plan
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/plans/usage/monthly:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    - format: date
+      in: query
+      name: endDate
+      type: string
+    - format: date
+      in: query
+      name: startDate
+      required: true
+      type: string
+    get:
+      operationId: v1PlansUsageMonthlyGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1PlanMonthlyUsages'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the tenant's monthly planUsage grouped by projects
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/preferences/clusterGroup:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantPrefClusterGroupGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1TenantEnableClusterGroup'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get is cluster group enabled for a specific tenant
+      tags:
+      - tenants
+    put:
+      operationId: V1TenantPrefClusterGroupUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantEnableClusterGroup'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Enable or Disable cluster group for a specific tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/preferences/clusterRbacSettings:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantClusterRbacSettingsGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantClusterRbacSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant cluster RBAC settings
+      tags:
+      - tenants
+    put:
+      operationId: v1TenantClusterRbacSettingsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantClusterRbacSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant cluster RBAC settings
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/preferences/clusterSettings:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantClusterSettingsGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1TenantClusterSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant cluster settings
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/preferences/clusterSettings/nodesAutoRemediationSetting:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    put:
+      operationId: v1TenantClustersNodesAutoRemediationSettingUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1NodesAutoRemediationSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant clusters nodes auto remediation setting
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/preferences/developerCredit:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantDeveloperCreditGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1DeveloperCredit'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get developer credit enabled for a specific tenant
+      tags:
+      - tenants
+    put:
+      operationId: V1TenantDeveloperCreditUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1DeveloperCredit'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update developer credit for a specific tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/preferences/fips:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantFipsSettingsGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1FipsSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant fips settings
+      tags:
+      - tenants
+    put:
+      operationId: v1TenantFipsSettingsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1FipsSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant fips setting
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/rateConfig:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1RateConfigGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1RateConfig'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get all rate config for public and private cloud
+      tags:
+      - tenants
+    put:
+      operationId: v1RateConfigUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1RateConfig'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the rate config for public and private cloud
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/resourceLimits:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantResourceLimitsGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1TenantResourceLimits'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get tenant level resource limits configuration
+      tags:
+      - tenants
+    patch:
+      operationId: v1TenantResourceLimitsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantResourceLimitsEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update tenant resource limits configuration
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/saml/config:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantUidSamlConfigSpecGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantSamlSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified service provider metadata and Saml Spec for tenant
+      tags:
+      - tenants
+    post:
+      operationId: V1TenantUidSamlConfigUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantSamlRequestSpec'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Associates the specified federation metadata for the tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/sso/auth/providers:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: V1TenantUidSsoAuthProvidersGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TenantSsoAuthProvidersEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get sso logins for the tenants
+      tags:
+      - tenants
+    post:
+      operationId: V1TenantUidSsoAuthProvidersUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TenantSsoAuthProvidersEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: enable sso logins for the tenants
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/subscriptions/aws/{uid}:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      description: 'Returns detailed subscription information including the user''s AWS account ID, entitlement data (plan limits, contract dates), and the derived monthly plan limits.
+
+        '
+      operationId: v1TenantSubscriptionsAwsGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AwsMarketplaceSubscription'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the details of a specific AWS marketplace subscription
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/subscriptions/metadata:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      description: 'Returns active marketplace subscription metadata for the specified tenant.
+
+        '
+      operationId: v1TenantSubscriptionsMetadataList
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1MarketplaceSubscriptionSummaries'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the metadata of marketplace subscriptions for the tenant
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/usage/cpuCoreHours:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      in: query
+      name: endTime
+      type: string
+    - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      in: query
+      name: startTime
+      type: string
+    get:
+      operationId: v1UsageCpuCoreHours
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1PlanCpuCoreHoursUsages'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the tenant's cpu corehours usages grouped by projects
+      tags:
+      - tenants
+  /v1/tenants/{tenantUid}/user:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    get:
+      operationId: v1TenantsUserGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1User'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the user object of the specified tenant
+      tags:
+      - tenants
+definitions:
+  v1AwsCloudAccountCredentialType:
+    default: secret
+    description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+    enum:
+    - secret
+    - sts
+    - pod-identity
+    type: string
+  v1ProjectUsage:
+    description: Project usage object
+    properties:
+      alloy:
+        $ref: '#/definitions/v1ProjectUsageData'
+      pure:
+        $ref: '#/definitions/v1ProjectUsageData'
+  v1DataSinkConfig:
+    description: Data sink
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1DataSinkSpec'
+    type: object
+  v1PlanMonthlyUsage:
+    description: Plan monthly usage entity
+    properties:
+      dailyUsages:
+        items:
+          $ref: '#/definitions/v1ResourceUsage'
+        type: array
+        uniqueItems: true
+      month:
+        $ref: '#/definitions/v1Time'
+        description: usage month
+      planLimit:
+        $ref: '#/definitions/v1PlanLimit'
+      planType:
+        enum:
+        - Trial
+        - MonthlyOnDemand
+        - AnnualSubscription
+        type: string
+      planUid:
+        type: string
+      totalMonthlyUsage:
+        $ref: '#/definitions/v1TotalResourceUsage'
+  v1AwsMarketplaceSubscription:
+    description: AWS marketplace subscription with metadata, spec, and status
+    properties:
+      metadata:
+        $ref: '#/definitions/v1AwsMarketplaceSubscriptionMetadata'
+      spec:
+        $ref: '#/definitions/v1AwsMarketplaceSubscriptionSpec'
+      status:
+        $ref: '#/definitions/v1AwsMarketplaceSubscriptionStatus'
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1Tenant:
+    description: Tenant
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1TenantSpec'
+      status:
+        $ref: '#/definitions/v1TenantStatus'
+    type: object
+  v1MarketplaceSubscriptionSummaries:
+    description: List of marketplace subscription summaries
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MarketplaceSubscriptionSummary'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1TierPrice:
+    description: tier price
+    properties:
+      alloyPricing:
+        items:
+          $ref: '#/definitions/v1PriceRange'
+        type: array
+        uniqueItems: true
+      purePricing:
+        items:
+          $ref: '#/definitions/v1PriceRange'
+        type: array
+        uniqueItems: true
+  v1InvoiceProject:
+    description: Invoice project object
+    properties:
+      amount:
+        description: Billing amount for the project
+        format: float64
+        type: number
+      projectName:
+        description: Name of the project
+        type: string
+      projectUid:
+        description: Project identifier
+        type: string
+      usage:
+        $ref: '#/definitions/v1ProjectUsage'
+        description: Usage by the project
+  v1TenantDomains:
+    description: Tenant domains
+    properties:
+      domains:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1InvoiceProductData:
+    description: Product invoice data
+    properties:
+      allocatedCredits:
+        description: Allocated credits
+        format: int64
+        type: number
+      amount:
+        description: Total amount
+        format: float64
+        type: number
+      billableCredits:
+        description: Credits to be billed
+        format: float64
+        type: number
+      breachedCredits:
+        description: Credits that are exceeds the allocated credits
+        format: float64
+        type: number
+      discount:
+        description: Applied discount
+        format: int64
+        type: number
+      freeCredits:
+        description: Allocated free credits
+        format: int64
+        type: number
+      overageLimitPercentage:
+        description: Allowed overage limit in percentage
+        format: int8
+        type: number
+      tierName:
+        description: Tier name
+        type: string
+      tierPrice:
+        description: Tier price
+        format: float64
+        type: number
+      totalUsedCredits:
+        description: Total used credits
+        format: float64
+        type: number
+      usedCredits:
+        description: Used credits
+        format: float64
+        type: number
+  v1SplunkSinkEntity:
+    description: Input payload for creating or updating a Splunk HEC sink.
+    properties:
+      name:
+        description: Human-readable name for this sink. Must be unique per tenant.
+        type: string
+      spec:
+        $ref: '#/definitions/v1SplunkSinkSpec'
+    required:
+    - name
+    - spec
+    type: object
+  v1UserStatus:
+    description: User status
+    properties:
+      activationLink:
+        description: provides the link to activate or reset the user password
+        type: string
+        x-omitempty: false
+      isActive:
+        description: Specifies if user account is active/disabled
+        type: boolean
+        x-omitempty: false
+      isPasswordResetting:
+        description: Specifies if user in multi org requested password reset
+        type: boolean
+        x-omitempty: false
+      lastSignIn:
+        $ref: '#/definitions/v1Time'
+        description: user's last sign in time
+  v1MarketplaceRegisterEntity:
+    description: 'Registration request submitted when a marketplace user is redirected to Palette after purchasing a SaaS contract (e.g., from AWS Marketplace). Contains the temporary registration token from the redirect and the user''s profile information for tenant and user creation.
+
+      '
+    properties:
+      emailId:
+        description: User's email address
+        type: string
+      firstName:
+        description: User's first name for the admin user profile
+        type: string
+      lastName:
+        description: User's last name for the admin user profile
+        type: string
+      orgName:
+        description: Organization name used as the tenant name. Must be unique across the platform.
+        type: string
+      providerType:
+        description: Marketplace provider type. Defaults to "aws" if empty or omitted.
+        enum:
+        - aws
+        type: string
+      registrationToken:
+        description: 'Temporary token provided by the marketplace provider during the redirect after purchase. Must be resolved promptly as it is short-lived (e.g., x-amzn-marketplace-token for AWS).
+
+          '
+        type: string
+    required:
+    - registrationToken
+    - emailId
+    - firstName
+    - lastName
+    - orgName
+  v1CloudWatch:
+    properties:
+      credentials:
+        $ref: '#/definitions/v1AwsCloudAccount'
+      group:
+        type: string
+      region:
+        type: string
+      stream:
+        type: string
+    type: object
+  v1PlanCredit:
+    description: Plan Credit
+    properties:
+      cpuCoreHours:
+        format: int64
+        type: number
+        x-omitempty: false
+      creditUid:
+        type: string
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: credit expiry time
+      name:
+        type: string
+      start:
+        $ref: '#/definitions/v1Time'
+        description: credit start time
+      type:
+        enum:
+        - Pure
+        - Alloy
+        type: string
+    required:
+    - type
+  v1DeveloperCredit:
+    description: Credits allocated for each tenant/user
+    properties:
+      cpu:
+        description: cpu in cores
+        format: int32
+        type: number
+        x-omitempty: false
+      memoryGiB:
+        description: memory in GiB
+        format: int32
+        type: number
+        x-omitempty: false
+      storageGiB:
+        description: storage in GiB
+        format: int32
+        type: integer
+        x-omitempty: false
+      virtualClustersLimit:
+        description: number of active virtual clusters
+        format: int32
+        type: number
+        x-omitempty: false
+  v1PlanCpuCoreHoursUsages:
+    properties:
+      hourlyUsages:
+        items:
+          $ref: '#/definitions/v1ResourceUsage'
+        type: array
+        uniqueItems: true
+    type: object
+  v1Macro:
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  v1Error:
+    properties:
+      code:
+        type: string
+      details:
+        type: object
+      message:
+        type: string
+      ref:
+        type: string
+    type: object
+  v1CloudInstanceRateConfig:
+    description: Cloud instance rate config
+    properties:
+      computeRateProportion:
+        format: float
+        type: number
+      memoryRateProportion:
+        format: float
+        type: number
+  v1PlanStatus:
+    properties:
+      changeLogs:
+        items:
+          type: string
+        type: array
+    type: object
+  v1TenantAssetCert:
+    description: tenant cert
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1Cert'
+    type: object
+  v1TenantAddressPatch:
+    description: Tenant Address
+    properties:
+      address:
+        $ref: '#/definitions/v1Address'
+    type: object
+  v1TenantOidcClientSpec:
+    description: Tenant
+    properties:
+      callbackUrl:
+        type: string
+        x-omitempty: false
+      clientId:
+        type: string
+        x-omitempty: false
+      clientSecret:
+        type: string
+        x-omitempty: false
+      defaultTeams:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      isSsoEnabled:
+        type: boolean
+        x-omitempty: false
+      issuerTls:
+        $ref: '#/definitions/v1OidcIssuerTls'
+      issuerUrl:
+        description: the issuer is the URL identifier for the service
+        type: string
+        x-omitempty: false
+      logoutUrl:
+        type: string
+        x-omitempty: false
+      requiredClaims:
+        $ref: '#/definitions/v1TenantOidcClaims'
+      scopes:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      scopesDelimiter:
+        type: string
+        x-omitempty: false
+      syncSsoTeams:
+        description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
+        type: boolean
+        x-omitempty: false
+      userInfo:
+        $ref: '#/definitions/v1OidcUserInfo'
+    type: object
+  v1PlanLimit:
+    description: Monthly Plan Limit
+    properties:
+      alloy:
+        $ref: '#/definitions/v1PlanLimitSpec'
+      isOnDemand:
+        description: is onDemand plan and has no limit
+        type: boolean
+        x-omitempty: false
+      isUnlimited:
+        description: is unlimited cpu core hours
+        type: boolean
+        x-omitempty: false
+      pure:
+        $ref: '#/definitions/v1PlanLimitSpec'
+  v1DataSinkableSpec:
+    properties:
+      cloudWatch:
+        $ref: '#/definitions/v1CloudWatch'
+      type:
+        enum:
+        - cloudwatch
+        type: string
+    type: object
+  v1AwsMarketplaceSubscriptionSpec:
+    description: AWS marketplace subscription specification
+    properties:
+      customerAccountId:
+        description: AWS account ID of the user
+        type: string
+      entitlement:
+        $ref: '#/definitions/v1MarketplaceEntitlement'
+      productId:
+        description: AWS Marketplace product ID (from the AWS license) the subscription belongs to
+        type: string
+  v1MarketplaceRegisterResponse:
+    description: 'Response returned after successful marketplace registration.
+
+      '
+    properties:
+      tenantUid:
+        description: UID of the newly created tenant
+        type: string
+  v1ResourceUsage:
+    description: ResourceUsage
+    properties:
+      projects:
+        items:
+          $ref: '#/definitions/v1ProjectResourceUsage'
+        type: array
+        uniqueItems: true
+      timestamp:
+        $ref: '#/definitions/v1Time'
+        description: resource usage time
+      totalAlloyCpuCoreHours:
+        type: number
+        x-omitempty: false
+      totalPureCpuCoreHours:
+        type: number
+        x-omitempty: false
+  v1Cert:
+    properties:
+      certificate:
+        type: string
+        x-omitempty: false
+      isCA:
+        type: boolean
+        x-omitempty: false
+      key:
+        type: string
+        x-omitempty: false
+    type: object
+  v1TenantFreemium:
+    description: Tenant freemium configuration
+    properties:
+      activeClustersLimit:
+        type: integer
+        x-omitempty: false
+      isFreemium:
+        type: boolean
+        x-omitempty: false
+      isUnlimited:
+        type: boolean
+        x-omitempty: false
+      overageUsageLimit:
+        format: float64
+        type: number
+        x-omitempty: false
+      totalUsageLimit:
+        format: float64
+        type: number
+        x-omitempty: false
+  v1PlanMonthlyUsages:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1PlanMonthlyUsage'
+        type: array
+    type: object
+  v1AwsLoginCredentials:
+    properties:
+      iamUser:
+        type: string
+      password:
+        format: password
+        type: string
+    type: object
+  v1DataSinkSpec:
+    properties:
+      auditDataSinks:
+        items:
+          $ref: '#/definitions/v1DataSinkableSpec'
+        type: array
+        uniqueItems: true
+    type: object
+  v1TenantBasicEntity:
+    description: Tenant Basic param
+    properties:
+      emailId:
+        type: string
+      orgName:
+        type: string
+    type: object
+  v1TenantSamlSpec:
+    description: Tenant
+    properties:
+      acsUrl:
+        type: string
+      attributes:
+        items:
+          $ref: '#/definitions/v1TenantSamlSpecAttribute'
+        type: array
+      audienceUrl:
+        description: same as entity id
+        type: string
+      certificate:
+        description: certificate for slo
+        type: string
+      defaultTeams:
+        items:
+          type: string
+        type: array
+      entityId:
+        type: string
+      federationMetadata:
+        type: string
+      identityProvider:
+        type: string
+      isSingleLogoutEnabled:
+        type: boolean
+        x-omitempty: false
+      isSsoEnabled:
+        type: boolean
+        x-omitempty: false
+      issuer:
+        description: same as entity id
+        type: string
+      nameIdFormat:
+        type: string
+      serviceProviderMetadata:
+        type: string
+      singleLogoutUrl:
+        description: slo url
+        type: string
+        x-omitempty: false
+      syncSsoTeams:
+        description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1AwsCloudAccount:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+    properties:
+      accessKey:
+        description: AWS account access key
+        type: string
+      credentialType:
+        $ref: '#/definitions/v1AwsCloudAccountCredentialType'
+      partition:
+        default: aws
+        description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+        enum:
+        - aws
+        - aws-us-gov
+        - aws-iso
+        - aws-iso-b
+        type: string
+      podIdentity:
+        $ref: '#/definitions/v1AwsPodIdentityCredentials'
+        description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
+      policyARNs:
+        description: List of policy ARNs required in case of credentialType sts.
+        items:
+          type: string
+        type: array
+      secretKey:
+        description: AWS account secret key
+        type: string
+      secretSpec:
+        $ref: '#/definitions/v1AwsSecretSpec'
+      secretToken:
+        description: AWS account secret token; in case of aws-iso and aws-iso-b
+        type: string
+      sts:
+        $ref: '#/definitions/v1AwsStsCredentials'
+        description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
+    type: object
+  v1User:
+    description: User
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1UserSpec'
+      status:
+        $ref: '#/definitions/v1UserStatus'
+    type: object
+  v1TenantPasswordPolicyEntity:
+    description: Tenant Password Policy Entity
+    properties:
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+      expiryDurationInDays:
+        type: integer
+      firstReminderInDays:
+        type: integer
+      isRegex:
+        type: boolean
+      maxLength:
+        type: integer
+      minLength:
+        type: integer
+      minNumOfBlockLetters:
+        type: integer
+      minNumOfDigits:
+        type: integer
+      minNumOfSmallLetters:
+        type: integer
+      minNumOfSpecialCharacters:
+        type: integer
+      regex:
+        type: string
+      updateTimestamp:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1UserSpec:
+    description: User specifications
+    properties:
+      emailId:
+        description: User's email id
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      roles:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  v1TenantCleanUpStatus:
+    description: Tenant CleanUp Status
+    properties:
+      cleanUpError:
+        type: string
+      cleanUpStages:
+        type: string
+      cleanUpTimestamp:
+        $ref: '#/definitions/v1Time'
+      cleanedResources:
+        items:
+          type: string
+        type: array
+      isCompleted:
+        type: boolean
+        x-omitempty: false
+      isInProgress:
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1InvoiceState:
+    description: Invoice state object
+    properties:
+      paymentMsg:
+        description: Payment status message
+        type: string
+      state:
+        enum:
+        - Paid
+        - PaymentPending
+        - PaymentInProgress
+        - PaymentFailed
+        type: string
+      timestamp:
+        $ref: '#/definitions/v1Time'
+        description: Time on which the state has been updated
+  v1TlsCA:
+    properties:
+      caCertBase64:
+        type: string
+      enabled:
+        type: boolean
+      insecureSkipVerify:
+        type: boolean
+    type: object
+  v1CustomCloudRateConfig:
+    description: Private cloud rate config
+    properties:
+      cloudType:
+        type: string
+      rateConfig:
+        $ref: '#/definitions/v1PrivateCloudRateConfig'
+  v1AwsMarketplaceSubscriptionMetadata:
+    description: Subscription metadata
+    properties:
+      kind:
+        description: Cloud provider kind
+        type: string
+      uid:
+        description: Subscription document UID
+        type: string
+  v1FipsSettings:
+    description: FIPS configuration
+    properties:
+      fipsClusterFeatureConfig:
+        $ref: '#/definitions/v1NonFipsConfig'
+      fipsClusterImportConfig:
+        $ref: '#/definitions/v1NonFipsConfig'
+      fipsPackConfig:
+        $ref: '#/definitions/v1NonFipsConfig'
+  v1Macros:
+    properties:
+      macros:
+        items:
+          $ref: '#/definitions/v1Macro'
+        type: array
+        uniqueItems: true
+  v1SinkSyncStatus:
+    description: Status of the data sink delivery sync loop
+    properties:
+      lastRunTime:
+        $ref: '#/definitions/v1Time'
+      lastSuccessTime:
+        $ref: '#/definitions/v1Time'
+      message:
+        description: Last error message when status=Failed. Empty when status=Success.
+        type: string
+      status:
+        description: Last known delivery status.
+        enum:
+        - Success
+        - Failed
+        type: string
+    type: object
+  v1PrivateCloudRateConfig:
+    description: Private cloud rate config
+    properties:
+      cpuUnitPricePerHour:
+        format: float64
+        type: number
+      gpuUnitPricePerHour:
+        format: float64
+        type: number
+      memoryUnitPriceGiBPerHour:
+        format: float64
+        type: number
+      storageUnitPriceGiBPerHour:
+        format: float64
+        type: number
+  v1ProjectUsageData:
+    description: Project usage data object
+    properties:
+      amount:
+        description: Billing amount for the project
+        format: float64
+        type: number
+      tierPrice:
+        description: Tier price based on the usage
+        format: float64
+        type: number
+      usedCredits:
+        description: Project used credits
+        format: float64
+        type: number
+  v1Plan:
+    description: Plan
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PlanSpec'
+      status:
+        $ref: '#/definitions/v1PlanStatus'
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1SplunkSink:
+    description: Splunk HEC audit-log sink configuration.
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1SplunkSinkSpec'
+      status:
+        $ref: '#/definitions/v1SinkStatus'
+    type: object
+  v1TenantClusterRbacSettings:
+    description: Tenant cluster RBAC settings
+    properties:
+      automaticClusterRoleBinding:
+        default: none
+        description: Specifies the mode for automatic creation and management of cluster role bindings for tenant clusters
+        enum:
+        - none
+        - enabled
+        - disabled
+        type: string
+        x-omitempty: false
+    type: object
+  v1TenantOidcClaims:
+    properties:
+      Email:
+        type: string
+        x-omitempty: false
+      FirstName:
+        type: string
+        x-omitempty: false
+      LastName:
+        type: string
+        x-omitempty: false
+      SpectroTeam:
+        type: string
+        x-omitempty: false
+    type: object
+  v1TenantSpec:
+    description: Tenant Spec
+    properties:
+      address:
+        $ref: '#/definitions/v1Address'
+      authType:
+        type: string
+      defaultLoginMode:
+        type: string
+      orgEmailId:
+        type: string
+      orgName:
+        type: string
+      planUid:
+        type: string
+    type: object
+  v1TenantFreemiumUsage:
+    properties:
+      isFreemium:
+        type: boolean
+        x-omitempty: false
+      isUnlimited:
+        type: boolean
+        x-omitempty: false
+      limit:
+        $ref: '#/definitions/v1FreemiumUsageLimit'
+      usage:
+        $ref: '#/definitions/v1FreemiumUsage'
+    type: object
+  v1FreemiumUsage:
+    properties:
+      usage:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1AwsPodIdentityCredentials:
+    description: AWS EKS Pod Identity credentials for role assumption
+    properties:
+      permissionBoundaryArn:
+        description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+        type: string
+      roleArn:
+        description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+        type: string
+    type: object
+  v1ProjectMeta:
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1AwsUserCloudAccount:
+    properties:
+      accountId:
+        type: string
+      cloudAccount:
+        $ref: '#/definitions/v1AwsCloudAccount'
+  v1Tenants:
+    description: Tenants list
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1Tenant'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1TenantContractSpec:
+    description: Tenant contract settings
+    properties:
+      acceptedTime:
+        $ref: '#/definitions/v1Time'
+        description: If the contract is accepted offline, set the accepted time
+      isAccepted:
+        description: If the contract is accepted offline, then set this field to true
+        type: boolean
+      isRequired:
+        description: Is the contract required, for on-prem installation it will be false
+        type: boolean
+    required:
+    - isRequired
+    - isAccepted
+    type: object
+  v1NodesAutoRemediationSettings:
+    properties:
+      disableNodesAutoRemediation:
+        type: boolean
+        x-omitempty: false
+      isEnabled:
+        type: boolean
+        x-omitempty: false
+  v1PublicCloudRateConfig:
+    description: Public cloud rate config
+    properties:
+      computeOptimized:
+        $ref: '#/definitions/v1CloudInstanceRateConfig'
+      memoryOptimized:
+        $ref: '#/definitions/v1CloudInstanceRateConfig'
+  v1AwsCreditAccountEntity:
+    properties:
+      creditLimitInDollars:
+        format: float64
+        type: number
+        x-omitempty: false
+      creditUsedInDollars:
+        format: float64
+        type: number
+        x-omitempty: false
+      loginCredentials:
+        $ref: '#/definitions/v1AwsLoginCredentials'
+      userCloudAccount:
+        $ref: '#/definitions/v1AwsUserCloudAccount'
+    type: object
+  v1PlanRenewal:
+    description: Plan Renewal
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: credit expiry time
+      planLimit:
+        $ref: '#/definitions/v1PlanLimit'
+      start:
+        $ref: '#/definitions/v1Time'
+        description: credit start time
+      type:
+        enum:
+        - Trial
+        - MonthlyOnDemand
+        - AnnualSubscription
+        type: string
+    required:
+    - type
+    - start
+    - expiry
+  v1TenantResourceLimits:
+    description: Tenant resource limits
+    properties:
+      resources:
+        items:
+          $ref: '#/definitions/v1TenantResourceLimit'
+        type: array
+        uniqueItems: true
+  v1TenantResourceLimit:
+    properties:
+      kind:
+        $ref: '#/definitions/v1ResourceLimitType'
+        type: string
+      label:
+        type: string
+      limit:
+        format: int64
+        type: number
+        x-omitempty: false
+      maxLimit:
+        format: int64
+        type: number
+        x-omitempty: false
+  v1SplunkSinkSpec:
+    description: Splunk HEC connection configuration.
+    properties:
+      hecUrl:
+        description: 'Splunk HEC URL, e.g. https://stack.splunkcloud.com:8088 or
+
+          https://http-inputs-<stack>.splunkcloud.com:443. Must use https,
+
+          except http://localhost:* / http://127.0.0.1:* permitted for dev.
+
+          '
+        type: string
+      index:
+        description: Optional. If empty, the HEC token's default index is used.
+        type: string
+      source:
+        description: Optional. If empty, the HEC token's default source is used.
+        type: string
+      tlsConfig:
+        $ref: '#/definitions/v1TlsCA'
+      token:
+        description: 'HEC token. Returned masked (''***'') on GET. PUT with the masked literal
+
+          ''***'' preserves the existing encrypted value; PUT with any other value
+
+          re-encrypts and replaces.
+
+          '
+        format: password
+        type: string
+    required:
+    - hecUrl
+    - token
+    type: object
+  v1OidcUserInfo:
+    properties:
+      claims:
+        $ref: '#/definitions/v1TenantOidcClaims'
+      useUserInfo:
+        default: false
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1ProjectResourceUsage:
+    description: project resource usage
+    properties:
+      alloyCpuCoreHours:
+        type: number
+        x-omitempty: false
+      project:
+        $ref: '#/definitions/v1ProjectMeta'
+      pureCpuCoreHours:
+        type: number
+        x-omitempty: false
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1InvoiceCredits:
+    description: Invoice credits object
+    properties:
+      alloyFreeCredits:
+        description: Credits allocated for import clusters
+        format: int64
+        type: number
+      pureFreeCredits:
+        description: Credits allocated for managed clusters
+        format: int64
+        type: number
+  v1PlanLimitSpec:
+    description: Monthly Plan Limit spec
+    properties:
+      cpuCoreHours:
+        description: cpu cores hours
+        format: int64
+        type: integer
+        x-omitempty: false
+      overageLimitPercentage:
+        default: 25
+        description: overage limit in percentage
+        format: int8
+        type: integer
+        x-omitempty: false
+      warnLimitPercentage:
+        default: 90
+        description: warning limit in percentage
+        format: int8
+        type: integer
+        x-omitempty: false
+  v1TenantResourceLimitsEntity:
+    description: Tenant resource limits. Supported resources keys are 'user','project','apiKey','team','role','cloudaccount','clusterprofile','workspace','registry','privategateway','location','certificate','macro','sshkey','alert','spectrocluster','edgehost'.
+    properties:
+      resources:
+        items:
+          $ref: '#/definitions/v1TenantResourceLimitEntity'
+        type: array
+        uniqueItems: true
+  v1AwsStsCredentials:
+    description: Aws sts credentials
+    properties:
+      arn:
+        description: Arn for the aws sts credentials in cloud account
+        type: string
+      externalId:
+        description: ExternalId for the aws sts credentials in cloud account
+        type: string
+    type: object
+  v1TotalResourceUsage:
+    description: Total Resource Usage
+    properties:
+      projects:
+        items:
+          $ref: '#/definitions/v1ProjectResourceUsage'
+        type: array
+        uniqueItems: true
+      totalAlloyCpuCoreHours:
+        type: number
+        x-omitempty: false
+      totalPureCpuCoreHours:
+        type: number
+        x-omitempty: false
+  v1TenantPaletteIdpConfigSpec:
+    description: Palette IDP configuration for the tenant
+    properties:
+      clientId:
+        description: The client ID for Palette OIDC
+        type: string
+        x-omitempty: false
+      clientSecret:
+        description: The client secret for Palette OIDC
+        type: string
+        x-omitempty: false
+      issuerUrl:
+        description: The issuer URL for Palette acting as OIDC identity provider
+        type: string
+        x-omitempty: false
+      scopes:
+        description: The OIDC scopes
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1TenantSelfSignUpSpec:
+    description: Tenant sign up data
+    properties:
+      emailId:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      loginMode:
+        default: devops
+        enum:
+        - dev
+        - devops
+        type: string
+      notifyTenantAdmin:
+        type: boolean
+      orgName:
+        type: string
+    required:
+    - firstName
+    - lastName
+    - emailId
+    - orgName
+    type: object
+  v1SinkStatus:
+    description: Data sink status
+    properties:
+      sync:
+        $ref: '#/definitions/v1SinkSyncStatus'
+    type: object
+  v1TenantSpecEntity:
+    description: Tenant Entity input
+    properties:
+      address:
+        $ref: '#/definitions/v1Address'
+      authType:
+        type: string
+      emailId:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      loginMode:
+        default: devops
+        enum:
+        - dev
+        - devops
+        type: string
+      orgEmailId:
+        type: string
+      orgName:
+        type: string
+      roles:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      ssoApp:
+        type: string
+    type: object
+  v1DataSinkSummary:
+    description: Data sink summary
+    properties:
+      kind:
+        description: 'Sink kind discriminator (e.g. splunk, cloudwatch). For legacy cloudwatch
+
+          entries the caller treats kind=cloudwatch as a presence signal and calls
+
+          /v1/tenants/{t}/assets/dataSinks to fetch the legacy CloudWatch configuration.
+
+          '
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      status:
+        $ref: '#/definitions/v1SinkStatus'
+    type: object
+  v1InvoiceBillingPeriod:
+    description: Invoice billing period object
+    properties:
+      end:
+        $ref: '#/definitions/v1Time'
+      start:
+        $ref: '#/definitions/v1Time'
+  v1Address:
+    description: Tenant Address
+    properties:
+      addressLine1:
+        type: string
+      addressLine2:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      pincode:
+        type: string
+      state:
+        type: string
+    type: object
+  v1AwsSecretSpec:
+    description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+    properties:
+      accountName:
+        description: AWS secret accountName; only for aws-iso-b environment
+        type: string
+      agency:
+        description: AWS secret agency
+        type: string
+      isCapValidationEnabled:
+        description: Flag to rotate the secret region credentials
+        type: boolean
+      mission:
+        description: AWS secret mission; only for aws-iso environment
+        type: string
+      namePrefix:
+        description: Policy Boundary
+        type: string
+      permissionBoundary:
+        description: Role or Policy Prefix
+        type: string
+      policy:
+        description: AWS secret policy; JSON string
+        type: string
+      role:
+        description: AWS secret role
+        type: string
+      tls:
+        $ref: '#/definitions/v1AwsSecretTlsConfig'
+        description: TLS configuration for the AWS secret
+    type: object
+  v1TenantSsoAuthProvidersEntity:
+    properties:
+      isEnabled:
+        type: boolean
+        x-omitempty: false
+      ssoLogins:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1CleanUpResource:
+    description: Resources of tenant
+    properties:
+      activeResources:
+        $ref: '#/definitions/v1ActiveTenantResources'
+      tenantStatus:
+        $ref: '#/definitions/v1TenantCleanUpStatus'
+    type: object
+  v1InvoicePlan:
+    description: Invoice plan object
+    properties:
+      freeCredits:
+        description: List of free credits
+        items:
+          $ref: '#/definitions/v1InvoicePlanCredit'
+        type: array
+      plantype:
+        enum:
+        - Trial
+        - MonthlyOnDemand
+        - AnnualSubscription
+        type: string
+      slaCredits:
+        description: List of SLA credits
+        items:
+          $ref: '#/definitions/v1InvoicePlanCredit'
+        type: array
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1FreemiumUsageLimit:
+    properties:
+      activeClusters:
+        type: integer
+        x-omitempty: false
+      overageUsage:
+        type: number
+        x-omitempty: false
+      usage:
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1TenantClusterSettings:
+    properties:
+      nodesAutoRemediationSetting:
+        $ref: '#/definitions/v1NodesAutoRemediationSettings'
+  v1ActiveTenantResources:
+    description: Active resources of tenant
+    properties:
+      activeResources:
+        additionalProperties:
+          items:
+            type: string
+          type: array
+        type: object
+    type: object
+  v1MarketplaceSubscriptionSummary:
+    description: Summary of a marketplace subscription for the tenant
+    properties:
+      kind:
+        description: Cloud provider kind
+        type: string
+      state:
+        description: Current subscription state
+        type: string
+      uid:
+        description: Subscription document UID
+        type: string
+  v1InvoicePlanCredit:
+    description: Invoice plan credit object
+    properties:
+      planCredit:
+        $ref: '#/definitions/v1PlanCredit'
+      totalCpuCoreHours:
+        description: Total used cpu core hours
+        format: int64
+        type: number
+  v1TenantAssetCerts:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1TenantAssetCert'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1TenantEntity:
+    description: Tenant Entity
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1TenantSpecEntity'
+    type: object
+  v1TenantStatus:
+    description: Tenant Status
+    properties:
+      cleanUpStatus:
+        $ref: '#/definitions/v1TenantCleanUpStatus'
+      isActive:
+        type: boolean
+        x-omitempty: false
+      toBeDeleted:
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1PlanSpec:
+    description: Plan specifications
+    properties:
+      cost:
+        $ref: '#/definitions/v1PlanCost'
+      developerCredits:
+        $ref: '#/definitions/v1DeveloperCredit'
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: plan expiry time
+      freeCredits:
+        items:
+          $ref: '#/definitions/v1PlanCredit'
+        type: array
+      planLimit:
+        $ref: '#/definitions/v1PlanLimit'
+      renewal:
+        $ref: '#/definitions/v1PlanRenewal'
+      slaCredits:
+        items:
+          $ref: '#/definitions/v1PlanCredit'
+        type: array
+      start:
+        $ref: '#/definitions/v1Time'
+        description: plan start time
+      tierPricing:
+        $ref: '#/definitions/v1TierPrice'
+      type:
+        enum:
+        - Trial
+        - MonthlyOnDemand
+        - AnnualSubscription
+        type: string
+    required:
+    - type
+    - start
+    - expiry
+  v1AwsSecretTlsConfig:
+    description: TLS configuration for the AWS secret
+    properties:
+      ca:
+        description: CA certificate
+        type: string
+      cert:
+        description: Certificate
+        type: string
+      key:
+        description: Key
+        type: string
+    type: object
+  v1NonFipsConfig:
+    description: Non-FIPS configuration
+    properties:
+      mode:
+        default: nonFipsDisabled
+        description: enable or disable the non FIPS complaint
+        enum:
+        - nonFipsEnabled
+        - nonFipsDisabled
+        type: string
+  v1TenantSamlRequestSpec:
+    description: Tenant
+    properties:
+      attributes:
+        items:
+          $ref: '#/definitions/v1TenantSamlSpecAttribute'
+        type: array
+      defaultTeams:
+        items:
+          type: string
+        type: array
+      federationMetadata:
+        type: string
+      identityProvider:
+        type: string
+      isSingleLogoutEnabled:
+        type: boolean
+      isSsoEnabled:
+        type: boolean
+      nameIdFormat:
+        type: string
+      syncSsoTeams:
+        description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
+        type: boolean
+    type: object
+  v1DataSinksSummary:
+    description: Summary of all sinks configured for a tenant, across kinds.
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1DataSinkSummary'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1ResourceLimitType:
+    enum:
+    - user
+    - project
+    - apiKey
+    - team
+    - role
+    - cloudaccount
+    - clusterprofile
+    - workspace
+    - registry
+    - privategateway
+    - location
+    - certificate
+    - macro
+    - sshkey
+    - alert
+    - spectrocluster
+    - edgehost
+    - appprofile
+    - appdeployment
+    - edgetoken
+    - clustergroup
+    - filter
+    - systemadmin
+    - spcpolicy
+    - clustertemplate
+    type: string
+  v1Invoice:
+    description: Invoice object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1InvoiceSpec'
+      status:
+        $ref: '#/definitions/v1InvoiceStatus'
+  v1OidcIssuerTls:
+    properties:
+      caCertificateBase64:
+        type: string
+        x-omitempty: false
+      insecureSkipVerify:
+        default: false
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1InvoiceSpec:
+    description: Invoice specification
+    properties:
+      address:
+        $ref: '#/definitions/v1Address'
+      billingPeriod:
+        $ref: '#/definitions/v1InvoiceBillingPeriod'
+      credits:
+        $ref: '#/definitions/v1InvoiceCredits'
+      envType:
+        description: Environment type [Trial,MonthlyOnDemand,AnnualSubscription,OnPrem]
+        type: string
+      month:
+        $ref: '#/definitions/v1Time'
+        description: Month for which invoice is generated
+      paymentUnit:
+        enum:
+        - usd
+        type: string
+      plan:
+        $ref: '#/definitions/v1InvoicePlan'
+  v1MarketplaceEntitlement:
+    description: Entitlement details from the marketplace contract
+    properties:
+      planEndTime:
+        description: Contract end time
+        format: date-time
+        type: string
+      planLimit:
+        $ref: '#/definitions/v1MarketplacePlanLimit'
+      planStartTime:
+        description: Contract start time
+        format: date-time
+        type: string
+  v1TenantActivate:
+    description: Activate/Deactivate tenant
+    properties:
+      isActive:
+        default: true
+        type: boolean
+    type: object
+  v1InvoiceStatus:
+    description: Invoice Status
+    properties:
+      billableAmount:
+        description: Total billable amount
+        format: float64
+        type: number
+      productInvoice:
+        $ref: '#/definitions/v1InvoiceProduct'
+      projects:
+        description: List of project invoices
+        items:
+          $ref: '#/definitions/v1InvoiceProject'
+        type: array
+      states:
+        description: List of invoice states
+        items:
+          $ref: '#/definitions/v1InvoiceState'
+        type: array
+        uniqueItems: true
+      stripeInvoiceId:
+        description: Stripe invoice uid
+        type: string
+  v1MarketplacePlanLimit:
+    description: Marketplace plan limit
+    properties:
+      cpuCoreHours:
+        description: Total CPU core-hours entitled
+        format: int64
+        type: integer
+        x-omitempty: false
+  v1PlanCost:
+    description: Plan Cost
+    properties:
+      discount:
+        format: float
+        type: number
+        x-omitempty: false
+      price:
+        format: float
+        type: number
+        x-omitempty: false
+  v1TenantResourceLimitEntity:
+    properties:
+      kind:
+        $ref: '#/definitions/v1ResourceLimitType'
+        type: string
+        x-omitempty: false
+      limit:
+        format: int64
+        type: number
+        x-omitempty: false
+  v1TenantSamlSpecAttribute:
+    properties:
+      attributeValue:
+        type: string
+      mappedAttribute:
+        type: string
+      name:
+        type: string
+      nameFormat:
+        type: string
+    type: object
+  v1RateConfig:
+    description: Rate config
+    properties:
+      apache-cloudstack:
+        $ref: '#/definitions/v1PrivateCloudRateConfig'
+      aws:
+        $ref: '#/definitions/v1PublicCloudRateConfig'
+      azure:
+        $ref: '#/definitions/v1PublicCloudRateConfig'
+      custom:
+        items:
+          $ref: '#/definitions/v1CustomCloudRateConfig'
+        type: array
+        uniqueItems: true
+      edge:
+        $ref: '#/definitions/v1PrivateCloudRateConfig'
+      edgeNative:
+        $ref: '#/definitions/v1PrivateCloudRateConfig'
+      gcp:
+        $ref: '#/definitions/v1PublicCloudRateConfig'
+      generic:
+        $ref: '#/definitions/v1PrivateCloudRateConfig'
+      maas:
+        $ref: '#/definitions/v1PrivateCloudRateConfig'
+      vsphere:
+        $ref: '#/definitions/v1PrivateCloudRateConfig'
+  v1LoginBannerSettings:
+    properties:
+      Message:
+        description: Login banner message displayed to the user
+        type: string
+        x-omitempty: false
+      isEnabled:
+        description: Set to 'true' if login banner has to be displayed for user
+        type: boolean
+        x-omitempty: false
+      title:
+        description: Banner title displayed to the user
+        type: string
+        x-omitempty: false
+  v1TenantEmailPatch:
+    description: Tenant EmailId
+    properties:
+      emailId:
+        type: string
+    type: object
+  v1AwsMarketplaceSubscriptionStatus:
+    description: AWS marketplace subscription status
+    properties:
+      state:
+        description: Current subscription state
+        type: string
+  v1TenantEnableClusterGroup:
+    description: Enable or Disable cluster group for a tenant
+    properties:
+      hideSystemClusterGroups:
+        type: boolean
+        x-omitempty: false
+      isClusterGroupEnabled:
+        description: Deprecated. Use hideSystemClusterGroups field
+        type: boolean
+        x-omitempty: false
+  v1PriceRange:
+    description: tier price range
+    properties:
+      discount:
+        format: int64
+        type: number
+      startFrom:
+        format: float64
+        type: number
+      unitAmount:
+        format: float64
+        type: number
+      upTo:
+        format: float64
+        type: number
+      upToInfinity:
+        type: boolean
+  v1InvoiceProduct:
+    description: Product invoice object
+    properties:
+      alloy:
+        $ref: '#/definitions/v1InvoiceProductData'
+      pure:
+        $ref: '#/definitions/v1InvoiceProductData'
+  v1AuthTokenSettings:
+    description: System auth token settings
+    properties:
+      expiryTimeMinutes:
+        description: Auth token expiry time in minutes
+        format: int32
+        maximum: 1440
+        minimum: 15
+        type: integer
+        x-omitempty: false
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

@@ -1,0 +1,2551 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations overlords API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: overlords
+  x-displayName: Overlords
+paths:
+  /v1/overlords:
+    get:
+      operationId: v1OverlordsList
+      parameters:
+      - in: query
+        name: name
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Overlords'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of overlords owned by the tenant
+      tags:
+      - overlords
+  /v1/overlords/apache-cloudstack/manifest:
+    parameters:
+    - in: query
+      name: pairingCode
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsCloudStackManifest
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1OverlordManifest'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the manifests required for the private gateway installation
+      tags:
+      - overlords
+  /v1/overlords/apache-cloudstack/{uid}/account:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsUidCloudStackAccountCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordCloudStackAccountCreate'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create the CloudStack cloudaccount for the private gateway
+      tags:
+      - overlords
+    put:
+      operationId: v1OverlordsUidCloudStackAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordCloudStackAccountEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update the CloudStack cloudaccount for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/apache-cloudstack/{uid}/account/validate:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      description: Validates CloudStack account credentials and domain. Verifies API connectivity and that the specified domain exists.
+      operationId: v1OverlordsUidCloudStackAccountValidate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          properties:
+            account:
+              $ref: '#/definitions/v1CloudStackCloudAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validate the CloudStack cloudaccount for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/apache-cloudstack/{uid}/cloudconfig:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsUidCloudStackCloudConfigCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordCloudStackCloudConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create the CloudStack cloud config for the private gateway
+      tags:
+      - overlords
+    put:
+      operationId: v1OverlordsUidCloudStackCloudConfigUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordCloudStackCloudConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update the CloudStack cloud config for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/apache-cloudstack/{uid}/clusterprofile:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsUidCloudStackClusterProfile
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterProfile'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified CloudStack private gateway cluster profile
+      tags:
+      - overlords
+  /v1/overlords/maas/manifest:
+    parameters:
+    - in: query
+      name: pairingCode
+      required: true
+      type: string
+    get:
+      operationId: V1OverlordsMaasManifest
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1OverlordManifest'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the manifests required for the private gateway installation
+      tags:
+      - overlords
+  /v1/overlords/maas/{uid}/account:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsUidMaasAccountCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordMaasAccountCreate'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create the maas cloudaccount for the private gateway
+      tags:
+      - overlords
+    put:
+      operationId: v1OverlordsUidMaasAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordMaasAccountEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update the maas cloudaccount for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/maas/{uid}/account/validate:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsUidMaasAccountValidate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          properties:
+            account:
+              $ref: '#/definitions/v1MaasCloudAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validate the maas cloudaccount for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/maas/{uid}/cloudconfig:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: V1OverlordsUidMaasCloudConfigCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordMaasCloudConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create the maas cloud config for the private gateway
+      tags:
+      - overlords
+    put:
+      operationId: V1OverlordsUidMaasCloudConfigUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordMaasCloudConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update the maas cloud config for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/maas/{uid}/clusterprofile:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsUidMaasClusterProfile
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterProfile'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified maas private gateway cluster profile
+      tags:
+      - overlords
+  /v1/overlords/maas/{uid}/pools:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsUidMaasPoolsList
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1IpPools'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of IP Pools for the specified maas private gateway
+      tags:
+      - overlords
+    post:
+      operationId: v1OverlordsUidMaasPoolCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1IpPoolInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates an IP pool definition for the specified maas private gateway
+      tags:
+      - overlords
+  /v1/overlords/maas/{uid}/pools/{poolUid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: path
+      name: poolUid
+      required: true
+      type: string
+    delete:
+      operationId: v1OverlordsUidMaasPoolDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the maas private gateway's specified IP Pool data
+      tags:
+      - overlords
+    put:
+      operationId: v1OverlordsUidMaasPoolUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1IpPoolInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the maas private gateway's specified IP Pool data
+      tags:
+      - overlords
+  /v1/overlords/migrate:
+    post:
+      operationId: V1OverlordsMigrate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordMigrateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: migrate all the clusters from source overlord to target overlord
+      tags:
+      - overlords
+  /v1/overlords/pairing/code:
+    get:
+      operationId: v1OverlordsPairingCode
+      parameters:
+      - enum:
+        - vsphere
+        - maas
+        - apache-cloudstack
+        in: query
+        name: cloudType
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1PairingCode'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the pairing code for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/vsphere/manifest:
+    parameters:
+    - in: query
+      name: pairingCode
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsVsphereManifest
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1OverlordManifest'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the manifests required for the private gateway installation
+      tags:
+      - overlords
+  /v1/overlords/vsphere/ova:
+    get:
+      operationId: v1OverlordsVsphereOvaGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1OverloadVsphereOva'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns overlord's ova information
+      tags:
+      - overlords
+  /v1/overlords/vsphere/tenants/{tenantUid}/system:
+    parameters:
+    - in: path
+      name: tenantUid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsSystem
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates the system private gateway for the specified tenant
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/account:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsUidVsphereAccountCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordVsphereAccountCreate'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create the vSphere cloudaccount for the private gateway
+      tags:
+      - overlords
+    put:
+      operationId: v1OverlordsUidVsphereAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordVsphereAccountEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update the vSphere cloudaccount for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/account/validate:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsUidVsphereAccountValidate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          properties:
+            account:
+              $ref: '#/definitions/v1VsphereCloudAccount'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validate the vSphere cloudaccount for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/cloudconfig:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1OverlordsUidVsphereCloudConfigCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordVsphereCloudConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create the vSphere cloud config for the private gateway
+      tags:
+      - overlords
+    put:
+      operationId: v1OverlordsUidVsphereCloudConfigUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1OverlordVsphereCloudConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update the vSphere cloud config for the private gateway
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/clusterprofile:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsUidVsphereClusterProfile
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterProfile'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified vsphere private gateway cluster profile
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/pools:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsUidPoolsList
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1IpPools'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of IP Pools for the specified private gateway
+      tags:
+      - overlords
+    post:
+      operationId: v1OverlordsUidPoolCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1IpPoolInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates an IP pool defintion for the sepcified private gateway
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/pools/{poolUid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: path
+      name: poolUid
+      required: true
+      type: string
+    delete:
+      operationId: v1OverlordsUidPoolDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the private gateways's specified IP Pool data
+      tags:
+      - overlords
+    put:
+      operationId: v1OverlordsUidPoolUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1IpPoolInputEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the private gateways's specified IP Pool data
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/properties/computecluster/resources:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: query
+      name: datacenter
+      required: true
+      type: string
+    - in: query
+      name: computecluster
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsUidVsphereComputeclusterRes
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1VsphereComputeClusterResources'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves the vSphere computecluster resources for the specified private gateway's account
+      tags:
+      - overlords
+  /v1/overlords/vsphere/{uid}/properties/datacenters:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1OverlordsUidVsphereDatacenters
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1VsphereDatacenters'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves the vSphere datacenters & datacluster for the specified private gateway's account
+      tags:
+      - overlords
+  /v1/overlords/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1OverlordsUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1DeletedMsg'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: delete the private gateway
+      tags:
+      - overlords
+    get:
+      operationId: v1OverlordsUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Overlord'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified private gateway's for the given uid
+      tags:
+      - overlords
+  /v1/overlords/{uid}/metadata:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1OverlordsUidMetadataUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ObjectMetaInputEntitySchema'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update the private gateway's metadata
+      tags:
+      - overlords
+  /v1/overlords/{uid}/reset:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1OverlordsUidReset
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1UpdatedMsg'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: reset the private gateway by disaaociating the private gateway's resources
+      tags:
+      - overlords
+definitions:
+  v1GpuConfig:
+    description: GPU configuration for resource allocation
+    properties:
+      limit:
+        description: GPU resource limit
+        format: int32
+        minimum: -1
+        type: integer
+        x-omitempty: false
+      provider:
+        default: nvidia
+        description: GPU provider (only nvidia is supported currently)
+        enum:
+        - nvidia
+        type: string
+  v1OverlordVsphereAccountEntity:
+    properties:
+      account:
+        $ref: '#/definitions/v1VsphereCloudAccount'
+      shareWithProjects:
+        type: boolean
+        x-omitempty: false
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1Pool:
+    description: Pool defines IP ranges or with CIDR for available IPs Gateway, Prefix and Nameserver if provided, will overwrite values in IPPool
+    properties:
+      end:
+        description: End is the last IP address that can be rendered. It is used as a validation that the rendered IP is in bound.
+        type: string
+      gateway:
+        description: Gateway is the gateway ip address
+        type: string
+      nameserver:
+        $ref: '#/definitions/v1Nameserver'
+        description: Nameserver provide information for dns resolvation
+      prefix:
+        description: Prefix is the mask of the network as integer (max 128)
+        format: int32
+        type: integer
+      start:
+        description: Start is the first ip address that can be rendered
+        type: string
+      subnet:
+        description: 'Subnet is used to validate that the rendered IP is in bounds. eg: 192.168.0.0/24 If Start value is not given, start value is derived from the subnet ip incremented by 1 (start value is `192.168.0.1` for subnet `192.168.0.0/24`)'
+        type: string
+    type: object
+  v1OverlordMigrateEntity:
+    properties:
+      sourceUid:
+        type: string
+      targetUid:
+        type: string
+  v1ClusterRbacSubjects:
+    description: Cluster role ref
+    properties:
+      name:
+        type: string
+      namespace:
+        type: string
+      type:
+        enum:
+        - User
+        - Group
+        - ServiceAccount
+        type: string
+    type: object
+  v1CloudStackMachineConfigEntity:
+    properties:
+      instanceConfig:
+        $ref: '#/definitions/v1InstanceConfig'
+        description: Instance Configuration
+      networks:
+        description: Network configuration
+        items:
+          $ref: '#/definitions/v1CloudStackNetworkConfig'
+        type: array
+      offering:
+        $ref: '#/definitions/v1CloudStackResource'
+      template:
+        $ref: '#/definitions/v1CloudStackResource'
+        description: CloudStack template override for this machine pool. If not specified, inherits cluster default from profile.
+    required:
+    - offering
+    type: object
+  v1ClusterRoleRef:
+    description: Cluster role ref
+    properties:
+      kind:
+        enum:
+        - Role
+        - ClusterRole
+        type: string
+      name:
+        type: string
+    type: object
+  v1ClusterProfileStatus:
+    description: ClusterProfileStatus defines the observed state of ClusterProfile
+    properties:
+      hasUserMacros:
+        description: If it is true then profile pack values has a reference to user defined macros
+        type: boolean
+        x-omitempty: false
+      inUseClusterTemplates:
+        items:
+          $ref: '#/definitions/v1ProjectResourceReference'
+        type: array
+      inUseClusterUids:
+        description: Deprecated. Use inUseClusters
+        items:
+          type: string
+        type: array
+      inUseClusters:
+        items:
+          $ref: '#/definitions/v1ObjectResReference'
+        type: array
+      isPublished:
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1PackRef:
+    description: PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml
+        type: object
+      digest:
+        description: digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade
+        type: string
+      inValidReason:
+        type: string
+      isInvalid:
+        description: pack is invalid when the associated tag is deleted from the registry
+        type: boolean
+      layer:
+        enum:
+        - kernel
+        - os
+        - k8s
+        - cni
+        - csi
+        - addon
+        type: string
+      logo:
+        description: path to the pack logo
+        type: string
+      manifests:
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      name:
+        description: pack name
+        type: string
+      packUid:
+        description: PackUID is Hubble packUID, not palette Pack.UID It is used by Hubble only.
+        type: string
+      params:
+        additionalProperties:
+          type: string
+        description: params passed as env variables to be consumed at installation time
+        type: object
+      presets:
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      registryUid:
+        description: pack registry uid
+        type: string
+      schema:
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      server:
+        description: pack registry server or helm repo
+        type: string
+      tag:
+        description: pack tag
+        type: string
+      type:
+        description: type of the pack
+        enum:
+        - spectro
+        - helm
+        - manifest
+        - oci
+        type: string
+      values:
+        description: values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+      version:
+        description: pack version
+        type: string
+    required:
+    - layer
+    - name
+    type: object
+  v1PackValuesEntity:
+    description: Pack values entity to refer the existing pack for the values override
+    properties:
+      manifests:
+        description: Pack manifests are additional content as part of the profile
+        items:
+          $ref: '#/definitions/v1ManifestRefUpdateEntity'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      tag:
+        description: Pack version tag
+        type: string
+      type:
+        $ref: '#/definitions/v1PackType'
+      values:
+        description: Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+    required:
+    - name
+    type: object
+  v1PairingCode:
+    description: Pairing code response
+    properties:
+      pairingCode:
+        type: string
+    type: object
+  v1IngressConfig:
+    description: Ingress configuration for exposing the virtual cluster's kube-apiserver
+    properties:
+      host:
+        type: string
+      port:
+        format: int64
+        type: integer
+  v1ManifestRefUpdateEntity:
+    description: Manifest update request payload
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      name:
+        description: Manifest name
+        type: string
+      uid:
+        description: Manifest uid
+        type: string
+    required:
+    - name
+  v1GeolocationLatlong:
+    description: Geolocation Latlong entity
+    properties:
+      latitude:
+        description: Latitude of a resource
+        format: float64
+        type: number
+        x-omitempty: false
+      longitude:
+        description: Longitude of a resource
+        format: float64
+        type: number
+        x-omitempty: false
+    type: object
+  v1OverloadStatus:
+    description: Overload status
+    properties:
+      health:
+        $ref: '#/definitions/v1SpectroClusterHealthStatus'
+      isActive:
+        type: boolean
+        x-omitempty: false
+      isReady:
+        type: boolean
+        x-omitempty: false
+      kubectlCommands:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      notifications:
+        $ref: '#/definitions/v1ClusterNotificationStatus'
+      state:
+        type: string
+    type: object
+  v1ClusterResourcesEntity:
+    properties:
+      namespaces:
+        items:
+          $ref: '#/definitions/v1ClusterNamespaceResourceInputEntity'
+        type: array
+        uniqueItems: true
+      rbacs:
+        items:
+          $ref: '#/definitions/v1ClusterRbacInputEntity'
+        type: array
+        uniqueItems: true
+    type: object
+  v1PackType:
+    default: spectro
+    enum:
+    - spectro
+    - helm
+    - manifest
+    - oci
+    type: string
+  v1ObjectResReference:
+    description: Object resource reference
+    properties:
+      kind:
+        type: string
+      name:
+        type: string
+      projectUid:
+        type: string
+      tenantUid:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1OverlordVsphereCloudConfig:
+    properties:
+      clusterConfig:
+        $ref: '#/definitions/v1VsphereOverlordClusterConfigEntity'
+      clusterProfiles:
+        description: Cluster profiles pack configuration for private gateway cluster
+        items:
+          $ref: '#/definitions/v1SpectroClusterProfileEntity'
+        type: array
+      clusterSettings:
+        $ref: '#/definitions/v1ClusterConfigEntity'
+        description: clusterSettings is the generic configuration related to a cluster like OS patch, Rbac, Namespace allocation
+      size:
+        description: size of the pool, number of machines
+        format: int32
+        type: integer
+  v1CloudStackCloudAccount:
+    description: CloudStack cloud account credentials
+    properties:
+      apiKey:
+        description: API Key for CloudStack authentication
+        type: string
+      apiUrl:
+        description: API URL for CloudStack management server
+        type: string
+      domain:
+        description: Cloudstack domain
+        type: string
+      insecure:
+        description: 'Skip SSL certificate verification (default: false)'
+        type: boolean
+      secretKey:
+        description: Secret Key for CloudStack authentication
+        type: string
+    required:
+    - apiUrl
+    - apiKey
+    - secretKey
+    type: object
+  v1OverlordCloudStackAccountEntity:
+    properties:
+      account:
+        $ref: '#/definitions/v1CloudStackCloudAccount'
+      shareWithProjects:
+        type: boolean
+        x-omitempty: false
+  v1HostClusterEndpointConfig:
+    properties:
+      ingressConfig:
+        $ref: '#/definitions/v1IngressConfig'
+      loadBalancerConfig:
+        $ref: '#/definitions/v1LoadBalancerConfig'
+  v1VsphereCloudAccount:
+    properties:
+      insecure:
+        description: Insecure is a flag that controls whether or not to validate the vSphere server's certificate.
+        type: boolean
+        x-omitempty: false
+      password:
+        type: string
+      username:
+        type: string
+      vcenterServer:
+        description: VcenterServer is the address of the vSphere endpoint
+        type: string
+    required:
+    - vcenterServer
+    - username
+    - password
+    type: object
+  v1IpPoolEntity:
+    description: IP Pool entity definition
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          pool:
+            $ref: '#/definitions/v1Pool'
+          priavetGatewayUid:
+            type: string
+          restrictToSingleCluster:
+            description: if true, restricts this IP pool to be used by single cluster at any time
+            type: boolean
+            x-omitempty: false
+        type: object
+      status:
+        $ref: '#/definitions/v1IpPoolStatus'
+    type: object
+  v1ClusterProfileSpec:
+    description: ClusterProfileTemplate can be in draft mode, or published mode User only see the latest published template, and (or) the draft template User can apply either the draft version or the latest published version to a cluster when user create a draft version, just copy the Published template, increment the version, and keep changing the draft template without increment the draft version when user publish a draft, the version is fixed, and won't be able to make any modification on published template For each clusterprofile that has a published version, there will be a ClusterProfileArchive automatically created when user publish a draft, the published version will also be copied over to the corresponding ClusterProfileArchive it is just in case in the future for whatever reason we may want to expose earlier versions
+    properties:
+      draft:
+        $ref: '#/definitions/v1ClusterProfileTemplate'
+      published:
+        $ref: '#/definitions/v1ClusterProfileTemplate'
+      version:
+        type: string
+      versions:
+        description: Cluster profile's list of all the versions
+        items:
+          $ref: '#/definitions/v1ClusterProfileVersion'
+        type: array
+    type: object
+  v1MaasInstanceType:
+    properties:
+      minCPU:
+        description: Minimum CPU cores
+        format: int32
+        type: integer
+      minDiskSizeInGB:
+        description: Minimum disk size in GiB
+        format: int32
+        type: integer
+      minMemInMB:
+        description: Minimum memory in MiB
+        format: int32
+        type: integer
+    type: object
+  v1CloudStackResource:
+    description: Cloud stack resource information
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  v1ClusterRbacInputEntity:
+    description: Cluster RBAC role binding defintion
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaUpdateEntity'
+      spec:
+        $ref: '#/definitions/v1ClusterRbacSpec'
+    type: object
+  v1OverloadVsphereOva:
+    description: Overload ova details
+    properties:
+      location:
+        type: string
+        x-omitempty: false
+    type: object
+  v1HyperShiftConfig:
+    description: 'HyperShiftConfig defines the configuration for HyperShift and OpenShift clusters.
+
+      This configuration is only applicable to MaaS clusters.
+
+      '
+    properties:
+      clusterDeploymentType:
+        $ref: '#/definitions/v1ClusterDeploymentType'
+      hostClusterUid:
+        description: 'The UID of the host HyperShift cluster.
+
+          This field is required only when clusterDeploymentType is set to ''openshift''.
+
+          Must reference a valid HyperShift cluster.
+
+          '
+        type: string
+    type: object
+  v1ClusterNamespaceResourceAllocation:
+    description: Cluster namespace resource allocation
+    properties:
+      cpuCores:
+        exclusiveMinimum: true
+        minimum: 0
+        type: number
+      gpuConfig:
+        $ref: '#/definitions/v1GpuConfig'
+      memoryMiB:
+        exclusiveMinimum: true
+        minimum: 0
+        type: number
+  v1CloudStackZoneSpec:
+    description: CloudStack zone with its network configuration
+    properties:
+      id:
+        description: Zone Id
+        type: string
+      name:
+        description: Zone name
+        type: string
+      network:
+        $ref: '#/definitions/v1CloudStackNetworkSpec'
+        description: Network configuration specific to this zone
+    type: object
+  v1VsphereOverlordClusterConfigEntity:
+    properties:
+      controlPlaneEndpoint:
+        $ref: '#/definitions/v1ControlPlaneEndPoint'
+        description: The optional control plane endpoint, which can be an IP or FQDN
+      ntpServers:
+        description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.
+        items:
+          type: string
+        type: array
+      placements:
+        description: Placements configuration Placements If defined, will replace default values defined in VsphereClusterConfig Array means one MachinePool can span across multiple vsphere compute cluster
+        items:
+          $ref: '#/definitions/v1VspherePlacementConfigEntity'
+        type: array
+      sshKeys:
+        description: SSHKeys specifies a list of ssh authorized keys for the 'spectro' user
+        items:
+          type: string
+        type: array
+      staticIp:
+        description: whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name
+        type: boolean
+    type: object
+  v1ClusterProfileTemplate:
+    description: ClusterProfileTemplate contains details of a clusterprofile definition
+    properties:
+      cloudType:
+        type: string
+      name:
+        type: string
+      packServerRefs:
+        description: PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      packServerSecret:
+        description: This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette
+        type: string
+      packs:
+        description: Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge
+        items:
+          $ref: '#/definitions/v1PackRef'
+        type: array
+      profileVersion:
+        description: version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster
+        type: string
+      relatedObject:
+        $ref: '#/definitions/v1ObjectReference'
+        description: RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with
+      type:
+        type: string
+      uid:
+        type: string
+      version:
+        description: Deprecated. Use profileVersion
+        format: int32
+        type: integer
+    type: object
+  v1LoadBalancerConfig:
+    description: Load balancer configuration for exposing the virtual cluster's kube-apiserver
+    properties:
+      externalIPs:
+        items:
+          type: string
+        type: array
+      externalTrafficPolicy:
+        type: string
+      loadBalancerSourceRanges:
+        items:
+          type: string
+        type: array
+  v1ClusterNamespaceSpec:
+    description: Cluster namespace spec
+    properties:
+      isRegex:
+        type: boolean
+        x-omitempty: false
+      relatedObject:
+        $ref: '#/definitions/v1RelatedObject'
+      resourceAllocation:
+        $ref: '#/definitions/v1ClusterNamespaceResourceAllocation'
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1RelatedObject:
+    description: Object for which the resource is related
+    properties:
+      kind:
+        enum:
+        - spectrocluster
+        - machine
+        - cloudconfig
+        - clusterprofile
+        - pack
+        - appprofile
+        - appdeployment
+        - edgehost
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ClusterNotificationStatus:
+    description: Cluster notifications status
+    properties:
+      isAvailable:
+        type: boolean
+        x-omitempty: false
+      isTemplateVariableResolutionPending:
+        type: boolean
+        x-omitempty: false
+  v1MaasCloudAccount:
+    properties:
+      apiEndpoint:
+        type: string
+      apiKey:
+        type: string
+      preferredSubnets:
+        description: list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet "10.11.130.0/24,10.10.10.0/24"
+        items:
+          type: string
+        type: array
+    required:
+    - apiKey
+    - apiEndpoint
+    type: object
+  v1UpdatedMsg:
+    description: Update response with message
+    properties:
+      msg:
+        type: string
+  v1Nameserver:
+    description: Nameserver define search domains and nameserver addresses
+    properties:
+      addresses:
+        items:
+          type: string
+        type: array
+      search:
+        items:
+          type: string
+        type: array
+    type: object
+  v1VsphereDatacenters:
+    description: List of Datacenters with computeclusters
+    properties:
+      items:
+        description: List of associated datacenters
+        items:
+          $ref: '#/definitions/v1VsphereDatacenter'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1OverlordCloudStackAccountCreate:
+    properties:
+      account:
+        $ref: '#/definitions/v1CloudStackCloudAccount'
+      name:
+        description: Name for the private gateway & cloud account
+        type: string
+      shareWithProjects:
+        type: boolean
+        x-omitempty: false
+  v1ClusterDeploymentType:
+    description: 'Defines the deployment type for HyperShift-enabled clusters.
+
+      - ''hypershift'': Indicates a HyperShift management cluster that hosts control planes for other clusters.
+
+      - ''openshift'': Indicates an OpenShift cluster whose control plane is hosted on a HyperShift management cluster.'
+    enum:
+    - hypershift
+    - openshift
+    type: string
+  v1PackPreset:
+    description: PackPreset defines the preset pack values
+    properties:
+      add:
+        type: string
+        x-omitempty: false
+      displayName:
+        type: string
+        x-omitempty: false
+      group:
+        type: string
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      remove:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1ProjectResourceReference:
+    description: Project-scoped resource reference
+    properties:
+      kind:
+        description: Kind of the referenced resource
+        type: string
+      name:
+        description: Name of the referenced resource
+        type: string
+      projectUid:
+        description: UID of the Project that scopes this resource
+        type: string
+      uid:
+        description: UID of the referenced resource
+        type: string
+    type: object
+  v1VsphereComputeCluster:
+    description: Vsphere compute cluster
+    properties:
+      datastores:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      name:
+        type: string
+      networks:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      resourcePools:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1CloudStackNetworkConfig:
+    description: Network configuration for CloudStack instances
+    properties:
+      id:
+        description: Network id
+        type: string
+      name:
+        description: Network name
+        type: string
+    type: object
+  v1CloudStackVPCSpec:
+    description: VPC configuration for CloudStack networks
+    properties:
+      cidr:
+        description: CIDR block for the VPC
+        type: string
+      id:
+        description: VPC id
+        type: string
+      name:
+        description: VPC name
+        type: string
+      offering:
+        description: VPC offering name
+        type: string
+    type: object
+  v1OverlordMaasCloudConfig:
+    properties:
+      clusterConfig:
+        $ref: '#/definitions/v1MaasClusterConfig'
+      clusterProfiles:
+        description: Cluster profiles pack configuration for private gateway cluster
+        items:
+          $ref: '#/definitions/v1SpectroClusterProfileEntity'
+        type: array
+      clusterSettings:
+        $ref: '#/definitions/v1ClusterConfigEntity'
+        description: clusterSettings is the generic configuration related to a cluster like OS patch, Rbac, Namespace allocation
+      machineConfig:
+        $ref: '#/definitions/v1MaasMachineConfigEntity'
+      size:
+        description: size of the pool, number of machines
+        format: int32
+        type: integer
+  v1HostClusterConfig:
+    properties:
+      clusterEndpoint:
+        $ref: '#/definitions/v1HostClusterEndpoint'
+        description: host cluster configuration
+      clusterGroup:
+        $ref: '#/definitions/v1ObjectReference'
+        description: cluster group reference
+      hostCluster:
+        $ref: '#/definitions/v1ObjectReference'
+        description: host cluster reference
+      isHostCluster:
+        default: false
+        description: is enabled as host cluster
+        type: boolean
+        x-omitempty: false
+  v1IpPoolStatus:
+    description: IP Pool status
+    properties:
+      allottedIps:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      associatedClusters:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      availableIps:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      inUse:
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1IpPools:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1IpPoolEntity'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1VspherePlacementConfigEntity:
+    description: 'Both ClusterConfig and MachinePoolConfig will have PlacementConfig MachinePoolconfig.Placements will overwrite values defined in ClusterConfig Currently the convention is: Datacenter / Folder / ImageTemplateFolder / Network should be defined at ClusterConfig Cluster / ResourcePool / Datastore / Network is defined at MachinePool ClusterConfig Network should only indicate use DHCP or not MachinePool Network should contain the actual network and IPPool'
+    properties:
+      cluster:
+        description: Cluster is the computecluster in vsphere
+        type: string
+      datacenter:
+        description: Datacenter is the name or inventory path of the datacenter where this machine's VM is created/located.
+        type: string
+      datastore:
+        description: Datastore is the datastore in which VMs are created/located.
+        type: string
+      folder:
+        description: Folder is the folder in which VMs are created/located.
+        type: string
+      imageTemplateFolder:
+        description: ImageTemplateFolder is the folder in which VMs templates are created/located. if empty will use default value spectro-templates
+        type: string
+      network:
+        $ref: '#/definitions/v1VsphereNetworkConfigEntity'
+        description: network info
+      resourcePool:
+        description: ResourcePool is the resource pool within the above computecluster Cluster
+        type: string
+      storagePolicyName:
+        description: StoragePolicyName of the storage policy to use with this Virtual Machine
+        type: string
+      uid:
+        description: UID for this placement
+        type: string
+    type: object
+  v1ClusterProfileVersion:
+    description: Cluster profile with version
+    properties:
+      uid:
+        type: string
+      version:
+        type: string
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1ObjectMetaUpdateEntity:
+    description: ObjectMeta update entity with uid as input
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1VsphereNetworkConfigEntity:
+    properties:
+      networkName:
+        description: NetworkName is the name of the network in which VMs are created/located.
+        type: string
+      parentPoolUid:
+        description: ParentPoolRef Uid to the ParentPool which allocates IPs for this IPPool
+        type: string
+      staticIp:
+        description: support dhcp or static IP, if false, use DHCP
+        type: boolean
+    required:
+    - networkName
+    type: object
+  v1SpectroClusterVariable:
+    description: Variable with value which will be used within the packs of cluster profile
+    properties:
+      name:
+        description: Variable name
+        type: string
+      value:
+        description: Actual value of the variable to be used within the cluster
+        type: string
+    required:
+    - name
+    type: object
+  v1OsPatchConfig:
+    properties:
+      onDemandPatchAfter:
+        $ref: '#/definitions/v1Time'
+        description: OnDemandPatchAfter is the desired time for one time on-demand patch
+      patchOnBoot:
+        description: PatchOnBoot indicates need to do patch when node first boot up, only once
+        type: boolean
+        x-omitempty: false
+      rebootIfRequired:
+        description: Reboot once the OS patch is applied
+        type: boolean
+        x-omitempty: false
+      schedule:
+        description: The schedule at which security patches will be applied to OS. Schedule should be in Cron format, see https://en.wikipedia.org/wiki/Cron for more help.
+        type: string
+    type: object
+  v1ClusterRbacBinding:
+    description: Cluster RBAC binding
+    properties:
+      namespace:
+        type: string
+      role:
+        $ref: '#/definitions/v1ClusterRoleRef'
+      subjects:
+        items:
+          $ref: '#/definitions/v1ClusterRbacSubjects'
+        type: array
+        uniqueItems: true
+      type:
+        enum:
+        - RoleBinding
+        - ClusterRoleBinding
+        type: string
+    type: object
+  v1OverlordVsphereAccountCreate:
+    properties:
+      account:
+        $ref: '#/definitions/v1VsphereCloudAccount'
+      name:
+        description: Name for the private gateway & cloud account
+        type: string
+      shareWithProjects:
+        type: boolean
+        x-omitempty: false
+  v1ControlPlaneEndPoint:
+    properties:
+      ddnsSearchDomain:
+        description: DDNSSearchDomain is the search domain used for resolving IP addresses when the EndpointType is DDNS. This search domain is appended to the generated Hostname to obtain the complete DNS name for the endpoint. If Host is already a DDNS FQDN, DDNSSearchDomain is not required
+        type: string
+      host:
+        description: IP or FQDN(External/DDNS)
+        type: string
+      type:
+        description: VIP or External
+        enum:
+        - VIP
+        - External
+        - DDNS
+        type: string
+    type: object
+  v1ClusterNamespaceResourceInputEntity:
+    description: Cluster Namespace resource definition
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaUpdateEntity'
+      spec:
+        $ref: '#/definitions/v1ClusterNamespaceSpec'
+    type: object
+  v1SpectroClusterProfileEntity:
+    description: Cluster profile request payload
+    properties:
+      packValues:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackValuesEntity'
+        type: array
+        uniqueItems: true
+      replaceWithProfile:
+        description: Cluster profile uid to be replaced with new profile
+        type: string
+      uid:
+        description: Cluster profile uid
+        type: string
+      variables:
+        items:
+          $ref: '#/definitions/v1SpectroClusterVariable'
+        type: array
+    type: object
+  v1InstanceConfig:
+    properties:
+      category:
+        type: string
+      cpuSet:
+        format: int64
+        type: integer
+      diskGiB:
+        format: int64
+        type: integer
+      memoryMiB:
+        description: MemoryMiB is the size of a virtual machine's memory, in MiB
+        format: int64
+        type: integer
+      name:
+        type: string
+      numCPUs:
+        description: NumCPUs is the number of virtual processors in a virtual machine
+        format: int32
+        type: integer
+  v1MaasClusterConfig:
+    description: Cluster level configuration for MAAS cloud and applicable for all the machine pools
+    properties:
+      domain:
+        description: Domain name of the cluster to be provisioned
+        type: string
+      enableLxdVm:
+        description: 'enableLxdVm controls MaaS KVM host enablement for the Host ControlPlane cluster only.
+
+          When true, Palette configures MaasMachineTemplate LXD settings so LXD initialization
+
+          is triggered on nodes of this (host) cluster. This does not affect workload clusters.
+
+          Cannot be enabled for clusters where useLxdVm is enabled for any of the control plane machine pool configs.'
+        type: boolean
+        x-omitempty: false
+      ntpServers:
+        description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.
+        items:
+          type: string
+        type: array
+      sshKeys:
+        description: SSH keys specifies a list of ssh authorized keys for the 'spectro' user
+        items:
+          type: string
+        type: array
+      staticIp:
+        description: whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name
+        type: boolean
+        x-omitempty: false
+    required:
+    - domain
+    type: object
+  v1DeletedMsg:
+    description: Deleted response with message
+    properties:
+      msg:
+        type: string
+  v1CloudStackClusterConfig:
+    description: Cluster level configuration for CloudStack cloud, same for all machinepools
+    properties:
+      controlPlaneEndpoint:
+        description: Endpoint IP to be used for API server, should only be enabled for static CloudStack network
+        type: string
+      overrideClusterAPIConfig:
+        description: 'YAML override for CAPI properties at cluster level.
+
+          Overrides pack-level and Palette-managed values.
+
+          '
+        type: string
+      project:
+        $ref: '#/definitions/v1CloudStackResource'
+        description: Project name for the cluster (optional)
+      sshKeyName:
+        description: SSH Key name for accessing cluster nodes
+        type: string
+      syncWithCKS:
+        description: SyncWithCKS determines if an externalManaged CKS cluster should be created (optional)
+        type: boolean
+      zones:
+        description: Multiple zones for multi-AZ deployments. If only one zone is specified, it will be treated as single-zone deployment
+        items:
+          $ref: '#/definitions/v1CloudStackZoneSpec'
+        type: array
+    type: object
+  v1MaasNetworkConfigEntity:
+    properties:
+      networkName:
+        description: NetworkName is the name of the network in which VMs are created/located.
+        type: string
+      parentPoolUid:
+        description: ParentPoolRef Uid to the ParentPool which allocates IPs for this IPPool
+        type: string
+      staticIp:
+        description: support dhcp or static IP, if false, use DHCP
+        type: boolean
+        x-omitempty: false
+    required:
+    - networkName
+    type: object
+  v1PackSchema:
+    description: PackSchema defines the schema definition, hints for the pack values
+    properties:
+      format:
+        type: string
+        x-omitempty: false
+      hints:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      listOptions:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      readonly:
+        type: boolean
+        x-omitempty: false
+      regex:
+        type: string
+        x-omitempty: false
+      required:
+        type: boolean
+        x-omitempty: false
+      type:
+        type: string
+        x-omitempty: false
+    type: object
+  v1OverlordMaasAccountCreate:
+    properties:
+      account:
+        $ref: '#/definitions/v1MaasCloudAccount'
+      name:
+        description: Name for the private gateway & cloud account
+        type: string
+      shareWithProjects:
+        type: boolean
+        x-omitempty: false
+  v1IpPoolInputEntity:
+    description: IP Pool input entity definition
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          pool:
+            $ref: '#/definitions/v1Pool'
+          restrictToSingleCluster:
+            description: if true, restricts this IP pool to be used by single cluster at any time
+            type: boolean
+        required:
+        - pool
+        type: object
+    type: object
+  v1ClusterProfile:
+    description: ClusterProfile is the Schema for the clusterprofiles API
+    properties:
+      apiVersion:
+        description: 'APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+        type: string
+      kind:
+        description: 'Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ClusterProfileSpec'
+      status:
+        $ref: '#/definitions/v1ClusterProfileStatus'
+    type: object
+  v1HostClusterEndpoint:
+    properties:
+      config:
+        $ref: '#/definitions/v1HostClusterEndpointConfig'
+      type:
+        description: is enabled as host cluster
+        enum:
+        - Ingress
+        - LoadBalancer
+        type: string
+  v1SpectroClusterHealthCondition:
+    description: Spectro cluster health condition
+    properties:
+      message:
+        type: string
+      relatedObject:
+        $ref: '#/definitions/v1RelatedObject'
+        type: object
+      type:
+        type: string
+  v1ClusterRbacSpec:
+    description: Cluster RBAC spec
+    properties:
+      bindings:
+        items:
+          $ref: '#/definitions/v1ClusterRbacBinding'
+        type: array
+        uniqueItems: true
+      isSystem:
+        default: false
+        description: Set to true when the binding is created automatically by the system, rather than manually by the user
+        type: boolean
+      relatedObject:
+        $ref: '#/definitions/v1RelatedObject'
+    type: object
+  v1Overlords:
+    description: Array of Overlords
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1Overlord'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1Overlord:
+    description: Overlord defintiion
+    properties:
+      kind:
+        type: string
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1OverloadSpec'
+      status:
+        $ref: '#/definitions/v1OverloadStatus'
+    type: object
+  v1VsphereDatacenter:
+    description: List of Datacenter with computeclusters
+    properties:
+      computeclusters:
+        description: List  of the VSphere compute clusters in datacenter
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      datacenter:
+        description: name of the datacenter of the VSphere
+        type: string
+      folders:
+        description: List  of the VSphere folders in datacenter
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1CloudStackNetworkSpec:
+    description: Enhanced network configuration for CloudStack
+    properties:
+      gateway:
+        description: Gateway IP address for the network
+        type: string
+      id:
+        description: Network id
+        type: string
+      name:
+        description: Network name
+        type: string
+      netmask:
+        description: Network mask for the network
+        type: string
+      offering:
+        description: Network offering name
+        type: string
+      routingMode:
+        description: Routing mode for the network
+        type: string
+      type:
+        description: 'Network type: Isolated, Shared, etc.'
+        type: string
+      vpc:
+        $ref: '#/definitions/v1CloudStackVPCSpec'
+        description: VPC configuration (optional, for VPC networks)
+    type: object
+  v1ObjectMetaInputEntitySchema:
+    description: Resource metadata
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    required:
+    - metadata
+    type: object
+  v1OverlordManifest:
+    description: overlord manifest
+    properties:
+      manifest:
+        type: string
+    type: object
+  v1LifecycleConfig:
+    properties:
+      pause:
+        default: false
+        description: enable pause life cycle config
+        type: boolean
+        x-omitempty: false
+  v1MachineManagementConfig:
+    properties:
+      osPatchConfig:
+        $ref: '#/definitions/v1OsPatchConfig'
+        description: "OS patch config contains properties to patch node os with latest security packages. \nIf OsPatchConfig is not provided then node os will not be patched with latest security updates.\nNote: For edge based cluster (like edge-native type) the osPatchConfig is NOT applicable, the values will be ignored.\n"
+    type: object
+  v1VsphereComputeClusterResources:
+    description: Datacenter and its resources like datastore, resoucepool, folders
+    properties:
+      computecluster:
+        $ref: '#/definitions/v1VsphereComputeCluster'
+      datacenter:
+        description: Name of the datacenter
+        type: string
+    type: object
+  v1OverloadSpec:
+    description: Overload spec
+    properties:
+      cloudAccountUid:
+        type: string
+        x-omitempty: false
+      ipAddress:
+        type: string
+      ipPools:
+        items:
+          $ref: '#/definitions/v1IpPoolEntity'
+        type: array
+      isSelfHosted:
+        type: boolean
+      isSystem:
+        type: boolean
+      spectroClusterUid:
+        type: string
+        x-omitempty: false
+      tenantUid:
+        type: string
+    type: object
+  v1SpectroClusterHealthStatus:
+    description: Spectro cluster health status
+    properties:
+      agentVersion:
+        type: string
+      conditions:
+        items:
+          $ref: '#/definitions/v1SpectroClusterHealthCondition'
+        type: array
+        uniqueItems: true
+      lastHeartBeatTimestamp:
+        $ref: '#/definitions/v1Time'
+      state:
+        type: string
+  v1OverlordMaasAccountEntity:
+    properties:
+      account:
+        $ref: '#/definitions/v1MaasCloudAccount'
+      shareWithProjects:
+        type: boolean
+        x-omitempty: false
+  v1OverlordCloudStackCloudConfig:
+    properties:
+      clusterConfig:
+        $ref: '#/definitions/v1CloudStackClusterConfig'
+      clusterProfiles:
+        description: Cluster profiles pack configuration for private gateway cluster
+        items:
+          $ref: '#/definitions/v1SpectroClusterProfileEntity'
+        type: array
+      clusterSettings:
+        $ref: '#/definitions/v1ClusterConfigEntity'
+        description: clusterSettings is the generic configuration related to a cluster like OS patch, Rbac, Namespace allocation
+      machineConfig:
+        $ref: '#/definitions/v1CloudStackMachineConfigEntity'
+      size:
+        description: size of the pool, number of machines
+        format: int32
+        type: integer
+  v1ClusterConfigEntity:
+    properties:
+      clusterMetaAttribute:
+        description: ClusterMetaAttribute can be used to set additional cluster metadata information.
+        type: string
+      controlPlaneHealthCheckTimeout:
+        type: string
+      hostClusterConfig:
+        $ref: '#/definitions/v1HostClusterConfig'
+      hyperShiftConfig:
+        $ref: '#/definitions/v1HyperShiftConfig'
+      lifecycleConfig:
+        $ref: '#/definitions/v1LifecycleConfig'
+      location:
+        $ref: '#/definitions/v1ClusterLocation'
+      machineManagementConfig:
+        $ref: '#/definitions/v1MachineManagementConfig'
+      resources:
+        $ref: '#/definitions/v1ClusterResourcesEntity'
+      timezone:
+        description: Timezone of a cluster in IANA standard format. It is mandatory field if cluster is deployed through template, else it is optional
+        type: string
+      updateWorkerPoolsInParallel:
+        type: boolean
+    type: object
+  v1ClusterLocation:
+    description: Cluster location information
+    properties:
+      countryCode:
+        description: country code for cluster location
+        type: string
+      countryName:
+        description: country name for cluster location
+        type: string
+      geoLoc:
+        $ref: '#/definitions/v1GeolocationLatlong'
+      regionCode:
+        description: region code for cluster location
+        type: string
+      regionName:
+        description: region name for cluster location
+        type: string
+    type: object
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or modify the referred object.
+    properties:
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1MaasMachineConfigEntity:
+    properties:
+      azs:
+        description: for control plane pool, this will be the failure domains for kcp
+        items:
+          type: string
+        type: array
+      instanceType:
+        $ref: '#/definitions/v1MaasInstanceType'
+      network:
+        $ref: '#/definitions/v1MaasNetworkConfigEntity'
+      resourcePool:
+        type: string
+      useLxdVm:
+        description: 'useLxdVm enables on-demand LXD VM provisioning for this machine pool (workload clusters only).
+
+          When true, machines in this pool are created as MAAS LXD-backed VMs instead of bare metal.'
+        type: boolean
+        x-omitempty: false
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

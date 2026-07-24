@@ -1,0 +1,282 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations metrics API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: metrics
+  x-displayName: Metrics
+paths:
+  /v1/metrics/{resourceKind}/values:
+    get:
+      description: Returns all the metrics for a given resource kind
+      operationId: v1MetricsList
+      parameters:
+      - enum:
+        - pod
+        - namespace
+        - spectrocluster
+        - machine
+        - project
+        in: path
+        name: resourceKind
+        required: true
+        type: string
+      - default: all
+        in: query
+        name: metricKind
+        type: string
+      - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+        format: date-time
+        in: query
+        name: startTime
+        type: string
+      - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+        format: date-time
+        in: query
+        name: endTime
+        type: string
+      - default: 1
+        format: int32
+        in: query
+        name: period
+        type: integer
+      - default: false
+        description: Deprecated. includeMasterMachines in boolean, group the data point by including control plane nodes if set to true
+        in: query
+        name: includeMasterMachines
+        type: boolean
+      - default: false
+        description: includeControlPlaneMachines in boolean, group the data point by including control plane nodes if set to true
+        in: query
+        name: includeControlPlaneMachines
+        type: boolean
+      - default: false
+        description: if true then api returns only aggregation values, else api returns all data points by default
+        in: query
+        name: discrete
+        type: boolean
+      - in: query
+        name: spectroClusterUid
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of metric items
+          schema:
+            $ref: '#/definitions/v1MetricTimeSeriesList'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves the list of metrics for a specified resource kind
+      tags:
+      - metrics
+  /v1/metrics/{resourceKind}/{resourceUid}/values:
+    delete:
+      operationId: v1MetricsUidDelete
+      parameters:
+      - enum:
+        - pod
+        - namespace
+        - spectrocluster
+        - machine
+        - project
+        in: path
+        name: resourceKind
+        required: true
+        type: string
+      - in: path
+        name: resourceUid
+        required: true
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the metrics of the specified resource
+      tags:
+      - metrics
+    get:
+      operationId: v1MetricsUidList
+      parameters:
+      - enum:
+        - pod
+        - namespace
+        - spectrocluster
+        - machine
+        - project
+        in: path
+        name: resourceKind
+        required: true
+        type: string
+      - in: path
+        name: resourceUid
+        required: true
+        type: string
+      - default: all
+        description: multiple metric kinds can be provided with comma separated
+        in: query
+        name: metricKind
+        type: string
+      - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+        format: date-time
+        in: query
+        name: startTime
+        type: string
+      - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+        format: date-time
+        in: query
+        name: endTime
+        type: string
+      - default: 1
+        description: period in minutes, group the data point by the specified period
+        format: int32
+        in: query
+        name: period
+        type: integer
+      - default: false
+        description: Deprecated. includeMasterMachines in boolean, group the data point by including control plane nodes if set to true
+        in: query
+        name: includeMasterMachines
+        type: boolean
+      - default: false
+        description: includeControlPlaneMachines in boolean, group the data point by including control plane nodes if set to true
+        in: query
+        name: includeControlPlaneMachines
+        type: boolean
+      - default: false
+        description: if true then api returns only aggregation values, else api returns all data points by default
+        in: query
+        name: discrete
+        type: boolean
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of metric items
+          schema:
+            $ref: '#/definitions/v1MetricTimeSeries'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the metrics for a specified resource uid
+      tags:
+      - metrics
+definitions:
+  v1MetricTimeSeries:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1Metrics'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1MetricsList:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1MetricMetadata'
+      metrics:
+        items:
+          $ref: '#/definitions/v1Metrics'
+        type: array
+        uniqueItems: true
+    type: object
+  v1MetricAggregation:
+    description: Aggregation values
+    properties:
+      avg:
+        type: number
+        x-omitempty: false
+      count:
+        format: int64
+        type: number
+        x-omitempty: false
+      max:
+        type: number
+        x-omitempty: false
+      min:
+        type: number
+        x-omitempty: false
+      sum:
+        type: number
+        x-omitempty: false
+    type: object
+  v1Metrics:
+    properties:
+      aggregation:
+        $ref: '#/definitions/v1MetricAggregation'
+      kind:
+        type: string
+      points:
+        items:
+          $ref: '#/definitions/v1MetricPoint'
+        type: array
+        uniqueItems: true
+      unit:
+        type: string
+    type: object
+  v1MetricPoint:
+    description: Metric Info
+    properties:
+      avg:
+        type: number
+      count:
+        format: int64
+        type: number
+      max:
+        type: number
+      min:
+        type: number
+      sum:
+        type: number
+      timestamp:
+        format: int64
+        type: number
+      value:
+        type: number
+        x-omitempty: false
+    type: object
+  v1MetricMetadata:
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1MetricTimeSeriesList:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1MetricsList'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

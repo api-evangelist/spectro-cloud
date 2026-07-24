@@ -1,0 +1,1250 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations workspaces API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: workspaces
+  x-displayName: Workspaces
+paths:
+  /v1/workspaces:
+    post:
+      operationId: v1WorkspacesCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create workspace
+      tags:
+      - workspaces
+  /v1/workspaces/teams/{teamUid}/roles:
+    parameters:
+    - in: path
+      name: teamUid
+      required: true
+      type: string
+    get:
+      operationId: v1TeamsWorkspaceGetRoles
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1WorkspaceScopeRoles'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified team's workspaces and roles data
+      tags:
+      - workspaces
+    put:
+      operationId: v1TeamsWorkspaceRolesPut
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1WorkspacesRolesPatch'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the workspace roles for the specified team
+      tags:
+      - workspaces
+  /v1/workspaces/users/{userUid}/roles:
+    parameters:
+    - in: path
+      name: userUid
+      required: true
+      type: string
+    get:
+      description: Returns a User with workspaces and roles
+      operationId: v1UsersWorkspaceGetRoles
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1WorkspaceScopeRoles'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified User workspaces and Roles information
+      tags:
+      - workspaces
+    put:
+      description: User is updated with workspace roles
+      operationId: v1UsersWorkspaceRolesPut
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1WorkspacesRolesPatch'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the workspace roles for user
+      tags:
+      - workspaces
+  /v1/workspaces/validate/name:
+    get:
+      operationId: v1WorkspacesValidateName
+      parameters:
+      - in: query
+        name: name
+        required: true
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates the workspace name
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1WorkspacesUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified workspace
+      tags:
+      - workspaces
+    get:
+      operationId: v1WorkspacesUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Workspace'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified workspace
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/backup:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1WorkspaceOpsBackupDelete
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceBackupDeleteEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Delete workspace backup
+      tags:
+      - workspaces
+    get:
+      operationId: v1WorkspaceOpsBackupGet
+      parameters:
+      - in: query
+        name: backupRequestUid
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1WorkspaceBackup'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the  workspace backup result
+      tags:
+      - workspaces
+    post:
+      operationId: v1WorkspaceOpsBackupCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceBackupConfigEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create workspace backup settings
+      tags:
+      - workspaces
+    put:
+      operationId: v1WorkspaceOpsBackupUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceBackupConfigEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update workspace backup settings
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/backup/onDemand:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1WorkspaceOpsBackupOnDemandCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceBackupConfigEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create On demand Workspace Backup
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/clusterNamespaces:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1WorkspacesUidClusterNamespacesUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceClusterNamespacesEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified workspace namespaces
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/clusterRbacs:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1WorkspacesClusterRbacCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterRbac'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create cluster rbac in workspace
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/clusterRbacs/{clusterRbacUid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: path
+      name: clusterRbacUid
+      required: true
+      type: string
+    delete:
+      operationId: v1WorkspacesUidClusterRbacDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified workspace cluster rbac
+      tags:
+      - workspaces
+    put:
+      operationId: v1WorkspacesUidClusterRbacUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterRbac'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified workspace cluster rbac
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/meta:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1WorkspacesUidMetaUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ObjectMeta'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified workspace meta
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/resourceAllocations:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      description: Deprecated
+      operationId: v1WorkspacesUidResourceAllocationsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceResourceAllocationsEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified workspace resource allocations
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/restore:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1WorkspaceOpsRestoreGet
+      parameters:
+      - in: query
+        name: restoreRequestUid
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1WorkspaceRestore'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the  workspace restore result
+      tags:
+      - workspaces
+  /v1/workspaces/{uid}/restore/onDemand:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    post:
+      operationId: v1WorkspaceOpsRestoreOnDemandCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1WorkspaceRestoreConfigEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create On demand Workspace Restore
+      tags:
+      - workspaces
+definitions:
+  v1IncludeClusterResourceMode:
+    description: 'Specifies the scope of cluster-wide resources to include in the backup based on the flag''--include-cluster-resources'':
+
+      - "Always": --include-cluster-resources=true, which includes all cluster-wide resources; restores only on the original cluster.
+
+      - "Auto": don''t specify --include-cluster-resources, which exclude general cluster-wide resources, but includes PersistentVolumes linked to selected namespaces.
+
+      - "Never": --include-cluster-resources=false, exclude all cluster-wide resources, including PersistentVolumes.
+
+      '
+    enum:
+    - Always
+    - Auto
+    - Never
+    type: string
+  v1GpuConfig:
+    description: GPU configuration for resource allocation
+    properties:
+      limit:
+        description: GPU resource limit
+        format: int32
+        minimum: -1
+        type: integer
+        x-omitempty: false
+      provider:
+        default: nvidia
+        description: GPU provider (only nvidia is supported currently)
+        enum:
+        - nvidia
+        type: string
+  v1WorkspacePolicies:
+    description: Workspace policies
+    properties:
+      backupPolicy:
+        $ref: '#/definitions/v1WorkspaceBackupConfigEntity'
+  v1WorkspaceError:
+    description: Workspace error
+    properties:
+      clusterUid:
+        type: string
+      msg:
+        type: string
+      name:
+        type: string
+      resourceType:
+        type: string
+  v1WorkspaceEntity:
+    description: Workspace information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1WorkspaceSpec'
+  v1WorkspaceBackupStatus:
+    description: Workspace backup status
+    properties:
+      workspaceBackupStatuses:
+        items:
+          $ref: '#/definitions/v1WorkspaceBackupStatusMeta'
+        type: array
+  v1WorkspaceRestoreStatus:
+    description: Workspace restore status
+    properties:
+      workspaceRestoreStatuses:
+        items:
+          $ref: '#/definitions/v1WorkspaceRestoreStatusMeta'
+        type: array
+  v1WorkspaceNamespaceImage:
+    description: Workspace namespace image information
+    properties:
+      blackListedImages:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  v1WorkspacesRolesPatch:
+    properties:
+      workspaces:
+        items:
+          $ref: '#/definitions/v1WorkspaceRolesPatch'
+        type: array
+    type: object
+  v1WorkspaceRolesPatch:
+    properties:
+      roles:
+        items:
+          type: string
+        type: array
+      uid:
+        type: string
+    type: object
+  v1WorkspaceRolesUidSummary:
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1WorkspaceClusterRestoreState:
+    description: Workspace cluster restore state
+    properties:
+      msg:
+        type: string
+      restoreTime:
+        $ref: '#/definitions/v1Time'
+      state:
+        type: string
+  v1WorkspaceBackupClusterRef:
+    description: Workspace backup cluster ref
+    properties:
+      backupName:
+        type: string
+      clusterUid:
+        type: string
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1WorkspaceRestoreStatusMeta:
+    description: Workspace restore status meta
+    properties:
+      actor:
+        $ref: '#/definitions/v1ClusterFeatureActor'
+      requestUid:
+        type: string
+      workspaceRestoreConfig:
+        $ref: '#/definitions/v1WorkspaceClusterRestoreConfig'
+  v1ClusterRbacSpec:
+    description: Cluster RBAC spec
+    properties:
+      bindings:
+        items:
+          $ref: '#/definitions/v1ClusterRbacBinding'
+        type: array
+        uniqueItems: true
+      isSystem:
+        default: false
+        description: Set to true when the binding is created automatically by the system, rather than manually by the user
+        type: boolean
+      relatedObject:
+        $ref: '#/definitions/v1RelatedObject'
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1ClusterRbacSubjects:
+    description: Cluster role ref
+    properties:
+      name:
+        type: string
+      namespace:
+        type: string
+      type:
+        enum:
+        - User
+        - Group
+        - ServiceAccount
+        type: string
+    type: object
+  v1ProjectsWorkspaces:
+    description: List projects and its workspaces
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+      workspaces:
+        items:
+          $ref: '#/definitions/v1WorkspacesRoles'
+        type: array
+        uniqueItems: true
+  v1ClusterRoleRef:
+    description: Cluster role ref
+    properties:
+      kind:
+        enum:
+        - Role
+        - ClusterRole
+        type: string
+      name:
+        type: string
+    type: object
+  v1WorkspaceStatus:
+    description: Workspace status
+    properties:
+      errors:
+        items:
+          $ref: '#/definitions/v1WorkspaceError'
+        type: array
+        uniqueItems: true
+  v1WorkspaceClusterBackupResponse:
+    description: Workspace cluster backup response
+    properties:
+      backupStatusMeta:
+        $ref: '#/definitions/v1BackupStatusMeta'
+      backupUid:
+        type: string
+      clusterName:
+        type: string
+      clusterUid:
+        type: string
+  v1WorkspaceResourceAllocation:
+    description: Workspace resource allocation
+    properties:
+      cpuCores:
+        minimum: -1
+        type: number
+        x-omitempty: false
+      gpuConfig:
+        $ref: '#/definitions/v1GpuConfig'
+      memoryMiB:
+        minimum: -1
+        type: number
+        x-omitempty: false
+  v1Workspace:
+    description: Workspace information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1WorkspaceSpec'
+      status:
+        $ref: '#/definitions/v1WorkspaceStatus'
+  v1BackupStatusMeta:
+    description: Backup  status meta
+    properties:
+      backupName:
+        type: string
+      backupState:
+        $ref: '#/definitions/v1BackupState'
+      backupedNamespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      expiryDate:
+        $ref: '#/definitions/v1Time'
+  v1ClusterResourceAllocation:
+    description: Workspace resource allocation
+    properties:
+      clusterUid:
+        type: string
+      resourceAllocation:
+        $ref: '#/definitions/v1WorkspaceResourceAllocation'
+  v1WorkspaceBackupStatusConfig:
+    description: Workspace backup status config
+    properties:
+      backupName:
+        type: string
+      durationInHours:
+        format: int64
+        type: number
+      includeAllDisks:
+        type: boolean
+      includeClusterResourceMode:
+        $ref: '#/definitions/v1IncludeClusterResourceMode'
+      includeClusterResources:
+        description: Deprecated. Use includeClusterResourceMode
+        type: boolean
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  v1ClusterBackupConfig:
+    description: Cluster backup config
+    properties:
+      backupLocationName:
+        type: string
+      backupLocationUid:
+        type: string
+      backupName:
+        type: string
+      backupPrefix:
+        type: string
+      durationInHours:
+        format: int64
+        type: number
+      includeAllDisks:
+        type: boolean
+      includeClusterResourceMode:
+        $ref: '#/definitions/v1IncludeClusterResourceMode'
+      includeClusterResources:
+        description: Deprecated. Use includeClusterResourceMode
+        type: boolean
+      locationType:
+        type: string
+      namespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      schedule:
+        $ref: '#/definitions/v1ClusterFeatureSchedule'
+  v1WorkspaceScopeRoles:
+    description: List all workspaces with the roles assigned to the users
+    properties:
+      projects:
+        items:
+          $ref: '#/definitions/v1ProjectsWorkspaces'
+        type: array
+        uniqueItems: true
+  v1WorkspaceRestore:
+    description: Workspace restore
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1WorkspaceRestoreSpec'
+      status:
+        $ref: '#/definitions/v1WorkspaceRestoreStatus'
+  v1ClusterRbacStatus:
+    description: Cluster rbac status
+    properties:
+      errors:
+        items:
+          $ref: '#/definitions/v1ClusterResourceError'
+        type: array
+        uniqueItems: true
+  v1BackupState:
+    description: Backup state
+    properties:
+      backupTime:
+        $ref: '#/definitions/v1Time'
+      deleteState:
+        type: string
+      msg:
+        type: string
+      state:
+        type: string
+  v1ClusterRbacBinding:
+    description: Cluster RBAC binding
+    properties:
+      namespace:
+        type: string
+      role:
+        $ref: '#/definitions/v1ClusterRoleRef'
+      subjects:
+        items:
+          $ref: '#/definitions/v1ClusterRbacSubjects'
+        type: array
+        uniqueItems: true
+      type:
+        enum:
+        - RoleBinding
+        - ClusterRoleBinding
+        type: string
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1ClusterFeatureSchedule:
+    description: Cluster feature schedule
+    properties:
+      scheduledRunTime:
+        type: string
+  v1RelatedObject:
+    description: Object for which the resource is related
+    properties:
+      kind:
+        enum:
+        - spectrocluster
+        - machine
+        - cloudconfig
+        - clusterprofile
+        - pack
+        - appprofile
+        - appdeployment
+        - edgehost
+        type: string
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1WorkspaceClusterRestoreConfig:
+    description: Workspace cluster restore config
+    properties:
+      backupName:
+        type: string
+      clusterRestoreRefs:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterRestoreResponse'
+        type: array
+      restoreState:
+        $ref: '#/definitions/v1WorkspaceRestoreState'
+      restoreTime:
+        $ref: '#/definitions/v1Time'
+  v1WorkspaceNamespaceResourceAllocation:
+    description: Workspace namespace resource allocation
+    properties:
+      clusterResourceAllocations:
+        items:
+          $ref: '#/definitions/v1ClusterResourceAllocation'
+        type: array
+        uniqueItems: true
+      defaultResourceAllocation:
+        $ref: '#/definitions/v1WorkspaceResourceAllocation'
+  v1WorkspaceRestoreState:
+    description: Workspace restore state
+    properties:
+      deleteState:
+        type: string
+      state:
+        type: string
+  v1WorkspaceBackupSpec:
+    description: Workspace backup spec
+    properties:
+      config:
+        $ref: '#/definitions/v1WorkspaceBackupConfig'
+      workspaceUid:
+        type: string
+  v1WorkspaceClusterNamespacesEntity:
+    description: Workspace cluster namespaces update entity
+    properties:
+      clusterNamespaces:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterNamespace'
+        type: array
+        uniqueItems: true
+      clusterRefs:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterRef'
+        type: array
+        uniqueItems: true
+      quota:
+        $ref: '#/definitions/v1WorkspaceQuota'
+  v1WorkspaceResourceAllocationsEntity:
+    description: Workspace resource allocation update entity
+    properties:
+      clusterNamespaces:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterNamespace'
+        type: array
+        uniqueItems: true
+      clusterRefs:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterRef'
+        type: array
+        uniqueItems: true
+      quota:
+        $ref: '#/definitions/v1WorkspaceQuota'
+  v1WorkspaceRestoreConfig:
+    description: Workspace cluster restore config
+    properties:
+      backupName:
+        type: string
+      includeClusterResourceMode:
+        $ref: '#/definitions/v1IncludeClusterResourceMode'
+      includeClusterResources:
+        description: Deprecated. Use includeClusterResourceMode
+        type: boolean
+      includeNamespaces:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      preserveNodePorts:
+        type: boolean
+      restorePVs:
+        type: boolean
+      sourceClusterUid:
+        type: string
+    required:
+    - backupName
+    - sourceClusterUid
+  v1WorkspaceBackupConfig:
+    description: Workspace backup config
+    properties:
+      backupConfig:
+        $ref: '#/definitions/v1ClusterBackupConfig'
+      clusterUids:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      includeAllClusters:
+        type: boolean
+  v1WorkspaceBackup:
+    description: Workspace backup
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1WorkspaceBackupSpec'
+      status:
+        $ref: '#/definitions/v1WorkspaceBackupStatus'
+  v1WorkspaceRestoreConfigEntity:
+    description: Cluster restore config
+    properties:
+      backupRequestUid:
+        type: string
+      restoreConfigs:
+        items:
+          $ref: '#/definitions/v1WorkspaceRestoreConfig'
+        type: array
+        uniqueItems: true
+    required:
+    - backupRequestUid
+  v1ClusterFeatureActor:
+    description: Compliance Scan actor
+    properties:
+      actorType:
+        type: string
+      uid:
+        type: string
+  v1ClusterResourceError:
+    description: Cluster resource error
+    properties:
+      msg:
+        type: string
+      name:
+        type: string
+      resourceType:
+        type: string
+  v1WorkspaceSpec:
+    description: Workspace specifications
+    properties:
+      clusterNamespaces:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterNamespace'
+        type: array
+        uniqueItems: true
+      clusterRbacs:
+        items:
+          $ref: '#/definitions/v1ClusterRbac'
+        type: array
+        uniqueItems: true
+      clusterRefs:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterRef'
+        type: array
+        uniqueItems: true
+      policies:
+        $ref: '#/definitions/v1WorkspacePolicies'
+      quota:
+        $ref: '#/definitions/v1WorkspaceQuota'
+  v1WorkspaceClusterNamespace:
+    description: Workspace cluster namespace
+    properties:
+      image:
+        $ref: '#/definitions/v1WorkspaceNamespaceImage'
+      isRegex:
+        type: boolean
+        x-omitempty: false
+      name:
+        type: string
+      namespaceResourceAllocation:
+        $ref: '#/definitions/v1WorkspaceNamespaceResourceAllocation'
+  v1WorkspaceClusterBackupConfig:
+    description: Workspace cluster backup config
+    properties:
+      backupName:
+        type: string
+      backupState:
+        $ref: '#/definitions/v1WorkspaceBackupState'
+      backupTime:
+        $ref: '#/definitions/v1Time'
+      clusterBackupRefs:
+        items:
+          $ref: '#/definitions/v1WorkspaceClusterBackupResponse'
+        type: array
+      config:
+        $ref: '#/definitions/v1WorkspaceBackupStatusConfig'
+      requestTime:
+        $ref: '#/definitions/v1Time'
+  v1WorkspaceBackupStatusMeta:
+    description: Workspace backup status meta
+    properties:
+      actor:
+        $ref: '#/definitions/v1ClusterFeatureActor'
+      requestUid:
+        type: string
+      workspaceBackupConfig:
+        $ref: '#/definitions/v1WorkspaceClusterBackupConfig'
+  v1WorkspaceRestoreSpec:
+    description: Workspace restore spec
+    properties:
+      workspaceUid:
+        type: string
+  v1WorkspaceClusterRef:
+    description: Workspace cluster reference
+    properties:
+      clusterName:
+        type: string
+      clusterUid:
+        type: string
+  v1WorkspaceBackupDeleteEntity:
+    description: Cluster backup delete config
+    properties:
+      clusterConfigs:
+        items:
+          $ref: '#/definitions/v1WorkspaceBackupClusterRef'
+        type: array
+        uniqueItems: true
+      requestUid:
+        type: string
+  v1WorkspaceBackupState:
+    description: Workspace backup state
+    properties:
+      deleteState:
+        type: string
+      state:
+        type: string
+  v1WorkspacesRoles:
+    description: Workspace users and their roles
+    properties:
+      inheritedRoles:
+        items:
+          $ref: '#/definitions/v1WorkspaceRolesUidSummary'
+        type: array
+      name:
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/v1WorkspaceRolesUidSummary'
+        type: array
+      uid:
+        type: string
+  v1WorkspaceQuota:
+    description: Workspace resource quota
+    properties:
+      resourceAllocation:
+        $ref: '#/definitions/v1WorkspaceResourceAllocation'
+  v1WorkspaceClusterRestoreResponse:
+    description: Workspace cluster restore response
+    properties:
+      backupName:
+        type: string
+      clusterName:
+        type: string
+      clusterUid:
+        type: string
+      restoreStatusMeta:
+        $ref: '#/definitions/v1WorkspaceClusterRestoreState'
+      restoreUid:
+        type: string
+  v1WorkspaceBackupConfigEntity:
+    description: Cluster backup config
+    properties:
+      backupConfig:
+        $ref: '#/definitions/v1ClusterBackupConfig'
+      clusterUids:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      includeAllClusters:
+        type: boolean
+  v1ClusterRbac:
+    description: Cluster RBAC role binding defintion
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ClusterRbacSpec'
+      status:
+        $ref: '#/definitions/v1ClusterRbacStatus'
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

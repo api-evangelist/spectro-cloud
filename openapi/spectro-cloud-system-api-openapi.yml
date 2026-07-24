@@ -1,0 +1,4272 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations system API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: system
+  x-displayName: System
+paths:
+  /v1/system/activate:
+    post:
+      operationId: v1SystemActivate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemActivateRequest'
+      responses:
+        '200':
+          description: Empty response
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+        '400':
+          description: Invalid request data
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates activation key, updates plan, logs activation, updates cache
+      tags:
+      - system
+  /v1/system/activation:
+    get:
+      operationId: v1SystemActivationGet
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/v1SystemActivationResponse'
+        '400':
+          description: Invalid request data
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns system activations doc, to be used in sysadmin console
+      tags:
+      - system
+  /v1/system/admin/email:
+    patch:
+      operationId: V1SystemAdminEmail
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1V1SystemAdminEmail'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: email reset for system admin
+      tags:
+      - system
+  /v1/system/admin/password/reset:
+    patch:
+      operationId: V1SystemAdminPasswordReset
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1V1SystemAdminPasswordResetEntity'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: password reset for system admin
+      tags:
+      - system
+  /v1/system/admins:
+    get:
+      description: Lists all System Administrator's information
+      operationId: v1SystemAdminsList
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1SystemAdmins'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Lists users
+      tags:
+      - system
+    post:
+      operationId: v1SystemAdminsCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemAdminEntity'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create a System Administrator
+      tags:
+      - system
+  /v1/system/admins/auth/password/{passwordToken}/activate:
+    parameters:
+    - description: Describes the expirable password token for the System Administrator to be used for authentication
+      in: path
+      name: passwordToken
+      required: true
+      type: string
+    patch:
+      description: Updates and Activates System Administrator password with the help of password token
+      operationId: v1SystemAdminsPasswordActivate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            password:
+              description: Describes the new password for the System Administrator
+              format: password
+              type: string
+          required:
+          - password
+          type: object
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates and Activates the specified System Administrator password using the password token
+      tags:
+      - system
+  /v1/system/admins/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1SystemAdminsUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified System Administrator
+      tags:
+      - system
+    get:
+      operationId: v1SystemAdminsUidGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1SystemAdmin'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified System Administrator information
+      tags:
+      - system
+  /v1/system/admins/{uid}/changePassword:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1SystemAdminsUidPasswordChange
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            currentPassword:
+              type: string
+            newPassword:
+              type: string
+          required:
+          - newPassword
+          - currentPassword
+          type: object
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: System Administrator password change request through the verification of the current password
+      tags:
+      - system
+  /v1/system/admins/{uid}/passwordResetLink:
+    put:
+      operationId: v1SystemAdminsUidPasswordResetLink
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Reset password link for a specified System Administrator
+      tags:
+      - system
+  /v1/system/admins/{uid}/profile:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      description: Update System Administrator Profile
+      operationId: v1SystemAdminsUidProfileUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemAdminProfile'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update User
+      tags:
+      - system
+  /v1/system/alerts:
+    get:
+      operationId: v1SystemAlertsGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Alerts'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the alerts specified for the system
+      tags:
+      - system
+  /v1/system/alerts/{component}:
+    parameters:
+    - in: path
+      name: component
+      required: true
+      type: string
+    delete:
+      operationId: v1SystemAlertDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified alert to the specified system
+      tags:
+      - system
+    put:
+      operationId: v1SystemAlertUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AlertEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Upsert the specified alert to the specified system
+      tags:
+      - system
+  /v1/system/appFeatures:
+    get:
+      operationId: v1SystemAppFeaturesGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1AppFeatures'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get system app features
+      tags:
+      - system
+    put:
+      operationId: v1SystemAppFeaturesUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AppFeatures'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update system app features
+      tags:
+      - system
+  /v1/system/authTokenSettings:
+    get:
+      operationId: v1SystemAuthTokenSettingsGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AuthTokenSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get system auth token settings
+      tags:
+      - system
+    put:
+      operationId: v1SystemAuthTokenSettingsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1AuthTokenSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update system auth token settings
+      tags:
+      - system
+  /v1/system/classificationBanner:
+    get:
+      operationId: v1SystemClassificationBannerGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClassificationBanner'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get system classification banner
+      tags:
+      - system
+    put:
+      operationId: v1SystemClassificationBannerUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClassificationBanner'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update system classification banner
+      tags:
+      - system
+  /v1/system/config/apache-cloudstack/image:
+    get:
+      operationId: V1SystemConfigCloudstackImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemCloudstackImage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system cloudstack image
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigCloudstackImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemCloudstackImage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default cloudstack devops image
+      tags:
+      - system
+  /v1/system/config/auth:
+    get:
+      operationId: V1SystemConfigAuthGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemConfigAuth'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config auth
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAuthUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemConfigAuth'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the system config auth
+      tags:
+      - system
+  /v1/system/config/aws/account:
+    get:
+      operationId: V1SystemConfigAwsAccountGet
+      responses:
+        '200':
+          description: Aws sts account
+          schema:
+            $ref: '#/definitions/v1SystemAwsAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config aws devops account
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAwsAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAwsAccount'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system config aws devops account
+      tags:
+      - system
+  /v1/system/config/aws/apiEndpoints:
+    get:
+      description: Retrieves all AWS partition endpoint configurations.
+      operationId: V1SystemConfigAwsApiEndpointsGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1AwsApiEndpointsConfig'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get AWS API endpoints configuration
+      tags:
+      - system
+    put:
+      description: Creates or replaces all AWS partition endpoint configurations.
+      operationId: V1SystemConfigAwsApiEndpointsUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1AwsApiEndpointsConfig'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update AWS API endpoints configuration
+      tags:
+      - system
+  /v1/system/config/aws/image:
+    get:
+      operationId: V1SystemConfigAwsImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemAwsImage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system aws image
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAwsImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAwsImage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default aws devops image
+      tags:
+      - system
+  /v1/system/config/aws/marketplace/account:
+    get:
+      operationId: V1SystemConfigAwsMarketplaceAccountGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemAwsMarketplaceAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config aws marketplace account
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAwsMarketplaceAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAwsMarketplaceAccount'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system config aws marketplace account
+      tags:
+      - system
+  /v1/system/config/aws/sts/account:
+    get:
+      operationId: V1SystemConfigAwsStsAccountGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemAwsStsAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config aws sts devops account
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAwsStsAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAwsStsAccount'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system config AWS sts devops account
+      tags:
+      - system
+  /v1/system/config/awsgov/sts/account:
+    get:
+      operationId: V1SystemConfigAwsGovStsAccountGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemAwsStsAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config AWS gov sts devops account
+      tags:
+      - system
+    post:
+      operationId: V1SystemConfigAwsGovStsAccountCreate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAwsStsAccount'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create the system config AWS gov sts devops account
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAwsGovStsAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAwsStsAccount'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the system config AWS gov sts devops account
+      tags:
+      - system
+  /v1/system/config/azure/account:
+    get:
+      operationId: V1SystemConfigAzureAccountGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemAzureAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system azure account
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAzureAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAzureAccount'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default azure devops account
+      tags:
+      - system
+  /v1/system/config/azure/storage:
+    get:
+      operationId: V1SystemConfigAzureStorageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemAzureStorage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system azure storage
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigAzureStorageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemAzureStorage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default azure devops storage
+      tags:
+      - system
+  /v1/system/config/certificate:
+    get:
+      description: 'Deprecated: Use GET /v1/system/config/domain/certificates'
+      operationId: V1SystemConfigCertificateGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemCertificateSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system certificates
+      tags:
+      - system
+    put:
+      description: 'Deprecated: Use PUT /v1/system/config/domain/certificates'
+      operationId: V1SystemConfigCertificateUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemCertificateSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system certificate
+      tags:
+      - system
+  /v1/system/config/cluster:
+    get:
+      operationId: V1SystemConfigClusterGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemConfigCluster'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config cluster
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigClusterUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemConfigCluster'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the system config cluster
+      tags:
+      - system
+  /v1/system/config/database/backup/:
+    get:
+      description: Deprecated. Use the config specific apis.
+      operationId: V1SystemConfigDatabaseBackupGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemBackupConfigSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      tags:
+      - system
+    put:
+      description: Deprecated. Use the config specific apis.
+      operationId: V1SystemConfigDatabaseBackupUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemBackupConfigSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system backup config
+      tags:
+      - system
+  /v1/system/config/database/backup/ftp:
+    get:
+      operationId: V1SystemConfigDatabaseBackupFtpGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemBackupFtpConfigSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system backup interval config
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigDatabaseBackupFtpUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemBackupFtpConfigSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system backup interval config
+      tags:
+      - system
+  /v1/system/config/database/backup/s3:
+    get:
+      operationId: V1SystemConfigDatabaseBackupS3Get
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemBackupS3ConfigSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system backup s3 config
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigDatabaseBackupS3Update
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemBackupS3ConfigSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system backup ftp storage config
+      tags:
+      - system
+  /v1/system/config/domain:
+    get:
+      description: 'Deprecated: Use GET /v1/system/config/domain/certificates'
+      operationId: V1SystemConfigDomainGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemConfigDomainSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system domain config
+      tags:
+      - system
+    patch:
+      description: 'Deprecated: Use PUT /v1/system/config/domain/certificates'
+      operationId: V1SystemConfigDomainHostPatch
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1DomainHost'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update domain host url
+      tags:
+      - system
+  /v1/system/config/domain/certificates:
+    get:
+      operationId: V1SystemConfigDomainCertificatesGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemConfigDomainCertificatesSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system domain config
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigDomainCertificatesPut
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemConfigDomainCertificatesSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: update domain host url and its certificates
+      tags:
+      - system
+  /v1/system/config/edge/image:
+    get:
+      operationId: V1SystemConfigEdgeImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemEdgeImage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system edge image
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigEdgeImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemEdgeImage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default edge devops image
+      tags:
+      - system
+  /v1/system/config/edgeNative/image:
+    get:
+      operationId: V1SystemConfigEdgeNativeImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemEdgeNativeImage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system edge-native image
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigEdgeNativeImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemEdgeNativeImage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default edge-native devops image
+      tags:
+      - system
+  /v1/system/config/ftp/validate:
+    post:
+      operationId: V1SystemConfigFtpValidate
+      parameters:
+      - enum:
+        - read
+        - write
+        - readwrite
+        in: query
+        name: permission
+        type: string
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemFtpSpec'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validates the ftp config
+      tags:
+      - system
+  /v1/system/config/gcp/account:
+    get:
+      operationId: V1SystemConfigGcpAccountGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemGcpAccount'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system gcp account
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigGcpAccountUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemGcpAccount'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default gcp devops account
+      tags:
+      - system
+  /v1/system/config/gcp/image:
+    get:
+      operationId: V1SystemConfigGcpImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemGcpImage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system gcp image
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigGcpImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemGcpImage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default gcp devops image
+      tags:
+      - system
+  /v1/system/config/imagePullSecret:
+    get:
+      operationId: V1SystemConfigImagePullSecretGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemConfigImagePullSecretSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system DHI image pull secret config
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigImagePullSecretUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemConfigImagePullSecretSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: create or update the system DHI image pull secret config
+      tags:
+      - system
+  /v1/system/config/keyValueStore:
+    put:
+      operationId: V1SystemConfigStoreUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemConfigStoreEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified property for the key
+      tags:
+      - system
+  /v1/system/config/keyValueStore/{key}:
+    parameters:
+    - in: path
+      name: key
+      required: true
+      type: string
+    delete:
+      operationId: V1SystemConfigStoreDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified property for the key
+      tags:
+      - system
+    get:
+      operationId: V1SystemConfigStoreGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemConfigStoreEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Gets the specified property for the key
+      tags:
+      - system
+  /v1/system/config/kubectl:
+    get:
+      operationId: V1SystemConfigKubectlGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemKubectlSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system web kubectl config
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigKubectlUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemKubectlSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system web kubectl config
+      tags:
+      - system
+  /v1/system/config/logger:
+    get:
+      operationId: V1SystemConfigLoggerGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemLoggerSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system logger
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigLoggerUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemLoggerSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system logger
+      tags:
+      - system
+  /v1/system/config/maas/image:
+    get:
+      operationId: V1SystemConfigMaasImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemMaasImage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system maas image
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigMaasImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemMaasImage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default maas devops image
+      tags:
+      - system
+  /v1/system/config/paymentsecrets:
+    put:
+      operationId: V1PaymentSecretsUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1PaymentSecrets'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the payment secrets
+      tags:
+      - system
+  /v1/system/config/preferences/billing:
+    get:
+      operationId: V1BillingPreferenceGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Billing'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the billing preference
+      tags:
+      - system
+    put:
+      operationId: V1BillingPreferenceUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1Billing'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the billing preference
+      tags:
+      - system
+  /v1/system/config/preferences/cluster:
+    get:
+      operationId: V1ClusterPreferenceGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1ClusterPreference'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the cluster preference
+      tags:
+      - system
+    put:
+      operationId: V1ClusterPreferenceUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1ClusterPreference'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the cluster preference
+      tags:
+      - system
+  /v1/system/config/proxy:
+    get:
+      operationId: V1SystemConfigProxyGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemProxySpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system proxy
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigProxyUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemProxySpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system proxy
+      tags:
+      - system
+  /v1/system/config/registries/oci/image:
+    get:
+      operationId: V1SystemConfigRegistriesOciImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemOciImageRegistry'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config oci image registry
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigRegistriesOciImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemOciImageRegistry'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system config oci image registry
+      tags:
+      - system
+  /v1/system/config/registries/{registryName}:
+    parameters:
+    - in: path
+      name: registryName
+      required: true
+      type: string
+    delete:
+      operationId: V1SystemRegistriesNameDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified Registry
+      tags:
+      - system
+    get:
+      operationId: V1SystemRegistriesNameGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemRegistry'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Gets the specified Registry
+      tags:
+      - system
+    put:
+      operationId: V1SystemRegistriesNameUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemRegistry'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified Registry
+      tags:
+      - system
+  /v1/system/config/reverseproxy:
+    get:
+      operationId: V1SystemConfigReverseProxyGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemReverseProxy'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system config reverse proxy
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigReverseProxyUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemReverseProxy'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system config reverse proxy
+      tags:
+      - system
+  /v1/system/config/s3/validate:
+    post:
+      operationId: V1SystemConfigS3Validate
+      parameters:
+      - enum:
+        - read
+        - write
+        - readwrite
+        in: query
+        name: permission
+        type: string
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemS3Spec'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validates the s3 config
+      tags:
+      - system
+  /v1/system/config/scar:
+    get:
+      operationId: V1SystemConfigScarGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemScarSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system Spectro repository
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigScarUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemScarSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system Spectro repository
+      tags:
+      - system
+  /v1/system/config/scar/validate:
+    get:
+      operationId: V1SystemConfigScarValidate
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemScarValidationResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validate existing scar config
+      tags:
+      - system
+  /v1/system/config/smtp:
+    get:
+      operationId: V1SystemConfigSmtpGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemSmtpSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system smtp
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigSmtpUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemSmtpSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system smtp
+      tags:
+      - system
+  /v1/system/config/smtp/validate:
+    put:
+      operationId: V1SystemConfigSmtpValidate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemSmtpSpec'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validates the system smtp
+      tags:
+      - system
+  /v1/system/config/sso:
+    get:
+      operationId: V1SystemConfigSsoGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemSsoSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system sso
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigSsoUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemSsoSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system sso
+      tags:
+      - system
+  /v1/system/config/sso/github/validate:
+    put:
+      operationId: V1SystemConfigSsoGithubValidate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemGithubSsoSpec'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validates the system sso for github
+      tags:
+      - system
+  /v1/system/config/sso/oidc/validate:
+    put:
+      operationId: V1SystemConfigSsoOidcValidate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemOidcClientSpec'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: validates the system sso for oidc based logins
+      tags:
+      - system
+  /v1/system/config/storage/s3:
+    get:
+      operationId: V1SystemConfigStorageS3Get
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemStorageS3ConfigSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system storage s3 config
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigStorageS3Update
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemStorageS3ConfigSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system storage config
+      tags:
+      - system
+  /v1/system/config/timeseries:
+    get:
+      operationId: V1SystemConfigTimeseriesGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemTimeseriesSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system timeseries
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigTimeseriesUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemTimeseriesSpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system timeseries
+      tags:
+      - system
+  /v1/system/config/vsphere/image:
+    get:
+      operationId: V1SystemConfigVsphereImageGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemVsphereImage'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system vsphere image
+      tags:
+      - system
+    put:
+      operationId: V1SystemConfigVsphereImageUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemVsphereImage'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system default vsphere devops image
+      tags:
+      - system
+  /v1/system/database/backup:
+    patch:
+      operationId: V1SystemDbBackup
+      parameters:
+      - enum:
+        - ftp
+        - s3
+        in: query
+        name: mode
+        type: string
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: backup the database
+      tags:
+      - system
+  /v1/system/database/backups:
+    get:
+      operationId: V1SystemDbBackups
+      parameters:
+      - enum:
+        - ftp
+        - s3
+        in: query
+        name: mode
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1DatabaseTransferStatus'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the database status
+      tags:
+      - system
+  /v1/system/database/backups/{backupUid}:
+    delete:
+      operationId: V1SystemDbBackupsBackupUid
+      parameters:
+      - in: path
+        name: backupUid
+        required: true
+        type: string
+      - enum:
+        - ftp
+        - s3
+        in: query
+        name: mode
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: delete the database backup
+      tags:
+      - system
+  /v1/system/database/recovery/{backupUid}/{mode}:
+    patch:
+      operationId: V1SystemDbRecover
+      parameters:
+      - in: path
+        name: backupUid
+        required: true
+        type: string
+      - enum:
+        - ftp
+        - s3
+        in: path
+        name: mode
+        required: true
+        type: string
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: recover the database
+      tags:
+      - system
+  /v1/system/database/restore/{backupUid}:
+    patch:
+      operationId: V1SystemDbRestore
+      parameters:
+      - in: path
+        name: backupUid
+        required: true
+        type: string
+      - enum:
+        - ftp
+        - s3
+        in: query
+        name: mode
+        type: string
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: restore the database
+      tags:
+      - system
+  /v1/system/encrypt:
+    post:
+      operationId: V1SystemEncrypt
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemCryptoInput'
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemCryptoData'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: encrypt the system data
+      tags:
+      - system
+  /v1/system/features:
+    get:
+      operationId: V1SystemFeaturesGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1SystemFeatures'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Lists all feature flags
+      tags:
+      - system
+  /v1/system/features/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: V1SystemFeaturesUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemFeaturesOperation'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the feature permission
+      tags:
+      - system
+  /v1/system/loginBanner:
+    get:
+      operationId: v1SystemLoginBannerGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1LoginBannerSettings'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get system login banner settings
+      tags:
+      - system
+    put:
+      operationId: v1SystemLoginBannerUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1LoginBannerSettings'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update system login banner settings
+      tags:
+      - system
+  /v1/system/password/policy/default:
+    get:
+      operationId: V1SystemPasswordPolicyGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemPasswordPolicySpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system password policy
+      tags:
+      - system
+    put:
+      operationId: V1SystemPasswordPolicyUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemPasswordPolicySpec'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system admin
+      tags:
+      - system
+  /v1/system/passwords/blocklist:
+    delete:
+      operationId: V1PasswordsBlockListDelete
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/V1PasswordsBlockList'
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Delete a list of block listed passwords
+      tags:
+      - system
+    patch:
+      operationId: V1PasswordsBlockListUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/V1PasswordsBlockList'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: List of block listed passwords
+      tags:
+      - system
+  /v1/system/plan:
+    get:
+      operationId: V1SystemPlanGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemPlan'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system plan
+      tags:
+      - system
+  /v1/system/plan/credits/{creditUid}:
+    parameters:
+    - in: path
+      name: creditUid
+      required: true
+      type: string
+    delete:
+      operationId: v1SystemCreditsUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified Plan's credit data
+      tags:
+      - system
+    put:
+      operationId: v1SystemCreditsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanCreditUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified Plan's credit data
+      tags:
+      - system
+  /v1/system/plan/freeCredit:
+    post:
+      operationId: v1SystemFreeCreditAdd
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanAddFreeCreditUpdate'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Add system free credit
+      tags:
+      - system
+  /v1/system/plan/planLimit:
+    put:
+      operationId: v1SystemPlanLimitUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemPlanLimitUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified system plan's limit
+      tags:
+      - system
+  /v1/system/plan/slaCredit:
+    post:
+      operationId: v1SystemSlaCreditAdd
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PlanAddSlaCreditUpdate'
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Adds system sla breach credit
+      tags:
+      - system
+  /v1/system/plan/startDate:
+    patch:
+      operationId: V1SystemStartDatePatch
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemStartDate'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: updates the system start date
+      tags:
+      - system
+  /v1/system/ratelimit:
+    get:
+      operationId: V1SystemRateLimitGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemRateLimit'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system plan
+      tags:
+      - system
+    patch:
+      operationId: V1SystemRateLimitPatch
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemRateLimit'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: toggles the rate limit
+      tags:
+      - system
+  /v1/system/resourceLimits:
+    get:
+      operationId: v1SystemResourceLimitsGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemResourceLimits'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get system resource limits
+      tags:
+      - system
+    patch:
+      operationId: v1SystemResourceLimitsUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SystemResourceLimits'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update system resource limits
+      tags:
+      - system
+  /v1/system/security/mode:
+    get:
+      operationId: V1SystemSecurityModeGet
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemSecurityMode'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the system security mode
+      tags:
+      - system
+    put:
+      operationId: V1SystemServiceModeUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1SystemSecurityMode'
+      responses:
+        '204':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1Updated'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the system security mode
+      tags:
+      - system
+  /v1/system/sysplan:
+    get:
+      operationId: v1SystemSysplanGet
+      responses:
+        '200':
+          description: Successful operation
+          schema:
+            $ref: '#/definitions/v1SystemSysplan'
+        '400':
+          description: Invalid request data
+          schema:
+            $ref: '#/definitions/v1Error'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns system plan document
+      tags:
+      - system
+  /v1/system/themes:
+    post:
+      operationId: v1SystemThemeCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ThemeCreateEntity'
+      responses:
+        '204':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Stores the theme json fields like logo, name at system level.
+      tags:
+      - system
+  /v1/system/themes/active:
+    get:
+      operationId: v1SystemThemeActiveGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Theme'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the active theme
+      tags:
+      - system
+  /v1/system/themes/metadata:
+    get:
+      operationId: v1SystemThemesMetadataGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ThemesMetadata'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the metadata of all the themes
+      tags:
+      - system
+  /v1/system/themes/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1SystemThemeDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the theme json fields like logo, name at system level.
+      tags:
+      - system
+    get:
+      operationId: v1SystemThemeGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Theme'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the theme json fields like logo, name at system level.
+      tags:
+      - system
+    put:
+      operationId: v1SystemThemeUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ThemeUpdateEntity'
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the theme json fields like logo, name at system level.
+      tags:
+      - system
+  /v1/system/themes/{uid}/activate:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1SystemThemeActivate
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Activates a theme
+      tags:
+      - system
+  /v1/system/themes/{uid}/deactivate:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1SystemThemeDeactivate
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deactivates a theme
+      tags:
+      - system
+  /v1/system/users/email/verify/resend:
+    patch:
+      description: Re-send the email to the user to be able to verify the email
+      operationId: V1SystemUsersEmailVerifyReSend
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Re-send the email to the user to be able to verify the email
+      tags:
+      - system
+  /v1/system/users/email/{emailToken}/verify:
+    parameters:
+    - description: Describes the expiry email token for the system user to be used for verification of email
+      in: path
+      name: emailToken
+      required: true
+      type: string
+    get:
+      description: Verifies the system user email with the help of email token
+      operationId: V1SystemUsersEmailVerify
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Verifies the system user email using the email token
+      tags:
+      - system
+  /v1/system/users/me:
+    get:
+      description: Verifies the system user email with the help of email token
+      operationId: V1SystemUsersMe
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemUserMe'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Verifies the system user email using the email token
+      tags:
+      - system
+  /v1/system/users/password/reset:
+    post:
+      description: Creates request to reset system password via email. Password reset email will be sent to the user. Sends 204 No Content.
+      operationId: v1SystemUsersPasswordResetRequest
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            emailId:
+              description: Describes email if for which password reset email has to be sent
+              type: string
+          required:
+          - emailId
+          type: object
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates request to reset system password via email
+      tags:
+      - system
+  /v1/system/users/password/{passwordToken}/reset:
+    parameters:
+    - description: Describes the expirable password token for the system user to be used for authentication of user
+      in: path
+      name: passwordToken
+      required: true
+      type: string
+    patch:
+      description: Updates the new system user password with the help of password token
+      operationId: v1SystemUsersPasswordReset
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          properties:
+            password:
+              description: Describes the new password for the system user
+              format: password
+              type: string
+          required:
+          - password
+          type: object
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Resets the system user password using the password token
+      tags:
+      - system
+  /v1/system/version/installed:
+    get:
+      operationId: V1SystemVersionInstalled
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemVersionInfo'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system installed version
+      tags:
+      - system
+  /v1/system/version/latest:
+    get:
+      operationId: V1SystemVersionLatest
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1SystemVersionInfo'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: get the system latest available version
+      tags:
+      - system
+definitions:
+  v1SystemScarSpec:
+    description: system scar config spec
+    properties:
+      baseContentPath:
+        type: string
+      caCert:
+        type: string
+      endpoint:
+        type: string
+      insecureVerify:
+        type: boolean
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  v1SystemReverseProxy:
+    description: system config reverse proxy
+    properties:
+      caCert:
+        type: string
+      clientCert:
+        type: string
+      clientKey:
+        type: string
+      port:
+        type: integer
+      protocol:
+        enum:
+        - http
+        - https
+        type: string
+      server:
+        type: string
+      vHostPort:
+        type: integer
+  v1SystemEdgeNativeImage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemEdgeNativeImageSpec'
+    type: object
+  v1TlsConfiguration:
+    description: TLS configuration
+    properties:
+      ca:
+        type: string
+      certificate:
+        type: string
+      enabled:
+        type: boolean
+        x-omitempty: false
+      insecureSkipVerify:
+        type: boolean
+        x-omitempty: false
+      key:
+        type: string
+    type: object
+  v1SystemAdminProfileSpec:
+    description: System Administrator Profile Specification
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+    type: object
+  v1SystemCloudstackImageSpec:
+    description: system cloudstack account specifications
+    properties:
+      imagesHostEndpoint:
+        type: string
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1SystemSsoSpec:
+    description: system sso config spec
+    properties:
+      acsUrlRoot:
+        type: string
+      acsUrlScheme:
+        type: string
+      apiVersion:
+        type: string
+      audienceUrl:
+        type: string
+      authSpec:
+        $ref: '#/definitions/v1SystemSsoAuthSpec'
+      entityId:
+        type: string
+    type: object
+  v1Channel:
+    properties:
+      alertAllUsers:
+        type: boolean
+        x-omitempty: false
+      createdBy:
+        type: string
+      http:
+        properties:
+          body:
+            type: string
+          headers:
+            additionalProperties:
+              type: string
+          method:
+            type: string
+          url:
+            type: string
+        type: object
+      identifiers:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      isActive:
+        type: boolean
+        x-omitempty: false
+      status:
+        $ref: '#/definitions/v1AlertNotificationStatus'
+      type:
+        enum:
+        - email
+        - app
+        - http
+        type: string
+      uid:
+        type: string
+    type: object
+  v1TierPrice:
+    description: tier price
+    properties:
+      alloyPricing:
+        items:
+          $ref: '#/definitions/v1PriceRange'
+        type: array
+        uniqueItems: true
+      purePricing:
+        items:
+          $ref: '#/definitions/v1PriceRange'
+        type: array
+        uniqueItems: true
+  v1SystemAdminProfile:
+    description: System Administrator Profile Entity
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1SystemAdminProfileSpec'
+    type: object
+  v1SystemVsphereImage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemVsphereImageSpec'
+    type: object
+  v1AwsRegionEndpoints:
+    description: AWS region endpoint configuration containing DNS suffix and service endpoints
+    properties:
+      dnsSuffix:
+        description: DNS suffix for the region (e.g., sc2s.sgov.gov)
+        type: string
+      services:
+        additionalProperties:
+          $ref: '#/definitions/v1AwsServiceEndpoint'
+        description: Map of service name to service endpoint configuration
+        type: object
+    type: object
+  v1SystemPlanLimitSpec:
+    description: Monthly Plan Limit spec
+    properties:
+      cpuCoreHours:
+        description: cpu cores hours
+        format: int64
+        type: integer
+        x-omitempty: false
+      overageLimitPercentage:
+        default: 25
+        description: overage limit in percentage
+        format: int8
+        type: integer
+        x-omitempty: false
+      warnLimitPercentage:
+        default: 90
+        description: warning limit in percentage
+        format: int8
+        type: integer
+        x-omitempty: false
+  v1SystemPlanCredit:
+    description: Plan Credit
+    properties:
+      cpuCoreHours:
+        format: int64
+        type: number
+        x-omitempty: false
+      creditUid:
+        type: string
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: credit expiry time
+      name:
+        type: string
+      start:
+        $ref: '#/definitions/v1Time'
+        description: credit start time
+      type:
+        enum:
+        - Pure
+        - Alloy
+        type: string
+    required:
+    - type
+  v1ClusterPreference:
+    description: cluster preference
+    properties:
+      archivalIntervalInHour:
+        description: clusters cleanup interval post deletion
+        type: integer
+      deletePeriodInHour:
+        description: clusters deleted before delete period are eligible for cleanup
+        type: integer
+      healthPollIntervalInMinutes:
+        description: clusters health poll interval
+        maximum: 60
+        minimum: 3
+        type: integer
+      monitorIntervalInMinutes:
+        description: clusters state and consistency monitor
+        type: integer
+  v1DeveloperCredit:
+    description: Credits allocated for each tenant/user
+    properties:
+      cpu:
+        description: cpu in cores
+        format: int32
+        type: number
+        x-omitempty: false
+      memoryGiB:
+        description: memory in GiB
+        format: int32
+        type: number
+        x-omitempty: false
+      storageGiB:
+        description: storage in GiB
+        format: int32
+        type: integer
+        x-omitempty: false
+      virtualClustersLimit:
+        description: number of active virtual clusters
+        format: int32
+        type: number
+        x-omitempty: false
+  v1SystemOidcClientSpec:
+    description: system sso oidc config spec
+    properties:
+      callbackUrl:
+        type: string
+        x-omitempty: false
+      clientId:
+        type: string
+        x-omitempty: false
+      clientSecret:
+        type: string
+        x-omitempty: false
+      isEnabled:
+        type: boolean
+        x-omitempty: false
+      issuerUrl:
+        description: the issuer is the URL identifier for the service
+        type: string
+        x-omitempty: false
+      logoUrl:
+        type: string
+        x-omitempty: false
+      requiredClaims:
+        $ref: '#/definitions/v1SystemOidcClaims'
+      scopes:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1Error:
+    properties:
+      code:
+        type: string
+      details:
+        type: object
+      message:
+        type: string
+      ref:
+        type: string
+    type: object
+  v1AwsPartitionEndpoints:
+    description: AWS partition endpoint configuration
+    properties:
+      credentialsEndpoint:
+        description: Credentials URL for obtaining temporary AWS credentials
+        type: string
+      description:
+        description: Description of the AWS partition
+        type: string
+      regions:
+        additionalProperties:
+          $ref: '#/definitions/v1AwsRegionEndpoints'
+        description: Map of region name to region endpoint configuration
+        type: object
+    type: object
+  v1SystemEdgeNativeImageSpec:
+    description: system edge-native account specifications
+    properties:
+      caCert:
+        type: string
+      imagesHostEndpoint:
+        type: string
+      insecureSkipVerify:
+        type: boolean
+      stylusImagesEndpoint:
+        type: string
+  v1TransferJob:
+    description: transfer job details
+    properties:
+      finishTime:
+        $ref: '#/definitions/v1Time'
+      folder:
+        type: string
+      isCompleted:
+        type: boolean
+      message:
+        items:
+          type: string
+        type: array
+      startTime:
+        $ref: '#/definitions/v1Time'
+      state:
+        type: string
+      status:
+        items:
+          type: string
+        type: array
+    type: object
+  v1SystemConfigImagePullSecretSpec:
+    description: system DHI image pull secret config spec
+    properties:
+      imagePullSecret:
+        description: base64 encoded docker config JSON
+        type: string
+    type: object
+  v1DomainHost:
+    description: update domain host for application. RootDomain gets dervied from domain host url
+    properties:
+      host:
+        type: string
+    type: object
+  v1Updated:
+    description: The resource was updated successfully
+  v1SystemAdmins:
+    description: List of System Admin information's
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1SystemAdmin'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1SystemAwsAccount:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemAwsSpec'
+    type: object
+  v1SystemMaasImageSpec:
+    description: system maas account specifications
+    properties:
+      caCert:
+        type: string
+      imagesHostEndpoint:
+        type: string
+      insecureSkipVerify:
+        type: boolean
+  v1SystemAwsImageSpec:
+    description: system aws account specifications
+    properties:
+      accountId:
+        type: string
+      goldenImageRegion:
+        type: string
+  v1Alerts:
+    items:
+      $ref: '#/definitions/v1Alert'
+    type: array
+  v1AwsApiEndpointsConfig:
+    description: AWS API endpoints configuration containing all partition settings
+    properties:
+      partitions:
+        additionalProperties:
+          $ref: '#/definitions/v1AwsPartitionEndpoints'
+        description: Map of partition name to AWS endpoint configuration
+        type: object
+    type: object
+  v1SystemUserMeStatus:
+    description: User status with permissions
+    properties:
+      isEmailSet:
+        type: boolean
+        x-omitempty: false
+      isEmailVerified:
+        type: boolean
+        x-omitempty: false
+      isMfaEnabled:
+        type: boolean
+        x-omitempty: false
+      isPasswordReset:
+        type: boolean
+        x-omitempty: false
+      lastEmailUpdateTime:
+        $ref: '#/definitions/v1Time'
+      lastEmailVerifiedTime:
+        $ref: '#/definitions/v1Time'
+      lastLoginTime:
+        $ref: '#/definitions/v1Time'
+      lastPasswordUpdateTime:
+        $ref: '#/definitions/v1Time'
+  v1SystemCertificatesSpec:
+    description: system certificate in base64 format
+    properties:
+      caCertificateBase64:
+        type: string
+        x-omitempty: false
+      certificateBase64:
+        type: string
+        x-omitempty: false
+      insecureSkipVerify:
+        type: boolean
+        x-omitempty: false
+      keyBase64:
+        type: string
+        x-omitempty: false
+    type: object
+  v1AwsServiceEndpoint:
+    description: AWS service endpoint configuration
+    properties:
+      endpoint:
+        description: The service endpoint URL
+        type: string
+      endpointFips:
+        description: The FIPS-compliant service endpoint URL
+        type: string
+    type: object
+  v1SystemBackupSpec:
+    description: system backup config spec
+    properties:
+      hourOfTheDay:
+        type: integer
+        x-omitempty: false
+      interval:
+        type: integer
+        x-omitempty: false
+      retentionPeriod:
+        type: integer
+        x-omitempty: false
+    type: object
+  v1AlertNotificationStatus:
+    properties:
+      isSucceeded:
+        type: boolean
+        x-omitempty: false
+      message:
+        type: string
+      time:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1SystemAwsImage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemAwsImageSpec'
+    type: object
+  v1SystemBackupFtpConfigSpec:
+    description: system backup config spec
+    properties:
+      backupSpec:
+        $ref: '#/definitions/v1SystemBackupSpec'
+      ftp:
+        $ref: '#/definitions/v1SystemFtpSpec'
+    type: object
+  v1SystemS3Spec:
+    description: system backup s3 storage config spec
+    properties:
+      accessKey:
+        type: string
+        x-omitempty: false
+      bucket:
+        type: string
+        x-omitempty: false
+      folder:
+        type: string
+        x-omitempty: false
+      region:
+        type: string
+        x-omitempty: false
+      secretKey:
+        type: string
+        x-omitempty: false
+    type: object
+  v1PasswordsBlockListEntity:
+    description: List of block listed passwords
+    properties:
+      passwords:
+        items:
+          type: string
+        type: array
+    type: object
+  v1SystemVersionInfo:
+    description: system version info
+    properties:
+      version:
+        type: string
+    type: object
+  v1SystemAzureStorage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemAzureStorageSpec'
+    type: object
+  v1AlertEntity:
+    properties:
+      channels:
+        items:
+          $ref: '#/definitions/v1Channel'
+        type: array
+    type: object
+  v1SystemLoggerSpec:
+    description: system logger config spec
+    properties:
+      format:
+        type: string
+      level:
+        type: string
+    type: object
+  v1SystemConfigStoreEntity:
+    properties:
+      key:
+        type: string
+        x-omitempty: false
+      value:
+        type: string
+        x-omitempty: false
+    required:
+    - key
+    - value
+    type: object
+  v1SystemAwsStsAccount:
+    description: System AWS Gov account specifications
+    properties:
+      accessKey:
+        type: string
+      accountId:
+        type: string
+      secretKey:
+        type: string
+  v1SystemVsphereImageSpec:
+    description: system vsphere account specifications
+    properties:
+      caCert:
+        type: string
+      imagesHostEndpoint:
+        type: string
+      insecureSkipVerify:
+        type: boolean
+      overlordOvaLocation:
+        type: string
+  v1SystemAdminActivation:
+    description: System Administrator Activation Specification
+    properties:
+      expiry:
+        $ref: '#/definitions/v1Time'
+      link:
+        type: string
+    type: object
+  v1SystemCertificateSpec:
+    description: system smtp config spec
+    properties:
+      caCert:
+        type: string
+      crt:
+        type: string
+      insecureSkipVerify:
+        type: boolean
+      key:
+        type: string
+    type: object
+  v1SystemProxySpec:
+    description: system proxy config spec
+    properties:
+      httpProxy:
+        type: string
+      httpsProxy:
+        type: string
+      noProxy:
+        type: string
+    type: object
+  v1SystemGithubSsoSpec:
+    description: system sso github config spec
+    properties:
+      clientId:
+        type: string
+      clientSecretKey:
+        type: string
+      isEnabled:
+        type: boolean
+      logoUrl:
+        type: string
+        x-omitempty: false
+    type: object
+  v1V1SystemAdminEmail:
+    description: SystemAdmin
+    properties:
+      email:
+        type: string
+      insecureVerify:
+        type: boolean
+      password:
+        type: string
+    type: object
+  v1ThemesMetadata:
+    description: Theme metadata
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1ThemeMetadata'
+        type: array
+    type: object
+  v1SystemUserSpec:
+    description: User specifications
+    properties:
+      adminType:
+        description: Admin type
+        type: string
+      emailId:
+        description: System User's email id
+        type: string
+  v1SystemScarValidationResponse:
+    description: system proxy config spec
+    properties:
+      spectroVersion:
+        type: string
+    type: object
+  v1SystemAwsMarketplaceAccount:
+    description: System AWS marketplace account specifications
+    properties:
+      accessKey:
+        type: string
+      accountId:
+        type: string
+      productId:
+        description: AWS Marketplace product ID
+        type: string
+      secretKey:
+        type: string
+      sqsQueueUrl:
+        description: AWS SQS queue URL for marketplace event notifications
+        type: string
+  v1RegistryAuth:
+    description: Auth credentials of the registry
+    properties:
+      password:
+        format: password
+        type: string
+      tls:
+        $ref: '#/definitions/v1TlsConfiguration'
+      token:
+        format: password
+        type: string
+      type:
+        enum:
+        - noAuth
+        - basic
+        - token
+        type: string
+      username:
+        type: string
+    type: object
+  v1SystemPlanLimitUpdate:
+    description: System Plan limit change update entity
+    properties:
+      planLimit:
+        $ref: '#/definitions/v1SystemPlanLimit'
+  v1PlanAddSlaCreditUpdate:
+    description: Plan add sla credit update entity
+    properties:
+      credit:
+        $ref: '#/definitions/v1PlanCreditEntity'
+  V1PasswordsBlockList:
+    description: List of blocklisted passwords
+    properties:
+      spec:
+        $ref: '#/definitions/v1PasswordsBlockListEntity'
+    type: object
+  v1SystemAzureAccount:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemAzureSpec'
+    type: object
+  v1SystemOciImageRegistry:
+    description: system web kubectl config spec
+    properties:
+      baseContentPath:
+        type: string
+      caCert:
+        type: string
+      endpoint:
+        type: string
+      insecureSkipVerify:
+        type: boolean
+      mirrorRegistries:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  v1SystemCryptoData:
+    description: SystemAdmin
+    properties:
+      input:
+        type: string
+      result:
+        type: string
+    type: object
+  v1AppFeatureFreemium:
+    description: Freemium information
+    properties:
+      activeClustersLimit:
+        type: integer
+        x-omitempty: false
+      isFreemium:
+        type: boolean
+        x-omitempty: false
+      overageUsageLimit:
+        format: float64
+        type: number
+        x-omitempty: false
+      totalUsageLimit:
+        format: float64
+        type: number
+        x-omitempty: false
+  v1SystemOidcClaims:
+    properties:
+      Email:
+        type: string
+        x-omitempty: false
+      FirstName:
+        type: string
+        x-omitempty: false
+      LastName:
+        type: string
+        x-omitempty: false
+      SpectroTeam:
+        type: string
+        x-omitempty: false
+    type: object
+  v1Billing:
+    description: billing preference
+    properties:
+      billingDay:
+        type: integer
+      tierPricing:
+        $ref: '#/definitions/v1TierPrice'
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1SystemResourceLimits:
+    description: System resource limits. Supported resources keys are 'user','project','apiKey','team','role','cloudaccount','clusterprofile','workspace','registry','privategateway','location','certificate','macro','sshkey','alert','spectrocluster','edgehost'.
+    properties:
+      resources:
+        items:
+          $ref: '#/definitions/v1SystemResourceLimit'
+        type: array
+        uniqueItems: true
+  v1SystemFtpSpec:
+    description: system ftp config spec
+    properties:
+      dir:
+        type: string
+        x-omitempty: false
+      password:
+        type: string
+        x-omitempty: false
+      server:
+        type: string
+        x-omitempty: false
+      username:
+        type: string
+        x-omitempty: false
+    type: object
+  v1PlanCreditEntity:
+    description: Plan Credit entity for create/update request
+    properties:
+      cpuCoreHours:
+        format: int64
+        type: number
+        x-omitempty: false
+      expiry:
+        $ref: '#/definitions/v1Time'
+      name:
+        type: string
+      start:
+        $ref: '#/definitions/v1Time'
+      type:
+        enum:
+        - Pure
+        - Alloy
+        type: string
+    required:
+    - type
+  v1SystemAdministratorSpec:
+    description: System Administrator Entity Specification
+    properties:
+      adminType:
+        enum:
+        - AccountAdmin
+        - OperationAdmin
+        type: string
+      emailId:
+        type: string
+      firstName:
+        type: string
+      lastName:
+        type: string
+      mfa:
+        $ref: '#/definitions/v1SystemAdminMfa'
+        type: string
+    required:
+    - firstName
+    - lastName
+    - emailId
+    - adminType
+    type: object
+  v1PaymentSecrets:
+    description: payment secrets
+    properties:
+      publishableKey:
+        type: string
+      secretKey:
+        type: string
+  v1Theme:
+    description: Theme data entity
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ThemeSpec'
+      status:
+        $ref: '#/definitions/v1ThemeStatus'
+    type: object
+  v1AppFeatures:
+    description: System app features
+    properties:
+      developerCredit:
+        $ref: '#/definitions/v1DeveloperCredit'
+      freeCloudCredit:
+        type: boolean
+        x-omitempty: false
+      freemium:
+        $ref: '#/definitions/v1AppFeatureFreemium'
+  v1SystemAdministratorStatus:
+    description: System Administrator Status
+    properties:
+      activation:
+        $ref: '#/definitions/v1SystemAdminActivation'
+      createdBy:
+        type: string
+      lastPasswordUpdate:
+        $ref: '#/definitions/v1Time'
+      lastSignIn:
+        $ref: '#/definitions/v1Time'
+      state:
+        type: string
+    type: object
+  v1SystemActivateRequest:
+    properties:
+      activationKey:
+        type: string
+    required:
+    - activationKey
+    type: object
+  v1SystemFeatures:
+    properties:
+      items:
+        description: List of system features
+        items:
+          $ref: '#/definitions/v1SystemFeature'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1SystemMaasImage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemMaasImageSpec'
+    type: object
+  v1SystemEdgeImage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemEdgeImageSpec'
+    type: object
+  v1SystemPasswordPolicySpec:
+    description: system password policy
+    properties:
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+      expiryDurationInDays:
+        type: integer
+      firstReminderInDays:
+        type: integer
+      isRegex:
+        type: boolean
+      maxLength:
+        type: integer
+      minLength:
+        type: integer
+      minNumOfBlockLetters:
+        type: integer
+      minNumOfDigits:
+        type: integer
+      minNumOfSmallLetters:
+        type: integer
+      minNumOfSpecialCharacters:
+        type: integer
+      regex:
+        type: string
+      reminderFrequency:
+        type: integer
+      updateTimestamp:
+        $ref: '#/definitions/v1Time'
+    type: object
+  v1SystemSsoAuthSpec:
+    description: system sso config spec
+    properties:
+      github:
+        $ref: '#/definitions/v1SystemGithubSsoSpec'
+      oidcAuthSpecs:
+        additionalProperties:
+          $ref: '#/definitions/v1SystemOidcClientSpec'
+        type: object
+    type: object
+  v1PlanAddFreeCreditUpdate:
+    description: Plan add free credit update entity
+    properties:
+      credit:
+        $ref: '#/definitions/v1PlanCreditEntity'
+  v1SystemSmtpSpec:
+    description: system smtp config spec
+    properties:
+      fromEmailId:
+        type: string
+      insecureSkipVerifyTls:
+        type: boolean
+      password:
+        type: string
+      smtpPort:
+        type: integer
+      smtpServer:
+        type: string
+      userName:
+        type: string
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1SystemGcpImageSpec:
+    description: system gcp account specifications
+    properties:
+      imageProject:
+        type: string
+  v1SystemBackupS3ConfigSpec:
+    description: system backup config spec
+    properties:
+      backupSpec:
+        $ref: '#/definitions/v1SystemBackupSpec'
+      s3:
+        $ref: '#/definitions/v1SystemS3Spec'
+    type: object
+  v1SystemAdminMfa:
+    description: System Administrator MFA configuration
+    properties:
+      devices:
+        items:
+          type: string
+        type: array
+      state:
+        type: string
+    type: object
+  v1SystemStartDate:
+    description: system start date
+    properties:
+      systemStartDate:
+        $ref: '#/definitions/v1Time'
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1ObjectMetaUpdateEntity:
+    description: ObjectMeta update entity with uid as input
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1SystemFeaturesSpec:
+    properties:
+      description:
+        description: Feature description
+        type: string
+      docLink:
+        description: Feature doc link
+        type: string
+      isAllowed:
+        description: Flag which specifies if feature is allowed or not
+        type: boolean
+        x-omitempty: false
+      key:
+        description: Unique Feature key
+        type: string
+    type: object
+  v1SystemEdgeImageSpec:
+    description: system edge account specifications
+    properties:
+      caCert:
+        type: string
+      imagesHostEndpoint:
+        type: string
+      insecureSkipVerify:
+        type: boolean
+  v1SystemActivationResponse:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          activationKeyUid:
+            type: string
+          planUid:
+            type: string
+          systemUid:
+            type: string
+        required:
+        - systemUid
+        - planUid
+        - activationKeyUid
+        type: object
+      status:
+        properties:
+          lastActivatedAt:
+            $ref: '#/definitions/v1Time'
+          state:
+            enum:
+            - Pending
+            - Active
+            - Inactive
+            type: string
+        required:
+        - state
+        type: object
+    type: object
+  v1SystemResourceLimit:
+    properties:
+      kind:
+        $ref: '#/definitions/v1ResourceLimitType'
+        type: string
+        x-omitempty: false
+      limit:
+        format: int64
+        type: number
+        x-omitempty: false
+      maxLimit:
+        format: int64
+        type: number
+        x-omitempty: false
+  v1SystemFeature:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1SystemFeaturesSpec'
+    type: object
+  v1SystemConfigAuth:
+    description: System config auth
+    properties:
+      enforceServiceAuthToken:
+        type: boolean
+        x-omitempty: false
+      enforceTlsVerify:
+        type: boolean
+        x-omitempty: false
+  v1V1SystemAdminPasswordResetEntity:
+    description: SystemAdmin
+    properties:
+      email:
+        type: string
+      newPassword:
+        type: string
+      oldPassword:
+        type: string
+    type: object
+  v1SystemBackupConfigSpec:
+    description: system backup config spec
+    properties:
+      ftp:
+        $ref: '#/definitions/v1SystemFtpSpec'
+      hourOfTheDay:
+        type: integer
+        x-omitempty: false
+      interval:
+        type: integer
+        x-omitempty: false
+      retentionPeriod:
+        type: integer
+        x-omitempty: false
+    type: object
+  v1ThemeUpdateEntity:
+    description: Theme data update entity
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaUpdateEntity'
+      spec:
+        $ref: '#/definitions/v1ThemeSpec'
+    type: object
+  v1SystemAzureStorageSpec:
+    description: system aws account specifications
+    properties:
+      accessKey:
+        type: string
+      container:
+        type: string
+      storageName:
+        type: string
+  v1SystemAdmin:
+    description: System Admin information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1SystemAdministratorSpec'
+      status:
+        $ref: '#/definitions/v1SystemAdministratorStatus'
+    type: object
+  v1SystemCloudstackImage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemCloudstackImageSpec'
+    type: object
+  v1SystemPlanLimit:
+    description: System Monthly Plan Limit
+    properties:
+      alloy:
+        $ref: '#/definitions/v1SystemPlanLimitSpec'
+      isUnlimited:
+        description: is unlimited cpu core hours
+        type: boolean
+        x-omitempty: false
+      pure:
+        $ref: '#/definitions/v1SystemPlanLimitSpec'
+  v1SystemSysplan:
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        properties:
+          expiresAt:
+            $ref: '#/definitions/v1Time'
+          type:
+            enum:
+            - Trial
+            - Unlimited
+            type: string
+        required:
+        - type
+        type: object
+    type: object
+  v1SystemSecurityMode:
+    description: System service mode
+    properties:
+      securityMode:
+        type: string
+  v1SystemGcpSpec:
+    description: system gcp account specifications
+    properties:
+      json:
+        type: string
+  v1DatabaseTransferJob:
+    description: database transfer job details
+    properties:
+      backupStatus:
+        $ref: '#/definitions/v1TransferJob'
+      backupUid:
+        type: string
+      mode:
+        enum:
+        - FileSystem
+        - Ftp
+        type: string
+    type: object
+  v1SystemTimeseriesMetrics:
+    description: system timeseries metrics config
+    properties:
+      archivalInterval:
+        type: integer
+      batchInterval:
+        type: integer
+      enabled:
+        type: boolean
+        x-omitempty: false
+      retentionPeriod:
+        type: integer
+    type: object
+  v1SystemFeaturesOperation:
+    properties:
+      isAllowed:
+        description: Flag which specifies if feature is allowed or not
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1SystemConfigDomainCertificatesSpec:
+    description: system domain and its certificate config spec
+    properties:
+      certificates:
+        $ref: '#/definitions/v1SystemCertificatesSpec'
+      rootDomain:
+        type: string
+    type: object
+  v1SystemUserMe:
+    description: User information wrt permissions
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1SystemUserSpec'
+      status:
+        $ref: '#/definitions/v1SystemUserMeStatus'
+    type: object
+  v1SystemRetentionPolicy:
+    description: system retention policy
+    properties:
+      retentionPeriod:
+        type: integer
+        x-omitempty: false
+    type: object
+  v1SystemAwsSpec:
+    description: system aws account specifications
+    properties:
+      accessKey:
+        type: string
+      secretKey:
+        type: string
+  v1SystemTimeseriesSpec:
+    description: system timeseries config spec
+    properties:
+      machine:
+        $ref: '#/definitions/v1SystemTimeseriesMetrics'
+      pod:
+        $ref: '#/definitions/v1SystemTimeseriesMetrics'
+    type: object
+  v1ThemeMetadata:
+    description: Theme metadata
+    properties:
+      active:
+        description: Tells if the theme is active or not
+        type: boolean
+        x-omitempty: false
+      name:
+        description: Name of the theme
+        type: string
+      uid:
+        description: Uid of the theme
+        type: string
+    type: object
+  v1DatabaseTransferStatus:
+    description: database transfer status
+    properties:
+      backups:
+        items:
+          $ref: '#/definitions/v1DatabaseTransferJob'
+        type: array
+      isActive:
+        type: boolean
+    type: object
+  v1SystemConfigDomainSpec:
+    description: system domain config spec
+    properties:
+      apiServer:
+        type: string
+      derivedApiServer:
+        type: string
+      derivedRootDomain:
+        type: string
+      rootDomain:
+        type: string
+      urlProtocol:
+        type: string
+    type: object
+  v1SystemPlan:
+    description: system plan
+    properties:
+      freeCredits:
+        items:
+          $ref: '#/definitions/v1SystemPlanCredit'
+        type: array
+      planLimit:
+        $ref: '#/definitions/v1SystemPlanLimit'
+      slaCredits:
+        items:
+          $ref: '#/definitions/v1SystemPlanCredit'
+        type: array
+      systemStartDate:
+        $ref: '#/definitions/v1Time'
+  v1ClassificationBanner:
+    properties:
+      config:
+        description: JSON-formatted string containing classification banner configuration data
+        type: string
+  v1SystemKubectlSpec:
+    description: system web kubectl config spec
+    properties:
+      endpoint:
+        type: string
+      isEnabled:
+        type: boolean
+    type: object
+  v1ResourceLimitType:
+    enum:
+    - user
+    - project
+    - apiKey
+    - team
+    - role
+    - cloudaccount
+    - clusterprofile
+    - workspace
+    - registry
+    - privategateway
+    - location
+    - certificate
+    - macro
+    - sshkey
+    - alert
+    - spectrocluster
+    - edgehost
+    - appprofile
+    - appdeployment
+    - edgetoken
+    - clustergroup
+    - filter
+    - systemadmin
+    - spcpolicy
+    - clustertemplate
+    type: string
+  v1PlanCreditUpdate:
+    description: Plan credit update entity
+    properties:
+      credit:
+        $ref: '#/definitions/v1PlanCreditEntity'
+  v1SystemAdminEntity:
+    description: System Admin information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1SystemAdministratorSpec'
+    type: object
+  v1ThemeSpec:
+    properties:
+      values:
+        description: Contains the string value of custom properties like logo, name etc.
+        type: string
+        x-omitempty: false
+    required:
+    - values
+  v1SystemAzureSpec:
+    description: system azure account specifications
+    properties:
+      clientId:
+        type: string
+      clientSecret:
+        type: string
+      subscriptionId:
+        type: string
+      tenantId:
+        type: string
+  v1Alert:
+    properties:
+      channels:
+        items:
+          $ref: '#/definitions/v1Channel'
+        type: array
+      component:
+        type: string
+    type: object
+  v1RegistryConf:
+    description: Registry configuration
+    properties:
+      auth:
+        $ref: '#/definitions/v1RegistryAuth'
+      endpoint:
+        type: string
+    type: object
+  v1LoginBannerSettings:
+    properties:
+      Message:
+        description: Login banner message displayed to the user
+        type: string
+        x-omitempty: false
+      isEnabled:
+        description: Set to 'true' if login banner has to be displayed for user
+        type: boolean
+        x-omitempty: false
+      title:
+        description: Banner title displayed to the user
+        type: string
+        x-omitempty: false
+  v1SystemConfigCluster:
+    description: System config cluster
+    properties:
+      stableEndpointAccess:
+        type: boolean
+        x-omitempty: false
+  v1SystemCryptoInput:
+    description: SystemAdmin
+    properties:
+      input:
+        type: string
+    type: object
+  v1ThemeCreateEntity:
+    description: Theme data create entity
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1ThemeSpec'
+    required:
+    - metadata
+    - spec
+    type: object
+  v1SystemRateLimit:
+    description: system rate-limit
+    properties:
+      isActive:
+        type: boolean
+  v1SystemRegistry:
+    description: Registry configuration
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1RegistryConf'
+    type: object
+  v1PriceRange:
+    description: tier price range
+    properties:
+      discount:
+        format: int64
+        type: number
+      startFrom:
+        format: float64
+        type: number
+      unitAmount:
+        format: float64
+        type: number
+      upTo:
+        format: float64
+        type: number
+      upToInfinity:
+        type: boolean
+  v1ThemeStatus:
+    properties:
+      active:
+        description: Specifies if the theme is active or not
+        type: boolean
+        x-omitempty: false
+  v1SystemGcpImage:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemGcpImageSpec'
+    type: object
+  v1SystemGcpAccount:
+    description: SystemAdmin
+    properties:
+      spec:
+        $ref: '#/definitions/v1SystemGcpSpec'
+    type: object
+  v1SystemStorageS3ConfigSpec:
+    description: system storage s3 config spec
+    properties:
+      isEnabled:
+        type: boolean
+      retentionPolicy:
+        $ref: '#/definitions/v1SystemRetentionPolicy'
+      s3:
+        $ref: '#/definitions/v1SystemS3Spec'
+    type: object
+  v1AuthTokenSettings:
+    description: System auth token settings
+    properties:
+      expiryTimeMinutes:
+        description: Auth token expiry time in minutes
+        format: int32
+        maximum: 1440
+        minimum: 15
+        type: integer
+        x-omitempty: false
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

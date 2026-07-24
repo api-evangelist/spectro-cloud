@@ -1,0 +1,75 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations permissions API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: permissions
+  x-displayName: Permissions
+paths:
+  /v1/permissions:
+    get:
+      operationId: v1PermissionsList
+      parameters:
+      - enum:
+        - system
+        - tenant
+        - project
+        - resource
+        in: query
+        name: scope
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of permissions
+          schema:
+            $ref: '#/definitions/v1Permissions'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of permissions
+      tags:
+      - permissions
+definitions:
+  v1Permission:
+    description: Permission information
+    properties:
+      name:
+        type: string
+      permissions:
+        items:
+          type: string
+        type: array
+      scope:
+        $ref: '#/definitions/v1Scope'
+    type: object
+  v1Scope:
+    enum:
+    - system
+    - tenant
+    - project
+    - resource
+    type: string
+  v1Permissions:
+    description: Array of permissions
+    items:
+      $ref: '#/definitions/v1Permission'
+    type: array
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

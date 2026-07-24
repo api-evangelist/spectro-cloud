@@ -1,0 +1,161 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations pcg API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: pcg
+  x-displayName: Pcg
+paths:
+  /v1/pcg/selfHosted:
+    post:
+      operationId: v1PcgSelfHosted
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1PcgSelfHostedParams'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: (empty)
+          schema:
+            $ref: '#/definitions/v1PcgServiceKubectlCommands'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the private gateway manifest link
+      tags:
+      - pcg
+  /v1/pcg/{uid}/register:
+    post:
+      operationId: v1PcgUidRegister
+      parameters:
+      - in: body
+        name: pairingCode
+        schema:
+          $ref: '#/definitions/v1PairingCode'
+      - in: path
+        name: uid
+        required: true
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Registers the pcg
+      tags:
+      - pcg
+  /v1/pcg/{uid}/services/ally/manifest:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1PcgUidAllyManifestGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: download file
+          headers:
+            Content-Disposition:
+              type: string
+          schema:
+            format: binary
+            type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the pcg ally manifest
+      tags:
+      - pcg
+  /v1/pcg/{uid}/services/jet/manifest:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1PcgUidJetManifestGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: download file
+          headers:
+            Content-Disposition:
+              type: string
+          schema:
+            format: binary
+            type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the pcg jet manifest
+      tags:
+      - pcg
+definitions:
+  v1PcgSelfHostedParams:
+    properties:
+      cloudType:
+        type: string
+      name:
+        type: string
+  v1PairingCode:
+    description: Pairing code response
+    properties:
+      pairingCode:
+        type: string
+    type: object
+  v1PcgServiceKubectlCommands:
+    description: Array of kubectl commands
+    properties:
+      kubectlCommands:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      overlordUid:
+        type: string
+    required:
+    - kubectlCommands
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

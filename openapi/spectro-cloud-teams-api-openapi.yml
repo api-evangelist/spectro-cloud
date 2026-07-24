@@ -1,0 +1,720 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations teams API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: teams
+  x-displayName: Teams
+paths:
+  /v1/teams:
+    get:
+      operationId: v1TeamsList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of teams
+          schema:
+            $ref: '#/definitions/v1Teams'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of teams
+      tags:
+      - teams
+    post:
+      operationId: v1TeamsCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Team'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Creates a team with the specified users and roles
+      tags:
+      - teams
+  /v1/teams/summary:
+    get:
+      description: Deprecated, Use Post api - Returns a list of team summaries
+      operationId: v1TeamsSummary
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        type: string
+      - default: 50
+        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        format: int64
+        in: query
+        name: limit
+        type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        format: int64
+        in: query
+        name: offset
+        type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TeamsSummary'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of team summary
+      tags:
+      - teams
+    post:
+      operationId: v1TeamsSummaryGet
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1TeamsSummarySpec'
+      responses:
+        '200':
+          description: An array of teams summary items
+          schema:
+            $ref: '#/definitions/v1TeamsSummaryList'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of teams summary with provided filter spec
+      tags:
+      - teams
+  /v1/teams/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1TeamsUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified team
+      tags:
+      - teams
+    get:
+      operationId: v1TeamsUidGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1Team'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the sepcified team
+      tags:
+      - teams
+    patch:
+      operationId: v1TeamsUidPatch
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1TeamPatch'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Patches the specified team
+      tags:
+      - teams
+    put:
+      operationId: v1TeamsUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1Team'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the sepcified team
+      tags:
+      - teams
+  /v1/teams/{uid}/projects:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1TeamsProjectRoles
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ProjectRolesEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified team's project and roles data
+      tags:
+      - teams
+    put:
+      operationId: v1TeamsProjectRolesPut
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1ProjectRolesPatch'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the projects and roles for the specified team
+      tags:
+      - teams
+  /v1/teams/{uid}/resourceRoles:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      description: Returns resource roles for team
+      operationId: v1TeamsUidResourceRoles
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ResourceRoles'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified individual and resource roles for a team
+      tags:
+      - teams
+    post:
+      description: Resource roles added to specific team
+      operationId: v1TeamsUidResourceRolesCreate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1ResourceRolesUpdateEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Add resource roles for team
+      tags:
+      - teams
+  /v1/teams/{uid}/resourceRoles/{resourceRoleUid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    - in: path
+      name: resourceRoleUid
+      required: true
+      type: string
+    delete:
+      operationId: v1TeamsUidResourceRolesUidDelete
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deleted the resource roles from team
+      tags:
+      - teams
+    patch:
+      description: Specific resource roles fo team is updated
+      operationId: v1TeamsResourceRolesUidUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1ResourceRolesUpdateEntity'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the resource roles for team
+      tags:
+      - teams
+  /v1/teams/{uid}/roles:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: V1TeamsUidTenantRolesGet
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1TeamTenantRolesEntity'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified team's tenant roles
+      tags:
+      - teams
+    put:
+      operationId: V1TeamsUidTenantRolesUpdate
+      parameters:
+      - in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/v1TeamTenantRolesUpdate'
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the tenant roles of the specified team
+      tags:
+      - teams
+definitions:
+  v1ResourceRolesUpdateEntity:
+    properties:
+      filterRefs:
+        items:
+          type: string
+        type: array
+      projectUids:
+        items:
+          type: string
+        type: array
+      roles:
+        items:
+          type: string
+        type: array
+    type: object
+  v1TeamSpecSummary:
+    properties:
+      emailId:
+        type: string
+      projects:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      roles:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      users:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+    type: object
+  v1Team:
+    description: Team information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1TeamSpec'
+      status:
+        $ref: '#/definitions/v1TeamStatus'
+    type: object
+  v1TeamsSummarySpec:
+    description: Teams filter summary spec
+    properties:
+      filter:
+        $ref: '#/definitions/v1TeamsFilterSpec'
+      sort:
+        items:
+          $ref: '#/definitions/v1TeamSummarySortSpec'
+        type: array
+        uniqueItems: true
+  v1ResourceRoles:
+    properties:
+      resourceRoles:
+        items:
+          $ref: '#/definitions/v1ResourceRolesEntity'
+        type: array
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1UidRoleSummary:
+    properties:
+      inheritedRoles:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      name:
+        type: string
+      roles:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      uid:
+        type: string
+    type: object
+  v1ResourceRolesEntity:
+    properties:
+      filterRefs:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      projectUids:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      roles:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+      uid:
+        type: string
+    type: object
+  v1ProjectRolesPatch:
+    properties:
+      projects:
+        items:
+          properties:
+            projectUid:
+              type: string
+            roles:
+              items:
+                type: string
+              type: array
+          type: object
+        type: array
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1TeamTenantRolesEntity:
+    properties:
+      roles:
+        items:
+          $ref: '#/definitions/v1UidSummary'
+        type: array
+    type: object
+  v1TeamsSummary:
+    description: Deprecated, Use v1UsersSummaryList - Returns User summary
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1TeamSummary'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1FilterString:
+    properties:
+      beginsWith:
+        type: string
+        x-nullable: true
+      contains:
+        type: string
+        x-nullable: true
+      eq:
+        type: string
+        x-nullable: true
+      ignoreCase:
+        default: true
+        type: boolean
+      ne:
+        type: string
+        x-nullable: true
+    type: object
+  v1TeamSpec:
+    description: Team specifications
+    properties:
+      roles:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      sources:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      users:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+  v1TeamTenantRolesUpdate:
+    properties:
+      roles:
+        items:
+          type: string
+        type: array
+    type: object
+  v1TeamPatch:
+    items:
+      $ref: '#/definitions/v1HttpPatch'
+    type: array
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1UidSummary:
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1TeamSummarySortFields:
+    enum:
+    - name
+    - creationTimestamp
+    type: string
+    x-nullable: true
+  v1TeamSummarySortSpec:
+    properties:
+      field:
+        $ref: '#/definitions/v1TeamSummarySortFields'
+      order:
+        $ref: '#/definitions/v1SortOrder'
+  v1TeamSummary:
+    description: Team summary
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1TeamSpecSummary'
+      status:
+        $ref: '#/definitions/v1TeamStatus'
+    type: object
+  v1TeamsFilterSpec:
+    description: Teams filter spec
+    properties:
+      name:
+        $ref: '#/definitions/v1FilterString'
+  v1TeamStatus:
+    description: Team status
+    type: object
+  v1TeamsSummaryList:
+    description: Returns Team summary
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1TeamSummary'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1HttpPatch:
+    properties:
+      from:
+        description: A path to the pointer from which reference will be taken
+        type: string
+      op:
+        description: The operation to be performed
+        enum:
+        - add
+        - remove
+        - replace
+        - move
+        - copy
+        type: string
+      path:
+        description: A path to the pointer on which operation will be done
+        type: string
+      value:
+        description: The value to be used within the operations.
+        type: object
+    required:
+    - op
+    - path
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1Teams:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1Team'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1ProjectRolesEntity:
+    properties:
+      projects:
+        items:
+          $ref: '#/definitions/v1UidRoleSummary'
+        type: array
+    type: object
+  v1SortOrder:
+    default: asc
+    enum:
+    - asc
+    - desc
+    type: string
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

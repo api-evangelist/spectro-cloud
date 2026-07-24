@@ -1,0 +1,2219 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations edgehosts API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: edgehosts
+  x-displayName: Edgehosts
+paths:
+  /v1/edgehosts:
+    get:
+      description: Deprecated. Use POST /v1/dashboard/edgehosts/search , to retrieve all the edgehosts without pagination use GET /v1/edgehosts/metadata.
+      operationId: v1EdgeHostDevicesList
+      parameters:
+      - enum:
+        - edge-native
+        - vsphere
+        in: query
+        name: type
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of edge host device items
+          schema:
+            $ref: '#/definitions/v1EdgeHostDevices'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieve the Complete Edgehost Metadata List
+      tags:
+      - edgehosts
+    post:
+      operationId: v1EdgeHostDevicesCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostDeviceEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create the edge host device
+      tags:
+      - edgehosts
+  /v1/edgehosts/metadata:
+    get:
+      operationId: v1EdgeHostsMetadataQuickFilterGet
+      parameters:
+      - enum:
+        - edge-native
+        - vsphere
+        in: query
+        name: type
+        type: string
+      - enum:
+        - unusedEdgeHosts
+        in: query
+        name: quickFilter
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of edge host metadata
+          schema:
+            $ref: '#/definitions/v1EdgeHostsMeta'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of edge hosts metadata matching the filter condition
+      tags:
+      - edgehosts
+  /v1/edgehosts/register:
+    post:
+      operationId: v1EdgeHostDevicesRegister
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostDevice'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1EdgeHostDevice'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Registers the edge host device
+      tags:
+      - edgehosts
+  /v1/edgehosts/tags:
+    get:
+      operationId: v1EdgeHostsTagsGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of edge hosts tags
+          schema:
+            $ref: '#/definitions/v1EdgeHostsTags'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of edge hosts tags
+      tags:
+      - edgehosts
+  /v1/edgehosts/tokens:
+    get:
+      operationId: v1EdgeTokensList
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of edge tokens
+          schema:
+            $ref: '#/definitions/v1EdgeTokens'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of edge tokens
+      tags:
+      - edgehosts
+    post:
+      operationId: v1EdgeTokensCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeTokenEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create the edge token
+      tags:
+      - edgehosts
+  /v1/edgehosts/tokens/{uid}:
+    parameters:
+    - description: Edge token uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1EdgeTokensUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified edge token
+      tags:
+      - edgehosts
+    get:
+      operationId: v1EdgeTokensUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1EdgeToken'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified edge token
+      tags:
+      - edgehosts
+    put:
+      operationId: v1EdgeTokensUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeTokenUpdate'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified edge token
+      tags:
+      - edgehosts
+  /v1/edgehosts/tokens/{uid}/state:
+    parameters:
+    - description: Edge token uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1EdgeTokensUidState
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeTokenActiveState'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Revoke or re-activate the edge token access
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1EdgeHostDevicesUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deletes the specified edge host device
+      tags:
+      - edgehosts
+    get:
+      operationId: v1EdgeHostDevicesUidGet
+      parameters:
+      - default: false
+        description: resolve pack values if set to true
+        in: query
+        name: resolvePackValues
+        type: boolean
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1EdgeHostDevice'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified edge host device
+      tags:
+      - edgehosts
+    put:
+      operationId: v1EdgeHostDevicesUidUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostDevice'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified edge host device
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/cluster/associate:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: v1EdgeHostDevicesUidClusterDeassociate
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Deassociate the clusters to the edge host
+      tags:
+      - edgehosts
+    patch:
+      operationId: v1EdgeHostDevicesUidClusterAssociate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostClusterEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Associate the clusters to the edge host
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/config:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1EdgeHostDevicesUidConfigGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1EdgeHostConfig'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Get the specified edge host device configuration
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/health:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1EdgeHostDevicesHealthUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostHealth'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the edge host health
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/hostCheckSum:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1EdgeHostDeviceHostCheckSumUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostDeviceHostCheckSum'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified edge host device host check sum
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/hostPairingKey:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1EdgeHostDeviceHostPairingKeyUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostDeviceHostPairingKey'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified edge host device host pairing key
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/meta:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1EdgeHostDevicesUidMetaUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostDeviceMetaUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified edge host device meta
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/pack/manifests/{manifestUid}:
+    get:
+      operationId: v1EdgeHostDevicesUidPackManifestsUidGet
+      parameters:
+      - description: edge host uid
+        in: path
+        name: uid
+        required: true
+        type: string
+      - description: manifest uid which is part of the pack ref
+        in: path
+        name: manifestUid
+        required: true
+        type: string
+      - default: false
+        description: resolve pack manifest values if set to true
+        in: query
+        name: resolveManifestValues
+        type: boolean
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: Pack manifest content
+          schema:
+            $ref: '#/definitions/v1Manifest'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified edge host's manifest
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/packs/status:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1EdgeHostDevicesUidPacksStatusPatch
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpectroClusterPacksStatusEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Patch update specified edge host's packs status
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/profiles:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1EdgeHostDevicesUidProfilesGet
+      parameters:
+      - description: includes pack meta such as schema, presets
+        in: query
+        name: includePackMeta
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1SpectroClusterProfileList'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the associated profiles of a specified edge host device
+      tags:
+      - edgehosts
+    put:
+      operationId: v1EdgeHostDevicesUidProfilesUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpectroClusterProfiles'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Associate cluster profiles to the specified edge host device
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/reset:
+    parameters:
+    - description: Edge host uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: V1EdgeHostsUidReset
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Reset the cluster through edge host
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/spc/download:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    get:
+      operationId: v1EdgeHostDevicesUidSpcDownload
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      produces:
+      - application/octet-stream
+      responses:
+        '200':
+          description: download spc archive file
+          headers:
+            Content-Disposition:
+              type: string
+          schema:
+            format: binary
+            type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Download the specified edge host device spc
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/tunnelConfig:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1EdgeHostDevicesUidTunnelConfigUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpectroTunnelConfig'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified edge host device tunnel configuration
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/tunnelStatus:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: v1EdgeHostDevicesUidTunnelStatusUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1SpectroTunnelStatus'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the edge host tunnel status
+      tags:
+      - edgehosts
+  /v1/edgehosts/{uid}/vsphere/properties:
+    parameters:
+    - in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: v1EdgeHostDevicesUidVspherePropertiesUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1EdgeHostVsphereCloudProperties'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Updates the specified edge host device vsphere properties
+      tags:
+      - edgehosts
+definitions:
+  v1Partition:
+    properties:
+      fileSystemType:
+        type: string
+      freeSpace:
+        format: int32
+        type: integer
+      mountPoint:
+        type: string
+      totalSpace:
+        format: int32
+        type: integer
+      usedSpace:
+        format: int32
+        type: integer
+    type: object
+  v1EdgeHostIdentity:
+    properties:
+      caCert:
+        description: CACert is the client CA certificate
+        type: string
+      mode:
+        description: Mode indicates a system or session connection to the host
+        type: string
+      socketPath:
+        description: SocketPath is an optional path to the socket on the host, if not using defaults
+        type: string
+      sshSecret:
+        $ref: '#/definitions/v1EdgeHostSSHSecret'
+        description: SSHSecret to the secret containing ssh-username
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1EdgeHostCloudProperties:
+    description: Additional cloud properties of the edge host (applicable based on the cloud type)
+    properties:
+      vsphere:
+        $ref: '#/definitions/v1EdgeHostVsphereCloudProperties'
+    type: object
+  v1DeviceSpec:
+    description: DeviceSpec defines the desired state of Device
+    properties:
+      archType:
+        default: amd64
+        description: Architecture type of the edge host
+        enum:
+        - arm64
+        - amd64
+        type: string
+      cpu:
+        $ref: '#/definitions/v1CPU'
+      disks:
+        items:
+          $ref: '#/definitions/v1Disk'
+        type: array
+      gpus:
+        items:
+          $ref: '#/definitions/v1GPUDeviceSpec'
+        type: array
+      hostState:
+        default: registration
+        description: State of edge host device
+        enum:
+        - registration
+        - cluster
+        - recovery
+        type: string
+      hostType:
+        default: appliance
+        description: Type of the edge host device
+        enum:
+        - appliance
+        - agent-mode
+        type: string
+      memory:
+        $ref: '#/definitions/v1Memory'
+      nics:
+        items:
+          $ref: '#/definitions/v1Nic'
+        type: array
+      os:
+        $ref: '#/definitions/v1OS'
+      secureBoot:
+        default: false
+        description: Secure boot configuration
+        type: boolean
+    type: object
+  v1PackTemplateParameters:
+    description: Pack template parameters
+    properties:
+      inputParameters:
+        description: Pack template input parameters array
+        items:
+          $ref: '#/definitions/v1PackTemplateParameter'
+        type: array
+      outputParameters:
+        description: Pack template output parameters array
+        items:
+          $ref: '#/definitions/v1PackTemplateParameter'
+        type: array
+  v1AclMeta:
+    description: Resource access control information (Read-only response data)
+    properties:
+      ownerUid:
+        description: User or service uid which created the resource
+        type: string
+      projectUid:
+        description: Project's uid if the resource is under a project
+        type: string
+      tenantUid:
+        description: Tenant's uid
+        type: string
+    type: object
+  v1EdgeHostClusterEntity:
+    properties:
+      clusterUid:
+        type: string
+    type: object
+  v1VsphereCloudDatacenter:
+    description: Vsphere datacenter
+    properties:
+      computeClusters:
+        items:
+          $ref: '#/definitions/v1VsphereComputeCluster'
+        type: array
+      folders:
+        items:
+          type: string
+        type: array
+      name:
+        type: string
+    type: object
+  v1EdgeHostStoragePool:
+    description: StoragePool is the storage pool for the vm image
+    properties:
+      name:
+        type: string
+  v1ObjectTagsEntity:
+    description: Object identity meta with tags
+    properties:
+      labels:
+        additionalProperties:
+          type: string
+        type: object
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1PackRef:
+    description: PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml
+        type: object
+      digest:
+        description: digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade
+        type: string
+      inValidReason:
+        type: string
+      isInvalid:
+        description: pack is invalid when the associated tag is deleted from the registry
+        type: boolean
+      layer:
+        enum:
+        - kernel
+        - os
+        - k8s
+        - cni
+        - csi
+        - addon
+        type: string
+      logo:
+        description: path to the pack logo
+        type: string
+      manifests:
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      name:
+        description: pack name
+        type: string
+      packUid:
+        description: PackUID is Hubble packUID, not palette Pack.UID It is used by Hubble only.
+        type: string
+      params:
+        additionalProperties:
+          type: string
+        description: params passed as env variables to be consumed at installation time
+        type: object
+      presets:
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      registryUid:
+        description: pack registry uid
+        type: string
+      schema:
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      server:
+        description: pack registry server or helm repo
+        type: string
+      tag:
+        description: pack tag
+        type: string
+      type:
+        description: type of the pack
+        enum:
+        - spectro
+        - helm
+        - manifest
+        - oci
+        type: string
+      values:
+        description: values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+      version:
+        description: pack version
+        type: string
+    required:
+    - layer
+    - name
+    type: object
+  v1PackValuesEntity:
+    description: Pack values entity to refer the existing pack for the values override
+    properties:
+      manifests:
+        description: Pack manifests are additional content as part of the profile
+        items:
+          $ref: '#/definitions/v1ManifestRefUpdateEntity'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      tag:
+        description: Pack version tag
+        type: string
+      type:
+        $ref: '#/definitions/v1PackType'
+      values:
+        description: Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+        type: string
+    required:
+    - name
+    type: object
+  v1ManifestPublishedSpec:
+    description: Manifest spec
+    properties:
+      published:
+        $ref: '#/definitions/v1ManifestData'
+  v1ManifestData:
+    description: Published manifest object
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      digest:
+        description: Manifest digest
+        type: string
+    type: object
+  v1PackSummarySpec:
+    description: Pack object
+    properties:
+      addonSubType:
+        description: Pack add-on sub type such as monitoring, db etc
+        type: string
+      addonType:
+        description: Pack add-on type such as logging, monitoring, security etc
+        type: string
+      annotations:
+        additionalProperties:
+          type: string
+        description: Pack annotations is used to allow pack to add more arbitrary configurations
+        type: object
+      cloudTypes:
+        description: Pack supported cloud types
+        items:
+          type: string
+        type: array
+      digest:
+        description: Pack digest
+        type: string
+      displayName:
+        description: Pack display name
+        type: string
+      eol:
+        description: 'Pack end of life, date format: yyyy-MM-dd'
+        type: string
+      group:
+        description: Pack group
+        type: string
+      layer:
+        $ref: '#/definitions/v1PackLayer'
+      logoUrl:
+        description: Pack logo url
+        type: string
+      manifests:
+        description: Pack manifests are additional content as part of the cluster profile
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      name:
+        description: Pack name
+        type: string
+      presets:
+        description: Pack presets are the set of configurations applied on user selection of presets
+        items:
+          $ref: '#/definitions/v1PackPreset'
+        type: array
+      registryUid:
+        description: Pack registry uid
+        type: string
+      schema:
+        description: Pack schema contains constraints such as data type, format, hints for the pack values
+        items:
+          $ref: '#/definitions/v1PackSchema'
+        type: array
+      template:
+        $ref: '#/definitions/v1PackTemplate'
+      type:
+        $ref: '#/definitions/v1PackType'
+      values:
+        description: Pack values
+        type: string
+      version:
+        description: Pack version
+        type: string
+    type: object
+  v1EdgeHostConfig:
+    properties:
+      clusterUids:
+        items:
+          type: string
+        type: array
+      tunnelConfig:
+        $ref: '#/definitions/v1SpectroTunnelConfig'
+    type: object
+  v1SpectroClusterProfiles:
+    properties:
+      profiles:
+        items:
+          $ref: '#/definitions/v1SpectroClusterProfileEntity'
+        type: array
+      spcApplySettings:
+        $ref: '#/definitions/v1SpcApplySettings'
+    required:
+    - profiles
+    type: object
+  v1PackDependency:
+    description: Pack template dependency
+    properties:
+      layer:
+        description: Pack template dependency pack layer
+        type: string
+      name:
+        description: Pack template dependency pack name
+        type: string
+      readOnly:
+        description: If true then dependency pack values can't be overridden
+        type: boolean
+    type: object
+  v1SpectroClusterPackStatusEntity:
+    properties:
+      condition:
+        $ref: '#/definitions/v1SpectroClusterPackCondition'
+        description: Pack deployment status conditions
+      endTime:
+        $ref: '#/definitions/v1Time'
+        description: Pack deployment end time
+      name:
+        description: Pack name
+        type: string
+      profileUid:
+        description: Cluster profile uid
+        type: string
+      startTime:
+        $ref: '#/definitions/v1Time'
+        description: Pack deployment start time
+      type:
+        $ref: '#/definitions/v1PackType'
+      version:
+        description: pack version
+        type: string
+    type: object
+  v1EdgeHostNetwork:
+    description: Network defines the network configuration for a virtual machine
+    properties:
+      networkName:
+        description: NetworkName of the network where this machine will be connected
+        type: string
+      networkType:
+        description: NetworkType  specifies the type of network
+        enum:
+        - default
+        - bridge
+        type: string
+    required:
+    - networkName
+    - networkType
+    type: object
+  v1ObjectEntity:
+    description: Object identity meta
+    properties:
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1ManifestRefUpdateEntity:
+    description: Manifest update request payload
+    properties:
+      content:
+        description: Manifest content in yaml
+        type: string
+      name:
+        description: Manifest name
+        type: string
+      uid:
+        description: Manifest uid
+        type: string
+    required:
+    - name
+  v1ClusterCondition:
+    properties:
+      lastProbeTime:
+        $ref: '#/definitions/v1Time'
+      lastTransitionTime:
+        $ref: '#/definitions/v1Time'
+      message:
+        description: Human-readable message indicating details about last transition.
+        type: string
+      reason:
+        description: Unique, one-word, CamelCase reason for the condition's last transition.
+        type: string
+      status:
+        type: string
+      type:
+        type: string
+    required:
+    - type
+    - status
+    type: object
+  v1EdgeHostDevice:
+    properties:
+      aclmeta:
+        $ref: '#/definitions/v1AclMeta'
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1EdgeHostDeviceSpec'
+      status:
+        $ref: '#/definitions/v1EdgeHostDeviceStatus'
+  v1Disk:
+    properties:
+      controller:
+        type: string
+      partitions:
+        items:
+          $ref: '#/definitions/v1Partition'
+        type: array
+      size:
+        description: Size in GB
+        format: int32
+        type: integer
+      vendor:
+        type: string
+    type: object
+  v1SpectroClusterProfileList:
+    properties:
+      profiles:
+        items:
+          $ref: '#/definitions/v1SpectroClusterProfile'
+        type: array
+    required:
+    - profiles
+    type: object
+  v1ServicePort:
+    properties:
+      port:
+        description: The port that will be exposed by this service.
+        format: int32
+        type: integer
+      protocol:
+        type: string
+    required:
+    - port
+    type: object
+  v1EdgeTokenSpec:
+    description: Edge token specification
+    properties:
+      defaultProject:
+        $ref: '#/definitions/v1EdgeTokenProject'
+        description: Default project where the edgehost will be placed on the token authorization
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: Edge token expiry date
+      token:
+        description: Edge token
+        type: string
+    type: object
+  v1PackLayer:
+    enum:
+    - kernel
+    - os
+    - k8s
+    - cni
+    - csi
+    - addon
+    type: string
+  v1PackType:
+    default: spectro
+    enum:
+    - spectro
+    - helm
+    - manifest
+    - oci
+    type: string
+  v1EdgeHostDeviceHostPairingKey:
+    properties:
+      hostPairingKey:
+        format: password
+        type: string
+    type: object
+  v1EdgeHostSSHSecret:
+    properties:
+      name:
+        description: SSH secret name
+        type: string
+      privateKey:
+        description: Private Key to access the host
+        type: string
+    type: object
+  v1SpcApplySettings:
+    properties:
+      actionType:
+        enum:
+        - DownloadAndInstall
+        - DownloadAndInstallLater
+        type: string
+    type: object
+  v1ServiceSpec:
+    description: ServiceSpec defines the specification of service registering edge
+    properties:
+      name:
+        type: string
+      version:
+        type: string
+    type: object
+  v1Memory:
+    properties:
+      sizeInMB:
+        description: memory size in bytes
+        format: int64
+        type: integer
+    type: object
+  v1ClusterProfilePacksEntity:
+    description: Cluster profile packs object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1PackSummarySpec'
+      status:
+        $ref: '#/definitions/v1PackSummaryStatus'
+    type: object
+  v1GPUDeviceSpec:
+    properties:
+      addresses:
+        additionalProperties:
+          type: string
+        description: 'Addresses is a map of PCI device entry name to its addresses.
+
+          Example entry would be "11:00.0 VGA compatible controller [0300]: NVIDIA
+
+          Corporation Device [10de:1eb1] (rev a1)"- > 0000_11_00_0" The address is
+
+          BDF (Bus Device Function) identifier format seperated by underscores. The
+
+          first 4 bits are almost always 0000. In the above example 11 is Bus, 00
+
+          is Device,0 is function. The values of these addreses are expected in hexadecimal
+
+          format
+
+          '
+        type: object
+      gpuCount:
+        description: Number of GPUs
+        format: int32
+        type: integer
+      memory:
+        description: GPU memory specification
+        type: string
+      migCapable:
+        description: MIG capability flag
+        type: boolean
+      migStrategy:
+        description: MIG strategy configuration
+        type: string
+      model:
+        description: Model is the model of GPU, for a given vendor, for eg., TU104GL [Tesla T4]
+        type: string
+      vendor:
+        description: Vendor is the GPU vendor, for eg., NVIDIA or AMD
+        type: string
+    type: object
+  v1PackTemplateParameterOption:
+    description: Pack template parameter option
+    properties:
+      dependencies:
+        description: Pack template parameter dependencies
+        items:
+          $ref: '#/definitions/v1PackDependency'
+        type: array
+      description:
+        description: Pack template parameter description
+        type: string
+      label:
+        description: Pack template parameter label
+        type: string
+    type: object
+  v1LoadBalancerService:
+    properties:
+      host:
+        description: IP or Host from svc.Status.LoadBalancerStatus.Ingress
+        type: string
+      name:
+        description: name of the loadbalancer service
+        type: string
+      ports:
+        description: port this service exposed
+        items:
+          $ref: '#/definitions/v1ServicePort'
+        type: array
+    type: object
+  v1ClusterProfileTemplate:
+    description: ClusterProfileTemplate contains details of a clusterprofile definition
+    properties:
+      cloudType:
+        type: string
+      name:
+        type: string
+      packServerRefs:
+        description: PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array
+        items:
+          $ref: '#/definitions/v1ObjectReference'
+        type: array
+      packServerSecret:
+        description: This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette
+        type: string
+      packs:
+        description: Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge
+        items:
+          $ref: '#/definitions/v1PackRef'
+        type: array
+      profileVersion:
+        description: version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster
+        type: string
+      relatedObject:
+        $ref: '#/definitions/v1ObjectReference'
+        description: RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with
+      type:
+        type: string
+      uid:
+        type: string
+      version:
+        description: Deprecated. Use profileVersion
+        format: int32
+        type: integer
+    type: object
+  v1EdgeTokenProject:
+    description: Edge token project information
+    properties:
+      name:
+        description: Project name
+        type: string
+      uid:
+        description: Project uid
+        type: string
+    type: object
+  v1EdgeHostsMeta:
+    properties:
+      edgeHosts:
+        items:
+          $ref: '#/definitions/v1EdgeHostMeta'
+        type: array
+    type: object
+  v1SpectroClusterProfile:
+    description: Cluster profile response
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1SpectroClusterProfileSpec'
+    type: object
+  v1EdgeHost:
+    description: EdgeHost is the underlying appliance
+    properties:
+      disableAutoRegister:
+        description: Set to true if auto register is disabled for the device
+        type: boolean
+        x-omitempty: false
+      hostAddress:
+        description: HostAddress is a FQDN or IP address of the Host
+        type: string
+      hostAuthToken:
+        description: HostAuthToken to authorize auto registration
+        type: string
+        x-omitempty: false
+      hostChecksum:
+        description: HostChecksum is the checksum provided by the edge host, to be persisted in SaaS
+        type: string
+        x-omitempty: false
+      hostIdentity:
+        $ref: '#/definitions/v1EdgeHostIdentity'
+        description: HostIdentity is the identity to access the edge host
+      hostPairingKey:
+        description: HostPairingKey is the one-time pairing key to pair the edge host with the device registered in SaaS
+        format: password
+        type: string
+        x-omitempty: false
+      hostUid:
+        description: HostUid is the ID of the EdgeHost
+        type: string
+      macAddress:
+        description: Mac address of edgehost
+        type: string
+        x-omitempty: false
+      project:
+        $ref: '#/definitions/v1ObjectEntity'
+        description: ProjectUid where the edgehost will be placed during auto registration
+        x-omitempty: false
+      remoteSsh:
+        default: enabled
+        description: RemoteSsh controls the remote SSH access for this edge host
+        enum:
+        - enabled
+        - disabled
+        type: string
+        x-omitempty: false
+    required:
+    - hostUid
+    - hostAddress
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1EdgeHostDeviceSpecEntity:
+    description: Edge host device spec
+    properties:
+      archType:
+        $ref: '#/definitions/v1ArchType'
+      hostPairingKey:
+        format: password
+        type: string
+      tunnelConfig:
+        $ref: '#/definitions/v1SpectroTunnelConfig'
+    type: object
+  v1PackPreset:
+    description: PackPreset defines the preset pack values
+    properties:
+      add:
+        type: string
+        x-omitempty: false
+      displayName:
+        type: string
+        x-omitempty: false
+      group:
+        type: string
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      remove:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+    type: object
+  v1SshTunnelStatus:
+    properties:
+      lastModifiedTime:
+        $ref: '#/definitions/v1Time'
+        description: LastModifiedTime is the last modified time of the SSH tunnel
+      message:
+        description: Message is the status message of the SSH tunnel
+        type: string
+      state:
+        description: State is the state of the SSH tunnel
+        enum:
+        - Initiating
+        - Created
+        - Deleting
+        - Deleted
+        - Failed
+        type: string
+      user:
+        $ref: '#/definitions/v1SshUserStatus'
+        description: User is the temporary user of the SSH tunnel
+    type: object
+  v1EdgeHostHealth:
+    description: EdgeHostHealth defines the desired health state of EdgeHostDevice
+    properties:
+      agentVersion:
+        type: string
+      message:
+        type: string
+      state:
+        enum:
+        - healthy
+        - unhealthy
+        type: string
+  v1VsphereComputeCluster:
+    description: Vsphere compute cluster
+    properties:
+      datastores:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      name:
+        type: string
+      networks:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+      resourcePools:
+        items:
+          type: string
+        type: array
+        uniqueItems: true
+    type: object
+  v1EdgeTokenEntity:
+    description: Edge token request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1EdgeTokenSpecEntity'
+    type: object
+  v1SpectroClusterPackCondition:
+    properties:
+      message:
+        type: string
+      reason:
+        type: string
+      status:
+        type: string
+      type:
+        enum:
+        - ReadyForInstall
+        - Installed
+        - Ready
+        - Error
+        - UpgradeAvailable
+        - WaitingForOtherLayers
+        type: string
+    type: object
+  v1EdgeTokenStatus:
+    description: Edge token status
+    properties:
+      isActive:
+        description: Set to 'true', if the token is active
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1PackSummaryStatus:
+    description: Pack status
+    type: object
+  v1EdgeHostDeviceSpec:
+    description: EdgeHostDeviceSpec defines the desired state of EdgeHostDevice
+    properties:
+      cloudProperties:
+        $ref: '#/definitions/v1EdgeHostCloudProperties'
+      clusterProfileTemplates:
+        items:
+          $ref: '#/definitions/v1ClusterProfileTemplate'
+        type: array
+      device:
+        $ref: '#/definitions/v1DeviceSpec'
+      host:
+        $ref: '#/definitions/v1EdgeHost'
+      properties:
+        $ref: '#/definitions/v1EdgeHostProperties'
+      service:
+        $ref: '#/definitions/v1ServiceSpec'
+      tunnelConfig:
+        $ref: '#/definitions/v1SpectroTunnelConfig'
+      type:
+        description: Deprecated. Cloudtype of the provisioned edge host
+        enum:
+        - vsphere
+        - edge-native
+        type: string
+      version:
+        type: string
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1EdgeHostDevices:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/v1EdgeHostDevice'
+        type: array
+        uniqueItems: true
+      listmeta:
+        $ref: '#/definitions/v1ListMetaData'
+    required:
+    - items
+    type: object
+  v1EdgeTokenActiveState:
+    description: Edge token active state
+    properties:
+      isActive:
+        description: Set to 'true', if the token is active
+        type: boolean
+  v1SpectroClusterVariable:
+    description: Variable with value which will be used within the packs of cluster profile
+    properties:
+      name:
+        description: Variable name
+        type: string
+      value:
+        description: Actual value of the variable to be used within the cluster
+        type: string
+    required:
+    - name
+    type: object
+  v1EdgeTokenUpdate:
+    description: Edge token update request payload
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1EdgeTokenSpecUpdate'
+    type: object
+  v1EdgeHostDeviceStatus:
+    description: EdgeHostDeviceStatus defines the observed state of EdgeHostDevice
+    properties:
+      health:
+        $ref: '#/definitions/v1EdgeHostHealth'
+      inUseClusters:
+        description: Deprecated. Use inUseClustersRef
+        items:
+          $ref: '#/definitions/v1ObjectEntity'
+        type: array
+      inUseClustersRef:
+        items:
+          $ref: '#/definitions/v1EdgeClusterObjectEntity'
+        type: array
+      packs:
+        items:
+          $ref: '#/definitions/v1ClusterPackStatus'
+        type: array
+      profileStatus:
+        $ref: '#/definitions/v1ProfileStatus'
+      serviceAuthToken:
+        type: string
+      state:
+        enum:
+        - ready
+        - unpaired
+        - in-use
+        type: string
+      tunnelStatus:
+        $ref: '#/definitions/v1SpectroTunnelStatus'
+    type: object
+  v1EdgeHostDeviceHostCheckSum:
+    properties:
+      hostCheckSum:
+        type: string
+    type: object
+  v1EdgeHostDeviceEntity:
+    description: Edge host device information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectTagsEntity'
+      spec:
+        $ref: '#/definitions/v1EdgeHostDeviceSpecEntity'
+    type: object
+  v1EdgeHostDeviceMetaUpdateEntity:
+    description: Edge host device uid and name
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectTagsEntity'
+    type: object
+  v1ArchType:
+    default: amd64
+    enum:
+    - amd64
+    - arm64
+    type: string
+  v1HybridClusterMeta:
+    description: Object identity meta of hybrid cluster
+    properties:
+      name:
+        description: Name of the hybrid cluster
+        type: string
+      uid:
+        description: Uid of the hybrid cluster
+        type: string
+  v1SpectroClusterProfileEntity:
+    description: Cluster profile request payload
+    properties:
+      packValues:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1PackValuesEntity'
+        type: array
+        uniqueItems: true
+      replaceWithProfile:
+        description: Cluster profile uid to be replaced with new profile
+        type: string
+      uid:
+        description: Cluster profile uid
+        type: string
+      variables:
+        items:
+          $ref: '#/definitions/v1SpectroClusterVariable'
+        type: array
+    type: object
+  v1SshUserCredentials:
+    properties:
+      password:
+        description: Password is the temporary password of the SSH tunnel
+        type: string
+      sshKey:
+        description: SshKey is the ssh key of the SSH tunnel
+        type: string
+      username:
+        description: UserName is the temporary username of the SSH tunnel
+        type: string
+    type: object
+  v1Nic:
+    properties:
+      dns:
+        items:
+          type: string
+        type: array
+      gateway:
+        type: string
+      ip:
+        type: string
+      isDefault:
+        type: boolean
+      macAddr:
+        type: string
+      nicName:
+        type: string
+      subnet:
+        type: string
+    type: object
+  v1EdgeHostVsphereCloudProperties:
+    description: Vsphere cloud properties of edge host
+    properties:
+      datacenters:
+        items:
+          $ref: '#/definitions/v1VsphereCloudDatacenter'
+        type: array
+  v1SpectroTunnelConfig:
+    description: Spectro tunnel configuration
+    properties:
+      remoteSsh:
+        default: disabled
+        enum:
+        - enabled
+        - disabled
+        type: string
+        x-omitempty: false
+      remoteSshTempUser:
+        default: disabled
+        enum:
+        - enabled
+        - disabled
+        type: string
+        x-omitempty: false
+    type: object
+  v1EdgeHostProperties:
+    description: Additional properties of edge host
+    properties:
+      networks:
+        items:
+          $ref: '#/definitions/v1EdgeHostNetwork'
+        type: array
+      storagePools:
+        items:
+          $ref: '#/definitions/v1EdgeHostStoragePool'
+        type: array
+  v1PackSchema:
+    description: PackSchema defines the schema definition, hints for the pack values
+    properties:
+      format:
+        type: string
+        x-omitempty: false
+      hints:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      listOptions:
+        items:
+          type: string
+        type: array
+        x-omitempty: false
+      name:
+        type: string
+        x-omitempty: false
+      readonly:
+        type: boolean
+        x-omitempty: false
+      regex:
+        type: string
+        x-omitempty: false
+      required:
+        type: boolean
+        x-omitempty: false
+      type:
+        type: string
+        x-omitempty: false
+    type: object
+  v1ListMetaData:
+    description: ListMeta describes metadata for the resource listing
+    properties:
+      continue:
+        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        type: string
+        x-omitempty: false
+      count:
+        description: Total count of the resources which might change during pagination based on the resources addition or deletion
+        type: integer
+        x-omitempty: false
+      limit:
+        description: Number of records feteched
+        type: integer
+        x-omitempty: false
+      offset:
+        description: The next offset for the pagination. Starting index for which next request will be placed.
+        type: integer
+        x-omitempty: false
+    type: object
+  v1EdgeToken:
+    description: Edge token information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1EdgeTokenSpec'
+      status:
+        $ref: '#/definitions/v1EdgeTokenStatus'
+    type: object
+  v1SshUserStatus:
+    properties:
+      credentials:
+        $ref: '#/definitions/v1SshUserCredentials'
+        description: Credentials is the temporary user credentials of the SSH tunnel
+      lastModifiedTime:
+        $ref: '#/definitions/v1Time'
+        description: LastModifiedTime is the last modified time of the SSH tunnel
+      message:
+        description: Message is the status message of the SSH tunnel
+        type: string
+      state:
+        description: State is the state of the SSH tunnel
+        enum:
+        - Created
+        - Deleted
+        - Failed
+        type: string
+    type: object
+  v1CPU:
+    properties:
+      cores:
+        description: number of cpu cores
+        format: int32
+        type: integer
+    type: object
+  v1SpectroClusterProfileSpec:
+    description: Cluster profile spec response
+    properties:
+      cloudType:
+        description: Cluster profile cloud type
+        type: string
+      packs:
+        description: Cluster profile packs array
+        items:
+          $ref: '#/definitions/v1ClusterProfilePacksEntity'
+        type: array
+        uniqueItems: true
+      relatedObject:
+        $ref: '#/definitions/v1ObjectReference'
+        description: RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with
+      type:
+        description: Cluster profile type [ "cluster", "infra", "add-on", "system" ]
+        type: string
+      version:
+        description: Cluster profile version
+        format: int32
+        type: integer
+    type: object
+  v1OS:
+    properties:
+      family:
+        type: string
+      kernel:
+        type: string
+      kernelVersion:
+        type: string
+      version:
+        type: string
+    type: object
+  v1Manifest:
+    description: Manifest object
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ManifestPublishedSpec'
+  v1ClusterPackStatus:
+    properties:
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+      endTime:
+        $ref: '#/definitions/v1Time'
+      manifests:
+        items:
+          $ref: '#/definitions/v1ClusterPackManifestStatus'
+        type: array
+      name:
+        type: string
+      profileUid:
+        type: string
+      services:
+        items:
+          $ref: '#/definitions/v1LoadBalancerService'
+        type: array
+      startTime:
+        $ref: '#/definitions/v1Time'
+      type:
+        type: string
+      version:
+        type: string
+    type: object
+  v1EdgeClusterObjectEntity:
+    description: Object identity meta of the cluster
+    properties:
+      hybridCluster:
+        $ref: '#/definitions/v1HybridClusterMeta'
+        description: In case of hybrid edge clusters, it provides the object identity meta of hybrid cluster
+      name:
+        description: Name of the cluster
+        type: string
+      uid:
+        description: Uid of the cluster
+        type: string
+    type: object
+  v1ClusterPackManifestStatus:
+    properties:
+      condition:
+        $ref: '#/definitions/v1ClusterCondition'
+      name:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1PackTemplateParameter:
+    description: Pack template parameter
+    properties:
+      description:
+        description: Pack template parameter description
+        type: string
+      displayName:
+        description: Pack template parameter display name
+        type: string
+      format:
+        description: Pack template parameter format
+        type: string
+      hidden:
+        description: Pack template parameter hidden flag, if true then the parameter is hidden in the UI
+        type: boolean
+      listOptions:
+        description: Pack template parameter list options as string array
+        items:
+          type: string
+        type: array
+      name:
+        description: Pack template parameter name
+        type: string
+      optional:
+        description: Pack template parameter optional flag, if true then the parameter value is not mandatory
+        type: boolean
+      options:
+        additionalProperties:
+          $ref: '#/definitions/v1PackTemplateParameterOption'
+          type: object
+        description: Pack template parameter options array
+        type: object
+      readOnly:
+        description: Pack template parameter readonly flag, if true then the parameter value can't be overridden
+        type: boolean
+      regex:
+        description: Pack template parameter regex, if set then parameter value must match with specified regex
+        type: string
+      targetKey:
+        description: Pack template parameter target key which is mapped to the key defined in the pack values
+        type: string
+      type:
+        description: Pack template parameter data type
+        type: string
+      value:
+        description: Pack template parameter value
+        type: string
+  v1EdgeTokens:
+    properties:
+      items:
+        description: List of edge tokens
+        items:
+          $ref: '#/definitions/v1EdgeToken'
+        type: array
+        uniqueItems: true
+    required:
+    - items
+    type: object
+  v1EdgeTokenSpecUpdate:
+    description: Edge token spec to be updated
+    properties:
+      defaultProjectUid:
+        description: Default project where the edgehost will be placed on the token authorization
+        type: string
+      expiry:
+        $ref: '#/definitions/v1Time'
+  v1ProfileStatus:
+    properties:
+      hasUserMacros:
+        description: If it is true then profile pack values has a reference to user defined macros
+        type: boolean
+        x-omitempty: false
+    type: object
+  v1SpectroTunnelStatus:
+    description: SpectroTunnelStatus is the status of the tunnel
+    properties:
+      ssh:
+        $ref: '#/definitions/v1SshTunnelStatus'
+        description: SshStatus is the status of the ssh tunnel
+    type: object
+  v1EdgeTokenSpecEntity:
+    description: Edge token specification
+    properties:
+      defaultProjectUid:
+        description: Default project where the edgehost will be placed on the token authorization
+        type: string
+      expiry:
+        $ref: '#/definitions/v1Time'
+        description: Edge token expiry date
+    type: object
+  v1PackTemplate:
+    description: Pack template configuration
+    properties:
+      manifest:
+        description: Pack template manifest content
+        type: string
+      parameters:
+        $ref: '#/definitions/v1PackTemplateParameters'
+      values:
+        description: Pack template values
+        type: string
+  v1ObjectReference:
+    description: ObjectReference contains enough information to let you inspect or modify the referred object.
+    properties:
+      kind:
+        description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+        type: string
+      name:
+        description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+        type: string
+      uid:
+        description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+        type: string
+    type: object
+  v1EdgeHostsTags:
+    properties:
+      tags:
+        items:
+          type: string
+        type: array
+    type: object
+  v1EdgeHostMeta:
+    properties:
+      archType:
+        $ref: '#/definitions/v1ArchType'
+      edgeHostType:
+        enum:
+        - edge-native
+        - vsphere
+        type: string
+      healthState:
+        type: string
+      name:
+        type: string
+      state:
+        type: string
+      uid:
+        type: string
+    type: object
+  v1SpectroClusterPacksStatusEntity:
+    properties:
+      packs:
+        items:
+          $ref: '#/definitions/v1SpectroClusterPackStatusEntity'
+        type: array
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

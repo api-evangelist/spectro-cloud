@@ -1,0 +1,59 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations health API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: health
+  x-displayName: Health
+paths:
+  /v1/health/ping:
+    get:
+      description: Ping Service
+      operationId: V1HealthPing
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1HealthPing'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Ping Service
+      tags:
+      - health
+  /v1/health/ready:
+    get:
+      description: Ready Service
+      operationId: V1HealthReady
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1HealthPing'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Ready Service
+      tags:
+      - health
+definitions:
+  v1HealthPing:
+    properties:
+      msg:
+        type: string
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header

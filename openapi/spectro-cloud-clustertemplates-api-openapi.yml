@@ -1,0 +1,946 @@
+swagger: '2.0'
+info:
+  title: Local Management APIs activations clusterTemplates API
+  version: v1
+servers:
+- url: https://edge-host-ip:5080
+schemes:
+- http
+- https
+consumes:
+- application/json
+produces:
+- application/json
+tags:
+- name: clusterTemplates
+  x-displayName: Cluster Templates
+paths:
+  /v1/clusterTemplates:
+    post:
+      operationId: V1ClusterTemplatesCreate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterTemplateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+          schema:
+            $ref: '#/definitions/v1Uid'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Create a new cluster template
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/spectroclusters/{clusterUid}/variables:
+    parameters:
+    - description: Cluster uid
+      in: path
+      name: clusterUid
+      required: true
+      type: string
+    patch:
+      operationId: V1ClusterTemplatesUidSpectroClustersUidVariablesPatch
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterTemplateVariablesUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified cluster's template variables
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/tags:
+    get:
+      operationId: V1ClusterTemplatesTagsGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: An array of cluster template tags
+          schema:
+            $ref: '#/definitions/v1ClusterTemplateTags'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of cluster template tags
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/validate/name:
+    get:
+      operationId: V1ClusterTemplatesValidateName
+      parameters:
+      - description: Cluster template name
+        in: query
+        name: name
+        type: string
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: Ok response without content
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              type: string
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Validates the cluster template name
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/{uid}:
+    parameters:
+    - description: Cluster template uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    delete:
+      operationId: V1ClusterTemplatesUidDelete
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was deleted successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Delete a cluster template by uid
+      tags:
+      - clusterTemplates
+    get:
+      operationId: V1ClusterTemplatesUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterTemplate'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified cluster template
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/{uid}/metadata:
+    parameters:
+    - description: Cluster template uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: V1ClusterTemplatesUidMetadataUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ObjectMetaInputEntitySchema'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified cluster template metadata
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/{uid}/policies:
+    parameters:
+    - description: Cluster template uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: V1ClusterTemplatesUidPoliciesUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterTemplatePoliciesUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified cluster template policies
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/{uid}/profiles:
+    parameters:
+    - description: Cluster template uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    put:
+      operationId: V1ClusterTemplatesUidProfilesUpdate
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterTemplateProfilesUpdateEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified cluster template profiles
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/{uid}/profiles/variables:
+    parameters:
+    - description: Cluster template uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    patch:
+      operationId: V1ClusterTemplatesUidProfilesVariablesPatch
+      parameters:
+      - in: body
+        name: body
+        schema:
+          $ref: '#/definitions/v1ClusterTemplateProfilesVariablesBatchEntity'
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update variables for profiles in a cluster template
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/{uid}/profiles/{profileUid}/variables:
+    parameters:
+    - description: Cluster template uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Profile uid
+      in: path
+      name: profileUid
+      required: true
+      type: string
+    get:
+      operationId: V1ClusterTemplatesUidProfilesProfileUidVariablesGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterTemplateProfileVariablesResponse'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieve variables for a specific profile in a cluster template
+      tags:
+      - clusterTemplates
+  /v1/clusterTemplates/{uid}/spectroclusters/{clusterUid}/reconcile:
+    parameters:
+    - description: Cluster template uid
+      in: path
+      name: uid
+      required: true
+      type: string
+    - description: Cluster uid
+      in: path
+      name: clusterUid
+      required: true
+      type: string
+    get:
+      operationId: V1ClusterTemplatesUidClusterReconcileClusterUidGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        type: string
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/v1ClusterReconcile'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the cluster reconcile document for a specific cluster launched from a template
+      tags:
+      - clusterTemplates
+definitions:
+  v1ClusterTemplateEntitySpec:
+    description: Cluster template specification
+    properties:
+      cloudType:
+        description: Type of cloud provider
+        type: string
+      policies:
+        description: List of policy references
+        items:
+          $ref: '#/definitions/v1PolicyRef'
+        type: array
+      profiles:
+        description: List of cluster profile references
+        items:
+          $ref: '#/definitions/v1ClusterTemplateProfile'
+        type: array
+    type: object
+  v1ClusterTemplateProfilesUpdateEntity:
+    description: Cluster template profiles update entity
+    properties:
+      profiles:
+        description: List of cluster profile references with updated variable values and assign strategies
+        items:
+          $ref: '#/definitions/v1ClusterTemplateProfile'
+        type: array
+    required:
+    - profiles
+    type: object
+  v1ClusterReconcileLog:
+    description: Cluster reconciliation log entry
+    properties:
+      appliedTimestamp:
+        description: Timestamp when this log entry was created
+        format: date-time
+        type: string
+      message:
+        description: Log message
+        type: string
+      profileUids:
+        description: List of profile UIDs involved in this reconciliation
+        items:
+          type: string
+        type: array
+      state:
+        description: Reconciliation state for this log entry
+        enum:
+        - Created
+        - Pending
+        - InProgress
+        - Applied
+        - Failed
+        type: string
+    type: object
+  v1ClusterTemplate:
+    description: Cluster template entity information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ClusterTemplateSpec'
+      status:
+        $ref: '#/definitions/v1ClusterTemplateStatus'
+    type: object
+  v1ClusterReconcile:
+    description: Cluster reconcile document containing all reconciliation information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMeta'
+      spec:
+        $ref: '#/definitions/v1ClusterReconcileSpec'
+      status:
+        $ref: '#/definitions/v1ClusterReconcileStatus'
+    type: object
+  v1ClusterVariableValue:
+    description: Cluster along with specific variable value
+    properties:
+      uid:
+        description: UID of the cluster
+        type: string
+      value:
+        description: Value of the variable
+        type: string
+    type: object
+  v1ClusterTemplateProfilesVariablesBatchEntity:
+    description: Cluster template profiles variables batch entity
+    properties:
+      profiles:
+        description: List of profiles with variables and cluster assignments
+        items:
+          $ref: '#/definitions/v1ClusterTemplateProfileVariablesGroup'
+        type: array
+    required:
+    - profiles
+    type: object
+  v1ObjectMeta:
+    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      creationTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      deletionTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      lastModifiedTimestamp:
+        $ref: '#/definitions/v1Time'
+        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+      uid:
+        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+        type: string
+    type: object
+  v1ClusterTemplateSpec:
+    description: Cluster template specification
+    properties:
+      cloudType:
+        description: Type of cloud provider
+        type: string
+      clusters:
+        additionalProperties:
+          $ref: '#/definitions/v1ClusterTemplateSpcRef'
+        description: Map of cluster references with cluster UID as key
+        type: object
+      policies:
+        description: List of policy references
+        items:
+          $ref: '#/definitions/v1PolicyRef'
+        type: array
+      profiles:
+        description: List of cluster profile references
+        items:
+          $ref: '#/definitions/v1ClusterTemplateProfile'
+        type: array
+    type: object
+  v1ClusterReconcileStatus:
+    description: Cluster reconcile status
+    properties:
+      lastAppliedTimestamp:
+        description: Timestamp when reconciliation was last applied
+        format: date-time
+        type: string
+      message:
+        description: Status message
+        type: string
+      state:
+        description: Current reconciliation state
+        enum:
+        - Created
+        - Pending
+        - InProgress
+        - Applied
+        - Failed
+        type: string
+      updateLogs:
+        description: List of reconciliation update logs
+        items:
+          $ref: '#/definitions/v1ClusterReconcileLog'
+        type: array
+      variableStatus:
+        $ref: '#/definitions/v1ClusterVariableReconcileStatus'
+    type: object
+  v1ClusterVariableReconcileStatus:
+    description: Cluster variable reconciliation status
+    properties:
+      state:
+        description: Variable reconciliation state
+        enum:
+        - Resolved
+        - Unresolved
+        type: string
+    type: object
+  v1Time:
+    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+    format: date-time
+    type: string
+  v1ClusterTemplateSpcRef:
+    description: Cluster template cluster reference
+    properties:
+      clusterUid:
+        description: UID of the cluster
+        type: string
+      name:
+        description: Name of the cluster
+        type: string
+    type: object
+  v1ObjectMetaInputEntitySchema:
+    description: Resource metadata
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+    required:
+    - metadata
+    type: object
+  v1VariableInputType:
+    default: text
+    description: Input type for the variable
+    enum:
+    - text
+    - dropdown
+    - multiline
+    type: string
+  v1ClusterTemplateVariablesUpdateEntity:
+    description: Cluster template variables update entity
+    properties:
+      profiles:
+        description: List of cluster profile references belonging to the cluster
+        items:
+          $ref: '#/definitions/v1ClusterTemplateProfileVariable'
+        type: array
+    required:
+    - profiles
+    type: object
+  v1ObjectMetaInputEntity:
+    description: ObjectMeta input entity for object creation
+    properties:
+      annotations:
+        additionalProperties:
+          type: string
+        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+        type: object
+      labels:
+        additionalProperties:
+          type: string
+        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+        type: object
+      name:
+        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+        type: string
+    type: object
+  v1Variable:
+    description: Unique variable field with schema definition
+    properties:
+      defaultValue:
+        description: The default value of the variable
+        type: string
+        x-omitempty: false
+      description:
+        description: Variable description
+        type: string
+      displayName:
+        description: Unique display name of the variable
+        type: string
+      format:
+        $ref: '#/definitions/v1VariableFormat'
+      hidden:
+        description: If true, then variable will be hidden for overriding the value. By default the hidden flag will be set to false
+        type: boolean
+        x-omitempty: false
+      immutable:
+        description: If true, then variable value can't be editable. By default the immutable flag will be set to false
+        type: boolean
+        x-omitempty: false
+      inputType:
+        $ref: '#/definitions/v1VariableInputType'
+        description: Input type for the variable - text or dropdown. Defaults to text for backward compatibility
+      isSensitive:
+        description: If true, then default value will be masked. By default the isSensitive flag will be set to false
+        type: boolean
+        x-omitempty: false
+      name:
+        description: Variable name
+        type: string
+      options:
+        description: Available options for dropdown input type
+        items:
+          $ref: '#/definitions/v1VariableOption'
+        type: array
+      regex:
+        description: Regular expression pattern which the variable value must match
+        type: string
+      required:
+        description: Flag to specify if the variable is optional or mandatory. If it is mandatory then default value must be provided
+        type: boolean
+        x-omitempty: false
+    required:
+    - name
+    type: object
+  v1ClusterTemplateProfileVariablesResponse:
+    description: Response for retrieving variables for a specific profile in a cluster template
+    properties:
+      variables:
+        description: List of variables with cluster assignments
+        items:
+          $ref: '#/definitions/v1ClusterTemplateProfileVariableWithClusters'
+        type: array
+    type: object
+  v1ClusterTemplateEntity:
+    description: Cluster template entity information
+    properties:
+      metadata:
+        $ref: '#/definitions/v1ObjectMetaInputEntity'
+      spec:
+        $ref: '#/definitions/v1ClusterTemplateEntitySpec'
+    type: object
+  v1ClusterTemplateVariable:
+    description: Cluster template variable
+    properties:
+      assignStrategy:
+        description: Assignment strategy for the variable
+        enum:
+        - all
+        - cluster
+        type: string
+      clusters:
+        description: List of clusters with the specific variable
+        items:
+          $ref: '#/definitions/v1ClusterVariableValue'
+        type: array
+      name:
+        description: Name of the variable
+        type: string
+      value:
+        description: Value of the variable to be applied to all clusters launched from this template. This value is specified when assignStrategy is set to all
+        type: string
+    type: object
+  v1SpectroClusterVariable:
+    description: Variable with value which will be used within the packs of cluster profile
+    properties:
+      name:
+        description: Variable name
+        type: string
+      value:
+        description: Actual value of the variable to be used within the cluster
+        type: string
+    required:
+    - name
+    type: object
+  v1VariableFormat:
+    default: string
+    description: Format type of the variable value
+    enum:
+    - string
+    - number
+    - boolean
+    - ipv4
+    - ipv4cidr
+    - ipv6
+    - version
+    - base64
+    type: string
+  v1ClusterTemplateProfileVariable:
+    description: Cluster template profile information
+    properties:
+      uid:
+        description: UID of the cluster profile
+        type: string
+      variables:
+        description: List of cluster profile variable values for the cluster to be updated.
+        items:
+          $ref: '#/definitions/v1SpectroClusterVariable'
+        type: array
+    type: object
+  v1ClusterTemplateMaintenanceStatus:
+    description: Cluster template maintenance status
+    properties:
+      nextWindowEndTime:
+        description: Next maintenance window end time
+        format: date-time
+        type: string
+      nextWindowStartTime:
+        description: Next maintenance window start time
+        format: date-time
+        type: string
+    type: object
+  v1ClusterVariableStatus:
+    description: Cluster variable status counts categorized by resolution state
+    properties:
+      resolved:
+        description: The number of clusters in which all variables have been successfully resolved
+        type: integer
+      unResolved:
+        description: The number of clusters that have unresolved variables requiring attention
+        type: integer
+    type: object
+  v1ClusterTemplateVariableClusterAssignment:
+    description: Cluster variable assignment information
+    properties:
+      assignedBy:
+        description: Specifies the actor who has made the current variable assignment
+        enum:
+        - spectrocluster
+        - clustertemplate
+        type: string
+      assignedValue:
+        description: Value assigned to the variable
+        type: string
+      assignmentState:
+        description: State of the variable assignment
+        enum:
+        - Pending
+        - Assigned
+        type: string
+      uid:
+        description: Cluster UID
+        type: string
+      value:
+        description: Current running value of the variable
+        type: string
+    required:
+    - uid
+    - assignmentState
+    type: object
+  v1ClusterReconcileSpec:
+    description: Cluster reconcile specification
+    properties:
+      profiles:
+        description: List of cluster profiles with reconciliation information
+        items:
+          $ref: '#/definitions/v1ClusterTemplateProfileVariables'
+        type: array
+    type: object
+  v1PolicyRef:
+    description: Policy reference
+    properties:
+      kind:
+        description: Kind of the policy
+        type: string
+      uid:
+        description: UID of the policy
+        type: string
+    type: object
+  v1Uid:
+    properties:
+      uid:
+        type: string
+    required:
+    - uid
+    type: object
+  v1ClusterTemplateTags:
+    description: Cluster template tags response
+    properties:
+      tags:
+        description: Array of cluster template tags
+        items:
+          type: string
+        type: array
+    type: object
+  v1ClusterTemplateProfile:
+    description: Cluster template profile information
+    properties:
+      uid:
+        description: UID of the cluster profile
+        type: string
+      variables:
+        description: List of cluster profile variable values and assign strategies. This is specified when clusters are launched from the template
+        items:
+          $ref: '#/definitions/v1ClusterTemplateVariable'
+        type: array
+    type: object
+  v1ClusterTemplateProfileVariableWithClusters:
+    description: Variable with cluster assignments
+    properties:
+      clusters:
+        description: List of clusters with variable assignments
+        items:
+          $ref: '#/definitions/v1ClusterTemplateVariableClusterAssignment'
+        type: array
+      variable:
+        $ref: '#/definitions/v1Variable'
+        description: Variable field with schema definition
+        type: object
+    required:
+    - variable
+    - clusters
+    type: object
+  v1ClusterTemplateProfileVariables:
+    description: Profile variables with grouped resolved and unresolved variables
+    properties:
+      name:
+        description: Profile name
+        type: string
+      uid:
+        description: Profile UID
+        type: string
+      variables:
+        description: List of resolved and unresolved variables belonging to a cluster launched from template
+        properties:
+          resolvedVariables:
+            description: List of resolved variables
+            items:
+              $ref: '#/definitions/v1SpectroClusterVariable'
+            type: array
+          unResolvedVariables:
+            description: List of unresolved variables
+            items:
+              $ref: '#/definitions/v1SpectroClusterVariable'
+            type: array
+        type: object
+    required:
+    - uid
+    type: object
+  v1ClusterTemplateProfileVariablesGroup:
+    description: Profile with variables and cluster assignments
+    properties:
+      uid:
+        description: UID of the cluster profile
+        type: string
+      variables:
+        description: List of variables with cluster assignments
+        items:
+          $ref: '#/definitions/v1ClusterTemplateVariableClusterMapping'
+        type: array
+    required:
+    - uid
+    - variables
+    type: object
+  v1ClusterTemplatePoliciesUpdateEntity:
+    description: Cluster template policies update entity
+    properties:
+      policies:
+        description: List of spc policy references to be updated in the cluster template
+        items:
+          $ref: '#/definitions/v1PolicyRef'
+        type: array
+    required:
+    - policies
+    type: object
+  v1ClusterReconcileStatusCounts:
+    description: Cluster reconcile metadata
+    properties:
+      clusters:
+        description: Clusters grouped by reconciliation status
+        properties:
+          applied:
+            description: List of UIDs for clusters in applied state
+            items:
+              type: string
+            type: array
+          failed:
+            description: List of UIDs for clusters in failed state
+            items:
+              type: string
+            type: array
+          pending:
+            description: List of UIDs for clusters in pending state
+            items:
+              type: string
+            type: array
+        type: object
+    type: object
+  v1ClusterTemplateVariableClusterMapping:
+    description: Variable with cluster assignments
+    properties:
+      clusters:
+        description: List of clusters with variable values
+        items:
+          $ref: '#/definitions/v1ClusterVariableValue'
+        type: array
+      name:
+        description: Name of the variable
+        type: string
+    required:
+    - name
+    - clusters
+    type: object
+  v1ClusterTemplateStatus:
+    description: Cluster template status
+    properties:
+      clusterStatusCounts:
+        $ref: '#/definitions/v1ClusterReconcileStatusCounts'
+      clusterVariables:
+        $ref: '#/definitions/v1ClusterVariableStatus'
+      maintenance:
+        $ref: '#/definitions/v1ClusterTemplateMaintenanceStatus'
+      state:
+        description: Current state of the cluster template
+        enum:
+        - Pending
+        - Applied
+        - Failed
+        - PartiallyApplied
+        type: string
+    type: object
+  v1VariableOption:
+    description: Option for dropdown variable input type
+    properties:
+      default:
+        description: Mark this option as the default selection
+        type: boolean
+        x-omitempty: false
+      description:
+        description: Optional tooltip/description for the option
+        type: string
+      label:
+        description: Display text for the option
+        type: string
+      value:
+        description: Actual value for the option
+        type: string
+    required:
+    - value
+    type: object
+securityDefinitions:
+  Authorization:
+    description: JWT authorization token obtained using /v1/users/default/login API
+    type: apiKey
+    name: Authorization
+    in: header
