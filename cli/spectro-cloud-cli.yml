@@ -1,0 +1,38 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.spectrocloud.com/automation/palette-cli/
+name: palette
+description: The Palette CLI interacts with Palette and manages resources; suited for
+  CI/CD pipelines and automation where Terraform or direct API calls are not ideal. It
+  uses AES encryption (passphrase-protected) to secure sensitive data such as API keys.
+install:
+  docs: https://docs.spectrocloud.com/automation/palette-cli/install-palette-cli/
+  downloads: https://docs.spectrocloud.com/downloads/
+  methods:
+  - Download the binary from the Palette Downloads page.
+commands:
+- name: login
+  purpose: Login to Palette.
+- name: project
+  purpose: Manage Palette projects.
+- name: ec
+  purpose: Palette Enterprise Cluster installation and pre-validation.
+- name: pcg
+  purpose: Private Cloud Gateway installation and pre-validation.
+- name: pde
+  purpose: Palette Developer Experience (virtual clusters / dev workflows).
+- name: vmo
+  purpose: Migrate, import and deploy VMs to Palette VMO.
+- name: content
+  purpose: Create and manage content bundles.
+- name: import
+  purpose: Import clusters into Palette.
+- name: fips-validate
+  purpose: Validate the FIPS compliance of your Kubernetes clusters.
+- name: docs
+  purpose: Start the Palette documentation site locally for offline use.
+- name: completion
+  purpose: Generate the shell autocompletion script.
+- name: help
+  purpose: Help with any command.
+commands_docs: https://docs.spectrocloud.com/automation/palette-cli/commands/

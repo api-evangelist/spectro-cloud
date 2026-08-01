@@ -1,27 +1,629 @@
 aid: spectro-cloud
 name: Spectro Cloud
-description: 'Spectro Cloud is a company surfaced as a portfolio company of sierra-ventures and added
-  to the API Evangelist network as a stub for enrichment. Sector: infrastructure. This profile is a lead
-  awaiting the enrichment pipeline.'
+description: 'Spectro Cloud provides Palette, an enterprise platform for managing the full
+  lifecycle of Kubernetes clusters and cloud-native and AI infrastructure across data
+  centers, public clouds, bare metal, and the edge. Palette uses declarative cluster
+  profiles (packs, Helm charts, manifests) for repeatable deployments, unified VM,
+  container, and AI-workload management, and granular governance across distributed and
+  air-gapped environments. Palette VerteX adds FIPS 140 and FedRAMP posture for regulated
+  and public-sector organizations. The Palette API is a large REST surface (1,200+
+  operations) covering clusters, cluster profiles, cloud accounts, projects, tenants,
+  registries, and edge hosts, with Go/TypeScript SDKs, a Terraform provider, a Crossplane
+  provider, and the Palette CLI for automation.'
 url: https://raw.githubusercontent.com/api-evangelist/spectro-cloud/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - sierra-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: enriched-from-live-api
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
+image: https://www.spectrocloud.com/favicon.ico
 tags:
 - Company
 - Infrastructure
-apis: []
+- Kubernetes
+- Cloud Native
+- Cluster Management
+- Edge Computing
+- Multi-Cloud
+- DevOps
+- AI Infrastructure
+apis:
+- aid: spectro-cloud:spectro-cloud-activations-api
+  name: Spectro Cloud activations API
+  description: The activations API from Spectro Cloud — 1 operation(s) for activations.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - activations
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-activations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-apikeys-api
+  name: Spectro Cloud apiKeys API
+  description: The apiKeys API from Spectro Cloud — 3 operation(s) for apikeys.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - apiKeys
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-apikeys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-appdeployments-api
+  name: Spectro Cloud appDeployments API
+  description: The appDeployments API from Spectro Cloud — 9 operation(s) for appdeployments.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - appDeployments
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-appdeployments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-appprofiles-api
+  name: Spectro Cloud appProfiles API
+  description: The appProfiles API from Spectro Cloud — 11 operation(s) for appprofiles.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - appProfiles
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-appprofiles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-audits-api
+  name: Spectro Cloud audits API
+  description: The audits API from Spectro Cloud — 4 operation(s) for audits.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - audits
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-audits-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-auth-api
+  name: Spectro Cloud auth API
+  description: The auth API from Spectro Cloud — 17 operation(s) for auth.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - auth
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-cloudaccounts-api
+  name: Spectro Cloud cloudaccounts API
+  description: The cloudaccounts API from Spectro Cloud — 32 operation(s) for cloudaccounts.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - cloudaccounts
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-cloudaccounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-cloudconfigs-api
+  name: Spectro Cloud cloudconfigs API
+  description: The cloudconfigs API from Spectro Cloud — 87 operation(s) for cloudconfigs.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - cloudconfigs
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-cloudconfigs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-clouds-api
+  name: Spectro Cloud clouds API
+  description: The clouds API from Spectro Cloud — 95 operation(s) for clouds.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - clouds
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-clouds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-clustergroups-api
+  name: Spectro Cloud clustergroups API
+  description: The clustergroups API from Spectro Cloud — 10 operation(s) for clustergroups.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - clustergroups
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-clustergroups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-clusterprofiles-api
+  name: Spectro Cloud clusterprofiles API
+  description: The clusterprofiles API from Spectro Cloud — 26 operation(s) for clusterprofiles.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - clusterprofiles
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-clusterprofiles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-clustertemplates-api
+  name: Spectro Cloud clusterTemplates API
+  description: The clusterTemplates API from Spectro Cloud — 11 operation(s) for clustertemplates.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - clusterTemplates
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-clustertemplates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-dashboard-api
+  name: Spectro Cloud dashboard API
+  description: The dashboard API from Spectro Cloud — 61 operation(s) for dashboard.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - dashboard
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-dashboard-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-datasinks-api
+  name: Spectro Cloud datasinks API
+  description: The datasinks API from Spectro Cloud — 1 operation(s) for datasinks.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - datasinks
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-datasinks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-edge-mgmt-api
+  name: Spectro Cloud edge-mgmt API
+  description: The edge-mgmt API from Spectro Cloud — 64 operation(s) for edge-mgmt.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - edge-mgmt
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-edge-mgmt-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-edgehosts-api
+  name: Spectro Cloud edgehosts API
+  description: The edgehosts API from Spectro Cloud — 22 operation(s) for edgehosts.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - edgehosts
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-edgehosts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-events-api
+  name: Spectro Cloud events API
+  description: The events API from Spectro Cloud — 3 operation(s) for events.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-features-api
+  name: Spectro Cloud features API
+  description: The features API from Spectro Cloud — 2 operation(s) for features.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - features
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-features-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-filters-api
+  name: Spectro Cloud filters API
+  description: The filters API from Spectro Cloud — 4 operation(s) for filters.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - filters
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-filters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-grpc-api
+  name: Spectro Cloud grpc API
+  description: The grpc API from Spectro Cloud — 1 operation(s) for grpc.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - grpc
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-grpc-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-health-api
+  name: Spectro Cloud health API
+  description: The health API from Spectro Cloud — 2 operation(s) for health.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-installers-api
+  name: Spectro Cloud installers API
+  description: The installers API from Spectro Cloud — 1 operation(s) for installers.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - installers
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-installers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-metrics-api
+  name: Spectro Cloud metrics API
+  description: The metrics API from Spectro Cloud — 2 operation(s) for metrics.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-notifications-api
+  name: Spectro Cloud notifications API
+  description: The notifications API from Spectro Cloud — 5 operation(s) for notifications.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-overlords-api
+  name: Spectro Cloud overlords API
+  description: The overlords API from Spectro Cloud — 29 operation(s) for overlords.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - overlords
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-overlords-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-packs-api
+  name: Spectro Cloud packs API
+  description: The packs API from Spectro Cloud — 6 operation(s) for packs.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - packs
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-packs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-pcg-api
+  name: Spectro Cloud pcg API
+  description: The pcg API from Spectro Cloud — 4 operation(s) for pcg.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - pcg
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-pcg-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-permissions-api
+  name: Spectro Cloud permissions API
+  description: The permissions API from Spectro Cloud — 1 operation(s) for permissions.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-permissions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-ping-api
+  name: Spectro Cloud ping API
+  description: The ping API from Spectro Cloud — 1 operation(s) for ping.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - ping
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-ping-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-plans-api
+  name: Spectro Cloud plans API
+  description: The plans API from Spectro Cloud — 9 operation(s) for plans.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - plans
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-projects-api
+  name: Spectro Cloud projects API
+  description: The projects API from Spectro Cloud — 12 operation(s) for projects.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-registries-api
+  name: Spectro Cloud registries API
+  description: The registries API from Spectro Cloud — 28 operation(s) for registries.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - registries
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-registries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-roles-api
+  name: Spectro Cloud roles API
+  description: The roles API from Spectro Cloud — 3 operation(s) for roles.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - roles
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-services-api
+  name: Spectro Cloud services API
+  description: The services API from Spectro Cloud — 2 operation(s) for services.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - services
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-services-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-spcpolicies-api
+  name: Spectro Cloud spcPolicies API
+  description: The spcPolicies API from Spectro Cloud — 5 operation(s) for spcpolicies.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - spcPolicies
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-spcpolicies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-spectroclusters-api
+  name: Spectro Cloud spectroclusters API
+  description: The spectroclusters API from Spectro Cloud — 158 operation(s) for spectroclusters.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - spectroclusters
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-spectroclusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-system-api
+  name: Spectro Cloud system API
+  description: The system API from Spectro Cloud — 95 operation(s) for system.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - system
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-system-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-teams-api
+  name: Spectro Cloud teams API
+  description: The teams API from Spectro Cloud — 7 operation(s) for teams.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-tenants-api
+  name: Spectro Cloud tenants API
+  description: The tenants API from Spectro Cloud — 51 operation(s) for tenants.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-tenants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-tunnel-api
+  name: Spectro Cloud tunnel API
+  description: The tunnel API from Spectro Cloud — 1 operation(s) for tunnel.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - tunnel
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-tunnel-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-users-api
+  name: Spectro Cloud users API
+  description: The users API from Spectro Cloud — 44 operation(s) for users.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-workspaces-api
+  name: Spectro Cloud workspaces API
+  description: The workspaces API from Spectro Cloud — 14 operation(s) for workspaces.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: AgenticAccess
+  url: agentic-access/spectro-cloud-agentic-access.yml
 - type: Website
   url: https://spectrocloud.com/
+- type: DeveloperPortal
+  url: https://docs.spectrocloud.com/
+- type: Documentation
+  url: https://docs.spectrocloud.com/
+- type: APIReference
+  url: https://docs.spectrocloud.com/api/
+- type: GettingStarted
+  url: https://docs.spectrocloud.com/tutorials/getting-started
+- type: Support
+  url: https://spectrocloud.atlassian.net/servicedesk/customer/portal/6
+- type: Login
+  url: https://console.spectrocloud.com/
+- type: TermsOfService
+  url: https://www.spectrocloud.com/terms-of-use
+- type: PrivacyPolicy
+  url: https://www.spectrocloud.com/privacy-policy
+- type: SignUp
+  url: https://www.spectrocloud.com/get-started
+- type: Blog
+  url: https://www.spectrocloud.com/blog
+- type: GitHubOrganization
+  url: https://github.com/spectrocloud
+- type: Authentication
+  url: authentication/spectro-cloud-authentication.yml
+- type: OpenAPI
+  url: openapi/spectro-cloud-palette-openapi.json
+- type: Packages
+  url: packages/spectro-cloud-packages.yml
+- type: SDKs
+  url: packages/spectro-cloud-packages.yml
+- type: CLI
+  url: cli/spectro-cloud-cli.yml
+- type: MCPServer
+  url: mcp/spectro-cloud-mcp.yml
+- type: LLMsTxt
+  url: llms/spectro-cloud-llms.txt
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Overlay
+  url: overlays/spectro-cloud-palette-overlay.yaml
+- type: WellKnown
+  url: well-known/spectro-cloud-well-known.yml
+- type: Conformance
+  url: conformance/spectro-cloud-conformance.yml
+- type: Compliance
+  url: https://www.spectrocloud.com/security
+- type: ErrorCatalog
+  url: errors/spectro-cloud-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/spectro-cloud-lifecycle.yml
+- type: Deprecation
+  url: https://docs.spectrocloud.com/release-notes/
+- type: ChangeLog
+  url: changelog/spectro-cloud-changelog.yml
+- type: Conventions
+  url: conventions/spectro-cloud-conventions.yml
+- type: DataModel
+  url: data-model/spectro-cloud-data-model.yml
+- type: RateLimits
+  url: rate-limits/spectro-cloud-rate-limits.yml
+- type: DomainSecurity
+  url: security/spectro-cloud-domain-security.yml
+- type: TrustCenter
+  url: security/spectro-cloud-trust-center.yml
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 1
+  pass: local-v1

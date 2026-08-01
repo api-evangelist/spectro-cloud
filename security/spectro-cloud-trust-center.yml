@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+source: https://www.spectrocloud.com/security
+url: https://www.spectrocloud.com/security
+certifications:
+- FedRAMP
+evidence:
+- source: https://www.spectrocloud.com/security
+  keywords:
+  - fedramp
+  - trust center

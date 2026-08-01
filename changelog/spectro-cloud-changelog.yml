@@ -1,0 +1,40 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.spectrocloud.com/release-notes/
+scheme: semver
+current_version: 4.9.27
+current_date: '2026-07-09'
+entries:
+- version: 4.9.27
+  date: '2026-07-09'
+  breaking: false
+  highlights:
+  - Bug fixes for CloudStack clusters and the Edge installer.
+- version: 4.9.24
+  date: '2026-07-01'
+  breaking: false
+  highlights:
+  - Custom UI bundling for Edge content.
+  - Agent upgrade pause improvements.
+- version: 4.9.23
+  date: '2026-06-29'
+  breaking: false
+  highlights:
+  - Password validation fix for non-VMO Edge clusters.
+- version: 4.9.22
+  date: '2026-06-28'
+  breaking: true
+  highlights:
+  - 'Breaking: Palette now validates the ProjectUid header on all API requests.'
+  - Backups transitioned from kube2iam to IRSA for EKS (Velero).
+- version: 4.9.18
+  date: '2026-06-11'
+  breaking: false
+  highlights:
+  - Liveness server security fix; cluster profile updates.
+- version: 4.9.14
+  date: '2026-05-31'
+  breaking: true
+  highlights:
+  - 'Breaking: authentication now required for manifest endpoints.'
+  - CAPI property overrides; Gen 2 Azure VM support; SSH key injection for MAAS.

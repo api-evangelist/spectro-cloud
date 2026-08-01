@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/spectro-cloud-palette-openapi.json
+skills:
+- file: spectro-cloud-authenticate-and-inspect-clusters.md
+  name: Authenticate and inspect Palette clusters
+  api: openapi/spectro-cloud-palette-openapi.json
+  operations:
+  - v1Authenticate
+  - v1ProjectsList
+  - v1SpectroClustersMetadata
+  - v1SpectroClustersGet
+  - v1SpectroClustersUidStatus
+- file: spectro-cloud-create-and-publish-cluster-profile.md
+  name: Create and publish a Palette cluster profile
+  api: openapi/spectro-cloud-palette-openapi.json
+  operations:
+  - v1ClusterProfilesCreate
+  - v1ClusterProfilesGet
+  - v1ClusterProfilesPublish
+  - v1ClusterProfilesMetadata
+- file: spectro-cloud-manage-projects.md
+  name: Manage Palette projects
+  api: openapi/spectro-cloud-palette-openapi.json
+  operations:
+  - v1ProjectsCreate
+  - v1ProjectsList
+  - v1ProjectsUidGet

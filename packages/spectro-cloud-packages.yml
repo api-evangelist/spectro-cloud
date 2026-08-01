@@ -1,0 +1,42 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/spectrocloud + npm + Terraform registry + docs.spectrocloud.com/automation
+packages:
+- language: go
+  registry: github
+  name: palette-sdk-go
+  url: https://github.com/spectrocloud/palette-sdk-go
+  install: go get github.com/spectrocloud/palette-sdk-go
+  official: true
+  description: Palette Go SDK — user-friendly Go client for the Palette APIs.
+- language: typescript
+  registry: npm
+  name: palette-sdk-typescript
+  url: https://www.npmjs.com/package/palette-sdk-typescript
+  install: npm install palette-sdk-typescript
+  official: true
+  license: Apache-2.0
+  version: 0.0.5
+  description: TypeScript SDK for the Spectro Cloud Palette API.
+- language: hcl
+  registry: terraform
+  name: spectrocloud/spectrocloud
+  url: https://registry.terraform.io/providers/spectrocloud/spectrocloud/latest
+  install: 'terraform: required_providers { spectrocloud = { source = "spectrocloud/spectrocloud" } }'
+  official: true
+  version: 0.29.8
+  downloads: 6858536
+  description: Official Spectro Cloud Terraform provider for Palette and Palette VerteX resources.
+- language: go
+  registry: github
+  name: palette-cli
+  url: https://docs.spectrocloud.com/automation/palette-cli/
+  install: https://docs.spectrocloud.com/automation/palette-cli/install-palette-cli/
+  official: true
+  description: Palette CLI binary for CI/CD and automation (see cli/ artifact for command surface).
+- language: yaml
+  registry: crossplane
+  name: crossplane-provider-palette
+  url: https://docs.spectrocloud.com/automation/crossplane/
+  official: true
+  description: Crossplane provider integration for managing Palette resources as Kubernetes control-plane objects.

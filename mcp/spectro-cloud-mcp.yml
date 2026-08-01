@@ -1,0 +1,66 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/spectro-cloud-palette-openapi.json
+note: No official hosted Palette MCP server was found (the spectrocloud/palette-agent-toolkit
+  repo is marked tbd). This is a DERIVED candidate tool list mapping representative Palette
+  API operations to MCP tools, for evaluation only.
+server:
+  name: spectro-cloud-palette
+  transport: stdio
+tools:
+- name: v1ProjectsList
+  description: List projects.
+  method: GET
+  path: /v1/projects
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1ProjectsList
+- name: v1ProjectsUidGet
+  description: Get a project by UID.
+  method: GET
+  path: /v1/projects/{uid}
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1ProjectsUidGet
+- name: v1SpectroClustersMetadata
+  description: List cluster metadata.
+  method: POST
+  path: /v1/dashboard/spectroclusters/metadata
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1SpectroClustersMetadata
+- name: v1SpectroClustersGet
+  description: Get a cluster by UID.
+  method: GET
+  path: /v1/spectroclusters/{uid}
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1SpectroClustersGet
+- name: v1SpectroClustersUidStatus
+  description: Get cluster status.
+  method: GET
+  path: /v1/spectroclusters/{uid}/status
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1SpectroClustersUidStatus
+- name: v1ClusterProfilesMetadata
+  description: List cluster-profile metadata.
+  method: GET
+  path: /v1/dashboard/clusterprofiles/metadata
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1ClusterProfilesMetadata
+- name: v1ClusterProfilesGet
+  description: Get a cluster profile by UID.
+  method: GET
+  path: /v1/clusterprofiles/{uid}
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1ClusterProfilesGet
+- name: v1CloudAccountsListSummary
+  description: List cloud-account summaries.
+  method: GET
+  path: /v1/cloudaccounts/summary
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1CloudAccountsListSummary
+- name: v1ClusterProfilesCreate
+  description: Create a cluster profile.
+  method: POST
+  path: /v1/clusterprofiles
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1ClusterProfilesCreate
+- name: v1ClusterProfilesPublish
+  description: Publish a cluster profile.
+  method: PATCH
+  path: /v1/clusterprofiles/{uid}/publish
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1ClusterProfilesPublish
+- name: v1ProjectsCreate
+  description: Create a project.
+  method: POST
+  path: /v1/projects
+  source_operation: openapi/spectro-cloud-palette-openapi.json#v1ProjectsCreate

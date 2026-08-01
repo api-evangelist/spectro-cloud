@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.spectrocloud.com/api/introduction/
+scope: per-source-IP
+default:
+  limit_count: 10
+  window: 1s
+  unit: requests-per-second
+  burst: 5
+  burst_max: 50
+notes: Palette applies rate limiting per source IP address. The default is 10 API requests
+  per second with a burst queue of 5 (up to 50 with burst). Some endpoints have higher
+  thresholds (for example /v1/cloudconfigs allows 50 req/s, 250 with burst). Exceeding
+  the limit returns HTTP 429 TooManyRequests. No rate-limit response headers are documented.
+overrides:
+- path: /v1/cloudconfigs
+  limit_count: 50
+  window: 1s
+  burst_max: 250
+exceeded_status: 429
+exceeded_error: TooManyRequests

@@ -1,0 +1,32 @@
+generated: '2026-07-21'
+method: searched
+source: https://www.spectrocloud.com/security + openapi/spectro-cloud-palette-openapi.json
+standards:
+- id: soc2-type2
+  conforms: true
+  evidence: 'Published on spectrocloud.com/security: certified to SOC 2 Type 2'
+- id: iso-27001
+  conforms: true
+  evidence: 'Published on spectrocloud.com/security: certified to ISO 27001'
+- id: fips-140
+  conforms: true
+  evidence: FIPS 140 validation for Palette VerteX (regulated-industry offering)
+- id: fedramp
+  conforms: true
+  evidence: FedRAMP Moderate posture for Palette VerteX
+- id: cncf-kubernetes-conformance
+  conforms: true
+  evidence: CNCF-certified service provider; CNCF-conformant PXK Kubernetes distribution
+- id: oauth2
+  conforms: false
+  evidence: API uses apiKey/JWT header auth, not OAuth2 flows
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Errors use a proprietary v1Error envelope (code/message/details/ref), not
+    application/problem+json
+- id: json-api
+  conforms: false
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false

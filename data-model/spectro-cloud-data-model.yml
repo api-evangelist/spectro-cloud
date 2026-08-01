@@ -1,0 +1,76 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/spectro-cloud-palette-openapi.json
+docs: https://docs.spectrocloud.com/api/samples/
+note: Palette resources follow a Kubernetes-style metadata/spec/status envelope; UIDs
+  are opaque strings scoped by tenant and (optionally) the ProjectUid request header.
+entities:
+- name: SpectroCluster
+  schema: v1SpectroCluster
+- name: ClusterProfile
+  schema: v1ClusterProfile
+- name: Project
+  schema: v1Project
+- name: Tenant
+  schema: v1Tenant
+- name: User
+  schema: v1User
+- name: Workspace
+  schema: v1Workspace
+- name: AppProfile
+  schema: v1AppProfile
+- name: AppDeployment
+  schema: v1AppDeployment
+- name: EdgeHost
+  schema: v1EdgeHost
+- name: Pack
+  schema: v1PackEntity
+- name: Team
+  schema: v1Team
+- name: Role
+  schema: v1Role
+relationships:
+- from: SpectroCluster
+  to: Pack
+  type: belongs_to
+  via: packUid
+- from: SpectroCluster
+  to: Registry
+  type: belongs_to
+  via: registryUid
+- from: SpectroCluster
+  to: Project
+  type: belongs_to
+  via: projectUid
+- from: SpectroCluster
+  to: ClusterProfile
+  type: belongs_to
+  via: profileUid
+- from: SpectroCluster
+  to: Tenant
+  type: belongs_to
+  via: tenantUid
+- from: ClusterProfile
+  to: Pack
+  type: belongs_to
+  via: packUid
+- from: ClusterProfile
+  to: Registry
+  type: belongs_to
+  via: registryUid
+- from: ClusterProfile
+  to: Project
+  type: belongs_to
+  via: projectUid
+- from: ClusterProfile
+  to: Tenant
+  type: belongs_to
+  via: tenantUid
+- from: Workspace
+  to: SpectroCluster
+  type: belongs_to
+  via: clusterUid
+- from: AppDeployment
+  to: ClusterProfile
+  type: belongs_to
+  via: profileUid

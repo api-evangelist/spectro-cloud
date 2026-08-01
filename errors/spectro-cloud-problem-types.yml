@@ -1,0 +1,53 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/spectro-cloud-palette-openapi.json
+docs: https://docs.spectrocloud.com/api/introduction/
+format: json
+envelope:
+  schema: v1Error
+  fields:
+  - code
+  - message
+  - details
+  - ref
+  description: 'All 4xx/5xx responses return the v1Error object: a machine-readable
+    string code, a human message, an optional details object, and a ref correlation
+    string.'
+problems:
+- status: 400
+  title: Invalid request data
+  description: Invalid request data
+  schema: v1Error
+  remediation: Fix the request payload/parameters to match the schema.
+  example_operation: v1ActivationsSystemGet
+- status: 401
+  title: Unauthorized
+  description: Unauthorized
+  schema: v1Error
+  remediation: Provide a valid ApiKey header or Authorization bearer token.
+  example_operation: V1TenantUidDatasinksSplunkCreate
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  schema: v1Error
+  remediation: The authenticated principal lacks permission or ProjectUid scope for
+    this resource.
+  example_operation: V1TenantUidDatasinksSplunkCreate
+- status: 409
+  title: Conflict
+  description: Sink already exists for tenant + kind (runtime code=SinkAlreadyExists)
+  schema: v1Error
+  remediation: Resolve the conflicting/duplicate resource before retrying.
+  example_operation: V1TenantUidDatasinksSplunkCreate
+- status: 504
+  title: Gateway timeout
+  description: Network/TLS/timeout error
+  schema: v1Error
+  remediation: Transient network/TLS/timeout; retry with backoff.
+  example_operation: V1TenantUidDatasinksSplunkValidate
+- status: 404
+  title: Resource not found
+  description: The specified resource was not found
+  schema: v1Error
+  remediation: Verify the resource UID and project scope exist.
+  example_operation: V1TenantUidDatasinksSplunkDelete

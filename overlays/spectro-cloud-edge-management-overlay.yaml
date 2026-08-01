@@ -1,0 +1,16 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Spectro Cloud Edge Local Management APIs
+  version: 1.0.0
+extends: openapi/spectro-cloud-edge-management-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-rating-notes: Local Management API served on the Edge host (edge-host-ip:5080);
+      Authorization header auth.
+    x-apis-io-slug: spectro-cloud
+- target: $.info
+  update:
+    x-artifact-crosslinks:
+      authentication: authentication/spectro-cloud-authentication.yml
+      conventions: conventions/spectro-cloud-conventions.yml

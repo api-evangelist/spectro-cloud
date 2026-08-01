@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.spectrocloud.com/release-notes/
+versioning:
+  scheme: uri-path
+  current: v1
+  also:
+  - v1alpha1
+  docs: https://docs.spectrocloud.com/api/introduction/
+  note: Future APIs increment the version and leave earlier versions intact; backward
+    compatibility is maintained across transitions.
+deprecation:
+  policy_url: https://docs.spectrocloud.com/release-notes/
+  documented: true
+  note: Deprecations and removals are announced in the dated release notes with migration
+    guidance (e.g. Ingress Nginx deprecated in 4.9.5 and removed by 4.9.14; migrate to
+    Traefik). No RFC 8594 Sunset/Deprecation response headers are documented.
+sla:
+  url: null
+  documented: false
+status_page: null
+status_page_documented: false
+support:
+  portal: https://spectrocloud.atlassian.net/servicedesk/customer/portal/6
+current_platform_version: 4.9.27
+current_platform_date: '2026-07-09'

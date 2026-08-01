@@ -1,0 +1,25 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/spectro-cloud-edge-management-openapi.json, openapi/spectro-cloud-palette-openapi.json
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: Authorization
+  type: apiKey
+  in: header
+  parameter: Authorization
+  description: JWT authorization token obtained using /v1/users/default/login API
+  sources:
+  - openapi/spectro-cloud-edge-management-openapi.json
+  - openapi/spectro-cloud-palette-openapi.json
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: ApiKey
+  description: API key authorization where API key can be generated from Palette console under
+    Profile > My API Keys
+  sources:
+  - openapi/spectro-cloud-palette-openapi.json

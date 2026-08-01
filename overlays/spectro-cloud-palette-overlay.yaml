@@ -1,0 +1,19 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Spectro Cloud Palette APIs
+  version: 1.0.0
+extends: openapi/spectro-cloud-palette-openapi.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-rating-notes: apiKey/JWT header auth; cursor pagination via listMeta;
+      per-IP rate limiting (429); v1Error envelope.
+    x-apis-io-slug: spectro-cloud
+- target: $.info
+  update:
+    x-artifact-crosslinks:
+      authentication: authentication/spectro-cloud-authentication.yml
+      conventions: conventions/spectro-cloud-conventions.yml
+      errors: errors/spectro-cloud-problem-types.yml
+      rate_limits: rate-limits/spectro-cloud-rate-limits.yml
+      lifecycle: lifecycle/spectro-cloud-lifecycle.yml

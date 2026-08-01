@@ -1,0 +1,55 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.spectrocloud.com/api/introduction/
+derived_from: openapi/spectro-cloud-palette-openapi.json
+authentication:
+  styles:
+  - ApiKey header (long-lived API key generated in Palette console)
+  - Authorization header (JWT bearer token from /v1/users/default/login, ~15 min TTL)
+  scope_header: ProjectUid
+  scope_note: The ProjectUid request header scopes calls to a project; validated on all
+    requests since Palette 4.9.22. Omit for tenant-scoped calls.
+  see: authentication/spectro-cloud-authentication.yml
+pagination:
+  style: cursor
+  request_params:
+  - limit
+  - offset
+  - continue
+  default_page_size: 50
+  max_page_size: 50
+  response_envelope: listMeta
+  response_fields:
+  - listMeta.continue
+  - listMeta.count
+  - listMeta.limit
+  - listMeta.offset
+  note: List endpoints return at most 50 items per payload; pass the continue token as a
+    query parameter to page forward.
+idempotency:
+  supported: false
+  note: Palette does not document an idempotency-key header; no Idempotency-Key parameter
+    appears in the OpenAPI. Writes are not advertised as idempotent-by-key.
+versioning:
+  style: uri-path
+  current: v1
+  also: v1alpha1
+  note: Version lives in the URI path; new versions increment and leave prior versions intact.
+  see: lifecycle/spectro-cloud-lifecycle.yml
+error_envelope:
+  schema: v1Error
+  fields:
+  - code
+  - message
+  - details
+  - ref
+  see: errors/spectro-cloud-problem-types.yml
+rate_limiting:
+  style: per-source-IP
+  exceeded_status: 429
+  headers_documented: false
+  see: rate-limits/spectro-cloud-rate-limits.yml
+filtering_sorting:
+  documented: false
+request_tracing:
+  documented: false
