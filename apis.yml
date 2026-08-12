@@ -583,7 +583,7 @@ common:
 - type: Authentication
   url: authentication/spectro-cloud-authentication.yml
 - type: OpenAPI
-  url: openapi/spectro-cloud-palette-openapi.json
+  url: openapi/_original/spectro-cloud-palette-openapi.json
 - type: Packages
   url: packages/spectro-cloud-packages.yml
 - type: SDKs
