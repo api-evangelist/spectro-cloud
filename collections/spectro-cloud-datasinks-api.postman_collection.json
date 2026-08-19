@@ -1,0 +1,161 @@
+{
+  "item": [
+    {
+      "id": "15babf05-81f1-40e3-a9ee-711a3bd0f10a",
+      "name": "datasinks",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7c541293-709e-4914-8961-3b063312c257",
+          "name": "sync data to cloud watch",
+          "request": {
+            "name": "sync data to cloud watch",
+            "description": {
+              "content": "Sync data to cloud watch",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "datasinks",
+                "cloudwatch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payload\": [\n    {\n      \"refUid\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\"\n    },\n    {\n      \"refUid\": \"<string>\",\n      \"timestamp\": \"<dateTime>\"\n    }\n  ],\n  \"spec\": {\n    \"credentials\": {\n      \"accessKey\": \"<string>\",\n      \"credentialType\": \"secret\",\n      \"partition\": \"aws\",\n      \"podIdentity\": {\n        \"permissionBoundaryArn\": \"<string>\",\n        \"roleArn\": \"<string>\"\n      },\n      \"policyARNs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"secretKey\": \"<string>\",\n      \"secretSpec\": {\n        \"accountName\": \"<string>\",\n        \"agency\": \"<string>\",\n        \"isCapValidationEnabled\": \"<boolean>\",\n        \"mission\": \"<string>\",\n        \"namePrefix\": \"<string>\",\n        \"permissionBoundary\": \"<string>\",\n        \"policy\": \"<string>\",\n        \"role\": \"<string>\",\n        \"tls\": {\n          \"ca\": \"<string>\",\n          \"cert\": \"<string>\",\n          \"key\": \"<string>\"\n        }\n      },\n      \"secretToken\": \"<string>\",\n      \"sts\": {\n        \"arn\": \"<string>\",\n        \"externalId\": \"<string>\"\n      }\n    },\n    \"group\": \"<string>\",\n    \"region\": \"<string>\",\n    \"stream\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1f5f6428-d7bf-4db2-b516-410e4bfa2125",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "datasinks",
+                    "cloudwatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payload\": [\n    {\n      \"refUid\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"key_0\": \"<object>\",\n      \"key_1\": \"<object>\"\n    },\n    {\n      \"refUid\": \"<string>\",\n      \"timestamp\": \"<dateTime>\",\n      \"key_0\": \"<object>\"\n    }\n  ],\n  \"spec\": {\n    \"credentials\": {\n      \"accessKey\": \"<string>\",\n      \"credentialType\": \"secret\",\n      \"partition\": \"aws\",\n      \"podIdentity\": {\n        \"permissionBoundaryArn\": \"<string>\",\n        \"roleArn\": \"<string>\"\n      },\n      \"policyARNs\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"secretKey\": \"<string>\",\n      \"secretSpec\": {\n        \"accountName\": \"<string>\",\n        \"agency\": \"<string>\",\n        \"isCapValidationEnabled\": \"<boolean>\",\n        \"mission\": \"<string>\",\n        \"namePrefix\": \"<string>\",\n        \"permissionBoundary\": \"<string>\",\n        \"policy\": \"<string>\",\n        \"role\": \"<string>\",\n        \"tls\": {\n          \"ca\": \"<string>\",\n          \"cert\": \"<string>\",\n          \"key\": \"<string>\"\n        }\n      },\n      \"secretToken\": \"<string>\",\n      \"sts\": {\n        \"arn\": \"<string>\",\n        \"externalId\": \"<string>\"\n      }\n    },\n    \"group\": \"<string>\",\n    \"region\": \"<string>\",\n    \"stream\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "792990d1-735e-4be6-aa61-9593771a7462",
+    "name": "Local Management APIs activations datasinks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

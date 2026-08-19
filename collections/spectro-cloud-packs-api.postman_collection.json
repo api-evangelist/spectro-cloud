@@ -1,0 +1,917 @@
+{
+  "item": [
+    {
+      "id": "5bbad56d-b9e7-46df-9ceb-fc263de56c36",
+      "name": "packs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fc8a3eac-13ab-442f-8ac3-d4e22bc3df4b",
+          "name": "Retrieves a list of packs",
+          "request": {
+            "name": "Retrieves a list of packs",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "packs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9aa51474-01ed-483b-9331-0f9c0f406eea",
+              "name": "An array of pack summary items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"1998-07-10T15:01:37.246Z\",\n        \"deletionTimestamp\": \"1972-11-09T17:33:52.692Z\",\n        \"labels\": {\n          \"key_0\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"2005-01-19T05:25:53.685Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"addonSubType\": \"string\",\n        \"addonType\": \"string\",\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"cloudTypes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"digest\": \"string\",\n        \"displayName\": \"string\",\n        \"eol\": \"string\",\n        \"group\": \"string\",\n        \"layer\": \"csi\",\n        \"logoUrl\": \"string\",\n        \"manifests\": [\n          {\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"presets\": [\n          {\n            \"add\": \"string\",\n            \"displayName\": \"string\",\n            \"group\": \"string\",\n            \"name\": \"string\",\n            \"remove\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"add\": \"string\",\n            \"displayName\": \"string\",\n            \"group\": \"string\",\n            \"name\": \"string\",\n            \"remove\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"registryUid\": \"string\",\n        \"schema\": [\n          {\n            \"format\": \"string\",\n            \"hints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"listOptions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"string\",\n            \"readonly\": true,\n            \"regex\": \"string\",\n            \"required\": false,\n            \"type\": \"string\"\n          },\n          {\n            \"format\": \"string\",\n            \"hints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"listOptions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"string\",\n            \"readonly\": false,\n            \"regex\": \"string\",\n            \"required\": true,\n            \"type\": \"string\"\n          }\n        ],\n        \"template\": {\n          \"manifest\": \"string\",\n          \"parameters\": {\n            \"inputParameters\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"outputParameters\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"values\": \"string\"\n        },\n        \"type\": \"spectro\",\n        \"values\": \"string\",\n        \"version\": \"string\"\n      },\n      \"status\": {}\n    },\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"1997-02-28T06:01:52.366Z\",\n        \"deletionTimestamp\": \"2013-05-19T06:22:29.450Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1979-12-12T23:17:58.708Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"addonSubType\": \"string\",\n        \"addonType\": \"string\",\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"cloudTypes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"digest\": \"string\",\n        \"displayName\": \"string\",\n        \"eol\": \"string\",\n        \"group\": \"string\",\n        \"layer\": \"addon\",\n        \"logoUrl\": \"string\",\n        \"manifests\": [\n          {\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"kind\": \"string\",\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"presets\": [\n          {\n            \"add\": \"string\",\n            \"displayName\": \"string\",\n            \"group\": \"string\",\n            \"name\": \"string\",\n            \"remove\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"add\": \"string\",\n            \"displayName\": \"string\",\n            \"group\": \"string\",\n            \"name\": \"string\",\n            \"remove\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"registryUid\": \"string\",\n        \"schema\": [\n          {\n            \"format\": \"string\",\n            \"hints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"listOptions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"string\",\n            \"readonly\": true,\n            \"regex\": \"string\",\n            \"required\": true,\n            \"type\": \"string\"\n          },\n          {\n            \"format\": \"string\",\n            \"hints\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"listOptions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"string\",\n            \"readonly\": false,\n            \"regex\": \"string\",\n            \"required\": true,\n            \"type\": \"string\"\n          }\n        ],\n        \"template\": {\n          \"manifest\": \"string\",\n          \"parameters\": {\n            \"inputParameters\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"outputParameters\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"values\": \"string\"\n        },\n        \"type\": \"spectro\",\n        \"values\": \"string\",\n        \"version\": \"string\"\n      },\n      \"status\": {}\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 5891,\n    \"limit\": 2838,\n    \"offset\": 5789\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b21d42fd-007c-43e9-af9f-7b13599f7c7f",
+          "name": "Retrieves a list of packs based on filter",
+          "request": {
+            "name": "Retrieves a list of packs based on filter",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "packs",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"addOnSubType\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"addOnType\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"displayName\": {\n      \"beginsWith\": \"<string>\",\n      \"contains\": \"<string>\",\n      \"eq\": \"<string>\",\n      \"ignoreCase\": true,\n      \"ne\": \"<string>\"\n    },\n    \"environment\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"isFips\": \"<boolean>\",\n    \"layer\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"name\": {\n      \"beginsWith\": \"<string>\",\n      \"contains\": \"<string>\",\n      \"eq\": \"<string>\",\n      \"ignoreCase\": true,\n      \"ne\": \"<string>\"\n    },\n    \"registryUid\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"source\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"state\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"type\": [\n      \"spectro\",\n      \"spectro\"\n    ]\n  },\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"asc\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"asc\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4d6a952b-1d9b-4c9a-b8ee-4cb2b03f2cf9",
+              "name": "An array of pack summary items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packs",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"addOnSubType\": [\n      \"<string>\"\n    ],\n    \"addOnType\": [\n      \"<string>\"\n    ],\n    \"displayName\": {\n      \"beginsWith\": \"<string>\",\n      \"contains\": \"<string>\",\n      \"eq\": \"<string>\",\n      \"ignoreCase\": true,\n      \"ne\": \"<string>\"\n    },\n    \"environment\": [\n      \"<string>\"\n    ],\n    \"isFips\": \"<boolean>\",\n    \"layer\": [\n      \"<string>\"\n    ],\n    \"name\": {\n      \"beginsWith\": \"<string>\",\n      \"contains\": \"<string>\",\n      \"eq\": \"<string>\",\n      \"ignoreCase\": true,\n      \"ne\": \"<string>\"\n    },\n    \"registryUid\": [\n      \"<string>\"\n    ],\n    \"source\": [\n      \"<string>\"\n    ],\n    \"state\": [\n      \"<string>\"\n    ],\n    \"type\": [\n      \"spectro\"\n    ]\n  },\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"asc\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"1993-12-13T03:14:17.160Z\",\n        \"deletionTimestamp\": \"2015-03-27T05:26:43.023Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\",\n          \"key_3\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1991-03-12T09:04:42.409Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"addonSubType\": \"string\",\n        \"addonType\": \"string\",\n        \"cloudTypes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"displayName\": \"string\",\n        \"group\": \"string\",\n        \"layer\": \"<string>\",\n        \"name\": \"string\",\n        \"registries\": [\n          {\n            \"annotations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"latestPackUid\": \"string\",\n            \"latestVersion\": \"string\",\n            \"logoUrl\": \"string\",\n            \"name\": \"string\",\n            \"scope\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"annotations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"latestPackUid\": \"string\",\n            \"latestVersion\": \"string\",\n            \"logoUrl\": \"string\",\n            \"name\": \"string\",\n            \"scope\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"type\": \"spectro\"\n      }\n    },\n    {\n      \"apiVersion\": \"string\",\n      \"kind\": \"string\",\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"creationTimestamp\": \"2001-08-26T12:59:45.986Z\",\n        \"deletionTimestamp\": \"2009-02-14T06:24:10.203Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"2021-01-04T06:18:24.729Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"addonSubType\": \"string\",\n        \"addonType\": \"string\",\n        \"cloudTypes\": [\n          \"string\",\n          \"string\"\n        ],\n        \"displayName\": \"string\",\n        \"group\": \"string\",\n        \"layer\": \"<string>\",\n        \"name\": \"string\",\n        \"registries\": [\n          {\n            \"annotations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"latestPackUid\": \"string\",\n            \"latestVersion\": \"string\",\n            \"logoUrl\": \"string\",\n            \"name\": \"string\",\n            \"scope\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"annotations\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"latestPackUid\": \"string\",\n            \"latestVersion\": \"string\",\n            \"logoUrl\": \"string\",\n            \"name\": \"string\",\n            \"scope\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"type\": \"spectro\"\n      }\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 6529,\n    \"limit\": 5798,\n    \"offset\": 8185\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c961db3b-a5be-4b8b-a24c-ec5a7071884d",
+          "name": "Retrieves a list of packs",
+          "request": {
+            "name": "Retrieves a list of packs",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "packs",
+                ":packName",
+                "registries",
+                ":registryUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cloudType",
+                  "value": "all",
+                  "description": "Pack cloud type"
+                },
+                {
+                  "disabled": false,
+                  "key": "layer",
+                  "value": "<string>",
+                  "description": "Pack layer"
+                },
+                {
+                  "disabled": false,
+                  "key": "states",
+                  "value": "<string>",
+                  "description": "Comma seperated pack states. Example values are \"deprecated\" \"deprecated,disabled\". If states is not specified or empty then by default API will return all packs except \"disabled\" packs"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "registryUid",
+                  "description": "(Required) Pack registry uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "packName",
+                  "description": "(Required) Pack name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0a032ced-05cc-4754-bb1d-2e0bf2e024d0",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packs",
+                    ":packName",
+                    "registries",
+                    ":registryUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cloudType",
+                      "value": "all"
+                    },
+                    {
+                      "key": "layer",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "states",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "registryUid",
+                      "description": "(Required) Pack registry uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "packName",
+                      "description": "(Required) Pack name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"addonSubType\": \"string\",\n  \"addonType\": \"string\",\n  \"cloudTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"displayName\": \"string\",\n  \"layer\": \"<string>\",\n  \"logoUrl\": \"string\",\n  \"name\": \"string\",\n  \"packValues\": [\n    {\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"dependencies\": [\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"packUid\": \"string\",\n      \"presets\": [\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"readme\": \"string\",\n      \"schema\": [\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": true,\n          \"regex\": \"string\",\n          \"required\": true,\n          \"type\": \"string\"\n        },\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": false,\n          \"regex\": \"string\",\n          \"required\": true,\n          \"type\": \"string\"\n        }\n      ],\n      \"template\": {\n        \"manifest\": \"string\",\n        \"parameters\": {\n          \"inputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"outputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"values\": \"string\"\n      },\n      \"values\": \"string\"\n    },\n    {\n      \"annotations\": {\n        \"key_0\": \"string\"\n      },\n      \"dependencies\": [\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"packUid\": \"string\",\n      \"presets\": [\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"readme\": \"string\",\n      \"schema\": [\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": false,\n          \"regex\": \"string\",\n          \"required\": true,\n          \"type\": \"string\"\n        },\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": true,\n          \"regex\": \"string\",\n          \"required\": true,\n          \"type\": \"string\"\n        }\n      ],\n      \"template\": {\n        \"manifest\": \"string\",\n        \"parameters\": {\n          \"inputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"outputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"values\": \"string\"\n      },\n      \"values\": \"string\"\n    }\n  ],\n  \"registryUid\": \"string\",\n  \"tags\": [\n    {\n      \"group\": \"string\",\n      \"packUid\": \"string\",\n      \"parentTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tag\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"group\": \"string\",\n      \"packUid\": \"string\",\n      \"parentTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tag\": \"string\",\n      \"version\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b27ecfa-0a1f-4daa-9d4b-3eb49ac79f6a",
+          "name": "Returns the logo for a specified pack",
+          "request": {
+            "name": "Returns the logo for a specified pack",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "packs",
+                ":packUid",
+                "logo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "packUid",
+                  "description": "(Required) Pack uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "image/png"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6f082f39-a954-4376-b971-8318df5a78b7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packs",
+                    ":packUid",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "packUid",
+                      "description": "(Required) Pack uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "image/png"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Cache control directive for the response",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "key": "Expires",
+                  "value": "string",
+                  "description": ""
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "image/png"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ae76b787-45dd-4584-a8c3-5e636300bdf3",
+          "name": "Returns the specified pack",
+          "request": {
+            "name": "Returns the specified pack",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "packs",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Pack uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2bcb826f-4866-470a-b302-c51a52da1b46",
+              "name": "A pack for the specified uid",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packs",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Pack uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"addonSubType\": \"string\",\n  \"addonType\": \"string\",\n  \"cloudTypes\": [\n    \"string\",\n    \"string\"\n  ],\n  \"displayName\": \"string\",\n  \"layer\": \"<string>\",\n  \"logoUrl\": \"string\",\n  \"name\": \"string\",\n  \"packValues\": [\n    {\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"dependencies\": [\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"packUid\": \"string\",\n      \"presets\": [\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"readme\": \"string\",\n      \"schema\": [\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": false,\n          \"regex\": \"string\",\n          \"required\": true,\n          \"type\": \"string\"\n        },\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": true,\n          \"regex\": \"string\",\n          \"required\": false,\n          \"type\": \"string\"\n        }\n      ],\n      \"template\": {\n        \"manifest\": \"string\",\n        \"parameters\": {\n          \"inputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"outputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"values\": \"string\"\n      },\n      \"values\": \"string\"\n    },\n    {\n      \"annotations\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"dependencies\": [\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        },\n        {\n          \"displayName\": \"string\",\n          \"logoUrl\": \"string\",\n          \"name\": \"string\",\n          \"registryUid\": \"string\",\n          \"uid\": \"string\",\n          \"version\": \"string\"\n        }\n      ],\n      \"packUid\": \"string\",\n      \"presets\": [\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"add\": \"string\",\n          \"displayName\": \"string\",\n          \"group\": \"string\",\n          \"name\": \"string\",\n          \"remove\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"readme\": \"string\",\n      \"schema\": [\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": true,\n          \"regex\": \"string\",\n          \"required\": true,\n          \"type\": \"string\"\n        },\n        {\n          \"format\": \"string\",\n          \"hints\": [\n            \"string\",\n            \"string\"\n          ],\n          \"listOptions\": [\n            \"string\",\n            \"string\"\n          ],\n          \"name\": \"string\",\n          \"readonly\": false,\n          \"regex\": \"string\",\n          \"required\": false,\n          \"type\": \"string\"\n        }\n      ],\n      \"template\": {\n        \"manifest\": \"string\",\n        \"parameters\": {\n          \"inputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"outputParameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"values\": \"string\"\n      },\n      \"values\": \"string\"\n    }\n  ],\n  \"registryUid\": \"string\",\n  \"tags\": [\n    {\n      \"group\": \"string\",\n      \"packUid\": \"string\",\n      \"parentTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tag\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"group\": \"string\",\n      \"packUid\": \"string\",\n      \"parentTags\": [\n        \"string\",\n        \"string\"\n      ],\n      \"tag\": \"string\",\n      \"version\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3344b7b5-5388-4c6b-9bb7-1c7f1e6a7605",
+          "name": "Returns the readme of a specified pack",
+          "request": {
+            "name": "Returns the readme of a specified pack",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "packs",
+                ":uid",
+                "readme"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Pack uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e0efa130-143e-413d-b695-3a0f9153c3db",
+              "name": "Readme describes the documentation of the specified pack",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "packs",
+                    ":uid",
+                    "readme"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Pack uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"readme\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7f182f47-5825-4772-bc7d-80f3d1fb2de2",
+    "name": "Local Management APIs activations packs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

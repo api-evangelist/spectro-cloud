@@ -1,0 +1,738 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations edgehosts API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "edgehosts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the Complete Edgehost Metadata List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deprecated. Use POST /v1/dashboard/edgehosts/search , to retrieve all the edgehosts without pagination use GET /v1/edgehosts/metadata."
+        },
+        {
+          "info": {
+            "name": "Create the edge host device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edgehosts",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create the edge host device"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of edge hosts metadata matching the filter condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "quickFilter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of edge hosts metadata matching the filter condition"
+        },
+        {
+          "info": {
+            "name": "Registers the edge host device",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/register",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Registers the edge host device"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of edge hosts tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/tags",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of edge hosts tags"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of edge tokens",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/tokens",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of edge tokens"
+        },
+        {
+          "info": {
+            "name": "Create the edge token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/tokens",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create the edge token"
+        },
+        {
+          "info": {
+            "name": "Returns the specified edge token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/tokens/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Edge token uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified edge token"
+        },
+        {
+          "info": {
+            "name": "Updates the specified edge token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/tokens/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Edge token uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified edge token"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified edge token",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/tokens/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Edge token uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified edge token"
+        },
+        {
+          "info": {
+            "name": "Revoke or re-activate the edge token access",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/tokens/:uid/state",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Edge token uid"
+              }
+            ]
+          },
+          "docs": "Revoke or re-activate the edge token access"
+        },
+        {
+          "info": {
+            "name": "Returns the specified edge host device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resolvePackValues",
+                "value": "",
+                "type": "query",
+                "description": "resolve pack values if set to true"
+              }
+            ]
+          },
+          "docs": "Returns the specified edge host device"
+        },
+        {
+          "info": {
+            "name": "Updates the specified edge host device",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified edge host device"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified edge host device",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified edge host device"
+        },
+        {
+          "info": {
+            "name": "Associate the clusters to the edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/cluster/associate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Associate the clusters to the edge host"
+        },
+        {
+          "info": {
+            "name": "Deassociate the clusters to the edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/cluster/associate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deassociate the clusters to the edge host"
+        },
+        {
+          "info": {
+            "name": "Get the specified edge host device configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/config",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified edge host device configuration"
+        },
+        {
+          "info": {
+            "name": "Updates the edge host health",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/health",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the edge host health"
+        },
+        {
+          "info": {
+            "name": "Update the specified edge host device host check sum",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/hostCheckSum",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the specified edge host device host check sum"
+        },
+        {
+          "info": {
+            "name": "Update the specified edge host device host pairing key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/hostPairingKey",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the specified edge host device host pairing key"
+        },
+        {
+          "info": {
+            "name": "Updates the specified edge host device meta",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/meta",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified edge host device meta"
+        },
+        {
+          "info": {
+            "name": "Returns the specified edge host's manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/pack/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "edge host uid"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "manifest uid which is part of the pack ref"
+              },
+              {
+                "name": "resolveManifestValues",
+                "value": "",
+                "type": "query",
+                "description": "resolve pack manifest values if set to true"
+              }
+            ]
+          },
+          "docs": "Returns the specified edge host's manifest"
+        },
+        {
+          "info": {
+            "name": "Patch update specified edge host's packs status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/packs/status",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Patch update specified edge host's packs status"
+        },
+        {
+          "info": {
+            "name": "Returns the associated profiles of a specified edge host device",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "includes pack meta such as schema, presets"
+              }
+            ]
+          },
+          "docs": "Returns the associated profiles of a specified edge host device"
+        },
+        {
+          "info": {
+            "name": "Associate cluster profiles to the specified edge host device",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Associate cluster profiles to the specified edge host device"
+        },
+        {
+          "info": {
+            "name": "Reset the cluster through edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/reset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Edge host uid"
+              }
+            ]
+          },
+          "docs": "Reset the cluster through edge host"
+        },
+        {
+          "info": {
+            "name": "Download the specified edge host device spc",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/spc/download",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Download the specified edge host device spc"
+        },
+        {
+          "info": {
+            "name": "Updates the specified edge host device tunnel configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/tunnelConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified edge host device tunnel configuration"
+        },
+        {
+          "info": {
+            "name": "Updates the edge host tunnel status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/tunnelStatus",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the edge host tunnel status"
+        },
+        {
+          "info": {
+            "name": "Updates the specified edge host device vsphere properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edgehosts/:uid/vsphere/properties",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified edge host device vsphere properties"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

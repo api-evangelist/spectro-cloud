@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations filters API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "filters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a list of Filters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/filters",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Returns a list of Filters"
+        },
+        {
+          "info": {
+            "name": "Returns a list of Filters metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/filters/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filterType",
+                "value": "",
+                "type": "query",
+                "description": "filterType can be - [tag, meta, resource]"
+              }
+            ]
+          },
+          "docs": "Returns a list of Filters metadata"
+        },
+        {
+          "info": {
+            "name": "Creates a Tag filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/filters/tag",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a Tag filter"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Filter object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/filters/tag/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified Filter object"
+        },
+        {
+          "info": {
+            "name": "Updates a Tag filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/filters/tag/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates a Tag filter"
+        },
+        {
+          "info": {
+            "name": "Delete the specified Filter object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/filters/tag/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the specified Filter object"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

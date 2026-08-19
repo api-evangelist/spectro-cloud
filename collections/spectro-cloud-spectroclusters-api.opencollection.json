@@ -1,0 +1,5053 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations spectroclusters API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "spectroclusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates an AKS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/aks",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an AKS cluster"
+        },
+        {
+          "info": {
+            "name": "Get AKS cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/aks/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get AKS cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates AKS cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/aks/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates AKS cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Creates a CloudStack cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/apache-cloudstack",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a CloudStack cluster"
+        },
+        {
+          "info": {
+            "name": "Imports a CloudStack cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/apache-cloudstack/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Imports a CloudStack cluster"
+        },
+        {
+          "info": {
+            "name": "Get CloudStack cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/apache-cloudstack/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get CloudStack cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates CloudStack cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/apache-cloudstack/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates CloudStack cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Creates an AWS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/aws",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an AWS cluster"
+        },
+        {
+          "info": {
+            "name": "Imports an AWS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/aws/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Imports an AWS cluster"
+        },
+        {
+          "info": {
+            "name": "Get AWS cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/aws/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get AWS cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates AWS cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/aws/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates AWS cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Creates an Azure cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/azure",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an Azure cluster"
+        },
+        {
+          "info": {
+            "name": "Imports an Azure cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/azure/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Imports an Azure cluster"
+        },
+        {
+          "info": {
+            "name": "Get Azure cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/azure/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Azure cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates Azure cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/azure/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates Azure cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Creates a Custom cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/cloudTypes/:cloudType",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              }
+            ]
+          },
+          "docs": "Creates a Custom cluster"
+        },
+        {
+          "info": {
+            "name": "Validates Custom cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/cloudTypes/:cloudType/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              }
+            ]
+          },
+          "docs": "Validates Custom cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Get cluster upgrade settings by hostClusterUid or overlordUid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/cluster/upgrade/settings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "hostClusterUid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "overlordUid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get cluster upgrade settings by hostClusterUid or overlordUid"
+        },
+        {
+          "info": {
+            "name": "Upgrades clusters launched from the specified cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/clusterTemplates/:uid/clusters/upgrade",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Upgrades clusters launched from the specified cluster template"
+        },
+        {
+          "info": {
+            "name": "Returns the associated profiles for all the cluster of launched from the specified cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/clusterTemplates/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "includes pack meta such as schema, presets"
+              }
+            ]
+          },
+          "docs": "Returns the associated profiles for all the cluster of launched from the specified cluster template"
+        },
+        {
+          "info": {
+            "name": "Validates if cluster template profile update triggers repave",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/clusterTemplates/:uid/validate/repave",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Validates if cluster template profile update triggers repave"
+        },
+        {
+          "info": {
+            "name": "Cluster configuration for the edge installer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/config/edgeInstaller",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Cluster configuration for the edge installer"
+        },
+        {
+          "info": {
+            "name": "Creates an EdgeNative cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/edge-native",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an EdgeNative cluster"
+        },
+        {
+          "info": {
+            "name": "Imports an EdgeNative cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/edge-native/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Imports an EdgeNative cluster"
+        },
+        {
+          "info": {
+            "name": "Get edge-native cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/edge-native/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get edge-native cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates edge-native cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/edge-native/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates edge-native cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Creates an EKS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/eks",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an EKS cluster"
+        },
+        {
+          "info": {
+            "name": "Get EKS cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/eks/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get EKS cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates EKS cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/eks/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates EKS cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Returns the cluster object references based on locationUid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/features/backup/locations/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the cluster object references based on locationUid"
+        },
+        {
+          "info": {
+            "name": "Change cluster backup location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/features/backup/locations/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Change cluster backup location"
+        },
+        {
+          "info": {
+            "name": "Download log fetcher logs for cluster by log fetcher uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/features/logFetcher/:uid/download",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Log fetcher uid for which log is requested"
+              },
+              {
+                "name": "fileName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Download log fetcher logs for cluster by log fetcher uid"
+        },
+        {
+          "info": {
+            "name": "Update log fetcher logs by log fetcher uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/features/logFetcher/:uid/log",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid for which log is requested"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query",
+                "description": "Unique request Id"
+              }
+            ]
+          },
+          "docs": "Update log fetcher logs by log fetcher uid"
+        },
+        {
+          "info": {
+            "name": "Creates a GCP cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/gcp",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a GCP cluster"
+        },
+        {
+          "info": {
+            "name": "Imports a GCP cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/gcp/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Imports a GCP cluster"
+        },
+        {
+          "info": {
+            "name": "Get GCP cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/gcp/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get GCP cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates GCP cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/gcp/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates GCP cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Imports a cluster of any cloud type in generic way",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/generic/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "The machines information will be captured, whereas the cloud specific configuration info will not be retrieved"
+        },
+        {
+          "info": {
+            "name": "Get generic cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/generic/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get generic cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Creates an GKE cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/gke",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an GKE cluster"
+        },
+        {
+          "info": {
+            "name": "Get GKE cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/gke/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get GKE cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates GKE cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/gke/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates GKE cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Creates a MAAS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/maas",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a MAAS cluster"
+        },
+        {
+          "info": {
+            "name": "Imports a Maas cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/maas/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Imports a Maas cluster"
+        },
+        {
+          "info": {
+            "name": "Get maas cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/maas/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get maas cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates MAAS cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/maas/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates MAAS cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Downloads the cluster definition archive file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/spc/download",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Downloads the cluster definition archive file"
+        },
+        {
+          "info": {
+            "name": "Returns the cluster image pull secret for the given scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/system/imagePullSecret",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "clusterUid",
+                "value": "",
+                "type": "query",
+                "description": "Spectro cluster uid"
+              },
+              {
+                "name": "overlordUid",
+                "value": "",
+                "type": "query",
+                "description": "Overlord (private cloud gateway) uid"
+              },
+              {
+                "name": "edgeHostUid",
+                "value": "",
+                "type": "query",
+                "description": "Edge host uid"
+              }
+            ]
+          },
+          "docs": "Returns the cluster image pull secret for the given scope"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of spectrocluster tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/tags",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of spectrocluster tags"
+        },
+        {
+          "info": {
+            "name": "Get cluster settings by context",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/upgrade/settings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get cluster settings by context"
+        },
+        {
+          "info": {
+            "name": "Update all clusters upgrade settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/upgrade/settings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Update all clusters upgrade settings"
+        },
+        {
+          "info": {
+            "name": "Validates the cluster name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/validate/name",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Cluster name"
+              }
+            ]
+          },
+          "docs": "Validates the cluster name"
+        },
+        {
+          "info": {
+            "name": "Validates spectro cluster packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/validate/packs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates spectro cluster packs"
+        },
+        {
+          "info": {
+            "name": "Creates a virtual cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/virtual",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a virtual cluster"
+        },
+        {
+          "info": {
+            "name": "Get the cluster pack values yaml",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/virtual/packs/values",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "kubernetesDistroType",
+                "value": "",
+                "type": "query",
+                "description": "Kubernetes distribution type"
+              }
+            ]
+          },
+          "docs": "Get the cluster pack values yaml"
+        },
+        {
+          "info": {
+            "name": "Validates virtual cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/virtual/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates virtual cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Creates a vSphere cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/vsphere",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a vSphere cluster"
+        },
+        {
+          "info": {
+            "name": "Imports a vSphere cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/vsphere/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Imports a vSphere cluster"
+        },
+        {
+          "info": {
+            "name": "Get vSphere cluster estimated rate information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/vsphere/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get vSphere cluster estimated rate information"
+        },
+        {
+          "info": {
+            "name": "Validates vSphere cluster create operation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/vsphere/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates vSphere cluster create operation"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "includeTags",
+                "value": "",
+                "type": "query",
+                "description": "Comma separated tags like system,profile"
+              },
+              {
+                "name": "resolvePackValues",
+                "value": "",
+                "type": "query",
+                "description": "Resolve pack values if set to true"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Includes pack meta such as schema, presets"
+              },
+              {
+                "name": "profileType",
+                "value": "",
+                "type": "query",
+                "description": "Filter cluster profile templates by profileType"
+              },
+              {
+                "name": "includeNonSpectroLabels",
+                "value": "",
+                "type": "query",
+                "description": "Include non spectro labels in the cluster labels if set to true"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "forceDelete",
+                "value": "",
+                "type": "query",
+                "description": "If set to true the cluster will be force deleted and user has to manually clean up the provisioned cloud resources"
+              }
+            ]
+          },
+          "docs": "Deletes the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Get the cluster asset doc",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the cluster asset doc"
+        },
+        {
+          "info": {
+            "name": "Associate the assets for the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Associate the assets for the cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's kube config file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/adminKubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's kube config file"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's token kube config file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/adminTokenKubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's token kube config file"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster's token kube config data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/adminTokenKubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster's token kube config data"
+        },
+        {
+          "info": {
+            "name": "Deletes the cluster's token kube config data",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/adminTokenKubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Deletes the cluster's token kube config data"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's frp kube config file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/frpKubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's frp kube config file"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster's frp kube config data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/frpKubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster's frp kube config data"
+        },
+        {
+          "info": {
+            "name": "Deletes the cluster's frp kube config client data",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/frpKubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Deletes the cluster's frp kube config client data"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's kube config file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/kubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "frp",
+                "value": "",
+                "type": "query",
+                "description": "FRP (reverse-proxy) based kube config will be returned if available"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's kube config file"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster's manifest data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/kubeconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster's manifest data"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's kube config client file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/kubeconfigclient",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's kube config client file"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster's kube config client data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/kubeconfigclient",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster's kube config client data"
+        },
+        {
+          "info": {
+            "name": "Deletes the cluster's kube config client data",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/kubeconfigclient",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Deletes the cluster's kube config client data"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's manifest data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's manifest data"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster's manifest data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/assets/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster's manifest data"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster meta attribute",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/clusterConfig/clusterMetaAttribute",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster meta attribute"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster controlPlane health check timeout",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/clusterConfig/controlPlaneHealthCheckTimeout",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster controlPlane health check timeout"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster host config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/clusterConfig/hostCluster",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster host config"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster Life cycle configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/clusterConfig/lifecycleConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster Life cycle configuration"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster OS patch configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/clusterConfig/osPatch",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster OS patch configuration"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster's timezone configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/clusterConfig/timezone",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster's timezone configuration"
+        },
+        {
+          "info": {
+            "name": "Retrieves namespaces for the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/namespaces",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Retrieves namespaces for the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Updates namespaces for the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/namespaces",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates namespaces for the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Retrieves the specified namespace of the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/namespaces/:namespaceUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "namespaceUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster namespace uid"
+              }
+            ]
+          },
+          "docs": "Retrieves the specified namespace of the cluster"
+        },
+        {
+          "info": {
+            "name": "Updates the specified namespace of the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/namespaces/:namespaceUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "namespaceUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster namespace uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified namespace of the cluster"
+        },
+        {
+          "info": {
+            "name": "Retrieves RBAC information for the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/rbacs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Retrieves RBAC information for the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Updates RBAC information for the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/rbacs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Updates RBAC information for the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Retrieves the specified RBAC of the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/rbacs/:rbacUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "rbacUid",
+                "value": "",
+                "type": "path",
+                "description": "RBAC resource uid"
+              }
+            ]
+          },
+          "docs": "Retrieves the specified RBAC of the cluster"
+        },
+        {
+          "info": {
+            "name": "Updates the specified RBAC of the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/config/rbacs/:rbacUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "rbacUid",
+                "value": "",
+                "type": "path",
+                "description": "RBAC resource uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified RBAC of the cluster"
+        },
+        {
+          "info": {
+            "name": "Download the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/download",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Download the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of edge host of edge-native cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/edge-native/edgeHosts",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of edge host of edge-native cluster"
+        },
+        {
+          "info": {
+            "name": "reset the edge clusters by deleting machine pools and conditions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/edge/reset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "reset the edge clusters by deleting machine pools and conditions"
+        },
+        {
+          "info": {
+            "name": "Returns the cluster backup result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "backupRequestUid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the cluster backup result"
+        },
+        {
+          "info": {
+            "name": "Create cluster backup settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create cluster backup settings"
+        },
+        {
+          "info": {
+            "name": "Update cluster backup settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update cluster backup settings"
+        },
+        {
+          "info": {
+            "name": "Reset cluster backup schedule settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reset cluster backup schedule settings"
+        },
+        {
+          "info": {
+            "name": "Create on demand cluster backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/backup/onDemand",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create on demand cluster backup"
+        },
+        {
+          "info": {
+            "name": "Delete cluster backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/backup/:backupName/request/:requestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "backupName",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "requestUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete cluster backup"
+        },
+        {
+          "info": {
+            "name": "Returns the compliance scan of cluster, if driverType is provided then specific status of driverType will be returned",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the compliance scan of cluster, if driverType is provided then specific status of driverType will be returned"
+        },
+        {
+          "info": {
+            "name": "Create cluster compliance scan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create cluster compliance scan"
+        },
+        {
+          "info": {
+            "name": "Update cluster compliance scan settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update cluster compliance scan settings"
+        },
+        {
+          "info": {
+            "name": "Returns the compliance scan log by cluster uid and driver type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/drivers",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the compliance scan log by cluster uid and driver type"
+        },
+        {
+          "info": {
+            "name": "Update the KubeBench compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/drivers/kubeBench",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the KubeBench compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Update the KubeHunter compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/drivers/kubeHunter",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the KubeHunter compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Update the Sonobuoy compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/drivers/sonobuoy",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the Sonobuoy compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Update the Syft compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/drivers/syft",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the Syft compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Delete the compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/:logUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Returns the KubeBench compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/:logUid/drivers/kubeBench",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the KubeBench compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Returns the KubeHunter compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/:logUid/drivers/kubeHunter",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the KubeHunter compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Returns the Sonobuoy compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/:logUid/drivers/sonobuoy",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "reportId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the Sonobuoy compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Returns the Syft compliance scan log by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/:logUid/drivers/syft",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Syft compliance scan log by uid"
+        },
+        {
+          "info": {
+            "name": "Returns the image sbom of syft scan log of cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/:logUid/drivers/syft/sbom",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "image",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the image sbom of syft scan log of cluster"
+        },
+        {
+          "info": {
+            "name": "Downloads the driver cluster logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/logs/:logUid/drivers/:driver/download",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "logUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "driver",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "fileFormat",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Downloads the driver cluster logs"
+        },
+        {
+          "info": {
+            "name": "Create on demand cluster compliance scan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/complianceScan/onDemand",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create on demand cluster compliance scan"
+        },
+        {
+          "info": {
+            "name": "Get the installed helm charts of a specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/helmCharts",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the installed helm charts of a specified cluster"
+        },
+        {
+          "info": {
+            "name": "Get the log fetcher for cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/logFetcher",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid for which log is requested"
+              },
+              {
+                "name": "requestId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the log fetcher for cluster"
+        },
+        {
+          "info": {
+            "name": "Create the log fetcher for cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/logFetcher",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid for which log is requested"
+              }
+            ]
+          },
+          "docs": "Create the log fetcher for cluster"
+        },
+        {
+          "info": {
+            "name": "Get the installed manifests of a specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the installed manifests of a specified cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the cluster restore of cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/restore",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "restoreRequestUid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the cluster restore of cluster"
+        },
+        {
+          "info": {
+            "name": "Create on demand cluster restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/features/restore/onDemand",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create on demand cluster restore"
+        },
+        {
+          "info": {
+            "name": "Update specific cluster heartbeat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/heartbeat",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Update specific cluster heartbeat"
+        },
+        {
+          "info": {
+            "name": "Returns the metadata of all hybrid pools associated with the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/hybridPools/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the metadata of all hybrid pools associated with the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Update specific cluster hybrid settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/hybridSettings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Update specific cluster hybrid settings"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's import manifest file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/import/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's import manifest file"
+        },
+        {
+          "info": {
+            "name": "Upgrade the specified imported read only cluster with full permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/import/upgrade",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Upgrade the specified imported read only cluster with full permissions"
+        },
+        {
+          "info": {
+            "name": "Get K8Certificate for spectro cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/k8certificates",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Get K8Certificate for spectro cluster"
+        },
+        {
+          "info": {
+            "name": "Update K8Certificate for spectro cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/k8certificates",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Update K8Certificate for spectro cluster"
+        },
+        {
+          "info": {
+            "name": "Sets the cluster control plane nodes Kubernetes certificates for renewal",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/k8certificates/renew",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Sets the cluster control plane nodes Kubernetes certificates for renewal"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's kube config file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/kubectl/redirect",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's kube config file"
+        },
+        {
+          "info": {
+            "name": "Associate the assets for the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/location",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Associate the assets for the cluster"
+        },
+        {
+          "info": {
+            "name": "Returns all manifests attached to the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "resolveValues",
+                "value": "",
+                "type": "query",
+                "description": "Resolve macros, variables, and template values in manifest content when true"
+              }
+            ]
+          },
+          "docs": "Returns a flat list of manifests from all cluster profiles and packs. When resolveValues is true, macros, variables, and template placeholders in manifest content are resolved."
+        },
+        {
+          "info": {
+            "name": "Update the specified spectro cluster metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Update the specified spectro cluster metadata"
+        },
+        {
+          "info": {
+            "name": "Returns available namespaces for the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/namespaces",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "skipEmptyNamespaces",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns available namespaces for the cluster"
+        },
+        {
+          "info": {
+            "name": "Returns k8s spectrocluster oidc",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/oidc",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "spc uid"
+              }
+            ]
+          },
+          "docs": "Returns k8s spectrocluster oidc"
+        },
+        {
+          "info": {
+            "name": "Returns k8s dashboard url",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/oidc/dashboard/url",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "spc uid"
+              }
+            ]
+          },
+          "docs": "Returns k8s dashboard url"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/pack/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "cluster uid"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "manifest uid which is part of the pack ref"
+              },
+              {
+                "name": "resolveManifestValues",
+                "value": "",
+                "type": "query",
+                "description": "resolve pack manifest values if set to true"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's manifest"
+        },
+        {
+          "info": {
+            "name": "Get specified cluster pack properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/pack/properties",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "layer",
+                "value": "",
+                "type": "query",
+                "description": "Pack layer"
+              },
+              {
+                "name": "fieldPath",
+                "value": "",
+                "type": "query",
+                "description": "Pack values yaml field path"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Pack name"
+              },
+              {
+                "name": "resolveMacros",
+                "value": "",
+                "type": "query",
+                "description": "Is the macros need to be resolved"
+              }
+            ]
+          },
+          "docs": "Get specified cluster pack properties"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster's pack references",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/packRefs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "notify",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Updates the cluster's pack references"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's packs resolved values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/packs/resolvedValues",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's packs resolved values"
+        },
+        {
+          "info": {
+            "name": "Patch update specified cluster's packs status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/packs/status",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Patch update specified cluster's packs status"
+        },
+        {
+          "info": {
+            "name": "Returns the profile updates of a specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profileUpdates",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the profile updates of a specified cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the associated profiles of a specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "includes pack meta such as schema, presets"
+              }
+            ]
+          },
+          "docs": "Returns the associated profiles of a specified cluster"
+        },
+        {
+          "info": {
+            "name": "Associate cluster profiles to the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "resolveNotification",
+                "value": "",
+                "type": "query",
+                "description": "Resolve pending cluster notification if set to true"
+              }
+            ]
+          },
+          "docs": "Associate cluster profiles to the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Patch cluster profiles to the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "resolveNotification",
+                "value": "",
+                "type": "query",
+                "description": "Resolve pending cluster notification if set to true"
+              }
+            ]
+          },
+          "docs": "Patch cluster profiles to the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Remove cluster profiles from the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Remove cluster profiles from the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the associated profile's pack manifests of a specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles/packs/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Includes pack meta such as schema, presets"
+              },
+              {
+                "name": "resolveMacros",
+                "value": "",
+                "type": "query",
+                "description": "Resolve pack macro variables if set to true"
+              }
+            ]
+          },
+          "docs": "Returns the associated profile's pack manifests of a specified cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster's profile pack configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles/:profileUid/packs/:packName/config",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "cluster uid"
+              },
+              {
+                "name": "profileUid",
+                "value": "",
+                "type": "path",
+                "description": "profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "pack name"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster's profile pack configuration"
+        },
+        {
+          "info": {
+            "name": "Returns the associated profiles pack manifests of the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles/:profileUid/packs/:packName/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "profileUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pack"
+              }
+            ]
+          },
+          "docs": "Returns the associated profiles pack manifests of the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Updates cluster profiles pack manifests to the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/profiles/:profileUid/packs/:packName/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "profileUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the pack"
+              }
+            ]
+          },
+          "docs": "Updates cluster profiles pack manifests to the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the estimated rate of the specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "periodType",
+                "value": "",
+                "type": "query",
+                "description": "Period type [hourly, monthly, yearly]"
+              }
+            ]
+          },
+          "docs": "Returns the estimated rate of the specified cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the spectrocluster repave approve update",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/repave/approve",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the spectrocluster repave approve update"
+        },
+        {
+          "info": {
+            "name": "Returns the spectrocluster repave",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/repave/status",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the spectrocluster repave"
+        },
+        {
+          "info": {
+            "name": "reset the cluster s by deleting machine pools and condtions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/reset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "reset the cluster s by deleting machine pools and condtions"
+        },
+        {
+          "info": {
+            "name": "Get the cluster's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Get the cluster's status"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster status condition",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/condition",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster status condition"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster status conditions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/conditions",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster status conditions"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster's service endpoints information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/endpoints",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster's service endpoints information"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster status as imported",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/imported",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster status as imported"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster's services information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/services",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster's services information"
+        },
+        {
+          "info": {
+            "name": "Returns the SPC apply information for the agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/spcApply",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the SPC apply information for the agent"
+        },
+        {
+          "info": {
+            "name": "Set the CanBeApplied to true on the spcApply status. CanBeApplied indicates the agent to orchestrate the spc changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/spcApply",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Set the CanBeApplied to true on the spcApply status. CanBeApplied indicates the agent to orchestrate the spc changes"
+        },
+        {
+          "info": {
+            "name": "Updates the agent patch time for the SPC changes",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/spcApply/patchTime",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the agent patch time for the SPC changes"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster's upgrade status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/status/upgrades",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the cluster's upgrade status"
+        },
+        {
+          "info": {
+            "name": "Update specific cluster upgrade settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/upgrade/settings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Update specific cluster upgrade settings"
+        },
+        {
+          "info": {
+            "name": "Validates cluster packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/validate/packs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "cluster uid"
+              }
+            ]
+          },
+          "docs": "Validates cluster packs"
+        },
+        {
+          "info": {
+            "name": "Validates if cluster gets repaved for the specified packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/validate/repave",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "cluster uid"
+              }
+            ]
+          },
+          "docs": "Validates if cluster gets repaved for the specified packs"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of variables associated with the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid for which variables need to be retrieved"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of variables associated with the cluster"
+        },
+        {
+          "info": {
+            "name": "Update cluster variable values for specified cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid for which variables need to be retrieved"
+              }
+            ]
+          },
+          "docs": "Update cluster variable values for specified cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the list of virtual machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace names, comma separated value (ex: dev,test). If namespace is empty it returns the specific resource under all namespace"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Returns the list of virtual machines"
+        },
+        {
+          "info": {
+            "name": "Create virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Create virtual machine"
+        },
+        {
+          "info": {
+            "name": "Returns the list of snapshots of given namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/snapshot",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "query",
+                "description": "vmName is comma separated value (ex: name1,name2)."
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace names, comma separated value (ex: dev,test). If namespace is empty it returns the specific resource under all namespace"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Returns the list of snapshots of given namespaces"
+        },
+        {
+          "info": {
+            "name": "Get virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Get virtual machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified virtual machine of the cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Updates the specified virtual machine of the cluster"
+        },
+        {
+          "info": {
+            "name": "Deletes the virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Deletes the virtual machine"
+        },
+        {
+          "info": {
+            "name": "Add volume to the virtual machine instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/addVolume",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Add volume to the virtual machine instance"
+        },
+        {
+          "info": {
+            "name": "Clone virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/clone",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Clone virtual machine"
+        },
+        {
+          "info": {
+            "name": "Migrate the virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/migrate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Migrate the virtual machine"
+        },
+        {
+          "info": {
+            "name": "Pause the virtual machine instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/pause",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Pause the virtual machine instance"
+        },
+        {
+          "info": {
+            "name": "Remove volume from the virtual machine instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/removeVolume",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Remove volume from the virtual machine instance"
+        },
+        {
+          "info": {
+            "name": "Restart the virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/restart",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Restart the virtual machine"
+        },
+        {
+          "info": {
+            "name": "Resume the virtual machine instance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/resume",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Resume the virtual machine instance"
+        },
+        {
+          "info": {
+            "name": "Create snapshot of virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/snapshot",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name of virtual machine"
+              }
+            ]
+          },
+          "docs": "Create snapshot of virtual machine"
+        },
+        {
+          "info": {
+            "name": "Get virtual machine snapshot",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/snapshot/:snapshotName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Get virtual machine snapshot"
+        },
+        {
+          "info": {
+            "name": "Updates the specified snapshot of a virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/snapshot/:snapshotName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Updates the specified snapshot of a virtual machine"
+        },
+        {
+          "info": {
+            "name": "Delete the snapshot of virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/snapshot/:snapshotName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "snapshotName",
+                "value": "",
+                "type": "path",
+                "description": "Snapshot name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Delete the snapshot of virtual machine"
+        },
+        {
+          "info": {
+            "name": "Start the virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/start",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Start the virtual machine"
+        },
+        {
+          "info": {
+            "name": "Stop the virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/vms/:vmName/stop",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "vmName",
+                "value": "",
+                "type": "path",
+                "description": "Virtual Machine name"
+              },
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query",
+                "description": "Namespace name"
+              }
+            ]
+          },
+          "docs": "Stop the virtual machine"
+        },
+        {
+          "info": {
+            "name": "Sync specified cluster workload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/workloads/sync",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Sync specified cluster workload"
+        },
+        {
+          "info": {
+            "name": "Sync specified cluster workload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spectroclusters/:uid/workloads/:workloadKind/sync",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              },
+              {
+                "name": "workloadKind",
+                "value": "",
+                "type": "path",
+                "description": "Workload kind"
+              }
+            ]
+          },
+          "docs": "Sync specified cluster workload"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

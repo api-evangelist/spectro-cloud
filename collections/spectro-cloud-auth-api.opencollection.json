@@ -1,0 +1,371 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations auth API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "auth",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Authenticates the user for the specified crendentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/auth/authenticate",
+            "params": [
+              {
+                "name": "setCookie",
+                "value": "",
+                "type": "query",
+                "description": "Describes a way to set cookie from backend."
+              }
+            ]
+          },
+          "docs": "Creates a authentication request with the specified credentials"
+        },
+        {
+          "info": {
+            "name": "V1AuthMfaDevicesList",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/mfa/devices"
+          },
+          "docs": "V1AuthMfaDevicesList"
+        },
+        {
+          "info": {
+            "name": "Returns the user organization details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/org",
+            "params": [
+              {
+                "name": "orgName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the allowed login method and information with the organization details"
+        },
+        {
+          "info": {
+            "name": "Idp authorization code callback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/org/:org/oidc/callback",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "Organization name"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Describes temporary and very short lived code sent by IDP to validate the token"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Describes a state to validate and associate request and response"
+              },
+              {
+                "name": "error",
+                "value": "",
+                "type": "query",
+                "description": "Describes a error code in case the IDP is not able to validate and authenticates the user"
+              },
+              {
+                "name": "error_description",
+                "value": "",
+                "type": "query",
+                "description": "Describes a error in case the IDP is not able to validate and authenticates the user"
+              }
+            ]
+          },
+          "docs": "Returns the Authorization token for the palette. This is called by the IDP as a callback url after IDP authenticates the user with its server."
+        },
+        {
+          "info": {
+            "name": "Identity provider logout url for the Oidc",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/org/:org/oidc/logout",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "Organization name"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Describes a state to validate and associate request and response"
+              }
+            ]
+          },
+          "docs": "Returns No Content. Works as a callback url after the IDP logout from their server."
+        },
+        {
+          "info": {
+            "name": "Identity provider callback url for the SMAL authentication",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/auth/org/:org/saml/callback",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "Organization name"
+              },
+              {
+                "name": "authToken",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated."
+              }
+            ]
+          },
+          "docs": "Returns the Authorization token for the palette. This is called by the SAML based IDP as a callback url after IDP authenticates the user with its server."
+        },
+        {
+          "info": {
+            "name": "Identity provider logout url for the SMAL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/auth/org/:org/saml/logout",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "path",
+                "description": "Organization name"
+              },
+              {
+                "name": "authToken",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated."
+              }
+            ]
+          },
+          "docs": "Returns No Content. Works as a callback url after the IDP logout from their server."
+        },
+        {
+          "info": {
+            "name": "Returns a list of user's organizations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/orgs"
+          },
+          "docs": "Returns a list of user's organizations details and login methods"
+        },
+        {
+          "info": {
+            "name": "Updates and Activates the specified user password using the password token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/auth/password/:passwordToken/activate",
+            "params": [
+              {
+                "name": "passwordToken",
+                "value": "",
+                "type": "path",
+                "description": "Describes the expirable password token for the user to be used for authentication of user"
+              }
+            ]
+          },
+          "docs": "Updates and Activates user password with the help of password token"
+        },
+        {
+          "info": {
+            "name": "Resets the user password using the password token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/auth/password/:passwordToken/reset",
+            "params": [
+              {
+                "name": "passwordToken",
+                "value": "",
+                "type": "path",
+                "description": "Describes the expirable password token for the user to be used for authentication of user"
+              }
+            ]
+          },
+          "docs": "Updates the new user password with the help of password token"
+        },
+        {
+          "info": {
+            "name": "Refreshes authentication token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/refresh/:token",
+            "params": [
+              {
+                "name": "setCookie",
+                "value": "",
+                "type": "query",
+                "description": "Describes a way to set cookie from backend."
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "path",
+                "description": "Non expired Authorization token"
+              }
+            ]
+          },
+          "docs": "Returns a new token within refresh timeout and same session id is maintained"
+        },
+        {
+          "info": {
+            "name": "Returns a list of predefined Identity Provider (IDP)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/sso/idps"
+          },
+          "docs": "Returns a list of predefined Identity Provider (IDP)"
+        },
+        {
+          "info": {
+            "name": "Returns a list of supported sso logins",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/sso/logins",
+            "params": [
+              {
+                "name": "org",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns a list of supported sso logins and their authentication mechanism"
+        },
+        {
+          "info": {
+            "name": "Returns a list of supported sso auth providers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/sso/providers"
+          },
+          "docs": "Returns a list of supported sso auth providers"
+        },
+        {
+          "info": {
+            "name": "Returns Authorization token. Works as a callback url for the system defined sso apps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/sso/:ssoApp/callback",
+            "params": [
+              {
+                "name": "ssoApp",
+                "value": "",
+                "type": "path",
+                "description": "Describes the sso app use to login into the system"
+              },
+              {
+                "name": "code",
+                "value": "",
+                "type": "query",
+                "description": "Describes temporary and very short lived code sent by IDP to validate the token"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Describes a state to validate and associate request and response"
+              },
+              {
+                "name": "error",
+                "value": "",
+                "type": "query",
+                "description": "Describes a error code in case the IDP is not able to validate and authenticates the user"
+              },
+              {
+                "name": "error_description",
+                "value": "",
+                "type": "query",
+                "description": "Describes a error in case the IDP is not able to validate and authenticates the user"
+              }
+            ]
+          },
+          "docs": "Returns Authorization token. Works as a callback url for the system defined sso apps"
+        },
+        {
+          "info": {
+            "name": "Returns No Content. Sends the user organization information via email",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/auth/user/org/forgot",
+            "params": [
+              {
+                "name": "emailId",
+                "value": "",
+                "type": "query",
+                "description": "Describes user's email id for sending organzation(s) details via email."
+              }
+            ]
+          },
+          "docs": "Returns No Content. Sends the user organization(s) information via email"
+        },
+        {
+          "info": {
+            "name": "Creates request to reset password via email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/auth/user/password/reset"
+          },
+          "docs": "Creates request to reset password via email. Password reset email will be sent to the user. Sends 204 No Content."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,2869 @@
+{
+  "item": [
+    {
+      "id": "a0dec5d6-a4fc-426c-9b11-8120a82a6a0b",
+      "name": "workspaces",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3b1220d-1724-4ba4-8044-18bc6ac10b6b",
+          "name": "Create workspace",
+          "request": {
+            "name": "Create workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"clusterNamespaces\": [\n      {\n        \"image\": {\n          \"blackListedImages\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"isRegex\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"namespaceResourceAllocation\": {\n          \"clusterResourceAllocations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"defaultResourceAllocation\": {\n            \"cpuCores\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpuConfig\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memoryMiB\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"image\": {\n          \"blackListedImages\": [\n            \"<string>\",\n            \"<string>\"\n          ]\n        },\n        \"isRegex\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"namespaceResourceAllocation\": {\n          \"clusterResourceAllocations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"defaultResourceAllocation\": {\n            \"cpuCores\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpuConfig\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memoryMiB\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ],\n    \"clusterRbacs\": [\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"creationTimestamp\": \"<dateTime>\",\n          \"deletionTimestamp\": \"<dateTime>\",\n          \"labels\": {\n            \"key_0\": \"<string>\"\n          },\n          \"lastModifiedTimestamp\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"uid\": \"<string>\"\n        },\n        \"spec\": {\n          \"bindings\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isSystem\": false,\n          \"relatedObject\": {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"status\": {\n          \"errors\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"<string>\"\n          },\n          \"creationTimestamp\": \"<dateTime>\",\n          \"deletionTimestamp\": \"<dateTime>\",\n          \"labels\": {\n            \"key_0\": \"<string>\"\n          },\n          \"lastModifiedTimestamp\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"uid\": \"<string>\"\n        },\n        \"spec\": {\n          \"bindings\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isSystem\": false,\n          \"relatedObject\": {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"status\": {\n          \"errors\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"clusterRefs\": [\n      {\n        \"clusterName\": \"<string>\",\n        \"clusterUid\": \"<string>\"\n      },\n      {\n        \"clusterName\": \"<string>\",\n        \"clusterUid\": \"<string>\"\n      }\n    ],\n    \"policies\": {\n      \"backupPolicy\": {\n        \"backupConfig\": {\n          \"backupLocationName\": \"<string>\",\n          \"backupLocationUid\": \"<string>\",\n          \"backupName\": \"<string>\",\n          \"backupPrefix\": \"<string>\",\n          \"durationInHours\": \"<int64>\",\n          \"includeAllDisks\": \"<boolean>\",\n          \"includeClusterResourceMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeClusterResources\": \"<boolean>\",\n          \"locationType\": \"<string>\",\n          \"namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"schedule\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"clusterUids\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"includeAllClusters\": \"<boolean>\"\n      }\n    },\n    \"quota\": {\n      \"resourceAllocation\": {\n        \"cpuCores\": \"<number>\",\n        \"gpuConfig\": {\n          \"limit\": \"<integer>\",\n          \"provider\": \"nvidia\"\n        },\n        \"memoryMiB\": \"<number>\"\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a7c4e165-5275-4163-84f4-0bc132c11361",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\",\n      \"key_4\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"clusterNamespaces\": [\n      {\n        \"image\": {\n          \"blackListedImages\": [\n            \"<string>\"\n          ]\n        },\n        \"isRegex\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"namespaceResourceAllocation\": {\n          \"clusterResourceAllocations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"defaultResourceAllocation\": {\n            \"cpuCores\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpuConfig\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memoryMiB\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ],\n    \"clusterRbacs\": [\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"<string>\"\n          },\n          \"creationTimestamp\": \"<dateTime>\",\n          \"deletionTimestamp\": \"<dateTime>\",\n          \"labels\": {\n            \"key_0\": \"<string>\"\n          },\n          \"lastModifiedTimestamp\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"uid\": \"<string>\"\n        },\n        \"spec\": {\n          \"bindings\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isSystem\": false,\n          \"relatedObject\": {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"status\": {\n          \"errors\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\"\n          },\n          \"creationTimestamp\": \"<dateTime>\",\n          \"deletionTimestamp\": \"<dateTime>\",\n          \"labels\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\"\n          },\n          \"lastModifiedTimestamp\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"uid\": \"<string>\"\n        },\n        \"spec\": {\n          \"bindings\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isSystem\": false,\n          \"relatedObject\": {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"status\": {\n          \"errors\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"clusterRefs\": [\n      {\n        \"clusterName\": \"<string>\",\n        \"clusterUid\": \"<string>\"\n      }\n    ],\n    \"policies\": {\n      \"backupPolicy\": {\n        \"backupConfig\": {\n          \"backupLocationName\": \"<string>\",\n          \"backupLocationUid\": \"<string>\",\n          \"backupName\": \"<string>\",\n          \"backupPrefix\": \"<string>\",\n          \"durationInHours\": \"<int64>\",\n          \"includeAllDisks\": \"<boolean>\",\n          \"includeClusterResourceMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeClusterResources\": \"<boolean>\",\n          \"locationType\": \"<string>\",\n          \"namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"schedule\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"clusterUids\": [\n          \"<string>\"\n        ],\n        \"includeAllClusters\": \"<boolean>\"\n      }\n    },\n    \"quota\": {\n      \"resourceAllocation\": {\n        \"cpuCores\": \"<number>\",\n        \"gpuConfig\": {\n          \"limit\": \"<integer>\",\n          \"provider\": \"nvidia\"\n        },\n        \"memoryMiB\": \"<number>\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bea18b07-7add-4f0f-9a33-fbdd6828d008",
+          "name": "Returns the specified team's workspaces and roles data",
+          "request": {
+            "name": "Returns the specified team's workspaces and roles data",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                "teams",
+                ":teamUid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "teamUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9a05ddf8-ee01-4f55-919a-2611f47d6e79",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    "teams",
+                    ":teamUid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "teamUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    {\n      \"name\": \"string\",\n      \"uid\": \"string\",\n      \"workspaces\": [\n        {\n          \"inheritedRoles\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"string\",\n          \"roles\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"uid\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aecbffea-dcb2-4aed-a277-a3203319e6a7",
+          "name": "Updates the workspace roles for the specified team",
+          "request": {
+            "name": "Updates the workspace roles for the specified team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                "teams",
+                ":teamUid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "teamUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workspaces\": [\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"uid\": \"<string>\"\n    },\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"uid\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "93e29ef4-7c98-4ba5-920c-48756b6bc648",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    "teams",
+                    ":teamUid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "teamUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0240cb9f-13df-42af-bf0a-81c8b7f7e304",
+          "name": "Returns the specified User workspaces and Roles information",
+          "request": {
+            "name": "Returns the specified User workspaces and Roles information",
+            "description": {
+              "content": "Returns a User with workspaces and roles",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                "users",
+                ":userUid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "692be2f3-8595-4975-afa2-a7f81d7aab54",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    "users",
+                    ":userUid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    {\n      \"name\": \"string\",\n      \"uid\": \"string\",\n      \"workspaces\": [\n        {\n          \"inheritedRoles\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"string\",\n          \"roles\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"uid\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dc11c1db-94b6-4604-b754-e46cb1211bab",
+          "name": "Updates the workspace roles for user",
+          "request": {
+            "name": "Updates the workspace roles for user",
+            "description": {
+              "content": "User is updated with workspace roles",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                "users",
+                ":userUid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workspaces\": [\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"uid\": \"<string>\"\n    },\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"uid\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "715dcd95-9a3d-46b8-ae1b-04970cb125ae",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    "users",
+                    ":userUid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0fc2ac61-8593-4824-8a02-f1a1841cdbe0",
+          "name": "Validates the workspace name",
+          "request": {
+            "name": "Validates the workspace name",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                "validate",
+                "name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "410dd5cf-559e-4ca9-be0a-9b2837f273d0",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    "validate",
+                    "name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11018c4f-db3f-42ba-8892-c985b02f961b",
+          "name": "Deletes the specified workspace",
+          "request": {
+            "name": "Deletes the specified workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fc555e8c-5548-44d6-82b7-c79019125330",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dec62fa-8a25-4bb9-a2f4-9aef0e203a0f",
+          "name": "Returns the specified workspace",
+          "request": {
+            "name": "Returns the specified workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3ca2ebe2-f5c9-4ac7-b8af-7af22b532f69",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"clusterNamespaces\": [\n      {\n        \"image\": {\n          \"blackListedImages\": [\n            \"<string>\"\n          ]\n        },\n        \"isRegex\": \"<boolean>\",\n        \"name\": \"<string>\",\n        \"namespaceResourceAllocation\": {\n          \"clusterResourceAllocations\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"defaultResourceAllocation\": {\n            \"cpuCores\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"gpuConfig\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"memoryMiB\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ],\n    \"clusterRbacs\": [\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\",\n            \"key_3\": \"<string>\"\n          },\n          \"creationTimestamp\": \"<dateTime>\",\n          \"deletionTimestamp\": \"<dateTime>\",\n          \"labels\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\",\n            \"key_2\": \"<string>\",\n            \"key_3\": \"<string>\"\n          },\n          \"lastModifiedTimestamp\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"uid\": \"<string>\"\n        },\n        \"spec\": {\n          \"bindings\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isSystem\": false,\n          \"relatedObject\": {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"status\": {\n          \"errors\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"<string>\"\n          },\n          \"creationTimestamp\": \"<dateTime>\",\n          \"deletionTimestamp\": \"<dateTime>\",\n          \"labels\": {\n            \"key_0\": \"<string>\",\n            \"key_1\": \"<string>\"\n          },\n          \"lastModifiedTimestamp\": \"<dateTime>\",\n          \"name\": \"<string>\",\n          \"uid\": \"<string>\"\n        },\n        \"spec\": {\n          \"bindings\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"isSystem\": false,\n          \"relatedObject\": {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"status\": {\n          \"errors\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      }\n    ],\n    \"clusterRefs\": [\n      {\n        \"clusterName\": \"<string>\",\n        \"clusterUid\": \"<string>\"\n      }\n    ],\n    \"policies\": {\n      \"backupPolicy\": {\n        \"backupConfig\": {\n          \"backupLocationName\": \"<string>\",\n          \"backupLocationUid\": \"<string>\",\n          \"backupName\": \"<string>\",\n          \"backupPrefix\": \"<string>\",\n          \"durationInHours\": \"<int64>\",\n          \"includeAllDisks\": \"<boolean>\",\n          \"includeClusterResourceMode\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"includeClusterResources\": \"<boolean>\",\n          \"locationType\": \"<string>\",\n          \"namespaces\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"schedule\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"clusterUids\": [\n          \"<string>\"\n        ],\n        \"includeAllClusters\": \"<boolean>\"\n      }\n    },\n    \"quota\": {\n      \"resourceAllocation\": {\n        \"cpuCores\": \"<number>\",\n        \"gpuConfig\": {\n          \"limit\": \"<integer>\",\n          \"provider\": \"nvidia\"\n        },\n        \"memoryMiB\": \"<number>\"\n      }\n    }\n  },\n  \"status\": {\n    \"errors\": [\n      {\n        \"clusterUid\": \"string\",\n        \"msg\": \"string\",\n        \"name\": \"string\",\n        \"resourceType\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1dd96c6e-0fe3-4b94-b1a0-f39b5c4750ed",
+          "name": "Delete workspace backup",
+          "request": {
+            "name": "Delete workspace backup",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "backup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clusterConfigs\": [\n    {\n      \"backupName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    },\n    {\n      \"backupName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    }\n  ],\n  \"requestUid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7d73617a-0c87-420a-a14f-1a590e862f5b",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "backup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusterConfigs\": [\n    {\n      \"backupName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    }\n  ],\n  \"requestUid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c58a947b-c354-4c54-8ea7-28876d097b0d",
+          "name": "Returns the  workspace backup result",
+          "request": {
+            "name": "Returns the  workspace backup result",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "backup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "backupRequestUid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b7b7eea7-b52e-4afe-970b-e8688adfce14",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "backup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "backupRequestUid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"config\": {\n      \"backupConfig\": {\n        \"backupLocationName\": \"<string>\",\n        \"backupLocationUid\": \"<string>\",\n        \"backupName\": \"<string>\",\n        \"backupPrefix\": \"<string>\",\n        \"durationInHours\": \"<int64>\",\n        \"includeAllDisks\": \"<boolean>\",\n        \"includeClusterResourceMode\": \"Never\",\n        \"includeClusterResources\": \"<boolean>\",\n        \"locationType\": \"<string>\",\n        \"namespaces\": [\n          \"string\"\n        ],\n        \"schedule\": {\n          \"scheduledRunTime\": \"string\"\n        }\n      },\n      \"clusterUids\": [\n        \"string\"\n      ],\n      \"includeAllClusters\": false\n    },\n    \"workspaceUid\": \"string\"\n  },\n  \"status\": {\n    \"workspaceBackupStatuses\": [\n      {\n        \"actor\": {\n          \"actorType\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"requestUid\": \"string\",\n        \"workspaceBackupConfig\": {\n          \"backupName\": \"string\",\n          \"backupState\": {\n            \"deleteState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"backupTime\": \"<dateTime>\",\n          \"clusterBackupRefs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"config\": {\n            \"backupName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"durationInHours\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includeAllDisks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includeClusterResourceMode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includeClusterResources\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"namespaces\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"requestTime\": \"<dateTime>\"\n        }\n      },\n      {\n        \"actor\": {\n          \"actorType\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"requestUid\": \"string\",\n        \"workspaceBackupConfig\": {\n          \"backupName\": \"string\",\n          \"backupState\": {\n            \"deleteState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"backupTime\": \"<dateTime>\",\n          \"clusterBackupRefs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"config\": {\n            \"backupName\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"durationInHours\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includeAllDisks\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includeClusterResourceMode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"includeClusterResources\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"namespaces\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"requestTime\": \"<dateTime>\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4873ffd5-e753-47f7-8272-639c4963b400",
+          "name": "Create workspace backup settings",
+          "request": {
+            "name": "Create workspace backup settings",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "backup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"backupConfig\": {\n    \"backupLocationName\": \"<string>\",\n    \"backupLocationUid\": \"<string>\",\n    \"backupName\": \"<string>\",\n    \"backupPrefix\": \"<string>\",\n    \"durationInHours\": \"<int64>\",\n    \"includeAllDisks\": \"<boolean>\",\n    \"includeClusterResourceMode\": \"<string>\",\n    \"includeClusterResources\": \"<boolean>\",\n    \"locationType\": \"<string>\",\n    \"namespaces\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schedule\": {\n      \"scheduledRunTime\": \"<string>\"\n    }\n  },\n  \"clusterUids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeAllClusters\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bed4b75c-ba7c-48fb-abad-3b9b21c4dae6",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "backup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff029fac-c7c1-4b95-8556-54902742112c",
+          "name": "Update workspace backup settings",
+          "request": {
+            "name": "Update workspace backup settings",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "backup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"backupConfig\": {\n    \"backupLocationName\": \"<string>\",\n    \"backupLocationUid\": \"<string>\",\n    \"backupName\": \"<string>\",\n    \"backupPrefix\": \"<string>\",\n    \"durationInHours\": \"<int64>\",\n    \"includeAllDisks\": \"<boolean>\",\n    \"includeClusterResourceMode\": \"<string>\",\n    \"includeClusterResources\": \"<boolean>\",\n    \"locationType\": \"<string>\",\n    \"namespaces\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schedule\": {\n      \"scheduledRunTime\": \"<string>\"\n    }\n  },\n  \"clusterUids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeAllClusters\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dfeaa2fe-1d2c-4bf3-9c24-df65f109e203",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "backup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cf5ddee-7247-4508-9a89-4dab9dfac6fb",
+          "name": "Create On demand Workspace Backup",
+          "request": {
+            "name": "Create On demand Workspace Backup",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "backup",
+                "onDemand"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"backupConfig\": {\n    \"backupLocationName\": \"<string>\",\n    \"backupLocationUid\": \"<string>\",\n    \"backupName\": \"<string>\",\n    \"backupPrefix\": \"<string>\",\n    \"durationInHours\": \"<int64>\",\n    \"includeAllDisks\": \"<boolean>\",\n    \"includeClusterResourceMode\": \"<string>\",\n    \"includeClusterResources\": \"<boolean>\",\n    \"locationType\": \"<string>\",\n    \"namespaces\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"schedule\": {\n      \"scheduledRunTime\": \"<string>\"\n    }\n  },\n  \"clusterUids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"includeAllClusters\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "62440921-149e-4b78-9191-a86677d40e4f",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "backup",
+                    "onDemand"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "209ba289-a612-40af-ad8f-1d6125425e2f",
+          "name": "Updates the specified workspace namespaces",
+          "request": {
+            "name": "Updates the specified workspace namespaces",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "clusterNamespaces"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clusterNamespaces\": [\n    {\n      \"image\": {\n        \"blackListedImages\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"isRegex\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"namespaceResourceAllocation\": {\n        \"clusterResourceAllocations\": [\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"defaultResourceAllocation\": {\n          \"cpuCores\": \"<number>\",\n          \"gpuConfig\": {\n            \"limit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memoryMiB\": \"<number>\"\n        }\n      }\n    },\n    {\n      \"image\": {\n        \"blackListedImages\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"isRegex\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"namespaceResourceAllocation\": {\n        \"clusterResourceAllocations\": [\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"defaultResourceAllocation\": {\n          \"cpuCores\": \"<number>\",\n          \"gpuConfig\": {\n            \"limit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memoryMiB\": \"<number>\"\n        }\n      }\n    }\n  ],\n  \"clusterRefs\": [\n    {\n      \"clusterName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    },\n    {\n      \"clusterName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    }\n  ],\n  \"quota\": {\n    \"resourceAllocation\": {\n      \"cpuCores\": \"<number>\",\n      \"gpuConfig\": {\n        \"limit\": \"<integer>\",\n        \"provider\": \"nvidia\"\n      },\n      \"memoryMiB\": \"<number>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ba979d11-5955-4a7e-9422-3a20c28fd25e",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "clusterNamespaces"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusterNamespaces\": [\n    {\n      \"image\": {\n        \"blackListedImages\": [\n          \"<string>\"\n        ]\n      },\n      \"isRegex\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"namespaceResourceAllocation\": {\n        \"clusterResourceAllocations\": [\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"defaultResourceAllocation\": {\n          \"cpuCores\": \"<number>\",\n          \"gpuConfig\": {\n            \"limit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memoryMiB\": \"<number>\"\n        }\n      }\n    }\n  ],\n  \"clusterRefs\": [\n    {\n      \"clusterName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    }\n  ],\n  \"quota\": {\n    \"resourceAllocation\": {\n      \"cpuCores\": \"<number>\",\n      \"gpuConfig\": {\n        \"limit\": \"<integer>\",\n        \"provider\": \"nvidia\"\n      },\n      \"memoryMiB\": \"<number>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d722f7ac-6dcb-4b57-bb03-a45e055d97de",
+          "name": "Create cluster rbac in workspace",
+          "request": {
+            "name": "Create cluster rbac in workspace",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "clusterRbacs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"bindings\": [\n      {\n        \"namespace\": \"<string>\",\n        \"role\": {\n          \"kind\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"subjects\": [\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"type\": \"<string>\"\n      },\n      {\n        \"namespace\": \"<string>\",\n        \"role\": {\n          \"kind\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"subjects\": [\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"type\": \"<string>\"\n      }\n    ],\n    \"isSystem\": false,\n    \"relatedObject\": {\n      \"kind\": \"<string>\",\n      \"name\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  },\n  \"status\": {\n    \"errors\": [\n      {\n        \"msg\": \"<string>\",\n        \"name\": \"<string>\",\n        \"resourceType\": \"<string>\"\n      },\n      {\n        \"msg\": \"<string>\",\n        \"name\": \"<string>\",\n        \"resourceType\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1cb70d28-709e-4aed-9af7-b007c4fe09b9",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "clusterRbacs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "496130bd-7edf-4c22-9525-8092cbf26995",
+          "name": "Deletes the specified workspace cluster rbac",
+          "request": {
+            "name": "Deletes the specified workspace cluster rbac",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "clusterRbacs",
+                ":clusterRbacUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterRbacUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9f293c55-8149-493d-be49-1f8e17a5c1b6",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "clusterRbacs",
+                    ":clusterRbacUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterRbacUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0f9005c4-f563-4d46-a00a-f64bc26f5fd7",
+          "name": "Updates the specified workspace cluster rbac",
+          "request": {
+            "name": "Updates the specified workspace cluster rbac",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "clusterRbacs",
+                ":clusterRbacUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterRbacUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"bindings\": [\n      {\n        \"namespace\": \"<string>\",\n        \"role\": {\n          \"kind\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"subjects\": [\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"type\": \"<string>\"\n      },\n      {\n        \"namespace\": \"<string>\",\n        \"role\": {\n          \"kind\": \"<string>\",\n          \"name\": \"<string>\"\n        },\n        \"subjects\": [\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"namespace\": \"<string>\",\n            \"type\": \"<string>\"\n          }\n        ],\n        \"type\": \"<string>\"\n      }\n    ],\n    \"isSystem\": false,\n    \"relatedObject\": {\n      \"kind\": \"<string>\",\n      \"name\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  },\n  \"status\": {\n    \"errors\": [\n      {\n        \"msg\": \"<string>\",\n        \"name\": \"<string>\",\n        \"resourceType\": \"<string>\"\n      },\n      {\n        \"msg\": \"<string>\",\n        \"name\": \"<string>\",\n        \"resourceType\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "49c0c0ee-9c7d-4749-89ec-1c28f0790299",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "clusterRbacs",
+                    ":clusterRbacUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterRbacUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2d59151-66a8-46ba-b8a0-11d6b764af99",
+          "name": "Updates the specified workspace meta",
+          "request": {
+            "name": "Updates the specified workspace meta",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "meta"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"annotations\": {\n    \"key_0\": \"<string>\"\n  },\n  \"creationTimestamp\": \"<dateTime>\",\n  \"deletionTimestamp\": \"<dateTime>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"lastModifiedTimestamp\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4f1c0b40-8cb1-4c68-8cb5-605f14c667c8",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"annotations\": {\n    \"key_0\": \"<string>\"\n  },\n  \"creationTimestamp\": \"<dateTime>\",\n  \"deletionTimestamp\": \"<dateTime>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"lastModifiedTimestamp\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5d5aaf8-ea45-4497-9b65-f33fad557db9",
+          "name": "Updates the specified workspace resource allocations",
+          "request": {
+            "name": "Updates the specified workspace resource allocations",
+            "description": {
+              "content": "Deprecated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "resourceAllocations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clusterNamespaces\": [\n    {\n      \"image\": {\n        \"blackListedImages\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"isRegex\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"namespaceResourceAllocation\": {\n        \"clusterResourceAllocations\": [\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"defaultResourceAllocation\": {\n          \"cpuCores\": \"<number>\",\n          \"gpuConfig\": {\n            \"limit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memoryMiB\": \"<number>\"\n        }\n      }\n    },\n    {\n      \"image\": {\n        \"blackListedImages\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      \"isRegex\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"namespaceResourceAllocation\": {\n        \"clusterResourceAllocations\": [\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"defaultResourceAllocation\": {\n          \"cpuCores\": \"<number>\",\n          \"gpuConfig\": {\n            \"limit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memoryMiB\": \"<number>\"\n        }\n      }\n    }\n  ],\n  \"clusterRefs\": [\n    {\n      \"clusterName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    },\n    {\n      \"clusterName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    }\n  ],\n  \"quota\": {\n    \"resourceAllocation\": {\n      \"cpuCores\": \"<number>\",\n      \"gpuConfig\": {\n        \"limit\": \"<integer>\",\n        \"provider\": \"nvidia\"\n      },\n      \"memoryMiB\": \"<number>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5bf3061f-3bcd-408a-9f9d-88c4a539d4a5",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "resourceAllocations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusterNamespaces\": [\n    {\n      \"image\": {\n        \"blackListedImages\": [\n          \"<string>\"\n        ]\n      },\n      \"isRegex\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"namespaceResourceAllocation\": {\n        \"clusterResourceAllocations\": [\n          {\n            \"clusterUid\": \"<string>\",\n            \"resourceAllocation\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"defaultResourceAllocation\": {\n          \"cpuCores\": \"<number>\",\n          \"gpuConfig\": {\n            \"limit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"provider\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"memoryMiB\": \"<number>\"\n        }\n      }\n    }\n  ],\n  \"clusterRefs\": [\n    {\n      \"clusterName\": \"<string>\",\n      \"clusterUid\": \"<string>\"\n    }\n  ],\n  \"quota\": {\n    \"resourceAllocation\": {\n      \"cpuCores\": \"<number>\",\n      \"gpuConfig\": {\n        \"limit\": \"<integer>\",\n        \"provider\": \"nvidia\"\n      },\n      \"memoryMiB\": \"<number>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5d55794-539f-4cd6-a18f-4930e4955993",
+          "name": "Returns the  workspace restore result",
+          "request": {
+            "name": "Returns the  workspace restore result",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "restore"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "restoreRequestUid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ebc62626-815a-4266-b274-00cb32bf4ecf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "restore"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "restoreRequestUid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"workspaceUid\": \"string\"\n  },\n  \"status\": {\n    \"workspaceRestoreStatuses\": [\n      {\n        \"actor\": {\n          \"actorType\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"requestUid\": \"string\",\n        \"workspaceRestoreConfig\": {\n          \"backupName\": \"string\",\n          \"clusterRestoreRefs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"restoreState\": {\n            \"deleteState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"restoreTime\": \"<dateTime>\"\n        }\n      },\n      {\n        \"actor\": {\n          \"actorType\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"requestUid\": \"string\",\n        \"workspaceRestoreConfig\": {\n          \"backupName\": \"string\",\n          \"clusterRestoreRefs\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"restoreState\": {\n            \"deleteState\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"state\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"restoreTime\": \"<dateTime>\"\n        }\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6edfc52b-569e-41e0-920f-24cc4e983822",
+          "name": "Create On demand Workspace Restore",
+          "request": {
+            "name": "Create On demand Workspace Restore",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "workspaces",
+                ":uid",
+                "restore",
+                "onDemand"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"backupRequestUid\": \"<string>\",\n  \"restoreConfigs\": [\n    {\n      \"backupName\": \"<string>\",\n      \"sourceClusterUid\": \"<string>\",\n      \"includeClusterResourceMode\": \"<string>\",\n      \"includeClusterResources\": \"<boolean>\",\n      \"includeNamespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"preserveNodePorts\": \"<boolean>\",\n      \"restorePVs\": \"<boolean>\"\n    },\n    {\n      \"backupName\": \"<string>\",\n      \"sourceClusterUid\": \"<string>\",\n      \"includeClusterResourceMode\": \"<string>\",\n      \"includeClusterResources\": \"<boolean>\",\n      \"includeNamespaces\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"preserveNodePorts\": \"<boolean>\",\n      \"restorePVs\": \"<boolean>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2bd8b4c7-bc59-4930-91d7-286832735866",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "workspaces",
+                    ":uid",
+                    "restore",
+                    "onDemand"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"backupRequestUid\": \"<string>\",\n  \"restoreConfigs\": [\n    {\n      \"backupName\": \"<string>\",\n      \"sourceClusterUid\": \"<string>\",\n      \"includeClusterResourceMode\": \"<string>\",\n      \"includeClusterResources\": \"<boolean>\",\n      \"includeNamespaces\": [\n        \"<string>\"\n      ],\n      \"preserveNodePorts\": \"<boolean>\",\n      \"restorePVs\": \"<boolean>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6a45fa9a-1998-49c9-9470-8f0e5fedf4a9",
+    "name": "Local Management APIs activations workspaces API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

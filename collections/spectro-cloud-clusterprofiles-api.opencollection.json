@@ -1,0 +1,1091 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations clusterprofiles API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clusterprofiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "publish",
+                "value": "",
+                "type": "query",
+                "description": "If true then cluster profile will be created and published in a single transaction"
+              }
+            ]
+          },
+          "docs": "Creates a cluster profile"
+        },
+        {
+          "info": {
+            "name": "Deletes list of cluster profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/bulk",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Deletes list of cluster profiles"
+        },
+        {
+          "info": {
+            "name": "Imports a cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/import",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "publish",
+                "value": "",
+                "type": "query",
+                "description": "If true then cluster profile will be published post successful import"
+              }
+            ]
+          },
+          "docs": "Imports a cluster profile"
+        },
+        {
+          "info": {
+            "name": "Imports a cluster profile via file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/import/file",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "publish",
+                "value": "",
+                "type": "query",
+                "description": "If true then cluster profile will be published post successful import"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Cluster profile import file format [\"yaml\", \"json\"]"
+              }
+            ]
+          },
+          "docs": "Imports a cluster profile via file"
+        },
+        {
+          "info": {
+            "name": "Validates cluster profile import",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/import/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates cluster profile import"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of macros",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/macros",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of macros"
+        },
+        {
+          "info": {
+            "name": "Validates the cluster profile metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/validate/name",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Cluster profile name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Cluster profile version"
+              }
+            ]
+          },
+          "docs": "Validates the cluster profile name and version"
+        },
+        {
+          "info": {
+            "name": "Validates cluster profile packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/validate/packs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates cluster profile packs"
+        },
+        {
+          "info": {
+            "name": "Returns a specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated pack meta such as schema, presets"
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "query",
+                "description": "Filter cluster profiles by target resource type - 'spectrocluster' for profiles suitable to launch/update clusters, 'clustertemplate' for profiles suitable to create/edit cluster template"
+              },
+              {
+                "name": "includePackAnnotations",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes pack annotations like OCI registry provider type and OCI pack archive URL"
+              }
+            ]
+          },
+          "docs": "Returns a specified cluster profile"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated pack meta such as schema, presets"
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "query",
+                "description": "Filter cluster profiles by target resource type - 'spectrocluster' for profiles suitable to launch/update clusters, 'clustertemplate' for profiles suitable to create/edit cluster template"
+              },
+              {
+                "name": "includePackAnnotations",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes pack annotations like OCI registry provider type and OCI pack archive URL"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster profile"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated pack meta such as schema, presets"
+              },
+              {
+                "name": "resourceType",
+                "value": "",
+                "type": "query",
+                "description": "Filter cluster profiles by target resource type - 'spectrocluster' for profiles suitable to launch/update clusters, 'clustertemplate' for profiles suitable to create/edit cluster template"
+              },
+              {
+                "name": "includePackAnnotations",
+                "value": "",
+                "type": "query",
+                "description": "If true, includes pack annotations like OCI registry provider type and OCI pack archive URL"
+              }
+            ]
+          },
+          "docs": "Deletes the specified cluster profile"
+        },
+        {
+          "info": {
+            "name": "Creates a clone of the specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/clone",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Creates a clone of the specified cluster profile"
+        },
+        {
+          "info": {
+            "name": "Validates the cluster profile clone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/clone/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Validates the cloned cluster profile name, version and target project uid"
+        },
+        {
+          "info": {
+            "name": "Export the specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/export",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Cluster profile export file format [ \"yaml\", \"json\" ]"
+              }
+            ]
+          },
+          "docs": "Export the specified cluster profile"
+        },
+        {
+          "info": {
+            "name": "Downloads the specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/export/terraform",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Cluster profile export file format [ \"yaml\", \"json\" ]"
+              }
+            ]
+          },
+          "docs": "Downloads the specified cluster profile"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster profile metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster profile metadata"
+        },
+        {
+          "info": {
+            "name": "Updates cluster profile packs ref",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packRefs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "notify",
+                "value": "",
+                "type": "query",
+                "description": "Cluster profile notification uid"
+              }
+            ]
+          },
+          "docs": "Updates cluster profile packs ref"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster profile packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated pack meta such as schema, presets"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster profile packs"
+        },
+        {
+          "info": {
+            "name": "Adds a new pack to the specified cluster profile and returns the created pack uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated pack meta such as schema, presets"
+              }
+            ]
+          },
+          "docs": "Adds a new pack to the specified cluster profile and returns the created pack uid"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster profile pack manifests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated pack meta such as schema, presets"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster profile pack manifests"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster profile packs resolved values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/resolvedValues",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster profile packs resolved values"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster profile pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster profile pack"
+        },
+        {
+          "info": {
+            "name": "Updates the specified pack information in the cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              }
+            ]
+          },
+          "docs": "Updates the specified pack information in the cluster profile"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified pack information in the cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified pack information in the cluster profile"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster profile pack configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName/config",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              },
+              {
+                "name": "packUid",
+                "value": "",
+                "type": "query",
+                "description": "Cluster profile pack uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster profile pack configuration"
+        },
+        {
+          "info": {
+            "name": "Returns the associated manifests for the specified profile's pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              }
+            ]
+          },
+          "docs": "Returns the associated manifests for the specified profile's pack"
+        },
+        {
+          "info": {
+            "name": "Adds manifest to the profiles packs and returns the added manifests uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              }
+            ]
+          },
+          "docs": "Adds manifest to the profiles packs and returns the added manifests uid"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster profile pack manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack manifest uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster profile pack manifest"
+        },
+        {
+          "info": {
+            "name": "Updates the specified manifest of the profile's pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack manifest uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified manifest of the profile's pack"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified cluster profile pack manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/packs/:packName/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack name"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile pack manifest uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified cluster profile pack manifest"
+        },
+        {
+          "info": {
+            "name": "Publishes the specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/publish",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Publish the draft cluster profile with next revision, the current draft cluster profile will be marked to published\nand the draft cluster profile will be set to null in the cluster profile template.\n"
+        },
+        {
+          "info": {
+            "name": "Downloads the specified cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/spc/download",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Downloads the specified cluster profile"
+        },
+        {
+          "info": {
+            "name": "Validates specified cluster profile packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/validate/packs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Validates specified cluster profile packs"
+        },
+        {
+          "info": {
+            "name": "Retrieve a list of variables defined for the cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of variables defined for the cluster profile"
+        },
+        {
+          "info": {
+            "name": "Update the variables defined for a cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Update the variables defined for a cluster profile"
+        },
+        {
+          "info": {
+            "name": "Update specific variables defined for a cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Update specific variables defined for a cluster profile"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified cluster profile variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clusterprofiles/:uid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster profile uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified cluster profile variables"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

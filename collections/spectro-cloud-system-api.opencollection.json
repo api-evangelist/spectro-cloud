@@ -1,0 +1,1896 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations system API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "system",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validates activation key, updates plan, logs activation, updates cache",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/activate"
+          },
+          "docs": "Validates activation key, updates plan, logs activation, updates cache"
+        },
+        {
+          "info": {
+            "name": "Returns system activations doc, to be used in sysadmin console",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/activation"
+          },
+          "docs": "Returns system activations doc, to be used in sysadmin console"
+        },
+        {
+          "info": {
+            "name": "email reset for system admin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/admin/email"
+          },
+          "docs": "email reset for system admin"
+        },
+        {
+          "info": {
+            "name": "password reset for system admin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/admin/password/reset"
+          },
+          "docs": "password reset for system admin"
+        },
+        {
+          "info": {
+            "name": "Lists users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/admins"
+          },
+          "docs": "Lists all System Administrator's information"
+        },
+        {
+          "info": {
+            "name": "Create a System Administrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/admins"
+          },
+          "docs": "Create a System Administrator"
+        },
+        {
+          "info": {
+            "name": "Updates and Activates the specified System Administrator password using the password token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/admins/auth/password/:passwordToken/activate",
+            "params": [
+              {
+                "name": "passwordToken",
+                "value": "",
+                "type": "path",
+                "description": "Describes the expirable password token for the System Administrator to be used for authentication"
+              }
+            ]
+          },
+          "docs": "Updates and Activates System Administrator password with the help of password token"
+        },
+        {
+          "info": {
+            "name": "Returns the specified System Administrator information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/admins/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified System Administrator information"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified System Administrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/admins/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified System Administrator"
+        },
+        {
+          "info": {
+            "name": "System Administrator password change request through the verification of the current password",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/admins/:uid/changePassword",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "System Administrator password change request through the verification of the current password"
+        },
+        {
+          "info": {
+            "name": "Reset password link for a specified System Administrator",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/admins/:uid/passwordResetLink",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Reset password link for a specified System Administrator"
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/admins/:uid/profile",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update System Administrator Profile"
+        },
+        {
+          "info": {
+            "name": "get the alerts specified for the system",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/alerts"
+          },
+          "docs": "get the alerts specified for the system"
+        },
+        {
+          "info": {
+            "name": "Upsert the specified alert to the specified system",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/alerts/:component",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upsert the specified alert to the specified system"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified alert to the specified system",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/alerts/:component",
+            "params": [
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified alert to the specified system"
+        },
+        {
+          "info": {
+            "name": "Get system app features",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/appFeatures"
+          },
+          "docs": "Get system app features"
+        },
+        {
+          "info": {
+            "name": "Update system app features",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/appFeatures"
+          },
+          "docs": "Update system app features"
+        },
+        {
+          "info": {
+            "name": "Get system auth token settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/authTokenSettings"
+          },
+          "docs": "Get system auth token settings"
+        },
+        {
+          "info": {
+            "name": "Update system auth token settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/authTokenSettings"
+          },
+          "docs": "Update system auth token settings"
+        },
+        {
+          "info": {
+            "name": "Get system classification banner",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/classificationBanner"
+          },
+          "docs": "Get system classification banner"
+        },
+        {
+          "info": {
+            "name": "Update system classification banner",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/classificationBanner"
+          },
+          "docs": "Update system classification banner"
+        },
+        {
+          "info": {
+            "name": "get the system cloudstack image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/apache-cloudstack/image"
+          },
+          "docs": "get the system cloudstack image"
+        },
+        {
+          "info": {
+            "name": "updates the system default cloudstack devops image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/apache-cloudstack/image"
+          },
+          "docs": "updates the system default cloudstack devops image"
+        },
+        {
+          "info": {
+            "name": "get the system config auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/auth"
+          },
+          "docs": "get the system config auth"
+        },
+        {
+          "info": {
+            "name": "Updates the system config auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/auth"
+          },
+          "docs": "Updates the system config auth"
+        },
+        {
+          "info": {
+            "name": "get the system config aws devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/account"
+          },
+          "docs": "get the system config aws devops account"
+        },
+        {
+          "info": {
+            "name": "updates the system config aws devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/account"
+          },
+          "docs": "updates the system config aws devops account"
+        },
+        {
+          "info": {
+            "name": "Get AWS API endpoints configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/apiEndpoints"
+          },
+          "docs": "Retrieves all AWS partition endpoint configurations."
+        },
+        {
+          "info": {
+            "name": "Update AWS API endpoints configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/apiEndpoints"
+          },
+          "docs": "Creates or replaces all AWS partition endpoint configurations."
+        },
+        {
+          "info": {
+            "name": "get the system aws image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/image"
+          },
+          "docs": "get the system aws image"
+        },
+        {
+          "info": {
+            "name": "updates the system default aws devops image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/image"
+          },
+          "docs": "updates the system default aws devops image"
+        },
+        {
+          "info": {
+            "name": "get the system config aws marketplace account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/marketplace/account"
+          },
+          "docs": "get the system config aws marketplace account"
+        },
+        {
+          "info": {
+            "name": "updates the system config aws marketplace account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/marketplace/account"
+          },
+          "docs": "updates the system config aws marketplace account"
+        },
+        {
+          "info": {
+            "name": "get the system config aws sts devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/sts/account"
+          },
+          "docs": "get the system config aws sts devops account"
+        },
+        {
+          "info": {
+            "name": "updates the system config AWS sts devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/aws/sts/account"
+          },
+          "docs": "updates the system config AWS sts devops account"
+        },
+        {
+          "info": {
+            "name": "get the system config AWS gov sts devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/awsgov/sts/account"
+          },
+          "docs": "get the system config AWS gov sts devops account"
+        },
+        {
+          "info": {
+            "name": "Create the system config AWS gov sts devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/config/awsgov/sts/account"
+          },
+          "docs": "Create the system config AWS gov sts devops account"
+        },
+        {
+          "info": {
+            "name": "Updates the system config AWS gov sts devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/awsgov/sts/account"
+          },
+          "docs": "Updates the system config AWS gov sts devops account"
+        },
+        {
+          "info": {
+            "name": "get the system azure account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/azure/account"
+          },
+          "docs": "get the system azure account"
+        },
+        {
+          "info": {
+            "name": "updates the system default azure devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/azure/account"
+          },
+          "docs": "updates the system default azure devops account"
+        },
+        {
+          "info": {
+            "name": "get the system azure storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/azure/storage"
+          },
+          "docs": "get the system azure storage"
+        },
+        {
+          "info": {
+            "name": "updates the system default azure devops storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/azure/storage"
+          },
+          "docs": "updates the system default azure devops storage"
+        },
+        {
+          "info": {
+            "name": "get the system certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/certificate"
+          },
+          "docs": "Deprecated: Use GET /v1/system/config/domain/certificates"
+        },
+        {
+          "info": {
+            "name": "updates the system certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/certificate"
+          },
+          "docs": "Deprecated: Use PUT /v1/system/config/domain/certificates"
+        },
+        {
+          "info": {
+            "name": "get the system config cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/cluster"
+          },
+          "docs": "get the system config cluster"
+        },
+        {
+          "info": {
+            "name": "Updates the system config cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/cluster"
+          },
+          "docs": "Updates the system config cluster"
+        },
+        {
+          "info": {
+            "name": "V1SystemConfigDatabaseBackupGet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/database/backup/"
+          },
+          "docs": "Deprecated. Use the config specific apis."
+        },
+        {
+          "info": {
+            "name": "updates the system backup config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/database/backup/"
+          },
+          "docs": "Deprecated. Use the config specific apis."
+        },
+        {
+          "info": {
+            "name": "get the system backup interval config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/database/backup/ftp"
+          },
+          "docs": "get the system backup interval config"
+        },
+        {
+          "info": {
+            "name": "updates the system backup interval config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/database/backup/ftp"
+          },
+          "docs": "updates the system backup interval config"
+        },
+        {
+          "info": {
+            "name": "get the system backup s3 config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/database/backup/s3"
+          },
+          "docs": "get the system backup s3 config"
+        },
+        {
+          "info": {
+            "name": "updates the system backup ftp storage config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/database/backup/s3"
+          },
+          "docs": "updates the system backup ftp storage config"
+        },
+        {
+          "info": {
+            "name": "get the system domain config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/domain"
+          },
+          "docs": "Deprecated: Use GET /v1/system/config/domain/certificates"
+        },
+        {
+          "info": {
+            "name": "update domain host url",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/config/domain"
+          },
+          "docs": "Deprecated: Use PUT /v1/system/config/domain/certificates"
+        },
+        {
+          "info": {
+            "name": "get the system domain config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/domain/certificates"
+          },
+          "docs": "get the system domain config"
+        },
+        {
+          "info": {
+            "name": "update domain host url and its certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/domain/certificates"
+          },
+          "docs": "update domain host url and its certificates"
+        },
+        {
+          "info": {
+            "name": "get the system edge image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/edge/image"
+          },
+          "docs": "get the system edge image"
+        },
+        {
+          "info": {
+            "name": "updates the system default edge devops image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/edge/image"
+          },
+          "docs": "updates the system default edge devops image"
+        },
+        {
+          "info": {
+            "name": "get the system edge-native image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/edgeNative/image"
+          },
+          "docs": "get the system edge-native image"
+        },
+        {
+          "info": {
+            "name": "updates the system default edge-native devops image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/edgeNative/image"
+          },
+          "docs": "updates the system default edge-native devops image"
+        },
+        {
+          "info": {
+            "name": "validates the ftp config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/config/ftp/validate",
+            "params": [
+              {
+                "name": "permission",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "validates the ftp config"
+        },
+        {
+          "info": {
+            "name": "get the system gcp account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/gcp/account"
+          },
+          "docs": "get the system gcp account"
+        },
+        {
+          "info": {
+            "name": "updates the system default gcp devops account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/gcp/account"
+          },
+          "docs": "updates the system default gcp devops account"
+        },
+        {
+          "info": {
+            "name": "get the system gcp image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/gcp/image"
+          },
+          "docs": "get the system gcp image"
+        },
+        {
+          "info": {
+            "name": "updates the system default gcp devops image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/gcp/image"
+          },
+          "docs": "updates the system default gcp devops image"
+        },
+        {
+          "info": {
+            "name": "get the system DHI image pull secret config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/imagePullSecret"
+          },
+          "docs": "get the system DHI image pull secret config"
+        },
+        {
+          "info": {
+            "name": "create or update the system DHI image pull secret config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/imagePullSecret"
+          },
+          "docs": "create or update the system DHI image pull secret config"
+        },
+        {
+          "info": {
+            "name": "Updates the specified property for the key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/keyValueStore"
+          },
+          "docs": "Updates the specified property for the key"
+        },
+        {
+          "info": {
+            "name": "Gets the specified property for the key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/keyValueStore/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the specified property for the key"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified property for the key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/config/keyValueStore/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified property for the key"
+        },
+        {
+          "info": {
+            "name": "get the system web kubectl config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/kubectl"
+          },
+          "docs": "get the system web kubectl config"
+        },
+        {
+          "info": {
+            "name": "updates the system web kubectl config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/kubectl"
+          },
+          "docs": "updates the system web kubectl config"
+        },
+        {
+          "info": {
+            "name": "get the system logger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/logger"
+          },
+          "docs": "get the system logger"
+        },
+        {
+          "info": {
+            "name": "updates the system logger",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/logger"
+          },
+          "docs": "updates the system logger"
+        },
+        {
+          "info": {
+            "name": "get the system maas image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/maas/image"
+          },
+          "docs": "get the system maas image"
+        },
+        {
+          "info": {
+            "name": "updates the system default maas devops image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/maas/image"
+          },
+          "docs": "updates the system default maas devops image"
+        },
+        {
+          "info": {
+            "name": "updates the payment secrets",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/paymentsecrets"
+          },
+          "docs": "updates the payment secrets"
+        },
+        {
+          "info": {
+            "name": "get the billing preference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/preferences/billing"
+          },
+          "docs": "get the billing preference"
+        },
+        {
+          "info": {
+            "name": "updates the billing preference",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/preferences/billing"
+          },
+          "docs": "updates the billing preference"
+        },
+        {
+          "info": {
+            "name": "get the cluster preference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/preferences/cluster"
+          },
+          "docs": "get the cluster preference"
+        },
+        {
+          "info": {
+            "name": "updates the cluster preference",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/preferences/cluster"
+          },
+          "docs": "updates the cluster preference"
+        },
+        {
+          "info": {
+            "name": "get the system proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/proxy"
+          },
+          "docs": "get the system proxy"
+        },
+        {
+          "info": {
+            "name": "updates the system proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/proxy"
+          },
+          "docs": "updates the system proxy"
+        },
+        {
+          "info": {
+            "name": "get the system config oci image registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/registries/oci/image"
+          },
+          "docs": "get the system config oci image registry"
+        },
+        {
+          "info": {
+            "name": "updates the system config oci image registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/registries/oci/image"
+          },
+          "docs": "updates the system config oci image registry"
+        },
+        {
+          "info": {
+            "name": "Gets the specified Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/registries/:registryName",
+            "params": [
+              {
+                "name": "registryName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets the specified Registry"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/registries/:registryName",
+            "params": [
+              {
+                "name": "registryName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified Registry"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Registry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/config/registries/:registryName",
+            "params": [
+              {
+                "name": "registryName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Registry"
+        },
+        {
+          "info": {
+            "name": "get the system config reverse proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/reverseproxy"
+          },
+          "docs": "get the system config reverse proxy"
+        },
+        {
+          "info": {
+            "name": "updates the system config reverse proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/reverseproxy"
+          },
+          "docs": "updates the system config reverse proxy"
+        },
+        {
+          "info": {
+            "name": "validates the s3 config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/config/s3/validate",
+            "params": [
+              {
+                "name": "permission",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "validates the s3 config"
+        },
+        {
+          "info": {
+            "name": "get the system Spectro repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/scar"
+          },
+          "docs": "get the system Spectro repository"
+        },
+        {
+          "info": {
+            "name": "updates the system Spectro repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/scar"
+          },
+          "docs": "updates the system Spectro repository"
+        },
+        {
+          "info": {
+            "name": "validate existing scar config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/scar/validate"
+          },
+          "docs": "validate existing scar config"
+        },
+        {
+          "info": {
+            "name": "get the system smtp",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/smtp"
+          },
+          "docs": "get the system smtp"
+        },
+        {
+          "info": {
+            "name": "updates the system smtp",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/smtp"
+          },
+          "docs": "updates the system smtp"
+        },
+        {
+          "info": {
+            "name": "validates the system smtp",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/smtp/validate"
+          },
+          "docs": "validates the system smtp"
+        },
+        {
+          "info": {
+            "name": "get the system sso",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/sso"
+          },
+          "docs": "get the system sso"
+        },
+        {
+          "info": {
+            "name": "updates the system sso",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/sso"
+          },
+          "docs": "updates the system sso"
+        },
+        {
+          "info": {
+            "name": "validates the system sso for github",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/sso/github/validate"
+          },
+          "docs": "validates the system sso for github"
+        },
+        {
+          "info": {
+            "name": "validates the system sso for oidc based logins",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/sso/oidc/validate"
+          },
+          "docs": "validates the system sso for oidc based logins"
+        },
+        {
+          "info": {
+            "name": "get the system storage s3 config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/storage/s3"
+          },
+          "docs": "get the system storage s3 config"
+        },
+        {
+          "info": {
+            "name": "updates the system storage config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/storage/s3"
+          },
+          "docs": "updates the system storage config"
+        },
+        {
+          "info": {
+            "name": "get the system timeseries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/timeseries"
+          },
+          "docs": "get the system timeseries"
+        },
+        {
+          "info": {
+            "name": "updates the system timeseries",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/timeseries"
+          },
+          "docs": "updates the system timeseries"
+        },
+        {
+          "info": {
+            "name": "get the system vsphere image",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/config/vsphere/image"
+          },
+          "docs": "get the system vsphere image"
+        },
+        {
+          "info": {
+            "name": "updates the system default vsphere devops image",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/config/vsphere/image"
+          },
+          "docs": "updates the system default vsphere devops image"
+        },
+        {
+          "info": {
+            "name": "backup the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/database/backup",
+            "params": [
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "backup the database"
+        },
+        {
+          "info": {
+            "name": "get the database status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/database/backups",
+            "params": [
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "get the database status"
+        },
+        {
+          "info": {
+            "name": "delete the database backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/database/backups/:backupUid",
+            "params": [
+              {
+                "name": "backupUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "delete the database backup"
+        },
+        {
+          "info": {
+            "name": "recover the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/database/recovery/:backupUid/:mode",
+            "params": [
+              {
+                "name": "backupUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "recover the database"
+        },
+        {
+          "info": {
+            "name": "restore the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/database/restore/:backupUid",
+            "params": [
+              {
+                "name": "backupUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "mode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "restore the database"
+        },
+        {
+          "info": {
+            "name": "encrypt the system data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/encrypt"
+          },
+          "docs": "encrypt the system data"
+        },
+        {
+          "info": {
+            "name": "Lists all feature flags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/features"
+          },
+          "docs": "Lists all feature flags"
+        },
+        {
+          "info": {
+            "name": "Updates the feature permission",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/features/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the feature permission"
+        },
+        {
+          "info": {
+            "name": "Get system login banner settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/loginBanner"
+          },
+          "docs": "Get system login banner settings"
+        },
+        {
+          "info": {
+            "name": "Update system login banner settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/loginBanner"
+          },
+          "docs": "Update system login banner settings"
+        },
+        {
+          "info": {
+            "name": "get the system password policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/password/policy/default"
+          },
+          "docs": "get the system password policy"
+        },
+        {
+          "info": {
+            "name": "updates the system admin",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/password/policy/default"
+          },
+          "docs": "updates the system admin"
+        },
+        {
+          "info": {
+            "name": "List of block listed passwords",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/passwords/blocklist"
+          },
+          "docs": "List of block listed passwords"
+        },
+        {
+          "info": {
+            "name": "Delete a list of block listed passwords",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/passwords/blocklist"
+          },
+          "docs": "Delete a list of block listed passwords"
+        },
+        {
+          "info": {
+            "name": "get the system plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/plan"
+          },
+          "docs": "get the system plan"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Plan's credit data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/plan/credits/:creditUid",
+            "params": [
+              {
+                "name": "creditUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified Plan's credit data"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Plan's credit data",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/plan/credits/:creditUid",
+            "params": [
+              {
+                "name": "creditUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Plan's credit data"
+        },
+        {
+          "info": {
+            "name": "Add system free credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/plan/freeCredit"
+          },
+          "docs": "Add system free credit"
+        },
+        {
+          "info": {
+            "name": "Updates the specified system plan's limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/plan/planLimit"
+          },
+          "docs": "Updates the specified system plan's limit"
+        },
+        {
+          "info": {
+            "name": "Adds system sla breach credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/plan/slaCredit"
+          },
+          "docs": "Adds system sla breach credit"
+        },
+        {
+          "info": {
+            "name": "updates the system start date",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/plan/startDate"
+          },
+          "docs": "updates the system start date"
+        },
+        {
+          "info": {
+            "name": "get the system plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/ratelimit"
+          },
+          "docs": "get the system plan"
+        },
+        {
+          "info": {
+            "name": "toggles the rate limit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/ratelimit"
+          },
+          "docs": "toggles the rate limit"
+        },
+        {
+          "info": {
+            "name": "Get system resource limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/resourceLimits"
+          },
+          "docs": "Get system resource limits"
+        },
+        {
+          "info": {
+            "name": "Update system resource limits",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/resourceLimits"
+          },
+          "docs": "Update system resource limits"
+        },
+        {
+          "info": {
+            "name": "Get the system security mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/security/mode"
+          },
+          "docs": "Get the system security mode"
+        },
+        {
+          "info": {
+            "name": "Updates the system security mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/security/mode"
+          },
+          "docs": "Updates the system security mode"
+        },
+        {
+          "info": {
+            "name": "Returns system plan document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/sysplan"
+          },
+          "docs": "Returns system plan document"
+        },
+        {
+          "info": {
+            "name": "Stores the theme json fields like logo, name at system level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/themes"
+          },
+          "docs": "Stores the theme json fields like logo, name at system level."
+        },
+        {
+          "info": {
+            "name": "Returns the active theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/themes/active"
+          },
+          "docs": "Returns the active theme"
+        },
+        {
+          "info": {
+            "name": "Returns the metadata of all the themes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/themes/metadata"
+          },
+          "docs": "Returns the metadata of all the themes"
+        },
+        {
+          "info": {
+            "name": "Get the theme json fields like logo, name at system level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/themes/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the theme json fields like logo, name at system level."
+        },
+        {
+          "info": {
+            "name": "Updates the theme json fields like logo, name at system level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/system/themes/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the theme json fields like logo, name at system level."
+        },
+        {
+          "info": {
+            "name": "Deletes the theme json fields like logo, name at system level.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/system/themes/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the theme json fields like logo, name at system level."
+        },
+        {
+          "info": {
+            "name": "Activates a theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/themes/:uid/activate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Activates a theme"
+        },
+        {
+          "info": {
+            "name": "Deactivates a theme",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/themes/:uid/deactivate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deactivates a theme"
+        },
+        {
+          "info": {
+            "name": "Re-send the email to the user to be able to verify the email",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/users/email/verify/resend"
+          },
+          "docs": "Re-send the email to the user to be able to verify the email"
+        },
+        {
+          "info": {
+            "name": "Verifies the system user email using the email token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/users/email/:emailToken/verify",
+            "params": [
+              {
+                "name": "emailToken",
+                "value": "",
+                "type": "path",
+                "description": "Describes the expiry email token for the system user to be used for verification of email"
+              }
+            ]
+          },
+          "docs": "Verifies the system user email with the help of email token"
+        },
+        {
+          "info": {
+            "name": "Verifies the system user email using the email token",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/users/me"
+          },
+          "docs": "Verifies the system user email with the help of email token"
+        },
+        {
+          "info": {
+            "name": "Creates request to reset system password via email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/system/users/password/reset"
+          },
+          "docs": "Creates request to reset system password via email. Password reset email will be sent to the user. Sends 204 No Content."
+        },
+        {
+          "info": {
+            "name": "Resets the system user password using the password token",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/system/users/password/:passwordToken/reset",
+            "params": [
+              {
+                "name": "passwordToken",
+                "value": "",
+                "type": "path",
+                "description": "Describes the expirable password token for the system user to be used for authentication of user"
+              }
+            ]
+          },
+          "docs": "Updates the new system user password with the help of password token"
+        },
+        {
+          "info": {
+            "name": "get the system installed version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/version/installed"
+          },
+          "docs": "get the system installed version"
+        },
+        {
+          "info": {
+            "name": "get the system latest available version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/system/version/latest"
+          },
+          "docs": "get the system latest available version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

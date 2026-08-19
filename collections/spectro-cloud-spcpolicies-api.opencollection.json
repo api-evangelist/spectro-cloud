@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations spcPolicies API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "spcPolicies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new maintenance policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/spcPolicies/maintenance",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new maintenance policy"
+        },
+        {
+          "info": {
+            "name": "Returns the specified maintenance policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spcPolicies/maintenance/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Policy uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified maintenance policy"
+        },
+        {
+          "info": {
+            "name": "Updates the specified maintenance policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/spcPolicies/maintenance/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Policy uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified maintenance policy"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of spc policy tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spcPolicies/tags",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of spc policy tags"
+        },
+        {
+          "info": {
+            "name": "Validates the spc policy name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/spcPolicies/:policyType/validate/name",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "policyType",
+                "value": "",
+                "type": "path",
+                "description": "Spc policy type"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Spc policy name"
+              }
+            ]
+          },
+          "docs": "Validates the spc policy name"
+        },
+        {
+          "info": {
+            "name": "Delete a policy by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/spcPolicies/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a policy by uid"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

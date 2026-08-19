@@ -1,0 +1,571 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations appProfiles API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "appProfiles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/appProfiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a application profile"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of application profile macros",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/macros",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of application profile macros"
+        },
+        {
+          "info": {
+            "name": "Returns the specified application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified application profile"
+        },
+        {
+          "info": {
+            "name": "Updates the specified application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified application profile"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified application profile"
+        },
+        {
+          "info": {
+            "name": "Clones the specified application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/clone",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              }
+            ]
+          },
+          "docs": "Clones the specified application profile"
+        },
+        {
+          "info": {
+            "name": "Validates the specified application profile clone",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/clone/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              }
+            ]
+          },
+          "docs": "Validates the specified application profile clone"
+        },
+        {
+          "info": {
+            "name": "Updates the specified application profile metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified application profile metadata"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of tiers of the specified application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of tiers of the specified application profile"
+        },
+        {
+          "info": {
+            "name": "Adds tier to the specified application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              }
+            ]
+          },
+          "docs": "Adds tier to the specified application profile"
+        },
+        {
+          "info": {
+            "name": "Updates app tier of the specified application profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              }
+            ]
+          },
+          "docs": "Updates app tier of the specified application profile"
+        },
+        {
+          "info": {
+            "name": "Returns the specified application profile tier information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified application profile tier information"
+        },
+        {
+          "info": {
+            "name": "Updates the specified application profile tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified application profile tier"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified application profile tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified application profile tier"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of manifests of the specified application profile tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of manifests of the specified application profile tier"
+        },
+        {
+          "info": {
+            "name": "Adds manifest to the specified application profile tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              }
+            ]
+          },
+          "docs": "Adds manifest to the specified application profile tier"
+        },
+        {
+          "info": {
+            "name": "Returns the specified application profile tier manifest information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier manifest uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified application profile tier manifest information"
+        },
+        {
+          "info": {
+            "name": "Updates the specified application profile tier manifest information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier manifest uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified application profile tier manifest information"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified application profile tier manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier manifest uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified application profile tier manifest"
+        },
+        {
+          "info": {
+            "name": "Returns the specified application profile tier resolved values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appProfiles/:uid/tiers/:tierUid/resolvedValues",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application profile tier uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified application profile tier resolved values"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

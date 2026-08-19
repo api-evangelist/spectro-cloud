@@ -1,0 +1,177 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations audits API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "audits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the list of audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/audits",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "userUid",
+                "value": "",
+                "type": "query",
+                "description": "Specify the user uid, to retrieve the specific user audit logs"
+              },
+              {
+                "name": "projectUid",
+                "value": "",
+                "type": "query",
+                "description": "Specify the project uid, to retrieve the specific project audit logs"
+              },
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "query",
+                "description": "Specify the tenant uid, to retrieve the specific tenant audit logs"
+              },
+              {
+                "name": "resourceKind",
+                "value": "",
+                "type": "query",
+                "description": "Specify the resource name, to retrieve the specific resource audit logs"
+              },
+              {
+                "name": "resourceUid",
+                "value": "",
+                "type": "query",
+                "description": "Specify the resource uid, to retrieve the specific resource audit logs"
+              },
+              {
+                "name": "actionType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of audit logs"
+        },
+        {
+          "info": {
+            "name": "Returns the specified audit log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/audits/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the audit uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified audit log"
+        },
+        {
+          "info": {
+            "name": "Returns the specified system audit message",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/audits/:uid/sysMsg",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the audit uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified system audit message"
+        },
+        {
+          "info": {
+            "name": "Updates the specified user message for the specified audit",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/audits/:uid/userMsg",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the audit uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified user message for the specified audit"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

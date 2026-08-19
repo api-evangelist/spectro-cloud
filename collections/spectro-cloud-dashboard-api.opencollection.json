@@ -1,0 +1,1661 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations dashboard API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "dashboard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of application deployments filter summary Supported filter fields - [\"appDeploymentName\", \"clusterUid\", \"tags\"] Supported sort fields - [\"appDeploymentName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/appDeployments",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of application deployments filter summary Supported filter fields - [\"appDeploymentName\", \"clusterUid\", \"tags\"] Supported sort fields - [\"appDeploymentName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of application profiles filter summary Supported filter fields - [\"profileName\", \"tags\"] Supported sort fields - [\"profileName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/appProfiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of application profiles filter summary Supported filter fields - [\"profileName\", \"tags\"] Supported sort fields - [\"profileName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of application profile metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/appProfiles/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of application profile metadata"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of edgehosts summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/appliances/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of edgehosts summary"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cloud accounts metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/cloudaccounts/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "environment",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cloud accounts metadata"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster templates filter summary Supported filter fields - [\"clusterTemplateName\", \"tags\", \"cloudType\",\"projectUid\", \"policyUid\"] Supported sort fields - [\"clusterTemplateName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clusterTemplates",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster templates filter summary Supported filter fields - [\"clusterTemplateName\", \"tags\", \"cloudType\",\"projectUid\", \"policyUid\"] Supported sort fields - [\"clusterTemplateName\", \"creationTimestamp\", \"lastModifiedTimestamp\"]"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of all cluster template metadata.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clusterTemplates/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all cluster template metadata."
+        },
+        {
+          "info": {
+            "name": "Retrieves spectroclusters meta information for clusters launched using the specified cluster template.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clusterTemplates/:uid/spectroclusters/meta",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "The UID of the cluster template"
+              }
+            ]
+          },
+          "docs": "Retrieves spectroclusters meta information for clusters launched using the specified cluster template."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster summary for a given cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clustergroups/:uid/hostClusters",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster summary for a given cluster group"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster summary for a given cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clustergroups/:uid/virtualClusters",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster summary for a given cluster group"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster profiles filter summary Supported filter fields - ['profileName', 'tags', 'profileType', 'environment', 'resourceType'] Supported sort fields - ['profileName', 'environment', 'profileType', 'creationTimestamp', 'lastModifiedTimestamp']",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clusterprofiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster profiles filter summary Supported filter fields - ['profileName', 'tags', 'profileType', 'environment', 'resourceType'] Supported sort fields - ['profileName', 'environment', 'profileType', 'creationTimestamp', 'lastModifiedTimestamp']"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster profiles metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clusterprofiles/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster profiles metadata"
+        },
+        {
+          "info": {
+            "name": "Retrieves a specified cluster profile summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/clusterprofiles/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a specified cluster profile summary"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Edgehosts summary with provided search filter. Supported fields as per schema /v1/dashboard/edgehosts/search/schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/edgehosts/search",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Edgehosts summary with provided search filter. Supported fields as per schema /v1/dashboard/edgehosts/search/schema"
+        },
+        {
+          "info": {
+            "name": "Retrieves a schema for the Edgehost search filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/edgehosts/search/schema",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a schema for the Edgehost search filter"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of PCG summary with provided search filter. Supported fields as per schema /v1/dashboard/pcgs/search/schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/pcgs/search",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of PCG summary with provided search filter. Supported fields as per schema /v1/dashboard/pcgs/search/schema"
+        },
+        {
+          "info": {
+            "name": "Retrieves a schema for the PCG search filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/pcgs/search/schema",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a schema for the PCG search filter"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of project summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/projects",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              },
+              {
+                "name": "metricPeriod",
+                "value": "",
+                "type": "query",
+                "description": "Metric period in minutes defines latest metrics by period"
+              }
+            ]
+          },
+          "docs": "Deprecated: Use POST /v1/dashboard/projects"
+        },
+        {
+          "info": {
+            "name": "v1ProjectsFilterSummary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/projects",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of projects metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/projects/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the project"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of projects metadata"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of spc policies filter summary Supported filter fields - [\"policyName\", \"tags\", \"policyType\"] Supported sort fields - [\"policyName\", \"policyType\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spcPolicies",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of spc policies filter summary Supported filter fields - [\"policyName\", \"tags\", \"policyType\"] Supported sort fields - [\"policyName\", \"policyType\", \"creationTimestamp\", \"lastModifiedTimestamp\"]"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of all spc policies metadata.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spcPolicies/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all spc policies metadata."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster summary with provided filter spec Supported filter fields - [\"cpuUsage\", \"memoryUsage\", \"clusterName\", \"tags\", \"healthState\", \"clusterStates\", \"isDeleted\", \"environments\", \"metricPeriod\"] Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Deprecated: Use POST /v1/dashboard/spectroclusters/search"
+        },
+        {
+          "info": {
+            "name": "Retrieves spectro clusters cloud cost summary information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/cost",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves spectro clusters cloud cost summary information"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of running, non rbac configured clusters in a workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/filters/workspace",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of running, non rbac configured clusters in a workspace"
+        },
+        {
+          "info": {
+            "name": "Get all clusters metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/meta",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns metadata information for all clusters"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster summary metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "quickFilter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster summary metadata"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster summary"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster metadata with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"clusterState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/metadata/search",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster metadata with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"clusterState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]"
+        },
+        {
+          "info": {
+            "name": "Retrieves a schema for the cluster metadata search filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/metadata/search/schema",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a schema for the cluster metadata search filter"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of clusters with the desired repave state",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/repaveStatus",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              },
+              {
+                "name": "repaveState",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of clusters with the desired repave state"
+        },
+        {
+          "info": {
+            "name": "Retrieves spectro clusters resource consumption",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/resources/consumption",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves spectro clusters resource consumption"
+        },
+        {
+          "info": {
+            "name": "Retrieves spectro clusters resources cost summary information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/resources/cost",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves spectro clusters resources cost summary information"
+        },
+        {
+          "info": {
+            "name": "Retrieves spectro clusters resources usage summary information",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/resources/usage",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves spectro clusters resources usage summary information"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster summary with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/search",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster summary with provided search filter spec Supported sort fields - [\"environment\", \"clusterName\", \"memoryUsage\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]"
+        },
+        {
+          "info": {
+            "name": "Export and download the list of cluster summary with matching search filter and download as a file(csv)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/search/export",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "encodedFilter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export and download the list of cluster summary with matching search filter and download as a file(csv)"
+        },
+        {
+          "info": {
+            "name": "Export the list of cluster summary with matching search filter and download as a file(csv) Supported sort fields - [\"environment\", \"clusterName\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/search/export",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "format",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Export the list of cluster summary with matching search filter and download as a file(csv) Supported sort fields - [\"environment\", \"clusterName\", \"healthState\", \"creationTimestamp\", \"lastModifiedTimestamp\"]"
+        },
+        {
+          "info": {
+            "name": "Retrieves a supported input values for the cluster search filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/search/input",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a supported input values for the cluster search filter"
+        },
+        {
+          "info": {
+            "name": "Retrieves a schema for the cluster search filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/search/schema",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a schema for the cluster search filter"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Virtual machine enabled clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/vms",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Virtual machine enabled clusters"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster summary"
+        },
+        {
+          "info": {
+            "name": "Retrieves the specified cluster cost summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/cost",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "period in minutes, group the data point by the specified period"
+              }
+            ]
+          },
+          "docs": "Retrieves the specified cluster cost summary"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster summary overview",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/overview",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster summary overview"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified spectro cluster resource consumption",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/resources/consumption",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified spectro cluster resource consumption"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workloads",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workloads"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload clusterrolebindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/clusterrolebinding",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload clusterrolebindings"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload cronjobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/cronjob",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload cronjobs"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload daemonsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/daemonset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload daemonsets"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/deployment",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload deployments"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/job",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload jobs"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/namespace",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload namespaces"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload pods",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/pod",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload pods"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload rolebindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/rolebinding",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload rolebindings"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified cluster workload statefulsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/spectroclusters/:uid/workloads/statefulset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified cluster workload statefulsets"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of workspace"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload clusterrolebindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/clusterrolebinding",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload clusterrolebindings"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload cronjobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/cronjob",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload cronjobs"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload daemonsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/daemonset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload daemonsets"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload deployments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/deployment",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload deployments"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload jobs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/job",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload jobs"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/namespace",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload namespaces"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload pods",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/pod",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload pods"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload rolebindings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/rolebinding",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload rolebindings"
+        },
+        {
+          "info": {
+            "name": "Retrieves specified workspace clusters workload statefulsets",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/dashboard/workspaces/:uid/spectroclusters/workloads/statefulset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves specified workspace clusters workload statefulsets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

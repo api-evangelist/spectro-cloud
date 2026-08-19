@@ -1,0 +1,535 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations workspaces API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/workspaces",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create workspace"
+        },
+        {
+          "info": {
+            "name": "Returns the specified team's workspaces and roles data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/workspaces/teams/:teamUid/roles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified team's workspaces and roles data"
+        },
+        {
+          "info": {
+            "name": "Updates the workspace roles for the specified team",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/workspaces/teams/:teamUid/roles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the workspace roles for the specified team"
+        },
+        {
+          "info": {
+            "name": "Returns the specified User workspaces and Roles information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/workspaces/users/:userUid/roles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a User with workspaces and roles"
+        },
+        {
+          "info": {
+            "name": "Updates the workspace roles for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/workspaces/users/:userUid/roles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "userUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User is updated with workspace roles"
+        },
+        {
+          "info": {
+            "name": "Validates the workspace name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/workspaces/validate/name",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Validates the workspace name"
+        },
+        {
+          "info": {
+            "name": "Returns the specified workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified workspace"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified workspace"
+        },
+        {
+          "info": {
+            "name": "Returns the  workspace backup result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "backupRequestUid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the  workspace backup result"
+        },
+        {
+          "info": {
+            "name": "Create workspace backup settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create workspace backup settings"
+        },
+        {
+          "info": {
+            "name": "Update workspace backup settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update workspace backup settings"
+        },
+        {
+          "info": {
+            "name": "Delete workspace backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/backup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete workspace backup"
+        },
+        {
+          "info": {
+            "name": "Create On demand Workspace Backup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/backup/onDemand",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create On demand Workspace Backup"
+        },
+        {
+          "info": {
+            "name": "Updates the specified workspace namespaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/clusterNamespaces",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified workspace namespaces"
+        },
+        {
+          "info": {
+            "name": "Create cluster rbac in workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/clusterRbacs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create cluster rbac in workspace"
+        },
+        {
+          "info": {
+            "name": "Updates the specified workspace cluster rbac",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/clusterRbacs/:clusterRbacUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clusterRbacUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified workspace cluster rbac"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified workspace cluster rbac",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/clusterRbacs/:clusterRbacUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "clusterRbacUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified workspace cluster rbac"
+        },
+        {
+          "info": {
+            "name": "Updates the specified workspace meta",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/meta",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified workspace meta"
+        },
+        {
+          "info": {
+            "name": "Updates the specified workspace resource allocations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/resourceAllocations",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deprecated"
+        },
+        {
+          "info": {
+            "name": "Returns the  workspace restore result",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/restore",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "restoreRequestUid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the  workspace restore result"
+        },
+        {
+          "info": {
+            "name": "Create On demand Workspace Restore",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/workspaces/:uid/restore/onDemand",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create On demand Workspace Restore"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

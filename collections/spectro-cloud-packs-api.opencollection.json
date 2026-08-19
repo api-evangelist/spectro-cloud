@@ -1,0 +1,234 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations packs API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "packs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/packs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of packs"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of packs based on filter",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/packs/search",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of packs based on filter"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of packs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/packs/:packName/registries/:registryUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "registryUid",
+                "value": "",
+                "type": "path",
+                "description": "Pack registry uid"
+              },
+              {
+                "name": "packName",
+                "value": "",
+                "type": "path",
+                "description": "Pack name"
+              },
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "query",
+                "description": "Pack cloud type"
+              },
+              {
+                "name": "layer",
+                "value": "",
+                "type": "query",
+                "description": "Pack layer"
+              },
+              {
+                "name": "states",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated pack states. Example values are \"deprecated\" \"deprecated,disabled\". If states is not specified or empty then by default API will return all packs except \"disabled\" packs"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of packs"
+        },
+        {
+          "info": {
+            "name": "Returns the logo for a specified pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/packs/:packUid/logo",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "packUid",
+                "value": "",
+                "type": "path",
+                "description": "Pack uid"
+              }
+            ]
+          },
+          "docs": "Returns the logo for a specified pack"
+        },
+        {
+          "info": {
+            "name": "Returns the specified pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/packs/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Pack uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified pack"
+        },
+        {
+          "info": {
+            "name": "Returns the readme of a specified pack",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/packs/:uid/readme",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Pack uid"
+              }
+            ]
+          },
+          "docs": "Returns the readme of a specified pack"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

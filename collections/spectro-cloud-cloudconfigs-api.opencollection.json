@@ -1,0 +1,4833 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations cloudconfigs API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cloudconfigs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the specified AKS cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified AKS cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates an AKS cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an AKS cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified AKS cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified AKS cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AKS machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AKS machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified AKS machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified AKS machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Azure machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aks/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Azure machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified CloudStack cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified CloudStack cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates a CloudStack cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates a CloudStack cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified CloudStack cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified CloudStack cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of CloudStack machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of CloudStack machines"
+        },
+        {
+          "info": {
+            "name": "Adds the CloudStack machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the CloudStack machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified CloudStack machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified CloudStack machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified CloudStack machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/apache-cloudstack/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified CloudStack machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified AWS cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified AWS cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Updates the hybrid configuration information of AWS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/clusterConfig/hybridConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "AWS Cluster's Hybrid Configuration"
+              }
+            ]
+          },
+          "docs": "Updates the hybrid configuration information of AWS cluster"
+        },
+        {
+          "info": {
+            "name": "Creates an Hybrid AWS cloud config's Edge-Native machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/edge-native/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Hybrid AWS cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an Hybrid AWS cloud config's Edge-Native machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified AWS Cluster's Edge-Native machine pool configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/edge-native/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "AWS Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Edge-native machine pool name"
+              }
+            ]
+          },
+          "docs": "Returns the specified AWS Cluster's Edge-Native machine pool configuration"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Hybrid AWS cluster cloud config's Edge-Native machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/edge-native/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "AWS Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Edge-native machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified Hybrid AWS cluster cloud config's Edge-Native machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Edge-Native machine pool of hybrid AWS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/edge-native/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "AWS Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Edge-native machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Edge-Native machine pool of hybrid AWS cluster"
+        },
+        {
+          "info": {
+            "name": "Creates an AWS cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an AWS cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified AWS cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified AWS cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified AWS machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified AWS machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified AWS machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/aws/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified AWS machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Azure cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Azure cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates an Azure cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an Azure cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Azure cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified Azure cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Returns all the Azure machines restricted to the user role and filters."
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Azure machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns a Azure machine for the specified uid."
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Azure machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/azure/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Azure machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Custom cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Custom cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates an Custom cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an Custom cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Custom cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified Custom cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Custom machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Custom machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Custom machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Custom machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Custom machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/cloudTypes/:cloudType/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud type"
+              },
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Custom machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified edge-native cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified edge-native cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates a edge-native cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates a edge-native cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified edge-native cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified edge-native cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of edge-native machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of edge-native machines"
+        },
+        {
+          "info": {
+            "name": "Adds the edge-native machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the edge-native machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified edge-native machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified edge-native machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified edge-native machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/edge-native/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified edge-native machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified EKS cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified EKS cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Updates EKS cloud config's fargate profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/fargateProfiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates EKS cloud config's fargate profiles"
+        },
+        {
+          "info": {
+            "name": "Creates an EKS cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an EKS cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified EKS cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified EKS cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of EKS machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of EKS machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified EKS machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified EKS machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified EKS machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/eks/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified EKS machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified GCP cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified GCP cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates a Gcp cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates a Gcp cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified GCP cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified GCP cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GCP machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GCP machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified GCP machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified GCP machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified GCP machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gcp/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified GCP machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Generic cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Generic cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates a generic cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates a generic cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified generic cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified generic cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Generic machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Generic machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified generic machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified generic machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/generic/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified GKE cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified GKE cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates an GKE cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an GKE cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified GKE cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified GKE cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GKE machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GKE machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified GKE machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified GKE machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Gcp machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/gke/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Gcp machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Maas cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Maas cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates an Maas cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates an Maas cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Maas cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified Maas cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Maas machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Maas machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Maas machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Maas machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Maas machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/maas/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Maas machine"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Virtual cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Virtual cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates a virtual cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates a virtual cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified virtual cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified virtual cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of virtual machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of virtual machines"
+        },
+        {
+          "info": {
+            "name": "Adds the machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified virtual machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to the cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to the cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified virtual machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified virtual machine"
+        },
+        {
+          "info": {
+            "name": "Updates and resizes the virtual cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/virtual/:configUid/resize",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify virtual cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates and resizes the virtual cluster"
+        },
+        {
+          "info": {
+            "name": "Returns the specified vSphere cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified vSphere cloud config"
+        },
+        {
+          "info": {
+            "name": "Updates the cluster configuration information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/clusterConfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the cluster configuration information"
+        },
+        {
+          "info": {
+            "name": "Creates a vSphere cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Creates a vSphere cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Updates the specified vSphere cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Updates the specified vSphere cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools/:machinePoolName",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Deletes the specified machine pool"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of vSphere machines",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of vSphere machines"
+        },
+        {
+          "info": {
+            "name": "Adds the vSphere machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools/:machinePoolName/machines",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              }
+            ]
+          },
+          "docs": "Adds the vSphere machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Returns the specified vSphere machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified vSphere machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine to cloud config's machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine to cloud config's machine pool"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified vSphere machine",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/vsphere/:configUid/machinePools/:machinePoolName/machines/:machineUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified vSphere machine"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine maintenance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/:cloudType/:configUid/machinePools/:machinePoolName/machines/:machineUid/maintenance",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              },
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cloud type"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine maintenance"
+        },
+        {
+          "info": {
+            "name": "Updates the specified machine maintenance",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/:cloudType/:configUid/machinePools/:machinePoolName/machines/:machineUid/maintenance/status",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              },
+              {
+                "name": "machinePoolName",
+                "value": "",
+                "type": "path",
+                "description": "Machine pool name"
+              },
+              {
+                "name": "machineUid",
+                "value": "",
+                "type": "path",
+                "description": "Machine uid"
+              },
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Cloud type"
+              }
+            ]
+          },
+          "docs": "Updates the specified machine maintenance"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cloud config's machine pools and machine uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/:configUid/machinePools/machineUids",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster's cloud config uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cloud config's machine pools and machine uid"
+        },
+        {
+          "info": {
+            "name": "Updates the health status of machines for the specified cloud config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/cloudconfigs/:configUid/machines/health",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "configUid",
+                "value": "",
+                "type": "path",
+                "description": "Cloud config uid"
+              }
+            ]
+          },
+          "docs": "Updates the health status of machines for the specified cloud config"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

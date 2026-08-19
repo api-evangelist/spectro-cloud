@@ -1,0 +1,142 @@
+{
+  "item": [
+    {
+      "id": "5ea8b23f-d62a-470c-bbd1-e37689a88eaa",
+      "name": "grpc",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "af82e678-e6b1-464f-b722-d4ea90dbf312",
+          "name": "Get Grpc Configuration",
+          "request": {
+            "name": "Get Grpc Configuration",
+            "description": {
+              "content": "Returns Grpc Configuration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "grpc",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a3d06afe-9f39-4e76-9c89-6908bd51b0e2",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "grpc",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"preferredServer\": {\n    \"endpoint\": \"string\",\n    \"tls\": {\n      \"caCert\": \"string\",\n      \"enabled\": false,\n      \"insecureSkipVerify\": false\n    }\n  },\n  \"servers\": [\n    {\n      \"endpoint\": \"string\",\n      \"tls\": {\n        \"caCert\": \"string\",\n        \"enabled\": true,\n        \"insecureSkipVerify\": false\n      }\n    },\n    {\n      \"endpoint\": \"string\",\n      \"tls\": {\n        \"caCert\": \"string\",\n        \"enabled\": false,\n        \"insecureSkipVerify\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "734220cf-8759-45bf-89f3-1bc7dccd08a3",
+    "name": "Local Management APIs activations grpc API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

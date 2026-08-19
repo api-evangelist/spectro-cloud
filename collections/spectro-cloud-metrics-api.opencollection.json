@@ -1,0 +1,187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations metrics API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves the list of metrics for a specified resource kind",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/metrics/:resourceKind/values",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "resourceKind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "metricKind",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "includeMasterMachines",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. includeMasterMachines in boolean, group the data point by including control plane nodes if set to true"
+              },
+              {
+                "name": "includeControlPlaneMachines",
+                "value": "",
+                "type": "query",
+                "description": "includeControlPlaneMachines in boolean, group the data point by including control plane nodes if set to true"
+              },
+              {
+                "name": "discrete",
+                "value": "",
+                "type": "query",
+                "description": "if true then api returns only aggregation values, else api returns all data points by default"
+              },
+              {
+                "name": "spectroClusterUid",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns all the metrics for a given resource kind"
+        },
+        {
+          "info": {
+            "name": "Returns the metrics for a specified resource uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/metrics/:resourceKind/:resourceUid/values",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "resourceKind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "metricKind",
+                "value": "",
+                "type": "query",
+                "description": "multiple metric kinds can be provided with comma separated"
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "period",
+                "value": "",
+                "type": "query",
+                "description": "period in minutes, group the data point by the specified period"
+              },
+              {
+                "name": "includeMasterMachines",
+                "value": "",
+                "type": "query",
+                "description": "Deprecated. includeMasterMachines in boolean, group the data point by including control plane nodes if set to true"
+              },
+              {
+                "name": "includeControlPlaneMachines",
+                "value": "",
+                "type": "query",
+                "description": "includeControlPlaneMachines in boolean, group the data point by including control plane nodes if set to true"
+              },
+              {
+                "name": "discrete",
+                "value": "",
+                "type": "query",
+                "description": "if true then api returns only aggregation values, else api returns all data points by default"
+              }
+            ]
+          },
+          "docs": "Returns the metrics for a specified resource uid"
+        },
+        {
+          "info": {
+            "name": "Deletes the metrics of the specified resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/metrics/:resourceKind/:resourceUid/values",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "resourceKind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the metrics of the specified resource"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

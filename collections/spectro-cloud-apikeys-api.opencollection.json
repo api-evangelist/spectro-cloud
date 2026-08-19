@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations apiKeys API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "apiKeys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of API keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/apiKeys"
+          },
+          "docs": "Retrieves a list of API keys"
+        },
+        {
+          "info": {
+            "name": "Create an API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/apiKeys"
+          },
+          "docs": "Create an API key"
+        },
+        {
+          "info": {
+            "name": "Returns the specified API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/apiKeys/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify API key uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified API key"
+        },
+        {
+          "info": {
+            "name": "Update the specified API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/apiKeys/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify API key uid"
+              }
+            ]
+          },
+          "docs": "Update the specified API key"
+        },
+        {
+          "info": {
+            "name": "Activate or de-active the specified API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/apiKeys/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify API key uid"
+              }
+            ]
+          },
+          "docs": "Activate or de-active the specified API key"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified API key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/apiKeys/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify API key uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified API key"
+        },
+        {
+          "info": {
+            "name": "Revoke or re-activate the API key access",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/apiKeys/:uid/state",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify API key uid"
+              }
+            ]
+          },
+          "docs": "Revoke or re-activate the API key access"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

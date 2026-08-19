@@ -2,9 +2,9 @@ generated: '2026-07-21'
 method: derived
 status: candidate
 source: openapi/spectro-cloud-palette-openapi.json
-note: No official hosted Palette MCP server was found (the spectrocloud/palette-agent-toolkit
-  repo is marked tbd). This is a DERIVED candidate tool list mapping representative Palette
-  API operations to MCP tools, for evaluation only.
+note: No official hosted Palette MCP server was found (the spectrocloud/palette-agent-toolkit repo is
+  marked tbd). This is a DERIVED candidate tool list mapping representative Palette API operations to
+  MCP tools, for evaluation only.
 server:
   name: spectro-cloud-palette
   transport: stdio
@@ -64,3 +64,9 @@ tools:
   method: POST
   path: /v1/projects
   source_operation: openapi/spectro-cloud-palette-openapi.json#v1ProjectsCreate
+deployment:
+  mode: none
+  verified: derived
+  tools: 11
+  checked: '2026-08-12'
+  source: catalog MCP census

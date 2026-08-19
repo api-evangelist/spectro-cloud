@@ -1,0 +1,1487 @@
+{
+  "item": [
+    {
+      "id": "e61c9164-6770-4af3-92fc-bdd2db8fc615",
+      "name": "plans",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cdb821f5-fb5e-4f49-af35-1b121a4e48cf",
+          "name": "Retrieves a list of plans",
+          "request": {
+            "name": "Retrieves a list of plans",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "06d59ed8-13d1-49e9-9c0e-119b599ecebd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"1969-09-29T00:49:01.440Z\",\n        \"deletionTimestamp\": \"1969-07-05T22:48:27.489Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1978-12-07T14:03:53.088Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"type\": \"MonthlyOnDemand\",\n        \"start\": \"1949-08-10T10:56:33.953Z\",\n        \"expiry\": \"1972-06-03T05:24:59.003Z\",\n        \"cost\": {\n          \"discount\": 6128.864152579297,\n          \"price\": 4329.019232220184\n        },\n        \"developerCredits\": {\n          \"cpu\": 159.24358550854834,\n          \"memoryGiB\": 9017.573476437185,\n          \"storageGiB\": 904,\n          \"virtualClustersLimit\": 1582.7683509101887\n        },\n        \"freeCredits\": [\n          {\n            \"type\": \"Alloy\",\n            \"cpuCoreHours\": 2178.1319879975435,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": \"Alloy\",\n            \"cpuCoreHours\": 6128.183486313708,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"planLimit\": {\n          \"alloy\": {\n            \"cpuCoreHours\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"overageLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"warnLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"isOnDemand\": false,\n          \"isUnlimited\": true,\n          \"pure\": {\n            \"cpuCoreHours\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"overageLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"warnLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"renewal\": {\n          \"type\": \"Trial\",\n          \"start\": \"2011-04-19T07:44:27.709Z\",\n          \"expiry\": \"1964-10-07T19:45:10.577Z\",\n          \"planLimit\": {\n            \"alloy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isOnDemand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isUnlimited\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"slaCredits\": [\n          {\n            \"type\": \"Alloy\",\n            \"cpuCoreHours\": 5814.405993155322,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": \"Pure\",\n            \"cpuCoreHours\": 2858.467552316598,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tierPricing\": {\n          \"alloyPricing\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"purePricing\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"status\": {\n        \"changeLogs\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"2022-09-27T11:22:29.371Z\",\n        \"deletionTimestamp\": \"1953-03-04T01:20:02.506Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1964-10-29T08:56:20.927Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"type\": \"AnnualSubscription\",\n        \"start\": \"1990-02-14T16:26:16.679Z\",\n        \"expiry\": \"1967-06-23T23:50:49.955Z\",\n        \"cost\": {\n          \"discount\": 6061.088326291493,\n          \"price\": 7884.2381614794895\n        },\n        \"developerCredits\": {\n          \"cpu\": 9296.010100343236,\n          \"memoryGiB\": 6199.575347364338,\n          \"storageGiB\": 5164,\n          \"virtualClustersLimit\": 3770.549821024497\n        },\n        \"freeCredits\": [\n          {\n            \"type\": \"Alloy\",\n            \"cpuCoreHours\": 5853.31176999825,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": \"Pure\",\n            \"cpuCoreHours\": 6731.8312367205,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"planLimit\": {\n          \"alloy\": {\n            \"cpuCoreHours\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"overageLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"warnLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"isOnDemand\": false,\n          \"isUnlimited\": false,\n          \"pure\": {\n            \"cpuCoreHours\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"overageLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"warnLimitPercentage\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"renewal\": {\n          \"type\": \"Trial\",\n          \"start\": \"1979-05-12T22:28:16.276Z\",\n          \"expiry\": \"2002-09-28T19:28:17.626Z\",\n          \"planLimit\": {\n            \"alloy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isOnDemand\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"isUnlimited\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"pure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"slaCredits\": [\n          {\n            \"type\": \"Pure\",\n            \"cpuCoreHours\": 8305.602835333513,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": \"Alloy\",\n            \"cpuCoreHours\": 4668.572847820526,\n            \"creditUid\": \"string\",\n            \"expiry\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"start\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"tierPricing\": {\n          \"alloyPricing\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"purePricing\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"status\": {\n        \"changeLogs\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 8532,\n    \"limit\": 2613,\n    \"offset\": 5520\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20e59c87-cd3d-43c0-885c-22c9a7f3dd22",
+          "name": "Creates a user plan",
+          "request": {
+            "name": "Creates a user plan",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"type\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"expiry\": \"<dateTime>\",\n    \"cost\": {\n      \"discount\": \"<float>\",\n      \"price\": \"<float>\"\n    },\n    \"developerCredits\": {\n      \"cpu\": \"<int32>\",\n      \"memoryGiB\": \"<int32>\",\n      \"storageGiB\": \"<integer>\",\n      \"virtualClustersLimit\": \"<int32>\"\n    },\n    \"freeCredits\": [\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      }\n    ],\n    \"planLimit\": {\n      \"alloy\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      },\n      \"isOnDemand\": \"<boolean>\",\n      \"isUnlimited\": \"<boolean>\",\n      \"pure\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      }\n    },\n    \"renewal\": {\n      \"type\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"expiry\": \"<dateTime>\",\n      \"planLimit\": {\n        \"alloy\": {\n          \"cpuCoreHours\": \"<long>\",\n          \"overageLimitPercentage\": 25,\n          \"warnLimitPercentage\": 90\n        },\n        \"isOnDemand\": \"<boolean>\",\n        \"isUnlimited\": \"<boolean>\",\n        \"pure\": {\n          \"cpuCoreHours\": \"<long>\",\n          \"overageLimitPercentage\": 25,\n          \"warnLimitPercentage\": 90\n        }\n      }\n    },\n    \"slaCredits\": [\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      }\n    ],\n    \"tierPricing\": {\n      \"alloyPricing\": [\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        },\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        }\n      ],\n      \"purePricing\": [\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        },\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        }\n      ]\n    }\n  },\n  \"status\": {\n    \"changeLogs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3af3dabb-204a-45f0-8e15-a54ede81432d",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"type\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"expiry\": \"<dateTime>\",\n    \"cost\": {\n      \"discount\": \"<float>\",\n      \"price\": \"<float>\"\n    },\n    \"developerCredits\": {\n      \"cpu\": \"<int32>\",\n      \"memoryGiB\": \"<int32>\",\n      \"storageGiB\": \"<integer>\",\n      \"virtualClustersLimit\": \"<int32>\"\n    },\n    \"freeCredits\": [\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      }\n    ],\n    \"planLimit\": {\n      \"alloy\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      },\n      \"isOnDemand\": \"<boolean>\",\n      \"isUnlimited\": \"<boolean>\",\n      \"pure\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      }\n    },\n    \"renewal\": {\n      \"type\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"expiry\": \"<dateTime>\",\n      \"planLimit\": {\n        \"alloy\": {\n          \"cpuCoreHours\": \"<long>\",\n          \"overageLimitPercentage\": 25,\n          \"warnLimitPercentage\": 90\n        },\n        \"isOnDemand\": \"<boolean>\",\n        \"isUnlimited\": \"<boolean>\",\n        \"pure\": {\n          \"cpuCoreHours\": \"<long>\",\n          \"overageLimitPercentage\": 25,\n          \"warnLimitPercentage\": 90\n        }\n      }\n    },\n    \"slaCredits\": [\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      }\n    ],\n    \"tierPricing\": {\n      \"alloyPricing\": [\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        }\n      ],\n      \"purePricing\": [\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        }\n      ]\n    }\n  },\n  \"status\": {\n    \"changeLogs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0c35bf48-5f18-4677-b6a7-107e84688e6b",
+          "name": "Returns the specified plan",
+          "request": {
+            "name": "Returns the specified plan",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "53e38f49-57dd-4b6b-8eb0-25ddbf794539",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"type\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"expiry\": \"<dateTime>\",\n    \"cost\": {\n      \"discount\": \"<float>\",\n      \"price\": \"<float>\"\n    },\n    \"developerCredits\": {\n      \"cpu\": \"<int32>\",\n      \"memoryGiB\": \"<int32>\",\n      \"storageGiB\": \"<integer>\",\n      \"virtualClustersLimit\": \"<int32>\"\n    },\n    \"freeCredits\": [\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      }\n    ],\n    \"planLimit\": {\n      \"alloy\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      },\n      \"isOnDemand\": \"<boolean>\",\n      \"isUnlimited\": \"<boolean>\",\n      \"pure\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      }\n    },\n    \"renewal\": {\n      \"type\": \"<string>\",\n      \"start\": \"<dateTime>\",\n      \"expiry\": \"<dateTime>\",\n      \"planLimit\": {\n        \"alloy\": {\n          \"cpuCoreHours\": \"<long>\",\n          \"overageLimitPercentage\": 25,\n          \"warnLimitPercentage\": 90\n        },\n        \"isOnDemand\": \"<boolean>\",\n        \"isUnlimited\": \"<boolean>\",\n        \"pure\": {\n          \"cpuCoreHours\": \"<long>\",\n          \"overageLimitPercentage\": 25,\n          \"warnLimitPercentage\": 90\n        }\n      }\n    },\n    \"slaCredits\": [\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"cpuCoreHours\": \"<int64>\",\n        \"creditUid\": \"<string>\",\n        \"expiry\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"start\": \"<dateTime>\"\n      }\n    ],\n    \"tierPricing\": {\n      \"alloyPricing\": [\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        }\n      ],\n      \"purePricing\": [\n        {\n          \"discount\": \"<int64>\",\n          \"startFrom\": \"<float64>\",\n          \"unitAmount\": \"<float64>\",\n          \"upTo\": \"<float64>\",\n          \"upToInfinity\": \"<boolean>\"\n        }\n      ]\n    }\n  },\n  \"status\": {\n    \"changeLogs\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "acd10226-5d3a-460a-b050-2ece4a8f2181",
+          "name": "Deletes the specified Plan's credit data",
+          "request": {
+            "name": "Deletes the specified Plan's credit data",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "credits",
+                ":creditUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "creditUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "499d2346-403c-4a2c-b6d0-9bb5aa0614d4",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "credits",
+                    ":creditUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "creditUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88e77cd7-d8ed-4cb1-8cf9-82e5497f2a7f",
+          "name": "Updates the specified Plan's credit data",
+          "request": {
+            "name": "Updates the specified Plan's credit data",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "credits",
+                ":creditUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "creditUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"credit\": {\n    \"type\": \"<string>\",\n    \"cpuCoreHours\": \"<int64>\",\n    \"expiry\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"start\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c98efba3-7fcb-410b-ad6d-5897d650055c",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "credits",
+                    ":creditUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "creditUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credit\": {\n    \"type\": \"<string>\",\n    \"cpuCoreHours\": \"<int64>\",\n    \"expiry\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"start\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "47379aa5-e3b8-40d6-8e1d-dc8faae00a6b",
+          "name": "Updates the specified plan's expiry",
+          "request": {
+            "name": "Updates the specified plan's expiry",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "expiry"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"expiry\": \"<dateTime>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "05b92253-1f76-481f-8c28-b3a4a6ef0fb5",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "expiry"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"expiry\": \"<dateTime>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcb4840f-1ea6-470a-a32d-c5201df5ea85",
+          "name": "Adds free credit to the specified plan",
+          "request": {
+            "name": "Adds free credit to the specified plan",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "freeCredit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"credit\": {\n    \"type\": \"<string>\",\n    \"cpuCoreHours\": \"<int64>\",\n    \"expiry\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"start\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2271fbaf-4fc3-4f7e-ad74-24bc81d38ba1",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "freeCredit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credit\": {\n    \"type\": \"<string>\",\n    \"cpuCoreHours\": \"<int64>\",\n    \"expiry\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"start\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "376f4a56-96bb-488a-9773-f3d701240d82",
+          "name": "Updates the specified plan's limit",
+          "request": {
+            "name": "Updates the specified plan's limit",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "planLimit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"planLimit\": {\n    \"alloy\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    },\n    \"isOnDemand\": \"<boolean>\",\n    \"isUnlimited\": \"<boolean>\",\n    \"pure\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b9f6535b-4e89-4a59-a8ea-41c9abd9906c",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "planLimit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"planLimit\": {\n    \"alloy\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    },\n    \"isOnDemand\": \"<boolean>\",\n    \"isUnlimited\": \"<boolean>\",\n    \"pure\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b88955f-d13e-46dc-8424-1aff9433282d",
+          "name": "Changes the plan type for the specified plan",
+          "request": {
+            "name": "Changes the plan type for the specified plan",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "planType"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"expiry\": \"<dateTime>\",\n  \"isPaymentGateway\": \"<boolean>\",\n  \"planLimit\": {\n    \"alloy\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    },\n    \"isOnDemand\": \"<boolean>\",\n    \"isUnlimited\": \"<boolean>\",\n    \"pure\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    }\n  },\n  \"tierPrice\": {\n    \"alloyPricing\": [\n      {\n        \"discount\": \"<int64>\",\n        \"startFrom\": \"<float64>\",\n        \"unitAmount\": \"<float64>\",\n        \"upTo\": \"<float64>\",\n        \"upToInfinity\": \"<boolean>\"\n      },\n      {\n        \"discount\": \"<int64>\",\n        \"startFrom\": \"<float64>\",\n        \"unitAmount\": \"<float64>\",\n        \"upTo\": \"<float64>\",\n        \"upToInfinity\": \"<boolean>\"\n      }\n    ],\n    \"purePricing\": [\n      {\n        \"discount\": \"<int64>\",\n        \"startFrom\": \"<float64>\",\n        \"unitAmount\": \"<float64>\",\n        \"upTo\": \"<float64>\",\n        \"upToInfinity\": \"<boolean>\"\n      },\n      {\n        \"discount\": \"<int64>\",\n        \"startFrom\": \"<float64>\",\n        \"unitAmount\": \"<float64>\",\n        \"upTo\": \"<float64>\",\n        \"upToInfinity\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b7adeebd-9501-424f-a430-e9ed489ed23c",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "planType"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"start\": \"<dateTime>\",\n  \"expiry\": \"<dateTime>\",\n  \"isPaymentGateway\": \"<boolean>\",\n  \"planLimit\": {\n    \"alloy\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    },\n    \"isOnDemand\": \"<boolean>\",\n    \"isUnlimited\": \"<boolean>\",\n    \"pure\": {\n      \"cpuCoreHours\": \"<long>\",\n      \"overageLimitPercentage\": 25,\n      \"warnLimitPercentage\": 90\n    }\n  },\n  \"tierPrice\": {\n    \"alloyPricing\": [\n      {\n        \"discount\": \"<int64>\",\n        \"startFrom\": \"<float64>\",\n        \"unitAmount\": \"<float64>\",\n        \"upTo\": \"<float64>\",\n        \"upToInfinity\": \"<boolean>\"\n      }\n    ],\n    \"purePricing\": [\n      {\n        \"discount\": \"<int64>\",\n        \"startFrom\": \"<float64>\",\n        \"unitAmount\": \"<float64>\",\n        \"upTo\": \"<float64>\",\n        \"upToInfinity\": \"<boolean>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cc8e166-5687-4452-9d5d-8e1540565211",
+          "name": "Adds renewal data to the existing plan",
+          "request": {
+            "name": "Adds renewal data to the existing plan",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "renewal"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"expiry\": \"<dateTime>\",\n    \"planLimit\": {\n      \"alloy\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      },\n      \"isOnDemand\": \"<boolean>\",\n      \"isUnlimited\": \"<boolean>\",\n      \"pure\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      }\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7efde276-be9e-40fa-9325-e0e0be4dd28c",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "renewal"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"renewal\": {\n    \"type\": \"<string>\",\n    \"start\": \"<dateTime>\",\n    \"expiry\": \"<dateTime>\",\n    \"planLimit\": {\n      \"alloy\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      },\n      \"isOnDemand\": \"<boolean>\",\n      \"isUnlimited\": \"<boolean>\",\n      \"pure\": {\n        \"cpuCoreHours\": \"<long>\",\n        \"overageLimitPercentage\": 25,\n        \"warnLimitPercentage\": 90\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "694b31e8-dbc5-401d-92b3-3e0b8cbe32eb",
+          "name": "Adds sla breach credit to the specified plan",
+          "request": {
+            "name": "Adds sla breach credit to the specified plan",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "plans",
+                ":uid",
+                "slaCredit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"credit\": {\n    \"type\": \"<string>\",\n    \"cpuCoreHours\": \"<int64>\",\n    \"expiry\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"start\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0eabd291-76ff-4922-8ee0-919d1581a898",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "plans",
+                    ":uid",
+                    "slaCredit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"credit\": {\n    \"type\": \"<string>\",\n    \"cpuCoreHours\": \"<int64>\",\n    \"expiry\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"start\": \"<dateTime>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "423fb2b8-3834-42db-b2ef-3ec82478e5b6",
+    "name": "Local Management APIs activations plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "item": [
+    {
+      "id": "261d034a-0ebb-4011-9013-4d03501179d1",
+      "name": "tunnel",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c11b67a2-b72a-43d4-a4af-835d68087eb1",
+          "name": "Get Tunnel Configuration",
+          "request": {
+            "name": "Get Tunnel Configuration",
+            "description": {
+              "content": "Returns Tunnel Configuration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "tunnel",
+                "config"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "76f8adcd-c45c-497a-892f-4df6a9b00c10",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "tunnel",
+                    "config"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"preferredServer\": {\n    \"endpoint\": \"string\",\n    \"tls\": {\n      \"caCert\": \"string\",\n      \"enabled\": false,\n      \"insecureSkipVerify\": true\n    }\n  },\n  \"servers\": [\n    {\n      \"endpoint\": \"string\",\n      \"tls\": {\n        \"caCert\": \"string\",\n        \"enabled\": false,\n        \"insecureSkipVerify\": true\n      }\n    },\n    {\n      \"endpoint\": \"string\",\n      \"tls\": {\n        \"caCert\": \"string\",\n        \"enabled\": true,\n        \"insecureSkipVerify\": true\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5ea4dca7-7096-47cb-b2c6-10ac89f9925e",
+    "name": "Local Management APIs activations tunnel API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

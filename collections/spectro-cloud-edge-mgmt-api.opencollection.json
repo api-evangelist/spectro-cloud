@@ -1,0 +1,1187 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations edge-mgmt API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "edge-mgmt",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the details of the cluster.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster"
+          },
+          "docs": "Get the details of the cluster."
+        },
+        {
+          "info": {
+            "name": "Creates a cluster with the provided cluster configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster"
+          },
+          "docs": "Creates a cluster with the provided cluster configuration"
+        },
+        {
+          "info": {
+            "name": "DEPRECATED - This endpoint is deprecated and will be removed in future versions. Use /v1/edge-mgmt/cluster/{clusterName} instead",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster"
+          },
+          "docs": "DEPRECATED - This endpoint is deprecated and will be removed in future versions. Use /v1/edge-mgmt/cluster/{clusterName} instead"
+        },
+        {
+          "info": {
+            "name": "Delete a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster"
+          },
+          "docs": "Delete a cluster"
+        },
+        {
+          "info": {
+            "name": "list the details of the cluster’s packs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/applications"
+          },
+          "docs": "list the details of the cluster’s packs."
+        },
+        {
+          "info": {
+            "name": "Get Cluster Certificates Info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/certificates"
+          },
+          "docs": "Get Cluster Certificates Info"
+        },
+        {
+          "info": {
+            "name": "Get Edge Cluster details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/details"
+          },
+          "docs": "Get Edge Cluster details"
+        },
+        {
+          "info": {
+            "name": "List cluster events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/events",
+            "params": [
+              {
+                "name": "namespace",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List cluster events"
+        },
+        {
+          "info": {
+            "name": "Creates a pairing request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/pair"
+          },
+          "docs": "Creates a pairing request"
+        },
+        {
+          "info": {
+            "name": "Get all existing pairing requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/pair/details"
+          },
+          "docs": "Get all existing pairing requests"
+        },
+        {
+          "info": {
+            "name": "Rejects a pairing request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/pair/reject"
+          },
+          "docs": "Rejects a pairing request"
+        },
+        {
+          "info": {
+            "name": "Verifies whether all cluster hosts are able to connect to palette",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/pair/verify-connection"
+          },
+          "docs": "Verifies whether all cluster hosts are able to connect to palette"
+        },
+        {
+          "info": {
+            "name": "Updates a cluster with the provided cluster configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/profiles"
+          },
+          "docs": "Updates a cluster with the provided cluster configuration"
+        },
+        {
+          "info": {
+            "name": "Validate cluster profile variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/profiles/variables/validate"
+          },
+          "docs": "Validate cluster profile variables"
+        },
+        {
+          "info": {
+            "name": "List existing Harbor Content Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/registry/content/details"
+          },
+          "docs": "Get Harbor Content Details"
+        },
+        {
+          "info": {
+            "name": "List Harbor Content Sync Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/registry/content/sync-status/details"
+          },
+          "docs": "Get Harbor Content Sync Status"
+        },
+        {
+          "info": {
+            "name": "Gets the harbor health status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/registry/health"
+          },
+          "docs": "Gets the harbor health status"
+        },
+        {
+          "info": {
+            "name": "Renew Cluster Certificates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/renew-certificates"
+          },
+          "docs": "Renew Cluster Certificates"
+        },
+        {
+          "info": {
+            "name": "Update cluster settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/settings"
+          },
+          "docs": "Update cluster settings"
+        },
+        {
+          "info": {
+            "name": "Updates a cluster with the provided cluster configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/:clusterName",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the cluster to be updated"
+              }
+            ]
+          },
+          "docs": "Updates a cluster with the provided cluster configuration"
+        },
+        {
+          "info": {
+            "name": "Patch a cluster with the provided cluster configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/cluster/:clusterName",
+            "params": [
+              {
+                "name": "clusterName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the cluster to be patched"
+              }
+            ]
+          },
+          "docs": "Patch a cluster with the provided cluster configuration"
+        },
+        {
+          "info": {
+            "name": "parses the preloaded cluster-config archive if it was included in the ISO.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/archive/embedded/details"
+          },
+          "docs": "parses the cluster-config archive."
+        },
+        {
+          "info": {
+            "name": "parses the cluster-config archive if it exists.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/archive/overridden/details"
+          },
+          "docs": "parses the cluster-config archive if it was uploaded as a standalone configuration."
+        },
+        {
+          "info": {
+            "name": "Delete or reject the cluster update archive",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/archive/update"
+          },
+          "docs": "Delete or reject the cluster update archive"
+        },
+        {
+          "info": {
+            "name": "parses the cluster-config update archive if it was included in the uploaded content-bundle.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/archive/update/details"
+          },
+          "docs": "parses the cluster-config update archive if it was included in the uploaded content-bundle."
+        },
+        {
+          "info": {
+            "name": "Fetch the cluster node pool details including edge host details.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/current/machinepools"
+          },
+          "docs": "Fetch the cluster node pool details including edge host details."
+        },
+        {
+          "info": {
+            "name": "Create a machine pool",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/current/machinepools"
+          },
+          "docs": "Create a machine pool"
+        },
+        {
+          "info": {
+            "name": "Update machine pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/current/machinepools/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the machine pool to be updated"
+              }
+            ]
+          },
+          "docs": "Update machine pools"
+        },
+        {
+          "info": {
+            "name": "Patch machine pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/current/machinepools/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the machine pool to be patched"
+              }
+            ]
+          },
+          "docs": "Patch machine pools"
+        },
+        {
+          "info": {
+            "name": "Delete machine pools",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/current/machinepools/:poolName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the machine pool to be deleted"
+              }
+            ]
+          },
+          "docs": "Delete machine pools"
+        },
+        {
+          "info": {
+            "name": "Delete a machine pool node",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/current/machinepools/:poolName/nodes/:nodeName",
+            "params": [
+              {
+                "name": "poolName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the machine pool"
+              },
+              {
+                "name": "nodeName",
+                "value": "",
+                "type": "path",
+                "description": "Name of the node"
+              }
+            ]
+          },
+          "docs": "Delete a node from the machine pool"
+        },
+        {
+          "info": {
+            "name": "A list of the K8s Cluster Nodes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/clusters/current/nodes"
+          },
+          "docs": "Get K8s Cluster Nodes"
+        },
+        {
+          "info": {
+            "name": "Ping an endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/connectivity/ping",
+            "params": [
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Ping an endpoint"
+        },
+        {
+          "info": {
+            "name": "Display route that IP packets take to a network host",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/connectivity/traceroute",
+            "params": [
+              {
+                "name": "endpoint",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Display route that IP packets take to a network host"
+        },
+        {
+          "info": {
+            "name": "Get edge host info",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current"
+          },
+          "docs": "Get edge host details"
+        },
+        {
+          "info": {
+            "name": "Get the public key used to verify the signed content.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/actions/content/signing-public-key"
+          },
+          "docs": "Get the base64 encoded key used to verify the signed content."
+        },
+        {
+          "info": {
+            "name": "Reboot edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/actions/reboot"
+          },
+          "docs": "Reboot edge host"
+        },
+        {
+          "info": {
+            "name": "Reset edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/actions/reset"
+          },
+          "docs": "Reset edge host"
+        },
+        {
+          "info": {
+            "name": "Shutdown edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/actions/shutdown"
+          },
+          "docs": "Shutdown edge host"
+        },
+        {
+          "info": {
+            "name": "Uploads the cluster config archive and extracts it to the required location on the edge host.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/actions/upload-clusterconfig"
+          },
+          "docs": "Uploads the cluster config archive and extracts it to the required location on the edge host."
+        },
+        {
+          "info": {
+            "name": "Uploads an archive file and extracts it to the required location on the edge host.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/actions/upload-content"
+          },
+          "docs": "Uploads an archive file and extracts it to the required location on the edge host."
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/audits",
+            "params": [
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "userUid",
+                "value": "",
+                "type": "query",
+                "description": "Specify the user uid, to retrieve the specific user audit logs"
+              },
+              {
+                "name": "resourceKind",
+                "value": "",
+                "type": "query",
+                "description": "Specify the resource name, to retrieve the specific resource audit logs"
+              },
+              {
+                "name": "actionType",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of audit logs"
+        },
+        {
+          "info": {
+            "name": "Download audit logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/audits/download"
+          },
+          "docs": "Download audit logs as a single compressed file"
+        },
+        {
+          "info": {
+            "name": "Retrieves the list of filter options to display on audit ui page",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/audits/filters"
+          },
+          "docs": "Retrieves the list of filter options to display on audit ui page"
+        },
+        {
+          "info": {
+            "name": "Get edge host configurations.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/configurations"
+          },
+          "docs": "Get edge host configurations."
+        },
+        {
+          "info": {
+            "name": "Update Edge Host configurations",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/configurations"
+          },
+          "docs": "Update Edge Host configurations"
+        },
+        {
+          "info": {
+            "name": "Edge host configurations status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/configurations/status"
+          },
+          "docs": "Edge host configurations status"
+        },
+        {
+          "info": {
+            "name": "Download edge host Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/download-logs"
+          },
+          "docs": "Downloads the logs of the edge host as a tar file."
+        },
+        {
+          "info": {
+            "name": "List last 'logCount' edge host error logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/error-logs",
+            "params": [
+              {
+                "name": "logCount",
+                "value": "",
+                "type": "query",
+                "description": "Number of logs to be fetched"
+              }
+            ]
+          },
+          "docs": "List last 'logCount' edge host error logs"
+        },
+        {
+          "info": {
+            "name": "List custom files from the '/var/log/files' directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/file-download/files"
+          },
+          "docs": "Lists all the first level files from the '/var/log/files' directory.\n"
+        },
+        {
+          "info": {
+            "name": "Download a custom file from the user-defined or default directory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/file-download/:filePath",
+            "params": [
+              {
+                "name": "filePath",
+                "value": "",
+                "type": "path",
+                "description": "Relative path of the file to download."
+              }
+            ]
+          },
+          "docs": "Downloads a file from the `/var/log/files` directory. The file path is expected to be relative to the `/var/log/files` directory.\n"
+        },
+        {
+          "info": {
+            "name": "Start edge host log collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/generate-logs"
+          },
+          "docs": "Start edge host log collection"
+        },
+        {
+          "info": {
+            "name": "Edge host log collection status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/generate-logs-status"
+          },
+          "docs": "Edge host log collection status"
+        },
+        {
+          "info": {
+            "name": "Link edge host to another edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/link"
+          },
+          "docs": "Link edge host to another edge host"
+        },
+        {
+          "info": {
+            "name": "Generate a link token for linking edge hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/link/generate-token"
+          },
+          "docs": "Generate a link token for linking edge hosts"
+        },
+        {
+          "info": {
+            "name": "Get the status of the edge host link",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/link/status"
+          },
+          "docs": "Get the status of the edge host link"
+        },
+        {
+          "info": {
+            "name": "Unlink edge host from other edge hosts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/unlink",
+            "params": [
+              {
+                "name": "peerId",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Unlink edge host from other edge hosts"
+        },
+        {
+          "info": {
+            "name": "Get metadata of last uploaded content archive file",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/uploaded-content/details"
+          },
+          "docs": "Get metadata of last uploaded content archive file"
+        },
+        {
+          "info": {
+            "name": "Get edge host userdata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/userdata"
+          },
+          "docs": "Get edge host userdata"
+        },
+        {
+          "info": {
+            "name": "Update edge host userdata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/userdata"
+          },
+          "docs": "Update edge host userdata"
+        },
+        {
+          "info": {
+            "name": "Update edge host userdata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/edgehosts/current/userdata"
+          },
+          "docs": "Update edge host userdata"
+        },
+        {
+          "info": {
+            "name": "Get life cycle events of cluster and edge host",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/events/lifecycle"
+          },
+          "docs": "Get life cycle events of cluster and edge host"
+        },
+        {
+          "info": {
+            "name": "List bonds",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bonds"
+          },
+          "docs": "List network bond interfaces"
+        },
+        {
+          "info": {
+            "name": "Get bond",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bonds/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a bond interface configuration"
+        },
+        {
+          "info": {
+            "name": "Create bond",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bonds/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a bond interface configuration"
+        },
+        {
+          "info": {
+            "name": "Create or update bond",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bonds/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create or update a bond interface configuration"
+        },
+        {
+          "info": {
+            "name": "Delete bond",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bonds/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a bond interface configuration"
+        },
+        {
+          "info": {
+            "name": "List bridges",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bridges"
+          },
+          "docs": "List all bridge interfaces"
+        },
+        {
+          "info": {
+            "name": "Get bridge",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bridges/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a bridge interface configuration"
+        },
+        {
+          "info": {
+            "name": "Create bridge",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bridges/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a bridge interface configuration"
+        },
+        {
+          "info": {
+            "name": "Create or update bridge",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bridges/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create or update a bridge interface configuration"
+        },
+        {
+          "info": {
+            "name": "Delete bridge",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/bridges/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a bridge interface configuration"
+        },
+        {
+          "info": {
+            "name": "Get network config options",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/config-options"
+          },
+          "docs": "Get valid configuration options for network components"
+        },
+        {
+          "info": {
+            "name": "List NICs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/interfaces"
+          },
+          "docs": "List network interfaces (NICs)"
+        },
+        {
+          "info": {
+            "name": "Get NIC",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/interfaces/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get one network interface"
+        },
+        {
+          "info": {
+            "name": "Update NIC config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/interfaces/:name/config",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update a network interface configuration"
+        },
+        {
+          "info": {
+            "name": "Get the currently selected management interface and the candidate list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/management-interface"
+          },
+          "docs": "Get the currently selected management interface and the candidate list"
+        },
+        {
+          "info": {
+            "name": "Set the management interface",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/management-interface"
+          },
+          "docs": "Set the management interface"
+        },
+        {
+          "info": {
+            "name": "List VLANs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/vlans"
+          },
+          "docs": "List VLAN interfaces"
+        },
+        {
+          "info": {
+            "name": "Get VLAN",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/vlans/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieve a VLAN interface configuration"
+        },
+        {
+          "info": {
+            "name": "Create VLAN",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/vlans/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create a VLAN interface configuration"
+        },
+        {
+          "info": {
+            "name": "Create or update VLAN",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/vlans/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create or update a VLAN interface configuration"
+        },
+        {
+          "info": {
+            "name": "Delete VLAN",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/network/vlans/:name",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a VLAN interface configuration"
+        },
+        {
+          "info": {
+            "name": "Get general settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/edge-mgmt/settings"
+          },
+          "docs": "Get general settings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations installers API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "installers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates the spectro installer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/installers/spectro",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates the spectro installer"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

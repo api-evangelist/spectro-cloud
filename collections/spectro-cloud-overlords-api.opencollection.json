@@ -1,0 +1,994 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations overlords API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "overlords",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of overlords owned by the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of overlords owned by the tenant"
+        },
+        {
+          "info": {
+            "name": "Returns the manifests required for the private gateway installation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/apache-cloudstack/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pairingCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the manifests required for the private gateway installation"
+        },
+        {
+          "info": {
+            "name": "create the CloudStack cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/apache-cloudstack/:uid/account",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create the CloudStack cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "update the CloudStack cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/apache-cloudstack/:uid/account",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update the CloudStack cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "validate the CloudStack cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/apache-cloudstack/:uid/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Validates CloudStack account credentials and domain. Verifies API connectivity and that the specified domain exists."
+        },
+        {
+          "info": {
+            "name": "create the CloudStack cloud config for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/apache-cloudstack/:uid/cloudconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create the CloudStack cloud config for the private gateway"
+        },
+        {
+          "info": {
+            "name": "update the CloudStack cloud config for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/apache-cloudstack/:uid/cloudconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update the CloudStack cloud config for the private gateway"
+        },
+        {
+          "info": {
+            "name": "Returns the specified CloudStack private gateway cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/apache-cloudstack/:uid/clusterprofile",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified CloudStack private gateway cluster profile"
+        },
+        {
+          "info": {
+            "name": "Returns the manifests required for the private gateway installation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pairingCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the manifests required for the private gateway installation"
+        },
+        {
+          "info": {
+            "name": "create the maas cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/account",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create the maas cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "update the maas cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/account",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update the maas cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "validate the maas cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "validate the maas cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "create the maas cloud config for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/cloudconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create the maas cloud config for the private gateway"
+        },
+        {
+          "info": {
+            "name": "update the maas cloud config for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/cloudconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update the maas cloud config for the private gateway"
+        },
+        {
+          "info": {
+            "name": "Returns the specified maas private gateway cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/clusterprofile",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified maas private gateway cluster profile"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of IP Pools for the specified maas private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/pools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of IP Pools for the specified maas private gateway"
+        },
+        {
+          "info": {
+            "name": "Creates an IP pool definition for the specified maas private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/pools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Creates an IP pool definition for the specified maas private gateway"
+        },
+        {
+          "info": {
+            "name": "Updates the maas private gateway's specified IP Pool data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/pools/:poolUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "poolUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the maas private gateway's specified IP Pool data"
+        },
+        {
+          "info": {
+            "name": "Deletes the maas private gateway's specified IP Pool data",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/overlords/maas/:uid/pools/:poolUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "poolUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the maas private gateway's specified IP Pool data"
+        },
+        {
+          "info": {
+            "name": "migrate all the clusters from source overlord to target overlord",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/migrate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "migrate all the clusters from source overlord to target overlord"
+        },
+        {
+          "info": {
+            "name": "Returns the pairing code for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/pairing/code",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the pairing code for the private gateway"
+        },
+        {
+          "info": {
+            "name": "Returns the manifests required for the private gateway installation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "pairingCode",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the manifests required for the private gateway installation"
+        },
+        {
+          "info": {
+            "name": "Returns overlord's ova information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/ova",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns overlord's ova information"
+        },
+        {
+          "info": {
+            "name": "Creates the system private gateway for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/tenants/:tenantUid/system",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Creates the system private gateway for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "create the vSphere cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/account",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create the vSphere cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "update the vSphere cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/account",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update the vSphere cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "validate the vSphere cloudaccount for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "validate the vSphere cloudaccount for the private gateway"
+        },
+        {
+          "info": {
+            "name": "create the vSphere cloud config for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/cloudconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create the vSphere cloud config for the private gateway"
+        },
+        {
+          "info": {
+            "name": "update the vSphere cloud config for the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/cloudconfig",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update the vSphere cloud config for the private gateway"
+        },
+        {
+          "info": {
+            "name": "Returns the specified vsphere private gateway cluster profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/clusterprofile",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified vsphere private gateway cluster profile"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of IP Pools for the specified private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/pools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of IP Pools for the specified private gateway"
+        },
+        {
+          "info": {
+            "name": "Creates an IP pool defintion for the sepcified private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/pools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Creates an IP pool defintion for the sepcified private gateway"
+        },
+        {
+          "info": {
+            "name": "Updates the private gateways's specified IP Pool data",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/pools/:poolUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "poolUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the private gateways's specified IP Pool data"
+        },
+        {
+          "info": {
+            "name": "Deletes the private gateways's specified IP Pool data",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/pools/:poolUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "poolUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the private gateways's specified IP Pool data"
+        },
+        {
+          "info": {
+            "name": "Retrieves the vSphere computecluster resources for the specified private gateway's account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/properties/computecluster/resources",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "datacenter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "computecluster",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieves the vSphere computecluster resources for the specified private gateway's account"
+        },
+        {
+          "info": {
+            "name": "Retrieves the vSphere datacenters & datacluster for the specified private gateway's account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/vsphere/:uid/properties/datacenters",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Retrieves the vSphere datacenters & datacluster for the specified private gateway's account"
+        },
+        {
+          "info": {
+            "name": "Returns the specified private gateway's for the given uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/overlords/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified private gateway's for the given uid"
+        },
+        {
+          "info": {
+            "name": "delete the private gateway",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/overlords/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "delete the private gateway"
+        },
+        {
+          "info": {
+            "name": "update the private gateway's metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/:uid/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update the private gateway's metadata"
+        },
+        {
+          "info": {
+            "name": "reset the private gateway by disaaociating the private gateway's resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/overlords/:uid/reset",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "reset the private gateway by disaaociating the private gateway's resources"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

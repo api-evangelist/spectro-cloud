@@ -1,0 +1,1566 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations tenants API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tenants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of tenants"
+        },
+        {
+          "info": {
+            "name": "Creates a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a tenant"
+        },
+        {
+          "info": {
+            "name": "Validates the AWS Marketplace token and redirects the browser to the UI setup page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/marketplace/aws/setup"
+          },
+          "docs": "Validates the AWS Marketplace token and redirects the browser to the UI setup page"
+        },
+        {
+          "info": {
+            "name": "Registers a marketplace user by resolving the registration token, verifying entitlements, and provisioning a tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/marketplace/register"
+          },
+          "docs": "Called after a user completes a SaaS contract purchase on a marketplace (e.g., AWS Marketplace) and is redirected to the Palette registration landing page. The flow resolves the temporary registration token to obtain the user's account identifier and product code, fetches the user's entitlements and creates a new tenant with the corresponding plan and admin user. The registration token is short-lived and must be resolved promptly.\n"
+        },
+        {
+          "info": {
+            "name": "Self signing up",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/signup"
+          },
+          "docs": "Self signing up"
+        },
+        {
+          "info": {
+            "name": "Activates the self signed tenant using the password token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/signup/:signupToken/activate",
+            "params": [
+              {
+                "name": "signupToken",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Activates the self signed tenant using the password token"
+        },
+        {
+          "info": {
+            "name": "Validate tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/validate"
+          },
+          "docs": "Validate tenant"
+        },
+        {
+          "info": {
+            "name": "Returns the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified tenant"
+        },
+        {
+          "info": {
+            "name": "activates the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/activate",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "activates the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Update tenant address",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/address",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant address"
+        },
+        {
+          "info": {
+            "name": "lists the certificates for the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/certs",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "lists the certificates for the tenant"
+        },
+        {
+          "info": {
+            "name": "create the tenant certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/certs",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create the tenant certificate"
+        },
+        {
+          "info": {
+            "name": "Returns the ca certificate for the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/certs/:certificateUid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificateUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the ca certificate for the tenant"
+        },
+        {
+          "info": {
+            "name": "updates the tenant certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/certs/:certificateUid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificateUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "updates the tenant certificate"
+        },
+        {
+          "info": {
+            "name": "deletes the tenant certificate",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/certs/:certificateUid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "certificateUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "deletes the tenant certificate"
+        },
+        {
+          "info": {
+            "name": "Returns data sink config of tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/dataSinks",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns data sink config of tenant"
+        },
+        {
+          "info": {
+            "name": "create data sink config",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/dataSinks",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "create data sink config"
+        },
+        {
+          "info": {
+            "name": "updates the tenant data sink config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/dataSinks",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "updates the tenant data sink config"
+        },
+        {
+          "info": {
+            "name": "deletes the tenant data sink config",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/assets/dataSinks",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "deletes the tenant data sink config"
+        },
+        {
+          "info": {
+            "name": "Get tenant auth token settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/authTokenSettings",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant auth token settings"
+        },
+        {
+          "info": {
+            "name": "Update tenant auth token settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/authTokenSettings",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant auth token settings"
+        },
+        {
+          "info": {
+            "name": "Clean up tenant resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/cleanUp",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "useTenantCtx",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "forceDelete",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Clean up tenant resources"
+        },
+        {
+          "info": {
+            "name": "Updates the tenant contract settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/contract",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the tenant contract settings"
+        },
+        {
+          "info": {
+            "name": "Tenant to accept the contract agreement",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/contract/accept",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Tenant to accept the contract agreement"
+        },
+        {
+          "info": {
+            "name": "Get the credit accounts for the tenants with free tier access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/creditAccount/aws",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the credit accounts for the tenants with free tier access"
+        },
+        {
+          "info": {
+            "name": "Deletes the aws credit account for tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/creditAccount/aws",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "forceDelete",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes the aws credit account for tenants"
+        },
+        {
+          "info": {
+            "name": "Creates the Splunk HEC data sink for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/datasinks/splunk",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Creates the Splunk HEC data sink for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Validates the Splunk HEC data sink connection for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/datasinks/splunk/validate",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Validates the Splunk HEC data sink connection for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Returns the Splunk HEC data sink for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/datasinks/splunk/:uid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Splunk HEC data sink for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Updates the Splunk HEC data sink for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/datasinks/splunk/:uid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the Splunk HEC data sink for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Deletes the Splunk HEC data sink for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/datasinks/splunk/:uid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the Splunk HEC data sink for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Returns a summary of all data sinks configured for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/datasinks/summary",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a summary of all data sinks configured for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "retrieves the domains for tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/domains",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "retrieves the domains for tenant"
+        },
+        {
+          "info": {
+            "name": "creates or updates domains for tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/domains",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "creates or updates domains for tenant"
+        },
+        {
+          "info": {
+            "name": "Update tenant emailId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/emailId",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant emailId"
+        },
+        {
+          "info": {
+            "name": "Get tenant level freemium configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/freemium",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant level freemium configuration"
+        },
+        {
+          "info": {
+            "name": "Update tenant freemium configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/freemium",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant freemium configuration"
+        },
+        {
+          "info": {
+            "name": "Get tenant freemium usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/freemiumUsage",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant freemium usage"
+        },
+        {
+          "info": {
+            "name": "Returns the Palette IDP config for the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/idp/palette/config",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Palette IDP config for the tenant"
+        },
+        {
+          "info": {
+            "name": "Returns a specified invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/invoices/:invoiceUid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the tenant uid"
+              },
+              {
+                "name": "invoiceUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the invoice uid"
+              }
+            ]
+          },
+          "docs": "Returns a specified invoice"
+        },
+        {
+          "info": {
+            "name": "Downloads the specified invoice report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/invoices/:invoiceUid/report/invoice/pdf",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the tenant uid"
+              },
+              {
+                "name": "invoiceUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the invoice uid"
+              }
+            ]
+          },
+          "docs": "Downloads the specified invoice report"
+        },
+        {
+          "info": {
+            "name": "Downloads the specified monthly invoice report",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/invoices/:invoiceUid/report/pdf",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the tenant uid"
+              },
+              {
+                "name": "invoiceUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the invoice uid"
+              }
+            ]
+          },
+          "docs": "Downloads the specified monthly invoice report"
+        },
+        {
+          "info": {
+            "name": "Downloads the specified tenant usage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/invoices/:invoiceUid/report/usage/pdf",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the tenant uid"
+              },
+              {
+                "name": "invoiceUid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the invoice uid"
+              }
+            ]
+          },
+          "docs": "Downloads the specified tenant usage"
+        },
+        {
+          "info": {
+            "name": "Get cleaned up tenant resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/isCleanedUp",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get cleaned up tenant resources"
+        },
+        {
+          "info": {
+            "name": "Get tenant login banner settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/loginBanner",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant login banner settings"
+        },
+        {
+          "info": {
+            "name": "Update tenant login banner settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/loginBanner",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant login banner settings"
+        },
+        {
+          "info": {
+            "name": "List the macros of the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/macros",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the macros of the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Create or add new macros for the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/macros",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create or add new macros for the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Update the macros of the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/macros",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the macros of the specified tenant"
+        },
+        {
+          "info": {
+            "name": "Update the macros for the specified tenant by given macro name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/macros",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the macros for the specified tenant by given macro name"
+        },
+        {
+          "info": {
+            "name": "Delete the macros for the specified tenant by given macro name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/macros",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the macros for the specified tenant by given macro name"
+        },
+        {
+          "info": {
+            "name": "Returns the oidc Spec for tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/oidc/config",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the oidc Spec for tenant"
+        },
+        {
+          "info": {
+            "name": "Associates the  oidc Spec for the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/oidc/config",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Associates the  oidc Spec for the tenant"
+        },
+        {
+          "info": {
+            "name": "retrieves the password policy for tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/password/policy",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "retrieves the password policy for tenant"
+        },
+        {
+          "info": {
+            "name": "creates or updates a password policy for tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/password/policy",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "creates or updates a password policy for tenant"
+        },
+        {
+          "info": {
+            "name": "Returns the current tenant's plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/plan",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the current tenant's plan"
+        },
+        {
+          "info": {
+            "name": "Returns the tenant's monthly planUsage grouped by projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/plans/usage/monthly",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "endDate",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "startDate",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the tenant's monthly planUsage grouped by projects"
+        },
+        {
+          "info": {
+            "name": "Get is cluster group enabled for a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/clusterGroup",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get is cluster group enabled for a specific tenant"
+        },
+        {
+          "info": {
+            "name": "Enable or Disable cluster group for a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/clusterGroup",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enable or Disable cluster group for a specific tenant"
+        },
+        {
+          "info": {
+            "name": "Get tenant cluster RBAC settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/clusterRbacSettings",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant cluster RBAC settings"
+        },
+        {
+          "info": {
+            "name": "Update tenant cluster RBAC settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/clusterRbacSettings",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant cluster RBAC settings"
+        },
+        {
+          "info": {
+            "name": "Get tenant cluster settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/clusterSettings",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant cluster settings"
+        },
+        {
+          "info": {
+            "name": "Update tenant clusters nodes auto remediation setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/clusterSettings/nodesAutoRemediationSetting",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant clusters nodes auto remediation setting"
+        },
+        {
+          "info": {
+            "name": "Get developer credit enabled for a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/developerCredit",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get developer credit enabled for a specific tenant"
+        },
+        {
+          "info": {
+            "name": "update developer credit for a specific tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/developerCredit",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "update developer credit for a specific tenant"
+        },
+        {
+          "info": {
+            "name": "Get tenant fips settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/fips",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant fips settings"
+        },
+        {
+          "info": {
+            "name": "Update tenant fips setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/preferences/fips",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant fips setting"
+        },
+        {
+          "info": {
+            "name": "Get all rate config for public and private cloud",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/rateConfig",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get all rate config for public and private cloud"
+        },
+        {
+          "info": {
+            "name": "updates the rate config for public and private cloud",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/rateConfig",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "updates the rate config for public and private cloud"
+        },
+        {
+          "info": {
+            "name": "Get tenant level resource limits configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/resourceLimits",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get tenant level resource limits configuration"
+        },
+        {
+          "info": {
+            "name": "Update tenant resource limits configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/resourceLimits",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update tenant resource limits configuration"
+        },
+        {
+          "info": {
+            "name": "Returns the specified service provider metadata and Saml Spec for tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/saml/config",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified service provider metadata and Saml Spec for tenant"
+        },
+        {
+          "info": {
+            "name": "Associates the specified federation metadata for the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/saml/config",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Associates the specified federation metadata for the tenant"
+        },
+        {
+          "info": {
+            "name": "get sso logins for the tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/sso/auth/providers",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "get sso logins for the tenants"
+        },
+        {
+          "info": {
+            "name": "enable sso logins for the tenants",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/sso/auth/providers",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "enable sso logins for the tenants"
+        },
+        {
+          "info": {
+            "name": "Returns the details of a specific AWS marketplace subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/subscriptions/aws/:uid",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns detailed subscription information including the user's AWS account ID, entitlement data (plan limits, contract dates), and the derived monthly plan limits.\n"
+        },
+        {
+          "info": {
+            "name": "Returns the metadata of marketplace subscriptions for the tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/subscriptions/metadata",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns active marketplace subscription metadata for the specified tenant.\n"
+        },
+        {
+          "info": {
+            "name": "Returns the tenant's cpu corehours usages grouped by projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/usage/cpuCoreHours",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+              }
+            ]
+          },
+          "docs": "Returns the tenant's cpu corehours usages grouped by projects"
+        },
+        {
+          "info": {
+            "name": "Returns the user object of the specified tenant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/tenants/:tenantUid/user",
+            "params": [
+              {
+                "name": "tenantUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the user object of the specified tenant"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

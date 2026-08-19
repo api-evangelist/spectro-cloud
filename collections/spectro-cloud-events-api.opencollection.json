@@ -1,0 +1,205 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations events API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a paginated list of component events based on request parameters",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/events/components",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of component events based on request parameters"
+        },
+        {
+          "info": {
+            "name": "Creates a component event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/events/components",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a component event"
+        },
+        {
+          "info": {
+            "name": "Creates the component events in bulk",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/events/components/bulk",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates the component events in bulk"
+        },
+        {
+          "info": {
+            "name": "Returns a list of components events for the specified related object",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/events/components/:objectKind/:objectUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objectKind",
+                "value": "",
+                "type": "path",
+                "description": "Describes the related object uid for which events has to be fetched"
+              },
+              {
+                "name": "objectUid",
+                "value": "",
+                "type": "path",
+                "description": "Describes the related object kind for which events has to be fetched"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Returns a list of components events for the specified related object"
+        },
+        {
+          "info": {
+            "name": "Delete all the components events for the specified related object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/events/components/:objectKind/:objectUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "objectKind",
+                "value": "",
+                "type": "path",
+                "description": "Describes the related object uid for which events has to be fetched"
+              },
+              {
+                "name": "objectUid",
+                "value": "",
+                "type": "path",
+                "description": "Describes the related object kind for which events has to be fetched"
+              }
+            ]
+          },
+          "docs": "Delete all the components events for the specified related object"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

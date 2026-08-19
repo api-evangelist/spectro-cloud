@@ -1,0 +1,314 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations clusterTemplates API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clusterTemplates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create a new cluster template"
+        },
+        {
+          "info": {
+            "name": "Update the specified cluster's template variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/spectroclusters/:clusterUid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "clusterUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Update the specified cluster's template variables"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster template tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/tags",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster template tags"
+        },
+        {
+          "info": {
+            "name": "Validates the cluster template name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/validate/name",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Cluster template name"
+              }
+            ]
+          },
+          "docs": "Validates the cluster template name"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster template"
+        },
+        {
+          "info": {
+            "name": "Delete a cluster template by uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Delete a cluster template by uid"
+        },
+        {
+          "info": {
+            "name": "Update the specified cluster template metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Update the specified cluster template metadata"
+        },
+        {
+          "info": {
+            "name": "Update the specified cluster template policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid/policies",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Update the specified cluster template policies"
+        },
+        {
+          "info": {
+            "name": "Update the specified cluster template profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Update the specified cluster template profiles"
+        },
+        {
+          "info": {
+            "name": "Update variables for profiles in a cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid/profiles/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              }
+            ]
+          },
+          "docs": "Update variables for profiles in a cluster template"
+        },
+        {
+          "info": {
+            "name": "Retrieve variables for a specific profile in a cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid/profiles/:profileUid/variables",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              },
+              {
+                "name": "profileUid",
+                "value": "",
+                "type": "path",
+                "description": "Profile uid"
+              }
+            ]
+          },
+          "docs": "Retrieve variables for a specific profile in a cluster template"
+        },
+        {
+          "info": {
+            "name": "Returns the cluster reconcile document for a specific cluster launched from a template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clusterTemplates/:uid/spectroclusters/:clusterUid/reconcile",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster template uid"
+              },
+              {
+                "name": "clusterUid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster uid"
+              }
+            ]
+          },
+          "docs": "Returns the cluster reconcile document for a specific cluster launched from a template"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

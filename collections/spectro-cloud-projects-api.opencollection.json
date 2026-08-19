@@ -1,0 +1,511 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations projects API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/projects",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Deprecated: Use POST /v1/dashboard/projects"
+        },
+        {
+          "info": {
+            "name": "Creates a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/projects",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a project"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of supported alerts for a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/projects/alerts"
+          },
+          "docs": "Retrieves a list of supported alerts for a project"
+        },
+        {
+          "info": {
+            "name": "Returns the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified project"
+        },
+        {
+          "info": {
+            "name": "Updates the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified project"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "cleanupProjectResources",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Deletes the specified project"
+        },
+        {
+          "info": {
+            "name": "Create the specified alert to the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/alerts/:component",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create the specified alert to the specified project"
+        },
+        {
+          "info": {
+            "name": "Upsert the specified alert to the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/alerts/:component",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Upsert the specified alert to the specified project"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified alert to the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/alerts/:component",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified alert to the specified project"
+        },
+        {
+          "info": {
+            "name": "Get the specified alert of the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/alerts/:component/:alertUid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "alertUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the specified alert of the specified project"
+        },
+        {
+          "info": {
+            "name": "Update the specified alert of the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/alerts/:component/:alertUid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "alertUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the specified alert of the specified project"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified alert of the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/alerts/:component/:alertUid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "component",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "alertUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified alert of the specified project"
+        },
+        {
+          "info": {
+            "name": "List the macros of the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/macros",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "List the macros of the specified project"
+        },
+        {
+          "info": {
+            "name": "Create or add new macros for the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/macros",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Create or add new macros for the specified project"
+        },
+        {
+          "info": {
+            "name": "Update the macros of the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/macros",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the macros of the specified project"
+        },
+        {
+          "info": {
+            "name": "Update the macros for the specified project by macro name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/macros",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the macros for the specified project by macro name"
+        },
+        {
+          "info": {
+            "name": "Delete the macros for the specified project by macro name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/macros",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete the macros for the specified project by macro name"
+        },
+        {
+          "info": {
+            "name": "Update the metadata of the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/meta",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the metadata of the specified project"
+        },
+        {
+          "info": {
+            "name": "Get project cluster settings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/preferences/clusterSettings",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get project cluster settings"
+        },
+        {
+          "info": {
+            "name": "Update project clusters nodes auto remediation setting",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/preferences/clusterSettings/nodesAutoRemediationSetting",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update project clusters nodes auto remediation setting"
+        },
+        {
+          "info": {
+            "name": "Update the teams association to the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/teams",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the teams association to the specified project"
+        },
+        {
+          "info": {
+            "name": "Update the users association to the specified project",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/users",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the users association to the specified project"
+        },
+        {
+          "info": {
+            "name": "Validate and returns active resource of project before delete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/projects/:uid/validate",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Validate and returns active resource of project before delete"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,375 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations appDeployments API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "appDeployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Creates a application deployment in the virtual cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/appDeployments",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a application deployment in the virtual cluster"
+        },
+        {
+          "info": {
+            "name": "Creates a application deployment in one of virtual clusters in the cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/clusterGroup",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a application deployment in one of virtual clusters in the cluster group"
+        },
+        {
+          "info": {
+            "name": "Returns the specified application deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified application deployment"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified application deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified application deployment"
+        },
+        {
+          "info": {
+            "name": "Returns profile of the specified application deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              }
+            ]
+          },
+          "docs": "Returns profile of the specified application deployment"
+        },
+        {
+          "info": {
+            "name": "Updates the specified application deployment profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified application deployment profile"
+        },
+        {
+          "info": {
+            "name": "Apply the application deployment profile updates",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile/apply",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              },
+              {
+                "name": "notify",
+                "value": "",
+                "type": "query",
+                "description": "Application deployment notification uid"
+              }
+            ]
+          },
+          "docs": "Apply the application deployment profile updates"
+        },
+        {
+          "info": {
+            "name": "Returns the specified application deployment profile tier information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile/tiers/:tierUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment tier uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified application deployment profile tier information"
+        },
+        {
+          "info": {
+            "name": "Updates the specified application deployment profile tier information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile/tiers/:tierUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment tier uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified application deployment profile tier information"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of manifests of the specified application deployment profile tier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile/tiers/:tierUid/manifests",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment tier uid"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of manifests of the specified application deployment profile tier"
+        },
+        {
+          "info": {
+            "name": "Returns the specified application deployment tier manifest information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile/tiers/:tierUid/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment tier uid"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment tier manifest uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified application deployment tier manifest information"
+        },
+        {
+          "info": {
+            "name": "Updates the specified application deployment tier manifest information",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile/tiers/:tierUid/manifests/:manifestUid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              },
+              {
+                "name": "tierUid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment tier uid"
+              },
+              {
+                "name": "manifestUid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment tier manifest uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified application deployment tier manifest information"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of profile versions of the specified application deployment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/appDeployments/:uid/profile/versions",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Application deployment uid"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of profile versions of the specified application deployment"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

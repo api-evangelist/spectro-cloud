@@ -1,0 +1,1608 @@
+{
+  "item": [
+    {
+      "id": "3df92f02-4cbc-477c-aa4f-fa743cb6ea59",
+      "name": "clusterTemplates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0379e29f-9dfe-4654-9030-b41328947c93",
+          "name": "Create a new cluster template",
+          "request": {
+            "name": "Create a new cluster template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  \"spec\": {\n    \"cloudType\": \"<string>\",\n    \"policies\": [\n      {\n        \"kind\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      {\n        \"kind\": \"<string>\",\n        \"uid\": \"<string>\"\n      }\n    ],\n    \"profiles\": [\n      {\n        \"uid\": \"<string>\",\n        \"variables\": [\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"uid\": \"<string>\",\n        \"variables\": [\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0bf541f7-2a1a-48a9-8b09-3dc0e3f2427b",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  \"spec\": {\n    \"cloudType\": \"<string>\",\n    \"policies\": [\n      {\n        \"kind\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      {\n        \"kind\": \"<string>\",\n        \"uid\": \"<string>\"\n      }\n    ],\n    \"profiles\": [\n      {\n        \"uid\": \"<string>\",\n        \"variables\": [\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"uid\": \"<string>\",\n        \"variables\": [\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd51abd8-2519-4daa-ba05-93c54b6a6557",
+          "name": "Update the specified cluster's template variables",
+          "request": {
+            "name": "Update the specified cluster's template variables",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                "spectroclusters",
+                ":clusterUid",
+                "variables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterUid",
+                  "description": "(Required) Cluster uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"profiles\": [\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8cd39d8b-9894-4b2e-b43e-8e548e54e412",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    "spectroclusters",
+                    ":clusterUid",
+                    "variables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterUid",
+                      "description": "(Required) Cluster uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profiles\": [\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18e4cb42-bdee-4d06-be99-2bc85f25a396",
+          "name": "Retrieves a list of cluster template tags",
+          "request": {
+            "name": "Retrieves a list of cluster template tags",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bcac8c46-efc6-4292-9dfb-0a23085e876d",
+              "name": "An array of cluster template tags",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tags\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "141a6cd4-71dd-4978-a519-cb4106db39b5",
+          "name": "Validates the cluster template name",
+          "request": {
+            "name": "Validates the cluster template name",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                "validate",
+                "name"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Cluster template name"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eb67979f-40b7-470d-9ec1-d2a175722e50",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    "validate",
+                    "name"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "07534be4-972a-4d58-80cf-7661f9768b7b",
+          "name": "Delete a cluster template by uid",
+          "request": {
+            "name": "Delete a cluster template by uid",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b76d9a49-668f-4d2b-9e6a-d55a169fa5e6",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e834bb7a-36f8-406c-8c76-a520e3258355",
+          "name": "Returns the specified cluster template",
+          "request": {
+            "name": "Returns the specified cluster template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "04e749b3-0ae9-49a0-a3ac-457baed947a0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"creationTimestamp\": \"1969-10-19T18:44:46.275Z\",\n    \"deletionTimestamp\": \"2021-07-15T23:30:35.512Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"lastModifiedTimestamp\": \"1961-01-29T12:08:48.828Z\",\n    \"name\": \"string\",\n    \"uid\": \"string\"\n  },\n  \"spec\": {\n    \"cloudType\": \"string\",\n    \"clusters\": {\n      \"key_0\": {\n        \"clusterUid\": \"string\",\n        \"name\": \"string\"\n      },\n      \"key_1\": {\n        \"clusterUid\": \"string\",\n        \"name\": \"string\"\n      }\n    },\n    \"policies\": [\n      {\n        \"kind\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      {\n        \"kind\": \"<string>\",\n        \"uid\": \"<string>\"\n      }\n    ],\n    \"profiles\": [\n      {\n        \"uid\": \"<string>\",\n        \"variables\": [\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"uid\": \"<string>\",\n        \"variables\": [\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"assignStrategy\": \"<string>\",\n            \"clusters\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  },\n  \"status\": {\n    \"clusterStatusCounts\": {\n      \"clusters\": {\n        \"applied\": [\n          \"string\",\n          \"string\"\n        ],\n        \"failed\": [\n          \"string\",\n          \"string\"\n        ],\n        \"pending\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    \"clusterVariables\": {\n      \"resolved\": 4537,\n      \"unResolved\": 8510\n    },\n    \"maintenance\": {\n      \"nextWindowEndTime\": \"2024-07-30T04:54:18.810Z\",\n      \"nextWindowStartTime\": \"1949-09-30T15:34:26.057Z\"\n    },\n    \"state\": \"Applied\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41cee98f-8101-470f-b168-2b01f3148aae",
+          "name": "Update the specified cluster template metadata",
+          "request": {
+            "name": "Update the specified cluster template metadata",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid",
+                "metadata"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8700aef6-6346-46b8-a44e-993d7b9942e5",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid",
+                    "metadata"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90ceed16-e035-45a4-b2b2-a1c33d492b7a",
+          "name": "Update the specified cluster template policies",
+          "request": {
+            "name": "Update the specified cluster template policies",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid",
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"policies\": [\n    {\n      \"kind\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    {\n      \"kind\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ff22fdde-a860-4fc7-b189-12b6c39411ae",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid",
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"policies\": [\n    {\n      \"kind\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    {\n      \"kind\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "41e57504-cd50-4b13-be74-56242703ea8d",
+          "name": "Update the specified cluster template profiles",
+          "request": {
+            "name": "Update the specified cluster template profiles",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid",
+                "profiles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"profiles\": [\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddd84a9f-70e6-4b05-ae3c-369c8f76879f",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid",
+                    "profiles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profiles\": [\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"assignStrategy\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e097f461-8916-495d-9bac-1cb651f1e70f",
+          "name": "Update variables for profiles in a cluster template",
+          "request": {
+            "name": "Update variables for profiles in a cluster template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid",
+                "profiles",
+                "variables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"profiles\": [\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d66cdf1-f866-4658-9004-72beb619cc9d",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid",
+                    "profiles",
+                    "variables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"profiles\": [\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"uid\": \"<string>\",\n      \"variables\": [\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"name\": \"<string>\",\n          \"clusters\": [\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"uid\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf0ff6bb-9fcc-4264-92df-f5836781091f",
+          "name": "Retrieve variables for a specific profile in a cluster template",
+          "request": {
+            "name": "Retrieve variables for a specific profile in a cluster template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid",
+                "profiles",
+                ":profileUid",
+                "variables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "profileUid",
+                  "description": "(Required) Profile uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "583b9016-01d4-4200-a36e-11b1b5dcd3b7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid",
+                    "profiles",
+                    ":profileUid",
+                    "variables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "profileUid",
+                      "description": "(Required) Profile uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"variables\": [\n    {\n      \"variable\": {\n        \"name\": \"string\",\n        \"defaultValue\": \"string\",\n        \"description\": \"string\",\n        \"displayName\": \"string\",\n        \"format\": \"string\",\n        \"hidden\": true,\n        \"immutable\": false,\n        \"inputType\": \"text\",\n        \"isSensitive\": true,\n        \"options\": [\n          {\n            \"value\": \"string\",\n            \"default\": false,\n            \"description\": \"string\",\n            \"label\": \"string\"\n          },\n          {\n            \"value\": \"string\",\n            \"default\": false,\n            \"description\": \"string\",\n            \"label\": \"string\"\n          }\n        ],\n        \"regex\": \"string\",\n        \"required\": false\n      },\n      \"clusters\": [\n        {\n          \"uid\": \"string\",\n          \"assignmentState\": \"Assigned\",\n          \"assignedBy\": \"spectrocluster\",\n          \"assignedValue\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"uid\": \"string\",\n          \"assignmentState\": \"Assigned\",\n          \"assignedBy\": \"spectrocluster\",\n          \"assignedValue\": \"string\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"variable\": {\n        \"name\": \"string\",\n        \"defaultValue\": \"string\",\n        \"description\": \"string\",\n        \"displayName\": \"string\",\n        \"format\": \"string\",\n        \"hidden\": false,\n        \"immutable\": true,\n        \"inputType\": \"text\",\n        \"isSensitive\": true,\n        \"options\": [\n          {\n            \"value\": \"string\",\n            \"default\": false,\n            \"description\": \"string\",\n            \"label\": \"string\"\n          },\n          {\n            \"value\": \"string\",\n            \"default\": true,\n            \"description\": \"string\",\n            \"label\": \"string\"\n          }\n        ],\n        \"regex\": \"string\",\n        \"required\": false\n      },\n      \"clusters\": [\n        {\n          \"uid\": \"string\",\n          \"assignmentState\": \"Pending\",\n          \"assignedBy\": \"spectrocluster\",\n          \"assignedValue\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"uid\": \"string\",\n          \"assignmentState\": \"Pending\",\n          \"assignedBy\": \"clustertemplate\",\n          \"assignedValue\": \"string\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bef6c4f7-6b53-4be0-ad80-f0c78933e6f1",
+          "name": "Returns the cluster reconcile document for a specific cluster launched from a template",
+          "request": {
+            "name": "Returns the cluster reconcile document for a specific cluster launched from a template",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "clusterTemplates",
+                ":uid",
+                "spectroclusters",
+                ":clusterUid",
+                "reconcile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Cluster template uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "clusterUid",
+                  "description": "(Required) Cluster uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b32779a0-14b9-4724-a1ea-cfc7b36b9bb7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "clusterTemplates",
+                    ":uid",
+                    "spectroclusters",
+                    ":clusterUid",
+                    "reconcile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Cluster template uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "clusterUid",
+                      "description": "(Required) Cluster uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\"\n    },\n    \"creationTimestamp\": \"1967-07-05T10:21:50.596Z\",\n    \"deletionTimestamp\": \"1952-03-21T08:51:53.188Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"lastModifiedTimestamp\": \"2001-12-18T13:54:51.076Z\",\n    \"name\": \"string\",\n    \"uid\": \"string\"\n  },\n  \"spec\": {\n    \"profiles\": [\n      {\n        \"uid\": \"string\",\n        \"name\": \"string\",\n        \"variables\": {\n          \"resolvedVariables\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"unResolvedVariables\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"uid\": \"string\",\n        \"name\": \"string\",\n        \"variables\": {\n          \"resolvedVariables\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"unResolvedVariables\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      }\n    ]\n  },\n  \"status\": {\n    \"lastAppliedTimestamp\": \"1960-10-23T10:47:17.167Z\",\n    \"message\": \"string\",\n    \"state\": \"Failed\",\n    \"updateLogs\": [\n      {\n        \"appliedTimestamp\": \"1959-11-15T14:26:27.810Z\",\n        \"message\": \"string\",\n        \"profileUids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"state\": \"InProgress\"\n      },\n      {\n        \"appliedTimestamp\": \"1990-03-27T05:20:12.107Z\",\n        \"message\": \"string\",\n        \"profileUids\": [\n          \"string\",\n          \"string\"\n        ],\n        \"state\": \"Failed\"\n      }\n    ],\n    \"variableStatus\": {\n      \"state\": \"Unresolved\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9ac0f1b3-d241-464a-8eb8-579ce6d56b7b",
+    "name": "Local Management APIs activations clusterTemplates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

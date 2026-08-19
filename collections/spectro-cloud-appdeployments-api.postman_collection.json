@@ -1,0 +1,1836 @@
+{
+  "item": [
+    {
+      "id": "6d9eba38-1ebb-41aa-9975-64aa55876705",
+      "name": "appDeployments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b2ab49ab-82a5-4cd0-b987-7b830334ff58",
+          "name": "Creates a application deployment in the virtual cluster",
+          "request": {
+            "name": "Creates a application deployment in the virtual cluster",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  \"spec\": {\n    \"config\": {\n      \"targetSpec\": {\n        \"clusterUid\": \"<string>\"\n      }\n    },\n    \"profile\": {\n      \"appProfileUid\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ef0cddd4-7c35-4e61-b4c5-773d0f066065",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  \"spec\": {\n    \"config\": {\n      \"targetSpec\": {\n        \"clusterUid\": \"<string>\"\n      }\n    },\n    \"profile\": {\n      \"appProfileUid\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0695ec1d-3370-46e2-b9da-0b2ed5fee5d2",
+          "name": "Creates a application deployment in one of virtual clusters in the cluster group",
+          "request": {
+            "name": "Creates a application deployment in one of virtual clusters in the cluster group",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                "clusterGroup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  \"spec\": {\n    \"config\": {\n      \"targetSpec\": {\n        \"clusterName\": \"<string>\",\n        \"clusterGroupUid\": \"<string>\",\n        \"clusterLimits\": {\n          \"cpu\": \"<integer>\",\n          \"memoryMiB\": \"<integer>\",\n          \"storageGiB\": \"<integer>\"\n        }\n      }\n    },\n    \"profile\": {\n      \"appProfileUid\": \"<string>\"\n    }\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "464494e5-1098-465f-9f66-12a9ede1ee62",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    "clusterGroup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"name\": \"<string>\"\n  },\n  \"spec\": {\n    \"config\": {\n      \"targetSpec\": {\n        \"clusterName\": \"<string>\",\n        \"clusterGroupUid\": \"<string>\",\n        \"clusterLimits\": {\n          \"cpu\": \"<integer>\",\n          \"memoryMiB\": \"<integer>\",\n          \"storageGiB\": \"<integer>\"\n        }\n      }\n    },\n    \"profile\": {\n      \"appProfileUid\": \"<string>\"\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f26006b5-fa62-4fa6-81f4-1e66e2e0d705",
+          "name": "Deletes the specified application deployment",
+          "request": {
+            "name": "Deletes the specified application deployment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b65b8db9-5a34-4842-96c2-066bfdad48f8",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b7276a5-8093-4e65-a0fa-6456aae0d793",
+          "name": "Returns the specified application deployment",
+          "request": {
+            "name": "Returns the specified application deployment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "12296268-a39a-494d-8b46-e6a4582b3c0e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"creationTimestamp\": \"2023-06-10T14:23:07.672Z\",\n    \"deletionTimestamp\": \"1980-05-09T23:16:15.423Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"lastModifiedTimestamp\": \"2007-09-03T12:30:37.858Z\",\n    \"name\": \"string\",\n    \"uid\": \"string\"\n  },\n  \"spec\": {\n    \"config\": {\n      \"target\": {\n        \"clusterRef\": {\n          \"deploymentClusterType\": \"virtual\",\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"envRef\": {\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"uid\": \"string\"\n        }\n      }\n    },\n    \"profile\": {\n      \"metadata\": {\n        \"name\": \"string\",\n        \"uid\": \"string\",\n        \"version\": \"string\"\n      },\n      \"template\": {\n        \"appTiers\": [\n          {\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"version\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"registryRefs\": [\n          {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"kind\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"uid\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  },\n  \"status\": {\n    \"appTiers\": [\n      {\n        \"condition\": {\n          \"type\": \"string\",\n          \"status\": \"string\",\n          \"lastProbeTime\": \"1985-12-15T02:18:05.805Z\",\n          \"lastTransitionTime\": \"1968-03-05T06:13:36.680Z\",\n          \"message\": \"string\",\n          \"reason\": \"string\"\n        },\n        \"endTime\": \"1984-09-14T03:19:48.538Z\",\n        \"manifests\": [\n          {\n            \"condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"profileUid\": \"string\",\n        \"services\": [\n          {\n            \"host\": \"string\",\n            \"name\": \"string\",\n            \"ports\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"host\": \"string\",\n            \"name\": \"string\",\n            \"ports\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"startTime\": \"1957-02-05T14:36:51.159Z\",\n        \"type\": \"string\",\n        \"version\": \"string\"\n      },\n      {\n        \"condition\": {\n          \"type\": \"string\",\n          \"status\": \"string\",\n          \"lastProbeTime\": \"1954-11-27T21:56:55.241Z\",\n          \"lastTransitionTime\": \"1954-02-28T12:34:22.438Z\",\n          \"message\": \"string\",\n          \"reason\": \"string\"\n        },\n        \"endTime\": \"2012-10-23T09:46:23.980Z\",\n        \"manifests\": [\n          {\n            \"condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"condition\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"name\": \"string\",\n        \"profileUid\": \"string\",\n        \"services\": [\n          {\n            \"host\": \"string\",\n            \"name\": \"string\",\n            \"ports\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"host\": \"string\",\n            \"name\": \"string\",\n            \"ports\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ],\n        \"startTime\": \"1954-06-23T11:35:15.325Z\",\n        \"type\": \"string\",\n        \"version\": \"string\"\n      }\n    ],\n    \"lifecycleStatus\": {\n      \"msg\": \"string\",\n      \"status\": \"Pausing\"\n    },\n    \"state\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25b7d03c-5783-48bc-8e21-bbb1a7106c52",
+          "name": "Returns profile of the specified application deployment",
+          "request": {
+            "name": "Returns profile of the specified application deployment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "55cb425c-89e6-4156-b426-e9ee940d600d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"uid\": \"string\",\n    \"version\": \"string\"\n  },\n  \"template\": {\n    \"appTiers\": [\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\"\n          },\n          \"creationTimestamp\": \"1957-01-23T19:07:17.647Z\",\n          \"deletionTimestamp\": \"1995-04-11T21:22:39.118Z\",\n          \"labels\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\",\n            \"key_2\": \"string\",\n            \"key_3\": \"string\"\n          },\n          \"lastModifiedTimestamp\": \"1985-10-07T06:29:27.906Z\",\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"spec\": {\n          \"containerRegistryUid\": \"string\",\n          \"installOrder\": 6372,\n          \"manifests\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"properties\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"registryUid\": \"string\",\n          \"sourceAppTierUid\": \"string\",\n          \"type\": \"manifest\",\n          \"values\": \"string\",\n          \"version\": \"string\"\n        }\n      },\n      {\n        \"metadata\": {\n          \"annotations\": {\n            \"key_0\": \"string\"\n          },\n          \"creationTimestamp\": \"2011-04-08T17:05:53.098Z\",\n          \"deletionTimestamp\": \"2022-03-16T18:47:24.982Z\",\n          \"labels\": {\n            \"key_0\": \"string\"\n          },\n          \"lastModifiedTimestamp\": \"2007-10-02T03:37:44.816Z\",\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"spec\": {\n          \"containerRegistryUid\": \"string\",\n          \"installOrder\": 1670,\n          \"manifests\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"properties\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"registryUid\": \"string\",\n          \"sourceAppTierUid\": \"string\",\n          \"type\": \"manifest\",\n          \"values\": \"string\",\n          \"version\": \"string\"\n        }\n      }\n    ],\n    \"registryRefs\": [\n      {\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      {\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70dc22a6-2ff8-49d0-a078-7d7cfcd623ac",
+          "name": "Updates the specified application deployment profile",
+          "request": {
+            "name": "Updates the specified application deployment profile",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"appProfileUid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2a498d97-b848-46fb-affe-45805fde8c00",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"appProfileUid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c60eeae3-a49b-474f-b27e-cf2cc6d89d28",
+          "name": "Apply the application deployment profile updates",
+          "request": {
+            "name": "Apply the application deployment profile updates",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile",
+                "apply"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "notify",
+                  "value": "<string>",
+                  "description": "Application deployment notification uid"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2ee9a43a-189e-4898-9b43-1e32473f6251",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile",
+                    "apply"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "notify",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fc588960-b2dc-4215-90ab-ade97f6e9d91",
+          "name": "Returns the specified application deployment profile tier information",
+          "request": {
+            "name": "Returns the specified application deployment profile tier information",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile",
+                "tiers",
+                ":tierUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tierUid",
+                  "description": "(Required) Application deployment tier uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "37e5b0ed-e8b1-4747-bced-715a92111ad1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile",
+                    "tiers",
+                    ":tierUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tierUid",
+                      "description": "(Required) Application deployment tier uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"creationTimestamp\": \"1956-07-24T13:01:08.218Z\",\n    \"deletionTimestamp\": \"1976-02-12T22:55:34.258Z\",\n    \"labels\": {\n      \"key_0\": \"string\"\n    },\n    \"lastModifiedTimestamp\": \"1961-05-26T02:44:41.131Z\",\n    \"name\": \"string\",\n    \"uid\": \"string\"\n  },\n  \"spec\": {\n    \"containerRegistryUid\": \"string\",\n    \"installOrder\": 1722,\n    \"manifests\": [\n      {\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      {\n        \"kind\": \"string\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      }\n    ],\n    \"properties\": [\n      {\n        \"format\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"format\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"registryUid\": \"string\",\n    \"sourceAppTierUid\": \"string\",\n    \"type\": \"manifest\",\n    \"values\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "05b4d6f6-a645-407c-9514-80a8c0ae1bc2",
+          "name": "Updates the specified application deployment profile tier information",
+          "request": {
+            "name": "Updates the specified application deployment profile tier information",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile",
+                "tiers",
+                ":tierUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tierUid",
+                  "description": "(Required) Application deployment tier uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"containerRegistryUid\": \"<string>\",\n  \"installOrder\": \"<integer>\",\n  \"manifests\": [\n    {\n      \"name\": \"<string>\",\n      \"content\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"content\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"properties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"values\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "675174a9-f147-4314-8075-2ac7226a29e4",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile",
+                    "tiers",
+                    ":tierUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tierUid",
+                      "description": "(Required) Application deployment tier uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"containerRegistryUid\": \"<string>\",\n  \"installOrder\": \"<integer>\",\n  \"manifests\": [\n    {\n      \"name\": \"<string>\",\n      \"content\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"content\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  ],\n  \"name\": \"<string>\",\n  \"properties\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ],\n  \"values\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aac9c2a-76bb-40db-be46-08dd9910ce65",
+          "name": "Retrieves a list of manifests of the specified application deployment profile tier",
+          "request": {
+            "name": "Retrieves a list of manifests of the specified application deployment profile tier",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile",
+                "tiers",
+                ":tierUid",
+                "manifests"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tierUid",
+                  "description": "(Required) Application deployment tier uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "201227d9-3e57-47b2-aa9a-3527507501d0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile",
+                    "tiers",
+                    ":tierUid",
+                    "manifests"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tierUid",
+                      "description": "(Required) Application deployment tier uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"manifests\": [\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"1978-06-09T09:24:24.249Z\",\n        \"deletionTimestamp\": \"2010-01-01T14:48:18.310Z\",\n        \"labels\": {\n          \"key_0\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1955-09-20T01:51:06.372Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"published\": {\n          \"content\": \"string\",\n          \"digest\": \"string\"\n        }\n      }\n    },\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"creationTimestamp\": \"1977-05-01T22:07:39.568Z\",\n        \"deletionTimestamp\": \"1989-07-28T02:24:15.547Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1969-08-02T05:06:10.664Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"published\": {\n          \"content\": \"string\",\n          \"digest\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b6e72c50-a435-4c86-8a8a-3009b1b75e4a",
+          "name": "Returns the specified application deployment tier manifest information",
+          "request": {
+            "name": "Returns the specified application deployment tier manifest information",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile",
+                "tiers",
+                ":tierUid",
+                "manifests",
+                ":manifestUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tierUid",
+                  "description": "(Required) Application deployment tier uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "manifestUid",
+                  "description": "(Required) Application deployment tier manifest uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0c319eb4-06db-4cc4-9bd1-189f9b7377fe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile",
+                    "tiers",
+                    ":tierUid",
+                    "manifests",
+                    ":manifestUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tierUid",
+                      "description": "(Required) Application deployment tier uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "manifestUid",
+                      "description": "(Required) Application deployment tier manifest uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"creationTimestamp\": \"1982-06-19T22:52:19.739Z\",\n    \"deletionTimestamp\": \"1976-03-01T11:32:11.015Z\",\n    \"labels\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"lastModifiedTimestamp\": \"2022-12-31T18:16:35.972Z\",\n    \"name\": \"string\",\n    \"uid\": \"string\"\n  },\n  \"spec\": {\n    \"published\": {\n      \"content\": \"string\",\n      \"digest\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a7ad55c9-6fed-471f-9892-e3c9a6403763",
+          "name": "Updates the specified application deployment tier manifest information",
+          "request": {
+            "name": "Updates the specified application deployment tier manifest information",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile",
+                "tiers",
+                ":tierUid",
+                "manifests",
+                ":manifestUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "tierUid",
+                  "description": "(Required) Application deployment tier uid"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "manifestUid",
+                  "description": "(Required) Application deployment tier manifest uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3bc1648-93c3-4782-8979-6c314b164d95",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile",
+                    "tiers",
+                    ":tierUid",
+                    "manifests",
+                    ":manifestUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "tierUid",
+                      "description": "(Required) Application deployment tier uid"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "manifestUid",
+                      "description": "(Required) Application deployment tier manifest uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"content\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8889a69-4384-425a-bdfa-46a89a284f9d",
+          "name": "Retrieves a list of profile versions of the specified application deployment",
+          "request": {
+            "name": "Retrieves a list of profile versions of the specified application deployment",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "appDeployments",
+                ":uid",
+                "profile",
+                "versions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Application deployment uid"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c800e482-afa6-4df2-a8b4-1a5b707bb201",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "appDeployments",
+                    ":uid",
+                    "profile",
+                    "versions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Application deployment uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"availableVersions\": [\n    {\n      \"uid\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"uid\": \"string\",\n      \"version\": \"string\"\n    }\n  ],\n  \"latestVersions\": [\n    {\n      \"uid\": \"string\",\n      \"version\": \"string\"\n    },\n    {\n      \"uid\": \"string\",\n      \"version\": \"string\"\n    }\n  ],\n  \"metadata\": {\n    \"name\": \"string\",\n    \"uid\": \"string\",\n    \"version\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e6c14509-2ed2-4e98-bf77-1265f02a90c5",
+    "name": "Local Management APIs activations appDeployments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

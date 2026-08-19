@@ -1,0 +1,585 @@
+{
+  "item": [
+    {
+      "id": "24649433-d611-4d94-8901-357c3ef27b4e",
+      "name": "metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8a62f02d-9419-480f-a7da-72b8c8c1b5db",
+          "name": "Retrieves the list of metrics for a specified resource kind",
+          "request": {
+            "name": "Retrieves the list of metrics for a specified resource kind",
+            "description": {
+              "content": "Returns all the metrics for a given resource kind",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ":resourceKind",
+                "values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metricKind",
+                  "value": "all"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeMasterMachines",
+                  "value": "false",
+                  "description": "Deprecated. includeMasterMachines in boolean, group the data point by including control plane nodes if set to true"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeControlPlaneMachines",
+                  "value": "false",
+                  "description": "includeControlPlaneMachines in boolean, group the data point by including control plane nodes if set to true"
+                },
+                {
+                  "disabled": false,
+                  "key": "discrete",
+                  "value": "false",
+                  "description": "if true then api returns only aggregation values, else api returns all data points by default"
+                },
+                {
+                  "disabled": false,
+                  "key": "spectroClusterUid",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceKind",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "68403c62-4c8f-48ca-a193-a847e8761cca",
+              "name": "An array of metric items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ":resourceKind",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metricKind",
+                      "value": "all"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "1"
+                    },
+                    {
+                      "key": "includeMasterMachines",
+                      "value": "false"
+                    },
+                    {
+                      "key": "includeControlPlaneMachines",
+                      "value": "false"
+                    },
+                    {
+                      "key": "discrete",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spectroClusterUid",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceKind",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metadata\": {\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"metrics\": [\n        {\n          \"aggregation\": {\n            \"avg\": 5352.5816420759575,\n            \"count\": 2144.1706270475324,\n            \"max\": 5359.448535308527,\n            \"min\": 828.9649366342411,\n            \"sum\": 6122.776405140299\n          },\n          \"kind\": \"string\",\n          \"points\": [\n            {\n              \"avg\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"unit\": \"string\"\n        },\n        {\n          \"aggregation\": {\n            \"avg\": 9397.681995296498,\n            \"count\": 6900.921654820943,\n            \"max\": 2761.649471292846,\n            \"min\": 4504.798217391083,\n            \"sum\": 1796.5671755275591\n          },\n          \"kind\": \"string\",\n          \"points\": [\n            {\n              \"avg\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"unit\": \"string\"\n        }\n      ]\n    },\n    {\n      \"metadata\": {\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"metrics\": [\n        {\n          \"aggregation\": {\n            \"avg\": 6800.699538962052,\n            \"count\": 2190.1551736715132,\n            \"max\": 8885.920605223748,\n            \"min\": 9425.081497699011,\n            \"sum\": 2549.090188281069\n          },\n          \"kind\": \"string\",\n          \"points\": [\n            {\n              \"avg\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"unit\": \"string\"\n        },\n        {\n          \"aggregation\": {\n            \"avg\": 8142.585703038203,\n            \"count\": 5071.815841334059,\n            \"max\": 1101.0402847617818,\n            \"min\": 2209.792928925803,\n            \"sum\": 3243.466392605916\n          },\n          \"kind\": \"string\",\n          \"points\": [\n            {\n              \"avg\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"count\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"max\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"min\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"sum\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"timestamp\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"unit\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e714df6-dbf4-4804-a871-6e027b6ff84c",
+          "name": "Deletes the metrics of the specified resource",
+          "request": {
+            "name": "Deletes the metrics of the specified resource",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ":resourceKind",
+                ":resourceUid",
+                "values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceKind",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9ccc8644-dba3-457e-b305-8cee3f2d5e63",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ":resourceKind",
+                    ":resourceUid",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceKind",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "334eaae7-4667-45a0-9d84-31b839314584",
+          "name": "Returns the metrics for a specified resource uid",
+          "request": {
+            "name": "Returns the metrics for a specified resource uid",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "metrics",
+                ":resourceKind",
+                ":resourceUid",
+                "values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "metricKind",
+                  "value": "all",
+                  "description": "multiple metric kinds can be provided with comma separated"
+                },
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "<dateTime>",
+                  "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "<dateTime>",
+                  "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers."
+                },
+                {
+                  "disabled": false,
+                  "key": "period",
+                  "value": "1",
+                  "description": "period in minutes, group the data point by the specified period"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeMasterMachines",
+                  "value": "false",
+                  "description": "Deprecated. includeMasterMachines in boolean, group the data point by including control plane nodes if set to true"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeControlPlaneMachines",
+                  "value": "false",
+                  "description": "includeControlPlaneMachines in boolean, group the data point by including control plane nodes if set to true"
+                },
+                {
+                  "disabled": false,
+                  "key": "discrete",
+                  "value": "false",
+                  "description": "if true then api returns only aggregation values, else api returns all data points by default"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceKind",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "94d93801-f0d2-433a-94f1-f0826fb5e80e",
+              "name": "An array of metric items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "metrics",
+                    ":resourceKind",
+                    ":resourceUid",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "metricKind",
+                      "value": "all"
+                    },
+                    {
+                      "key": "startTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "period",
+                      "value": "1"
+                    },
+                    {
+                      "key": "includeMasterMachines",
+                      "value": "false"
+                    },
+                    {
+                      "key": "includeControlPlaneMachines",
+                      "value": "false"
+                    },
+                    {
+                      "key": "discrete",
+                      "value": "false"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceKind",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"aggregation\": {\n        \"avg\": 9116.141401050352,\n        \"count\": 4939.993801044184,\n        \"max\": 3496.963697531079,\n        \"min\": 1733.6800938158137,\n        \"sum\": 5189.9004824111225\n      },\n      \"kind\": \"string\",\n      \"points\": [\n        {\n          \"avg\": 1856.1253681674516,\n          \"count\": 1962.8992774931742,\n          \"max\": 724.0731122022548,\n          \"min\": 9531.772990922747,\n          \"sum\": 636.6035170955764,\n          \"timestamp\": 6167.192325641912,\n          \"value\": 4692.254575173489\n        },\n        {\n          \"avg\": 6273.4005562316315,\n          \"count\": 3236.0401517405503,\n          \"max\": 6066.758868672516,\n          \"min\": 3614.547464770479,\n          \"sum\": 7031.920802663625,\n          \"timestamp\": 6780.753825920164,\n          \"value\": 3600.966112621685\n        }\n      ],\n      \"unit\": \"string\"\n    },\n    {\n      \"aggregation\": {\n        \"avg\": 1242.5692152402246,\n        \"count\": 1592.2492188403014,\n        \"max\": 9577.871494045086,\n        \"min\": 9476.502344998486,\n        \"sum\": 9089.935365126568\n      },\n      \"kind\": \"string\",\n      \"points\": [\n        {\n          \"avg\": 5547.070486898411,\n          \"count\": 9537.916405105914,\n          \"max\": 5422.742333500478,\n          \"min\": 5127.815617985121,\n          \"sum\": 2468.866247054634,\n          \"timestamp\": 8255.977531777891,\n          \"value\": 2415.1112781994475\n        },\n        {\n          \"avg\": 970.2377408121554,\n          \"count\": 4767.019150609491,\n          \"max\": 2263.980034462452,\n          \"min\": 8716.628660233797,\n          \"sum\": 9188.943440209881,\n          \"timestamp\": 9886.957013970557,\n          \"value\": 2939.303805699738\n        }\n      ],\n      \"unit\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "46e1ccbe-ee91-4306-9dcd-c9f053ae7407",
+    "name": "Local Management APIs activations metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

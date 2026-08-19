@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations clustergroups API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clustergroups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create cluster groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clustergroups",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create cluster groups"
+        },
+        {
+          "info": {
+            "name": "Get cluster group developer credit usage by scope",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/developerCredit/usage/:scope",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "scope",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get cluster group developer credit usage by scope"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster groups host cluster summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/hostCluster",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster groups host cluster summary"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cluster groups host cluster metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/hostCluster/metadata",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cluster groups host cluster metadata"
+        },
+        {
+          "info": {
+            "name": "Validates the cluster groups name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/validate/name",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Validates the cluster groups name"
+        },
+        {
+          "info": {
+            "name": "Returns the specified cluster groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the specified cluster groups"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified cluster group"
+        },
+        {
+          "info": {
+            "name": "Updates cluster reference and host cluster config",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/:uid/hostCluster",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates cluster reference and host cluster config"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster groups meta",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/:uid/meta",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster groups meta"
+        },
+        {
+          "info": {
+            "name": "Returns the specified clustergroup's profile packs resolved values",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/:uid/packs/resolvedValues",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Cluster group uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified clustergroup's profile packs resolved values"
+        },
+        {
+          "info": {
+            "name": "Returns the associated profiles of a specified cluster group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "ClusterGroup uid"
+              },
+              {
+                "name": "includePackMeta",
+                "value": "",
+                "type": "query",
+                "description": "includes pack meta such as schema, presets"
+              }
+            ]
+          },
+          "docs": "Returns the associated profiles of a specified cluster group"
+        },
+        {
+          "info": {
+            "name": "Updates the specified cluster groups profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clustergroups/:uid/profiles",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "ClusterGroup uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified cluster groups profiles"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

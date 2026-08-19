@@ -1,0 +1,2022 @@
+{
+  "item": [
+    {
+      "id": "b299ff42-a05b-472d-9e87-53225d1aac07",
+      "name": "teams",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e27ce285-5bd7-4ed4-8f77-549487ba03b5",
+          "name": "Retrieves a list of teams",
+          "request": {
+            "name": "Retrieves a list of teams",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "43592c1c-d7f5-412d-b75b-a6d7a373307d",
+              "name": "An array of teams",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"creationTimestamp\": \"1997-07-05T12:13:48.591Z\",\n        \"deletionTimestamp\": \"1980-06-06T11:08:23.296Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1977-03-31T17:58:40.146Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"roles\": [\n          \"string\"\n        ],\n        \"sources\": [\n          \"string\"\n        ],\n        \"users\": [\n          \"string\"\n        ]\n      },\n      \"status\": {}\n    },\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"creationTimestamp\": \"1948-12-27T13:57:27.873Z\",\n        \"deletionTimestamp\": \"2014-11-04T16:32:47.723Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"2015-04-18T22:57:48.525Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"roles\": [\n          \"string\"\n        ],\n        \"sources\": [\n          \"string\"\n        ],\n        \"users\": [\n          \"string\"\n        ]\n      },\n      \"status\": {}\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 7827,\n    \"limit\": 5470,\n    \"offset\": 270\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5778a9d-c7e0-48d7-9661-9266c406fe6b",
+          "name": "Creates a team with the specified users and roles",
+          "request": {
+            "name": "Creates a team with the specified users and roles",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sources\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"users\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "931b41f5-f66e-43b3-9326-0244c233ff2b",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f795f0a-6f91-4593-b1fa-fb744b66c0b3",
+          "name": "Retrieves a list of team summary",
+          "request": {
+            "name": "Retrieves a list of team summary",
+            "description": {
+              "content": "Deprecated, Use Post api - Returns a list of team summaries",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0311e973-fc95-4628-acd7-b4ea5be281e2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"<string>\"\n        },\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"key_0\": \"<string>\"\n        },\n        \"lastModifiedTimestamp\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      \"spec\": {\n        \"emailId\": \"string\",\n        \"projects\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"roles\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"users\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ]\n      },\n      \"status\": \"<object>\"\n    },\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"lastModifiedTimestamp\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      \"spec\": {\n        \"emailId\": \"string\",\n        \"projects\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"roles\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"users\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ]\n      },\n      \"status\": \"<object>\"\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 8532,\n    \"limit\": 8253,\n    \"offset\": 6053\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25702847-b551-4231-92fc-d9bf024c5ebb",
+          "name": "Retrieves a list of teams summary with provided filter spec",
+          "request": {
+            "name": "Retrieves a list of teams summary with provided filter spec",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"name\": {\n      \"beginsWith\": \"<string>\",\n      \"contains\": \"<string>\",\n      \"eq\": \"<string>\",\n      \"ignoreCase\": true,\n      \"ne\": \"<string>\"\n    }\n  },\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"asc\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"asc\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b69a9f03-1dc1-4d9d-8285-0f67ccb3521b",
+              "name": "An array of teams summary items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"name\": {\n      \"beginsWith\": \"<string>\",\n      \"contains\": \"<string>\",\n      \"eq\": \"<string>\",\n      \"ignoreCase\": true,\n      \"ne\": \"<string>\"\n    }\n  },\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"asc\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"key_0\": \"<string>\"\n        },\n        \"lastModifiedTimestamp\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      \"spec\": {\n        \"emailId\": \"string\",\n        \"projects\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"roles\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"users\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ]\n      },\n      \"status\": \"<object>\"\n    },\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"creationTimestamp\": \"<dateTime>\",\n        \"deletionTimestamp\": \"<dateTime>\",\n        \"labels\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        },\n        \"lastModifiedTimestamp\": \"<dateTime>\",\n        \"name\": \"<string>\",\n        \"uid\": \"<string>\"\n      },\n      \"spec\": {\n        \"emailId\": \"string\",\n        \"projects\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"roles\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"users\": [\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"uid\": \"string\"\n          }\n        ]\n      },\n      \"status\": \"<object>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b8a049b-7bc9-4ea5-819f-7338eaaef2f5",
+          "name": "Deletes the specified team",
+          "request": {
+            "name": "Deletes the specified team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "651de5b2-5a86-43b6-9688-38d9adec3186",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fcd3a93c-c988-4107-b8aa-6408037ae764",
+          "name": "Returns the sepcified team",
+          "request": {
+            "name": "Returns the sepcified team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7dd28ed-ffd7-4374-a49b-03bfd35039de",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"roles\": [\n      \"<string>\"\n    ],\n    \"sources\": [\n      \"<string>\"\n    ],\n    \"users\": [\n      \"<string>\"\n    ]\n  },\n  \"status\": \"<object>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02c287fc-bb2e-4656-870b-408dce614d5d",
+          "name": "Patches the specified team",
+          "request": {
+            "name": "Patches the specified team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b8907914-0763-46dd-a593-2d14f2d0cf48",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  {\n    \"op\": \"<string>\",\n    \"path\": \"<string>\",\n    \"from\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "535ddb22-6bc6-449b-9cfc-8347091f1c4c",
+          "name": "Updates the sepcified team",
+          "request": {
+            "name": "Updates the sepcified team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\",\n      \"key_3\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"roles\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sources\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"users\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"status\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b48eace7-a297-4776-8bcd-cfff6992c012",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3231bacf-bb81-4c13-b5c7-89886b1c23f2",
+          "name": "Returns the specified team's project and roles data",
+          "request": {
+            "name": "Returns the specified team's project and roles data",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1e2f08d5-8956-483a-8ce0-aeb565077e72",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"projects\": [\n    {\n      \"inheritedRoles\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"name\": \"string\",\n      \"roles\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"uid\": \"string\"\n    },\n    {\n      \"inheritedRoles\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"name\": \"string\",\n      \"roles\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"uid\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d7e095c-c07b-4e12-9ce1-43ab3dbc7c09",
+          "name": "Updates the projects and roles for the specified team",
+          "request": {
+            "name": "Updates the projects and roles for the specified team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"projects\": [\n    {\n      \"projectUid\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"projectUid\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d898776c-1927-4983-8f96-727cfad10c6d",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"projects\": [\n    {\n      \"projectUid\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"projectUid\": \"<string>\",\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cdca6206-d32b-4fd4-8289-0bb15123d96c",
+          "name": "Returns the specified individual and resource roles for a team",
+          "request": {
+            "name": "Returns the specified individual and resource roles for a team",
+            "description": {
+              "content": "Returns resource roles for team",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "resourceRoles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "306e80d3-b7e9-4ca2-b3d1-757d280c2734",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "resourceRoles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"resourceRoles\": [\n    {\n      \"filterRefs\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"projectUids\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"roles\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"uid\": \"string\"\n    },\n    {\n      \"filterRefs\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"projectUids\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"roles\": [\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        }\n      ],\n      \"uid\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56aee742-a18d-4c21-9091-8637f6973de8",
+          "name": "Add resource roles for team",
+          "request": {
+            "name": "Add resource roles for team",
+            "description": {
+              "content": "Resource roles added to specific team",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "resourceRoles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filterRefs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"projectUids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b17854b-fb48-4e8d-92d7-e0834b8c01d8",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "resourceRoles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "520fc8ed-e6ca-4caf-801f-4b9fb2163f15",
+          "name": "Deleted the resource roles from team",
+          "request": {
+            "name": "Deleted the resource roles from team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "resourceRoles",
+                ":resourceRoleUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceRoleUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7483f5be-f7d1-466b-b15c-9ed3b6f42cd9",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "resourceRoles",
+                    ":resourceRoleUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceRoleUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b63ee675-9bcb-430c-99a2-5b41f97acb8c",
+          "name": "Updates the resource roles for team",
+          "request": {
+            "name": "Updates the resource roles for team",
+            "description": {
+              "content": "Specific resource roles fo team is updated",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "resourceRoles",
+                ":resourceRoleUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceRoleUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filterRefs\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"projectUids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "50c9c4d9-6ae5-4414-b727-4f098a0df8c8",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "resourceRoles",
+                    ":resourceRoleUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceRoleUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8d3421e-b083-48b8-b18d-1428fa23cb87",
+          "name": "Returns the specified team's tenant roles",
+          "request": {
+            "name": "Returns the specified team's tenant roles",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "253359c8-244a-4724-87f3-40735cf45f4b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"roles\": [\n    {\n      \"name\": \"string\",\n      \"uid\": \"string\"\n    },\n    {\n      \"name\": \"string\",\n      \"uid\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52159bdc-865a-4c5a-96e2-bf6497f8db6c",
+          "name": "Updates the tenant roles of the specified team",
+          "request": {
+            "name": "Updates the tenant roles of the specified team",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "teams",
+                ":uid",
+                "roles"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b6d820f2-046e-41e0-a5de-dd736eb61942",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "teams",
+                    ":uid",
+                    "roles"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "abce9f1b-a5a6-4c53-9cc4-eccb6a541f77",
+    "name": "Local Management APIs activations teams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

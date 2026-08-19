@@ -1,0 +1,1671 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations cloudaccounts API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "cloudaccounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieves a list of CloudStack cloud accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of CloudStack cloud accounts"
+        },
+        {
+          "info": {
+            "name": "Creates a CloudStack cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a CloudStack cloud account"
+        },
+        {
+          "info": {
+            "name": "Returns the specified CloudStack account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "CloudStack cloud account uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified CloudStack account"
+        },
+        {
+          "info": {
+            "name": "Updates the specified CloudStack account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "CloudStack cloud account uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified CloudStack account"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified CloudStack account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "CloudStack cloud account uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified CloudStack account"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack disk offerings for a given account and zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/diskofferings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack disk offerings are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack disk offerings are requested"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack disk offerings for a given account and zone"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack domains for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/domains",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack domains for a given account"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack SSH key pairs for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/keypairs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "query",
+                "description": "Domain ID for which CloudStack SSH key pairs are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack SSH key pairs are requested"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack SSH key pairs for a given account"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack networks for a given account and zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/networks",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack networks are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack networks are requested"
+              },
+              {
+                "name": "vpcId",
+                "value": "",
+                "type": "query",
+                "description": "VPC ID for which CloudStack networks are requested"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack networks for a given account and zone"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack compute offerings for a given account and zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/offerings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack offerings are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack offerings are requested"
+              },
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "query",
+                "description": "Template ID for which CloudStack offerings are requested"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack compute offerings for a given account and zone"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack projects for a given account and domain",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/projects",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack projects for a given account and domain"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack templates for a given account and zone",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/templates",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack templates are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack templates are requested"
+              },
+              {
+                "name": "templateIds",
+                "value": "",
+                "type": "query",
+                "description": "Template IDs for which CloudStack templates are requested"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack templates for a given account and zone"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack VPCs for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/vpcs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "zoneId",
+                "value": "",
+                "type": "query",
+                "description": "Zone ID for which CloudStack VPCs are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack VPCs are requested"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack VPCs for a given account"
+        },
+        {
+          "info": {
+            "name": "Get the cloudstack zones for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/apache-cloudstack/:uid/properties/zones",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the cloudstack zones for a given account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS cloud accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/aws",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS cloud accounts"
+        },
+        {
+          "info": {
+            "name": "Creates an AWS cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/aws",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an AWS cloud account"
+        },
+        {
+          "info": {
+            "name": "Returns the specified AWS account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/aws/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "AWS cloud account uid"
+              },
+              {
+                "name": "assumeCredentials",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Returns the specified AWS account"
+        },
+        {
+          "info": {
+            "name": "Updates the specified AWS account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/aws/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "AWS cloud account uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified AWS account"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified AWS account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/aws/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "AWS cloud account uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified AWS account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of azure cloud accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/azure",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of azure cloud accounts"
+        },
+        {
+          "info": {
+            "name": "Create azure cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/azure",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Create azure cloud account"
+        },
+        {
+          "info": {
+            "name": "Returns the specified azure cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/azure/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Azure cloud account uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified azure cloud account"
+        },
+        {
+          "info": {
+            "name": "Updates the specified azure account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/azure/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Azure cloud account uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified azure account"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified azure account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/azure/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Azure cloud account uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified azure account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cloud accounts by cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/cloudTypes/:cloudType",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud type"
+              },
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cloud accounts by cloud type"
+        },
+        {
+          "info": {
+            "name": "Creates an cloud account of specific cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/cloudTypes/:cloudType",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud type"
+              }
+            ]
+          },
+          "docs": "Creates an cloud account of specific cloud type"
+        },
+        {
+          "info": {
+            "name": "Returns the specified account by cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/cloudTypes/:cloudType/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud account uid"
+              },
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the specified account by cloud type"
+        },
+        {
+          "info": {
+            "name": "Updates the specified account by cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/cloudTypes/:cloudType/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud account uid"
+              },
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud type"
+              }
+            ]
+          },
+          "docs": "Updates the specified account by cloud type"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified account by cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/cloudTypes/:cloudType/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud account uid"
+              },
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Custom cloud type"
+              }
+            ]
+          },
+          "docs": "Deletes the specified account by cloud type"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of gcp cloud accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/gcp",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of gcp cloud accounts"
+        },
+        {
+          "info": {
+            "name": "Creates a GCP cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/gcp",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a GCP cloud account"
+        },
+        {
+          "info": {
+            "name": "Returns the specified GCP cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/gcp/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "GCP cloud account uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified GCP cloud account"
+        },
+        {
+          "info": {
+            "name": "Updates the specified GCP account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/gcp/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "GCP cloud account uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified GCP account"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified GCP account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/gcp/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "GCP cloud account uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified GCP account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Maas cloud accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Maas cloud accounts"
+        },
+        {
+          "info": {
+            "name": "Creates an Maas cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates an Maas cloud account"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Maas account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Maas cloud account uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Maas account"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Maas account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Maas cloud account uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified Maas account"
+        },
+        {
+          "info": {
+            "name": "Patches the specified CloudAccount Maas",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Maas cloud account uid"
+              }
+            ]
+          },
+          "docs": "Patches the specified CloudAccount Maas"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified Maas account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Maas cloud account uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified Maas account"
+        },
+        {
+          "info": {
+            "name": "Get the maas azs for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid/properties/azs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the maas azs for a given account"
+        },
+        {
+          "info": {
+            "name": "Get the maas domains for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid/properties/domains",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the maas domains for a given account"
+        },
+        {
+          "info": {
+            "name": "Get the maas pools for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid/properties/resourcePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the maas pools for a given account"
+        },
+        {
+          "info": {
+            "name": "Get the maas subnets for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid/properties/subnets",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the maas subnets for a given account"
+        },
+        {
+          "info": {
+            "name": "Get the maas tags for a given account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/maas/:uid/properties/tags",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the maas tags for a given account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of cloud accounts summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/summary",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of cloud accounts summary"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of vSphere cloud accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/vsphere",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of vSphere cloud accounts"
+        },
+        {
+          "info": {
+            "name": "Creates a vSphere cloud account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/vsphere",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Creates a vSphere cloud account"
+        },
+        {
+          "info": {
+            "name": "Returns the specified vSphere account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/vsphere/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "VSphere cloud account uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified vSphere account"
+        },
+        {
+          "info": {
+            "name": "Updates the specified VSphere account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/vsphere/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "VSphere cloud account uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified VSphere account"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified vSphere account",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/vsphere/:uid",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "VSphere cloud account uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified vSphere account"
+        },
+        {
+          "info": {
+            "name": "Get the vSphere computecluster resources for the given overlord account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/vsphere/:uid/properties/computecluster/resources",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "datacenter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "computecluster",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "useQualifiedNetworkName",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get the vSphere computecluster resources for the given overlord account"
+        },
+        {
+          "info": {
+            "name": "Get the vSphere datacenters & datacluster for the given overlord account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/vsphere/:uid/properties/datacenters",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the vSphere datacenters & datacluster for the given overlord account"
+        },
+        {
+          "info": {
+            "name": "Update the geolocation annotation",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/cloudaccounts/:uid/geoLocation",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Update the geolocation annotation"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

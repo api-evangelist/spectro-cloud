@@ -1,0 +1,2949 @@
+{
+  "item": [
+    {
+      "id": "499c9741-171b-43c6-a675-efdcb03e5d63",
+      "name": "projects",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cf4416f6-9cf2-4f7c-9452-8a2ca65686a9",
+          "name": "Retrieves a list of projects",
+          "request": {
+            "name": "Retrieves a list of projects",
+            "description": {
+              "content": "Deprecated: Use POST /v1/dashboard/projects",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7d23ff5-05ce-4bb2-9d1c-c5056a6b6d62",
+              "name": "An array of projects",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"1954-07-25T06:02:40.715Z\",\n        \"deletionTimestamp\": \"2024-09-16T20:10:03.104Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"2014-12-29T15:55:30.729Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"alerts\": [\n          {\n            \"channels\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"component\": \"string\"\n          }\n        ],\n        \"logoUrl\": \"string\",\n        \"teams\": [\n          {\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"teamId\": \"string\"\n          }\n        ],\n        \"users\": [\n          {\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"userId\": \"string\"\n          }\n        ]\n      },\n      \"status\": {\n        \"cleanUpStatus\": {\n          \"cleanedResources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"msg\": \"string\",\n          \"state\": \"string\"\n        },\n        \"isDisabled\": true\n      }\n    },\n    {\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"creationTimestamp\": \"2024-07-20T07:35:32.732Z\",\n        \"deletionTimestamp\": \"1980-11-29T19:20:43.877Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1991-02-24T14:07:57.770Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"spec\": {\n        \"alerts\": [\n          {\n            \"channels\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"component\": \"string\"\n          }\n        ],\n        \"logoUrl\": \"string\",\n        \"teams\": [\n          {\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"teamId\": \"string\"\n          }\n        ],\n        \"users\": [\n          {\n            \"roles\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"userId\": \"string\"\n          }\n        ]\n      },\n      \"status\": {\n        \"cleanUpStatus\": {\n          \"cleanedResources\": [\n            \"string\",\n            \"string\"\n          ],\n          \"msg\": \"string\",\n          \"state\": \"string\"\n        },\n        \"isDisabled\": true\n      }\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 690,\n    \"limit\": 1642,\n    \"offset\": 8559\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34b5c9e3-87ec-4b78-9c34-8e97aa2d9836",
+          "name": "Creates a project",
+          "request": {
+            "name": "Creates a project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                "key": "ProjectUid",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"logoUid\": \"<string>\",\n    \"teams\": [\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"teamId\": \"<string>\"\n      },\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"teamId\": \"<string>\"\n      }\n    ],\n    \"users\": [\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"userId\": \"<string>\"\n      },\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"userId\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a068cf4-28c6-4d80-bfaa-dc2db52ec55e",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources",
+                    "key": "ProjectUid",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e84301f-235b-4536-8083-408f3c3b4f5f",
+          "name": "Retrieves a list of supported alerts for a project",
+          "request": {
+            "name": "Retrieves a list of supported alerts for a project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c684d2d8-2713-4c5f-bb9a-afcb8d2c4bd7",
+              "name": "An array of alert components",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"components\": [\n    {\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"supportedChannels\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"supportedChannels\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8860c4cc-6022-4fd8-a081-6a915fc6df38",
+          "name": "Deletes the specified project",
+          "request": {
+            "name": "Deletes the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cleanupProjectResources",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"deletingClusterDurationThresholdInMin\": \"<integer>\",\n  \"provisioningClusterDurationThresholdInMin\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88823a85-8de0-419c-8b97-ac3ce93bcc98",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cleanupProjectResources",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"deletingClusterDurationThresholdInMin\": \"<integer>\",\n  \"provisioningClusterDurationThresholdInMin\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a5f88db6-3598-45f0-a4cd-1c720938ec64",
+          "name": "Returns the specified project",
+          "request": {
+            "name": "Returns the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "25ddba68-ac9b-4592-85d4-0069064f6ed3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"alerts\": [\n      {\n        \"channels\": [\n          {\n            \"alertAllUsers\": true,\n            \"createdBy\": \"string\",\n            \"http\": {\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"headers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"identifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isActive\": false,\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"email\",\n            \"uid\": \"string\"\n          },\n          {\n            \"alertAllUsers\": false,\n            \"createdBy\": \"string\",\n            \"http\": {\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"headers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"identifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isActive\": true,\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"http\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"component\": \"string\"\n      },\n      {\n        \"channels\": [\n          {\n            \"alertAllUsers\": false,\n            \"createdBy\": \"string\",\n            \"http\": {\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"headers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"identifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isActive\": true,\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"http\",\n            \"uid\": \"string\"\n          },\n          {\n            \"alertAllUsers\": true,\n            \"createdBy\": \"string\",\n            \"http\": {\n              \"body\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"headers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"method\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"url\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"identifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"isActive\": true,\n            \"status\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": \"http\",\n            \"uid\": \"string\"\n          }\n        ],\n        \"component\": \"string\"\n      }\n    ],\n    \"logoUrl\": \"string\",\n    \"teams\": [\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"teamId\": \"<string>\"\n      }\n    ],\n    \"users\": [\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"userId\": \"<string>\"\n      }\n    ]\n  },\n  \"status\": {\n    \"cleanUpStatus\": {\n      \"cleanedResources\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"state\": \"string\"\n    },\n    \"isDisabled\": true\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "af80b99c-b99f-4825-bbb5-9545397eec6e",
+          "name": "Updates the specified project",
+          "request": {
+            "name": "Updates the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"annotations\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\",\n      \"key_2\": \"<string>\"\n    },\n    \"creationTimestamp\": \"<dateTime>\",\n    \"deletionTimestamp\": \"<dateTime>\",\n    \"labels\": {\n      \"key_0\": \"<string>\",\n      \"key_1\": \"<string>\"\n    },\n    \"lastModifiedTimestamp\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"uid\": \"<string>\"\n  },\n  \"spec\": {\n    \"logoUid\": \"<string>\",\n    \"teams\": [\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"teamId\": \"<string>\"\n      },\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"teamId\": \"<string>\"\n      }\n    ],\n    \"users\": [\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"userId\": \"<string>\"\n      },\n      {\n        \"roles\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"userId\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6faa1d47-a297-4b58-9755-d221929483af",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3590f794-0c52-4183-ad51-c110f332d9e7",
+          "name": "Deletes the specified alert to the specified project",
+          "request": {
+            "name": "Deletes the specified alert to the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "alerts",
+                ":component"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6158e752-9968-405b-893b-27af2843e35b",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "alerts",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94e01b81-f3a5-4858-b1fa-1ff2f72384e7",
+          "name": "Create the specified alert to the specified project",
+          "request": {
+            "name": "Create the specified alert to the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "alerts",
+                ":component"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alertAllUsers\": \"<boolean>\",\n  \"createdBy\": \"<string>\",\n  \"http\": {\n    \"body\": \"<string>\",\n    \"headers\": {\n      \"key_0\": \"<string>\"\n    },\n    \"method\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"identifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isActive\": \"<boolean>\",\n  \"status\": {\n    \"isSucceeded\": \"<boolean>\",\n    \"message\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"type\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7a7f9248-8d5b-474d-a87f-b94a15a4b37f",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "alerts",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ba21850-bf0b-4845-bec9-ea7c5d886983",
+          "name": "Upsert the specified alert to the specified project",
+          "request": {
+            "name": "Upsert the specified alert to the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "alerts",
+                ":component"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channels\": [\n    {\n      \"alertAllUsers\": \"<boolean>\",\n      \"createdBy\": \"<string>\",\n      \"http\": {\n        \"body\": \"<string>\",\n        \"headers\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        \"method\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"identifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isActive\": \"<boolean>\",\n      \"status\": {\n        \"isSucceeded\": \"<boolean>\",\n        \"message\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"type\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    {\n      \"alertAllUsers\": \"<boolean>\",\n      \"createdBy\": \"<string>\",\n      \"http\": {\n        \"body\": \"<string>\",\n        \"headers\": {\n          \"key_0\": \"<string>\"\n        },\n        \"method\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"identifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"isActive\": \"<boolean>\",\n      \"status\": {\n        \"isSucceeded\": \"<boolean>\",\n        \"message\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"type\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8403e004-8e88-4c1a-82ae-cd6ed103617c",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "alerts",
+                    ":component"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"channels\": [\n    {\n      \"alertAllUsers\": \"<boolean>\",\n      \"createdBy\": \"<string>\",\n      \"http\": {\n        \"body\": \"<string>\",\n        \"headers\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        },\n        \"method\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"identifiers\": [\n        \"<string>\"\n      ],\n      \"isActive\": \"<boolean>\",\n      \"status\": {\n        \"isSucceeded\": \"<boolean>\",\n        \"message\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"type\": \"<string>\",\n      \"uid\": \"<string>\"\n    },\n    {\n      \"alertAllUsers\": \"<boolean>\",\n      \"createdBy\": \"<string>\",\n      \"http\": {\n        \"body\": \"<string>\",\n        \"headers\": {\n          \"key_0\": \"<string>\"\n        },\n        \"method\": \"<string>\",\n        \"url\": \"<string>\"\n      },\n      \"identifiers\": [\n        \"<string>\"\n      ],\n      \"isActive\": \"<boolean>\",\n      \"status\": {\n        \"isSucceeded\": \"<boolean>\",\n        \"message\": \"<string>\",\n        \"time\": \"<dateTime>\"\n      },\n      \"type\": \"<string>\",\n      \"uid\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "88de0741-b6e0-476b-9820-0012aa51c7bf",
+          "name": "Deletes the specified alert of the specified project",
+          "request": {
+            "name": "Deletes the specified alert of the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "alerts",
+                ":component",
+                ":alertUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "19e75ff2-9009-4cf4-b578-61a239848b19",
+              "name": "The resource was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "alerts",
+                    ":component",
+                    ":alertUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cbeb45f9-f5ca-4388-a652-50e419463cea",
+          "name": "Get the specified alert of the specified project",
+          "request": {
+            "name": "Get the specified alert of the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "alerts",
+                ":component",
+                ":alertUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "29b5d63c-2f0d-4668-92f0-5a84abe2c7ae",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "alerts",
+                    ":component",
+                    ":alertUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"alertAllUsers\": \"<boolean>\",\n  \"createdBy\": \"<string>\",\n  \"http\": {\n    \"body\": \"<string>\",\n    \"headers\": {\n      \"key_0\": \"<string>\"\n    },\n    \"method\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"identifiers\": [\n    \"<string>\"\n  ],\n  \"isActive\": \"<boolean>\",\n  \"status\": {\n    \"isSucceeded\": \"<boolean>\",\n    \"message\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"type\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5a4549ae-8a2d-4f90-aee3-a4a40789745c",
+          "name": "Update the specified alert of the specified project",
+          "request": {
+            "name": "Update the specified alert of the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "alerts",
+                ":component",
+                ":alertUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "component",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertUid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"alertAllUsers\": \"<boolean>\",\n  \"createdBy\": \"<string>\",\n  \"http\": {\n    \"body\": \"<string>\",\n    \"headers\": {\n      \"key_0\": \"<string>\"\n    },\n    \"method\": \"<string>\",\n    \"url\": \"<string>\"\n  },\n  \"identifiers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"isActive\": \"<boolean>\",\n  \"status\": {\n    \"isSucceeded\": \"<boolean>\",\n    \"message\": \"<string>\",\n    \"time\": \"<dateTime>\"\n  },\n  \"type\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9098dabf-7673-4390-a92e-6b01dbfa080a",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "alerts",
+                    ":component",
+                    ":alertUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "component",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertUid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a31c160-e803-446a-a096-93b6c7ac4df5",
+          "name": "Delete the macros for the specified project by macro name",
+          "request": {
+            "name": "Delete the macros for the specified project by macro name",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "macros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"macros\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "72d293f0-6385-488f-aa65-685e280141b8",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "macros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c64e104-1cd4-4621-ba32-15d81dcd1f62",
+          "name": "List the macros of the specified project",
+          "request": {
+            "name": "List the macros of the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "macros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "54cb4e73-417d-4375-91b7-ff2d44481c85",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "macros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"macros\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b53f037a-6699-4584-87f1-bb8e1d287e51",
+          "name": "Update the macros for the specified project by macro name",
+          "request": {
+            "name": "Update the macros for the specified project by macro name",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "macros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"macros\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "778319fd-ab88-4d3f-a460-8c037f2ee748",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "macros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f4276bc7-8dac-44e1-b9f0-d89980d39270",
+          "name": "Create or add new macros for the specified project",
+          "request": {
+            "name": "Create or add new macros for the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "macros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"macros\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "942d4f80-4dd3-4927-aa92-ab6f9f4a6436",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "macros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1e486b49-1b0b-40f1-9826-5460e67fac89",
+          "name": "Update the macros of the specified project",
+          "request": {
+            "name": "Update the macros of the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "macros"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"macros\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b22f9b49-5de2-49a0-8d96-79a2a148d06e",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "macros"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "06adb8a1-4643-48c6-b3e1-56119687ef80",
+          "name": "Update the metadata of the specified project",
+          "request": {
+            "name": "Update the metadata of the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "meta"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"annotations\": {\n    \"key_0\": \"<string>\"\n  },\n  \"creationTimestamp\": \"<dateTime>\",\n  \"deletionTimestamp\": \"<dateTime>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"lastModifiedTimestamp\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20caaadd-247a-4939-9cff-84018a6771ea",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "meta"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"annotations\": {\n    \"key_0\": \"<string>\"\n  },\n  \"creationTimestamp\": \"<dateTime>\",\n  \"deletionTimestamp\": \"<dateTime>\",\n  \"labels\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  },\n  \"lastModifiedTimestamp\": \"<dateTime>\",\n  \"name\": \"<string>\",\n  \"uid\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d00438c-79d0-4223-872b-83ed970935a4",
+          "name": "Get project cluster settings",
+          "request": {
+            "name": "Get project cluster settings",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "preferences",
+                "clusterSettings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cac61e9c-8f6a-4f8c-a250-761df2958a29",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "preferences",
+                    "clusterSettings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"nodesAutoRemediationSetting\": {\n    \"disableNodesAutoRemediation\": true,\n    \"isEnabled\": false\n  },\n  \"tenantClusterSettings\": {\n    \"nodesAutoRemediationSetting\": {\n      \"disableNodesAutoRemediation\": true,\n      \"isEnabled\": false\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb4d81d1-fedf-46b0-bd17-b9d30566ca2d",
+          "name": "Update project clusters nodes auto remediation setting",
+          "request": {
+            "name": "Update project clusters nodes auto remediation setting",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "preferences",
+                "clusterSettings",
+                "nodesAutoRemediationSetting"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"disableNodesAutoRemediation\": \"<boolean>\",\n  \"isEnabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56ae48c5-cc15-4a09-afa4-34db2eab0f9c",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "preferences",
+                    "clusterSettings",
+                    "nodesAutoRemediationSetting"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"disableNodesAutoRemediation\": \"<boolean>\",\n  \"isEnabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d03111d1-e12a-44bb-8e0b-13a5d98ffdb7",
+          "name": "Update the teams association to the specified project",
+          "request": {
+            "name": "Update the teams association to the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "teams"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"teams\": [\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"teamId\": \"<string>\"\n    },\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"teamId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20e0b384-6f29-4a1f-ba01-30dce49f512d",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "teams"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"teams\": [\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"teamId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8ad8af6-4208-49d1-b550-54a5ba61a41b",
+          "name": "Update the users association to the specified project",
+          "request": {
+            "name": "Update the users association to the specified project",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"userId\": \"<string>\"\n    },\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2d2011e0-3f3b-4361-bfc8-26cca46d22ed",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    {\n      \"roles\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"userId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "50017af7-6afa-4763-8e58-85d7cc225c4a",
+          "name": "Validate and returns active resource of project before delete",
+          "request": {
+            "name": "Validate and returns active resource of project before delete",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "projects",
+                ":uid",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "23f76f1d-05ac-499f-9344-1d29fcfc5e84",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "projects",
+                    ":uid",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"appDeployments\": {\n    \"apps\": [\n      {\n        \"appRef\": {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"state\": \"string\"\n      },\n      {\n        \"appRef\": {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"state\": \"string\"\n      }\n    ],\n    \"count\": 4020\n  },\n  \"clusters\": {\n    \"clusters\": [\n      {\n        \"clusterRef\": {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"state\": \"string\"\n      },\n      {\n        \"clusterRef\": {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"state\": \"string\"\n      }\n    ],\n    \"count\": 373\n  },\n  \"virtualClusters\": {\n    \"clusters\": [\n      {\n        \"clusterRef\": {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"state\": \"string\"\n      },\n      {\n        \"clusterRef\": {\n          \"name\": \"string\",\n          \"uid\": \"string\"\n        },\n        \"state\": \"string\"\n      }\n    ],\n    \"count\": 1844\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7553c2e8-bae6-4e59-8f89-326ec6b0dc76",
+    "name": "Local Management APIs activations projects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

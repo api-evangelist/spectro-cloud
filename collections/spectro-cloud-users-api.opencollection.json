@@ -1,0 +1,1227 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations users API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current logged in user's information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/current"
+          },
+          "docs": "Get current logged in user's information"
+        },
+        {
+          "info": {
+            "name": "Patches the current logged in user's configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/current"
+          },
+          "docs": "Patches the current logged in user's configuration"
+        },
+        {
+          "info": {
+            "name": "Authenticates the user with the specified credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/default/login",
+            "params": [
+              {
+                "name": "setCookie",
+                "value": "",
+                "type": "query",
+                "description": "Describes a way to set cookie from backend."
+              },
+              {
+                "name": "extendedSession",
+                "value": "",
+                "type": "query",
+                "description": "Flag which if set to true will extend token timeout for the user to 24hrs and if not set will default to 2hrs"
+              }
+            ]
+          },
+          "docs": "Authenticates the user with the specified credentials"
+        },
+        {
+          "info": {
+            "name": "Logs out the user from the system",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/default/logout"
+          },
+          "docs": "Logs out the user from the system"
+        },
+        {
+          "info": {
+            "name": "Resets the user's password",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/default/password/reset"
+          },
+          "docs": "Resets the user's password"
+        },
+        {
+          "info": {
+            "name": "Refreshes the authentication token of the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/default/token/renewal",
+            "params": [
+              {
+                "name": "extendedSession",
+                "value": "",
+                "type": "query",
+                "description": "Flag which if set to true will extend token timeout for the user to 24hrs and if not set will default to 2hrs"
+              }
+            ]
+          },
+          "docs": "Refreshes the authentication token of the user"
+        },
+        {
+          "info": {
+            "name": "Lists users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "fields",
+                "value": "",
+                "type": "query",
+                "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+              },
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Lists users the given user context"
+        },
+        {
+          "info": {
+            "name": "Create User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "A user is created for the given user context"
+        },
+        {
+          "info": {
+            "name": "Returns the specified users location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              }
+            ]
+          },
+          "docs": "Returns the specified users location"
+        },
+        {
+          "info": {
+            "name": "Create a Azure location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/azure"
+          },
+          "docs": "Create a Azure location"
+        },
+        {
+          "info": {
+            "name": "Returns the specified Azure location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/azure/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the Azure location uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified Azure location"
+        },
+        {
+          "info": {
+            "name": "Updates the specified Azure location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/azure/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the Azure location uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified Azure location"
+        },
+        {
+          "info": {
+            "name": "Create a GCP location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/gcp"
+          },
+          "docs": "Create a GCP location"
+        },
+        {
+          "info": {
+            "name": "Returns the specified GCP location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/gcp/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the GCP location uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified GCP location"
+        },
+        {
+          "info": {
+            "name": "Updates the specified GCP location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/gcp/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the GCP location uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified GCP location"
+        },
+        {
+          "info": {
+            "name": "Create a MinIO location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/minio"
+          },
+          "docs": "Create a MinIO location"
+        },
+        {
+          "info": {
+            "name": "Returns the specified MinIO location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/minio/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the MinIO location uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified MinIO location"
+        },
+        {
+          "info": {
+            "name": "Updates the specified MinIO location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/minio/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the MinIO location uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified MinIO location"
+        },
+        {
+          "info": {
+            "name": "Create a S3 location",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/s3"
+          },
+          "docs": "Create a S3 location"
+        },
+        {
+          "info": {
+            "name": "Returns the specified S3 location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/s3/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the S3 location uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified S3 location"
+        },
+        {
+          "info": {
+            "name": "Updates the specified S3 location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/s3/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the S3 location uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified S3 location"
+        },
+        {
+          "info": {
+            "name": "Returns the specified S3 location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/s3/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the S3 location uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified S3 location"
+        },
+        {
+          "info": {
+            "name": "Update the default backup location",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/:type/:uid/default",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the location uid"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "Specify the location type [aws/azure/gcp/minio/s3]"
+              }
+            ]
+          },
+          "docs": "Update the default backup location"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified location",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/assets/locations/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the location uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified location"
+        },
+        {
+          "info": {
+            "name": "Returns the SSH keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/sshkeys",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              }
+            ]
+          },
+          "docs": "Returns the SSH keys"
+        },
+        {
+          "info": {
+            "name": "Creates a SSH key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/assets/sshkeys"
+          },
+          "docs": "Creates a SSH key"
+        },
+        {
+          "info": {
+            "name": "Returns the specified user ssh key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/sshkeys/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the SSH key uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified user ssh key"
+        },
+        {
+          "info": {
+            "name": "Updates the specified user ssh key",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/assets/sshkeys/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the SSH key uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified user ssh key"
+        },
+        {
+          "info": {
+            "name": "Returns the specified user ssh key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/assets/sshkeys/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the SSH key uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified user ssh key"
+        },
+        {
+          "info": {
+            "name": "Returns the specified vSphere DNS mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/vsphere/dnsMapping",
+            "params": [
+              {
+                "name": "gatewayUid",
+                "value": "",
+                "type": "query",
+                "description": "Specify the vSphere gateway uid"
+              },
+              {
+                "name": "datacenter",
+                "value": "",
+                "type": "query",
+                "description": "Specify the vSphere datacenter name"
+              },
+              {
+                "name": "network",
+                "value": "",
+                "type": "query",
+                "description": "Specify the vSphere network name"
+              }
+            ]
+          },
+          "docs": "Returns the specified vSphere DNS mapping"
+        },
+        {
+          "info": {
+            "name": "Returns the specified vSphere DNS mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/vsphere/dnsMappings",
+            "params": [
+              {
+                "name": "filters",
+                "value": "",
+                "type": "query",
+                "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+              }
+            ]
+          },
+          "docs": "Returns the specified vSphere DNS mappings"
+        },
+        {
+          "info": {
+            "name": "Create a vSphere DNS mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/assets/vsphere/dnsMappings"
+          },
+          "docs": "Create a vSphere DNS mapping"
+        },
+        {
+          "info": {
+            "name": "Returns the specified vSphere DNS mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/assets/vsphere/dnsMappings/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the vSphere DNS mapping uid"
+              }
+            ]
+          },
+          "docs": "Returns the specified vSphere DNS mapping"
+        },
+        {
+          "info": {
+            "name": "Updates the specified vSphere DNS mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/assets/vsphere/dnsMappings/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the vSphere DNS mapping uid"
+              }
+            ]
+          },
+          "docs": "Updates the specified vSphere DNS mapping"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified vSphere DNS mapping",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/assets/vsphere/dnsMappings/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "Specify the vSphere DNS mapping uid"
+              }
+            ]
+          },
+          "docs": "Deletes the specified vSphere DNS mapping"
+        },
+        {
+          "info": {
+            "name": "Revoke access of specific token(s)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/auth/tokens/revoke"
+          },
+          "docs": "Revoke access of specific token(s)"
+        },
+        {
+          "info": {
+            "name": "Get the system Spectro repository. Restricted to edge services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/config/scar"
+          },
+          "docs": "Get the system Spectro repository. Restricted to edge services"
+        },
+        {
+          "info": {
+            "name": "Returns the base information of specified User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/info"
+          },
+          "docs": "Returns a basic information of User for the specified uid."
+        },
+        {
+          "info": {
+            "name": "gets users kubectl session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/kubectl/session/:sessionUid",
+            "params": [
+              {
+                "name": "sessionUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "gets users kubectl session"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of users metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/meta"
+          },
+          "docs": "Retrieves a list of users metadata"
+        },
+        {
+          "info": {
+            "name": "V1UsersMfaDevicesList",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/mfa/devices"
+          },
+          "docs": "V1UsersMfaDevicesList"
+        },
+        {
+          "info": {
+            "name": "V1UsersMfaDevicesNameGet",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/mfa/devices/:deviceName",
+            "params": [
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "V1UsersMfaDevicesNameGet"
+        },
+        {
+          "info": {
+            "name": "V1UsersMfaDevicesNameDelete",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/mfa/devices/:deviceName",
+            "params": [
+              {
+                "name": "deviceName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "V1UsersMfaDevicesNameDelete"
+        },
+        {
+          "info": {
+            "name": "V1UsersMfaRegisterDeviceFinish",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/mfa/register/device/finish"
+          },
+          "docs": "V1UsersMfaRegisterDeviceFinish"
+        },
+        {
+          "info": {
+            "name": "V1UsersMfaRegisterDeviceStart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/mfa/register/device/start",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "V1UsersMfaRegisterDeviceStart"
+        },
+        {
+          "info": {
+            "name": "User password change request using the user emailId",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/password/change"
+          },
+          "docs": "User password change request via current password and emailId"
+        },
+        {
+          "info": {
+            "name": "User password reset request using the email id",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/password/reset"
+          },
+          "docs": "User password request will be sent to the supplied emailId"
+        },
+        {
+          "info": {
+            "name": "Returns the specified user summary list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/summary",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+              },
+              {
+                "name": "continue",
+                "value": "",
+                "type": "query",
+                "description": "continue token to paginate the subsequent data items"
+              }
+            ]
+          },
+          "docs": "Deprecated, Use Post api - Returns a list of user summaries"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of users summary with provided filter spec",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/summary"
+          },
+          "docs": "Retrieves a list of users summary with provided filter spec"
+        },
+        {
+          "info": {
+            "name": "Returns the users system feature",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/system/features"
+          },
+          "docs": "Returns the users system feature"
+        },
+        {
+          "info": {
+            "name": "List the macros of the system",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/system/macros"
+          },
+          "docs": "List the macros of the system"
+        },
+        {
+          "info": {
+            "name": "Create or add new macros for the system user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/system/macros"
+          },
+          "docs": "Create or add new macros for the system user"
+        },
+        {
+          "info": {
+            "name": "Update the macros of the system",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/system/macros"
+          },
+          "docs": "Update the macros of the system"
+        },
+        {
+          "info": {
+            "name": "Update the macros for the system user by macro name",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/system/macros"
+          },
+          "docs": "Update the macros for the system user by macro name"
+        },
+        {
+          "info": {
+            "name": "Delete the macros for the system user by macro name",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/system/macros"
+          },
+          "docs": "Delete the macros for the system user by macro name"
+        },
+        {
+          "info": {
+            "name": "Returns the specified User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a User for the specified uid."
+        },
+        {
+          "info": {
+            "name": "Update User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "A user is created for the given user context"
+        },
+        {
+          "info": {
+            "name": "Patches the specified User",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User is patched for the specified information"
+        },
+        {
+          "info": {
+            "name": "Deletes the specified User",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/:uid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deletes the specified User for given uid"
+        },
+        {
+          "info": {
+            "name": "User password change request using the user uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/password/change",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User password change request via current password"
+        },
+        {
+          "info": {
+            "name": "User password reset request using the user uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/password/reset",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User password reset request, will send the password reset option through the emailId"
+        },
+        {
+          "info": {
+            "name": "Returns the specified User Projects and Roles information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/projects",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns a User with projects and roles"
+        },
+        {
+          "info": {
+            "name": "Updates the projects and roles for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/projects",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User is updated with projects and roles"
+        },
+        {
+          "info": {
+            "name": "Returns the specified individual and resource roles for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/resourceRoles",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns resource roles for user"
+        },
+        {
+          "info": {
+            "name": "Add resource roles for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/resourceRoles",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Resource roles added to specific user"
+        },
+        {
+          "info": {
+            "name": "Updates the resource roles for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/resourceRoles/:resourceRoleUid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceRoleUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Specific resource roles fo user is updated"
+        },
+        {
+          "info": {
+            "name": "Deleted the resource roles from user",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/resourceRoles/:resourceRoleUid",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "resourceRoleUid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Deleted the resource roles from user"
+        },
+        {
+          "info": {
+            "name": "Returns the specified individual and team roles for a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/roles",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns roles clubbed from team"
+        },
+        {
+          "info": {
+            "name": "Updates the roles for user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/roles",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "User is updated with roles"
+        },
+        {
+          "info": {
+            "name": "Users status login mode",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://edge-host-ip:5080/v1/users/:uid/status/loginMode",
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Users status login mode"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

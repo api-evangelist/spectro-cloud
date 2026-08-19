@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations services API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "services",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns a latest version for a given service name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/services/:serviceName/version",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "path",
+                "description": "service name"
+              },
+              {
+                "name": "clusterUid",
+                "value": "",
+                "type": "query",
+                "description": "spectro cluster uid"
+              },
+              {
+                "name": "edgeHostUid",
+                "value": "",
+                "type": "query",
+                "description": "edge host uid"
+              }
+            ]
+          },
+          "docs": "Returns a latest version for a given service name"
+        },
+        {
+          "info": {
+            "name": "Returns a service manifest for a given service name and version",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/services/:serviceName/versions/:version/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "serviceName",
+                "value": "",
+                "type": "path",
+                "description": "service name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "path",
+                "description": "service version"
+              },
+              {
+                "name": "action",
+                "value": "",
+                "type": "query",
+                "description": "action type"
+              },
+              {
+                "name": "resourceFilename",
+                "value": "",
+                "type": "query",
+                "description": "resource file name"
+              },
+              {
+                "name": "clusterUid",
+                "value": "",
+                "type": "query",
+                "description": "spectro cluster uid"
+              },
+              {
+                "name": "edgeHostUid",
+                "value": "",
+                "type": "query",
+                "description": "edge host uid"
+              }
+            ]
+          },
+          "docs": "Returns a service manifest for a given service name and version"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

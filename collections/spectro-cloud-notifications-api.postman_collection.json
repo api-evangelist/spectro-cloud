@@ -1,0 +1,731 @@
+{
+  "item": [
+    {
+      "id": "b5b9fb53-972d-40f3-b28b-b88ef1f2b2bd",
+      "name": "notifications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ed6f1f2b-1cd8-4c2f-abd3-8a6a52ca6413",
+          "name": "Returns a paginated list of notifications based on request parameters",
+          "request": {
+            "name": "Returns a paginated list of notifications based on request parameters",
+            "description": {
+              "content": "Returns a paginated list of notifications based on request parameters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notifications",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cacbabf9-a6fd-4e5c-a3c2-f2402789009b",
+              "name": "An array of notification items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifications",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"action\": {\n        \"ack\": false,\n        \"actionMessage\": \"string\",\n        \"actionType\": \"NotifyActionClusterUpdate\",\n        \"events\": {\n          \"key_0\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        },\n        \"isDone\": true,\n        \"isInfo\": true,\n        \"link\": \"string\"\n      },\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"creationTimestamp\": \"2010-08-26T15:32:07.031Z\",\n        \"deletionTimestamp\": \"1950-11-22T21:34:58.892Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"2008-12-20T14:58:57.602Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"relatedObject\": {\n        \"kind\": \"cloudconfig\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"source\": {\n        \"component\": \"string\"\n      },\n      \"type\": \"NotificationPackRegistryUpdate\"\n    },\n    {\n      \"action\": {\n        \"ack\": true,\n        \"actionMessage\": \"string\",\n        \"actionType\": \"NotifyActionPackRegistryUpdate\",\n        \"events\": {\n          \"key_0\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          }\n        },\n        \"isDone\": true,\n        \"isInfo\": false,\n        \"link\": \"string\"\n      },\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"creationTimestamp\": \"2013-01-26T20:27:03.991Z\",\n        \"deletionTimestamp\": \"2026-06-17T21:08:22.191Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1992-05-04T15:23:10.891Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"relatedObject\": {\n        \"kind\": \"spectrocluster\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"source\": {\n        \"component\": \"string\"\n      },\n      \"type\": \"NotificationPackUpdate\"\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 4615,\n    \"limit\": 1840,\n    \"offset\": 9628\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "57bbfd8f-b18c-438f-aac1-9906bdf13fa4",
+          "name": "Creates a notification event",
+          "request": {
+            "name": "Creates a notification event",
+            "description": {
+              "content": "Creates a notification event",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notifications",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"component\": \"<string>\",\n  \"digest\": \"<string>\",\n  \"message\": \"<string>\",\n  \"meta\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "92917469-70c1-4bef-ad4b-b019593851c6",
+              "name": "Created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifications",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"component\": \"<string>\",\n  \"digest\": \"<string>\",\n  \"message\": \"<string>\",\n  \"meta\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uid\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d2bebd3f-305f-4302-a5c1-a4c74fd14232",
+          "name": "Returns a list of notifications for the specified related object",
+          "request": {
+            "name": "Returns a list of notifications for the specified related object",
+            "description": {
+              "content": "Returns a list of notifications for the specified related object",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notifications",
+                ":objectKind",
+                ":objectUid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "fields",
+                  "value": "<string>",
+                  "description": "Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name"
+                },
+                {
+                  "disabled": false,
+                  "key": "filters",
+                  "value": "<string>",
+                  "description": "Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws\n\nServer will be restricted to certain fields based on the indexed data for each resource."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "<string>",
+                  "description": "Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "50",
+                  "description": "limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.\nIf more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>",
+                  "description": "offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination."
+                },
+                {
+                  "disabled": false,
+                  "key": "continue",
+                  "value": "<string>",
+                  "description": "continue token to paginate the subsequent data items"
+                },
+                {
+                  "disabled": false,
+                  "key": "isDone",
+                  "value": "<string>",
+                  "description": "Describes a way to fetch \"done\" notifications"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectKind",
+                  "description": "(Required) Describes the related object kind for which notifications have to be fetched"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "objectUid",
+                  "description": "(Required) Describes the related object uid for which notifications have to be fetched"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cd415258-2558-449b-9333-c312d6587549",
+              "name": "An array of component event items",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifications",
+                    ":objectKind",
+                    ":objectUid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "fields",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "filters",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "continue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "isDone",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectKind",
+                      "description": "(Required) Describes the related object kind for which notifications have to be fetched"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "objectUid",
+                      "description": "(Required) Describes the related object uid for which notifications have to be fetched"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"action\": {\n        \"ack\": false,\n        \"actionMessage\": \"string\",\n        \"actionType\": \"NotifyActionClusterUpdate\",\n        \"events\": {\n          \"key_0\": {\n            \"key_0\": \"string\",\n            \"key_1\": \"string\"\n          },\n          \"key_1\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"isDone\": true,\n        \"isInfo\": false,\n        \"link\": \"string\"\n      },\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"2018-02-28T22:30:52.853Z\",\n        \"deletionTimestamp\": \"1975-07-12T20:27:17.020Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"2000-10-12T02:56:11.525Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"relatedObject\": {\n        \"kind\": \"cloudconfig\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"source\": {\n        \"component\": \"string\"\n      },\n      \"type\": \"NotificationNone\"\n    },\n    {\n      \"action\": {\n        \"ack\": true,\n        \"actionMessage\": \"string\",\n        \"actionType\": \"NotifyActionPackRegistryUpdate\",\n        \"events\": {\n          \"key_0\": {\n            \"key_0\": \"string\"\n          },\n          \"key_1\": {\n            \"key_0\": \"string\"\n          }\n        },\n        \"isDone\": true,\n        \"isInfo\": true,\n        \"link\": \"string\"\n      },\n      \"metadata\": {\n        \"annotations\": {\n          \"key_0\": \"string\"\n        },\n        \"creationTimestamp\": \"1999-12-24T13:09:10.470Z\",\n        \"deletionTimestamp\": \"1947-02-23T18:26:03.482Z\",\n        \"labels\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"lastModifiedTimestamp\": \"1949-09-03T01:19:12.007Z\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"relatedObject\": {\n        \"kind\": \"pack\",\n        \"name\": \"string\",\n        \"uid\": \"string\"\n      },\n      \"source\": {\n        \"component\": \"string\"\n      },\n      \"type\": \"NotificationNone\"\n    }\n  ],\n  \"listmeta\": {\n    \"continue\": \"string\",\n    \"count\": 845,\n    \"limit\": 4942,\n    \"offset\": 1533\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b9ef6df-622b-48df-affe-8a0986f364b0",
+          "name": "Updates the specified notification for the acknowledgment",
+          "request": {
+            "name": "Updates the specified notification for the acknowledgment",
+            "description": {
+              "content": "Updates the specified notification for the acknowledgment",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notifications",
+                ":uid",
+                "ack"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Describes acknowledging notification uid"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2a4d0ebf-36dd-453d-8fcd-246dfb00bd7e",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifications",
+                    ":uid",
+                    "ack"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Describes acknowledging notification uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6dc765a8-0ff2-4865-a39c-1c19c86fc7a2",
+          "name": "Updates the specified notification action as done",
+          "request": {
+            "name": "Updates the specified notification action as done",
+            "description": {
+              "content": "Updates the specified notification action as done",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "notifications",
+                ":uid",
+                "done"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "uid",
+                  "description": "(Required) Describes notification uid"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "730be7b2-7954-4187-9d6e-fcfe6b626ab3",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "notifications",
+                    ":uid",
+                    "done"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "uid",
+                      "description": "(Required) Describes notification uid"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3001b902-62b7-4167-914d-74e5d1c34100",
+    "name": "Local Management APIs activations notifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

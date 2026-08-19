@@ -1,0 +1,3150 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations clouds API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "clouds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Check if CloudStack account is valid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates CloudStack account credentials and domain. Verifies API connectivity and that the specified domain exists. Returns no contents if account is valid else error."
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack disk offerings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/diskOfferings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack disk offerings are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack disk offerings are requested"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack disk offerings"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/domains",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack domains"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack SSH key pairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/keypairs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              },
+              {
+                "name": "domainId",
+                "value": "",
+                "type": "query",
+                "description": "Domain ID for which CloudStack SSH key pairs are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack SSH key pairs are requested"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack SSH key pairs"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack networks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/networks",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack networks are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack networks are requested"
+              },
+              {
+                "name": "vpcId",
+                "value": "",
+                "type": "query",
+                "description": "VPC ID for which CloudStack networks are requested"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack networks"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack compute offerings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/offerings",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack offerings are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack offerings are requested"
+              },
+              {
+                "name": "templateId",
+                "value": "",
+                "type": "query",
+                "description": "Template ID for which CloudStack offerings are requested"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack compute offerings"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/projects",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack projects"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/templates",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              },
+              {
+                "name": "zone",
+                "value": "",
+                "type": "query",
+                "description": "Zone for which CloudStack templates are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack templates are requested"
+              },
+              {
+                "name": "templateIds",
+                "value": "",
+                "type": "query",
+                "description": "Template IDs for which CloudStack templates are requested"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack templates"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack Vpcs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/vpcs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              },
+              {
+                "name": "zoneId",
+                "value": "",
+                "type": "query",
+                "description": "Zone ID for which CloudStack VPCs are requested"
+              },
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "query",
+                "description": "Project ID for which CloudStack VPCs are requested"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack Vpcs"
+        },
+        {
+          "info": {
+            "name": "Returns the CloudStack zones",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/apache-cloudstack/zones",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific CloudStack cloud account"
+              }
+            ]
+          },
+          "docs": "Returns the CloudStack zones"
+        },
+        {
+          "info": {
+            "name": "Retrieves the Aws secret credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/account/secret/credentials",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves the Aws secret credentials"
+        },
+        {
+          "info": {
+            "name": "Retrieves AWS external id and account id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/account/sts",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "partition",
+                "value": "",
+                "type": "query",
+                "description": "AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values"
+              }
+            ]
+          },
+          "docs": "Retrieves AWS external id and account id"
+        },
+        {
+          "info": {
+            "name": "Validate the specified AWS account credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate the specified AWS account credentials"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS AMI types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/amiTypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS AMI types"
+        },
+        {
+          "info": {
+            "name": "Get AWS API endpoints configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/apiEndpoints",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves all AWS partition endpoint configurations."
+        },
+        {
+          "info": {
+            "name": "validates aws cloud watch credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/cloudwatch/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validates aws cloud watch credentials"
+        },
+        {
+          "info": {
+            "name": "Retrieves AWS cloud account usage cost from cost explorer.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/cost",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves AWS cloud account usage cost from cost explorer."
+        },
+        {
+          "info": {
+            "name": "Get AWS Volume Size",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/imageIds/:imageId/volumeSize",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Specific AWS Region"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              },
+              {
+                "name": "imageId",
+                "value": "",
+                "type": "path",
+                "description": "AWS image id"
+              }
+            ]
+          },
+          "docs": "Get AWS Volume Size"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS policies for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/policies",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS policies for the specified account"
+        },
+        {
+          "info": {
+            "name": "Validate the aws policy arns validate",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/policyArns/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Validate the aws policy arns validate"
+        },
+        {
+          "info": {
+            "name": "Validate AWS properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/properties/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate AWS properties"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS regions for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS regions for the specified account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS availability zones for the specified region",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/availabilityzones",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which zones are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS availability zones for the specified region"
+        },
+        {
+          "info": {
+            "name": "Copies the specified image from one region to another region",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/copydefaultimages",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region to copy AWS image from"
+              }
+            ]
+          },
+          "docs": "Copies the specified image from one region to another region"
+        },
+        {
+          "info": {
+            "name": "Check if Aws cluster name is valid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/eksClusters/name/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "cluster name to be validated"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which cluster name is validated"
+              }
+            ]
+          },
+          "docs": "Returns no contents if aws cluster name is valid else error."
+        },
+        {
+          "info": {
+            "name": "Returns AWS image for the specified AMI name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/images",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region to find AWS image"
+              }
+            ]
+          },
+          "docs": "Returns AWS image for the specified AMI name"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS instance types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/instancetypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which AWS instances are requested"
+              },
+              {
+                "name": "cpuGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having cpu greater than or equal"
+              },
+              {
+                "name": "memoryGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having memory greater than or equal"
+              },
+              {
+                "name": "gpuGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having gpu greater than or equal"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              },
+              {
+                "name": "hrgArn",
+                "value": "",
+                "type": "query",
+                "description": "Optional HRG ARN to filter instance types by HRG supported families"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS instance types"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS keypairs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/keypairs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which AWS key pairs are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS keypairs"
+        },
+        {
+          "info": {
+            "name": "Validate the specified AWS keypair",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/keypairs/:keypair/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which AWS key pairs is validated"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              },
+              {
+                "name": "keypair",
+                "value": "",
+                "type": "path",
+                "description": "AWS Key pair which is to be validated"
+              }
+            ]
+          },
+          "docs": "Validate the specified AWS keypair"
+        },
+        {
+          "info": {
+            "name": "Get AWS KMS key by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/kms/:keyId",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which AWS KMS key belongs"
+              },
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "path",
+                "description": "The globally unique identifier for the KMS key"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Get AWS KMS key by Id"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS KMS keys for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/kmskeys",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which AWS KMS key are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS KMS keys for the specified account"
+        },
+        {
+          "info": {
+            "name": "Validate an Aws KMS key for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/kmskeys/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which AWS KMS key is validated"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              },
+              {
+                "name": "keyArn",
+                "value": "",
+                "type": "query",
+                "description": "AWS KEY ARN for validation"
+              }
+            ]
+          },
+          "docs": "Validate an Aws KMS key for the specified account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS Host Resource Groups for the specified account and region",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/resourceGroups",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "AWS region"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "UID of the AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS Host Resource Groups for the specified account and region"
+        },
+        {
+          "info": {
+            "name": "Retrieves license configurations for the specified Host Resource Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/resourceGroups/licenses",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "AWS region"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "UID of the AWS cloud account"
+              },
+              {
+                "name": "hrgArn",
+                "value": "",
+                "type": "query",
+                "description": "ARN of the Host Resource Group"
+              }
+            ]
+          },
+          "docs": "Retrieves license configurations for the specified Host Resource Group"
+        },
+        {
+          "info": {
+            "name": "Validates available capacity for an instance type in a Host Resource Group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/resourceGroups/validateCapacity",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "AWS region"
+              },
+              {
+                "name": "hrgArn",
+                "value": "",
+                "type": "query",
+                "description": "ARN of the Host Resource Group"
+              }
+            ]
+          },
+          "docs": "Validates available capacity for an instance type in a Host Resource Group"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS storage types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/storagetypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which AWS storage types are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS storage types"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of VPCs for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/regions/:region/vpcs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which VPCs are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of VPCs for the specified account"
+        },
+        {
+          "info": {
+            "name": "Validate the AWS S3 bucket",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/s3/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate the AWS S3 bucket"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of AWS security groups for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/securitygroups",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific AWS cloud account"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Region for which security groups are requested"
+              },
+              {
+                "name": "vpcId",
+                "value": "",
+                "type": "query",
+                "description": "Vpc Id for which security groups are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of AWS security groups for the specified account"
+        },
+        {
+          "info": {
+            "name": "Get all AWS Volume Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/aws/volumeTypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Specific AWS Region"
+              }
+            ]
+          },
+          "docs": "List all AWS Volume Types"
+        },
+        {
+          "info": {
+            "name": "Check if Azure account is valid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns no contents if account is valid else error."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/groups",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Azure groups"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/regions",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "SubscriptionId for which resources is requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Azure regions"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure instance types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/regions/:region/instancetypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which Azure instance types are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "Azure subscription ID (optional - falls back to cloud account subscription if not provided)"
+              },
+              {
+                "name": "cpuGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having cpu greater than or equal"
+              },
+              {
+                "name": "memoryGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having memory greater than or equal"
+              },
+              {
+                "name": "gpuGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having gpu greater than or equal"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Azure instance types"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure storage types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/regions/:region/storagetypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which Azure storage types are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Azure storage types"
+        },
+        {
+          "info": {
+            "name": "Check if Azure cluster name is valid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/regions/:region/subscriptions/:subscriptionId/aksClusters/name/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "cluster name to be validated"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "region in which cluster name is to be validated"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "subscriptionId in which cluster name is to be validated"
+              },
+              {
+                "name": "resourceGroup",
+                "value": "",
+                "type": "query",
+                "description": "resourceGroup in which cluster name is to be validated"
+              }
+            ]
+          },
+          "docs": "Returns no contents if Azure cluster name is valid else error."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure virtual network list for the sepcified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/regions/:region/subscriptions/:subscriptionId/networks",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which Azure virtual networks are requested"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Uid for which Azure virtual networks are requested"
+              },
+              {
+                "name": "resourceGroup",
+                "value": "",
+                "type": "query",
+                "description": "Resource group for which Azure virtual networks are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Azure virtual network list for the sepcified account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure resource group for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/regions/:region/subscriptions/:subscriptionId/resourceGroups",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which Azure resource group are requested"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "path",
+                "description": "Uid for which Azure resource group are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Azure resource group for the specified account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure zones for the specified region",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/regions/:region/zones",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which Azure zones are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "subscriptionId of azure account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Azure zones for the specified region"
+        },
+        {
+          "info": {
+            "name": "Get Azure private DNS zones for the given resource group",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/resourceGroups/:resourceGroup/privateDnsZones",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "resourceGroup",
+                "value": "",
+                "type": "path",
+                "description": "resourceGroup for which Azure private dns zones are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "subscriptionId for which Azure private dns zones are requested"
+              }
+            ]
+          },
+          "docs": "Returns Azure private DNS zones"
+        },
+        {
+          "info": {
+            "name": "Get Azure storage accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/resourceGroups/:resourceGroup/storageAccounts",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "resourceGroup",
+                "value": "",
+                "type": "path",
+                "description": "resourceGroup for which Azure storage accounts are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "subscriptionId for which Azure storage accounts are requested"
+              }
+            ]
+          },
+          "docs": "Returns Azure storage accounts."
+        },
+        {
+          "info": {
+            "name": "Get Azure storage containers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/resourceGroups/:resourceGroup/storageAccounts/:storageAccountName/containers",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "resourceGroup",
+                "value": "",
+                "type": "path",
+                "description": "resourceGroup for which Azure storage accounts are requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              },
+              {
+                "name": "subscriptionId",
+                "value": "",
+                "type": "query",
+                "description": "subscriptionId for which Azure storage accounts are requested"
+              },
+              {
+                "name": "storageAccountName",
+                "value": "",
+                "type": "path",
+                "description": "resourceGroup for which Azure storage accounts are requested"
+              }
+            ]
+          },
+          "docs": "Returns Azure storage containers for the given account."
+        },
+        {
+          "info": {
+            "name": "Get Azure storage account types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/storageaccounttypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Region for which Azure storage account types are requested"
+              }
+            ]
+          },
+          "docs": "Returns Azure storage account types."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Azure subscription list for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/subscriptions",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              }
+            ]
+          },
+          "docs": "Returns list of Azure subscription list."
+        },
+        {
+          "info": {
+            "name": "Returns the Azure vhd url for the specified vhd location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/azure/vhds/:vhd/url",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "vhd",
+                "value": "",
+                "type": "path",
+                "description": "vhd location for which Azure vhd url is requested"
+              },
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Azure cloud account"
+              }
+            ]
+          },
+          "docs": "Returns the Azure vhd url for the specified vhd location"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud types"
+        },
+        {
+          "info": {
+            "name": "Registers the custom cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/register",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Registers the custom cloud type"
+        },
+        {
+          "info": {
+            "name": "Deletes the custom cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Deletes the custom cloud type"
+        },
+        {
+          "info": {
+            "name": "Returns valid keys for the cloud account used for custom cloud type",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/cloudAccountKeys",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns valid keys for the cloud account used for custom cloud type"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type cloud account keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/cloudAccountKeys",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type cloud account keys"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type bootstrap",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/bootstrap",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type bootstrap"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type bootstrap",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/bootstrap",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type bootstrap"
+        },
+        {
+          "info": {
+            "name": "Delete the custom cloud type bootstrap",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/bootstrap",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Delete the custom cloud type bootstrap"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type cloud provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/cloudProvider",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type cloud provider"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type cloud provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/cloudProvider",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type cloud provider"
+        },
+        {
+          "info": {
+            "name": "Delete the custom cloud type cloud provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/cloudProvider",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Delete the custom cloud type cloud provider"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type control plane",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/controlPlane",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type control plane"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type control plane",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/controlPlane",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type control plane"
+        },
+        {
+          "info": {
+            "name": "Delete the custom cloud type control plane",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/controlPlane",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Delete the custom cloud type control plane"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type core",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/core",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type core"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type core",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/core",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type core"
+        },
+        {
+          "info": {
+            "name": "Delete the custom cloud type core",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/core",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Delete the custom cloud type core"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/clusterTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type cluster template"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/clusterTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type cluster template"
+        },
+        {
+          "info": {
+            "name": "Delete the custom cloud type cluster template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/clusterTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Delete the custom cloud type cluster template"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type controlPlane pool template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/controlPlanePoolTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type controlPlane pool template"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type controlPlane pool template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/controlPlanePoolTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type controlPlane pool template"
+        },
+        {
+          "info": {
+            "name": "Delete the custom cloud type controlPlane pool template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/controlPlanePoolTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Delete the custom cloud type controlPlane pool template"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type worker pool template",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/workerPoolTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type worker pool template"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type worker pool template",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/workerPoolTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type worker pool template"
+        },
+        {
+          "info": {
+            "name": "Delete the custom cloud type worker pool template",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/content/templates/workerPoolTemplate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Delete the custom cloud type worker pool template"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type logo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/logo",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type logo"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type logo",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/logo",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type logo"
+        },
+        {
+          "info": {
+            "name": "Returns the custom cloud type meta",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/meta",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Returns the custom cloud type meta"
+        },
+        {
+          "info": {
+            "name": "Update the custom cloud type meta",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://edge-host-ip:5080/v1/clouds/cloudTypes/:cloudType/meta",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudType",
+                "value": "",
+                "type": "path",
+                "description": "Unique cloud type"
+              }
+            ]
+          },
+          "docs": "Update the custom cloud type meta"
+        },
+        {
+          "info": {
+            "name": "Validate EKS properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/eks/properties/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate EKS properties"
+        },
+        {
+          "info": {
+            "name": "Validate the specified GCP account credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate the specified GCP account credentials"
+        },
+        {
+          "info": {
+            "name": "Validate the specified GCP az",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/azs/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate the specified GCP az"
+        },
+        {
+          "info": {
+            "name": "Validate the specified GCP bucket name credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/bucketname/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate the specified GCP bucket name credentials"
+        },
+        {
+          "info": {
+            "name": "Validates the image with tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/image/container/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "imagePath",
+                "value": "",
+                "type": "query",
+                "description": "image path in the container"
+              },
+              {
+                "name": "tag",
+                "value": "",
+                "type": "query",
+                "description": "tag in the GCP container"
+              }
+            ]
+          },
+          "docs": "Validates the image with tag"
+        },
+        {
+          "info": {
+            "name": "Returns the Gcp image url for the specified image location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/images/:imageName/url",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "imageName",
+                "value": "",
+                "type": "path",
+                "description": "imageName for which GCP image url is requested"
+              }
+            ]
+          },
+          "docs": "Returns the Gcp image url for the specified image location"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GCP projects for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/projects",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific GCP cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GCP projects for the specified account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GCP regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/projects/:project/regions",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific GCP cloud account"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "Project Name for which GCP zones are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GCP regions"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GCP networks for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/projects/:project/regions/:region/networks",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific GCP cloud account"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which GCP networks are requested"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "Project Name for which GCP networks are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GCP networks for the specified account"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GCP zones for the specified account and region",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/projects/:project/regions/:region/zones",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific GCP cloud account"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which GCP zones are requested"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "Project Name for which GCP zones are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GCP zones for the specified account and region"
+        },
+        {
+          "info": {
+            "name": "Validate the specified GCP project",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/projects/:project/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "GCP project uid"
+              }
+            ]
+          },
+          "docs": "Validate the specified GCP project"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GCP zones for the specified account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/projects/:project/zones",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific GCP cloud account"
+              },
+              {
+                "name": "project",
+                "value": "",
+                "type": "path",
+                "description": "Project Name for which GCP zones are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GCP zones for the specified account"
+        },
+        {
+          "info": {
+            "name": "Validate GCP properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/properties/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Validate GCP properties"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of GCP instance types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/regions/:region/instancetypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which GCP instance types are requested"
+              },
+              {
+                "name": "cpuGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having cpu greater than or equal"
+              },
+              {
+                "name": "memoryGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having memory greater than or equal"
+              },
+              {
+                "name": "gpuGtEq",
+                "value": "",
+                "type": "query",
+                "description": "Filter for instances having gpu greater than or equal"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of GCP instance types"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Gcp storage types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/gcp/regions/:region/storagetypes",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "path",
+                "description": "Region for which GCP storage types are requested"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Gcp storage types"
+        },
+        {
+          "info": {
+            "name": "Check if Maas account is valid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/maas/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns no contents if account is valid else error."
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Maas zones for a particular account uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/maas/azs",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Maas cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Maas zones for a particular account uid"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Maas domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/maas/domains",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Maas cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Maas domains"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Maas pools for a particular account uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/maas/resourcePools",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Maas cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Maas pools for a particular account uid"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Maas subnets for a particular account uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/maas/subnets",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Maas cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Maas subnets for a particular account uid"
+        },
+        {
+          "info": {
+            "name": "Retrieves a list of Maas tags for a particular account uid",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/maas/tags",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific Maas cloud account"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Maas tags for a particular account uid"
+        },
+        {
+          "info": {
+            "name": "Check if Vsphere account is valid",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/clouds/vsphere/account/validate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns no contents if account is valid else error."
+        },
+        {
+          "info": {
+            "name": "Returns the vsphere data centers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/vsphere/datacenters",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific cloud account"
+              }
+            ]
+          },
+          "docs": "Returns the vsphere data centers"
+        },
+        {
+          "info": {
+            "name": "Returns the resources for vsphere compute cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/vsphere/datacenters/:uid/computeclusters/:computecluster",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloudAccountUid",
+                "value": "",
+                "type": "query",
+                "description": "Uid for the specific VSphere cloud account"
+              },
+              {
+                "name": "computecluster",
+                "value": "",
+                "type": "path",
+                "description": "computecluster for which resources is requested"
+              },
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path",
+                "description": "VSphere datacenter uid for which resources is requested"
+              }
+            ]
+          },
+          "docs": "Returns the resources for vsphere compute cluster"
+        },
+        {
+          "info": {
+            "name": "Retrieves vsphere env",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/vsphere/env",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Retrieves vsphere env"
+        },
+        {
+          "info": {
+            "name": "Returns the cloud compute rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/:cloud/compute/:type/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloud",
+                "value": "",
+                "type": "path",
+                "description": "cloud for which compute rate is requested"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "instance type for which compute rate is requested"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "region for which compute rate is requested"
+              }
+            ]
+          },
+          "docs": "Returns the cloud compute rate"
+        },
+        {
+          "info": {
+            "name": "Returns the cloud storage rate",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/clouds/:cloud/storage/:type/rate",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cloud",
+                "value": "",
+                "type": "path",
+                "description": "cloud for which compute rate is requested"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "path",
+                "description": "storage type for which compute rate is requested"
+              },
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "region for which compute rate is requested"
+              },
+              {
+                "name": "maxDiskType",
+                "value": "",
+                "type": "query",
+                "description": "maxDiskType for which compute rate is requested"
+              }
+            ]
+          },
+          "docs": "Returns the cloud storage rate"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

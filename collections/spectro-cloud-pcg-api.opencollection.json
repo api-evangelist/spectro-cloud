@@ -1,0 +1,107 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations pcg API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "pcg",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Returns the private gateway manifest link",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/pcg/selfHosted",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns the private gateway manifest link"
+        },
+        {
+          "info": {
+            "name": "Registers the pcg",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://edge-host-ip:5080/v1/pcg/:uid/register",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Registers the pcg"
+        },
+        {
+          "info": {
+            "name": "Returns the pcg ally manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/pcg/:uid/services/ally/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the pcg ally manifest"
+        },
+        {
+          "info": {
+            "name": "Returns the pcg jet manifest",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/pcg/:uid/services/jet/manifest",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "uid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the pcg jet manifest"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Local Management APIs activations grpc API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "grpc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Grpc Configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://edge-host-ip:5080/v1/grpc/config",
+            "headers": [
+              {
+                "name": "ProjectUid",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns Grpc Configuration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

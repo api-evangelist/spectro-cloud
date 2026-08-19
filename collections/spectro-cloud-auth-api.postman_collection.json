@@ -1,0 +1,1746 @@
+{
+  "item": [
+    {
+      "id": "0050cc77-846d-43fe-9be8-51d918cef94c",
+      "name": "auth",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ecef28cc-b1b9-429a-82c4-29ac8b41f658",
+          "name": "Authenticates the user for the specified crendentials",
+          "request": {
+            "name": "Authenticates the user for the specified crendentials",
+            "description": {
+              "content": "Creates a authentication request with the specified credentials",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "authenticate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "setCookie",
+                  "value": "true",
+                  "description": "Describes a way to set cookie from backend."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailId\": \"<string>\",\n  \"org\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "160bd255-5904-4862-b982-addbc85d7d8f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "authenticate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "setCookie",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emailId\": \"<string>\",\n  \"org\": \"<string>\",\n  \"password\": \"<password>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Authorization\": \"string\",\n  \"isMfa\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3dc9d834-66b8-4c30-9618-ecda61737f7d",
+          "name": "V1AuthMfaDevicesList",
+          "request": {
+            "name": "V1AuthMfaDevicesList",
+            "description": {},
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "mfa",
+                "devices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f14adb8-1dde-4aec-af76-e624defe3b1f",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "mfa",
+                    "devices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"creationTimestamp\": \"2008-01-05T18:01:46.149Z\",\n    \"deviceName\": \"string\"\n  },\n  {\n    \"creationTimestamp\": \"2018-02-24T22:38:09.736Z\",\n    \"deviceName\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c471331-372b-4d0b-9c89-7cabe844d62b",
+          "name": "Returns the user organization details",
+          "request": {
+            "name": "Returns the user organization details",
+            "description": {
+              "content": "Returns the allowed login method and information with the organization details",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "org"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "orgName",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1315d71c-4ae2-4995-aba1-7de4562afa3e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "org"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "orgName",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"appEnv\": \"string\",\n  \"authType\": \"password\",\n  \"orgName\": \"string\",\n  \"redirectUrl\": \"string\",\n  \"rootDomain\": \"string\",\n  \"securityMode\": \"string\",\n  \"ssoLogins\": [\n    {\n      \"displayName\": \"string\",\n      \"logo\": \"string\",\n      \"name\": \"string\",\n      \"redirectUri\": \"string\"\n    }\n  ],\n  \"totalTenants\": 9900.073030282718\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b51ef47-69c1-426c-b03c-60d70ab7cb74",
+          "name": "Idp authorization code callback",
+          "request": {
+            "name": "Idp authorization code callback",
+            "description": {
+              "content": "Returns the Authorization token for the palette. This is called by the IDP as a callback url after IDP authenticates the user with its server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "org",
+                ":org",
+                "oidc",
+                "callback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "Describes temporary and very short lived code sent by IDP to validate the token"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Describes a state to validate and associate request and response"
+                },
+                {
+                  "disabled": false,
+                  "key": "error",
+                  "value": "<string>",
+                  "description": "Describes a error code in case the IDP is not able to validate and authenticates the user"
+                },
+                {
+                  "disabled": false,
+                  "key": "error_description",
+                  "value": "<string>",
+                  "description": "Describes a error in case the IDP is not able to validate and authenticates the user"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org",
+                  "description": "(Required) Organization name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d3417eac-4eb1-41a7-84bb-e75ea359751d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "org",
+                    ":org",
+                    "oidc",
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "error",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "error_description",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org",
+                      "description": "(Required) Organization name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Authorization\": \"string\",\n  \"isMfa\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ffc5cc61-7279-4274-9b92-0507c0097a2a",
+          "name": "Identity provider logout url for the Oidc",
+          "request": {
+            "name": "Identity provider logout url for the Oidc",
+            "description": {
+              "content": "Returns No Content. Works as a callback url after the IDP logout from their server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "org",
+                ":org",
+                "oidc",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Describes a state to validate and associate request and response"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org",
+                  "description": "(Required) Organization name"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "453ed78a-74a0-4515-92b6-177bd872b96f",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "org",
+                    ":org",
+                    "oidc",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org",
+                      "description": "(Required) Organization name"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6a7e45e-dd6a-48ce-8fb9-b19ef2020402",
+          "name": "Identity provider callback url for the SMAL authentication",
+          "request": {
+            "name": "Identity provider callback url for the SMAL authentication",
+            "description": {
+              "content": "Returns the Authorization token for the palette. This is called by the SAML based IDP as a callback url after IDP authenticates the user with its server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "org",
+                ":org",
+                "saml",
+                "callback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authToken",
+                  "value": "<string>",
+                  "description": "Deprecated."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org",
+                  "description": "(Required) Organization name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "SAMLResponse",
+                  "value": "<string>",
+                  "description": "Describe the SAML compliant response sent by IDP which will be validated by Palette"
+                },
+                {
+                  "disabled": false,
+                  "key": "RelayState",
+                  "value": "<string>",
+                  "description": "Describes a state to validate and associate request and response"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9cce6b46-8162-4bf2-9e22-68c2b9469cd5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "org",
+                    ":org",
+                    "saml",
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org",
+                      "description": "(Required) Organization name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Describe the SAML compliant response sent by IDP which will be validated by Palette",
+                        "type": "text/plain"
+                      },
+                      "key": "SAMLResponse",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Describes a state to validate and associate request and response",
+                        "type": "text/plain"
+                      },
+                      "key": "RelayState",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Authorization\": \"string\",\n  \"isMfa\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8127c75-6ca7-4dc0-b189-17bf188772e9",
+          "name": "Identity provider logout url for the SMAL",
+          "request": {
+            "name": "Identity provider logout url for the SMAL",
+            "description": {
+              "content": "Returns No Content. Works as a callback url after the IDP logout from their server.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "org",
+                ":org",
+                "saml",
+                "logout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "authToken",
+                  "value": "<string>",
+                  "description": "Deprecated."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "org",
+                  "description": "(Required) Organization name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "SAMLResponse",
+                  "value": "<string>",
+                  "description": "Describe the SAML compliant response sent by IDP which will be validated by Palette to perform logout."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "83be2712-a8b7-4fd9-b1b6-24ec9fa7d8da",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "org",
+                    ":org",
+                    "saml",
+                    "logout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "authToken",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "org",
+                      "description": "(Required) Organization name"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Describe the SAML compliant response sent by IDP which will be validated by Palette to perform logout.",
+                        "type": "text/plain"
+                      },
+                      "key": "SAMLResponse",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe8e4fec-10a8-4fcc-9b5b-d38201bb120b",
+          "name": "Returns a list of user's organizations",
+          "request": {
+            "name": "Returns a list of user's organizations",
+            "description": {
+              "content": "Returns a list of user's organizations details and login methods",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "orgs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "039b0ae2-c992-4725-87ed-b241cfb265b0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "orgs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"organizations\": [\n    {\n      \"authType\": \"string\",\n      \"name\": \"string\",\n      \"redirectUrl\": \"string\",\n      \"ssoLogins\": [\n        {\n          \"displayName\": \"string\",\n          \"logo\": \"string\",\n          \"name\": \"string\",\n          \"redirectUri\": \"string\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18475dc6-a542-49ad-a512-49f95f5288bd",
+          "name": "Updates and Activates the specified user password using the password token",
+          "request": {
+            "name": "Updates and Activates the specified user password using the password token",
+            "description": {
+              "content": "Updates and Activates user password with the help of password token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "password",
+                ":passwordToken",
+                "activate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "passwordToken",
+                  "description": "(Required) Describes the expirable password token for the user to be used for authentication of user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "88a1d61f-ba0d-4718-90c6-427b80e17816",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "password",
+                    ":passwordToken",
+                    "activate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "passwordToken",
+                      "description": "(Required) Describes the expirable password token for the user to be used for authentication of user"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f907f392-191e-478e-bb85-5c0ceddef334",
+          "name": "Resets the user password using the password token",
+          "request": {
+            "name": "Resets the user password using the password token",
+            "description": {
+              "content": "Updates the new user password with the help of password token",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "password",
+                ":passwordToken",
+                "reset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "passwordToken",
+                  "description": "(Required) Describes the expirable password token for the user to be used for authentication of user"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"password\": \"<password>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "240dc113-2f4d-4bdd-b58e-f4499fe8cc9f",
+              "name": "The resource was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "password",
+                    ":passwordToken",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "passwordToken",
+                      "description": "(Required) Describes the expirable password token for the user to be used for authentication of user"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ae3afd7-9632-45bd-8f45-e394ce394b78",
+          "name": "Refreshes authentication token",
+          "request": {
+            "name": "Refreshes authentication token",
+            "description": {
+              "content": "Returns a new token within refresh timeout and same session id is maintained",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "refresh",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "setCookie",
+                  "value": "true",
+                  "description": "Describes a way to set cookie from backend."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Non expired Authorization token"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "95b7735f-b270-439a-945a-218f6f8836ff",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "refresh",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "setCookie",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Non expired Authorization token"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Authorization\": \"string\",\n  \"isMfa\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "12688c98-848a-4065-81a1-b87e8c0f55f4",
+          "name": "Returns a list of predefined Identity Provider (IDP)",
+          "request": {
+            "name": "Returns a list of predefined Identity Provider (IDP)",
+            "description": {
+              "content": "Returns a list of predefined Identity Provider (IDP)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "sso",
+                "idps"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8507a217-cb40-4cce-910f-f8068c26ec4a",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "sso",
+                    "idps"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a3a4c7b-aafb-4fe1-8279-c7eeeb11a4c9",
+          "name": "Returns a list of supported sso logins",
+          "request": {
+            "name": "Returns a list of supported sso logins",
+            "description": {
+              "content": "Returns a list of supported sso logins and their authentication mechanism",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "sso",
+                "logins"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "org",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70e28a42-2b1c-42ba-92fe-f709f5d540cd",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "sso",
+                    "logins"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "org",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"displayName\": \"string\",\n    \"logo\": \"string\",\n    \"name\": \"string\",\n    \"redirectUri\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "342a7f10-6278-4adb-ae69-b509de43a752",
+          "name": "Returns a list of supported sso auth providers",
+          "request": {
+            "name": "Returns a list of supported sso auth providers",
+            "description": {
+              "content": "Returns a list of supported sso auth providers",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "sso",
+                "providers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d39098de-275d-4f61-952f-d36e18faffa0",
+              "name": "(empty)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "sso",
+                    "providers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"displayName\": \"string\",\n    \"logo\": \"string\",\n    \"name\": \"string\",\n    \"redirectUri\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a02d80fe-21d1-4e89-86ab-e25e0c44e20b",
+          "name": "Returns Authorization token. Works as a callback url for the system defined sso apps",
+          "request": {
+            "name": "Returns Authorization token. Works as a callback url for the system defined sso apps",
+            "description": {
+              "content": "Returns Authorization token. Works as a callback url for the system defined sso apps",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "sso",
+                ":ssoApp",
+                "callback"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "code",
+                  "value": "<string>",
+                  "description": "Describes temporary and very short lived code sent by IDP to validate the token"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Describes a state to validate and associate request and response"
+                },
+                {
+                  "disabled": false,
+                  "key": "error",
+                  "value": "<string>",
+                  "description": "Describes a error code in case the IDP is not able to validate and authenticates the user"
+                },
+                {
+                  "disabled": false,
+                  "key": "error_description",
+                  "value": "<string>",
+                  "description": "Describes a error in case the IDP is not able to validate and authenticates the user"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "ssoApp",
+                  "description": "(Required) Describes the sso app use to login into the system"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d0fbd23a-f074-4e1f-80a9-7cead7de9c20",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "sso",
+                    ":ssoApp",
+                    "callback"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "error",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "error_description",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "ssoApp",
+                      "description": "(Required) Describes the sso app use to login into the system"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Authorization\": \"string\",\n  \"isMfa\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "56bc1f72-9db5-4961-b0f6-3787cbb286f6",
+          "name": "Returns No Content. Sends the user organization information via email",
+          "request": {
+            "name": "Returns No Content. Sends the user organization information via email",
+            "description": {
+              "content": "Returns No Content. Sends the user organization(s) information via email",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "user",
+                "org",
+                "forgot"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "emailId",
+                  "value": "<string>",
+                  "description": "(Required) Describes user's email id for sending organzation(s) details via email."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4452d63e-f9ce-4ad2-bb33-d175e34109af",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "user",
+                    "org",
+                    "forgot"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "emailId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c1fc457-3d7e-4103-bf82-dcfdf604d343",
+          "name": "Creates request to reset password via email",
+          "request": {
+            "name": "Creates request to reset password via email",
+            "description": {
+              "content": "Creates request to reset password via email. Password reset email will be sent to the user. Sends 204 No Content.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "v1",
+                "auth",
+                "user",
+                "password",
+                "reset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "662686c2-84c4-41b0-bb8e-0f9b4448892d",
+              "name": "Ok response without content",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "v1",
+                    "auth",
+                    "user",
+                    "password",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"emailId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Audit uid for the request",
+                  "key": "AuditUid",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://edge-host-ip:5080",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d562eebc-d9ab-4682-b4fa-a0f60fe0ff18",
+    "name": "Local Management APIs activations auth API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
