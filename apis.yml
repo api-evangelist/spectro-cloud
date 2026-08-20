@@ -37,6 +37,16 @@ tags:
 - Company
 - Infrastructure
 - Kubernetes
+- Cloud-Native
+- Cluster Management
+- Edge Computing
+- Multi-Cloud
+- DevOps
+- AI Infrastructure
+tags_raw:
+- Company
+- Infrastructure
+- Kubernetes
 - Cloud Native
 - Cluster Management
 - Edge Computing
@@ -50,6 +60,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Activations
+  tags_raw:
   - activations
   properties:
   - type: OpenAPI
@@ -62,6 +74,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - APIKeys
+  tags_raw:
   - apiKeys
   properties:
   - type: OpenAPI
@@ -74,6 +88,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - App Deployments
+  tags_raw:
   - appDeployments
   properties:
   - type: OpenAPI
@@ -85,7 +101,8 @@ apis:
   description: The appProfiles API from Spectro Cloud — 11 operation(s) for appprofiles.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
-  tags:
+  tags: []
+  tags_raw:
   - appProfiles
   properties:
   - type: OpenAPI
@@ -98,6 +115,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Audits
+  tags_raw:
   - audits
   properties:
   - type: OpenAPI
@@ -110,6 +129,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Authentication
+  tags_raw:
   - auth
   properties:
   - type: OpenAPI
@@ -122,6 +143,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Cloud Accounts
+  tags_raw:
   - cloudaccounts
   properties:
   - type: OpenAPI
@@ -146,6 +169,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Clouds
+  tags_raw:
   - clouds
   properties:
   - type: OpenAPI
@@ -158,6 +183,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - ClusterGroups
+  tags_raw:
   - clustergroups
   properties:
   - type: OpenAPI
@@ -181,7 +208,8 @@ apis:
   description: The clusterTemplates API from Spectro Cloud — 11 operation(s) for clustertemplates.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
-  tags:
+  tags: []
+  tags_raw:
   - clusterTemplates
   properties:
   - type: OpenAPI
@@ -194,6 +222,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Dashboard
+  tags_raw:
   - dashboard
   properties:
   - type: OpenAPI
@@ -206,6 +236,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Data Sinks
+  tags_raw:
   - datasinks
   properties:
   - type: OpenAPI
@@ -242,6 +274,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Event
+  tags_raw:
   - events
   properties:
   - type: OpenAPI
@@ -254,6 +288,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Features
+  tags_raw:
   - features
   properties:
   - type: OpenAPI
@@ -266,6 +302,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Filters
+  tags_raw:
   - filters
   properties:
   - type: OpenAPI
@@ -278,6 +316,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - gRPC
+  tags_raw:
   - grpc
   properties:
   - type: OpenAPI
@@ -290,6 +330,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Health
+  tags_raw:
   - health
   properties:
   - type: OpenAPI
@@ -302,6 +344,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Installers
+  tags_raw:
   - installers
   properties:
   - type: OpenAPI
@@ -314,6 +358,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Metrics
+  tags_raw:
   - metrics
   properties:
   - type: OpenAPI
@@ -326,6 +372,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Notification
+  tags_raw:
   - notifications
   properties:
   - type: OpenAPI
@@ -350,6 +398,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Packs
+  tags_raw:
   - packs
   properties:
   - type: OpenAPI
@@ -374,6 +424,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Permissions
+  tags_raw:
   - permissions
   properties:
   - type: OpenAPI
@@ -386,6 +438,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Ping
+  tags_raw:
   - ping
   properties:
   - type: OpenAPI
@@ -398,6 +452,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Plans
+  tags_raw:
   - plans
   properties:
   - type: OpenAPI
@@ -410,6 +466,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Project
+  tags_raw:
   - projects
   properties:
   - type: OpenAPI
@@ -422,6 +480,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Registries
+  tags_raw:
   - registries
   properties:
   - type: OpenAPI
@@ -434,6 +494,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Roles
+  tags_raw:
   - roles
   properties:
   - type: OpenAPI
@@ -446,6 +508,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Services
+  tags_raw:
   - services
   properties:
   - type: OpenAPI
@@ -457,7 +521,8 @@ apis:
   description: The spcPolicies API from Spectro Cloud — 5 operation(s) for spcpolicies.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
-  tags:
+  tags: []
+  tags_raw:
   - spcPolicies
   properties:
   - type: OpenAPI
@@ -482,6 +547,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - System
+  tags_raw:
   - system
   properties:
   - type: OpenAPI
@@ -494,6 +561,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Team
+  tags_raw:
   - teams
   properties:
   - type: OpenAPI
@@ -506,6 +575,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Tenants
+  tags_raw:
   - tenants
   properties:
   - type: OpenAPI
@@ -530,6 +601,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - User
+  tags_raw:
   - users
   properties:
   - type: OpenAPI
@@ -542,6 +615,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - Workspaces
+  tags_raw:
   - workspaces
   properties:
   - type: OpenAPI
