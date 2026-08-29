@@ -17,6 +17,18 @@ x-backed-by:
 - sierra-ventures
 x-tier: profiled
 x-tier-reason: enriched-from-live-api
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
@@ -629,6 +641,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/spectro-cloud-capability-edges.yml
+  name: Spectro Cloud Business Capability Map
 - type: AgenticAccess
   url: agentic-access/spectro-cloud-agentic-access.yml
 - type: Website
