@@ -72,7 +72,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - activations
+  - Activations
   tags_raw:
   - activations
   properties:
@@ -99,7 +99,8 @@ apis:
   description: The appDeployments API from Spectro Cloud — 9 operation(s) for appdeployments.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
-  tags: []
+  tags:
+  - App Deployments
   tags_raw:
   - appDeployments
   properties:
@@ -126,7 +127,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - audits
+  - Audits
   tags_raw:
   - audits
   properties:
@@ -154,7 +155,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - cloudaccounts
+  - Cloud Accounts
   tags_raw:
   - cloudaccounts
   properties:
@@ -180,7 +181,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - clouds
+  - Clouds
   tags_raw:
   - clouds
   properties:
@@ -194,7 +195,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - clustergroups
+  - ClusterGroups
   tags_raw:
   - clustergroups
   properties:
@@ -247,7 +248,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - datasinks
+  - Data Sinks
   tags_raw:
   - datasinks
   properties:
@@ -313,7 +314,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - filters
+  - Filters
   tags_raw:
   - filters
   properties:
@@ -327,7 +328,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - grpc
+  - gRPC
   tags_raw:
   - grpc
   properties:
@@ -355,7 +356,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - installers
+  - Installers
   tags_raw:
   - installers
   properties:
@@ -409,7 +410,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - packs
+  - Packs
   tags_raw:
   - packs
   properties:
@@ -491,7 +492,7 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - registries
+  - Registries
   tags_raw:
   - registries
   properties:
