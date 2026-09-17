@@ -82,34 +82,6 @@ apis:
     url: openapi/spectro-cloud-activations-api-openapi.yml
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-apikeys-api
-  name: Spectro Cloud apiKeys API
-  description: The apiKeys API from Spectro Cloud — 3 operation(s) for apikeys.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - APIKeys
-  tags_raw:
-  - apiKeys
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-apikeys-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-appdeployments-api
-  name: Spectro Cloud appDeployments API
-  description: The appDeployments API from Spectro Cloud — 9 operation(s) for appdeployments.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - App Deployments
-  tags_raw:
-  - appDeployments
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-appdeployments-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-appprofiles-api
   name: Spectro Cloud appProfiles API
   description: The appProfiles API from Spectro Cloud — 11 operation(s) for appprofiles.
@@ -151,20 +123,6 @@ apis:
     url: openapi/spectro-cloud-auth-api-openapi.yml
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-cloudaccounts-api
-  name: Spectro Cloud cloudaccounts API
-  description: The cloudaccounts API from Spectro Cloud — 32 operation(s) for cloudaccounts.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Cloud Accounts
-  tags_raw:
-  - cloudaccounts
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-cloudaccounts-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-cloudconfigs-api
   name: Spectro Cloud cloudconfigs API
   description: The cloudconfigs API from Spectro Cloud — 87 operation(s) for cloudconfigs.
@@ -189,20 +147,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/spectro-cloud-clouds-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-clustergroups-api
-  name: Spectro Cloud clustergroups API
-  description: The clustergroups API from Spectro Cloud — 10 operation(s) for clustergroups.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - ClusterGroups
-  tags_raw:
-  - clustergroups
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-clustergroups-api-openapi.yml
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-clusterprofiles-api
@@ -242,20 +186,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/spectro-cloud-dashboard-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-datasinks-api
-  name: Spectro Cloud datasinks API
-  description: The datasinks API from Spectro Cloud — 1 operation(s) for datasinks.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Data Sinks
-  tags_raw:
-  - datasinks
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-datasinks-api-openapi.yml
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-edge-mgmt-api
@@ -635,6 +565,66 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/spectro-cloud-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-api-keys-api
+  name: Spectro Cloud API Keys API
+  description: The API Keys API from Spectro Cloud — 3 operation(s) for api keys.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-api-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-app-deployments-api
+  name: Spectro Cloud App Deployments API
+  description: The App Deployments API from Spectro Cloud — 9 operation(s) for app deployments.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - App Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-app-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-cloud-accounts-api
+  name: Spectro Cloud Cloud Accounts API
+  description: The Cloud Accounts API from Spectro Cloud — 32 operation(s) for cloud accounts.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Cloud Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-cloud-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-cluster-groups-api
+  name: Spectro Cloud cluster groups API
+  description: The cluster groups API from Spectro Cloud — 10 operation(s) for cluster groups.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - cluster groups
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-cluster-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+- aid: spectro-cloud:spectro-cloud-data-sinks-api
+  name: Spectro Cloud Data Sinks API
+  description: The Data Sinks API from Spectro Cloud — 1 operation(s) for data sinks.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Data Sinks
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-data-sinks-api-openapi.yml
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 maintainers:
