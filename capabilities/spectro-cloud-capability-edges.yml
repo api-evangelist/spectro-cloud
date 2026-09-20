@@ -95,7 +95,8 @@ edges:
     self-signup and marketplace provisioning — tenant provisioning and lifecycle. Some operations spill
     into tenant configuration/limits, hence not 0.95.
 - tag: clustergroups
-  spec_file: spectro-cloud-clustergroups-api-openapi.yml
+  spec_file: spectro-cloud-cluster-groups-api-openapi.yml
+  reanchored_from: spectro-cloud-clustergroups-api-openapi.yml
   capability_id: BC-600.50
   capability_id_l1: BC-600
   capability_name: IT Infrastructure Management
@@ -136,7 +137,8 @@ edges:
   reason: 'Teams here are access-control principals: groups of users bound to project and resource roles.
     That is access administration (IAM), not HR team management.'
 - tag: appDeployments
-  spec_file: spectro-cloud-appdeployments-api-openapi.yml
+  spec_file: spectro-cloud-app-deployments-api-openapi.yml
+  reanchored_from: spectro-cloud-appdeployments-api-openapi.yml
   capability_id: BC-4210.40
   capability_id_l1: BC-4210
   capability_name: Deployment Orchestration
@@ -146,7 +148,8 @@ edges:
   reason: Operations create, target and update application deployments (with manifests/tiers) onto Kubernetes
     virtual clusters and cluster groups — deployment orchestration of software changes to running environments.
 - tag: cloudaccounts
-  spec_file: spectro-cloud-cloudaccounts-api-openapi.yml
+  spec_file: spectro-cloud-cloud-accounts-api-openapi.yml
+  reanchored_from: spectro-cloud-cloudaccounts-api-openapi.yml
   capability_id: BC-600.50
   capability_id_l1: BC-600
   capability_name: IT Infrastructure Management
