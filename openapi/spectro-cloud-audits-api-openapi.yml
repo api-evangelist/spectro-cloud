@@ -1,18 +1,11 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: Local Management APIs activations audits API
+  title: Palette APIs - 4.9 Audits API
   version: v1
 servers:
-- url: https://edge-host-ip:5080
-schemes:
-- http
-- https
-consumes:
-- application/json
-produces:
-- application/json
+- url: https://api.spectrocloud.com
 tags:
-- name: audits
+- name: Audits
   x-displayName: Audits
 paths:
   /v1/audits:
@@ -20,146 +13,166 @@ paths:
       operationId: v1AuditsList
       parameters:
       - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-        format: date-time
         in: query
         name: startTime
-        type: string
+        schema:
+          type: string
+          format: date-time
       - description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-        format: date-time
         in: query
         name: endTime
-        type: string
+        schema:
+          type: string
+          format: date-time
       - description: Specify the user uid, to retrieve the specific user audit logs
         in: query
         name: userUid
-        type: string
+        schema:
+          type: string
       - description: Specify the project uid, to retrieve the specific project audit logs
         in: query
         name: projectUid
-        type: string
+        schema:
+          type: string
       - description: Specify the tenant uid, to retrieve the specific tenant audit logs
         in: query
         name: tenantUid
-        type: string
+        schema:
+          type: string
       - description: Specify the resource name, to retrieve the specific resource audit logs
         in: query
         name: resourceKind
-        type: string
+        schema:
+          type: string
       - description: Specify the resource uid, to retrieve the specific resource audit logs
         in: query
         name: resourceUid
-        type: string
-      - enum:
-        - create
-        - update
-        - delete
-        - publish
-        - deploy
-        - activity
-        - action
-        in: query
+        schema:
+          type: string
+      - in: query
         name: actionType
-        type: string
-      - default: 50
-        description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+        schema:
+          type: string
+          enum:
+          - create
+          - update
+          - delete
+          - publish
+          - deploy
+          - activity
+          - action
+      - description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
 
           If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
-        format: int64
         in: query
         name: limit
-        type: integer
+        schema:
+          type: integer
+          format: int64
+          default: 50
       - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
-        format: int64
         in: query
         name: offset
-        type: integer
+        schema:
+          type: integer
+          format: int64
       - description: continue token to paginate the subsequent data items
         in: query
         name: continue
-        type: string
+        schema:
+          type: string
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
         name: ProjectUid
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: (empty)
-          schema:
-            $ref: '#/definitions/v1Audits'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Audits'
       security:
       - ApiKey: []
       - Authorization: []
       summary: Retrieves the list of audit logs
       tags:
-      - audits
+      - Audits
   /v1/audits/{uid}:
     parameters:
     - description: Specify the audit uid
       in: path
       name: uid
       required: true
-      type: string
+      schema:
+        type: string
     get:
       operationId: v1AuditsUidGet
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
         name: ProjectUid
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: (empty)
-          schema:
-            $ref: '#/definitions/v1Audit'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Audit'
       security:
       - ApiKey: []
       - Authorization: []
       summary: Returns the specified audit log
       tags:
-      - audits
+      - Audits
   /v1/audits/{uid}/sysMsg:
     parameters:
     - description: Specify the audit uid
       in: path
       name: uid
       required: true
-      type: string
+      schema:
+        type: string
     get:
       operationId: v1AuditsUidGetSysMsg
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
         name: ProjectUid
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: (empty)
-          schema:
-            $ref: '#/definitions/v1AuditSysMsg'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AuditSysMsg'
       security:
       - ApiKey: []
       - Authorization: []
       summary: Returns the specified system audit message
       tags:
-      - audits
+      - Audits
   /v1/audits/{uid}/userMsg:
     parameters:
     - description: Specify the audit uid
       in: path
       name: uid
       required: true
-      type: string
+      schema:
+        type: string
     patch:
       operationId: v1AuditsUidMsgUpdate
       parameters:
-      - in: body
-        name: body
-        schema:
-          $ref: '#/definitions/v1AuditMsgUpdate'
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
         name: ProjectUid
-        type: string
+        schema:
+          type: string
       responses:
         '204':
           description: The resource was updated successfully
@@ -168,195 +181,206 @@ paths:
       - Authorization: []
       summary: Updates the specified user message for the specified audit
       tags:
-      - audits
-definitions:
-  v1AuditMsgUpdate:
-    description: Audit user message update request payload
-    properties:
-      userMsg:
-        description: User message
-        maxLength: 255
-        minLength: 3
-        type: string
-    type: object
-  v1Time:
-    description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-    format: date-time
-    type: string
-  v1ProjectMeta:
-    properties:
-      name:
-        type: string
-      uid:
-        type: string
-    type: object
-  v1AuditResourceReference:
-    description: Audit resource reference object
-    properties:
-      kind:
-        description: Audit resource type
-        type: string
-      label:
-        description: Audit resource label
-        type: string
-      name:
-        description: Audit resource name
-        type: string
-      uid:
-        description: Audit resource uid
-        type: string
-    required:
-    - uid
-    type: object
-  v1Audits:
-    properties:
-      items:
-        description: List of audit message
+      - Audits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AuditMsgUpdate'
+components:
+  schemas:
+    v1AuditSpec:
+      description: Audit specifications
+      properties:
+        actionMsg:
+          description: Audit action message
+          type: string
+        actionType:
+          enum:
+          - create
+          - update
+          - delete
+          - publish
+          - deploy
+          - activity
+          - action
+          type: string
+        actor:
+          $ref: '#/components/schemas/v1AuditActor'
+        contentMsg:
+          description: Audit content message
+          type: string
+        resource:
+          $ref: '#/components/schemas/v1AuditResourceReference'
+        userMsg:
+          description: Audit user message
+          type: string
+    v1AuditMsgUpdate:
+      description: Audit user message update request payload
+      properties:
+        userMsg:
+          description: User message
+          maxLength: 255
+          minLength: 3
+          type: string
+      type: object
+    v1AuditActor:
+      description: Audit actor object
+      properties:
+        actorType:
+          enum:
+          - user
+          - system
+          - service
+          type: string
+        project:
+          $ref: '#/components/schemas/v1ProjectMeta'
+        serviceName:
+          type: string
+        user:
+          $ref: '#/components/schemas/v1UserMeta'
+    v1AuditResourceReference:
+      description: Audit resource reference object
+      properties:
+        kind:
+          description: Audit resource type
+          type: string
+        label:
+          description: Audit resource label
+          type: string
+        name:
+          description: Audit resource name
+          type: string
+        uid:
+          description: Audit resource uid
+          type: string
+      required:
+      - uid
+      type: object
+    v1ObjectMeta:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        deletionTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1AuditSysMsg:
+      description: Audit system message
+      properties:
+        actionMsg:
+          description: Audit resource action message
+          type: string
+        contentMsg:
+          description: Audit resource content message
+          type: string
+      type: object
+    v1Audits:
+      properties:
         items:
-          $ref: '#/definitions/v1Audit'
-        type: array
-        uniqueItems: true
-      listmeta:
-        $ref: '#/definitions/v1ListMetaData'
-    required:
-    - items
-    type: object
-  v1UserMeta:
-    properties:
-      emailId:
-        type: string
-      firstName:
-        type: string
-      lastName:
-        type: string
-      org:
-        type: string
-      uid:
-        type: string
-    type: object
-  v1ObjectMeta:
-    description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
-    properties:
-      annotations:
-        additionalProperties:
+          description: List of audit message
+          items:
+            $ref: '#/components/schemas/v1Audit'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1Audit:
+      description: Audit response payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AuditSpec'
+      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1UserMeta:
+      properties:
+        emailId:
           type: string
-        description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-        type: object
-      creationTimestamp:
-        $ref: '#/definitions/v1Time'
-        description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-      deletionTimestamp:
-        $ref: '#/definitions/v1Time'
-        description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
-
-
-          Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-      labels:
-        additionalProperties:
+        firstName:
           type: string
-        description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-        type: object
-      lastModifiedTimestamp:
-        $ref: '#/definitions/v1Time'
-        description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-          Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-      name:
-        description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-        type: string
-      uid:
-        description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
-
-
-          Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
-        type: string
-    type: object
-  v1AuditSpec:
-    description: Audit specifications
-    properties:
-      actionMsg:
-        description: Audit action message
-        type: string
-      actionType:
-        enum:
-        - create
-        - update
-        - delete
-        - publish
-        - deploy
-        - activity
-        - action
-        type: string
-      actor:
-        $ref: '#/definitions/v1AuditActor'
-      contentMsg:
-        description: Audit content message
-        type: string
-      resource:
-        $ref: '#/definitions/v1AuditResourceReference'
-      userMsg:
-        description: Audit user message
-        type: string
-  v1ListMetaData:
-    description: ListMeta describes metadata for the resource listing
-    properties:
-      continue:
-        description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-        type: string
-        x-omitempty: false
-      count:
-        description: Total count of the resources which might change during pagination based on the resources addition or deletion
-        type: integer
-        x-omitempty: false
-      limit:
-        description: Number of records feteched
-        type: integer
-        x-omitempty: false
-      offset:
-        description: The next offset for the pagination. Starting index for which next request will be placed.
-        type: integer
-        x-omitempty: false
-    type: object
-  v1Audit:
-    description: Audit response payload
-    properties:
-      metadata:
-        $ref: '#/definitions/v1ObjectMeta'
-      spec:
-        $ref: '#/definitions/v1AuditSpec'
-    type: object
-  v1AuditSysMsg:
-    description: Audit system message
-    properties:
-      actionMsg:
-        description: Audit resource action message
-        type: string
-      contentMsg:
-        description: Audit resource content message
-        type: string
-    type: object
-  v1AuditActor:
-    description: Audit actor object
-    properties:
-      actorType:
-        enum:
-        - user
-        - system
-        - service
-        type: string
-      project:
-        $ref: '#/definitions/v1ProjectMeta'
-      serviceName:
-        type: string
-      user:
-        $ref: '#/definitions/v1UserMeta'
-securityDefinitions:
-  Authorization:
-    description: JWT authorization token obtained using /v1/users/default/login API
-    type: apiKey
-    name: Authorization
-    in: header
+        lastName:
+          type: string
+        org:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1ProjectMeta:
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
+      in: header
+      name: ApiKey
+      type: apiKey
+    Authorization:
+      description: JWT token authorization obtained using /v1/auth/authenticate api
+      in: header
+      name: Authorization
+      type: apiKey

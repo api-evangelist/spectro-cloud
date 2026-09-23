@@ -1,186 +1,163 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Spc Policies API
+  title: Palette APIs - 4.9 API Keys API
   version: v1
 servers:
 - url: https://api.spectrocloud.com
 tags:
-- name: spcPolicies
-  x-displayName: Spc Policies
+- name: API Keys
+  x-displayName: Api Keys
 paths:
-  /v1/spcPolicies/maintenance:
+  /v1/apiKeys:
+    get:
+      operationId: v1ApiKeysList
+      responses:
+        '200':
+          description: Retrieves a list of API keys
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ApiKeys'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Retrieves a list of API keys
+      tags:
+      - API Keys
     post:
-      operationId: V1SpcPoliciesMaintenanceCreate
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
+      operationId: v1ApiKeysCreate
       responses:
         '201':
-          description: Created successfully
-          headers:
-            AuditUid:
-              description: Audit uid for the request
-              schema:
-                type: string
+          description: APIKey Created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1Uid'
+                $ref: '#/components/schemas/v1ApiKeyCreateResponse'
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Create a new maintenance policy
+      summary: Create an API key
       tags:
-      - spcPolicies
+      - API Keys
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v1SpcPolicyEntity'
-  /v1/spcPolicies/maintenance/{uid}:
+              $ref: '#/components/schemas/v1ApiKeyEntity'
+  /v1/apiKeys/{uid}:
     parameters:
-    - description: Policy uid
+    - description: Specify API key uid
       in: path
-      name: uid
-      required: true
-      schema:
-        type: string
-    get:
-      operationId: V1SpcPoliciesMaintenanceUidGet
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1SpcPolicyEntity'
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Returns the specified maintenance policy
-      tags:
-      - spcPolicies
-    put:
-      operationId: V1SpcPoliciesMaintenanceUidUpdate
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '204':
-          description: The resource was updated successfully
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Updates the specified maintenance policy
-      tags:
-      - spcPolicies
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v1SpcPolicyEntity'
-  /v1/spcPolicies/tags:
-    get:
-      operationId: V1SpcPoliciesTagsGet
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '200':
-          description: An array of spc policy tags
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1SpcPolicyTags'
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Retrieves a list of spc policy tags
-      tags:
-      - spcPolicies
-  /v1/spcPolicies/{policyType}/validate/name:
-    parameters:
-    - description: Spc policy type
-      in: path
-      name: policyType
-      required: true
-      schema:
-        type: string
-    get:
-      operationId: V1SpcPoliciesValidateName
-      parameters:
-      - description: Spc policy name
-        in: query
-        name: name
-        schema:
-          type: string
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '204':
-          description: Ok response without content
-          headers:
-            AuditUid:
-              description: Audit uid for the request
-              schema:
-                type: string
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Validates the spc policy name
-      tags:
-      - spcPolicies
-  /v1/spcPolicies/{uid}:
-    parameters:
-    - in: path
       name: uid
       required: true
       schema:
         type: string
     delete:
-      operationId: V1SpcPoliciesUidDelete
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
+      operationId: v1ApiKeysUidDelete
       responses:
         '204':
           description: The resource was deleted successfully
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Delete a policy by uid
+      summary: Deletes the specified API key
       tags:
-      - spcPolicies
+      - API Keys
+    get:
+      operationId: v1ApiKeysUidGet
+      responses:
+        '200':
+          description: (empty)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ApiKey'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns the specified API key
+      tags:
+      - API Keys
+    patch:
+      operationId: v1ApiKeysUidActiveState
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Activate or de-active the specified API key
+      tags:
+      - API Keys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ApiKeyActiveState'
+    put:
+      operationId: v1ApiKeysUidUpdate
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Update the specified API key
+      tags:
+      - API Keys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ApiKeyUpdate'
+  /v1/apiKeys/{uid}/state:
+    parameters:
+    - description: Specify API key uid
+      in: path
+      name: uid
+      required: true
+      schema:
+        type: string
+    put:
+      operationId: v1ApiKeysUidState
+      responses:
+        '204':
+          description: The resource was updated successfully
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Revoke or re-activate the API key access
+      tags:
+      - API Keys
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ApiKeyActiveState'
 components:
   schemas:
-    v1SpcPolicyEntity:
-      description: Policy entity information
+    v1ApiKeySpec:
+      description: API key specification
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1SpcPolicySpec'
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: API key expiry date
+        key:
+          description: 'Deprecated: API key field will be no longer available'
+          type: string
+        user:
+          $ref: '#/components/schemas/v1ApiKeyUser'
+          description: User to whom the API key is created
+      type: object
+    v1ApiKeySpecEntity:
+      description: API key specification
+      properties:
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: API key expiry date
+        userUid:
+          description: User to whom the API key has to be created
+          type: string
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -223,52 +200,87 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1Uid:
+    v1ApiKeyStatus:
+      description: API key status
       properties:
-        uid:
-          type: string
-      required:
-      - uid
+        isActive:
+          description: API key active state
+          type: boolean
       type: object
-    v1SpcPolicySpec:
-      description: Policy specification
+    v1ApiKeyUpdate:
+      description: API key update request payload
       properties:
-        schedules:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ApiKeySpecUpdate'
+      type: object
+    v1ApiKeySpecUpdate:
+      description: API key update request specification
+      properties:
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: API key expiry date
+    v1ApiKeys:
+      properties:
+        items:
+          description: List of API keys
           items:
-            $ref: '#/components/schemas/v1Schedule'
+            $ref: '#/components/schemas/v1ApiKey'
           type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1ApiKeyCreateResponse:
+      description: Response of create API key
+      properties:
+        apiKey:
+          description: Api key is used for authentication
+          type: string
+        uid:
+          description: User uid
+          type: string
+      type: object
+    v1ApiKeyEntity:
+      description: API key request payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ApiKeySpecEntity'
+      type: object
+    v1ApiKey:
+      description: API key information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ApiKeySpec'
+        status:
+          $ref: '#/components/schemas/v1ApiKeyStatus'
       type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
-    v1Schedule:
-      description: Information about a schedule for the policy
+    v1ApiKeyActiveState:
       properties:
-        durationHrs:
-          description: Specifies the time window in hours during which the system is allowed to start upgrades on eligible clusters. Actual upgrade completion may vary due to cluster-specific factors like bandwidth, capacity, or environment.
-          maximum: 24
-          minimum: 1
-          type: integer
-        name:
-          description: Name of the upgrade schedule
-          type: string
-        startCron:
-          description: Cron expression for the start time of the schedule
-          type: string
-      required:
-      - durationHrs
-      - startCron
-      - name
-      type: object
-    v1SpcPolicyTags:
-      description: Spc policy tags response
+        isActive:
+          description: API key active state
+          type: boolean
+    v1ApiKeyUser:
+      description: API key user information
       properties:
-        tags:
-          description: Array of spc policy tags
-          items:
-            type: string
-          type: array
+        firstName:
+          description: First name of user
+          type: string
+        lastName:
+          description: Last name of user
+          type: string
+        uid:
+          description: User uid
+          type: string
       type: object
   securitySchemes:
     ApiKey:

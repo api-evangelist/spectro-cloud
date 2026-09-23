@@ -1,0 +1,28 @@
+# Front Door AI Index — spectro-cloud — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: spectro-cloud
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: spectrocloud.com
+  final_host: www.spectrocloud.com
+  ownership: own
+  owner: spectro-cloud
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 46
+  host_score: 46
+  density: 23.91
+  words: 1924
+  tiers:
+    agentic: 8
+    core: 38
+    model: 0
+  ambiguous: 1
+  top_terms:
+    AI: 38
+    inference: 7
+    AI assistant: 1
+    smart: 1

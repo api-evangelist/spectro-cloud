@@ -1,16 +1,16 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 App Profiles API
+  title: Palette APIs - 4.9 App Deployments API
   version: v1
 servers:
 - url: https://api.spectrocloud.com
 tags:
-- name: appProfiles
-  x-displayName: App Profiles
+- name: App Deployments
+  x-displayName: App Deployments
 paths:
-  /v1/appProfiles:
+  /v1/appDeployments:
     post:
-      operationId: v1AppProfilesCreate
+      operationId: v1AppDeploymentsVirtualClusterCreate
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -32,17 +32,17 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Creates a application profile
+      summary: Creates a application deployment in the virtual cluster
       tags:
-      - appProfiles
+      - App Deployments
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v1AppProfileEntity'
-  /v1/appProfiles/macros:
-    get:
-      operationId: v1AppProfilesMacrosList
+              $ref: '#/components/schemas/v1AppDeploymentVirtualClusterEntity'
+  /v1/appDeployments/clusterGroup:
+    post:
+      operationId: v1AppDeploymentsClusterGroupCreate
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -50,27 +50,38 @@ paths:
         schema:
           type: string
       responses:
-        '200':
-          description: OK
+        '201':
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              schema:
+                type: string
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1Macros'
+                $ref: '#/components/schemas/v1Uid'
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Retrieves a list of application profile macros
+      summary: Creates a application deployment in one of virtual clusters in the cluster group
       tags:
-      - appProfiles
-  /v1/appProfiles/{uid}:
+      - App Deployments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AppDeploymentClusterGroupEntity'
+  /v1/appDeployments/{uid}:
     parameters:
-    - in: path
+    - description: Application deployment uid
+      in: path
       name: uid
       required: true
       schema:
         type: string
     delete:
-      operationId: v1AppProfilesUidDelete
+      operationId: v1AppDeploymentsUidDelete
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -83,11 +94,11 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Deletes the specified application profile
+      summary: Deletes the specified application deployment
       tags:
-      - appProfiles
+      - App Deployments
     get:
-      operationId: v1AppProfilesUidGet
+      operationId: v1AppDeploymentsUidGet
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -100,15 +111,44 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1AppProfile'
+                $ref: '#/components/schemas/v1AppDeployment'
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Returns the specified application profile
+      summary: Returns the specified application deployment
       tags:
-      - appProfiles
+      - App Deployments
+  /v1/appDeployments/{uid}/profile:
+    parameters:
+    - description: Application deployment uid
+      in: path
+      name: uid
+      required: true
+      schema:
+        type: string
+    get:
+      operationId: v1AppDeploymentsUidProfileGet
+      parameters:
+      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
+        in: header
+        name: ProjectUid
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AppDeploymentProfileSpec'
+      security:
+      - ApiKey: []
+      - Authorization: []
+      summary: Returns profile of the specified application deployment
+      tags:
+      - App Deployments
     put:
-      operationId: v1AppProfilesUidUpdate
+      operationId: v1AppDeploymentsUidProfileUpdate
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -121,98 +161,29 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Updates the specified application profile
+      summary: Updates the specified application deployment profile
       tags:
-      - appProfiles
+      - App Deployments
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/v1AppProfileEntity'
-  /v1/appProfiles/{uid}/clone:
+              $ref: '#/components/schemas/v1AppDeploymentProfileEntity'
+  /v1/appDeployments/{uid}/profile/apply:
     parameters:
-    - description: Application profile uid
+    - description: Application deployment uid
       in: path
       name: uid
       required: true
       schema:
         type: string
-    post:
-      operationId: v1AppProfilesUidClone
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '201':
-          description: Created successfully
-          headers:
-            AuditUid:
-              description: Audit uid for the request
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1Uid'
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Clones the specified application profile
-      tags:
-      - appProfiles
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v1AppProfileCloneEntity'
-  /v1/appProfiles/{uid}/clone/validate:
-    parameters:
-    - description: Application profile uid
-      in: path
-      name: uid
-      required: true
-      schema:
-        type: string
-    post:
-      operationId: v1AppProfilesUidCloneValidate
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '204':
-          description: Ok response without content
-          headers:
-            AuditUid:
-              description: Audit uid for the request
-              schema:
-                type: string
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Validates the specified application profile clone
-      tags:
-      - appProfiles
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v1AppProfileCloneMetaInputEntity'
-  /v1/appProfiles/{uid}/metadata:
-    parameters:
-    - description: Application profile uid
-      in: path
-      name: uid
-      required: true
+    - description: Application deployment notification uid
+      in: query
+      name: notify
       schema:
         type: string
     patch:
-      operationId: v1AppProfilesUidMetadataUpdate
+      operationId: v1AppDeploymentsUidProfileApply
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -225,138 +196,25 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Updates the specified application profile metadata
+      summary: Apply the application deployment profile updates
       tags:
-      - appProfiles
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v1AppProfileMetaEntity'
-  /v1/appProfiles/{uid}/tiers:
+      - App Deployments
+  /v1/appDeployments/{uid}/profile/tiers/{tierUid}:
     parameters:
-    - description: Application profile uid
+    - description: Application deployment uid
       in: path
       name: uid
       required: true
       schema:
         type: string
-    get:
-      operationId: v1AppProfilesUidTiersGet
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '200':
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1AppProfileTiers'
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Retrieves a list of tiers of the specified application profile
-      tags:
-      - appProfiles
-    patch:
-      operationId: v1AppProfilesUidTiersPatch
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '201':
-          description: Created successfully
-          headers:
-            AuditUid:
-              description: Audit uid for the request
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1Uid'
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Updates app tier of the specified application profile
-      tags:
-      - appProfiles
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v1AppTierPatchEntity'
-    post:
-      operationId: v1AppProfilesUidTiersCreate
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '201':
-          description: Created successfully
-          headers:
-            AuditUid:
-              description: Audit uid for the request
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1Uid'
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Adds tier to the specified application profile
-      tags:
-      - appProfiles
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v1AppTierEntity'
-  /v1/appProfiles/{uid}/tiers/{tierUid}:
-    parameters:
-    - description: Application profile uid
-      in: path
-      name: uid
-      required: true
-      schema:
-        type: string
-    - description: Application profile tier uid
+    - description: Application deployment tier uid
       in: path
       name: tierUid
       required: true
       schema:
         type: string
-    delete:
-      operationId: v1AppProfilesUidTiersUidDelete
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '204':
-          description: The resource was deleted successfully
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Deletes the specified application profile tier
-      tags:
-      - appProfiles
     get:
-      operationId: v1AppProfilesUidTiersUidGet
+      operationId: v1AppDeploymentsProfileTiersUidGet
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -373,11 +231,11 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Returns the specified application profile tier information
+      summary: Returns the specified application deployment profile tier information
       tags:
-      - appProfiles
+      - App Deployments
     put:
-      operationId: v1AppProfilesUidTiersUidUpdate
+      operationId: v1AppDeploymentsProfileTiersUidUpdate
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -390,30 +248,30 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Updates the specified application profile tier
+      summary: Updates the specified application deployment profile tier information
       tags:
-      - appProfiles
+      - App Deployments
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppTierUpdateEntity'
-  /v1/appProfiles/{uid}/tiers/{tierUid}/manifests:
+  /v1/appDeployments/{uid}/profile/tiers/{tierUid}/manifests:
     parameters:
-    - description: Application profile uid
+    - description: Application deployment uid
       in: path
       name: uid
       required: true
       schema:
         type: string
-    - description: Application profile tier uid
+    - description: Application deployment tier uid
       in: path
       name: tierUid
       required: true
       schema:
         type: string
     get:
-      operationId: v1AppProfilesUidTiersUidManifestsGet
+      operationId: v1AppDeploymentsProfileTiersUidManifestsGet
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -430,79 +288,31 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Retrieves a list of manifests of the specified application profile tier
+      summary: Retrieves a list of manifests of the specified application deployment profile…
       tags:
-      - appProfiles
-    post:
-      operationId: v1AppProfilesUidTiersUidManifestsCreate
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '201':
-          description: Created successfully
-          headers:
-            AuditUid:
-              description: Audit uid for the request
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/v1Uid'
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Adds manifest to the specified application profile tier
-      tags:
-      - appProfiles
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/v1ManifestInputEntity'
-  /v1/appProfiles/{uid}/tiers/{tierUid}/manifests/{manifestUid}:
+      - App Deployments
+  /v1/appDeployments/{uid}/profile/tiers/{tierUid}/manifests/{manifestUid}:
     parameters:
-    - description: Application profile uid
+    - description: Application deployment uid
       in: path
       name: uid
       required: true
       schema:
         type: string
-    - description: Application profile tier uid
+    - description: Application deployment tier uid
       in: path
       name: tierUid
       required: true
       schema:
         type: string
-    - description: Application profile tier manifest uid
+    - description: Application deployment tier manifest uid
       in: path
       name: manifestUid
       required: true
       schema:
         type: string
-    delete:
-      operationId: v1AppProfilesUidTiersUidManifestsUidDelete
-      parameters:
-      - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
-        in: header
-        name: ProjectUid
-        schema:
-          type: string
-      responses:
-        '204':
-          description: The resource was deleted successfully
-      security:
-      - ApiKey: []
-      - Authorization: []
-      summary: Deletes the specified application profile tier manifest
-      tags:
-      - appProfiles
     get:
-      operationId: v1AppProfilesUidTiersUidManifestsUidGet
+      operationId: v1AppDeploymentsProfileTiersManifestsUidGet
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -519,11 +329,11 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Returns the specified application profile tier manifest information
+      summary: Returns the specified application deployment tier manifest information
       tags:
-      - appProfiles
+      - App Deployments
     put:
-      operationId: v1AppProfilesUidTiersUidManifestsUidUpdate
+      operationId: v1AppDeploymentsProfileTiersManifestsUidUpdate
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -536,30 +346,24 @@ paths:
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Updates the specified application profile tier manifest information
+      summary: Updates the specified application deployment tier manifest information
       tags:
-      - appProfiles
+      - App Deployments
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
-  /v1/appProfiles/{uid}/tiers/{tierUid}/resolvedValues:
+  /v1/appDeployments/{uid}/profile/versions:
     parameters:
-    - description: Application profile uid
+    - description: Application deployment uid
       in: path
       name: uid
       required: true
       schema:
         type: string
-    - description: Application profile tier uid
-      in: path
-      name: tierUid
-      required: true
-      schema:
-        type: string
     get:
-      operationId: v1AppProfilesUidTiersUidResolvedValuesGet
+      operationId: v1AppDeploymentsUidProfileVersionsGet
       parameters:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
@@ -572,13 +376,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/v1AppTierResolvedValues'
+                $ref: '#/components/schemas/v1AppDeploymentProfileVersions'
       security:
       - ApiKey: []
       - Authorization: []
-      summary: Returns the specified application profile tier resolved values
+      summary: Retrieves a list of profile versions of the specified application deployment
       tags:
-      - appProfiles
+      - App Deployments
 components:
   schemas:
     v1ObjectMetaInputEntity:
@@ -604,42 +408,34 @@ components:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
           $ref: '#/components/schemas/v1AppTierSpec'
-    v1AppProfileCloneEntity:
-      description: Application profile clone request payload
+    v1LifecycleStatus:
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1AppProfileCloneMetaInputEntity'
-      type: object
-    v1AppProfile:
-      description: Application profile response
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          properties:
-            parentUid:
-              description: Application profile parent profile uid
-              type: string
-            template:
-              $ref: '#/components/schemas/v1AppProfileTemplate'
-            version:
-              description: Application profile version
-              type: string
-            versions:
-              description: Application profile versions list
-              items:
-                $ref: '#/components/schemas/v1AppProfileVersion'
-              type: array
-          type: object
+        msg:
+          description: error or success msg of lifecycle
+          type: string
         status:
-          description: Application profile status
-          properties:
-            inUseApps:
-              description: Application profile apps array
-              items:
-                $ref: '#/components/schemas/v1ObjectResReference'
-              type: array
-          type: object
+          description: lifecycle status
+          enum:
+          - Pausing
+          - Paused
+          - Resuming
+          - Running
+          - Error
+          type: string
+    v1AppDeploymentClusterGroupTargetSpec:
+      description: Application deployment cluster group target spec
+      properties:
+        clusterGroupUid:
+          description: Application deployment cluster group uid
+          type: string
+        clusterLimits:
+          $ref: '#/components/schemas/v1AppDeploymentTargetClusterLimits'
+        clusterName:
+          description: Application deployment virtual cluster name
+          type: string
+      required:
+      - clusterName
+      - clusterGroupUid
       type: object
     v1AppTierType:
       default: manifest
@@ -649,33 +445,68 @@ components:
       - operator-instance
       - container
       type: string
-    v1AppProfileCloneTarget:
-      description: Application profile clone target
+    v1AppDeploymentProfileSpec:
+      description: Application deployment profile spec
       properties:
-        projectUid:
-          description: Application profile clone target project uid
-          type: string
+        metadata:
+          $ref: '#/components/schemas/v1AppDeploymentProfileMeta'
+        template:
+          $ref: '#/components/schemas/v1AppProfileTemplateSpec'
       type: object
-    v1ObjectResReference:
-      description: Object resource reference
+    v1AppDeploymentTargetClusterLimits:
+      description: Application deployment target cluster limits
       properties:
-        kind:
-          type: string
+        cpu:
+          description: CPU cores
+          format: int32
+          type: integer
+        memoryMiB:
+          description: Memory in MiB
+          format: int32
+          type: integer
+        storageGiB:
+          description: Storage in GiB
+          format: int32
+          type: integer
+    v1AppDeploymentClusterGroupSpec:
+      description: Application deployment cluster group spec
+      properties:
+        config:
+          $ref: '#/components/schemas/v1AppDeploymentClusterGroupConfigEntity'
+        profile:
+          $ref: '#/components/schemas/v1AppDeploymentProfileEntity'
+      type: object
+    v1ClusterPackManifestStatus:
+      properties:
+        condition:
+          $ref: '#/components/schemas/v1ClusterCondition'
         name:
-          type: string
-        projectUid:
-          type: string
-        tenantUid:
           type: string
         uid:
           type: string
       type: object
-    v1Macro:
+    v1AppDeploymentClusterRef:
+      description: Application deployment cluster reference
       properties:
+        deploymentClusterType:
+          description: Application deployment source cluster type[ "virtualCluster", "hostCluster" ]
+          enum:
+          - virtual
+          - host
+          type: string
         name:
+          description: Application deployment cluster name
           type: string
-        value:
+        uid:
+          description: Application deployment cluster uid
           type: string
+      type: object
+    v1AppDeploymentClusterGroupConfigEntity:
+      description: Application deployment cluster group config
+      properties:
+        targetSpec:
+          $ref: '#/components/schemas/v1AppDeploymentClusterGroupTargetSpec'
+      type: object
     v1AppTierManifests:
       description: Application tier manifests data
       properties:
@@ -684,6 +515,20 @@ components:
           items:
             $ref: '#/components/schemas/v1Manifest'
           type: array
+    v1LoadBalancerService:
+      properties:
+        host:
+          description: IP or Host from svc.Status.LoadBalancerStatus.Ingress
+          type: string
+        name:
+          description: name of the loadbalancer service
+          type: string
+        ports:
+          description: port this service exposed
+          items:
+            $ref: '#/components/schemas/v1ServicePort'
+          type: array
+      type: object
     v1ManifestPublishedSpec:
       description: Manifest spec
       properties:
@@ -698,6 +543,20 @@ components:
         value:
           description: Application tier property value
           type: string
+    v1AppDeploymentTargetConfig:
+      description: Application deployment target config response
+      properties:
+        clusterRef:
+          $ref: '#/components/schemas/v1AppDeploymentClusterRef'
+        envRef:
+          $ref: '#/components/schemas/v1AppDeploymentTargetEnvironmentRef'
+      type: object
+    v1AppDeploymentVirtualClusterConfigEntity:
+      description: Application deployment virtual cluster config
+      properties:
+        targetSpec:
+          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterTargetSpec'
+      type: object
     v1AppProfileTemplate:
       description: Application profile template information
       properties:
@@ -713,14 +572,22 @@ components:
             $ref: '#/components/schemas/v1ObjectReference'
           type: array
       type: object
-    v1AppTierResolvedValues:
-      description: Application tier resolved macro values
+    v1AppDeploymentClusterGroupEntity:
+      description: Application deployment cluster group request payload
       properties:
-        resolved:
-          additionalProperties:
-            type: string
-          description: Application tier resolved macro values map
-          type: object
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1AppDeploymentClusterGroupSpec'
+      type: object
+    v1AppDeploymentVirtualClusterEntity:
+      description: Application deployment virtual cluster request payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterSpec'
+      type: object
     v1Uid:
       properties:
         uid:
@@ -728,20 +595,25 @@ components:
       required:
       - uid
       type: object
-    v1AppProfileEntity:
-      description: Application profile request payload
+    v1ClusterCondition:
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          description: Application profile spec
-          properties:
-            template:
-              $ref: '#/components/schemas/v1AppProfileTemplateEntity'
-            version:
-              description: Application profile version
-              type: string
-          type: object
+        lastProbeTime:
+          $ref: '#/components/schemas/v1Time'
+        lastTransitionTime:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: Human-readable message indicating details about last transition.
+          type: string
+        reason:
+          description: Unique, one-word, CamelCase reason for the condition's last transition.
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+      required:
+      - type
+      - status
       type: object
     v1ManifestData:
       description: Published manifest object
@@ -753,15 +625,69 @@ components:
           description: Manifest digest
           type: string
       type: object
-    v1ManifestInputEntity:
-      description: Manifest request payload
+    v1AppDeploymentStatus:
+      description: Application deployment status
       properties:
-        content:
-          description: Manifest content
+        appTiers:
+          description: Application deployment tiers
+          items:
+            $ref: '#/components/schemas/v1ClusterPackStatus'
+          type: array
+        lifecycleStatus:
+          $ref: '#/components/schemas/v1LifecycleStatus'
+        state:
+          description: Application deployment state [ "Pending", "Deploying", "Deployed", "Updating" ]
           type: string
+      type: object
+    v1AppDeploymentTargetEnvironmentRef:
+      description: Application deployment target environment reference
+      properties:
         name:
-          description: Manifest name
+          description: Application deployment target resource name
           type: string
+        type:
+          description: Application deployment target resource type [ "nestedCluster", "clusterGroup" ]
+          type: string
+        uid:
+          description: Application deployment target resource uid
+          type: string
+      type: object
+    v1AppDeploymentProfileVersions:
+      description: Application deployment profile versions
+      properties:
+        availableVersions:
+          description: Application deployment profile available versions
+          items:
+            $ref: '#/components/schemas/v1AppDeploymentProfileVersion'
+          type: array
+        latestVersions:
+          description: Application deployment profile latest versions
+          items:
+            $ref: '#/components/schemas/v1AppDeploymentProfileVersion'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/v1AppDeploymentProfileMeta'
+      type: object
+    v1AppDeployment:
+      description: Application deployment response
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AppDeploymentSpec'
+        status:
+          $ref: '#/components/schemas/v1AppDeploymentStatus'
+      type: object
+    v1AppDeploymentProfileVersion:
+      description: Application deployment profile version
+      properties:
+        uid:
+          description: Application deployment profile uid
+          type: string
+        version:
+          description: Application deployment profile version
+          type: string
+      type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -803,6 +729,15 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1AppDeploymentProfileEntity:
+      description: Application deployment profile request payload
+      properties:
+        appProfileUid:
+          description: Application deployment profile uid
+          type: string
+      required:
+      - appProfileUid
+      type: object
     v1AppTierUpdateEntity:
       description: Application tier update request payload
       properties:
@@ -833,14 +768,6 @@ components:
           description: Application tier version
           type: string
       type: object
-    v1AppTierPatchEntity:
-      description: Application tier patch request payload
-      properties:
-        appTier:
-          $ref: '#/components/schemas/v1AppTierEntity'
-        replaceWithAppTier:
-          description: Application tier UID to be replaced with new tier
-          type: string
     v1ManifestRefUpdateEntity:
       description: Manifest update request payload
       properties:
@@ -855,46 +782,6 @@ components:
           type: string
       required:
       - name
-    v1AppTierEntity:
-      description: Application tier request payload
-      properties:
-        containerRegistryUid:
-          description: Application tier container registry uid
-          type: string
-        installOrder:
-          description: Application tier installation order
-          format: int32
-          type: integer
-        manifests:
-          description: Application tier manifests
-          items:
-            $ref: '#/components/schemas/v1ManifestInputEntity'
-          type: array
-        name:
-          description: Application tier name
-          type: string
-        properties:
-          description: Application tier properties
-          items:
-            $ref: '#/components/schemas/v1AppTierPropertyEntity'
-          type: array
-        registryUid:
-          description: Application tier registry uid
-          type: string
-        sourceAppTierUid:
-          description: Application tier source pack uid
-          type: string
-        type:
-          $ref: '#/components/schemas/v1AppTierType'
-        values:
-          description: Application tier configuration values in yaml format
-          type: string
-        version:
-          description: Application tier version
-          type: string
-      required:
-      - name
-      type: object
     v1Manifest:
       description: Manifest object
       properties:
@@ -917,32 +804,42 @@ components:
           description: Application tier version
           type: string
       type: object
-    v1AppProfileTiers:
-      description: Application profile tiers information
+    v1AppDeploymentSpec:
+      description: Application deployment spec
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AppProfileTiersSpec'
+        config:
+          $ref: '#/components/schemas/v1AppDeploymentConfig'
+        profile:
+          $ref: '#/components/schemas/v1AppDeploymentProfile'
       type: object
-    v1AppProfileMetaEntity:
-      description: Application profile metadata request payload
+    v1AppProfileTemplateSpec:
+      description: Application profile template specs
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1AppProfileMetaUpdateEntity'
-        version:
-          description: Application profile version
-          type: string
-      required:
-      - metadata
-      type: object
-    v1Macros:
-      properties:
-        macros:
+        appTiers:
+          description: Application profile tiers
           items:
-            $ref: '#/components/schemas/v1Macro'
+            $ref: '#/components/schemas/v1AppTier'
           type: array
           uniqueItems: true
+        registryRefs:
+          description: Application profile registries reference
+          items:
+            $ref: '#/components/schemas/v1ObjectReference'
+          type: array
+      type: object
+    v1AppDeploymentProfileMeta:
+      description: Application deployment profile metadata
+      properties:
+        name:
+          description: Application deployment profile name
+          type: string
+        uid:
+          description: Application deployment profile uid
+          type: string
+        version:
+          description: Application deployment profile version
+          type: string
+      type: object
     v1AppTierSpec:
       description: Application tier specs
       properties:
@@ -979,53 +876,64 @@ components:
           description: Application tier version
           type: string
       type: object
-    v1AppProfileCloneMetaInputEntity:
-      description: Application profile clone metadata
+    v1ServicePort:
       properties:
-        name:
-          description: Application profile name
-          type: string
-        target:
-          $ref: '#/components/schemas/v1AppProfileCloneTarget'
-        version:
-          description: Application profile version
+        port:
+          description: The port that will be exposed by this service.
+          format: int32
+          type: integer
+        protocol:
           type: string
       required:
-      - name
+      - port
       type: object
-    v1AppProfileTemplateEntity:
-      description: Application profile template spec
+    v1ClusterPackStatus:
       properties:
-        appTiers:
-          description: Application profile tiers
+        condition:
+          $ref: '#/components/schemas/v1ClusterCondition'
+        endTime:
+          $ref: '#/components/schemas/v1Time'
+        manifests:
           items:
-            $ref: '#/components/schemas/v1AppTierEntity'
+            $ref: '#/components/schemas/v1ClusterPackManifestStatus'
           type: array
-          uniqueItems: true
-      type: object
-    v1AppProfileMetaUpdateEntity:
-      description: Application profile metadata update request payload
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: Application profile annotations
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: Application profile labels
-          type: object
-      type: object
-    v1AppProfileTiersSpec:
-      description: Application profile tiers information
-      properties:
-        appTiers:
-          description: Application profile tiers
+        name:
+          type: string
+        profileUid:
+          type: string
+        services:
           items:
-            $ref: '#/components/schemas/v1AppTier'
+            $ref: '#/components/schemas/v1LoadBalancerService'
           type: array
-          uniqueItems: true
+        startTime:
+          $ref: '#/components/schemas/v1Time'
+        type:
+          type: string
+        version:
+          type: string
+      type: object
+    v1AppDeploymentConfig:
+      description: Application deployment config response
+      properties:
+        target:
+          $ref: '#/components/schemas/v1AppDeploymentTargetConfig'
+      type: object
+    v1AppDeploymentVirtualClusterTargetSpec:
+      description: Application deployment virtual cluster target spec
+      properties:
+        clusterUid:
+          description: Application deployment virtual cluster uid
+          type: string
+      required:
+      - clusterUid
+      type: object
+    v1AppDeploymentVirtualClusterSpec:
+      description: Application deployment virtual cluster spec
+      properties:
+        config:
+          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterConfigEntity'
+        profile:
+          $ref: '#/components/schemas/v1AppDeploymentProfileEntity'
       type: object
     v1AppTierProperty:
       description: Application tier property object
@@ -1042,14 +950,6 @@ components:
         value:
           description: Application tier property value
           type: string
-    v1AppProfileVersion:
-      description: Application profile version
-      properties:
-        uid:
-          type: string
-        version:
-          type: string
-      type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
@@ -1066,6 +966,14 @@ components:
         uid:
           description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
           type: string
+      type: object
+    v1AppDeploymentProfile:
+      description: Application deployment profile
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1AppDeploymentProfileMeta'
+        template:
+          $ref: '#/components/schemas/v1AppProfileTemplate'
       type: object
   securitySchemes:
     ApiKey:

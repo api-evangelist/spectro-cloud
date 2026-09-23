@@ -1,16 +1,9 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: Local Management APIs activations grpc API
+  title: Palette APIs - 4.9 Grpc API
   version: v1
 servers:
-- url: https://edge-host-ip:5080
-schemes:
-- http
-- https
-consumes:
-- application/json
-produces:
-- application/json
+- url: https://api.spectrocloud.com
 tags:
 - name: grpc
   x-displayName: Grpc
@@ -23,49 +16,58 @@ paths:
       - description: A project UID is required for project-scoped resources and should be omitted when targeting tenant-scoped resources
         in: header
         name: ProjectUid
-        type: string
+        schema:
+          type: string
       responses:
         '200':
           description: (empty)
-          schema:
-            $ref: '#/definitions/v1GrpcConfiguration'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GrpcConfiguration'
       security:
       - ApiKey: []
       - Authorization: []
       summary: Get Grpc Configuration
       tags:
       - grpc
-definitions:
-  v1GrpcEndpoint:
-    properties:
-      endpoint:
-        description: Describes the URL where the client has to connect to the grpc server
-        type: string
-      tls:
-        description: Describes the Grpc tls config which client will use to make a request to the grpc server
-        properties:
-          caCert:
-            type: string
-          enabled:
-            type: boolean
-          insecureSkipVerify:
-            type: boolean
-        type: object
-    type: object
-  v1GrpcConfiguration:
-    description: Describes the response that contains the grpc configuration to establish connection
-    properties:
-      preferredServer:
-        $ref: '#/definitions/v1GrpcEndpoint'
-      servers:
-        items:
-          $ref: '#/definitions/v1GrpcEndpoint'
-        type: array
-        uniqueItems: true
-    type: object
-securityDefinitions:
-  Authorization:
-    description: JWT authorization token obtained using /v1/users/default/login API
-    type: apiKey
-    name: Authorization
-    in: header
+components:
+  schemas:
+    v1GrpcConfiguration:
+      description: Describes the response that contains the grpc configuration to establish connection
+      properties:
+        preferredServer:
+          $ref: '#/components/schemas/v1GrpcEndpoint'
+        servers:
+          items:
+            $ref: '#/components/schemas/v1GrpcEndpoint'
+          type: array
+          uniqueItems: true
+      type: object
+    v1GrpcEndpoint:
+      properties:
+        endpoint:
+          description: Describes the URL where the client has to connect to the grpc server
+          type: string
+        tls:
+          description: Describes the Grpc tls config which client will use to make a request to the grpc server
+          properties:
+            caCert:
+              type: string
+            enabled:
+              type: boolean
+            insecureSkipVerify:
+              type: boolean
+          type: object
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
+      in: header
+      name: ApiKey
+      type: apiKey
+    Authorization:
+      description: JWT token authorization obtained using /v1/auth/authenticate api
+      in: header
+      name: Authorization
+      type: apiKey

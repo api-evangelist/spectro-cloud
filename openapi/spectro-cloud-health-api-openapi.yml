@@ -1,59 +1,60 @@
-swagger: '2.0'
+openapi: 3.2.0
 info:
-  title: Local Management APIs activations health API
+  title: Palette APIs - 4.9 Health API
   version: v1
 servers:
-- url: https://edge-host-ip:5080
-schemes:
-- http
-- https
-consumes:
-- application/json
-produces:
-- application/json
+- url: https://api.spectrocloud.com
 tags:
-- name: health
+- name: Health
   x-displayName: Health
 paths:
   /v1/health/ping:
     get:
-      description: Ping Service
       operationId: V1HealthPing
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/v1HealthPing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1HealthPing'
       security:
       - ApiKey: []
       - Authorization: []
       summary: Ping Service
       tags:
-      - health
+      - Health
   /v1/health/ready:
     get:
-      description: Ready Service
       operationId: V1HealthReady
       responses:
         '200':
           description: OK
-          schema:
-            $ref: '#/definitions/v1HealthPing'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1HealthPing'
       security:
       - ApiKey: []
       - Authorization: []
       summary: Ready Service
       tags:
-      - health
-definitions:
-  v1HealthPing:
-    properties:
-      msg:
-        type: string
-    type: object
-securityDefinitions:
-  Authorization:
-    description: JWT authorization token obtained using /v1/users/default/login API
-    type: apiKey
-    name: Authorization
-    in: header
+      - Health
+components:
+  schemas:
+    v1HealthPing:
+      properties:
+        msg:
+          type: string
+      type: object
+  securitySchemes:
+    ApiKey:
+      description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
+      in: header
+      name: ApiKey
+      type: apiKey
+    Authorization:
+      description: JWT token authorization obtained using /v1/auth/authenticate api
+      in: header
+      name: Authorization
+      type: apiKey
