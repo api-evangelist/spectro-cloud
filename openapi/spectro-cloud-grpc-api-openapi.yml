@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Grpc API
+  title: Palette APIs - 4.9 gRPC API
   version: v1
 servers:
 - url: https://api.spectrocloud.com
@@ -33,17 +33,6 @@ paths:
       - grpc
 components:
   schemas:
-    v1GrpcConfiguration:
-      description: Describes the response that contains the grpc configuration to establish connection
-      properties:
-        preferredServer:
-          $ref: '#/components/schemas/v1GrpcEndpoint'
-        servers:
-          items:
-            $ref: '#/components/schemas/v1GrpcEndpoint'
-          type: array
-          uniqueItems: true
-      type: object
     v1GrpcEndpoint:
       properties:
         endpoint:
@@ -59,6 +48,17 @@ components:
             insecureSkipVerify:
               type: boolean
           type: object
+      type: object
+    v1GrpcConfiguration:
+      description: Describes the response that contains the grpc configuration to establish connection
+      properties:
+        preferredServer:
+          $ref: '#/components/schemas/v1GrpcEndpoint'
+        servers:
+          items:
+            $ref: '#/components/schemas/v1GrpcEndpoint'
+          type: array
+          uniqueItems: true
       type: object
   securitySchemes:
     ApiKey:

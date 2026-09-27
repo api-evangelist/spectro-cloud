@@ -41,54 +41,14 @@ paths:
         required: true
 components:
   schemas:
-    v1.DataSinkPayload:
-      additionalProperties:
-        type: object
-      description: Data sink payload entity
-      properties:
-        refUid:
-          description: RefUid of the data sink payload
-          type: string
-        timestamp:
-          $ref: '#/components/schemas/v1Time'
-      type: object
-    v1.DataSinkCloudWatchConfig:
-      description: Data sink cloud watch config
-      properties:
-        payload:
-          $ref: '#/components/schemas/v1.DataSinkPayloads'
-        spec:
-          $ref: '#/components/schemas/v1.CloudWatchConfig'
-      type: object
-    v1.DataSinkPayloads:
-      description: List of data sink payload entities
-      items:
-        $ref: '#/components/schemas/v1.DataSinkPayload'
-      type: array
-      uniqueItems: true
-    v1AwsPodIdentityCredentials:
-      description: AWS EKS Pod Identity credentials for role assumption
-      properties:
-        permissionBoundaryArn:
-          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
-          type: string
-        roleArn:
-          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
-          type: string
-      type: object
-    v1AwsSecretTlsConfig:
-      description: TLS configuration for the AWS secret
-      properties:
-        ca:
-          description: CA certificate
-          type: string
-        cert:
-          description: Certificate
-          type: string
-        key:
-          description: Key
-          type: string
-      type: object
+    v1AwsCloudAccountCredentialType:
+      default: secret
+      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+      enum:
+      - secret
+      - sts
+      - pod-identity
+      type: string
     v1AwsSecretSpec:
       description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
       properties:
@@ -120,29 +80,41 @@ components:
           $ref: '#/components/schemas/v1AwsSecretTlsConfig'
           description: TLS configuration for the AWS secret
       type: object
-    v1.CloudWatchConfig:
-      description: Cloud watch config entity
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1.DataSinkCloudWatchConfig:
+      description: Data sink cloud watch config
       properties:
-        credentials:
-          $ref: '#/components/schemas/v1AwsCloudAccount'
-        group:
-          description: Name of the group
+        payload:
+          $ref: '#/components/schemas/v1.DataSinkPayloads'
+        spec:
+          $ref: '#/components/schemas/v1.CloudWatchConfig'
+      type: object
+    v1AwsSecretTlsConfig:
+      description: TLS configuration for the AWS secret
+      properties:
+        ca:
+          description: CA certificate
           type: string
-        region:
-          description: Name of the region
+        cert:
+          description: Certificate
           type: string
-        stream:
-          description: Name of the stream
+        key:
+          description: Key
           type: string
       type: object
-    v1AwsCloudAccountCredentialType:
-      default: secret
-      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
-      enum:
-      - secret
-      - sts
-      - pod-identity
-      type: string
+    v1AwsPodIdentityCredentials:
+      description: AWS EKS Pod Identity credentials for role assumption
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
     v1AwsCloudAccount:
       description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
       properties:
@@ -180,10 +152,6 @@ components:
           $ref: '#/components/schemas/v1AwsStsCredentials'
           description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
     v1AwsStsCredentials:
       description: Aws sts credentials
       properties:
@@ -194,6 +162,38 @@ components:
           description: ExternalId for the aws sts credentials in cloud account
           type: string
       type: object
+    v1.DataSinkPayload:
+      additionalProperties:
+        type: object
+      description: Data sink payload entity
+      properties:
+        refUid:
+          description: RefUid of the data sink payload
+          type: string
+        timestamp:
+          $ref: '#/components/schemas/v1Time'
+      type: object
+    v1.CloudWatchConfig:
+      description: Cloud watch config entity
+      properties:
+        credentials:
+          $ref: '#/components/schemas/v1AwsCloudAccount'
+        group:
+          description: Name of the group
+          type: string
+        region:
+          description: Name of the region
+          type: string
+        stream:
+          description: Name of the stream
+          type: string
+      type: object
+    v1.DataSinkPayloads:
+      description: List of data sink payload entities
+      items:
+        $ref: '#/components/schemas/v1.DataSinkPayload'
+      type: array
+      uniqueItems: true
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

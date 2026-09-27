@@ -358,35 +358,47 @@ paths:
       - clusterTemplates
 components:
   schemas:
-    v1ClusterTemplateVariable:
-      description: Cluster template variable
+    v1ClusterTemplateProfileVariableWithClusters:
+      description: Variable with cluster assignments
       properties:
-        assignStrategy:
-          description: Assignment strategy for the variable
-          enum:
-          - all
-          - cluster
-          type: string
         clusters:
-          description: List of clusters with the specific variable
+          description: List of clusters with variable assignments
           items:
-            $ref: '#/components/schemas/v1ClusterVariableValue'
+            $ref: '#/components/schemas/v1ClusterTemplateVariableClusterAssignment'
           type: array
-        name:
-          description: Name of the variable
-          type: string
-        value:
-          description: Value of the variable to be applied to all clusters launched from this template. This value is specified when assignStrategy is set to all
-          type: string
+        variable:
+          $ref: '#/components/schemas/v1Variable'
+          description: Variable field with schema definition
+          type: object
+      required:
+      - variable
+      - clusters
       type: object
-    v1ClusterTemplateSpcRef:
-      description: Cluster template cluster reference
+    v1ClusterTemplateTags:
+      description: Cluster template tags response
       properties:
-        clusterUid:
-          description: UID of the cluster
-          type: string
-        name:
-          description: Name of the cluster
+        tags:
+          description: Array of cluster template tags
+          items:
+            type: string
+          type: array
+      type: object
+    v1ClusterTemplateStatus:
+      description: Cluster template status
+      properties:
+        clusterStatusCounts:
+          $ref: '#/components/schemas/v1ClusterReconcileStatusCounts'
+        clusterVariables:
+          $ref: '#/components/schemas/v1ClusterVariableStatus'
+        maintenance:
+          $ref: '#/components/schemas/v1ClusterTemplateMaintenanceStatus'
+        state:
+          description: Current state of the cluster template
+          enum:
+          - Pending
+          - Applied
+          - Failed
+          - PartiallyApplied
           type: string
       type: object
     v1ObjectMetaInputEntity:
@@ -404,6 +416,64 @@ components:
           type: object
         name:
           description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1ClusterVariableStatus:
+      description: Cluster variable status counts categorized by resolution state
+      properties:
+        resolved:
+          description: The number of clusters in which all variables have been successfully resolved
+          type: integer
+        unResolved:
+          description: The number of clusters that have unresolved variables requiring attention
+          type: integer
+      type: object
+    v1ClusterReconcileStatusCounts:
+      description: Cluster reconcile metadata
+      properties:
+        clusters:
+          description: Clusters grouped by reconciliation status
+          properties:
+            applied:
+              description: List of UIDs for clusters in applied state
+              items:
+                type: string
+              type: array
+            failed:
+              description: List of UIDs for clusters in failed state
+              items:
+                type: string
+              type: array
+            pending:
+              description: List of UIDs for clusters in pending state
+              items:
+                type: string
+              type: array
+          type: object
+      type: object
+    v1ClusterReconcileLog:
+      description: Cluster reconciliation log entry
+      properties:
+        appliedTimestamp:
+          description: Timestamp when this log entry was created
+          format: date-time
+          type: string
+        message:
+          description: Log message
+          type: string
+        profileUids:
+          description: List of profile UIDs involved in this reconciliation
+          items:
+            type: string
+          type: array
+        state:
+          description: Reconciliation state for this log entry
+          enum:
+          - Created
+          - Pending
+          - InProgress
+          - Applied
+          - Failed
           type: string
       type: object
     v1ClusterTemplateVariableClusterMapping:
@@ -431,426 +501,14 @@ components:
         status:
           $ref: '#/components/schemas/v1ClusterTemplateStatus'
       type: object
-    v1ClusterVariableStatus:
-      description: Cluster variable status counts categorized by resolution state
-      properties:
-        resolved:
-          description: The number of clusters in which all variables have been successfully resolved
-          type: integer
-        unResolved:
-          description: The number of clusters that have unresolved variables requiring attention
-          type: integer
-      type: object
-    v1VariableFormat:
-      default: string
-      description: Format type of the variable value
-      enum:
-      - string
-      - number
-      - boolean
-      - ipv4
-      - ipv4cidr
-      - ipv6
-      - version
-      - base64
-      type: string
-    v1ClusterTemplateProfilesVariablesBatchEntity:
-      description: Cluster template profiles variables batch entity
+    v1ClusterReconcileSpec:
+      description: Cluster reconcile specification
       properties:
         profiles:
-          description: List of profiles with variables and cluster assignments
+          description: List of cluster profiles with reconciliation information
           items:
-            $ref: '#/components/schemas/v1ClusterTemplateProfileVariablesGroup'
+            $ref: '#/components/schemas/v1ClusterTemplateProfileVariables'
           type: array
-      required:
-      - profiles
-      type: object
-    v1ClusterTemplateProfileVariableWithClusters:
-      description: Variable with cluster assignments
-      properties:
-        clusters:
-          description: List of clusters with variable assignments
-          items:
-            $ref: '#/components/schemas/v1ClusterTemplateVariableClusterAssignment'
-          type: array
-        variable:
-          $ref: '#/components/schemas/v1Variable'
-          description: Variable field with schema definition
-          type: object
-      required:
-      - variable
-      - clusters
-      type: object
-    v1ClusterReconcileStatusCounts:
-      description: Cluster reconcile metadata
-      properties:
-        clusters:
-          description: Clusters grouped by reconciliation status
-          properties:
-            applied:
-              description: List of UIDs for clusters in applied state
-              items:
-                type: string
-              type: array
-            failed:
-              description: List of UIDs for clusters in failed state
-              items:
-                type: string
-              type: array
-            pending:
-              description: List of UIDs for clusters in pending state
-              items:
-                type: string
-              type: array
-          type: object
-      type: object
-    v1ClusterReconcile:
-      description: Cluster reconcile document containing all reconciliation information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ClusterReconcileSpec'
-        status:
-          $ref: '#/components/schemas/v1ClusterReconcileStatus'
-      type: object
-    v1ClusterTemplateProfilesUpdateEntity:
-      description: Cluster template profiles update entity
-      properties:
-        profiles:
-          description: List of cluster profile references with updated variable values and assign strategies
-          items:
-            $ref: '#/components/schemas/v1ClusterTemplateProfile'
-          type: array
-      required:
-      - profiles
-      type: object
-    v1ClusterTemplatePoliciesUpdateEntity:
-      description: Cluster template policies update entity
-      properties:
-        policies:
-          description: List of spc policy references to be updated in the cluster template
-          items:
-            $ref: '#/components/schemas/v1PolicyRef'
-          type: array
-      required:
-      - policies
-      type: object
-    v1ClusterTemplateProfileVariablesGroup:
-      description: Profile with variables and cluster assignments
-      properties:
-        uid:
-          description: UID of the cluster profile
-          type: string
-        variables:
-          description: List of variables with cluster assignments
-          items:
-            $ref: '#/components/schemas/v1ClusterTemplateVariableClusterMapping'
-          type: array
-      required:
-      - uid
-      - variables
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1ClusterVariableReconcileStatus:
-      description: Cluster variable reconciliation status
-      properties:
-        state:
-          description: Variable reconciliation state
-          enum:
-          - Resolved
-          - Unresolved
-          type: string
-      type: object
-    v1ClusterTemplateEntitySpec:
-      description: Cluster template specification
-      properties:
-        cloudType:
-          description: Type of cloud provider
-          type: string
-        policies:
-          description: List of policy references
-          items:
-            $ref: '#/components/schemas/v1PolicyRef'
-          type: array
-        profiles:
-          description: List of cluster profile references
-          items:
-            $ref: '#/components/schemas/v1ClusterTemplateProfile'
-          type: array
-      type: object
-    v1ClusterTemplateProfileVariable:
-      description: Cluster template profile information
-      properties:
-        uid:
-          description: UID of the cluster profile
-          type: string
-        variables:
-          description: List of cluster profile variable values for the cluster to be updated.
-          items:
-            $ref: '#/components/schemas/v1SpectroClusterVariable'
-          type: array
-      type: object
-    v1ClusterVariableValue:
-      description: Cluster along with specific variable value
-      properties:
-        uid:
-          description: UID of the cluster
-          type: string
-        value:
-          description: Value of the variable
-          type: string
-      type: object
-    v1ClusterTemplateTags:
-      description: Cluster template tags response
-      properties:
-        tags:
-          description: Array of cluster template tags
-          items:
-            type: string
-          type: array
-      type: object
-    v1VariableInputType:
-      default: text
-      description: Input type for the variable
-      enum:
-      - text
-      - dropdown
-      - multiline
-      type: string
-    v1ObjectMeta:
-      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        deletionTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
-
-
-            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        lastModifiedTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-        uid:
-          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
-
-
-            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
-          type: string
-      type: object
-    v1ClusterTemplateEntity:
-      description: Cluster template entity information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1ClusterTemplateEntitySpec'
-      type: object
-    v1ClusterTemplateProfileVariables:
-      description: Profile variables with grouped resolved and unresolved variables
-      properties:
-        name:
-          description: Profile name
-          type: string
-        uid:
-          description: Profile UID
-          type: string
-        variables:
-          description: List of resolved and unresolved variables belonging to a cluster launched from template
-          properties:
-            resolvedVariables:
-              description: List of resolved variables
-              items:
-                $ref: '#/components/schemas/v1SpectroClusterVariable'
-              type: array
-            unResolvedVariables:
-              description: List of unresolved variables
-              items:
-                $ref: '#/components/schemas/v1SpectroClusterVariable'
-              type: array
-          type: object
-      required:
-      - uid
-      type: object
-    v1ClusterTemplateVariablesUpdateEntity:
-      description: Cluster template variables update entity
-      properties:
-        profiles:
-          description: List of cluster profile references belonging to the cluster
-          items:
-            $ref: '#/components/schemas/v1ClusterTemplateProfileVariable'
-          type: array
-      required:
-      - profiles
-      type: object
-    v1ClusterTemplateProfile:
-      description: Cluster template profile information
-      properties:
-        uid:
-          description: UID of the cluster profile
-          type: string
-        variables:
-          description: List of cluster profile variable values and assign strategies. This is specified when clusters are launched from the template
-          items:
-            $ref: '#/components/schemas/v1ClusterTemplateVariable'
-          type: array
-      type: object
-    v1ClusterReconcileLog:
-      description: Cluster reconciliation log entry
-      properties:
-        appliedTimestamp:
-          description: Timestamp when this log entry was created
-          format: date-time
-          type: string
-        message:
-          description: Log message
-          type: string
-        profileUids:
-          description: List of profile UIDs involved in this reconciliation
-          items:
-            type: string
-          type: array
-        state:
-          description: Reconciliation state for this log entry
-          enum:
-          - Created
-          - Pending
-          - InProgress
-          - Applied
-          - Failed
-          type: string
-      type: object
-    v1VariableOption:
-      description: Option for dropdown variable input type
-      properties:
-        default:
-          description: Mark this option as the default selection
-          type: boolean
-          x-omitempty: false
-        description:
-          description: Optional tooltip/description for the option
-          type: string
-        label:
-          description: Display text for the option
-          type: string
-        value:
-          description: Actual value for the option
-          type: string
-      required:
-      - value
-      type: object
-    v1ClusterTemplateStatus:
-      description: Cluster template status
-      properties:
-        clusterStatusCounts:
-          $ref: '#/components/schemas/v1ClusterReconcileStatusCounts'
-        clusterVariables:
-          $ref: '#/components/schemas/v1ClusterVariableStatus'
-        maintenance:
-          $ref: '#/components/schemas/v1ClusterTemplateMaintenanceStatus'
-        state:
-          description: Current state of the cluster template
-          enum:
-          - Pending
-          - Applied
-          - Failed
-          - PartiallyApplied
-          type: string
-      type: object
-    v1ObjectMetaInputEntitySchema:
-      description: Resource metadata
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-      required:
-      - metadata
-      type: object
-    v1ClusterTemplateVariableClusterAssignment:
-      description: Cluster variable assignment information
-      properties:
-        assignedBy:
-          description: Specifies the actor who has made the current variable assignment
-          enum:
-          - spectrocluster
-          - clustertemplate
-          type: string
-        assignedValue:
-          description: Value assigned to the variable
-          type: string
-        assignmentState:
-          description: State of the variable assignment
-          enum:
-          - Pending
-          - Assigned
-          type: string
-        uid:
-          description: Cluster UID
-          type: string
-        value:
-          description: Current running value of the variable
-          type: string
-      required:
-      - uid
-      - assignmentState
-      type: object
-    v1ClusterTemplateSpec:
-      description: Cluster template specification
-      properties:
-        cloudType:
-          description: Type of cloud provider
-          type: string
-        clusters:
-          additionalProperties:
-            $ref: '#/components/schemas/v1ClusterTemplateSpcRef'
-          description: Map of cluster references with cluster UID as key
-          type: object
-        policies:
-          description: List of policy references
-          items:
-            $ref: '#/components/schemas/v1PolicyRef'
-          type: array
-        profiles:
-          description: List of cluster profile references
-          items:
-            $ref: '#/components/schemas/v1ClusterTemplateProfile'
-          type: array
-      type: object
-    v1PolicyRef:
-      description: Policy reference
-      properties:
-        kind:
-          description: Kind of the policy
-          type: string
-        uid:
-          description: UID of the policy
-          type: string
       type: object
     v1Variable:
       description: Unique variable field with schema definition
@@ -900,6 +558,10 @@ components:
       required:
       - name
       type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
     v1ClusterReconcileStatus:
       description: Cluster reconcile status
       properties:
@@ -927,31 +589,222 @@ components:
         variableStatus:
           $ref: '#/components/schemas/v1ClusterVariableReconcileStatus'
       type: object
-    v1ClusterReconcileSpec:
-      description: Cluster reconcile specification
+    v1ClusterTemplateEntity:
+      description: Cluster template entity information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1ClusterTemplateEntitySpec'
+      type: object
+    v1ClusterTemplateVariablesUpdateEntity:
+      description: Cluster template variables update entity
       properties:
         profiles:
-          description: List of cluster profiles with reconciliation information
+          description: List of cluster profile references belonging to the cluster
           items:
-            $ref: '#/components/schemas/v1ClusterTemplateProfileVariables'
+            $ref: '#/components/schemas/v1ClusterTemplateProfileVariable'
+          type: array
+      required:
+      - profiles
+      type: object
+    v1ObjectMetaInputEntitySchema:
+      description: Resource metadata
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+      required:
+      - metadata
+      type: object
+    v1ClusterTemplateEntitySpec:
+      description: Cluster template specification
+      properties:
+        cloudType:
+          description: Type of cloud provider
+          type: string
+        policies:
+          description: List of policy references
+          items:
+            $ref: '#/components/schemas/v1PolicyRef'
+          type: array
+        profiles:
+          description: List of cluster profile references
+          items:
+            $ref: '#/components/schemas/v1ClusterTemplateProfile'
           type: array
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1ClusterTemplateMaintenanceStatus:
-      description: Cluster template maintenance status
+    v1ClusterReconcile:
+      description: Cluster reconcile document containing all reconciliation information
       properties:
-        nextWindowEndTime:
-          description: Next maintenance window end time
-          format: date-time
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ClusterReconcileSpec'
+        status:
+          $ref: '#/components/schemas/v1ClusterReconcileStatus'
+      type: object
+    v1ObjectMeta:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        deletionTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
           type: string
-        nextWindowStartTime:
-          description: Next maintenance window start time
-          format: date-time
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1ClusterTemplatePoliciesUpdateEntity:
+      description: Cluster template policies update entity
+      properties:
+        policies:
+          description: List of spc policy references to be updated in the cluster template
+          items:
+            $ref: '#/components/schemas/v1PolicyRef'
+          type: array
+      required:
+      - policies
+      type: object
+    v1ClusterVariableReconcileStatus:
+      description: Cluster variable reconciliation status
+      properties:
+        state:
+          description: Variable reconciliation state
+          enum:
+          - Resolved
+          - Unresolved
+          type: string
+      type: object
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1ClusterTemplateVariable:
+      description: Cluster template variable
+      properties:
+        assignStrategy:
+          description: Assignment strategy for the variable
+          enum:
+          - all
+          - cluster
+          type: string
+        clusters:
+          description: List of clusters with the specific variable
+          items:
+            $ref: '#/components/schemas/v1ClusterVariableValue'
+          type: array
+        name:
+          description: Name of the variable
+          type: string
+        value:
+          description: Value of the variable to be applied to all clusters launched from this template. This value is specified when assignStrategy is set to all
+          type: string
+      type: object
+    v1VariableOption:
+      description: Option for dropdown variable input type
+      properties:
+        default:
+          description: Mark this option as the default selection
+          type: boolean
+          x-omitempty: false
+        description:
+          description: Optional tooltip/description for the option
+          type: string
+        label:
+          description: Display text for the option
+          type: string
+        value:
+          description: Actual value for the option
+          type: string
+      required:
+      - value
+      type: object
+    v1ClusterTemplateProfileVariable:
+      description: Cluster template profile information
+      properties:
+        uid:
+          description: UID of the cluster profile
+          type: string
+        variables:
+          description: List of cluster profile variable values for the cluster to be updated.
+          items:
+            $ref: '#/components/schemas/v1SpectroClusterVariable'
+          type: array
+      type: object
+    v1ClusterTemplateSpec:
+      description: Cluster template specification
+      properties:
+        cloudType:
+          description: Type of cloud provider
+          type: string
+        clusters:
+          additionalProperties:
+            $ref: '#/components/schemas/v1ClusterTemplateSpcRef'
+          description: Map of cluster references with cluster UID as key
+          type: object
+        policies:
+          description: List of policy references
+          items:
+            $ref: '#/components/schemas/v1PolicyRef'
+          type: array
+        profiles:
+          description: List of cluster profile references
+          items:
+            $ref: '#/components/schemas/v1ClusterTemplateProfile'
+          type: array
+      type: object
+    v1ClusterTemplateProfilesVariablesBatchEntity:
+      description: Cluster template profiles variables batch entity
+      properties:
+        profiles:
+          description: List of profiles with variables and cluster assignments
+          items:
+            $ref: '#/components/schemas/v1ClusterTemplateProfileVariablesGroup'
+          type: array
+      required:
+      - profiles
+      type: object
+    v1VariableInputType:
+      default: text
+      description: Input type for the variable
+      enum:
+      - text
+      - dropdown
+      - multiline
+      type: string
     v1SpectroClusterVariable:
       description: Variable with value which will be used within the packs of cluster profile
       properties:
@@ -964,6 +817,68 @@ components:
       required:
       - name
       type: object
+    v1ClusterTemplateMaintenanceStatus:
+      description: Cluster template maintenance status
+      properties:
+        nextWindowEndTime:
+          description: Next maintenance window end time
+          format: date-time
+          type: string
+        nextWindowStartTime:
+          description: Next maintenance window start time
+          format: date-time
+          type: string
+      type: object
+    v1ClusterTemplateProfileVariables:
+      description: Profile variables with grouped resolved and unresolved variables
+      properties:
+        name:
+          description: Profile name
+          type: string
+        uid:
+          description: Profile UID
+          type: string
+        variables:
+          description: List of resolved and unresolved variables belonging to a cluster launched from template
+          properties:
+            resolvedVariables:
+              description: List of resolved variables
+              items:
+                $ref: '#/components/schemas/v1SpectroClusterVariable'
+              type: array
+            unResolvedVariables:
+              description: List of unresolved variables
+              items:
+                $ref: '#/components/schemas/v1SpectroClusterVariable'
+              type: array
+          type: object
+      required:
+      - uid
+      type: object
+    v1ClusterTemplateProfilesUpdateEntity:
+      description: Cluster template profiles update entity
+      properties:
+        profiles:
+          description: List of cluster profile references with updated variable values and assign strategies
+          items:
+            $ref: '#/components/schemas/v1ClusterTemplateProfile'
+          type: array
+      required:
+      - profiles
+      type: object
+    v1VariableFormat:
+      default: string
+      description: Format type of the variable value
+      enum:
+      - string
+      - number
+      - boolean
+      - ipv4
+      - ipv4cidr
+      - ipv6
+      - version
+      - base64
+      type: string
     v1ClusterTemplateProfileVariablesResponse:
       description: Response for retrieving variables for a specific profile in a cluster template
       properties:
@@ -972,6 +887,91 @@ components:
           items:
             $ref: '#/components/schemas/v1ClusterTemplateProfileVariableWithClusters'
           type: array
+      type: object
+    v1PolicyRef:
+      description: Policy reference
+      properties:
+        kind:
+          description: Kind of the policy
+          type: string
+        uid:
+          description: UID of the policy
+          type: string
+      type: object
+    v1ClusterVariableValue:
+      description: Cluster along with specific variable value
+      properties:
+        uid:
+          description: UID of the cluster
+          type: string
+        value:
+          description: Value of the variable
+          type: string
+      type: object
+    v1ClusterTemplateProfile:
+      description: Cluster template profile information
+      properties:
+        uid:
+          description: UID of the cluster profile
+          type: string
+        variables:
+          description: List of cluster profile variable values and assign strategies. This is specified when clusters are launched from the template
+          items:
+            $ref: '#/components/schemas/v1ClusterTemplateVariable'
+          type: array
+      type: object
+    v1ClusterTemplateProfileVariablesGroup:
+      description: Profile with variables and cluster assignments
+      properties:
+        uid:
+          description: UID of the cluster profile
+          type: string
+        variables:
+          description: List of variables with cluster assignments
+          items:
+            $ref: '#/components/schemas/v1ClusterTemplateVariableClusterMapping'
+          type: array
+      required:
+      - uid
+      - variables
+      type: object
+    v1ClusterTemplateSpcRef:
+      description: Cluster template cluster reference
+      properties:
+        clusterUid:
+          description: UID of the cluster
+          type: string
+        name:
+          description: Name of the cluster
+          type: string
+      type: object
+    v1ClusterTemplateVariableClusterAssignment:
+      description: Cluster variable assignment information
+      properties:
+        assignedBy:
+          description: Specifies the actor who has made the current variable assignment
+          enum:
+          - spectrocluster
+          - clustertemplate
+          type: string
+        assignedValue:
+          description: Value assigned to the variable
+          type: string
+        assignmentState:
+          description: State of the variable assignment
+          enum:
+          - Pending
+          - Assigned
+          type: string
+        uid:
+          description: Cluster UID
+          type: string
+        value:
+          description: Current running value of the variable
+          type: string
+      required:
+      - uid
+      - assignmentState
       type: object
   securitySchemes:
     ApiKey:

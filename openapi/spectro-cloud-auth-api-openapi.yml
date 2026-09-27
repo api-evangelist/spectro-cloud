@@ -458,80 +458,16 @@ components:
         name:
           type: string
       type: object
-    v1UserToken:
-      description: Returns the Authorization token. To be used for further api calls
-      properties:
-        Authorization:
-          description: Describes the authentication token in jwt format.
-          type: string
-        isMfa:
-          description: Indicates the authentication flow using MFA
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1IdentityProviders:
-      description: Describes a list of predefined Identity Provider (IDP)
-      items:
-        $ref: '#/components/schemas/v1IdentityProvider'
-      type: array
-      uniqueItems: true
-    v1Organizations:
-      description: Returns a list of user's organizations details and login methods
-      properties:
-        organizations:
-          description: Describes a list of user's organization
-          items:
-            $ref: '#/components/schemas/v1Organization'
-          type: array
-          uniqueItems: true
-      type: object
-    v1MfaDeviceMeta:
-      properties:
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        deviceName:
-          type: string
-      type: object
-    v1Organization:
-      description: Describes user's organization details
-      properties:
-        authType:
-          description: Describes user's enabled authorization mode
-          type: string
-        name:
-          description: Describes user's organization name
-          type: string
-        redirectUrl:
-          description: Describes user's organization authentication url
-          type: string
-        ssoLogins:
-          $ref: '#/components/schemas/v1SsoLogins'
-          description: Describes a list of allowed social logins for the organization
-      type: object
-    v1MfaDevices:
-      items:
-        $ref: '#/components/schemas/v1MfaDeviceMeta'
-      type: array
     v1SsoLogins:
       description: Describes the allowed sso logins
       items:
         $ref: '#/components/schemas/v1SsoLogin'
       type: array
       uniqueItems: true
-    v1AuthLogin:
-      description: Describes the credential details required for authentication
-      properties:
-        emailId:
-          description: Describes the email id required for the user to authenticate
-          type: string
-        org:
-          description: Describes the user's organization name to login
-          type: string
-        password:
-          description: Describes the password required for the user to authenticate
-          format: password
-          type: string
-      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
     v1LoginResponse:
       description: Returns the allowed login method and information with the organization details
       properties:
@@ -565,10 +501,60 @@ components:
           format: int64
           type: number
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
+    v1Organization:
+      description: Describes user's organization details
+      properties:
+        authType:
+          description: Describes user's enabled authorization mode
+          type: string
+        name:
+          description: Describes user's organization name
+          type: string
+        redirectUrl:
+          description: Describes user's organization authentication url
+          type: string
+        ssoLogins:
+          $ref: '#/components/schemas/v1SsoLogins'
+          description: Describes a list of allowed social logins for the organization
+      type: object
+    v1AuthLogin:
+      description: Describes the credential details required for authentication
+      properties:
+        emailId:
+          description: Describes the email id required for the user to authenticate
+          type: string
+        org:
+          description: Describes the user's organization name to login
+          type: string
+        password:
+          description: Describes the password required for the user to authenticate
+          format: password
+          type: string
+      type: object
+    v1IdentityProviders:
+      description: Describes a list of predefined Identity Provider (IDP)
+      items:
+        $ref: '#/components/schemas/v1IdentityProvider'
+      type: array
+      uniqueItems: true
+    v1UserToken:
+      description: Returns the Authorization token. To be used for further api calls
+      properties:
+        Authorization:
+          description: Describes the authentication token in jwt format.
+          type: string
+        isMfa:
+          description: Indicates the authentication flow using MFA
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1MfaDeviceMeta:
+      properties:
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        deviceName:
+          type: string
+      type: object
     v1SsoLogin:
       description: Describes the allowed sso login details
       properties:
@@ -585,6 +571,20 @@ components:
           description: Describes the sso login url for the authentication
           type: string
       type: object
+    v1Organizations:
+      description: Returns a list of user's organizations details and login methods
+      properties:
+        organizations:
+          description: Describes a list of user's organization
+          items:
+            $ref: '#/components/schemas/v1Organization'
+          type: array
+          uniqueItems: true
+      type: object
+    v1MfaDevices:
+      items:
+        $ref: '#/components/schemas/v1MfaDeviceMeta'
+      type: array
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

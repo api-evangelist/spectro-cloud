@@ -136,12 +136,12 @@ paths:
       - pcg
 components:
   schemas:
-    v1PairingCode:
-      description: Pairing code response
+    v1PcgSelfHostedParams:
       properties:
-        pairingCode:
+        cloudType:
           type: string
-      type: object
+        name:
+          type: string
     v1PcgServiceKubectlCommands:
       description: Array of kubectl commands
       properties:
@@ -155,12 +155,12 @@ components:
       required:
       - kubectlCommands
       type: object
-    v1PcgSelfHostedParams:
+    v1PairingCode:
+      description: Pairing code response
       properties:
-        cloudType:
+        pairingCode:
           type: string
-        name:
-          type: string
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

@@ -69,7 +69,7 @@ tags_raw:
 - AI Infrastructure
 apis:
 - aid: spectro-cloud:spectro-cloud-activations-api
-  name: Spectro Cloud activations API
+  name: Spectro Cloud Activations API
   description: The activations API from Spectro Cloud — 1 operation(s) for activations.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -83,7 +83,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-appprofiles-api
-  name: Spectro Cloud appProfiles API
+  name: Spectro Cloud App Profiles API
   description: The appProfiles API from Spectro Cloud — 11 operation(s) for appprofiles.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -96,7 +96,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-audits-api
-  name: Spectro Cloud audits API
+  name: Spectro Cloud Audits API
   description: The audits API from Spectro Cloud — 4 operation(s) for audits.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -110,7 +110,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-auth-api
-  name: Spectro Cloud auth API
+  name: Spectro Cloud Auth API
   description: The auth API from Spectro Cloud — 17 operation(s) for auth.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -124,7 +124,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-cloudconfigs-api
-  name: Spectro Cloud cloudconfigs API
+  name: Spectro Cloud Cloudconfigs API
   description: The cloudconfigs API from Spectro Cloud — 87 operation(s) for cloudconfigs.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -136,7 +136,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-clouds-api
-  name: Spectro Cloud clouds API
+  name: Spectro Cloud Clouds API
   description: The clouds API from Spectro Cloud — 95 operation(s) for clouds.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -150,7 +150,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-clusterprofiles-api
-  name: Spectro Cloud clusterprofiles API
+  name: Spectro Cloud Clusterprofiles API
   description: The clusterprofiles API from Spectro Cloud — 26 operation(s) for clusterprofiles.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -162,7 +162,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-clustertemplates-api
-  name: Spectro Cloud clusterTemplates API
+  name: Spectro Cloud Cluster Templates API
   description: The clusterTemplates API from Spectro Cloud — 11 operation(s) for clustertemplates.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -175,7 +175,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-dashboard-api
-  name: Spectro Cloud dashboard API
+  name: Spectro Cloud Dashboard API
   description: The dashboard API from Spectro Cloud — 61 operation(s) for dashboard.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -189,7 +189,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-edge-mgmt-api
-  name: Spectro Cloud edge-mgmt API
+  name: Spectro Cloud Edge Mgmt API
   description: The edge-mgmt API from Spectro Cloud — 64 operation(s) for edge-mgmt.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -201,7 +201,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-edgehosts-api
-  name: Spectro Cloud edgehosts API
+  name: Spectro Cloud Edgehosts API
   description: The edgehosts API from Spectro Cloud — 22 operation(s) for edgehosts.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -213,7 +213,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-events-api
-  name: Spectro Cloud events API
+  name: Spectro Cloud Events API
   description: The events API from Spectro Cloud — 3 operation(s) for events.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -227,7 +227,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-features-api
-  name: Spectro Cloud features API
+  name: Spectro Cloud Features API
   description: The features API from Spectro Cloud — 2 operation(s) for features.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -241,7 +241,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-filters-api
-  name: Spectro Cloud filters API
+  name: Spectro Cloud Filters API
   description: The filters API from Spectro Cloud — 4 operation(s) for filters.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -255,7 +255,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-grpc-api
-  name: Spectro Cloud grpc API
+  name: Spectro Cloud Grpc API
   description: The grpc API from Spectro Cloud — 1 operation(s) for grpc.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -269,7 +269,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-health-api
-  name: Spectro Cloud health API
+  name: Spectro Cloud Health API
   description: The health API from Spectro Cloud — 2 operation(s) for health.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -283,7 +283,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-installers-api
-  name: Spectro Cloud installers API
+  name: Spectro Cloud Installers API
   description: The installers API from Spectro Cloud — 1 operation(s) for installers.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -297,7 +297,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-metrics-api
-  name: Spectro Cloud metrics API
+  name: Spectro Cloud Metrics API
   description: The metrics API from Spectro Cloud — 2 operation(s) for metrics.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -311,7 +311,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-notifications-api
-  name: Spectro Cloud notifications API
+  name: Spectro Cloud Notifications API
   description: The notifications API from Spectro Cloud — 5 operation(s) for notifications.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -325,7 +325,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-overlords-api
-  name: Spectro Cloud overlords API
+  name: Spectro Cloud Overlords API
   description: The overlords API from Spectro Cloud — 29 operation(s) for overlords.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -337,7 +337,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-packs-api
-  name: Spectro Cloud packs API
+  name: Spectro Cloud Packs API
   description: The packs API from Spectro Cloud — 6 operation(s) for packs.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -351,7 +351,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-pcg-api
-  name: Spectro Cloud pcg API
+  name: Spectro Cloud Pcg API
   description: The pcg API from Spectro Cloud — 4 operation(s) for pcg.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -363,7 +363,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-permissions-api
-  name: Spectro Cloud permissions API
+  name: Spectro Cloud Permissions API
   description: The permissions API from Spectro Cloud — 1 operation(s) for permissions.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -377,7 +377,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-ping-api
-  name: Spectro Cloud ping API
+  name: Spectro Cloud Ping API
   description: The ping API from Spectro Cloud — 1 operation(s) for ping.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -391,7 +391,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-plans-api
-  name: Spectro Cloud plans API
+  name: Spectro Cloud Plans API
   description: The plans API from Spectro Cloud — 9 operation(s) for plans.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -405,7 +405,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-projects-api
-  name: Spectro Cloud projects API
+  name: Spectro Cloud Projects API
   description: The projects API from Spectro Cloud — 12 operation(s) for projects.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -419,7 +419,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-registries-api
-  name: Spectro Cloud registries API
+  name: Spectro Cloud Registries API
   description: The registries API from Spectro Cloud — 28 operation(s) for registries.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -433,7 +433,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-roles-api
-  name: Spectro Cloud roles API
+  name: Spectro Cloud Roles API
   description: The roles API from Spectro Cloud — 3 operation(s) for roles.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -447,7 +447,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-services-api
-  name: Spectro Cloud services API
+  name: Spectro Cloud Services API
   description: The services API from Spectro Cloud — 2 operation(s) for services.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -461,7 +461,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-spcpolicies-api
-  name: Spectro Cloud spcPolicies API
+  name: Spectro Cloud Spc Policies API
   description: The spcPolicies API from Spectro Cloud — 5 operation(s) for spcpolicies.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -474,7 +474,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-spectroclusters-api
-  name: Spectro Cloud spectroclusters API
+  name: Spectro Cloud Spectroclusters API
   description: The spectroclusters API from Spectro Cloud — 158 operation(s) for spectroclusters.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -486,7 +486,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-system-api
-  name: Spectro Cloud system API
+  name: Spectro Cloud System API
   description: The system API from Spectro Cloud — 95 operation(s) for system.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -500,7 +500,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-teams-api
-  name: Spectro Cloud teams API
+  name: Spectro Cloud Teams API
   description: The teams API from Spectro Cloud — 7 operation(s) for teams.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -514,7 +514,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-tenants-api
-  name: Spectro Cloud tenants API
+  name: Spectro Cloud Tenants API
   description: The tenants API from Spectro Cloud — 51 operation(s) for tenants.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -528,7 +528,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-tunnel-api
-  name: Spectro Cloud tunnel API
+  name: Spectro Cloud Tunnel API
   description: The tunnel API from Spectro Cloud — 1 operation(s) for tunnel.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -540,7 +540,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-users-api
-  name: Spectro Cloud users API
+  name: Spectro Cloud Users API
   description: The users API from Spectro Cloud — 44 operation(s) for users.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -554,7 +554,7 @@ apis:
   - type: Documentation
     url: https://docs.spectrocloud.com/api/introduction/
 - aid: spectro-cloud:spectro-cloud-workspaces-api
-  name: Spectro Cloud workspaces API
+  name: Spectro Cloud Workspaces API
   description: The workspaces API from Spectro Cloud — 14 operation(s) for workspaces.
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
@@ -573,8 +573,6 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - APIKeys
-  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -611,8 +609,6 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
-  - ClusterGroups
-  tags_raw:
   - cluster groups
   properties:
   - type: OpenAPI

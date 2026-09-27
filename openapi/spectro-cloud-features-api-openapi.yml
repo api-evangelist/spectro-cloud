@@ -62,6 +62,30 @@ paths:
               $ref: '#/components/schemas/v1FeatureUpdate'
 components:
   schemas:
+    v1Features:
+      properties:
+        items:
+          description: List of features
+          items:
+            $ref: '#/components/schemas/v1Feature'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1FeatureUpdateSpec:
+      description: Feature update spec
+      properties:
+        description:
+          description: Feature description
+          type: string
+        docLink:
+          description: Feature doc link
+          type: string
     v1ObjectMetaInputEntity:
       description: ObjectMeta input entity for object creation
       properties:
@@ -79,6 +103,13 @@ components:
           description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
           type: string
       type: object
+    v1FeatureUpdate:
+      description: Feature update spec
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1FeatureUpdateSpec'
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -120,21 +151,6 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1FeatureUpdate:
-      description: Feature update spec
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1FeatureUpdateSpec'
-    v1Feature:
-      description: Feature response
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1FeatureSpec'
-      type: object
     v1FeatureSpec:
       description: Feature spec
       properties:
@@ -147,29 +163,13 @@ components:
         key:
           description: Feature key
           type: string
-    v1FeatureUpdateSpec:
-      description: Feature update spec
+    v1Feature:
+      description: Feature response
       properties:
-        description:
-          description: Feature description
-          type: string
-        docLink:
-          description: Feature doc link
-          type: string
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1Features:
-      properties:
-        items:
-          description: List of features
-          items:
-            $ref: '#/components/schemas/v1Feature'
-          type: array
-          uniqueItems: true
-      required:
-      - items
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1FeatureSpec'
       type: object
   securitySchemes:
     ApiKey:

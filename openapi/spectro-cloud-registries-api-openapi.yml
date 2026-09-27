@@ -1235,59 +1235,110 @@ paths:
       - Registries
 components:
   schemas:
-    v1EcrRegistrySpec:
-      description: Ecr registry spec
+    v1RegistryConfigEntity:
+      description: Registry configuration entity
       properties:
-        baseContentPath:
-          description: OCI ecr registry content base path
-          type: string
-        containsSpectroManifest:
-          type: boolean
-          x-omitempty: false
-        credentials:
-          $ref: '#/components/schemas/v1AwsCloudAccount'
-        defaultRegion:
-          type: string
-        endpoint:
-          type: string
-        isPrivate:
-          type: boolean
-        isSyncSupported:
-          type: boolean
-        providerType:
-          default: helm
-          enum:
-          - helm
-          - pack
-          - zarf
-          type: string
-        registryUid:
-          description: Ecr registry uid
-          type: string
-        scope:
-          type: string
-        tls:
-          $ref: '#/components/schemas/v1TlsConfiguration'
-      required:
-      - endpoint
-      - isPrivate
+        config:
+          $ref: '#/components/schemas/v1RegistryConfiguration'
       type: object
-    v1HelmRegistrySummary:
-      description: Helm Registry summary
+    v1EcrRegistry:
+      description: Ecr registry information
       properties:
+        kind:
+          type: string
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
-          $ref: '#/components/schemas/v1HelmRegistrySpecSummary'
+          $ref: '#/components/schemas/v1EcrRegistrySpec'
         status:
-          $ref: '#/components/schemas/v1HelmRegistryStatusSummary'
+          $ref: '#/components/schemas/v1OciRegistryStatus'
       type: object
-    v1HelmRegistriesSummary:
-      description: Helm Registries Summary
+    v1AwsSecretTlsConfig:
+      description: TLS configuration for the AWS secret
+      properties:
+        ca:
+          description: CA certificate
+          type: string
+        cert:
+          description: Certificate
+          type: string
+        key:
+          description: Key
+          type: string
+      type: object
+    v1AwsPodIdentityCredentials:
+      description: AWS EKS Pod Identity credentials for role assumption
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1HelmRegistryCreateOption:
+      description: Helm registry create options
+      properties:
+        charts:
+          items:
+            $ref: '#/components/schemas/v1HelmChartOption'
+          type: array
+          uniqueItems: true
+        skipSync:
+          type: boolean
+      type: object
+    v1AwsCloudAccountCredentialType:
+      default: secret
+      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+      enum:
+      - secret
+      - sts
+      - pod-identity
+      type: string
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1SyncRecovery:
+      description: Sync recovery lifecycle details set by the orphan-recovery scheduler
+      properties:
+        message:
+          description: Recovery-specific failure message, if any
+          type: string
+        syncRecoveryState:
+          description: 'Sync recovery state: Interrupted, Recovering, or Recovered'
+          enum:
+          - Interrupted
+          - Recovering
+          - Recovered
+          type: string
+      type: object
+    v1PackRegistriesSummary:
+      description: Pack Registries Summary
       properties:
         items:
           items:
-            $ref: '#/components/schemas/v1HelmRegistrySummary'
+            $ref: '#/components/schemas/v1PackRegistrySummary'
           type: array
           uniqueItems: true
         listmeta:
@@ -1295,15 +1346,76 @@ components:
       required:
       - items
       type: object
-    v1OciRegistry:
-      description: Oci registry information
+    v1HelmRegistries:
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1OciRegistrySpec'
-        status:
-          $ref: '#/components/schemas/v1OciRegistryStatusSummary'
+        items:
+          items:
+            $ref: '#/components/schemas/v1HelmRegistry'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1TlsConfiguration:
+      description: TLS configuration
+      properties:
+        ca:
+          type: string
+        certificate:
+          type: string
+        enabled:
+          type: boolean
+          x-omitempty: false
+        insecureSkipVerify:
+          type: boolean
+          x-omitempty: false
+        key:
+          type: string
+      type: object
+    v1OciRegistrySpec:
+      description: Image registry spec
+      properties:
+        containsSpectroManifest:
+          type: boolean
+          x-omitempty: false
+        defaultRegion:
+          type: string
+        endpoint:
+          type: string
+        isPrivate:
+          type: boolean
+        providerType:
+          type: string
+        registryType:
+          type: string
+        scope:
+          type: string
+      type: object
+    v1RegistryMetadata:
+      description: Registry meta
+      properties:
+        isDefault:
+          type: boolean
+          x-omitempty: false
+        isPrivate:
+          type: boolean
+          x-omitempty: false
+        kind:
+          type: string
+        name:
+          type: string
+        scope:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1HelmRegistryStatus:
+      description: Status of the helm registry
+      properties:
+        helmSyncStatus:
+          $ref: '#/components/schemas/v1RegistrySyncStatus'
       type: object
     v1OciImageRegistry:
       description: Oci Image Registry
@@ -1327,300 +1439,67 @@ components:
         username:
           type: string
       type: object
-    v1AwsSecretSpec:
-      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+    v1RegistryAuth:
+      description: Auth credentials of the registry
       properties:
-        accountName:
-          description: AWS secret accountName; only for aws-iso-b environment
-          type: string
-        agency:
-          description: AWS secret agency
-          type: string
-        isCapValidationEnabled:
-          description: Flag to rotate the secret region credentials
-          type: boolean
-        mission:
-          description: AWS secret mission; only for aws-iso environment
-          type: string
-        namePrefix:
-          description: Policy Boundary
-          type: string
-        permissionBoundary:
-          description: Role or Policy Prefix
-          type: string
-        policy:
-          description: AWS secret policy; JSON string
-          type: string
-        role:
-          description: AWS secret role
+        password:
+          format: password
           type: string
         tls:
-          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
-          description: TLS configuration for the AWS secret
-      type: object
-    v1RegistryMetadata:
-      description: Registry meta
-      properties:
-        isDefault:
-          type: boolean
-          x-omitempty: false
-        isPrivate:
-          type: boolean
-          x-omitempty: false
-        kind:
+          $ref: '#/components/schemas/v1TlsConfiguration'
+        token:
+          format: password
           type: string
-        name:
+        type:
+          enum:
+          - noAuth
+          - basic
+          - token
           type: string
-        scope:
-          type: string
-        uid:
+        username:
           type: string
       type: object
-    v1PackRegistrySpec:
-      description: Pack registry credentials spec
+    v1RegistrySyncStatus:
+      description: Status of the registry sync
       properties:
-        auth:
-          $ref: '#/components/schemas/v1RegistryAuth'
-        endpoint:
-          type: string
-        name:
-          type: string
-        private:
+        isSyncSupported:
           type: boolean
           x-omitempty: false
-        registryUid:
-          description: Pack registry uid
-          type: string
-        scope:
-          type: string
-      required:
-      - endpoint
-      - auth
-      type: object
-    v1SyncRecovery:
-      description: Sync recovery lifecycle details set by the orphan-recovery scheduler
-      properties:
+        lastRunTime:
+          $ref: '#/components/schemas/v1Time'
+        lastSyncedTime:
+          $ref: '#/components/schemas/v1Time'
         message:
-          description: Recovery-specific failure message, if any
           type: string
-        syncRecoveryState:
-          description: 'Sync recovery state: Interrupted, Recovering, or Recovered'
-          enum:
-          - Interrupted
-          - Recovering
-          - Recovered
+        status:
           type: string
+        syncRecovery:
+          $ref: '#/components/schemas/v1SyncRecovery'
       type: object
-    v1PackRegistry:
-      description: Pack registry information
+    v1OciRegistryStatus:
+      description: Status of the oci registry
       properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
+        syncStatus:
+          $ref: '#/components/schemas/v1RegistrySyncStatus'
+      type: object
+    v1HelmRegistryEntity:
+      description: Helm registry information
+      properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
-          $ref: '#/components/schemas/v1PackRegistrySpec'
-        status:
-          $ref: '#/components/schemas/v1PackRegistryStatus'
+          $ref: '#/components/schemas/v1HelmRegistrySpecEntity'
       type: object
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
+    v1OciRegistry:
+      description: Oci registry information
       properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
-      type: object
-    v1RegistriesMetadata:
-      description: Pack Registries Metadata
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1RegistryMetadata'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1HelmChartOption:
-      description: If chart options are provided then the specified chart is validated first and synced immediately. If the specified chart is not found in the specified registry then creation is cancelled.
-      properties:
-        name:
-          type: string
-        version:
-          type: string
-      type: object
-    v1PackRegistrySpecSummary:
-      description: Pack Registry spec summary
-      properties:
-        endpoint:
-          type: string
-        private:
-          type: boolean
-          x-omitempty: false
-        scope:
-          type: string
-      type: object
-    v1EcrRegistry:
-      description: Ecr registry information
-      properties:
-        kind:
-          type: string
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
-          $ref: '#/components/schemas/v1EcrRegistrySpec'
+          $ref: '#/components/schemas/v1OciRegistrySpec'
         status:
-          $ref: '#/components/schemas/v1OciRegistryStatus'
+          $ref: '#/components/schemas/v1OciRegistryStatusSummary'
       type: object
-    v1HelmRegistryStatus:
-      description: Status of the helm registry
-      properties:
-        helmSyncStatus:
-          $ref: '#/components/schemas/v1RegistrySyncStatus'
-      type: object
-    v1HelmRegistrySpecEntity:
-      description: Helm registry credentials spec
-      properties:
-        auth:
-          $ref: '#/components/schemas/v1RegistryAuth'
-        createOption:
-          $ref: '#/components/schemas/v1HelmRegistryCreateOption'
-        endpoint:
-          type: string
-        isPrivate:
-          type: boolean
-        name:
-          type: string
-        scope:
-          type: string
-      required:
-      - endpoint
-      - auth
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1AwsCloudAccount:
-      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
-      properties:
-        accessKey:
-          description: AWS account access key
-          type: string
-        credentialType:
-          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
-        partition:
-          default: aws
-          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
-          enum:
-          - aws
-          - aws-us-gov
-          - aws-iso
-          - aws-iso-b
-          type: string
-        podIdentity:
-          $ref: '#/components/schemas/v1AwsPodIdentityCredentials'
-          description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
-        policyARNs:
-          description: List of policy ARNs required in case of credentialType sts.
-          items:
-            type: string
-          type: array
-        secretKey:
-          description: AWS account secret key
-          type: string
-        secretSpec:
-          $ref: '#/components/schemas/v1AwsSecretSpec'
-        secretToken:
-          description: AWS account secret token; in case of aws-iso and aws-iso-b
-          type: string
-        sts:
-          $ref: '#/components/schemas/v1AwsStsCredentials'
-          description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
-      type: object
-    v1AwsStsCredentials:
-      description: Aws sts credentials
-      properties:
-        arn:
-          description: Arn for the aws sts credentials in cloud account
-          type: string
-        externalId:
-          description: ExternalId for the aws sts credentials in cloud account
-          type: string
-      type: object
-    v1OciRegistryStatusSummary:
-      description: OCI registry status summary
-      properties:
-        sync:
-          $ref: '#/components/schemas/v1RegistrySyncStatus'
-    v1PackRegistryStatusSummary:
-      description: Pack registry status summary
-      properties:
-        sync:
-          $ref: '#/components/schemas/v1RegistrySyncStatus'
-      type: object
-    v1PackRegistryStatus:
-      description: Status of the pack registry
-      properties:
-        packSyncStatus:
-          $ref: '#/components/schemas/v1RegistrySyncStatus'
-      type: object
-    v1RegistryConfiguration:
-      description: Registry configuration
-      properties:
-        auth:
-          $ref: '#/components/schemas/v1RegistryAuth'
-        endpoint:
-          type: string
-        name:
-          type: string
-      type: object
-    v1PackRegistries:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1PackRegistry'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1HelmRegistryCreateOption:
-      description: Helm registry create options
-      properties:
-        charts:
-          items:
-            $ref: '#/components/schemas/v1HelmChartOption'
-          type: array
-          uniqueItems: true
-        skipSync:
-          type: boolean
-      type: object
-    v1HelmRegistryStatusSummary:
-      description: Helm registry status summary
-      properties:
-        sync:
-          $ref: '#/components/schemas/v1RegistrySyncStatus'
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -1662,14 +1541,230 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1AwsPodIdentityCredentials:
-      description: AWS EKS Pod Identity credentials for role assumption
+    v1PackRegistrySpec:
+      description: Pack registry credentials spec
       properties:
-        permissionBoundaryArn:
-          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+        auth:
+          $ref: '#/components/schemas/v1RegistryAuth'
+        endpoint:
           type: string
-        roleArn:
-          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+        name:
+          type: string
+        private:
+          type: boolean
+          x-omitempty: false
+        registryUid:
+          description: Pack registry uid
+          type: string
+        scope:
+          type: string
+      required:
+      - endpoint
+      - auth
+      type: object
+    v1OciRegistryEntity:
+      description: Oci registry credentials
+      properties:
+        auth:
+          $ref: '#/components/schemas/v1RegistryAuth'
+        defaultRegion:
+          type: string
+        endpoint:
+          type: string
+        providerType:
+          type: string
+        scope:
+          type: string
+        type:
+          type: string
+      type: object
+    v1AwsSecretSpec:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+      properties:
+        accountName:
+          description: AWS secret accountName; only for aws-iso-b environment
+          type: string
+        agency:
+          description: AWS secret agency
+          type: string
+        isCapValidationEnabled:
+          description: Flag to rotate the secret region credentials
+          type: boolean
+        mission:
+          description: AWS secret mission; only for aws-iso environment
+          type: string
+        namePrefix:
+          description: Policy Boundary
+          type: string
+        permissionBoundary:
+          description: Role or Policy Prefix
+          type: string
+        policy:
+          description: AWS secret policy; JSON string
+          type: string
+        role:
+          description: AWS secret role
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
+          description: TLS configuration for the AWS secret
+      type: object
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1PackRegistrySummary:
+      description: Pack Registry summary
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1PackRegistrySpecSummary'
+        status:
+          $ref: '#/components/schemas/v1PackRegistryStatusSummary'
+      type: object
+    v1HelmRegistrySpecEntity:
+      description: Helm registry credentials spec
+      properties:
+        auth:
+          $ref: '#/components/schemas/v1RegistryAuth'
+        createOption:
+          $ref: '#/components/schemas/v1HelmRegistryCreateOption'
+        endpoint:
+          type: string
+        isPrivate:
+          type: boolean
+        name:
+          type: string
+        scope:
+          type: string
+      required:
+      - endpoint
+      - auth
+      type: object
+    v1HelmRegistrySpec:
+      description: Helm registry credentials spec
+      properties:
+        auth:
+          $ref: '#/components/schemas/v1RegistryAuth'
+        endpoint:
+          type: string
+        isPrivate:
+          type: boolean
+          x-omitempty: false
+        name:
+          type: string
+        registryUid:
+          description: Helm registry uid
+          type: string
+        scope:
+          type: string
+      required:
+      - endpoint
+      - auth
+      type: object
+    v1PackRegistry:
+      description: Pack registry information
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1PackRegistrySpec'
+        status:
+          $ref: '#/components/schemas/v1PackRegistryStatus'
+      type: object
+    v1PackRegistrySpecSummary:
+      description: Pack Registry spec summary
+      properties:
+        endpoint:
+          type: string
+        private:
+          type: boolean
+          x-omitempty: false
+        scope:
+          type: string
+      type: object
+    v1OciRegistryStatusSummary:
+      description: OCI registry status summary
+      properties:
+        sync:
+          $ref: '#/components/schemas/v1RegistrySyncStatus'
+    v1HelmRegistriesSummary:
+      description: Helm Registries Summary
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1HelmRegistrySummary'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1OciRegistries:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1OciRegistry'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1HelmRegistrySpecSummary:
+      description: Helm Registry spec summary
+      properties:
+        endpoint:
+          type: string
+        isPrivate:
+          type: boolean
+          x-omitempty: false
+        scope:
+          type: string
+      type: object
+    v1RegistriesMetadata:
+      description: Pack Registries Metadata
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1RegistryMetadata'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1PackRegistryStatus:
+      description: Status of the pack registry
+      properties:
+        packSyncStatus:
+          $ref: '#/components/schemas/v1RegistrySyncStatus'
+      type: object
+    v1HelmRegistrySummary:
+      description: Helm Registry summary
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1HelmRegistrySpecSummary'
+        status:
+          $ref: '#/components/schemas/v1HelmRegistryStatusSummary'
+      type: object
+    v1RegistryConfiguration:
+      description: Registry configuration
+      properties:
+        auth:
+          $ref: '#/components/schemas/v1RegistryAuth'
+        endpoint:
+          type: string
+        name:
           type: string
       type: object
     v1BasicOciRegistrySpec:
@@ -1707,147 +1802,14 @@ components:
       - endpoint
       - auth
       type: object
-    v1RegistryConfigEntity:
-      description: Registry configuration entity
+    v1AwsStsCredentials:
+      description: Aws sts credentials
       properties:
-        config:
-          $ref: '#/components/schemas/v1RegistryConfiguration'
-      type: object
-    v1OciRegistries:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1OciRegistry'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1OciRegistryStatus:
-      description: Status of the oci registry
-      properties:
-        syncStatus:
-          $ref: '#/components/schemas/v1RegistrySyncStatus'
-      type: object
-    v1TlsConfiguration:
-      description: TLS configuration
-      properties:
-        ca:
+        arn:
+          description: Arn for the aws sts credentials in cloud account
           type: string
-        certificate:
-          type: string
-        enabled:
-          type: boolean
-          x-omitempty: false
-        insecureSkipVerify:
-          type: boolean
-          x-omitempty: false
-        key:
-          type: string
-      type: object
-    v1OciRegistryEntity:
-      description: Oci registry credentials
-      properties:
-        auth:
-          $ref: '#/components/schemas/v1RegistryAuth'
-        defaultRegion:
-          type: string
-        endpoint:
-          type: string
-        providerType:
-          type: string
-        scope:
-          type: string
-        type:
-          type: string
-      type: object
-    v1HelmRegistrySpecSummary:
-      description: Helm Registry spec summary
-      properties:
-        endpoint:
-          type: string
-        isPrivate:
-          type: boolean
-          x-omitempty: false
-        scope:
-          type: string
-      type: object
-    v1AwsCloudAccountCredentialType:
-      default: secret
-      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
-      enum:
-      - secret
-      - sts
-      - pod-identity
-      type: string
-    v1HelmRegistrySpec:
-      description: Helm registry credentials spec
-      properties:
-        auth:
-          $ref: '#/components/schemas/v1RegistryAuth'
-        endpoint:
-          type: string
-        isPrivate:
-          type: boolean
-          x-omitempty: false
-        name:
-          type: string
-        registryUid:
-          description: Helm registry uid
-          type: string
-        scope:
-          type: string
-      required:
-      - endpoint
-      - auth
-      type: object
-    v1AwsSecretTlsConfig:
-      description: TLS configuration for the AWS secret
-      properties:
-        ca:
-          description: CA certificate
-          type: string
-        cert:
-          description: Certificate
-          type: string
-        key:
-          description: Key
-          type: string
-      type: object
-    v1RegistrySyncStatus:
-      description: Status of the registry sync
-      properties:
-        isSyncSupported:
-          type: boolean
-          x-omitempty: false
-        lastRunTime:
-          $ref: '#/components/schemas/v1Time'
-        lastSyncedTime:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          type: string
-        status:
-          type: string
-        syncRecovery:
-          $ref: '#/components/schemas/v1SyncRecovery'
-      type: object
-    v1OciRegistrySpec:
-      description: Image registry spec
-      properties:
-        containsSpectroManifest:
-          type: boolean
-          x-omitempty: false
-        defaultRegion:
-          type: string
-        endpoint:
-          type: string
-        isPrivate:
-          type: boolean
-        providerType:
-          type: string
-        registryType:
-          type: string
-        scope:
+        externalId:
+          description: ExternalId for the aws sts credentials in cloud account
           type: string
       type: object
     v1BasicOciRegistry:
@@ -1862,6 +1824,11 @@ components:
         status:
           $ref: '#/components/schemas/v1OciRegistryStatus'
       type: object
+    v1HelmRegistryStatusSummary:
+      description: Helm registry status summary
+      properties:
+        sync:
+          $ref: '#/components/schemas/v1RegistrySyncStatus'
     v1HelmRegistry:
       description: Helm registry information
       properties:
@@ -1876,66 +1843,99 @@ components:
         status:
           $ref: '#/components/schemas/v1HelmRegistryStatus'
       type: object
-    v1PackRegistriesSummary:
-      description: Pack Registries Summary
+    v1HelmChartOption:
+      description: If chart options are provided then the specified chart is validated first and synced immediately. If the specified chart is not found in the specified registry then creation is cancelled.
       properties:
-        items:
+        name:
+          type: string
+        version:
+          type: string
+      type: object
+    v1PackRegistryStatusSummary:
+      description: Pack registry status summary
+      properties:
+        sync:
+          $ref: '#/components/schemas/v1RegistrySyncStatus'
+      type: object
+    v1AwsCloudAccount:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+      properties:
+        accessKey:
+          description: AWS account access key
+          type: string
+        credentialType:
+          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
+        partition:
+          default: aws
+          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+          enum:
+          - aws
+          - aws-us-gov
+          - aws-iso
+          - aws-iso-b
+          type: string
+        podIdentity:
+          $ref: '#/components/schemas/v1AwsPodIdentityCredentials'
+          description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
+        policyARNs:
+          description: List of policy ARNs required in case of credentialType sts.
           items:
-            $ref: '#/components/schemas/v1PackRegistrySummary'
+            type: string
           type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
+        secretKey:
+          description: AWS account secret key
+          type: string
+        secretSpec:
+          $ref: '#/components/schemas/v1AwsSecretSpec'
+        secretToken:
+          description: AWS account secret token; in case of aws-iso and aws-iso-b
+          type: string
+        sts:
+          $ref: '#/components/schemas/v1AwsStsCredentials'
+          description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
       type: object
-    v1HelmRegistryEntity:
-      description: Helm registry information
+    v1EcrRegistrySpec:
+      description: Ecr registry spec
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1HelmRegistrySpecEntity'
-      type: object
-    v1PackRegistrySummary:
-      description: Pack Registry summary
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1PackRegistrySpecSummary'
-        status:
-          $ref: '#/components/schemas/v1PackRegistryStatusSummary'
-      type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1RegistryAuth:
-      description: Auth credentials of the registry
-      properties:
-        password:
-          format: password
+        baseContentPath:
+          description: OCI ecr registry content base path
+          type: string
+        containsSpectroManifest:
+          type: boolean
+          x-omitempty: false
+        credentials:
+          $ref: '#/components/schemas/v1AwsCloudAccount'
+        defaultRegion:
+          type: string
+        endpoint:
+          type: string
+        isPrivate:
+          type: boolean
+        isSyncSupported:
+          type: boolean
+        providerType:
+          default: helm
+          enum:
+          - helm
+          - pack
+          - zarf
+          type: string
+        registryUid:
+          description: Ecr registry uid
+          type: string
+        scope:
           type: string
         tls:
           $ref: '#/components/schemas/v1TlsConfiguration'
-        token:
-          format: password
-          type: string
-        type:
-          enum:
-          - noAuth
-          - basic
-          - token
-          type: string
-        username:
-          type: string
+      required:
+      - endpoint
+      - isPrivate
       type: object
-    v1HelmRegistries:
+    v1PackRegistries:
       properties:
         items:
           items:
-            $ref: '#/components/schemas/v1HelmRegistry'
+            $ref: '#/components/schemas/v1PackRegistry'
           type: array
           uniqueItems: true
         listmeta:

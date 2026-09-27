@@ -2684,6 +2684,398 @@ paths:
       - Authorization: []
 components:
   schemas:
+    v1RegistryCredentials:
+      type: object
+      properties:
+        certificates:
+          type: array
+          items:
+            type: string
+        domain:
+          description: Registry domain (optional)
+          type: string
+        encodedPassword:
+          description: Whether the password is encoded (optional, defaults to false)
+          type: boolean
+        insecure:
+          description: Whether to allow insecure registry connections (optional)
+          type: boolean
+        password:
+          description: Registry password (**masked in response**)
+          type: string
+        repositoryName:
+          description: Repository name (optional)
+          type: string
+        username:
+          description: Username for registry access (optional)
+          type: string
+    v1UpdateStrategy:
+      description: UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1
+      type: object
+      properties:
+        type:
+          description: update strategy, either ScaleOut or ScaleIn if empty, will default to RollingUpdateScaleOut
+          type: string
+          enum:
+          - RollingUpdateScaleOut
+          - RollingUpdateScaleIn
+    v1ClusterCurrentApplications:
+      properties:
+        clusterProfileTemplates:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ClusterProfileTemplate'
+    v1ClusterProfileConfiguration:
+      description: v1ClusterProfileConfiguration is the configuration required to update a cluster's profiles.
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1MetaData'
+        spec:
+          type: object
+          properties:
+            archiveUploadPath:
+              type: string
+    v1Management:
+      type: object
+      required:
+      - type
+      properties:
+        edgeHostToken:
+          description: Edge host token. Required for remote management
+          type: string
+        insecure:
+          description: Whether to allow insecure connections (optional)
+          type: boolean
+        paletteEndpoint:
+          description: URL for remote palette endpoint (optional)
+          type: string
+        projectName:
+          description: Project name (optional)
+          type: string
+        type:
+          $ref: '#/components/schemas/v1ManagementMode'
+    v1EventSource:
+      description: Event source info
+      type: object
+      properties:
+        component:
+          type: string
+        host:
+          type: string
+    v1ProfileVariable:
+      type: object
+      properties:
+        name:
+          type: string
+        profileUid:
+          type: string
+        value:
+          type: string
+    v1Condition:
+      required:
+      - type
+      - status
+      properties:
+        lastProbeTime:
+          $ref: '#/components/schemas/v1Time'
+        lastTransitionTime:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: Human readable message indicating details about last transition.
+          type: string
+        reason:
+          description: Unique, one word reason for the condition's last transition.
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      type: object
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+    v1HarborContentsDetails:
+      type: object
+      properties:
+        status:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1HarborContentDetails'
+    v1ValidateVariables:
+      description: v1 Validate Variables is for validating the variables
+      type: object
+      properties:
+        archiveUploadPath:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1MetaData'
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ValidataVariable'
+    uploadResponse:
+      type: object
+      properties:
+        message:
+          type: string
+        uploadPath:
+          type: string
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      type: string
+      format: date-time
+    v1EdgeNativeCloudConfigSpec:
+      description: EdgeNativeCloudConfigSpec defines the desired state of EdgeNativeCloudConfig
+      type: object
+      required:
+      - clusterConfig
+      - machinePoolConfig
+      properties:
+        clusterConfig:
+          $ref: '#/components/schemas/v1EdgeNativeClusterConfig'
+        machinePoolConfig:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1EdgeNativeMachinePoolConfig'
+    v1NicSummary:
+      type: object
+      properties:
+        bondName:
+          description: Name of the bond this NIC is a member of, empty if not part of any bond
+          type: string
+        bridgeName:
+          description: Name of the bridge this NIC is a member of, empty if not part of any bridge
+          type: string
+        configStatus:
+          type: string
+        gateway:
+          type: string
+        ip:
+          type: string
+        isClusterNIC:
+          description: True if this NIC is used for cluster communication
+          type: boolean
+        mac:
+          type: string
+        mtu:
+          type: integer
+        name:
+          type: string
+        nameservers:
+          type: array
+          items:
+            type: string
+          x-omitempty: true
+        status:
+          type: string
+        subnet:
+          type: string
+        type:
+          type: string
+          enum:
+          - dhcp
+          - static
+        vlanID:
+          type: string
+    v1FileMetadataList:
+      type: object
+      properties:
+        files:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1FileMetadata'
+    v1AuditActor:
+      description: Audit actor object
+      properties:
+        actorType:
+          type: string
+          enum:
+          - user
+          - system
+        uid:
+          description: id of actor
+          type: string
+    v1ManagementInterfaceUpdateRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          description: 'Name of the interface to use as management interface. Must match an
+
+            entry from the candidates list. Empty string clears the selection
+
+            and reverts to default routing.
+
+            '
+          type: string
+    v1ObjectReference:
+      description: ObjectReference contains enough information to let you inspect or modify the referred object.
+      type: object
+      properties:
+        apiVersion:
+          description: API version of the referent.
+          type: string
+        fieldPath:
+          description: 'If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: "spec.containers{name}" (where "name" refers to the name of the container that triggered the event) or if no container name is specified "spec.containers[2]" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object.'
+          type: string
+        kind:
+          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        name:
+          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+          type: string
+        namespace:
+          description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/'
+          type: string
+        resourceVersion:
+          description: 'Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency'
+          type: string
+        uid:
+          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+          type: string
+    v1State:
+      type: string
+      enum:
+      - Provisioning
+      - Running
+      - Deleting
+      - Error
+    v1OS:
+      type: object
+      properties:
+        family:
+          type: string
+        kernel:
+          type: string
+        kernelVersion:
+          type: string
+        version:
+          type: string
+    v1ClusterStatus:
+      description: ClusterStatus provides the status of the cluster.
+      properties:
+        agentVersion:
+          type: string
+        clusterConditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Condition'
+        clusterState:
+          $ref: '#/components/schemas/v1State'
+        clusterStateReason:
+          type: string
+        health:
+          $ref: '#/components/schemas/v1Health'
+        isRebootPending:
+          type: boolean
+          default: false
+        k8sVersion:
+          type: string
+        kubeconfig:
+          type: string
+        nodePools:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ClusterNodePoolStatus'
+        ntpServersApplied:
+          type: boolean
+          default: false
+          x-isnullable: false
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Service'
+        sshKeysApplied:
+          type: boolean
+          default: false
+          x-isnullable: false
+    v1ClusterConfigArchiveDetails:
+      type: object
+      properties:
+        archiveUploadPath:
+          type: string
+        clusterProfileDetails:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ClusterProfileDetail'
+    v1ClusterNode:
+      type: object
+      properties:
+        age:
+          type: string
+        architecture:
+          type: string
+        edgeHostID:
+          type: string
+        ipv4:
+          type: string
+          x-go-name: IPV4
+        kernelVersion:
+          type: string
+        kubeletVersion:
+          type: string
+        nodeHealth:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ClusterNodeCondition'
+        nodeName:
+          type: string
+        nodeStatus:
+          $ref: '#/components/schemas/v1ClusterNodeCondition'
+        operatingSystem:
+          type: string
+        osImage:
+          type: string
+    v1ClusterNodeStatus:
+      type: object
+      properties:
+        age:
+          type: string
+        architecture:
+          type: string
+        health:
+          $ref: '#/components/schemas/v1Health'
+        ipv4:
+          type: string
+          x-go-name: IPV4
+        k8sVersion:
+          type: string
+        nodeName:
+          type: string
+        nodeState:
+          $ref: '#/components/schemas/v1State'
+    v1ConditionOrder:
+      properties:
+        order:
+          description: Order or sequence of the condition in comparison to all the conditions.
+          type: integer
+          format: int32
+        reason:
+          description: Unique, one word reason for the condition's last transition.
+          type: string
+        reasonLabel:
+          description: Readable label for the reason.
+          type: string
+        type:
+          description: Type of the condition.
+          type: string
+        typeLabel:
+          description: Readable label for the type.
+          type: string
     v1EdgeHostInfo:
       description: EdgeHostInfo is the information about the edge host.
       type: object
@@ -2694,21 +3086,140 @@ components:
           $ref: '#/components/schemas/v1EdgeHostSpec'
         status:
           $ref: '#/components/schemas/v1EdgeHostStatus'
-    v1CPU:
+    v1Memory:
       type: object
       properties:
-        cores:
-          description: Cpu cores defines the number of cpu cores on the edge host.
+        sizeInMB:
+          description: Memory size in bytes
           type: integer
-          format: int32
-    v1BridgeList:
-      description: Collection of bridge interfaces
+          format: int64
+    v1ManagementInterfaceCandidate:
+      type: object
+      required:
+      - name
+      - type
+      properties:
+        ipAddress:
+          type: string
+        name:
+          type: string
+        status:
+          description: Link state (e.g. up, down, dormant, unknown)
+          type: string
+        type:
+          type: string
+          enum:
+          - nic
+          - bond
+          - vlan
+          - bridge
+    v1PingResponse:
       type: object
       properties:
-        items:
+        pingHostStatus:
+          type: string
+    v1EdgeHostConfigurationStatus:
+      type: object
+      properties:
+        errorMessage:
+          type: string
+        state:
+          type: string
+          enum:
+          - Not Configured
+          - In Progress
+          - Configured
+          - Failed
+    v1ClusterSpec:
+      description: ClusterSpec is the specification of the cluster.
+      type: object
+      properties:
+        hostIDs:
           type: array
           items:
-            $ref: '#/components/schemas/v1Bridge'
+            type: string
+        nodePools:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ClusterNodePoolSpec'
+        ntpServers:
+          type: array
+          items:
+            type: string
+        overlayCIDR:
+          type: string
+        sshKeys:
+          type: array
+          items:
+            type: string
+        vip:
+          type: string
+    v1NetworkConfig:
+      type: object
+      properties:
+        caCerts:
+          description: List of CA certificates (optional)
+          type: array
+          items:
+            type: string
+          x-omitempty: true
+        httpProxy:
+          type: string
+        httpsProxy:
+          type: string
+        interfaces:
+          description: Mapping of interface names to their configuration
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1NetworkInterface'
+        noProxy:
+          type: string
+    v1NodeRole:
+      type: string
+      enum:
+      - init
+      - controlplane
+      - worker
+      - unknown
+    v1PackCondition:
+      properties:
+        message:
+          type: string
+        reason:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+    v1ManagementMode:
+      type: string
+      enum:
+      - central
+      - local
+    v1FileMetadata:
+      type: object
+      properties:
+        creationTimestamp:
+          type: string
+          format: date-time
+        fileName:
+          type: string
+        lastModifiedTimestamp:
+          type: string
+          format: date-time
+        size:
+          type: string
+    v1ClusterNodeCondition:
+      type: object
+      properties:
+        conditionType:
+          type: string
+        message:
+          type: string
+        reason:
+          type: string
+        status:
+          type: string
     v1AuditMeta:
       properties:
         createTimestamp:
@@ -2718,66 +3229,360 @@ components:
         edgeHostId:
           description: edge host id
           type: string
-    v1ClusterProfileTemplate:
+    v1PackContent:
       properties:
-        description:
+        contentType:
           type: string
+          enum:
+          - image
+          - artifact
+          - chart
         name:
           type: string
-        packs:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1PackInfo'
-        type:
+        syncMsg:
           type: string
-        uid:
+        syncStatus:
           type: string
-        variables:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Variable'
-        version:
-          type: string
-    v1Disk:
-      description: Disk is the specification of the disks on the edge host.
+    v1Event:
+      description: Event information organized by tags
       type: object
       properties:
-        controller:
+        involvedObject:
+          type: object
+          $ref: '#/components/schemas/v1ObjectReference'
+        message:
           type: string
-        partitions:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Partition'
-        size:
-          description: Size in GB
-          type: integer
-          format: int32
-        vendor:
+        metadata:
+          type: object
+          $ref: '#/components/schemas/v1ObjectMeta'
+        reason:
           type: string
-    v1EdgeNativeCloudConfig:
-      description: EdgeNativeCloudConfig is the Schema for the edgenativecloudconfigs API
+        relatedObject:
+          type: object
+          $ref: '#/components/schemas/v1RelatedObject'
+        severity:
+          type: string
+        source:
+          type: object
+          $ref: '#/components/schemas/v1EventSource'
+    apiError:
+      type: string
+    v1Cluster:
+      description: Cluster provides details about cluster.
       type: object
       properties:
         metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
+          $ref: '#/components/schemas/v1MetaData'
         spec:
-          $ref: '#/components/schemas/v1EdgeNativeCloudConfigSpec'
-    v1LifecycleEvents:
-      description: events representing lifecycle of cluster and edge host
+          $ref: '#/components/schemas/v1ClusterSpec'
+        status:
+          $ref: '#/components/schemas/v1ClusterStatus'
+    v1Taint:
+      description: Taint
       type: object
       properties:
-        clusterEvents:
+        effect:
+          type: string
+          enum:
+          - NoSchedule
+          - PreferNoSchedule
+          - NoExecute
+        key:
+          description: The taint key to be applied to a node
+          type: string
+        timeAdded:
+          $ref: '#/components/schemas/v1Time'
+        value:
+          description: The taint value corresponding to the taint key.
+          type: string
+    v1EdgeHostStatus:
+      description: EdgeHostStatus is the status of the edge host.
+      type: object
+      properties:
+        agentVersion:
+          type: string
+        configurationStatus:
+          $ref: '#/components/schemas/v1Configuration'
+        dns:
+          $ref: '#/components/schemas/v1DNS'
+        hostName:
+          type: string
+        isClusterPhase:
+          type: boolean
+          default: false
+        ntp:
+          $ref: '#/components/schemas/v1NTP'
+    v1HttpPatch:
+      type: object
+      required:
+      - op
+      - path
+      properties:
+        op:
+          description: The operation to be performed
+          type: string
+          enum:
+          - add
+          - remove
+          - replace
+        path:
+          description: A path to the pointer on which operation will be done
+          type: string
+        value:
+          description: The value to be used within the operations.
+          type: object
+    v1ConditionCategoryOrder:
+      properties:
+        category:
+          description: Name of the parent category for the conditions list.
+          type: string
+        conditionsOrder:
+          description: Order or sequence of all the conditions in this category.
           type: array
           items:
-            $ref: '#/components/schemas/v1Condition'
-        edgeHostEvents:
+            $ref: '#/components/schemas/v1ConditionOrder'
+        order:
+          description: Order or sequence of the category in comparison to all the categories.
+          type: integer
+          format: int32
+    v1NetworkConfigOptions:
+      description: Valid configuration options for network components
+      type: object
+      properties:
+        bond:
+          $ref: '#/components/schemas/v1BondConfigOptions'
+    v1BridgeList:
+      description: Collection of bridge interfaces
+      type: object
+      properties:
+        items:
           type: array
           items:
-            $ref: '#/components/schemas/v1Condition'
-        expectedOrder:
+            $ref: '#/components/schemas/v1Bridge'
+    v1AuditSpec:
+      description: Audit specifications
+      properties:
+        actionType:
+          type: string
+          enum:
+          - create
+          - update
+          - delete
+          - action
+          - activity
+        actor:
+          $ref: '#/components/schemas/v1AuditActor'
+        message:
+          description: Audit action message
+          type: string
+        resource:
+          $ref: '#/components/schemas/v1AuditResourceReference'
+    v1Bridge:
+      description: Bridge interface configuration
+      type: object
+      properties:
+        configStatus:
+          description: Detailed configuration status from networkctl
+          type: string
+        gateway:
+          description: Gateway IP address
+          type: string
+        ip:
+          description: IP address (for static type)
+          type: string
+        members:
+          description: Member interfaces attached to this bridge (NICs, Bonds, or VLANs e.g., eth0, bond0, eth0.100)
           type: array
           items:
-            $ref: '#/components/schemas/v1ConditionCategoryOrder'
+            type: string
+        mtu:
+          description: MTU for the bridge interface
+          type: integer
+          format: int64
+        name:
+          description: Bridge interface name (e.g., br0)
+          type: string
+        nameservers:
+          description: DNS nameservers
+          type: array
+          items:
+            type: string
+        status:
+          description: Status of the bridge interface (up/down/applying/unknown)
+          type: string
+        stpEnabled:
+          description: 'Spanning Tree Protocol setting persisted for this bridge.
+
+            Absent (omitted from the response) means the user did not configure STP — the bridge runs without STP (legacy behavior).
+
+            true / false reflect the explicit configured value.
+
+            '
+          type:
+          - boolean
+          - 'null'
+        subnet:
+          description: Subnet mask (for static type)
+          type: string
+        type:
+          description: Network configuration type
+          type: string
+          enum:
+          - dhcp
+          - static
+          - none
+    v1NotFound:
+      description: Resource not found
+    v1ValidataVariable:
+      type: object
+      properties:
+        name:
+          type: string
+        profileUid:
+          type: string
+        value:
+          type: string
+    v1CA:
+      type: object
+      properties:
+        childCerts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ChildCerts'
+        expirationDate:
+          type: string
+        issueDate:
+          type: string
+        name:
+          type: string
+    v1MachinePoolPatch:
+      type: object
+      properties:
+        machinePoolConfigPatches:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1HttpPatch'
+    v1NicSummaryList:
+      type: object
+      properties:
+        interfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1NicSummary'
+    v1VLAN:
+      description: VLAN interface configuration
+      type: object
+      properties:
+        bridgeName:
+          description: Name of the bridge this VLAN is a member of, empty if not part of any bridge
+          type: string
+        configStatus:
+          description: Detailed configuration status from networkctl
+          type: string
+        gateway:
+          description: Gateway IP address
+          type: string
+        ip:
+          description: IP address (required for static type)
+          type: string
+        mtu:
+          description: MTU for the VLAN interface
+          type: integer
+          format: int64
+        name:
+          description: VLAN interface name (e.g., ens32.100 or bond0.100)
+          type: string
+        nameservers:
+          description: DNS nameservers
+          type: array
+          items:
+            type: string
+        parentName:
+          description: Parent interface name (NIC or Bond)
+          type: string
+        parentType:
+          description: Type of parent interface
+          type: string
+          enum:
+          - nic
+          - bond
+        status:
+          description: Status of the VLAN interface (up/down/applying/unknown)
+          type: string
+        subnet:
+          description: Subnet mask (required for static type)
+          type: string
+        type:
+          description: Network configuration type
+          type: string
+          enum:
+          - dhcp
+          - static
+        vlanID:
+          description: VLAN ID (1-4094)
+          type: string
+    v1ObjectMeta:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      type: object
+      properties:
+        annotations:
+          type: object
+          additionalProperties:
+            type: string
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        deletionTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        labels:
+          type: object
+          additionalProperties:
+            type: string
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        name:
+          type: string
+        namespace:
+          type: string
+        resourceVersion:
+          type: string
+        selfLink:
+          type: string
+        uid:
+          type: string
+    v1HarborContentSyncStatus:
+      type: object
+      properties:
+        contentType:
+          type: string
+          enum:
+          - image
+          - artifact
+          - chart
+          - pack
+        creationTimestamp:
+          type: string
+          format: date-time
+        lastSyncTimestamp:
+          type: string
+          format: date-time
+        msg:
+          type: string
+        name:
+          type: string
+        size:
+          type: string
+        source:
+          type: string
+        status:
+          type: string
+          enum:
+          - pending
+          - completed
+          - failed
+        target:
+          type: string
+        version:
+          type: string
     v1PackInfo:
       type: object
       properties:
@@ -2807,59 +3612,428 @@ components:
           type: string
         version:
           type: string
-    v1AuditActor:
-      description: Audit actor object
-      properties:
-        actorType:
-          type: string
-          enum:
-          - user
-          - system
-        uid:
-          description: id of actor
-          type: string
-    v1EdgeNativeClusterConfig:
-      description: EdgeNativeClusterConfig defines Edge Native Cluster specific Spec
+    v1CPU:
       type: object
       properties:
-        controlPlaneEndpoint:
-          description: ControlPlaneEndpoint is the control plane endpoint, which can be an IP or FQDN
-          $ref: '#/components/schemas/v1EdgeNativeControlPlaneEndPoint'
-        isTwoNodeCluster:
-          description: Enable two-node high availability configuration (PostgreSQL-based instead of etcd)
+        cores:
+          description: Cpu cores defines the number of cpu cores on the edge host.
+          type: integer
+          format: int32
+    v1ContentSigningKey:
+      type: object
+      properties:
+        creationTimestamp:
+          description: CreationTimestamp is the timestamp when the resource was created.
+          $ref: '#/components/schemas/v1Time'
+        description:
+          type: string
+        key:
+          type: string
+    v1BondRequest:
+      description: Bond interface request payload
+      type: object
+      required:
+      - members
+      properties:
+        gateway:
+          type: string
+        ip:
+          type: string
+        lacpTransmitRate:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        miiMonitorSec:
+          type: string
+        mode:
+          type: string
+        mtu:
+          type: integer
+          format: int64
+        name:
+          type: string
+        nameservers:
+          type: array
+          items:
+            type: string
+        subnet:
+          type: string
+        transmitHashPolicy:
+          type: string
+        type:
+          type: string
+          enum:
+          - dhcp
+          - static
+          - none
+        vlanID:
+          type: string
+    v1ClusterNodePool:
+      type: object
+      properties:
+        archType:
+          $ref: '#/components/schemas/v1ArchType'
+        isControlPlane:
           type: boolean
-          default: false
+        name:
+          description: Name of the cluster node pool.
+          type: string
+    v1EdgeNativeClusterSettings:
+      description: EdgeNativeClusterSettings defines Edge Native Cluster specific settings
+      properties:
         ntpServers:
           description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list
           type: array
           items:
             type: string
-        overlayNetworkConfiguration:
-          description: OverlayNetworkConfiguration is the configuration for the overlay network
-          $ref: '#/components/schemas/v1EdgeNativeOverlayNetworkConfiguration'
+            default: ''
         sshKeys:
           description: SSHKeys specifies a list of ssh authorized keys to access the vms as a 'spectro' user
           type: array
           items:
             type: string
             default: ''
-        staticIp:
-          description: StaticIP indicates if IP allocation type is static IP. DHCP is the default allocation type
-          type: boolean
-    v1ValidateVariablesResponse:
+    v1VLANList:
+      description: Collection of VLAN interfaces
       type: object
       properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1VLAN'
+    v1BondConfigOptions:
+      description: Valid configuration options for bond interfaces
+      type: object
+      properties:
+        lacpTransmitRate:
+          description: Valid LACP transmit rates for 802.3ad mode
+          type: array
+          items:
+            type: string
+          example:
+          - slow
+          - fast
+        mode:
+          description: Valid bond modes
+          type: array
+          items:
+            type: string
+          example:
+          - balance-rr
+          - active-backup
+          - balance-xor
+          - broadcast
+          - 802.3ad
+          - balance-tlb
+          - balance-alb
+        transmitHashPolicy:
+          description: Valid transmit hash policies for bond modes that support it
+          type: array
+          items:
+            type: string
+          example:
+          - layer2
+          - layer3+4
+          - layer2+3
+          - encap2+3
+          - encap3+4
+    v1Settings:
+      type: object
+      properties:
+        featureFlags:
+          type: object
+          additionalProperties:
+            type: boolean
+        installationMode:
+          type: string
+          enum:
+          - airgap
+          - connected
+        managementMode:
+          $ref: '#/components/schemas/v1ManagementMode'
+    v1EdgeNativeControlPlaneEndPoint:
+      type: object
+      properties:
+        ddnsSearchDomain:
+          description: DDNSSearchDomain is the search domain used for resolving IP addresses when the EndpointType is DDNS. This search domain is appended to the generated Hostname to obtain the complete DNS name for the endpoint. If Host is already a DDNS FQDN, DDNSSearchDomain is not required
+          type: string
+        host:
+          description: Host is FQDN(DDNS) or IP
+          type: string
+        type:
+          description: Type indicates DDNS or VIP
+          type: string
+    v1UploadedContentDetails:
+      type: object
+      properties:
+        fileName:
+          description: Name of last uploaded content archive file
+          type: string
+        sha256Hash:
+          description: Hash of last uploaded content archive file
+          type: string
+        sizeInBytes:
+          description: Size of last uploaded content archive file in bytes
+          type: integer
+        sizeInGiB:
+          description: Size of last uploaded content archive file in GiB
+          type: number
+          format: float
+        sizeInMiB:
+          description: Size of last uploaded content archive file in MiB
+          type: number
+          format: float
+        uploadDateTime:
+          type: string
+          format: date-time
+    v1ClusterPairVerifiedConnectionResponse:
+      type: object
+      properties:
+        message:
+          description: any custom message
+          type: string
+        verified:
+          description: whether all cluster hosts can connect to palette
+          type: boolean
+    v1Pack:
+      type: object
+      properties:
+        logo:
+          type: string
+        name:
+          type: string
+        values:
+          type: string
+        version:
+          type: string
+    v1AuditResourceReference:
+      description: Audit resource object
+      properties:
+        kind:
+          description: Audit resource type
+          type: string
+        name:
+          description: Audit resource name
+          type: string
+        uid:
+          description: Audit resource id
+          type: string
+    v1LinkPeer:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/v1EdgeHostInfo'
+        contentSyncStatus:
+          description: content sync status for the edge host
+          type: string
+        health:
+          $ref: '#/components/schemas/v1Health'
+        id:
+          description: edge host id
+          type: string
+        ip:
+          description: edge host ip
+          type: string
+        localUIPort:
+          description: edge host local UI port
+          type: string
+        nodeRole:
+          $ref: '#/components/schemas/v1NodeRole'
+        overlayIP:
+          description: edge host overlay ip
+          type: string
+        role:
+          description: edge host role
+          type: string
+        status:
+          description: edge host status
+          type: string
+    v1HostInfo:
+      type: object
+      properties:
+        hostState:
+          type: string
+        hostType:
+          type: string
+        secureBoot:
+          type: boolean
+    v1EdgeHost:
+      type: object
+      properties:
+        hostAddress:
+          type: string
+        hostID:
+          type: string
+        hostName:
+          type: string
+        nic:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Nic'
+    v1AuditFilterObect:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          type: object
+          properties:
+            label:
+              type: string
+            value:
+              type: string
+    v1NetworkInterfaceUpdateRequest:
+      type: object
+      required:
+      - type
+      properties:
+        gateway:
+          type: string
+        ip:
+          type: string
+        mtu:
+          type: integer
+        name:
+          type: string
+        nameservers:
+          type: array
+          items:
+            type: string
+          x-omitempty: true
+        subnet:
+          type: string
+        type:
+          type: string
+          enum:
+          - dhcp
+          - static
+        vlanID:
+          type: string
+    v1CertificateDetails:
+      type: object
+      properties:
+        certificates:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1CA'
+        earliestAutoRenewalTime:
+          type: string
+        needsRenewal:
+          type: boolean
+    v1EdgeHostGenerateLogsStatus:
+      description: Edge host log collection status
+      type: object
+      properties:
+        msg:
+          type: string
+        status:
+          type: string
+          enum:
+          - Unknown
+          - InProgress
+          - Completed
+          - Failed
+    v1Port:
+      description: Port provides details about port.
+      type: object
+      properties:
+        appProtocol:
+          description: App protocol of the port.
+          type: string
+        name:
+          description: Name of the port.
+          type: string
+        nodePort:
+          description: NodePort number.
+          type: integer
+        port:
+          description: Port number.
+          type: integer
+        protocol:
+          description: Protocol of the port.
+          type: string
+        targetPort:
+          description: number or string of the target port .
+          type: string
+    v1ManagementInterface:
+      type: object
+      required:
+      - selected
+      - candidates
+      properties:
+        candidates:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ManagementInterfaceCandidate'
+        selected:
+          description: 'Name of the currently selected management interface. Empty string
+
+            means no selection (default routing applies). Always present in
+
+            the response.
+
+            '
+          type: string
+    v1Events:
+      type: object
+      required:
+      - items
+      properties:
+        items:
+          type: array
+          uniqueItems: true
+          items:
+            $ref: '#/components/schemas/v1Event'
+    v1ClusterPatch:
+      type: object
+      properties:
+        clusterConfigPatches:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1HttpPatch'
+    v1ClusterProfileDetail:
+      type: object
+      properties:
+        packs:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Pack'
+        profileDescription:
+          type: string
+        profileName:
+          type: string
+        profileTags:
+          type: string
+        profileType:
+          type: string
+        profileUid:
+          type: string
+        profileVersion:
+          type: string
         variables:
           type: array
           items:
-            $ref: '#/components/schemas/v1ValidateVariableResponse'
-    v1Memory:
+            $ref: '#/components/schemas/v1Variable'
+    v1ClusterConfiguration:
+      description: v1ClusterConfiguration is the configuration required to create a cluster.
       type: object
       properties:
-        sizeInMB:
-          description: Memory size in bytes
-          type: integer
-          format: int64
+        metadata:
+          $ref: '#/components/schemas/v1MetaData'
+        spec:
+          type: object
+          properties:
+            archiveUploadPath:
+              type: string
+            cloudConfig:
+              $ref: '#/components/schemas/v1EdgeNativeCloudConfig'
+            profileVariables:
+              type: array
+              items:
+                $ref: '#/components/schemas/v1ProfileVariable'
+            scheduleAt:
+              type: string
     v1Nic:
       description: Nic is the specification of the network interface card on the edge host.
       type: object
@@ -2880,478 +4054,6 @@ components:
           type: string
         subnet:
           type: string
-    v1CA:
-      type: object
-      properties:
-        childCerts:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ChildCerts'
-        expirationDate:
-          type: string
-        issueDate:
-          type: string
-        name:
-          type: string
-    v1ValidataVariable:
-      type: object
-      properties:
-        name:
-          type: string
-        profileUid:
-          type: string
-        value:
-          type: string
-    v1NicSummaryList:
-      type: object
-      properties:
-        interfaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1NicSummary'
-    v1Partition:
-      description: Partition is the specification of the partitions on the disk.
-      type: object
-      properties:
-        fileSystemType:
-          type: string
-        freeSpace:
-          type: integer
-          format: int32
-        mountPoint:
-          type: string
-        totalSpace:
-          type: integer
-          format: int32
-        usedSpace:
-          type: integer
-          format: int32
-    v1HarborContentDetails:
-      type: object
-      properties:
-        contentType:
-          type: string
-          enum:
-          - image
-          - artifact
-          - chart
-          - pack
-        dateAdded:
-          type: string
-          format: date-time
-        name:
-          type: string
-        size:
-          type: string
-        version:
-          type: string
-    v1UpdateStrategy:
-      description: UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1
-      type: object
-      properties:
-        type:
-          description: update strategy, either ScaleOut or ScaleIn if empty, will default to RollingUpdateScaleOut
-          type: string
-          enum:
-          - RollingUpdateScaleOut
-          - RollingUpdateScaleIn
-    v1AuditResourceReference:
-      description: Audit resource object
-      properties:
-        kind:
-          description: Audit resource type
-          type: string
-        name:
-          description: Audit resource name
-          type: string
-        uid:
-          description: Audit resource id
-          type: string
-    v1PackContent:
-      properties:
-        contentType:
-          type: string
-          enum:
-          - image
-          - artifact
-          - chart
-        name:
-          type: string
-        syncMsg:
-          type: string
-        syncStatus:
-          type: string
-    v1NotFound:
-      description: Resource not found
-    v1ClusterNodeCondition:
-      type: object
-      properties:
-        conditionType:
-          type: string
-        message:
-          type: string
-        reason:
-          type: string
-        status:
-          type: string
-    v1DNS:
-      type: object
-      properties:
-        nameservers:
-          type: array
-          items:
-            type: string
-        options:
-          type: array
-          items:
-            type: string
-        searchDomains:
-          type: array
-          items:
-            type: string
-    v1FileMetadata:
-      type: object
-      properties:
-        creationTimestamp:
-          type: string
-          format: date-time
-        fileName:
-          type: string
-        lastModifiedTimestamp:
-          type: string
-          format: date-time
-        size:
-          type: string
-    v1Pack:
-      type: object
-      properties:
-        logo:
-          type: string
-        name:
-          type: string
-        values:
-          type: string
-        version:
-          type: string
-    v1HarborContentsDetails:
-      type: object
-      properties:
-        status:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1HarborContentDetails'
-    v1ClusterNodePoolSpec:
-      description: ClusterNodePool provides details about cluster node pool.
-      type: object
-      properties:
-        hosts:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1EdgeHost'
-        pool:
-          $ref: '#/components/schemas/v1ClusterNodePool'
-    v1ContentSigningKey:
-      type: object
-      properties:
-        creationTimestamp:
-          description: CreationTimestamp is the timestamp when the resource was created.
-          $ref: '#/components/schemas/v1Time'
-        description:
-          type: string
-        key:
-          type: string
-    v1EdgeHostSpec:
-      description: EdgeHostSpec is the specification of the edge host.
-      type: object
-      properties:
-        connectionMode:
-          $ref: '#/components/schemas/v1ConnectionMode'
-        hardwareSpec:
-          $ref: '#/components/schemas/v1HardwareSpec'
-        hostInfo:
-          $ref: '#/components/schemas/v1HostInfo'
-        managementMode:
-          $ref: '#/components/schemas/v1ManagementMode'
-        networkInfo:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Nic'
-        nodeRole:
-          $ref: '#/components/schemas/v1NodeRole'
-        paletteEndpointURL:
-          type: string
-    v1CertificateDetails:
-      type: object
-      properties:
-        certificates:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1CA'
-        earliestAutoRenewalTime:
-          type: string
-        needsRenewal:
-          type: boolean
-    v1Cluster:
-      description: Cluster provides details about cluster.
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1MetaData'
-        spec:
-          $ref: '#/components/schemas/v1ClusterSpec'
-        status:
-          $ref: '#/components/schemas/v1ClusterStatus'
-    v1PingResponse:
-      type: object
-      properties:
-        pingHostStatus:
-          type: string
-    v1ClusterCurrentApplications:
-      properties:
-        clusterProfileTemplates:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ClusterProfileTemplate'
-    v1Error:
-      type: object
-      properties:
-        code:
-          type: string
-        details:
-          type: object
-        message:
-          type: string
-        ref:
-          type: string
-    v1MetaData:
-      description: MetaData defines the metadata for the resource.
-      type: object
-      properties:
-        creationTimestamp:
-          description: CreationTimestamp is the timestamp when the resource was created.
-          $ref: '#/components/schemas/v1Time'
-        id:
-          description: ID is the unique identifier of the resource.
-          type: string
-        labels:
-          description: 'Labels are key-value pairs that can be used to organize and categorize resources.
-
-            '
-          type: object
-          additionalProperties:
-            type: string
-        lastModifiedTimestamp:
-          description: LastModifiedTimestamp is the timestamp when the resource was last modified.
-          $ref: '#/components/schemas/v1Time'
-        name:
-          description: Name is the name of the resource.
-          type: string
-        tags:
-          description: Tags is the list of tags associated with the resource.
-          type: object
-          additionalProperties:
-            type: object
-    v1Health:
-      description: Health provides details about the resource health.
-      type: object
-      properties:
-        reason:
-          type: string
-        status:
-          type: string
-          enum:
-          - Healthy
-          - Unhealthy
-    apiError:
-      type: string
-    v1TraceRouteResponse:
-      type: object
-      properties:
-        traceRouteStatus:
-          type: string
-    v1ClusterProfileConfiguration:
-      description: v1ClusterProfileConfiguration is the configuration required to update a cluster's profiles.
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1MetaData'
-        spec:
-          type: object
-          properties:
-            archiveUploadPath:
-              type: string
-    v1Service:
-      description: ClusterService provides details about services in cluster.
-      type: object
-      properties:
-        host:
-          description: Host of the service.
-          type: string
-        name:
-          description: Name of the service.
-          type: string
-        ports:
-          description: Ports of the service.
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Port'
-    v1EdgeNativeControlPlaneEndPoint:
-      type: object
-      properties:
-        ddnsSearchDomain:
-          description: DDNSSearchDomain is the search domain used for resolving IP addresses when the EndpointType is DDNS. This search domain is appended to the generated Hostname to obtain the complete DNS name for the endpoint. If Host is already a DDNS FQDN, DDNSSearchDomain is not required
-          type: string
-        host:
-          description: Host is FQDN(DDNS) or IP
-          type: string
-        type:
-          description: Type indicates DDNS or VIP
-          type: string
-    v1NotFoundResponseWithMessage:
-      description: Resource not found with message
-      properties:
-        message:
-          type: string
-    v1ManagementMode:
-      type: string
-      enum:
-      - central
-      - local
-    v1EdgeNativeHost:
-      description: EdgeNativeHost is the underlying appliance
-      type: object
-      properties:
-        IsCandidateCaption:
-          description: Is Edge host nominated as candidate
-          type: boolean
-          default: false
-          x-omitempty: false
-        caCert:
-          description: CACert for TLS connections
-          type: string
-        hostAddress:
-          description: HostAddress is a FQDN or IP address of the Host
-          type: string
-          default: ''
-        hostName:
-          description: Qualified name of host
-          type: string
-          default: ''
-        hostUid:
-          description: HostUid is the ID of the EdgeHost
-          type: string
-          default: ''
-        networkInfo:
-          description: List network interfaces of an EH
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Nic'
-        nic:
-          description: Edge native nic. (Depricated)
-          $ref: '#/components/schemas/v1Nic'
-        nicName:
-          description: Deprecated. Edge host nic name
-          type: string
-        nodeInfo:
-          description: node information if edgehost is part of a cluster
-          x-omitempty: true
-          $ref: '#/components/schemas/v1NodeInfo'
-        staticIP:
-          description: Deprecated. Edge host static IP
-          type: string
-        tags:
-          description: tags set via userdata.
-          additionalProperties:
-            type: object
-          x-omitempty: true
-        twoNodeCandidatePriority:
-          description: Set the edgehost candidate priority as primary or secondary, if the edgehost is nominated as two node candidate
-          type: string
-          enum:
-          - primary
-          - secondary
-    v1ManagementInterface:
-      type: object
-      required:
-      - selected
-      - candidates
-      properties:
-        candidates:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ManagementInterfaceCandidate'
-        selected:
-          description: 'Name of the currently selected management interface. Empty string
-
-            means no selection (default routing applies). Always present in
-
-            the response.
-
-            '
-          type: string
-    v1EdgeHostGenerateLogsStatus:
-      description: Edge host log collection status
-      type: object
-      properties:
-        msg:
-          type: string
-        status:
-          type: string
-          enum:
-          - Unknown
-          - InProgress
-          - Completed
-          - Failed
-    v1ClusterSpec:
-      description: ClusterSpec is the specification of the cluster.
-      type: object
-      properties:
-        hostIDs:
-          type: array
-          items:
-            type: string
-        nodePools:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ClusterNodePoolSpec'
-        ntpServers:
-          type: array
-          items:
-            type: string
-        overlayCIDR:
-          type: string
-        sshKeys:
-          type: array
-          items:
-            type: string
-        vip:
-          type: string
-    v1LinkStatus:
-      type: object
-      properties:
-        errorMessage:
-          description: The error message in case of failure
-          type: string
-        peers:
-          description: The list of peers linked to the edge host
-          type: array
-          items:
-            $ref: '#/components/schemas/v1LinkPeer'
-        status:
-          description: The status of the link operation
-          type: string
-          enum:
-          - Pending
-          - InProgress
-          - Completed
-          - Failed
-    v1NodeRole:
-      type: string
-      enum:
-      - init
-      - controlplane
-      - worker
-      - unknown
     v1Variable:
       type: object
       properties:
@@ -3397,61 +4099,389 @@ components:
           type: boolean
         value:
           type: string
-    v1RegistryCredentials:
+    v1HarborContentsSyncStatus:
       type: object
       properties:
-        certificates:
+        errors:
+          type: object
+          additionalProperties:
+            type: string
+        pendingItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1HarborContentSyncStatus'
+        statusMessage:
+          type: string
+    v1BridgeRequest:
+      description: Bridge interface request payload
+      type: object
+      required:
+      - name
+      properties:
+        gateway:
+          description: Gateway IP address
+          type: string
+        ip:
+          description: IP address (required for static type)
+          type: string
+        members:
+          description: Member interfaces to attach to this bridge (NICs, Bonds, or VLANs e.g., eth0, bond0, eth0.100)
           type: array
           items:
             type: string
-        domain:
-          description: Registry domain (optional)
+        mtu:
+          description: MTU for the bridge interface
+          type: integer
+          format: int64
+        name:
+          description: Bridge interface name (e.g., br0)
           type: string
-        encodedPassword:
-          description: Whether the password is encoded (optional, defaults to false)
-          type: boolean
-        insecure:
-          description: Whether to allow insecure registry connections (optional)
-          type: boolean
-        password:
-          description: Registry password (**masked in response**)
-          type: string
-        repositoryName:
-          description: Repository name (optional)
-          type: string
-        username:
-          description: Username for registry access (optional)
-          type: string
-    v1BadRequest:
-      description: Bad request
-    v1ClusterNode:
-      type: object
-      properties:
-        age:
-          type: string
-        architecture:
-          type: string
-        edgeHostID:
-          type: string
-        ipv4:
-          type: string
-          x-go-name: IPV4
-        kernelVersion:
-          type: string
-        kubeletVersion:
-          type: string
-        nodeHealth:
+        nameservers:
+          description: DNS nameservers
           type: array
           items:
-            $ref: '#/components/schemas/v1ClusterNodeCondition'
-        nodeName:
+            type: string
+        stpEnabled:
+          description: 'Spanning Tree Protocol toggle for the bridge.
+
+            Omit to keep the legacy "no STP" behavior (no STP= written to the netdev unit).
+
+            Set to true to enable STP (recommended for any bridge with multiple members).
+
+            Set to false to explicitly disable STP and acknowledge the loop risk.
+
+            '
+          type:
+          - boolean
+          - 'null'
+        subnet:
+          description: Subnet mask (required for static type)
           type: string
-        nodeStatus:
-          $ref: '#/components/schemas/v1ClusterNodeCondition'
-        operatingSystem:
+        type:
+          description: Network configuration type. Default is dhcp.
           type: string
-        osImage:
+          enum:
+          - dhcp
+          - static
+          - none
+    v1TraceRouteResponse:
+      type: object
+      properties:
+        traceRouteStatus:
           type: string
+    v1MachinePoolProperties:
+      description: Machine pool specific properties
+      type: object
+      properties:
+        archType:
+          description: Architecture type of the pool. Default value is 'amd64'
+          x-omitempty: false
+          $ref: '#/components/schemas/v1ArchType'
+    v1ClusterNodePoolSpec:
+      description: ClusterNodePool provides details about cluster node pool.
+      type: object
+      properties:
+        hosts:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1EdgeHost'
+        pool:
+          $ref: '#/components/schemas/v1ClusterNodePool'
+    v1ConnectionMode:
+      type: string
+      enum:
+      - connected
+      - airgap
+    v1HarborHealthDetails:
+      type: object
+      properties:
+        DiskAvailable:
+          type: string
+        DiskCapacity:
+          type: string
+        DiskUsed:
+          type: string
+        Message:
+          type: string
+        State:
+          type: string
+          enum:
+          - Healthy
+          - Unhealthy
+          - NotInstalled
+        UsagePercentage:
+          type: string
+    v1Disk:
+      description: Disk is the specification of the disks on the edge host.
+      type: object
+      properties:
+        controller:
+          type: string
+        partitions:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Partition'
+        size:
+          description: Size in GB
+          type: integer
+          format: int32
+        vendor:
+          type: string
+    v1EdgeNativeOverlayNetworkConfiguration:
+      type: object
+      properties:
+        cidr:
+          description: CIDR is the CIDR of the overlay network
+          type: string
+        enable:
+          description: Enable is a flag to enable overlay network
+          type: boolean
+          x-omitempty: false
+    v1DNS:
+      type: object
+      properties:
+        nameservers:
+          type: array
+          items:
+            type: string
+        options:
+          type: array
+          items:
+            type: string
+        searchDomains:
+          type: array
+          items:
+            type: string
+    v1CloudInit:
+      type: object
+      properties:
+        hostName:
+          description: Host name (optional)
+          type: string
+        network:
+          description: Network configuration
+          $ref: '#/components/schemas/v1NetworkConfig'
+        registryCredentials:
+          $ref: '#/components/schemas/v1RegistryCredentials'
+        stages:
+          description: base64 encoded cloud init stages in yaml format
+          type: string
+        tags:
+          description: Key-value pairs of tags
+          type: object
+          additionalProperties:
+            type: object
+        v1Management:
+          $ref: '#/components/schemas/v1Management'
+    v1NTP:
+      type: object
+      properties:
+        connectionRetrySec:
+          type: string
+        fallbackNtpServers:
+          type: array
+          items:
+            type: string
+        ntpServers:
+          type: array
+          items:
+            type: string
+        pollIntervalMaxSec:
+          type: string
+        pollIntervalMinSec:
+          type: string
+        rootDistanceMaxSec:
+          type: string
+        saveIntervalSec:
+          type: string
+    v1ClusterProfileTemplate:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        packs:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1PackInfo'
+        type:
+          type: string
+        uid:
+          type: string
+        variables:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Variable'
+        version:
+          type: string
+    v1ValidateVariableResponse:
+      type: object
+      properties:
+        isValid:
+          type: boolean
+        name:
+          type: string
+        profileName:
+          type: string
+        profileUid:
+          type: string
+        regex:
+          type: string
+        validationFailureReason:
+          type: string
+    v1Bond:
+      description: Bond interface configuration
+      type: object
+      properties:
+        bridgeName:
+          description: Name of the bridge this bond is a member of, empty if not part of any bridge
+          type: string
+        configStatus:
+          description: Detailed configuration status from networkctl
+          type: string
+        gateway:
+          type: string
+        ip:
+          type: string
+        lacpTransmitRate:
+          type: string
+        members:
+          type: array
+          items:
+            type: string
+        miiMonitorSec:
+          type: string
+        mode:
+          type: string
+        mtu:
+          type: integer
+          format: int64
+        name:
+          type: string
+        nameservers:
+          type: array
+          items:
+            type: string
+        status:
+          description: Status of the bond interface (up/down/applying/unknown)
+          type: string
+        subnet:
+          type: string
+        transmitHashPolicy:
+          type: string
+        type:
+          type: string
+          enum:
+          - dhcp
+          - static
+          - none
+        vlanID:
+          type: string
+    v1Error:
+      type: object
+      properties:
+        code:
+          type: string
+        details:
+          type: object
+        message:
+          type: string
+        ref:
+          type: string
+    v1HardwareSpec:
+      description: HardwareSpec is the specification of the hardware of the edge host.
+      type: object
+      properties:
+        archType:
+          $ref: '#/components/schemas/v1ArchType'
+        cpu:
+          $ref: '#/components/schemas/v1CPU'
+        disks:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Disk'
+        gpus:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GPUDeviceSpec'
+        memory:
+          $ref: '#/components/schemas/v1Memory'
+        os:
+          $ref: '#/components/schemas/v1OS'
+    v1VLANRequest:
+      description: VLAN interface request payload
+      type: object
+      required:
+      - parentName
+      - parentType
+      - vlanID
+      properties:
+        gateway:
+          description: Gateway IP address
+          type: string
+        ip:
+          description: IP address (required for static type)
+          type: string
+        mtu:
+          description: MTU for the VLAN interface
+          type: integer
+          format: int64
+        nameservers:
+          description: DNS nameservers
+          type: array
+          items:
+            type: string
+        parentName:
+          description: Parent interface name (NIC or Bond)
+          type: string
+        parentType:
+          description: Type of parent interface (nic or bond)
+          type: string
+          enum:
+          - nic
+          - bond
+        subnet:
+          description: Subnet mask (required for static type)
+          type: string
+        type:
+          description: Network configuration type. Default is dhcp.
+          type: string
+          enum:
+          - dhcp
+          - static
+        vlanID:
+          description: VLAN ID (1-4094)
+          type: string
+    v1LifecycleEvents:
+      description: events representing lifecycle of cluster and edge host
+      type: object
+      properties:
+        clusterEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Condition'
+        edgeHostEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Condition'
+        expectedOrder:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ConditionCategoryOrder'
+    v1AcceptedResponseWithMessage:
+      description: Accepted response with message
+      properties:
+        message:
+          type: string
+    v1ClusterNodePoolStatus:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ClusterNodeStatus'
+        pool:
+          $ref: '#/components/schemas/v1ClusterNodePool'
     v1EdgeNativeMachinePoolConfig:
       type: object
       required:
@@ -3529,249 +4559,21 @@ components:
         useControlPlaneAsWorker:
           description: if IsControlPlane==true && useControlPlaneAsWorker==true, then will remove master taint this will not be used for worker pools
           type: boolean
-    v1ProfileVariable:
-      type: object
-      properties:
-        name:
-          type: string
-        profileUid:
-          type: string
-        value:
-          type: string
-    v1ClusterNodeStatus:
-      type: object
-      properties:
-        age:
-          type: string
-        architecture:
-          type: string
-        health:
-          $ref: '#/components/schemas/v1Health'
-        ipv4:
-          type: string
-          x-go-name: IPV4
-        k8sVersion:
-          type: string
-        nodeName:
-          type: string
-        nodeState:
-          $ref: '#/components/schemas/v1State'
-    v1ClusterNodes:
-      type: object
-      properties:
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ClusterNode'
-    v1HarborHealthDetails:
-      type: object
-      properties:
-        DiskAvailable:
-          type: string
-        DiskCapacity:
-          type: string
-        DiskUsed:
-          type: string
-        Message:
-          type: string
-        State:
-          type: string
-          enum:
-          - Healthy
-          - Unhealthy
-          - NotInstalled
-        UsagePercentage:
-          type: string
-    v1Bond:
-      description: Bond interface configuration
-      type: object
-      properties:
-        bridgeName:
-          description: Name of the bridge this bond is a member of, empty if not part of any bridge
-          type: string
-        configStatus:
-          description: Detailed configuration status from networkctl
-          type: string
-        gateway:
-          type: string
-        ip:
-          type: string
-        lacpTransmitRate:
-          type: string
-        members:
-          type: array
-          items:
-            type: string
-        miiMonitorSec:
-          type: string
-        mode:
-          type: string
-        mtu:
-          type: integer
-          format: int64
-        name:
-          type: string
-        nameservers:
-          type: array
-          items:
-            type: string
-        status:
-          description: Status of the bond interface (up/down/applying/unknown)
-          type: string
-        subnet:
-          type: string
-        transmitHashPolicy:
-          type: string
-        type:
-          type: string
-          enum:
-          - dhcp
-          - static
-          - none
-        vlanID:
-          type: string
-    v1Condition:
-      required:
-      - type
-      - status
-      properties:
-        lastProbeTime:
-          $ref: '#/components/schemas/v1Time'
-        lastTransitionTime:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          description: Human readable message indicating details about last transition.
-          type: string
-        reason:
-          description: Unique, one word reason for the condition's last transition.
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-    v1EventSource:
-      description: Event source info
-      type: object
-      properties:
-        component:
-          type: string
-        host:
-          type: string
-    v1ValidateVariableResponse:
-      type: object
-      properties:
-        isValid:
-          type: boolean
-        name:
-          type: string
-        profileName:
-          type: string
-        profileUid:
-          type: string
-        regex:
-          type: string
-        validationFailureReason:
-          type: string
-    v1ConditionCategoryOrder:
-      properties:
-        category:
-          description: Name of the parent category for the conditions list.
-          type: string
-        conditionsOrder:
-          description: Order or sequence of all the conditions in this category.
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ConditionOrder'
-        order:
-          description: Order or sequence of the category in comparison to all the categories.
-          type: integer
-          format: int32
-    v1Port:
-      description: Port provides details about port.
-      type: object
-      properties:
-        appProtocol:
-          description: App protocol of the port.
-          type: string
-        name:
-          description: Name of the port.
-          type: string
-        nodePort:
-          description: NodePort number.
-          type: integer
-        port:
-          description: Port number.
-          type: integer
-        protocol:
-          description: Protocol of the port.
-          type: string
-        targetPort:
-          description: number or string of the target port .
-          type: string
-    v1ClusterConfiguration:
-      description: v1ClusterConfiguration is the configuration required to create a cluster.
+    v1Configuration:
+      description: Configuration status of the edge host.
+      type: string
+      enum:
+      - pending
+      - inprogress
+      - configured
+    v1EdgeNativeCloudConfig:
+      description: EdgeNativeCloudConfig is the Schema for the edgenativecloudconfigs API
       type: object
       properties:
         metadata:
-          $ref: '#/components/schemas/v1MetaData'
+          $ref: '#/components/schemas/v1ObjectMeta'
         spec:
-          type: object
-          properties:
-            archiveUploadPath:
-              type: string
-            cloudConfig:
-              $ref: '#/components/schemas/v1EdgeNativeCloudConfig'
-            profileVariables:
-              type: array
-              items:
-                $ref: '#/components/schemas/v1ProfileVariable'
-            scheduleAt:
-              type: string
-    v1PackCondition:
-      properties:
-        message:
-          type: string
-        reason:
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-    v1OS:
-      type: object
-      properties:
-        family:
-          type: string
-        kernel:
-          type: string
-        kernelVersion:
-          type: string
-        version:
-          type: string
-    v1RelatedObject:
-      description: The object for which the event is related
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-          - spectrocluster
-          - machine
-          - cloudconfig
-          - clusterprofile
-          - pack
-        name:
-          type: string
-        uid:
-          type: string
-    v1VLANList:
-      description: Collection of VLAN interfaces
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1VLAN'
+          $ref: '#/components/schemas/v1EdgeNativeCloudConfigSpec'
     v1Audit:
       description: Audit response payload
       type: object
@@ -3780,977 +4582,13 @@ components:
           $ref: '#/components/schemas/v1AuditMeta'
         spec:
           $ref: '#/components/schemas/v1AuditSpec'
-    v1EdgeHostConfigurationStatus:
+    v1ValidateVariablesResponse:
       type: object
       properties:
-        errorMessage:
-          type: string
-        state:
-          type: string
-          enum:
-          - Not Configured
-          - In Progress
-          - Configured
-          - Failed
-    v1EdgeNativeClusterSettings:
-      description: EdgeNativeClusterSettings defines Edge Native Cluster specific settings
-      properties:
-        ntpServers:
-          description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list
-          type: array
-          items:
-            type: string
-            default: ''
-        sshKeys:
-          description: SSHKeys specifies a list of ssh authorized keys to access the vms as a 'spectro' user
-          type: array
-          items:
-            type: string
-            default: ''
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      type: object
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
-    v1NTP:
-      type: object
-      properties:
-        connectionRetrySec:
-          type: string
-        fallbackNtpServers:
-          type: array
-          items:
-            type: string
-        ntpServers:
-          type: array
-          items:
-            type: string
-        pollIntervalMaxSec:
-          type: string
-        pollIntervalMinSec:
-          type: string
-        rootDistanceMaxSec:
-          type: string
-        saveIntervalSec:
-          type: string
-    v1VLANRequest:
-      description: VLAN interface request payload
-      type: object
-      required:
-      - parentName
-      - parentType
-      - vlanID
-      properties:
-        gateway:
-          description: Gateway IP address
-          type: string
-        ip:
-          description: IP address (required for static type)
-          type: string
-        mtu:
-          description: MTU for the VLAN interface
-          type: integer
-          format: int64
-        nameservers:
-          description: DNS nameservers
-          type: array
-          items:
-            type: string
-        parentName:
-          description: Parent interface name (NIC or Bond)
-          type: string
-        parentType:
-          description: Type of parent interface (nic or bond)
-          type: string
-          enum:
-          - nic
-          - bond
-        subnet:
-          description: Subnet mask (required for static type)
-          type: string
-        type:
-          description: Network configuration type. Default is dhcp.
-          type: string
-          enum:
-          - dhcp
-          - static
-        vlanID:
-          description: VLAN ID (1-4094)
-          type: string
-    v1BridgeRequest:
-      description: Bridge interface request payload
-      type: object
-      required:
-      - name
-      properties:
-        gateway:
-          description: Gateway IP address
-          type: string
-        ip:
-          description: IP address (required for static type)
-          type: string
-        members:
-          description: Member interfaces to attach to this bridge (NICs, Bonds, or VLANs e.g., eth0, bond0, eth0.100)
-          type: array
-          items:
-            type: string
-        mtu:
-          description: MTU for the bridge interface
-          type: integer
-          format: int64
-        name:
-          description: Bridge interface name (e.g., br0)
-          type: string
-        nameservers:
-          description: DNS nameservers
-          type: array
-          items:
-            type: string
-        stpEnabled:
-          description: 'Spanning Tree Protocol toggle for the bridge.
-
-            Omit to keep the legacy "no STP" behavior (no STP= written to the netdev unit).
-
-            Set to true to enable STP (recommended for any bridge with multiple members).
-
-            Set to false to explicitly disable STP and acknowledge the loop risk.
-
-            '
-          type:
-          - boolean
-          - 'null'
-        subnet:
-          description: Subnet mask (required for static type)
-          type: string
-        type:
-          description: Network configuration type. Default is dhcp.
-          type: string
-          enum:
-          - dhcp
-          - static
-          - none
-    v1FileMetadataList:
-      type: object
-      properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1FileMetadata'
-    v1ClusterPairVerifiedConnectionResponse:
-      type: object
-      properties:
-        message:
-          description: any custom message
-          type: string
-        verified:
-          description: whether all cluster hosts can connect to palette
-          type: boolean
-    v1MachinePoolProperties:
-      description: Machine pool specific properties
-      type: object
-      properties:
-        archType:
-          description: Architecture type of the pool. Default value is 'amd64'
-          x-omitempty: false
-          $ref: '#/components/schemas/v1ArchType'
-    v1ClusterPairInfoResponse:
-      description: Cluster Pair Info received from palette
-      type: object
-      properties:
-        pairingUid:
-          description: unique pairing uid
-          type: string
-    v1HostInfo:
-      type: object
-      properties:
-        hostState:
-          type: string
-        hostType:
-          type: string
-        secureBoot:
-          type: boolean
-    v1ChildCerts:
-      type: object
-      properties:
-        expirationDate:
-          type: string
-        issueDate:
-          type: string
-        name:
-          type: string
-        nodeName:
-          type: string
-    v1ManagementInterfaceUpdateRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          description: 'Name of the interface to use as management interface. Must match an
-
-            entry from the candidates list. Empty string clears the selection
-
-            and reverts to default routing.
-
-            '
-          type: string
-    v1ClusterProfileDetail:
-      type: object
-      properties:
-        packs:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Pack'
-        profileDescription:
-          type: string
-        profileName:
-          type: string
-        profileTags:
-          type: string
-        profileType:
-          type: string
-        profileUid:
-          type: string
-        profileVersion:
-          type: string
         variables:
           type: array
           items:
-            $ref: '#/components/schemas/v1Variable'
-    v1ClusterNodePool:
-      type: object
-      properties:
-        archType:
-          $ref: '#/components/schemas/v1ArchType'
-        isControlPlane:
-          type: boolean
-        name:
-          description: Name of the cluster node pool.
-          type: string
-    v1UploadedContentDetails:
-      type: object
-      properties:
-        fileName:
-          description: Name of last uploaded content archive file
-          type: string
-        sha256Hash:
-          description: Hash of last uploaded content archive file
-          type: string
-        sizeInBytes:
-          description: Size of last uploaded content archive file in bytes
-          type: integer
-        sizeInGiB:
-          description: Size of last uploaded content archive file in GiB
-          type: number
-          format: float
-        sizeInMiB:
-          description: Size of last uploaded content archive file in MiB
-          type: number
-          format: float
-        uploadDateTime:
-          type: string
-          format: date-time
-    v1HttpPatch:
-      type: object
-      required:
-      - op
-      - path
-      properties:
-        op:
-          description: The operation to be performed
-          type: string
-          enum:
-          - add
-          - remove
-          - replace
-        path:
-          description: A path to the pointer on which operation will be done
-          type: string
-        value:
-          description: The value to be used within the operations.
-          type: object
-    v1ObjectMeta:
-      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
-      type: object
-      properties:
-        annotations:
-          type: object
-          additionalProperties:
-            type: string
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        deletionTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        labels:
-          type: object
-          additionalProperties:
-            type: string
-        lastModifiedTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        name:
-          type: string
-        namespace:
-          type: string
-        resourceVersion:
-          type: string
-        selfLink:
-          type: string
-        uid:
-          type: string
-    v1Configuration:
-      description: Configuration status of the edge host.
-      type: string
-      enum:
-      - pending
-      - inprogress
-      - configured
-    v1AuditsList:
-      type: object
-      required:
-      - items
-      properties:
-        items:
-          description: List of audit message
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/v1Audit'
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-    v1EdgeHost:
-      type: object
-      properties:
-        hostAddress:
-          type: string
-        hostID:
-          type: string
-        hostName:
-          type: string
-        nic:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Nic'
-    v1Events:
-      type: object
-      required:
-      - items
-      properties:
-        items:
-          type: array
-          uniqueItems: true
-          items:
-            $ref: '#/components/schemas/v1Event'
-    v1Event:
-      description: Event information organized by tags
-      type: object
-      properties:
-        involvedObject:
-          type: object
-          $ref: '#/components/schemas/v1ObjectReference'
-        message:
-          type: string
-        metadata:
-          type: object
-          $ref: '#/components/schemas/v1ObjectMeta'
-        reason:
-          type: string
-        relatedObject:
-          type: object
-          $ref: '#/components/schemas/v1RelatedObject'
-        severity:
-          type: string
-        source:
-          type: object
-          $ref: '#/components/schemas/v1EventSource'
-    v1Bridge:
-      description: Bridge interface configuration
-      type: object
-      properties:
-        configStatus:
-          description: Detailed configuration status from networkctl
-          type: string
-        gateway:
-          description: Gateway IP address
-          type: string
-        ip:
-          description: IP address (for static type)
-          type: string
-        members:
-          description: Member interfaces attached to this bridge (NICs, Bonds, or VLANs e.g., eth0, bond0, eth0.100)
-          type: array
-          items:
-            type: string
-        mtu:
-          description: MTU for the bridge interface
-          type: integer
-          format: int64
-        name:
-          description: Bridge interface name (e.g., br0)
-          type: string
-        nameservers:
-          description: DNS nameservers
-          type: array
-          items:
-            type: string
-        status:
-          description: Status of the bridge interface (up/down/applying/unknown)
-          type: string
-        stpEnabled:
-          description: 'Spanning Tree Protocol setting persisted for this bridge.
-
-            Absent (omitted from the response) means the user did not configure STP — the bridge runs without STP (legacy behavior).
-
-            true / false reflect the explicit configured value.
-
-            '
-          type:
-          - boolean
-          - 'null'
-        subnet:
-          description: Subnet mask (for static type)
-          type: string
-        type:
-          description: Network configuration type
-          type: string
-          enum:
-          - dhcp
-          - static
-          - none
-    v1ClusterPairMeta:
-      type: object
-      properties:
-        insecure:
-          description: Connect to palette insecurely
-          type: boolean
-        paletteEndpoint:
-          description: Palette endpoint to pair to
-          type: string
-        registrationToken:
-          description: Token used to authenticate pairing request to palette
-          type: string
-    v1Settings:
-      type: object
-      properties:
-        featureFlags:
-          type: object
-          additionalProperties:
-            type: boolean
-        installationMode:
-          type: string
-          enum:
-          - airgap
-          - connected
-        managementMode:
-          $ref: '#/components/schemas/v1ManagementMode'
-    v1ManagementInterfaceCandidate:
-      type: object
-      required:
-      - name
-      - type
-      properties:
-        ipAddress:
-          type: string
-        name:
-          type: string
-        status:
-          description: Link state (e.g. up, down, dormant, unknown)
-          type: string
-        type:
-          type: string
-          enum:
-          - nic
-          - bond
-          - vlan
-          - bridge
-    v1ClusterStatus:
-      description: ClusterStatus provides the status of the cluster.
-      properties:
-        agentVersion:
-          type: string
-        clusterConditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Condition'
-        clusterState:
-          $ref: '#/components/schemas/v1State'
-        clusterStateReason:
-          type: string
-        health:
-          $ref: '#/components/schemas/v1Health'
-        isRebootPending:
-          type: boolean
-          default: false
-        k8sVersion:
-          type: string
-        kubeconfig:
-          type: string
-        nodePools:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ClusterNodePoolStatus'
-        ntpServersApplied:
-          type: boolean
-          default: false
-          x-isnullable: false
-        services:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Service'
-        sshKeysApplied:
-          type: boolean
-          default: false
-          x-isnullable: false
-    v1ConnectionMode:
-      type: string
-      enum:
-      - connected
-      - airgap
-    v1HardwareSpec:
-      description: HardwareSpec is the specification of the hardware of the edge host.
-      type: object
-      properties:
-        archType:
-          $ref: '#/components/schemas/v1ArchType'
-        cpu:
-          $ref: '#/components/schemas/v1CPU'
-        disks:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Disk'
-        gpus:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1GPUDeviceSpec'
-        memory:
-          $ref: '#/components/schemas/v1Memory'
-        os:
-          $ref: '#/components/schemas/v1OS'
-    v1EdgeHostStatus:
-      description: EdgeHostStatus is the status of the edge host.
-      type: object
-      properties:
-        agentVersion:
-          type: string
-        configurationStatus:
-          $ref: '#/components/schemas/v1Configuration'
-        dns:
-          $ref: '#/components/schemas/v1DNS'
-        hostName:
-          type: string
-        isClusterPhase:
-          type: boolean
-          default: false
-        ntp:
-          $ref: '#/components/schemas/v1NTP'
-    v1EdgeNativeOverlayNetworkConfiguration:
-      type: object
-      properties:
-        cidr:
-          description: CIDR is the CIDR of the overlay network
-          type: string
-        enable:
-          description: Enable is a flag to enable overlay network
-          type: boolean
-          x-omitempty: false
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      type: string
-      format: date-time
-    v1State:
-      type: string
-      enum:
-      - Provisioning
-      - Running
-      - Deleting
-      - Error
-    v1ObjectReference:
-      description: ObjectReference contains enough information to let you inspect or modify the referred object.
-      type: object
-      properties:
-        apiVersion:
-          description: API version of the referent.
-          type: string
-        fieldPath:
-          description: 'If referring to a piece of an object instead of an entire object, this string should contain a valid JSON/Go field access statement, such as desiredState.manifest.containers[2]. For example, if the object reference is to a container within a pod, this would take on a value like: "spec.containers{name}" (where "name" refers to the name of the container that triggered the event) or if no container name is specified "spec.containers[2]" (container with index 2 in this pod). This syntax is chosen only to have some well-defined way of referencing a part of an object.'
-          type: string
-        kind:
-          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
-          type: string
-        name:
-          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-          type: string
-        namespace:
-          description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/'
-          type: string
-        resourceVersion:
-          description: 'Specific resourceVersion to which this reference is made, if any. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#concurrency-control-and-consistency'
-          type: string
-        uid:
-          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
-          type: string
-    v1AcceptedResponseWithMessage:
-      description: Accepted response with message
-      properties:
-        message:
-          type: string
-    v1Taint:
-      description: Taint
-      type: object
-      properties:
-        effect:
-          type: string
-          enum:
-          - NoSchedule
-          - PreferNoSchedule
-          - NoExecute
-        key:
-          description: The taint key to be applied to a node
-          type: string
-        timeAdded:
-          $ref: '#/components/schemas/v1Time'
-        value:
-          description: The taint value corresponding to the taint key.
-          type: string
-    v1ClusterNodePoolStatus:
-      type: object
-      properties:
-        nodes:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ClusterNodeStatus'
-        pool:
-          $ref: '#/components/schemas/v1ClusterNodePool'
-    v1VLAN:
-      description: VLAN interface configuration
-      type: object
-      properties:
-        bridgeName:
-          description: Name of the bridge this VLAN is a member of, empty if not part of any bridge
-          type: string
-        configStatus:
-          description: Detailed configuration status from networkctl
-          type: string
-        gateway:
-          description: Gateway IP address
-          type: string
-        ip:
-          description: IP address (required for static type)
-          type: string
-        mtu:
-          description: MTU for the VLAN interface
-          type: integer
-          format: int64
-        name:
-          description: VLAN interface name (e.g., ens32.100 or bond0.100)
-          type: string
-        nameservers:
-          description: DNS nameservers
-          type: array
-          items:
-            type: string
-        parentName:
-          description: Parent interface name (NIC or Bond)
-          type: string
-        parentType:
-          description: Type of parent interface
-          type: string
-          enum:
-          - nic
-          - bond
-        status:
-          description: Status of the VLAN interface (up/down/applying/unknown)
-          type: string
-        subnet:
-          description: Subnet mask (required for static type)
-          type: string
-        type:
-          description: Network configuration type
-          type: string
-          enum:
-          - dhcp
-          - static
-        vlanID:
-          description: VLAN ID (1-4094)
-          type: string
-    v1CloudInit:
-      type: object
-      properties:
-        hostName:
-          description: Host name (optional)
-          type: string
-        network:
-          description: Network configuration
-          $ref: '#/components/schemas/v1NetworkConfig'
-        registryCredentials:
-          $ref: '#/components/schemas/v1RegistryCredentials'
-        stages:
-          description: base64 encoded cloud init stages in yaml format
-          type: string
-        tags:
-          description: Key-value pairs of tags
-          type: object
-          additionalProperties:
-            type: object
-        v1Management:
-          $ref: '#/components/schemas/v1Management'
-    v1LinkToken:
-      type: object
-      properties:
-        interval:
-          description: The refresh interval for the link token in seconds
-          type: integer
-        remainingTime:
-          description: The remaining time for the current link token to be valid in seconds
-          type: integer
-        token:
-          description: The link token to link the edge host in base64 encoded format
-          type: string
-    v1AuditFilterObect:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          type: object
-          properties:
-            label:
-              type: string
-            value:
-              type: string
-    v1ConditionOrder:
-      properties:
-        order:
-          description: Order or sequence of the condition in comparison to all the conditions.
-          type: integer
-          format: int32
-        reason:
-          description: Unique, one word reason for the condition's last transition.
-          type: string
-        reasonLabel:
-          description: Readable label for the reason.
-          type: string
-        type:
-          description: Type of the condition.
-          type: string
-        typeLabel:
-          description: Readable label for the type.
-          type: string
-    v1EdgeHostConfigurations:
-      type: object
-      properties:
-        caCerts:
-          type: array
-          items:
-            type: string
-        httpProxy:
-          type: string
-        httpsProxy:
-          type: string
-        noProxy:
-          type: string
-    v1NetworkConfigOptions:
-      description: Valid configuration options for network components
-      type: object
-      properties:
-        bond:
-          $ref: '#/components/schemas/v1BondConfigOptions'
-    v1ClusterPatch:
-      type: object
-      properties:
-        clusterConfigPatches:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1HttpPatch'
-    v1NicSummary:
-      type: object
-      properties:
-        bondName:
-          description: Name of the bond this NIC is a member of, empty if not part of any bond
-          type: string
-        bridgeName:
-          description: Name of the bridge this NIC is a member of, empty if not part of any bridge
-          type: string
-        configStatus:
-          type: string
-        gateway:
-          type: string
-        ip:
-          type: string
-        isClusterNIC:
-          description: True if this NIC is used for cluster communication
-          type: boolean
-        mac:
-          type: string
-        mtu:
-          type: integer
-        name:
-          type: string
-        nameservers:
-          type: array
-          items:
-            type: string
-          x-omitempty: true
-        status:
-          type: string
-        subnet:
-          type: string
-        type:
-          type: string
-          enum:
-          - dhcp
-          - static
-        vlanID:
-          type: string
-    v1ClusterConfigArchiveDetails:
-      type: object
-      properties:
-        archiveUploadPath:
-          type: string
-        clusterProfileDetails:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ClusterProfileDetail'
-    v1LinkPeer:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/v1EdgeHostInfo'
-        contentSyncStatus:
-          description: content sync status for the edge host
-          type: string
-        health:
-          $ref: '#/components/schemas/v1Health'
-        id:
-          description: edge host id
-          type: string
-        ip:
-          description: edge host ip
-          type: string
-        localUIPort:
-          description: edge host local UI port
-          type: string
-        nodeRole:
-          $ref: '#/components/schemas/v1NodeRole'
-        overlayIP:
-          description: edge host overlay ip
-          type: string
-        role:
-          description: edge host role
-          type: string
-        status:
-          description: edge host status
-          type: string
-    v1ClusterPairDetailsResponse:
-      type: object
-      properties:
-        insecure:
-          description: Connect to palette insecurely
-          type: boolean
-        message:
-          description: any custom message
-          type: string
-        pairingUid:
-          description: unique pairing uid
-          type: string
-        paletteEndpoint:
-          description: Palette endpoint to pair to
-          type: string
-        registrationToken:
-          description: Token used to authenticate pairing request to palette
-          type: string
-        status:
-          description: current pairing status
-          type: string
-          enum:
-          - Pairing
-          - Paired
-          - Rejected
-          - Failed
-    v1BondRequest:
-      description: Bond interface request payload
-      type: object
-      required:
-      - members
-      properties:
-        gateway:
-          type: string
-        ip:
-          type: string
-        lacpTransmitRate:
-          type: string
-        members:
-          type: array
-          items:
-            type: string
-        miiMonitorSec:
-          type: string
-        mode:
-          type: string
-        mtu:
-          type: integer
-          format: int64
-        name:
-          type: string
-        nameservers:
-          type: array
-          items:
-            type: string
-        subnet:
-          type: string
-        transmitHashPolicy:
-          type: string
-        type:
-          type: string
-          enum:
-          - dhcp
-          - static
-          - none
-        vlanID:
-          type: string
-    v1HarborContentSyncStatus:
-      type: object
-      properties:
-        contentType:
-          type: string
-          enum:
-          - image
-          - artifact
-          - chart
-          - pack
-        creationTimestamp:
-          type: string
-          format: date-time
-        lastSyncTimestamp:
-          type: string
-          format: date-time
-        msg:
-          type: string
-        name:
-          type: string
-        size:
-          type: string
-        source:
-          type: string
-        status:
-          type: string
-          enum:
-          - pending
-          - completed
-          - failed
-        target:
-          type: string
-        version:
-          type: string
+            $ref: '#/components/schemas/v1ValidateVariableResponse'
     v1NetworkInterface:
       type: object
       required:
@@ -4771,65 +4609,128 @@ components:
           enum:
           - static
           - dhcp
-    v1NetworkConfig:
+    v1Health:
+      description: Health provides details about the resource health.
       type: object
       properties:
-        caCerts:
-          description: List of CA certificates (optional)
-          type: array
-          items:
-            type: string
-          x-omitempty: true
-        httpProxy:
+        reason:
           type: string
-        httpsProxy:
-          type: string
-        interfaces:
-          description: Mapping of interface names to their configuration
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/v1NetworkInterface'
-        noProxy:
-          type: string
-    v1ValidateVariables:
-      description: v1 Validate Variables is for validating the variables
-      type: object
-      properties:
-        archiveUploadPath:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1MetaData'
-        variables:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1ValidataVariable'
-    v1NetworkInterfaceUpdateRequest:
-      type: object
-      required:
-      - type
-      properties:
-        gateway:
-          type: string
-        ip:
-          type: string
-        mtu:
-          type: integer
-        name:
-          type: string
-        nameservers:
-          type: array
-          items:
-            type: string
-          x-omitempty: true
-        subnet:
-          type: string
-        type:
+        status:
           type: string
           enum:
-          - dhcp
-          - static
-        vlanID:
+          - Healthy
+          - Unhealthy
+    v1BondList:
+      description: Collection of bond interfaces
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Bond'
+    v1LinkToken:
+      type: object
+      properties:
+        interval:
+          description: The refresh interval for the link token in seconds
+          type: integer
+        remainingTime:
+          description: The remaining time for the current link token to be valid in seconds
+          type: integer
+        token:
+          description: The link token to link the edge host in base64 encoded format
           type: string
+    v1ChildCerts:
+      type: object
+      properties:
+        expirationDate:
+          type: string
+        issueDate:
+          type: string
+        name:
+          type: string
+        nodeName:
+          type: string
+    v1ClusterNodes:
+      type: object
+      properties:
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ClusterNode'
+    v1EdgeNativeClusterConfig:
+      description: EdgeNativeClusterConfig defines Edge Native Cluster specific Spec
+      type: object
+      properties:
+        controlPlaneEndpoint:
+          description: ControlPlaneEndpoint is the control plane endpoint, which can be an IP or FQDN
+          $ref: '#/components/schemas/v1EdgeNativeControlPlaneEndPoint'
+        isTwoNodeCluster:
+          description: Enable two-node high availability configuration (PostgreSQL-based instead of etcd)
+          type: boolean
+          default: false
+        ntpServers:
+          description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list
+          type: array
+          items:
+            type: string
+        overlayNetworkConfiguration:
+          description: OverlayNetworkConfiguration is the configuration for the overlay network
+          $ref: '#/components/schemas/v1EdgeNativeOverlayNetworkConfiguration'
+        sshKeys:
+          description: SSHKeys specifies a list of ssh authorized keys to access the vms as a 'spectro' user
+          type: array
+          items:
+            type: string
+            default: ''
+        staticIp:
+          description: StaticIP indicates if IP allocation type is static IP. DHCP is the default allocation type
+          type: boolean
+    v1Partition:
+      description: Partition is the specification of the partitions on the disk.
+      type: object
+      properties:
+        fileSystemType:
+          type: string
+        freeSpace:
+          type: integer
+          format: int32
+        mountPoint:
+          type: string
+        totalSpace:
+          type: integer
+          format: int32
+        usedSpace:
+          type: integer
+          format: int32
+    v1MetaData:
+      description: MetaData defines the metadata for the resource.
+      type: object
+      properties:
+        creationTimestamp:
+          description: CreationTimestamp is the timestamp when the resource was created.
+          $ref: '#/components/schemas/v1Time'
+        id:
+          description: ID is the unique identifier of the resource.
+          type: string
+        labels:
+          description: 'Labels are key-value pairs that can be used to organize and categorize resources.
+
+            '
+          type: object
+          additionalProperties:
+            type: string
+        lastModifiedTimestamp:
+          description: LastModifiedTimestamp is the timestamp when the resource was last modified.
+          $ref: '#/components/schemas/v1Time'
+        name:
+          description: Name is the name of the resource.
+          type: string
+        tags:
+          description: Tags is the list of tags associated with the resource.
+          type: object
+          additionalProperties:
+            type: object
     v1GPUDeviceSpec:
       type: object
       properties:
@@ -4871,6 +4772,132 @@ components:
         vendor:
           description: Vendor is the GPU vendor, for eg., NVIDIA or AMD
           type: string
+    v1EdgeHostConfigurations:
+      type: object
+      properties:
+        caCerts:
+          type: array
+          items:
+            type: string
+        httpProxy:
+          type: string
+        httpsProxy:
+          type: string
+        noProxy:
+          type: string
+    v1HarborContentDetails:
+      type: object
+      properties:
+        contentType:
+          type: string
+          enum:
+          - image
+          - artifact
+          - chart
+          - pack
+        dateAdded:
+          type: string
+          format: date-time
+        name:
+          type: string
+        size:
+          type: string
+        version:
+          type: string
+    v1EdgeNativeHost:
+      description: EdgeNativeHost is the underlying appliance
+      type: object
+      properties:
+        IsCandidateCaption:
+          description: Is Edge host nominated as candidate
+          type: boolean
+          default: false
+          x-omitempty: false
+        caCert:
+          description: CACert for TLS connections
+          type: string
+        hostAddress:
+          description: HostAddress is a FQDN or IP address of the Host
+          type: string
+          default: ''
+        hostName:
+          description: Qualified name of host
+          type: string
+          default: ''
+        hostUid:
+          description: HostUid is the ID of the EdgeHost
+          type: string
+          default: ''
+        networkInfo:
+          description: List network interfaces of an EH
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Nic'
+        nic:
+          description: Edge native nic. (Depricated)
+          $ref: '#/components/schemas/v1Nic'
+        nicName:
+          description: Deprecated. Edge host nic name
+          type: string
+        nodeInfo:
+          description: node information if edgehost is part of a cluster
+          x-omitempty: true
+          $ref: '#/components/schemas/v1NodeInfo'
+        staticIP:
+          description: Deprecated. Edge host static IP
+          type: string
+        tags:
+          description: tags set via userdata.
+          additionalProperties:
+            type: object
+          x-omitempty: true
+        twoNodeCandidatePriority:
+          description: Set the edgehost candidate priority as primary or secondary, if the edgehost is nominated as two node candidate
+          type: string
+          enum:
+          - primary
+          - secondary
+    v1LinkStatus:
+      type: object
+      properties:
+        errorMessage:
+          description: The error message in case of failure
+          type: string
+        peers:
+          description: The list of peers linked to the edge host
+          type: array
+          items:
+            $ref: '#/components/schemas/v1LinkPeer'
+        status:
+          description: The status of the link operation
+          type: string
+          enum:
+          - Pending
+          - InProgress
+          - Completed
+          - Failed
+    v1ArchType:
+      description: Architecture type of the edge host
+      type: string
+      default: amd64
+      enum:
+      - arm64
+      - amd64
+    v1Service:
+      description: ClusterService provides details about services in cluster.
+      type: object
+      properties:
+        host:
+          description: Host of the service.
+          type: string
+        name:
+          description: Name of the service.
+          type: string
+        ports:
+          description: Ports of the service.
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Port'
     v1NodeInfo:
       type: object
       properties:
@@ -4893,134 +4920,107 @@ components:
           type: string
         nodeState:
           type: string
-    v1HarborContentsSyncStatus:
-      type: object
+    v1NotFoundResponseWithMessage:
+      description: Resource not found with message
       properties:
-        errors:
-          type: object
-          additionalProperties:
-            type: string
-        pendingItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1HarborContentSyncStatus'
-        statusMessage:
-          type: string
-    v1EdgeNativeCloudConfigSpec:
-      description: EdgeNativeCloudConfigSpec defines the desired state of EdgeNativeCloudConfig
-      type: object
-      required:
-      - clusterConfig
-      - machinePoolConfig
-      properties:
-        clusterConfig:
-          $ref: '#/components/schemas/v1EdgeNativeClusterConfig'
-        machinePoolConfig:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1EdgeNativeMachinePoolConfig'
-    v1AuditSpec:
-      description: Audit specifications
-      properties:
-        actionType:
-          type: string
-          enum:
-          - create
-          - update
-          - delete
-          - action
-          - activity
-        actor:
-          $ref: '#/components/schemas/v1AuditActor'
         message:
-          description: Audit action message
           type: string
-        resource:
-          $ref: '#/components/schemas/v1AuditResourceReference'
-    v1ArchType:
-      description: Architecture type of the edge host
-      type: string
-      default: amd64
-      enum:
-      - arm64
-      - amd64
-    v1Management:
+    v1ClusterPairInfoResponse:
+      description: Cluster Pair Info received from palette
       type: object
-      required:
-      - type
       properties:
-        edgeHostToken:
-          description: Edge host token. Required for remote management
+        pairingUid:
+          description: unique pairing uid
           type: string
+    v1EdgeHostSpec:
+      description: EdgeHostSpec is the specification of the edge host.
+      type: object
+      properties:
+        connectionMode:
+          $ref: '#/components/schemas/v1ConnectionMode'
+        hardwareSpec:
+          $ref: '#/components/schemas/v1HardwareSpec'
+        hostInfo:
+          $ref: '#/components/schemas/v1HostInfo'
+        managementMode:
+          $ref: '#/components/schemas/v1ManagementMode'
+        networkInfo:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Nic'
+        nodeRole:
+          $ref: '#/components/schemas/v1NodeRole'
+        paletteEndpointURL:
+          type: string
+    v1ClusterPairMeta:
+      type: object
+      properties:
         insecure:
-          description: Whether to allow insecure connections (optional)
+          description: Connect to palette insecurely
           type: boolean
         paletteEndpoint:
-          description: URL for remote palette endpoint (optional)
+          description: Palette endpoint to pair to
           type: string
-        projectName:
-          description: Project name (optional)
+        registrationToken:
+          description: Token used to authenticate pairing request to palette
           type: string
-        type:
-          $ref: '#/components/schemas/v1ManagementMode'
-    v1BondList:
-      description: Collection of bond interfaces
+    v1BadRequest:
+      description: Bad request
+    v1AuditsList:
       type: object
+      required:
+      - items
       properties:
         items:
+          description: List of audit message
           type: array
+          uniqueItems: true
           items:
-            $ref: '#/components/schemas/v1Bond'
-    uploadResponse:
+            $ref: '#/components/schemas/v1Audit'
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+    v1RelatedObject:
+      description: The object for which the event is related
       type: object
       properties:
+        kind:
+          type: string
+          enum:
+          - spectrocluster
+          - machine
+          - cloudconfig
+          - clusterprofile
+          - pack
+        name:
+          type: string
+        uid:
+          type: string
+    v1ClusterPairDetailsResponse:
+      type: object
+      properties:
+        insecure:
+          description: Connect to palette insecurely
+          type: boolean
         message:
+          description: any custom message
           type: string
-        uploadPath:
+        pairingUid:
+          description: unique pairing uid
           type: string
-    v1BondConfigOptions:
-      description: Valid configuration options for bond interfaces
-      type: object
-      properties:
-        lacpTransmitRate:
-          description: Valid LACP transmit rates for 802.3ad mode
-          type: array
-          items:
-            type: string
-          example:
-          - slow
-          - fast
-        mode:
-          description: Valid bond modes
-          type: array
-          items:
-            type: string
-          example:
-          - balance-rr
-          - active-backup
-          - balance-xor
-          - broadcast
-          - 802.3ad
-          - balance-tlb
-          - balance-alb
-        transmitHashPolicy:
-          description: Valid transmit hash policies for bond modes that support it
-          type: array
-          items:
-            type: string
-          example:
-          - layer2
-          - layer3+4
-          - layer2+3
-          - encap2+3
-          - encap3+4
-    v1MachinePoolPatch:
-      type: object
-      properties:
-        machinePoolConfigPatches:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1HttpPatch'
+        paletteEndpoint:
+          description: Palette endpoint to pair to
+          type: string
+        registrationToken:
+          description: Token used to authenticate pairing request to palette
+          type: string
+        status:
+          description: current pairing status
+          type: string
+          enum:
+          - Pairing
+          - Paired
+          - Rejected
+          - Failed
   securitySchemes:
     Authorization:
       description: JWT authorization token obtained using /v1/users/default/login API

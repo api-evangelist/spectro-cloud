@@ -206,6 +206,63 @@ paths:
       - Notifications
 components:
   schemas:
+    v1NotificationEvent:
+      description: Describes notification event details
+      properties:
+        component:
+          description: Describes component of notification event
+          type: string
+        digest:
+          description: Describes notification event digest
+          type: string
+        message:
+          description: Describes a information for the notification event
+          type: string
+        meta:
+          additionalProperties:
+            type: string
+          description: Describes a event messages with meta digest as the key
+          type: object
+        type:
+          description: Describes notification event type
+          enum:
+          - NotificationPackSync
+          - NotificationClusterProfileSync
+          type: string
+      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1Notifications:
+      description: Describe a list of generated notifications
+      properties:
+        items:
+          description: Describe a list of generated notifications
+          items:
+            $ref: '#/components/schemas/v1Notification'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+          description: Describes the meta information about the notification lists
+      required:
+      - items
+      type: object
+    v1NotificationSource:
+      description: Describes origin info for the notification
+      properties:
+        component:
+          description: Describes component where notification originated
+          type: string
+      type: object
     v1Notification:
       description: Describes event notification and action definition
       properties:
@@ -229,30 +286,6 @@ components:
           - NotificationPackUpdate
           - NotificationPackRegistryUpdate
           - NotificationNone
-          type: string
-      type: object
-    v1NotificationEvent:
-      description: Describes notification event details
-      properties:
-        component:
-          description: Describes component of notification event
-          type: string
-        digest:
-          description: Describes notification event digest
-          type: string
-        message:
-          description: Describes a information for the notification event
-          type: string
-        meta:
-          additionalProperties:
-            type: string
-          description: Describes a event messages with meta digest as the key
-          type: object
-        type:
-          description: Describes notification event type
-          enum:
-          - NotificationPackSync
-          - NotificationClusterProfileSync
           type: string
       type: object
     v1ObjectMeta:
@@ -296,27 +329,25 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1Notifications:
-      description: Describe a list of generated notifications
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
       properties:
-        items:
-          description: Describe a list of generated notifications
-          items:
-            $ref: '#/components/schemas/v1Notification'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-          description: Describes the meta information about the notification lists
-      required:
-      - items
-      type: object
-    v1NotificationSource:
-      description: Describes origin info for the notification
-      properties:
-        component:
-          description: Describes component where notification originated
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
           type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
       type: object
     v1RelatedObject:
       description: Object for which the resource is related
@@ -336,13 +367,6 @@ components:
           type: string
         uid:
           type: string
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
       type: object
     v1NotificationAction:
       description: Describes actions for the notification
@@ -380,30 +404,6 @@ components:
           x-omitempty: false
         link:
           type: string
-      type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
       type: object
   securitySchemes:
     ApiKey:

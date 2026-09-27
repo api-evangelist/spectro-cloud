@@ -203,11 +203,55 @@ paths:
       - Metrics
 components:
   schemas:
+    v1MetricAggregation:
+      description: Aggregation values
+      properties:
+        avg:
+          type: number
+          x-omitempty: false
+        count:
+          format: int64
+          type: number
+          x-omitempty: false
+        max:
+          type: number
+          x-omitempty: false
+        min:
+          type: number
+          x-omitempty: false
+        sum:
+          type: number
+          x-omitempty: false
+      type: object
+    v1Metrics:
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/v1MetricAggregation'
+        kind:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/v1MetricPoint'
+          type: array
+          uniqueItems: true
+        unit:
+          type: string
+      type: object
     v1MetricTimeSeries:
       properties:
         items:
           items:
             $ref: '#/components/schemas/v1Metrics'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MetricTimeSeriesList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MetricsList'
           type: array
           uniqueItems: true
       required:
@@ -219,6 +263,16 @@ components:
           type: string
         uid:
           type: string
+      type: object
+    v1MetricsList:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1MetricMetadata'
+        metrics:
+          items:
+            $ref: '#/components/schemas/v1Metrics'
+          type: array
+          uniqueItems: true
       type: object
     v1MetricPoint:
       description: Metric Info
@@ -240,60 +294,6 @@ components:
         value:
           type: number
           x-omitempty: false
-      type: object
-    v1MetricAggregation:
-      description: Aggregation values
-      properties:
-        avg:
-          type: number
-          x-omitempty: false
-        count:
-          format: int64
-          type: number
-          x-omitempty: false
-        max:
-          type: number
-          x-omitempty: false
-        min:
-          type: number
-          x-omitempty: false
-        sum:
-          type: number
-          x-omitempty: false
-      type: object
-    v1MetricTimeSeriesList:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MetricsList'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1MetricsList:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1MetricMetadata'
-        metrics:
-          items:
-            $ref: '#/components/schemas/v1Metrics'
-          type: array
-          uniqueItems: true
-      type: object
-    v1Metrics:
-      properties:
-        aggregation:
-          $ref: '#/components/schemas/v1MetricAggregation'
-        kind:
-          type: string
-        points:
-          items:
-            $ref: '#/components/schemas/v1MetricPoint'
-          type: array
-          uniqueItems: true
-        unit:
-          type: string
       type: object
   securitySchemes:
     ApiKey:

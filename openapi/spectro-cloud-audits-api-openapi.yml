@@ -189,6 +189,10 @@ paths:
               $ref: '#/components/schemas/v1AuditMsgUpdate'
 components:
   schemas:
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
     v1AuditSpec:
       description: Audit specifications
       properties:
@@ -215,30 +219,19 @@ components:
         userMsg:
           description: Audit user message
           type: string
-    v1AuditMsgUpdate:
-      description: Audit user message update request payload
+    v1UserMeta:
       properties:
-        userMsg:
-          description: User message
-          maxLength: 255
-          minLength: 3
+        emailId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        org:
+          type: string
+        uid:
           type: string
       type: object
-    v1AuditActor:
-      description: Audit actor object
-      properties:
-        actorType:
-          enum:
-          - user
-          - system
-          - service
-          type: string
-        project:
-          $ref: '#/components/schemas/v1ProjectMeta'
-        serviceName:
-          type: string
-        user:
-          $ref: '#/components/schemas/v1UserMeta'
     v1AuditResourceReference:
       description: Audit resource reference object
       properties:
@@ -256,6 +249,69 @@ components:
           type: string
       required:
       - uid
+      type: object
+    v1Audit:
+      description: Audit response payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AuditSpec'
+      type: object
+    v1Audits:
+      properties:
+        items:
+          description: List of audit message
+          items:
+            $ref: '#/components/schemas/v1Audit'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1AuditActor:
+      description: Audit actor object
+      properties:
+        actorType:
+          enum:
+          - user
+          - system
+          - service
+          type: string
+        project:
+          $ref: '#/components/schemas/v1ProjectMeta'
+        serviceName:
+          type: string
+        user:
+          $ref: '#/components/schemas/v1UserMeta'
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1ProjectMeta:
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -298,6 +354,15 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1AuditMsgUpdate:
+      description: Audit user message update request payload
+      properties:
+        userMsg:
+          description: User message
+          maxLength: 255
+          minLength: 3
+          type: string
+      type: object
     v1AuditSysMsg:
       description: Audit system message
       properties:
@@ -307,71 +372,6 @@ components:
         contentMsg:
           description: Audit resource content message
           type: string
-      type: object
-    v1Audits:
-      properties:
-        items:
-          description: List of audit message
-          items:
-            $ref: '#/components/schemas/v1Audit'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1Audit:
-      description: Audit response payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AuditSpec'
-      type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1UserMeta:
-      properties:
-        emailId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        org:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ProjectMeta:
-      properties:
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
       type: object
   securitySchemes:
     ApiKey:
