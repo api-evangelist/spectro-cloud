@@ -160,10 +160,18 @@ components:
         sha:
           type: string
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
+    v1ServiceManifest:
+      description: Service manifest information
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ServiceManifestSpec'
+      type: object
     v1ServiceVersion:
       description: Service version information
       properties:
@@ -176,17 +184,24 @@ components:
         spec:
           $ref: '#/components/schemas/v1ServiceVersionSpec'
       type: object
-    v1ServiceManifest:
-      description: Service manifest information
+    v1ServiceManifestSpec:
       properties:
-        apiVersion:
+        manifests:
+          items:
+            $ref: '#/components/schemas/v1GitRepoFileContent'
+          type: array
+          uniqueItems: true
+        name:
           type: string
-        kind:
+        version:
           type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ServiceManifestSpec'
+      type: object
+    v1ServiceVersionSpec:
+      properties:
+        latestVersion:
+          $ref: '#/components/schemas/v1GitRepoFileContent'
+        name:
+          type: string
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -229,25 +244,10 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1ServiceManifestSpec:
-      properties:
-        manifests:
-          items:
-            $ref: '#/components/schemas/v1GitRepoFileContent'
-          type: array
-          uniqueItems: true
-        name:
-          type: string
-        version:
-          type: string
-      type: object
-    v1ServiceVersionSpec:
-      properties:
-        latestVersion:
-          $ref: '#/components/schemas/v1GitRepoFileContent'
-        name:
-          type: string
-      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

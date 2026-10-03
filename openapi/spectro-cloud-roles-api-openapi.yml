@@ -182,49 +182,6 @@ paths:
               $ref: '#/components/schemas/v1RoleClone'
 components:
   schemas:
-    v1RoleClone:
-      description: Role clone specifications
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1RoleCloneMetadata'
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1Roles:
-      description: Array of Roles
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1Role'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1RoleStatus:
-      description: Role status
-      properties:
-        isEnabled:
-          description: Specifies if role account is enabled/disabled
-          type: boolean
-          x-omitempty: false
-    v1Scope:
-      enum:
-      - system
-      - tenant
-      - project
-      - resource
-      type: string
     v1ListMetaData:
       description: ListMeta describes metadata for the resource listing
       properties:
@@ -249,6 +206,21 @@ components:
       description: Role clone metadata
       properties:
         name:
+          type: string
+    v1RoleSpec:
+      description: Role specifications
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        scope:
+          $ref: '#/components/schemas/v1Scope'
+        type:
+          enum:
+          - system
+          - user
           type: string
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -291,6 +263,24 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1RoleClone:
+      description: Role clone specifications
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1RoleCloneMetadata'
+    v1Roles:
+      description: Array of Roles
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1Role'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
     v1Role:
       description: Role
       properties:
@@ -300,21 +290,31 @@ components:
           $ref: '#/components/schemas/v1RoleSpec'
         status:
           $ref: '#/components/schemas/v1RoleStatus'
-    v1RoleSpec:
-      description: Role specifications
+    v1RoleStatus:
+      description: Role status
       properties:
-        permissions:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        scope:
-          $ref: '#/components/schemas/v1Scope'
-        type:
-          enum:
-          - system
-          - user
+        isEnabled:
+          description: Specifies if role account is enabled/disabled
+          type: boolean
+          x-omitempty: false
+    v1Scope:
+      enum:
+      - system
+      - tenant
+      - project
+      - resource
+      type: string
+    v1Uid:
+      properties:
+        uid:
           type: string
+      required:
+      - uid
+      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

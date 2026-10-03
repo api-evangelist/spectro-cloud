@@ -1173,79 +1173,217 @@ paths:
       - overlords
 components:
   schemas:
-    v1MaasCloudAccount:
+    v1ClusterProfileTemplate:
+      description: ClusterProfileTemplate contains details of a clusterprofile definition
       properties:
-        apiEndpoint:
+        cloudType:
           type: string
-        apiKey:
-          type: string
-        preferredSubnets:
-          description: list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet "10.11.130.0/24,10.10.10.0/24"
-          items:
-            type: string
-          type: array
-      required:
-      - apiKey
-      - apiEndpoint
-      type: object
-    v1OverlordVsphereAccountCreate:
-      properties:
-        account:
-          $ref: '#/components/schemas/v1VsphereCloudAccount'
-        name:
-          description: Name for the private gateway & cloud account
-          type: string
-        shareWithProjects:
-          type: boolean
-          x-omitempty: false
-    v1VsphereComputeCluster:
-      description: Vsphere compute cluster
-      properties:
-        datastores:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
         name:
           type: string
-        networks:
+        packServerRefs:
+          description: PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array
           items:
-            type: string
+            $ref: '#/components/schemas/v1ObjectReference'
           type: array
-          uniqueItems: true
-        resourcePools:
+        packServerSecret:
+          description: This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette
+          type: string
+        packs:
+          description: Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge
           items:
-            type: string
+            $ref: '#/components/schemas/v1PackRef'
           type: array
-          uniqueItems: true
+        profileVersion:
+          description: version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster
+          type: string
+        relatedObject:
+          $ref: '#/components/schemas/v1ObjectReference'
+          description: RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with
+        type:
+          type: string
+        uid:
+          type: string
+        version:
+          description: Deprecated. Use profileVersion
+          format: int32
+          type: integer
       type: object
-    v1MaasNetworkConfigEntity:
+    v1OverlordMaasCloudConfig:
       properties:
-        networkName:
-          description: NetworkName is the name of the network in which VMs are created/located.
+        clusterConfig:
+          $ref: '#/components/schemas/v1MaasClusterConfig'
+        clusterProfiles:
+          description: Cluster profiles pack configuration for private gateway cluster
+          items:
+            $ref: '#/components/schemas/v1SpectroClusterProfileEntity'
+          type: array
+        clusterSettings:
+          $ref: '#/components/schemas/v1ClusterConfigEntity'
+          description: clusterSettings is the generic configuration related to a cluster like OS patch, Rbac, Namespace allocation
+        machineConfig:
+          $ref: '#/components/schemas/v1MaasMachineConfigEntity'
+        size:
+          description: size of the pool, number of machines
+          format: int32
+          type: integer
+    v1RelatedObject:
+      description: Object for which the resource is related
+      properties:
+        kind:
+          enum:
+          - spectrocluster
+          - machine
+          - cloudconfig
+          - clusterprofile
+          - pack
+          - appprofile
+          - appdeployment
+          - edgehost
           type: string
-        parentPoolUid:
-          description: ParentPoolRef Uid to the ParentPool which allocates IPs for this IPPool
+        name:
           type: string
-        staticIp:
-          description: support dhcp or static IP, if false, use DHCP
-          type: boolean
-          x-omitempty: false
-      required:
-      - networkName
+        uid:
+          type: string
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
+    v1ClusterRbacSubjects:
+      description: Cluster role ref
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        type:
+          enum:
+          - User
+          - Group
+          - ServiceAccount
+          type: string
+      type: object
+    v1GpuConfig:
+      description: GPU configuration for resource allocation
+      properties:
+        limit:
+          description: GPU resource limit
+          format: int32
+          minimum: -1
+          type: integer
+          x-omitempty: false
+        provider:
+          default: nvidia
+          description: GPU provider (only nvidia is supported currently)
+          enum:
+          - nvidia
+          type: string
+    v1PackValuesEntity:
+      description: Pack values entity to refer the existing pack for the values override
+      properties:
+        manifests:
+          description: Pack manifests are additional content as part of the profile
+          items:
+            $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
+          type: array
+        name:
+          description: Pack name
+          type: string
+        tag:
+          description: Pack version tag
+          type: string
+        type:
+          $ref: '#/components/schemas/v1PackType'
+        values:
+          description: Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
+          type: string
+      required:
+      - name
+      type: object
+    v1CloudStackNetworkSpec:
+      description: Enhanced network configuration for CloudStack
+      properties:
+        gateway:
+          description: Gateway IP address for the network
+          type: string
+        id:
+          description: Network id
+          type: string
+        name:
+          description: Network name
+          type: string
+        netmask:
+          description: Network mask for the network
+          type: string
+        offering:
+          description: Network offering name
+          type: string
+        routingMode:
+          description: Routing mode for the network
+          type: string
+        type:
+          description: 'Network type: Isolated, Shared, etc.'
+          type: string
+        vpc:
+          $ref: '#/components/schemas/v1CloudStackVPCSpec'
+          description: VPC configuration (optional, for VPC networks)
+      type: object
+    v1VsphereComputeClusterResources:
+      description: Datacenter and its resources like datastore, resoucepool, folders
+      properties:
+        computecluster:
+          $ref: '#/components/schemas/v1VsphereComputeCluster'
+        datacenter:
+          description: Name of the datacenter
+          type: string
+      type: object
+    v1ClusterRbacBinding:
+      description: Cluster RBAC binding
+      properties:
+        namespace:
+          type: string
+        role:
+          $ref: '#/components/schemas/v1ClusterRoleRef'
+        subjects:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbacSubjects'
+          type: array
+          uniqueItems: true
+        type:
+          enum:
+          - RoleBinding
+          - ClusterRoleBinding
+          type: string
+      type: object
+    v1SpectroClusterHealthStatus:
+      description: Spectro cluster health status
+      properties:
+        agentVersion:
+          type: string
+        conditions:
+          items:
+            $ref: '#/components/schemas/v1SpectroClusterHealthCondition'
+          type: array
+          uniqueItems: true
+        lastHeartBeatTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        state:
+          type: string
+    v1PackType:
+      default: spectro
+      enum:
+      - spectro
+      - helm
+      - manifest
+      - oci
       type: string
-    v1ObjectMetaInputEntitySchema:
-      description: Resource metadata
+    v1ClusterNamespaceResourceAllocation:
+      description: Cluster namespace resource allocation
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-      required:
-      - metadata
-      type: object
+        cpuCores:
+          type: number
+          exclusiveMinimum: 0
+        gpuConfig:
+          $ref: '#/components/schemas/v1GpuConfig'
+        memoryMiB:
+          type: number
+          exclusiveMinimum: 0
     v1PackRef:
       description: PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it
       properties:
@@ -1324,77 +1462,52 @@ components:
       - layer
       - name
       type: object
-    v1IngressConfig:
-      description: Ingress configuration for exposing the virtual cluster's kube-apiserver
+    v1Uid:
       properties:
-        host:
-          type: string
-        port:
-          format: int64
-          type: integer
-    v1ObjectReference:
-      description: ObjectReference contains enough information to let you inspect or modify the referred object.
-      properties:
-        kind:
-          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
-          type: string
-        name:
-          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-          type: string
         uid:
-          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
           type: string
+      required:
+      - uid
       type: object
-    v1CloudStackClusterConfig:
-      description: Cluster level configuration for CloudStack cloud, same for all machinepools
+    v1OverlordVsphereAccountEntity:
       properties:
-        controlPlaneEndpoint:
-          description: Endpoint IP to be used for API server, should only be enabled for static CloudStack network
-          type: string
-        overrideClusterAPIConfig:
-          description: 'YAML override for CAPI properties at cluster level.
-
-            Overrides pack-level and Palette-managed values.
-
-            '
-          type: string
-        project:
-          $ref: '#/components/schemas/v1CloudStackResource'
-          description: Project name for the cluster (optional)
-        sshKeyName:
-          description: SSH Key name for accessing cluster nodes
-          type: string
-        syncWithCKS:
-          description: SyncWithCKS determines if an externalManaged CKS cluster should be created (optional)
+        account:
+          $ref: '#/components/schemas/v1VsphereCloudAccount'
+        shareWithProjects:
           type: boolean
-        zones:
-          description: Multiple zones for multi-AZ deployments. If only one zone is specified, it will be treated as single-zone deployment
-          items:
-            $ref: '#/components/schemas/v1CloudStackZoneSpec'
-          type: array
-      type: object
-    v1Pool:
-      description: Pool defines IP ranges or with CIDR for available IPs Gateway, Prefix and Nameserver if provided, will overwrite values in IPPool
+          x-omitempty: false
+    v1MaasMachineConfigEntity:
       properties:
-        end:
-          description: End is the last IP address that can be rendered. It is used as a validation that the rendered IP is in bound.
+        azs:
+          description: for control plane pool, this will be the failure domains for kcp
+          items:
+            type: string
+          type: array
+        instanceType:
+          $ref: '#/components/schemas/v1MaasInstanceType'
+        network:
+          $ref: '#/components/schemas/v1MaasNetworkConfigEntity'
+        resourcePool:
           type: string
-        gateway:
-          description: Gateway is the gateway ip address
-          type: string
-        nameserver:
-          $ref: '#/components/schemas/v1Nameserver'
-          description: Nameserver provide information for dns resolvation
-        prefix:
-          description: Prefix is the mask of the network as integer (max 128)
-          format: int32
-          type: integer
-        start:
-          description: Start is the first ip address that can be rendered
-          type: string
-        subnet:
-          description: 'Subnet is used to validate that the rendered IP is in bounds. eg: 192.168.0.0/24 If Start value is not given, start value is derived from the subnet ip incremented by 1 (start value is `192.168.0.1` for subnet `192.168.0.0/24`)'
-          type: string
+        useLxdVm:
+          description: 'useLxdVm enables on-demand LXD VM provisioning for this machine pool (workload clusters only).
+
+            When true, machines in this pool are created as MAAS LXD-backed VMs instead of bare metal.'
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1ClusterResourcesEntity:
+      properties:
+        namespaces:
+          items:
+            $ref: '#/components/schemas/v1ClusterNamespaceResourceInputEntity'
+          type: array
+          uniqueItems: true
+        rbacs:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbacInputEntity'
+          type: array
+          uniqueItems: true
       type: object
     v1CloudStackCloudAccount:
       description: CloudStack cloud account credentials
@@ -1419,184 +1532,6 @@ components:
       - apiKey
       - secretKey
       type: object
-    v1Overlord:
-      description: Overlord defintiion
-      properties:
-        kind:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1OverloadSpec'
-        status:
-          $ref: '#/components/schemas/v1OverloadStatus'
-      type: object
-    v1MaasClusterConfig:
-      description: Cluster level configuration for MAAS cloud and applicable for all the machine pools
-      properties:
-        domain:
-          description: Domain name of the cluster to be provisioned
-          type: string
-        enableLxdVm:
-          description: 'enableLxdVm controls MaaS KVM host enablement for the Host ControlPlane cluster only.
-
-            When true, Palette configures MaasMachineTemplate LXD settings so LXD initialization
-
-            is triggered on nodes of this (host) cluster. This does not affect workload clusters.
-
-            Cannot be enabled for clusters where useLxdVm is enabled for any of the control plane machine pool configs.'
-          type: boolean
-          x-omitempty: false
-        ntpServers:
-          description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.
-          items:
-            type: string
-          type: array
-        sshKeys:
-          description: SSH keys specifies a list of ssh authorized keys for the 'spectro' user
-          items:
-            type: string
-          type: array
-        staticIp:
-          description: whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name
-          type: boolean
-          x-omitempty: false
-      required:
-      - domain
-      type: object
-    v1CloudStackNetworkSpec:
-      description: Enhanced network configuration for CloudStack
-      properties:
-        gateway:
-          description: Gateway IP address for the network
-          type: string
-        id:
-          description: Network id
-          type: string
-        name:
-          description: Network name
-          type: string
-        netmask:
-          description: Network mask for the network
-          type: string
-        offering:
-          description: Network offering name
-          type: string
-        routingMode:
-          description: Routing mode for the network
-          type: string
-        type:
-          description: 'Network type: Isolated, Shared, etc.'
-          type: string
-        vpc:
-          $ref: '#/components/schemas/v1CloudStackVPCSpec'
-          description: VPC configuration (optional, for VPC networks)
-      type: object
-    v1OverlordCloudStackAccountEntity:
-      properties:
-        account:
-          $ref: '#/components/schemas/v1CloudStackCloudAccount'
-        shareWithProjects:
-          type: boolean
-          x-omitempty: false
-    v1VsphereDatacenter:
-      description: List of Datacenter with computeclusters
-      properties:
-        computeclusters:
-          description: List  of the VSphere compute clusters in datacenter
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        datacenter:
-          description: name of the datacenter of the VSphere
-          type: string
-        folders:
-          description: List  of the VSphere folders in datacenter
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-      type: object
-    v1ControlPlaneEndPoint:
-      properties:
-        ddnsSearchDomain:
-          description: DDNSSearchDomain is the search domain used for resolving IP addresses when the EndpointType is DDNS. This search domain is appended to the generated Hostname to obtain the complete DNS name for the endpoint. If Host is already a DDNS FQDN, DDNSSearchDomain is not required
-          type: string
-        host:
-          description: IP or FQDN(External/DDNS)
-          type: string
-        type:
-          description: VIP or External
-          enum:
-          - VIP
-          - External
-          - DDNS
-          type: string
-      type: object
-    v1ClusterProfileSpec:
-      description: ClusterProfileTemplate can be in draft mode, or published mode User only see the latest published template, and (or) the draft template User can apply either the draft version or the latest published version to a cluster when user create a draft version, just copy the Published template, increment the version, and keep changing the draft template without increment the draft version when user publish a draft, the version is fixed, and won't be able to make any modification on published template For each clusterprofile that has a published version, there will be a ClusterProfileArchive automatically created when user publish a draft, the published version will also be copied over to the corresponding ClusterProfileArchive it is just in case in the future for whatever reason we may want to expose earlier versions
-      properties:
-        draft:
-          $ref: '#/components/schemas/v1ClusterProfileTemplate'
-        published:
-          $ref: '#/components/schemas/v1ClusterProfileTemplate'
-        version:
-          type: string
-        versions:
-          description: Cluster profile's list of all the versions
-          items:
-            $ref: '#/components/schemas/v1ClusterProfileVersion'
-          type: array
-      type: object
-    v1ProjectResourceReference:
-      description: Project-scoped resource reference
-      properties:
-        kind:
-          description: Kind of the referenced resource
-          type: string
-        name:
-          description: Name of the referenced resource
-          type: string
-        projectUid:
-          description: UID of the Project that scopes this resource
-          type: string
-        uid:
-          description: UID of the referenced resource
-          type: string
-      type: object
-    v1PackSchema:
-      description: PackSchema defines the schema definition, hints for the pack values
-      properties:
-        format:
-          type: string
-          x-omitempty: false
-        hints:
-          items:
-            type: string
-          type: array
-          x-omitempty: false
-        listOptions:
-          items:
-            type: string
-          type: array
-          x-omitempty: false
-        name:
-          type: string
-          x-omitempty: false
-        readonly:
-          type: boolean
-          x-omitempty: false
-        regex:
-          type: string
-          x-omitempty: false
-        required:
-          type: boolean
-          x-omitempty: false
-        type:
-          type: string
-          x-omitempty: false
-      type: object
     v1OverlordMaasAccountCreate:
       properties:
         account:
@@ -1607,138 +1542,27 @@ components:
         shareWithProjects:
           type: boolean
           x-omitempty: false
-    v1MaasMachineConfigEntity:
+    v1VsphereComputeCluster:
+      description: Vsphere compute cluster
       properties:
-        azs:
-          description: for control plane pool, this will be the failure domains for kcp
+        datastores:
           items:
             type: string
           type: array
-        instanceType:
-          $ref: '#/components/schemas/v1MaasInstanceType'
-        network:
-          $ref: '#/components/schemas/v1MaasNetworkConfigEntity'
-        resourcePool:
-          type: string
-        useLxdVm:
-          description: 'useLxdVm enables on-demand LXD VM provisioning for this machine pool (workload clusters only).
-
-            When true, machines in this pool are created as MAAS LXD-backed VMs instead of bare metal.'
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1ObjectResReference:
-      description: Object resource reference
-      properties:
-        kind:
-          type: string
+          uniqueItems: true
         name:
           type: string
-        projectUid:
-          type: string
-        tenantUid:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ClusterNamespaceResourceAllocation:
-      description: Cluster namespace resource allocation
-      properties:
-        cpuCores:
-          type: number
-          exclusiveMinimum: 0
-        gpuConfig:
-          $ref: '#/components/schemas/v1GpuConfig'
-        memoryMiB:
-          type: number
-          exclusiveMinimum: 0
-    v1IpPoolStatus:
-      description: IP Pool status
-      properties:
-        allottedIps:
+        networks:
           items:
             type: string
           type: array
           uniqueItems: true
-        associatedClusters:
+        resourcePools:
           items:
             type: string
           type: array
           uniqueItems: true
-        availableIps:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        inUse:
-          type: boolean
-          x-omitempty: false
       type: object
-    v1ClusterProfileStatus:
-      description: ClusterProfileStatus defines the observed state of ClusterProfile
-      properties:
-        hasUserMacros:
-          description: If it is true then profile pack values has a reference to user defined macros
-          type: boolean
-          x-omitempty: false
-        inUseClusterTemplates:
-          items:
-            $ref: '#/components/schemas/v1ProjectResourceReference'
-          type: array
-        inUseClusterUids:
-          description: Deprecated. Use inUseClusters
-          items:
-            type: string
-          type: array
-        inUseClusters:
-          items:
-            $ref: '#/components/schemas/v1ObjectResReference'
-          type: array
-        isPublished:
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1OverlordMaasAccountEntity:
-      properties:
-        account:
-          $ref: '#/components/schemas/v1MaasCloudAccount'
-        shareWithProjects:
-          type: boolean
-          x-omitempty: false
-    v1SpectroClusterProfileEntity:
-      description: Cluster profile request payload
-      properties:
-        packValues:
-          description: Cluster profile packs array
-          items:
-            $ref: '#/components/schemas/v1PackValuesEntity'
-          type: array
-          uniqueItems: true
-        replaceWithProfile:
-          description: Cluster profile uid to be replaced with new profile
-          type: string
-        uid:
-          description: Cluster profile uid
-          type: string
-        variables:
-          items:
-            $ref: '#/components/schemas/v1SpectroClusterVariable'
-          type: array
-      type: object
-    v1ManifestRefUpdateEntity:
-      description: Manifest update request payload
-      properties:
-        content:
-          description: Manifest content in yaml
-          type: string
-        name:
-          description: Manifest name
-          type: string
-        uid:
-          description: Manifest uid
-          type: string
-      required:
-      - name
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -1780,50 +1604,271 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1InstanceConfig:
+    v1IngressConfig:
+      description: Ingress configuration for exposing the virtual cluster's kube-apiserver
       properties:
-        category:
+        host:
           type: string
-        cpuSet:
+        port:
           format: int64
           type: integer
-        diskGiB:
-          format: int64
-          type: integer
-        memoryMiB:
-          description: MemoryMiB is the size of a virtual machine's memory, in MiB
-          format: int64
-          type: integer
+    v1ObjectResReference:
+      description: Object resource reference
+      properties:
+        kind:
+          type: string
         name:
           type: string
-        numCPUs:
-          description: NumCPUs is the number of virtual processors in a virtual machine
+        projectUid:
+          type: string
+        tenantUid:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1OsPatchConfig:
+      properties:
+        onDemandPatchAfter:
+          $ref: '#/components/schemas/v1Time'
+          description: OnDemandPatchAfter is the desired time for one time on-demand patch
+        patchOnBoot:
+          description: PatchOnBoot indicates need to do patch when node first boot up, only once
+          type: boolean
+          x-omitempty: false
+        rebootIfRequired:
+          description: Reboot once the OS patch is applied
+          type: boolean
+          x-omitempty: false
+        schedule:
+          description: The schedule at which security patches will be applied to OS. Schedule should be in Cron format, see https://en.wikipedia.org/wiki/Cron for more help.
+          type: string
+      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1ClusterNamespaceSpec:
+      description: Cluster namespace spec
+      properties:
+        isRegex:
+          type: boolean
+          x-omitempty: false
+        relatedObject:
+          $ref: '#/components/schemas/v1RelatedObject'
+        resourceAllocation:
+          $ref: '#/components/schemas/v1ClusterNamespaceResourceAllocation'
+    v1HostClusterConfig:
+      properties:
+        clusterEndpoint:
+          $ref: '#/components/schemas/v1HostClusterEndpoint'
+          description: host cluster configuration
+        clusterGroup:
+          $ref: '#/components/schemas/v1ObjectReference'
+          description: cluster group reference
+        hostCluster:
+          $ref: '#/components/schemas/v1ObjectReference'
+          description: host cluster reference
+        isHostCluster:
+          default: false
+          description: is enabled as host cluster
+          type: boolean
+          x-omitempty: false
+    v1PackPreset:
+      description: PackPreset defines the preset pack values
+      properties:
+        add:
+          type: string
+          x-omitempty: false
+        displayName:
+          type: string
+          x-omitempty: false
+        group:
+          type: string
+          x-omitempty: false
+        name:
+          type: string
+          x-omitempty: false
+        remove:
+          items:
+            type: string
+          type: array
+          x-omitempty: false
+      type: object
+    v1LoadBalancerConfig:
+      description: Load balancer configuration for exposing the virtual cluster's kube-apiserver
+      properties:
+        externalIPs:
+          items:
+            type: string
+          type: array
+        externalTrafficPolicy:
+          type: string
+        loadBalancerSourceRanges:
+          items:
+            type: string
+          type: array
+    v1Overlords:
+      description: Array of Overlords
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1Overlord'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1ProjectResourceReference:
+      description: Project-scoped resource reference
+      properties:
+        kind:
+          description: Kind of the referenced resource
+          type: string
+        name:
+          description: Name of the referenced resource
+          type: string
+        projectUid:
+          description: UID of the Project that scopes this resource
+          type: string
+        uid:
+          description: UID of the referenced resource
+          type: string
+      type: object
+    v1OverlordVsphereAccountCreate:
+      properties:
+        account:
+          $ref: '#/components/schemas/v1VsphereCloudAccount'
+        name:
+          description: Name for the private gateway & cloud account
+          type: string
+        shareWithProjects:
+          type: boolean
+          x-omitempty: false
+    v1CloudStackClusterConfig:
+      description: Cluster level configuration for CloudStack cloud, same for all machinepools
+      properties:
+        controlPlaneEndpoint:
+          description: Endpoint IP to be used for API server, should only be enabled for static CloudStack network
+          type: string
+        overrideClusterAPIConfig:
+          description: 'YAML override for CAPI properties at cluster level.
+
+            Overrides pack-level and Palette-managed values.
+
+            '
+          type: string
+        project:
+          $ref: '#/components/schemas/v1CloudStackResource'
+          description: Project name for the cluster (optional)
+        sshKeyName:
+          description: SSH Key name for accessing cluster nodes
+          type: string
+        syncWithCKS:
+          description: SyncWithCKS determines if an externalManaged CKS cluster should be created (optional)
+          type: boolean
+        zones:
+          description: Multiple zones for multi-AZ deployments. If only one zone is specified, it will be treated as single-zone deployment
+          items:
+            $ref: '#/components/schemas/v1CloudStackZoneSpec'
+          type: array
+      type: object
+    v1OverlordCloudStackCloudConfig:
+      properties:
+        clusterConfig:
+          $ref: '#/components/schemas/v1CloudStackClusterConfig'
+        clusterProfiles:
+          description: Cluster profiles pack configuration for private gateway cluster
+          items:
+            $ref: '#/components/schemas/v1SpectroClusterProfileEntity'
+          type: array
+        clusterSettings:
+          $ref: '#/components/schemas/v1ClusterConfigEntity'
+          description: clusterSettings is the generic configuration related to a cluster like OS patch, Rbac, Namespace allocation
+        machineConfig:
+          $ref: '#/components/schemas/v1CloudStackMachineConfigEntity'
+        size:
+          description: size of the pool, number of machines
           format: int32
           type: integer
-    v1Uid:
+    v1Nameserver:
+      description: Nameserver define search domains and nameserver addresses
+      properties:
+        addresses:
+          items:
+            type: string
+          type: array
+        search:
+          items:
+            type: string
+          type: array
+      type: object
+    v1CloudStackZoneSpec:
+      description: CloudStack zone with its network configuration
+      properties:
+        id:
+          description: Zone Id
+          type: string
+        name:
+          description: Zone name
+          type: string
+        network:
+          $ref: '#/components/schemas/v1CloudStackNetworkSpec'
+          description: Network configuration specific to this zone
+      type: object
+    v1IpPoolStatus:
+      description: IP Pool status
+      properties:
+        allottedIps:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        associatedClusters:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        availableIps:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        inUse:
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1CloudStackVPCSpec:
+      description: VPC configuration for CloudStack networks
+      properties:
+        cidr:
+          description: CIDR block for the VPC
+          type: string
+        id:
+          description: VPC id
+          type: string
+        name:
+          description: VPC name
+          type: string
+        offering:
+          description: VPC offering name
+          type: string
+      type: object
+    v1HostClusterEndpoint:
+      properties:
+        config:
+          $ref: '#/components/schemas/v1HostClusterEndpointConfig'
+        type:
+          description: is enabled as host cluster
+          enum:
+          - Ingress
+          - LoadBalancer
+          type: string
+    v1ClusterProfileVersion:
+      description: Cluster profile with version
       properties:
         uid:
           type: string
-      required:
-      - uid
-      type: object
-    v1ClusterResourcesEntity:
-      properties:
-        namespaces:
-          items:
-            $ref: '#/components/schemas/v1ClusterNamespaceResourceInputEntity'
-          type: array
-          uniqueItems: true
-        rbacs:
-          items:
-            $ref: '#/components/schemas/v1ClusterRbacInputEntity'
-          type: array
-          uniqueItems: true
-      type: object
-    v1UpdatedMsg:
-      description: Update response with message
-      properties:
-        msg:
+        version:
           type: string
     v1SpectroClusterVariable:
       description: Variable with value which will be used within the packs of cluster profile
@@ -1853,19 +1898,205 @@ components:
           description: size of the pool, number of machines
           format: int32
           type: integer
-    v1CloudStackZoneSpec:
-      description: CloudStack zone with its network configuration
+    v1ObjectMetaInputEntitySchema:
+      description: Resource metadata
       properties:
-        id:
-          description: Zone Id
-          type: string
-        name:
-          description: Zone name
-          type: string
-        network:
-          $ref: '#/components/schemas/v1CloudStackNetworkSpec'
-          description: Network configuration specific to this zone
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+      required:
+      - metadata
       type: object
+    v1ObjectMetaUpdateEntity:
+      description: ObjectMeta update entity with uid as input
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1UpdatedMsg:
+      description: Update response with message
+      properties:
+        msg:
+          type: string
+    v1VsphereCloudAccount:
+      properties:
+        insecure:
+          description: Insecure is a flag that controls whether or not to validate the vSphere server's certificate.
+          type: boolean
+          x-omitempty: false
+        password:
+          type: string
+        username:
+          type: string
+        vcenterServer:
+          description: VcenterServer is the address of the vSphere endpoint
+          type: string
+      required:
+      - vcenterServer
+      - username
+      - password
+      type: object
+    v1PackSchema:
+      description: PackSchema defines the schema definition, hints for the pack values
+      properties:
+        format:
+          type: string
+          x-omitempty: false
+        hints:
+          items:
+            type: string
+          type: array
+          x-omitempty: false
+        listOptions:
+          items:
+            type: string
+          type: array
+          x-omitempty: false
+        name:
+          type: string
+          x-omitempty: false
+        readonly:
+          type: boolean
+          x-omitempty: false
+        regex:
+          type: string
+          x-omitempty: false
+        required:
+          type: boolean
+          x-omitempty: false
+        type:
+          type: string
+          x-omitempty: false
+      type: object
+    v1PairingCode:
+      description: Pairing code response
+      properties:
+        pairingCode:
+          type: string
+      type: object
+    v1ObjectMetaInputEntity:
+      description: ObjectMeta input entity for object creation
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1OverloadSpec:
+      description: Overload spec
+      properties:
+        cloudAccountUid:
+          type: string
+          x-omitempty: false
+        ipAddress:
+          type: string
+        ipPools:
+          items:
+            $ref: '#/components/schemas/v1IpPoolEntity'
+          type: array
+        isSelfHosted:
+          type: boolean
+        isSystem:
+          type: boolean
+        spectroClusterUid:
+          type: string
+          x-omitempty: false
+        tenantUid:
+          type: string
+      type: object
+    v1GeolocationLatlong:
+      description: Geolocation Latlong entity
+      properties:
+        latitude:
+          description: Latitude of a resource
+          format: float64
+          type: number
+          x-omitempty: false
+        longitude:
+          description: Longitude of a resource
+          format: float64
+          type: number
+          x-omitempty: false
+      type: object
+    v1ClusterRbacSpec:
+      description: Cluster RBAC spec
+      properties:
+        bindings:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbacBinding'
+          type: array
+          uniqueItems: true
+        isSystem:
+          default: false
+          description: Set to true when the binding is created automatically by the system, rather than manually by the user
+          type: boolean
+        relatedObject:
+          $ref: '#/components/schemas/v1RelatedObject'
+      type: object
+    v1IpPools:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1IpPoolEntity'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1OverlordMaasAccountEntity:
+      properties:
+        account:
+          $ref: '#/components/schemas/v1MaasCloudAccount'
+        shareWithProjects:
+          type: boolean
+          x-omitempty: false
+    v1ClusterProfileSpec:
+      description: ClusterProfileTemplate can be in draft mode, or published mode User only see the latest published template, and (or) the draft template User can apply either the draft version or the latest published version to a cluster when user create a draft version, just copy the Published template, increment the version, and keep changing the draft template without increment the draft version when user publish a draft, the version is fixed, and won't be able to make any modification on published template For each clusterprofile that has a published version, there will be a ClusterProfileArchive automatically created when user publish a draft, the published version will also be copied over to the corresponding ClusterProfileArchive it is just in case in the future for whatever reason we may want to expose earlier versions
+      properties:
+        draft:
+          $ref: '#/components/schemas/v1ClusterProfileTemplate'
+        published:
+          $ref: '#/components/schemas/v1ClusterProfileTemplate'
+        version:
+          type: string
+        versions:
+          description: Cluster profile's list of all the versions
+          items:
+            $ref: '#/components/schemas/v1ClusterProfileVersion'
+          type: array
+      type: object
+    v1LifecycleConfig:
+      properties:
+        pause:
+          default: false
+          description: enable pause life cycle config
+          type: boolean
+          x-omitempty: false
+    v1OverlordCloudStackAccountEntity:
+      properties:
+        account:
+          $ref: '#/components/schemas/v1CloudStackCloudAccount'
+        shareWithProjects:
+          type: boolean
+          x-omitempty: false
     v1CloudStackNetworkConfig:
       description: Network configuration for CloudStack instances
       properties:
@@ -1876,6 +2107,373 @@ components:
           description: Network name
           type: string
       type: object
+    v1DeletedMsg:
+      description: Deleted response with message
+      properties:
+        msg:
+          type: string
+    v1IpPoolInputEntity:
+      description: IP Pool input entity definition
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          properties:
+            pool:
+              $ref: '#/components/schemas/v1Pool'
+            restrictToSingleCluster:
+              description: if true, restricts this IP pool to be used by single cluster at any time
+              type: boolean
+          required:
+          - pool
+          type: object
+      type: object
+    v1MachineManagementConfig:
+      properties:
+        osPatchConfig:
+          $ref: '#/components/schemas/v1OsPatchConfig'
+          description: "OS patch config contains properties to patch node os with latest security packages. \nIf OsPatchConfig is not provided then node os will not be patched with latest security updates.\nNote: For edge based cluster (like edge-native type) the osPatchConfig is NOT applicable, the values will be ignored.\n"
+      type: object
+    v1OverlordMigrateEntity:
+      properties:
+        sourceUid:
+          type: string
+        targetUid:
+          type: string
+    v1MaasClusterConfig:
+      description: Cluster level configuration for MAAS cloud and applicable for all the machine pools
+      properties:
+        domain:
+          description: Domain name of the cluster to be provisioned
+          type: string
+        enableLxdVm:
+          description: 'enableLxdVm controls MaaS KVM host enablement for the Host ControlPlane cluster only.
+
+            When true, Palette configures MaasMachineTemplate LXD settings so LXD initialization
+
+            is triggered on nodes of this (host) cluster. This does not affect workload clusters.
+
+            Cannot be enabled for clusters where useLxdVm is enabled for any of the control plane machine pool configs.'
+          type: boolean
+          x-omitempty: false
+        ntpServers:
+          description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.
+          items:
+            type: string
+          type: array
+        sshKeys:
+          description: SSH keys specifies a list of ssh authorized keys for the 'spectro' user
+          items:
+            type: string
+          type: array
+        staticIp:
+          description: whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name
+          type: boolean
+          x-omitempty: false
+      required:
+      - domain
+      type: object
+    v1ClusterNotificationStatus:
+      description: Cluster notifications status
+      properties:
+        isAvailable:
+          type: boolean
+          x-omitempty: false
+        isTemplateVariableResolutionPending:
+          type: boolean
+          x-omitempty: false
+    v1InstanceConfig:
+      properties:
+        category:
+          type: string
+        cpuSet:
+          format: int64
+          type: integer
+        diskGiB:
+          format: int64
+          type: integer
+        memoryMiB:
+          description: MemoryMiB is the size of a virtual machine's memory, in MiB
+          format: int64
+          type: integer
+        name:
+          type: string
+        numCPUs:
+          description: NumCPUs is the number of virtual processors in a virtual machine
+          format: int32
+          type: integer
+    v1MaasInstanceType:
+      properties:
+        minCPU:
+          description: Minimum CPU cores
+          format: int32
+          type: integer
+        minDiskSizeInGB:
+          description: Minimum disk size in GiB
+          format: int32
+          type: integer
+        minMemInMB:
+          description: Minimum memory in MiB
+          format: int32
+          type: integer
+      type: object
+    v1CloudStackResource:
+      description: Cloud stack resource information
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    v1ClusterRoleRef:
+      description: Cluster role ref
+      properties:
+        kind:
+          enum:
+          - Role
+          - ClusterRole
+          type: string
+        name:
+          type: string
+      type: object
+    v1ClusterRbacInputEntity:
+      description: Cluster RBAC role binding defintion
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaUpdateEntity'
+        spec:
+          $ref: '#/components/schemas/v1ClusterRbacSpec'
+      type: object
+    v1CloudStackMachineConfigEntity:
+      properties:
+        instanceConfig:
+          $ref: '#/components/schemas/v1InstanceConfig'
+          description: Instance Configuration
+        networks:
+          description: Network configuration
+          items:
+            $ref: '#/components/schemas/v1CloudStackNetworkConfig'
+          type: array
+        offering:
+          $ref: '#/components/schemas/v1CloudStackResource'
+        template:
+          $ref: '#/components/schemas/v1CloudStackResource'
+          description: CloudStack template override for this machine pool. If not specified, inherits cluster default from profile.
+      required:
+      - offering
+      type: object
+    v1SpectroClusterProfileEntity:
+      description: Cluster profile request payload
+      properties:
+        packValues:
+          description: Cluster profile packs array
+          items:
+            $ref: '#/components/schemas/v1PackValuesEntity'
+          type: array
+          uniqueItems: true
+        replaceWithProfile:
+          description: Cluster profile uid to be replaced with new profile
+          type: string
+        uid:
+          description: Cluster profile uid
+          type: string
+        variables:
+          items:
+            $ref: '#/components/schemas/v1SpectroClusterVariable'
+          type: array
+      type: object
+    v1ControlPlaneEndPoint:
+      properties:
+        ddnsSearchDomain:
+          description: DDNSSearchDomain is the search domain used for resolving IP addresses when the EndpointType is DDNS. This search domain is appended to the generated Hostname to obtain the complete DNS name for the endpoint. If Host is already a DDNS FQDN, DDNSSearchDomain is not required
+          type: string
+        host:
+          description: IP or FQDN(External/DDNS)
+          type: string
+        type:
+          description: VIP or External
+          enum:
+          - VIP
+          - External
+          - DDNS
+          type: string
+      type: object
+    v1VsphereDatacenters:
+      description: List of Datacenters with computeclusters
+      properties:
+        items:
+          description: List of associated datacenters
+          items:
+            $ref: '#/components/schemas/v1VsphereDatacenter'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1VsphereOverlordClusterConfigEntity:
+      properties:
+        controlPlaneEndpoint:
+          $ref: '#/components/schemas/v1ControlPlaneEndPoint'
+          description: The optional control plane endpoint, which can be an IP or FQDN
+        ntpServers:
+          description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.
+          items:
+            type: string
+          type: array
+        placements:
+          description: Placements configuration Placements If defined, will replace default values defined in VsphereClusterConfig Array means one MachinePool can span across multiple vsphere compute cluster
+          items:
+            $ref: '#/components/schemas/v1VspherePlacementConfigEntity'
+          type: array
+        sshKeys:
+          description: SSHKeys specifies a list of ssh authorized keys for the 'spectro' user
+          items:
+            type: string
+          type: array
+        staticIp:
+          description: whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name
+          type: boolean
+      type: object
+    v1OverloadStatus:
+      description: Overload status
+      properties:
+        health:
+          $ref: '#/components/schemas/v1SpectroClusterHealthStatus'
+        isActive:
+          type: boolean
+          x-omitempty: false
+        isReady:
+          type: boolean
+          x-omitempty: false
+        kubectlCommands:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        notifications:
+          $ref: '#/components/schemas/v1ClusterNotificationStatus'
+        state:
+          type: string
+      type: object
+    v1ClusterDeploymentType:
+      description: 'Defines the deployment type for HyperShift-enabled clusters.
+
+        - ''hypershift'': Indicates a HyperShift management cluster that hosts control planes for other clusters.
+
+        - ''openshift'': Indicates an OpenShift cluster whose control plane is hosted on a HyperShift management cluster.'
+      enum:
+      - hypershift
+      - openshift
+      type: string
+    v1MaasNetworkConfigEntity:
+      properties:
+        networkName:
+          description: NetworkName is the name of the network in which VMs are created/located.
+          type: string
+        parentPoolUid:
+          description: ParentPoolRef Uid to the ParentPool which allocates IPs for this IPPool
+          type: string
+        staticIp:
+          description: support dhcp or static IP, if false, use DHCP
+          type: boolean
+          x-omitempty: false
+      required:
+      - networkName
+      type: object
+    v1Pool:
+      description: Pool defines IP ranges or with CIDR for available IPs Gateway, Prefix and Nameserver if provided, will overwrite values in IPPool
+      properties:
+        end:
+          description: End is the last IP address that can be rendered. It is used as a validation that the rendered IP is in bound.
+          type: string
+        gateway:
+          description: Gateway is the gateway ip address
+          type: string
+        nameserver:
+          $ref: '#/components/schemas/v1Nameserver'
+          description: Nameserver provide information for dns resolvation
+        prefix:
+          description: Prefix is the mask of the network as integer (max 128)
+          format: int32
+          type: integer
+        start:
+          description: Start is the first ip address that can be rendered
+          type: string
+        subnet:
+          description: 'Subnet is used to validate that the rendered IP is in bounds. eg: 192.168.0.0/24 If Start value is not given, start value is derived from the subnet ip incremented by 1 (start value is `192.168.0.1` for subnet `192.168.0.0/24`)'
+          type: string
+      type: object
+    v1ObjectReference:
+      description: ObjectReference contains enough information to let you inspect or modify the referred object.
+      properties:
+        kind:
+          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        name:
+          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+          type: string
+        uid:
+          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+          type: string
+      type: object
+    v1MaasCloudAccount:
+      properties:
+        apiEndpoint:
+          type: string
+        apiKey:
+          type: string
+        preferredSubnets:
+          description: list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet "10.11.130.0/24,10.10.10.0/24"
+          items:
+            type: string
+          type: array
+      required:
+      - apiKey
+      - apiEndpoint
+      type: object
+    v1Overlord:
+      description: Overlord defintiion
+      properties:
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1OverloadSpec'
+        status:
+          $ref: '#/components/schemas/v1OverloadStatus'
+      type: object
+    v1ClusterConfigEntity:
+      properties:
+        clusterMetaAttribute:
+          description: ClusterMetaAttribute can be used to set additional cluster metadata information.
+          type: string
+        controlPlaneHealthCheckTimeout:
+          type: string
+        hostClusterConfig:
+          $ref: '#/components/schemas/v1HostClusterConfig'
+        hyperShiftConfig:
+          $ref: '#/components/schemas/v1HyperShiftConfig'
+        lifecycleConfig:
+          $ref: '#/components/schemas/v1LifecycleConfig'
+        location:
+          $ref: '#/components/schemas/v1ClusterLocation'
+        machineManagementConfig:
+          $ref: '#/components/schemas/v1MachineManagementConfig'
+        resources:
+          $ref: '#/components/schemas/v1ClusterResourcesEntity'
+        timezone:
+          description: Timezone of a cluster in IANA standard format. It is mandatory field if cluster is deployed through template, else it is optional
+          type: string
+        updateWorkerPoolsInParallel:
+          type: boolean
+      type: object
+    v1HostClusterEndpointConfig:
+      properties:
+        ingressConfig:
+          $ref: '#/components/schemas/v1IngressConfig'
+        loadBalancerConfig:
+          $ref: '#/components/schemas/v1LoadBalancerConfig'
     v1ClusterLocation:
       description: Cluster location information
       properties:
@@ -1894,54 +2492,6 @@ components:
           description: region name for cluster location
           type: string
       type: object
-    v1IpPoolInputEntity:
-      description: IP Pool input entity definition
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          properties:
-            pool:
-              $ref: '#/components/schemas/v1Pool'
-            restrictToSingleCluster:
-              description: if true, restricts this IP pool to be used by single cluster at any time
-              type: boolean
-          required:
-          - pool
-          type: object
-      type: object
-    v1SpectroClusterHealthStatus:
-      description: Spectro cluster health status
-      properties:
-        agentVersion:
-          type: string
-        conditions:
-          items:
-            $ref: '#/components/schemas/v1SpectroClusterHealthCondition'
-          type: array
-          uniqueItems: true
-        lastHeartBeatTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        state:
-          type: string
-    v1OverlordMaasCloudConfig:
-      properties:
-        clusterConfig:
-          $ref: '#/components/schemas/v1MaasClusterConfig'
-        clusterProfiles:
-          description: Cluster profiles pack configuration for private gateway cluster
-          items:
-            $ref: '#/components/schemas/v1SpectroClusterProfileEntity'
-          type: array
-        clusterSettings:
-          $ref: '#/components/schemas/v1ClusterConfigEntity'
-          description: clusterSettings is the generic configuration related to a cluster like OS patch, Rbac, Namespace allocation
-        machineConfig:
-          $ref: '#/components/schemas/v1MaasMachineConfigEntity'
-        size:
-          description: size of the pool, number of machines
-          format: int32
-          type: integer
     v1VspherePlacementConfigEntity:
       description: 'Both ClusterConfig and MachinePoolConfig will have PlacementConfig MachinePoolconfig.Placements will overwrite values defined in ClusterConfig Currently the convention is: Datacenter / Folder / ImageTemplateFolder / Network should be defined at ClusterConfig Cluster / ResourcePool / Datastore / Network is defined at MachinePool ClusterConfig Network should only indicate use DHCP or not MachinePool Network should contain the actual network and IPPool'
       properties:
@@ -1973,271 +2523,34 @@ components:
           description: UID for this placement
           type: string
       type: object
-    v1ClusterProfileVersion:
-      description: Cluster profile with version
+    v1OverlordCloudStackAccountCreate:
       properties:
-        uid:
+        account:
+          $ref: '#/components/schemas/v1CloudStackCloudAccount'
+        name:
+          description: Name for the private gateway & cloud account
           type: string
-        version:
-          type: string
-    v1Overlords:
-      description: Array of Overlords
+        shareWithProjects:
+          type: boolean
+          x-omitempty: false
+    v1VsphereDatacenter:
+      description: List of Datacenter with computeclusters
       properties:
-        items:
+        computeclusters:
+          description: List  of the VSphere compute clusters in datacenter
           items:
-            $ref: '#/components/schemas/v1Overlord'
+            type: string
           type: array
           uniqueItems: true
-      required:
-      - items
-      type: object
-    v1ObjectMetaInputEntity:
-      description: ObjectMeta input entity for object creation
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-      type: object
-    v1VsphereComputeClusterResources:
-      description: Datacenter and its resources like datastore, resoucepool, folders
-      properties:
-        computecluster:
-          $ref: '#/components/schemas/v1VsphereComputeCluster'
         datacenter:
-          description: Name of the datacenter
+          description: name of the datacenter of the VSphere
           type: string
-      type: object
-    v1ClusterConfigEntity:
-      properties:
-        clusterMetaAttribute:
-          description: ClusterMetaAttribute can be used to set additional cluster metadata information.
-          type: string
-        controlPlaneHealthCheckTimeout:
-          type: string
-        hostClusterConfig:
-          $ref: '#/components/schemas/v1HostClusterConfig'
-        hyperShiftConfig:
-          $ref: '#/components/schemas/v1HyperShiftConfig'
-        lifecycleConfig:
-          $ref: '#/components/schemas/v1LifecycleConfig'
-        location:
-          $ref: '#/components/schemas/v1ClusterLocation'
-        machineManagementConfig:
-          $ref: '#/components/schemas/v1MachineManagementConfig'
-        resources:
-          $ref: '#/components/schemas/v1ClusterResourcesEntity'
-        timezone:
-          description: Timezone of a cluster in IANA standard format. It is mandatory field if cluster is deployed through template, else it is optional
-          type: string
-        updateWorkerPoolsInParallel:
-          type: boolean
-      type: object
-    v1PackValuesEntity:
-      description: Pack values entity to refer the existing pack for the values override
-      properties:
-        manifests:
-          description: Pack manifests are additional content as part of the profile
+        folders:
+          description: List  of the VSphere folders in datacenter
           items:
-            $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
-          type: array
-        name:
-          description: Pack name
-          type: string
-        tag:
-          description: Pack version tag
-          type: string
-        type:
-          $ref: '#/components/schemas/v1PackType'
-        values:
-          description: Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values
-          type: string
-      required:
-      - name
-      type: object
-    v1ObjectMetaUpdateEntity:
-      description: ObjectMeta update entity with uid as input
-      properties:
-        annotations:
-          additionalProperties:
             type: string
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1SpectroClusterHealthCondition:
-      description: Spectro cluster health condition
-      properties:
-        message:
-          type: string
-        relatedObject:
-          $ref: '#/components/schemas/v1RelatedObject'
-          type: object
-        type:
-          type: string
-    v1VsphereDatacenters:
-      description: List of Datacenters with computeclusters
-      properties:
-        items:
-          description: List of associated datacenters
-          items:
-            $ref: '#/components/schemas/v1VsphereDatacenter'
           type: array
           uniqueItems: true
-      required:
-      - items
-      type: object
-    v1HostClusterEndpointConfig:
-      properties:
-        ingressConfig:
-          $ref: '#/components/schemas/v1IngressConfig'
-        loadBalancerConfig:
-          $ref: '#/components/schemas/v1LoadBalancerConfig'
-    v1DeletedMsg:
-      description: Deleted response with message
-      properties:
-        msg:
-          type: string
-    v1MaasInstanceType:
-      properties:
-        minCPU:
-          description: Minimum CPU cores
-          format: int32
-          type: integer
-        minDiskSizeInGB:
-          description: Minimum disk size in GiB
-          format: int32
-          type: integer
-        minMemInMB:
-          description: Minimum memory in MiB
-          format: int32
-          type: integer
-      type: object
-    v1CloudStackMachineConfigEntity:
-      properties:
-        instanceConfig:
-          $ref: '#/components/schemas/v1InstanceConfig'
-          description: Instance Configuration
-        networks:
-          description: Network configuration
-          items:
-            $ref: '#/components/schemas/v1CloudStackNetworkConfig'
-          type: array
-        offering:
-          $ref: '#/components/schemas/v1CloudStackResource'
-        template:
-          $ref: '#/components/schemas/v1CloudStackResource'
-          description: CloudStack template override for this machine pool. If not specified, inherits cluster default from profile.
-      required:
-      - offering
-      type: object
-    v1OverlordMigrateEntity:
-      properties:
-        sourceUid:
-          type: string
-        targetUid:
-          type: string
-    v1ClusterRbacInputEntity:
-      description: Cluster RBAC role binding defintion
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaUpdateEntity'
-        spec:
-          $ref: '#/components/schemas/v1ClusterRbacSpec'
-      type: object
-    v1ClusterRbacSpec:
-      description: Cluster RBAC spec
-      properties:
-        bindings:
-          items:
-            $ref: '#/components/schemas/v1ClusterRbacBinding'
-          type: array
-          uniqueItems: true
-        isSystem:
-          default: false
-          description: Set to true when the binding is created automatically by the system, rather than manually by the user
-          type: boolean
-        relatedObject:
-          $ref: '#/components/schemas/v1RelatedObject'
-      type: object
-    v1PackPreset:
-      description: PackPreset defines the preset pack values
-      properties:
-        add:
-          type: string
-          x-omitempty: false
-        displayName:
-          type: string
-          x-omitempty: false
-        group:
-          type: string
-          x-omitempty: false
-        name:
-          type: string
-          x-omitempty: false
-        remove:
-          items:
-            type: string
-          type: array
-          x-omitempty: false
-      type: object
-    v1CloudStackResource:
-      description: Cloud stack resource information
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-    v1ClusterProfileTemplate:
-      description: ClusterProfileTemplate contains details of a clusterprofile definition
-      properties:
-        cloudType:
-          type: string
-        name:
-          type: string
-        packServerRefs:
-          description: PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array
-          items:
-            $ref: '#/components/schemas/v1ObjectReference'
-          type: array
-        packServerSecret:
-          description: This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette
-          type: string
-        packs:
-          description: Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge
-          items:
-            $ref: '#/components/schemas/v1PackRef'
-          type: array
-        profileVersion:
-          description: version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster
-          type: string
-        relatedObject:
-          $ref: '#/components/schemas/v1ObjectReference'
-          description: RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with
-        type:
-          type: string
-        uid:
-          type: string
-        version:
-          description: Deprecated. Use profileVersion
-          format: int32
-          type: integer
       type: object
     v1HyperShiftConfig:
       description: 'HyperShiftConfig defines the configuration for HyperShift and OpenShift clusters.
@@ -2258,151 +2571,21 @@ components:
             '
           type: string
       type: object
-    v1ClusterDeploymentType:
-      description: 'Defines the deployment type for HyperShift-enabled clusters.
-
-        - ''hypershift'': Indicates a HyperShift management cluster that hosts control planes for other clusters.
-
-        - ''openshift'': Indicates an OpenShift cluster whose control plane is hosted on a HyperShift management cluster.'
-      enum:
-      - hypershift
-      - openshift
-      type: string
-    v1ClusterRbacBinding:
-      description: Cluster RBAC binding
+    v1OverlordManifest:
+      description: overlord manifest
       properties:
-        namespace:
-          type: string
-        role:
-          $ref: '#/components/schemas/v1ClusterRoleRef'
-        subjects:
-          items:
-            $ref: '#/components/schemas/v1ClusterRbacSubjects'
-          type: array
-          uniqueItems: true
-        type:
-          enum:
-          - RoleBinding
-          - ClusterRoleBinding
+        manifest:
           type: string
       type: object
-    v1LoadBalancerConfig:
-      description: Load balancer configuration for exposing the virtual cluster's kube-apiserver
+    v1SpectroClusterHealthCondition:
+      description: Spectro cluster health condition
       properties:
-        externalIPs:
-          items:
-            type: string
-          type: array
-        externalTrafficPolicy:
+        message:
           type: string
-        loadBalancerSourceRanges:
-          items:
-            type: string
-          type: array
-    v1PackType:
-      default: spectro
-      enum:
-      - spectro
-      - helm
-      - manifest
-      - oci
-      type: string
-    v1VsphereOverlordClusterConfigEntity:
-      properties:
-        controlPlaneEndpoint:
-          $ref: '#/components/schemas/v1ControlPlaneEndPoint'
-          description: The optional control plane endpoint, which can be an IP or FQDN
-        ntpServers:
-          description: NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.
-          items:
-            type: string
-          type: array
-        placements:
-          description: Placements configuration Placements If defined, will replace default values defined in VsphereClusterConfig Array means one MachinePool can span across multiple vsphere compute cluster
-          items:
-            $ref: '#/components/schemas/v1VspherePlacementConfigEntity'
-          type: array
-        sshKeys:
-          description: SSHKeys specifies a list of ssh authorized keys for the 'spectro' user
-          items:
-            type: string
-          type: array
-        staticIp:
-          description: whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name
-          type: boolean
-      type: object
-    v1OverloadVsphereOva:
-      description: Overload ova details
-      properties:
-        location:
-          type: string
-          x-omitempty: false
-      type: object
-    v1OverloadSpec:
-      description: Overload spec
-      properties:
-        cloudAccountUid:
-          type: string
-          x-omitempty: false
-        ipAddress:
-          type: string
-        ipPools:
-          items:
-            $ref: '#/components/schemas/v1IpPoolEntity'
-          type: array
-        isSelfHosted:
-          type: boolean
-        isSystem:
-          type: boolean
-        spectroClusterUid:
-          type: string
-          x-omitempty: false
-        tenantUid:
-          type: string
-      type: object
-    v1OverlordCloudStackAccountCreate:
-      properties:
-        account:
-          $ref: '#/components/schemas/v1CloudStackCloudAccount'
-        name:
-          description: Name for the private gateway & cloud account
-          type: string
-        shareWithProjects:
-          type: boolean
-          x-omitempty: false
-    v1GeolocationLatlong:
-      description: Geolocation Latlong entity
-      properties:
-        latitude:
-          description: Latitude of a resource
-          format: float64
-          type: number
-          x-omitempty: false
-        longitude:
-          description: Longitude of a resource
-          format: float64
-          type: number
-          x-omitempty: false
-      type: object
-    v1ClusterNamespaceSpec:
-      description: Cluster namespace spec
-      properties:
-        isRegex:
-          type: boolean
-          x-omitempty: false
         relatedObject:
           $ref: '#/components/schemas/v1RelatedObject'
-        resourceAllocation:
-          $ref: '#/components/schemas/v1ClusterNamespaceResourceAllocation'
-    v1HostClusterEndpoint:
-      properties:
-        config:
-          $ref: '#/components/schemas/v1HostClusterEndpointConfig'
+          type: object
         type:
-          description: is enabled as host cluster
-          enum:
-          - Ingress
-          - LoadBalancer
           type: string
     v1IpPoolEntity:
       description: IP Pool entity definition
@@ -2423,256 +2606,6 @@ components:
         status:
           $ref: '#/components/schemas/v1IpPoolStatus'
       type: object
-    v1OverloadStatus:
-      description: Overload status
-      properties:
-        health:
-          $ref: '#/components/schemas/v1SpectroClusterHealthStatus'
-        isActive:
-          type: boolean
-          x-omitempty: false
-        isReady:
-          type: boolean
-          x-omitempty: false
-        kubectlCommands:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        notifications:
-          $ref: '#/components/schemas/v1ClusterNotificationStatus'
-        state:
-          type: string
-      type: object
-    v1VsphereCloudAccount:
-      properties:
-        insecure:
-          description: Insecure is a flag that controls whether or not to validate the vSphere server's certificate.
-          type: boolean
-          x-omitempty: false
-        password:
-          type: string
-        username:
-          type: string
-        vcenterServer:
-          description: VcenterServer is the address of the vSphere endpoint
-          type: string
-      required:
-      - vcenterServer
-      - username
-      - password
-      type: object
-    v1IpPools:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1IpPoolEntity'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1ClusterNamespaceResourceInputEntity:
-      description: Cluster Namespace resource definition
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaUpdateEntity'
-        spec:
-          $ref: '#/components/schemas/v1ClusterNamespaceSpec'
-      type: object
-    v1OverlordManifest:
-      description: overlord manifest
-      properties:
-        manifest:
-          type: string
-      type: object
-    v1OverlordVsphereAccountEntity:
-      properties:
-        account:
-          $ref: '#/components/schemas/v1VsphereCloudAccount'
-        shareWithProjects:
-          type: boolean
-          x-omitempty: false
-    v1CloudStackVPCSpec:
-      description: VPC configuration for CloudStack networks
-      properties:
-        cidr:
-          description: CIDR block for the VPC
-          type: string
-        id:
-          description: VPC id
-          type: string
-        name:
-          description: VPC name
-          type: string
-        offering:
-          description: VPC offering name
-          type: string
-      type: object
-    v1ClusterRbacSubjects:
-      description: Cluster role ref
-      properties:
-        name:
-          type: string
-        namespace:
-          type: string
-        type:
-          enum:
-          - User
-          - Group
-          - ServiceAccount
-          type: string
-      type: object
-    v1HostClusterConfig:
-      properties:
-        clusterEndpoint:
-          $ref: '#/components/schemas/v1HostClusterEndpoint'
-          description: host cluster configuration
-        clusterGroup:
-          $ref: '#/components/schemas/v1ObjectReference'
-          description: cluster group reference
-        hostCluster:
-          $ref: '#/components/schemas/v1ObjectReference'
-          description: host cluster reference
-        isHostCluster:
-          default: false
-          description: is enabled as host cluster
-          type: boolean
-          x-omitempty: false
-    v1GpuConfig:
-      description: GPU configuration for resource allocation
-      properties:
-        limit:
-          description: GPU resource limit
-          format: int32
-          minimum: -1
-          type: integer
-          x-omitempty: false
-        provider:
-          default: nvidia
-          description: GPU provider (only nvidia is supported currently)
-          enum:
-          - nvidia
-          type: string
-    v1OverlordCloudStackCloudConfig:
-      properties:
-        clusterConfig:
-          $ref: '#/components/schemas/v1CloudStackClusterConfig'
-        clusterProfiles:
-          description: Cluster profiles pack configuration for private gateway cluster
-          items:
-            $ref: '#/components/schemas/v1SpectroClusterProfileEntity'
-          type: array
-        clusterSettings:
-          $ref: '#/components/schemas/v1ClusterConfigEntity'
-          description: clusterSettings is the generic configuration related to a cluster like OS patch, Rbac, Namespace allocation
-        machineConfig:
-          $ref: '#/components/schemas/v1CloudStackMachineConfigEntity'
-        size:
-          description: size of the pool, number of machines
-          format: int32
-          type: integer
-    v1MachineManagementConfig:
-      properties:
-        osPatchConfig:
-          $ref: '#/components/schemas/v1OsPatchConfig'
-          description: "OS patch config contains properties to patch node os with latest security packages. \nIf OsPatchConfig is not provided then node os will not be patched with latest security updates.\nNote: For edge based cluster (like edge-native type) the osPatchConfig is NOT applicable, the values will be ignored.\n"
-      type: object
-    v1Nameserver:
-      description: Nameserver define search domains and nameserver addresses
-      properties:
-        addresses:
-          items:
-            type: string
-          type: array
-        search:
-          items:
-            type: string
-          type: array
-      type: object
-    v1ClusterNotificationStatus:
-      description: Cluster notifications status
-      properties:
-        isAvailable:
-          type: boolean
-          x-omitempty: false
-        isTemplateVariableResolutionPending:
-          type: boolean
-          x-omitempty: false
-    v1OsPatchConfig:
-      properties:
-        onDemandPatchAfter:
-          $ref: '#/components/schemas/v1Time'
-          description: OnDemandPatchAfter is the desired time for one time on-demand patch
-        patchOnBoot:
-          description: PatchOnBoot indicates need to do patch when node first boot up, only once
-          type: boolean
-          x-omitempty: false
-        rebootIfRequired:
-          description: Reboot once the OS patch is applied
-          type: boolean
-          x-omitempty: false
-        schedule:
-          description: The schedule at which security patches will be applied to OS. Schedule should be in Cron format, see https://en.wikipedia.org/wiki/Cron for more help.
-          type: string
-      type: object
-    v1LifecycleConfig:
-      properties:
-        pause:
-          default: false
-          description: enable pause life cycle config
-          type: boolean
-          x-omitempty: false
-    v1PairingCode:
-      description: Pairing code response
-      properties:
-        pairingCode:
-          type: string
-      type: object
-    v1VsphereNetworkConfigEntity:
-      properties:
-        networkName:
-          description: NetworkName is the name of the network in which VMs are created/located.
-          type: string
-        parentPoolUid:
-          description: ParentPoolRef Uid to the ParentPool which allocates IPs for this IPPool
-          type: string
-        staticIp:
-          description: support dhcp or static IP, if false, use DHCP
-          type: boolean
-      required:
-      - networkName
-      type: object
-    v1RelatedObject:
-      description: Object for which the resource is related
-      properties:
-        kind:
-          enum:
-          - spectrocluster
-          - machine
-          - cloudconfig
-          - clusterprofile
-          - pack
-          - appprofile
-          - appdeployment
-          - edgehost
-          type: string
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ClusterRoleRef:
-      description: Cluster role ref
-      properties:
-        kind:
-          enum:
-          - Role
-          - ClusterRole
-          type: string
-        name:
-          type: string
-      type: object
     v1ClusterProfile:
       description: ClusterProfile is the Schema for the clusterprofiles API
       properties:
@@ -2688,6 +2621,73 @@ components:
           $ref: '#/components/schemas/v1ClusterProfileSpec'
         status:
           $ref: '#/components/schemas/v1ClusterProfileStatus'
+      type: object
+    v1ClusterProfileStatus:
+      description: ClusterProfileStatus defines the observed state of ClusterProfile
+      properties:
+        hasUserMacros:
+          description: If it is true then profile pack values has a reference to user defined macros
+          type: boolean
+          x-omitempty: false
+        inUseClusterTemplates:
+          items:
+            $ref: '#/components/schemas/v1ProjectResourceReference'
+          type: array
+        inUseClusterUids:
+          description: Deprecated. Use inUseClusters
+          items:
+            type: string
+          type: array
+        inUseClusters:
+          items:
+            $ref: '#/components/schemas/v1ObjectResReference'
+          type: array
+        isPublished:
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1OverloadVsphereOva:
+      description: Overload ova details
+      properties:
+        location:
+          type: string
+          x-omitempty: false
+      type: object
+    v1ClusterNamespaceResourceInputEntity:
+      description: Cluster Namespace resource definition
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaUpdateEntity'
+        spec:
+          $ref: '#/components/schemas/v1ClusterNamespaceSpec'
+      type: object
+    v1ManifestRefUpdateEntity:
+      description: Manifest update request payload
+      properties:
+        content:
+          description: Manifest content in yaml
+          type: string
+        name:
+          description: Manifest name
+          type: string
+        uid:
+          description: Manifest uid
+          type: string
+      required:
+      - name
+    v1VsphereNetworkConfigEntity:
+      properties:
+        networkName:
+          description: NetworkName is the name of the network in which VMs are created/located.
+          type: string
+        parentPoolUid:
+          description: ParentPoolRef Uid to the ParentPool which allocates IPs for this IPPool
+          type: string
+        staticIp:
+          description: support dhcp or static IP, if false, use DHCP
+          type: boolean
+      required:
+      - networkName
       type: object
   securitySchemes:
     ApiKey:

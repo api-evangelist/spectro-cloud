@@ -318,31 +318,6 @@ paths:
               $ref: '#/components/schemas/v1PlanAddSlaCreditUpdate'
 components:
   schemas:
-    v1PlanAddFreeCreditUpdate:
-      description: Plan add free credit update entity
-      properties:
-        credit:
-          $ref: '#/components/schemas/v1PlanCreditEntity'
-    v1Plan:
-      description: Plan
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1PlanSpec'
-        status:
-          $ref: '#/components/schemas/v1PlanStatus'
-    v1PlanCost:
-      description: Plan Cost
-      properties:
-        discount:
-          format: float
-          type: number
-          x-omitempty: false
-        price:
-          format: float
-          type: number
-          x-omitempty: false
     v1PriceRange:
       description: tier price range
       properties:
@@ -360,82 +335,6 @@ components:
           type: number
         upToInfinity:
           type: boolean
-    v1PlanCreditUpdate:
-      description: Plan credit update entity
-      properties:
-        credit:
-          $ref: '#/components/schemas/v1PlanCreditEntity'
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
-      type: object
-    v1PlanStatus:
-      properties:
-        changeLogs:
-          items:
-            type: string
-          type: array
-      type: object
-    v1PlanRenewalUpdate:
-      description: Plan add renawal update entity
-      properties:
-        renewal:
-          $ref: '#/components/schemas/v1PlanRenewal'
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1PlanLimitUpdate:
-      description: Plan limit change update entity
-      properties:
-        planLimit:
-          $ref: '#/components/schemas/v1PlanLimit'
-      required:
-      - planLimit
-    v1PlanExpiry:
-      description: Plan expiry
-      properties:
-        expiry:
-          $ref: '#/components/schemas/v1Time'
-          description: plan expiry time
-      required:
-      - expiry
-    v1PlanLimitSpec:
-      description: Monthly Plan Limit spec
-      properties:
-        cpuCoreHours:
-          description: cpu cores hours
-          format: int64
-          type: integer
-          x-omitempty: false
-        overageLimitPercentage:
-          default: 25
-          description: overage limit in percentage
-          format: int8
-          type: integer
-          x-omitempty: false
-        warnLimitPercentage:
-          default: 90
-          description: warning limit in percentage
-          format: int8
-          type: integer
-          x-omitempty: false
     v1PlanRenewal:
       description: Plan Renewal
       properties:
@@ -457,32 +356,20 @@ components:
       - type
       - start
       - expiry
-    v1PlanSpec:
-      description: Plan specifications
+    v1PlanChangeUpdate:
+      description: Plan change update entity
       properties:
-        cost:
-          $ref: '#/components/schemas/v1PlanCost'
-        developerCredits:
-          $ref: '#/components/schemas/v1DeveloperCredit'
         expiry:
           $ref: '#/components/schemas/v1Time'
           description: plan expiry time
-        freeCredits:
-          items:
-            $ref: '#/components/schemas/v1PlanCredit'
-          type: array
+        isPaymentGateway:
+          type: boolean
         planLimit:
           $ref: '#/components/schemas/v1PlanLimit'
-        renewal:
-          $ref: '#/components/schemas/v1PlanRenewal'
-        slaCredits:
-          items:
-            $ref: '#/components/schemas/v1PlanCredit'
-          type: array
         start:
           $ref: '#/components/schemas/v1Time'
           description: plan start time
-        tierPricing:
+        tierPrice:
           $ref: '#/components/schemas/v1TierPrice'
         type:
           enum:
@@ -494,6 +381,105 @@ components:
       - type
       - start
       - expiry
+    v1PlanLimit:
+      description: Monthly Plan Limit
+      properties:
+        alloy:
+          $ref: '#/components/schemas/v1PlanLimitSpec'
+        isOnDemand:
+          description: is onDemand plan and has no limit
+          type: boolean
+          x-omitempty: false
+        isUnlimited:
+          description: is unlimited cpu core hours
+          type: boolean
+          x-omitempty: false
+        pure:
+          $ref: '#/components/schemas/v1PlanLimitSpec'
+    v1DeveloperCredit:
+      description: Credits allocated for each tenant/user
+      properties:
+        cpu:
+          description: cpu in cores
+          format: int32
+          type: number
+          x-omitempty: false
+        memoryGiB:
+          description: memory in GiB
+          format: int32
+          type: number
+          x-omitempty: false
+        storageGiB:
+          description: storage in GiB
+          format: int32
+          type: integer
+          x-omitempty: false
+        virtualClustersLimit:
+          description: number of active virtual clusters
+          format: int32
+          type: number
+          x-omitempty: false
+    v1PlanAddSlaCreditUpdate:
+      description: Plan add sla credit update entity
+      properties:
+        credit:
+          $ref: '#/components/schemas/v1PlanCreditEntity'
+    v1TierPrice:
+      description: tier price
+      properties:
+        alloyPricing:
+          items:
+            $ref: '#/components/schemas/v1PriceRange'
+          type: array
+          uniqueItems: true
+        purePricing:
+          items:
+            $ref: '#/components/schemas/v1PriceRange'
+          type: array
+          uniqueItems: true
+    v1PlanCreditEntity:
+      description: Plan Credit entity for create/update request
+      properties:
+        cpuCoreHours:
+          format: int64
+          type: number
+          x-omitempty: false
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+        name:
+          type: string
+        start:
+          $ref: '#/components/schemas/v1Time'
+        type:
+          enum:
+          - Pure
+          - Alloy
+          type: string
+      required:
+      - type
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1PlanCost:
+      description: Plan Cost
+      properties:
+        discount:
+          format: float
+          type: number
+          x-omitempty: false
+        price:
+          format: float
+          type: number
+          x-omitempty: false
+    v1PlanAddFreeCreditUpdate:
+      description: Plan add free credit update entity
+      properties:
+        credit:
+          $ref: '#/components/schemas/v1PlanCreditEntity'
     v1PlanCredit:
       description: Plan Credit
       properties:
@@ -518,8 +504,20 @@ components:
           type: string
       required:
       - type
-    v1PlanAddSlaCreditUpdate:
-      description: Plan add sla credit update entity
+    v1PlanRenewalUpdate:
+      description: Plan add renawal update entity
+      properties:
+        renewal:
+          $ref: '#/components/schemas/v1PlanRenewal'
+    v1PlanStatus:
+      properties:
+        changeLogs:
+          items:
+            type: string
+          type: array
+      type: object
+    v1PlanCreditUpdate:
+      description: Plan credit update entity
       properties:
         credit:
           $ref: '#/components/schemas/v1PlanCreditEntity'
@@ -564,57 +562,49 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1PlanCreditEntity:
-      description: Plan Credit entity for create/update request
+    v1PlanLimitSpec:
+      description: Monthly Plan Limit spec
       properties:
         cpuCoreHours:
+          description: cpu cores hours
           format: int64
-          type: number
+          type: integer
           x-omitempty: false
-        expiry:
-          $ref: '#/components/schemas/v1Time'
-        name:
-          type: string
-        start:
-          $ref: '#/components/schemas/v1Time'
-        type:
-          enum:
-          - Pure
-          - Alloy
-          type: string
-      required:
-      - type
-    v1PlanChangeUpdate:
-      description: Plan change update entity
+        overageLimitPercentage:
+          default: 25
+          description: overage limit in percentage
+          format: int8
+          type: integer
+          x-omitempty: false
+        warnLimitPercentage:
+          default: 90
+          description: warning limit in percentage
+          format: int8
+          type: integer
+          x-omitempty: false
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
       properties:
-        expiry:
-          $ref: '#/components/schemas/v1Time'
-          description: plan expiry time
-        isPaymentGateway:
-          type: boolean
-        planLimit:
-          $ref: '#/components/schemas/v1PlanLimit'
-        start:
-          $ref: '#/components/schemas/v1Time'
-          description: plan start time
-        tierPrice:
-          $ref: '#/components/schemas/v1TierPrice'
-        type:
-          enum:
-          - Trial
-          - MonthlyOnDemand
-          - AnnualSubscription
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
           type: string
-      required:
-      - type
-      - start
-      - expiry
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
       type: object
     v1Plans:
       description: Array of Plans
@@ -629,57 +619,67 @@ components:
       required:
       - items
       type: object
-    v1TierPrice:
-      description: tier price
+    v1PlanSpec:
+      description: Plan specifications
       properties:
-        alloyPricing:
+        cost:
+          $ref: '#/components/schemas/v1PlanCost'
+        developerCredits:
+          $ref: '#/components/schemas/v1DeveloperCredit'
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: plan expiry time
+        freeCredits:
           items:
-            $ref: '#/components/schemas/v1PriceRange'
+            $ref: '#/components/schemas/v1PlanCredit'
           type: array
-          uniqueItems: true
-        purePricing:
+        planLimit:
+          $ref: '#/components/schemas/v1PlanLimit'
+        renewal:
+          $ref: '#/components/schemas/v1PlanRenewal'
+        slaCredits:
           items:
-            $ref: '#/components/schemas/v1PriceRange'
+            $ref: '#/components/schemas/v1PlanCredit'
           type: array
-          uniqueItems: true
-    v1PlanLimit:
-      description: Monthly Plan Limit
+        start:
+          $ref: '#/components/schemas/v1Time'
+          description: plan start time
+        tierPricing:
+          $ref: '#/components/schemas/v1TierPrice'
+        type:
+          enum:
+          - Trial
+          - MonthlyOnDemand
+          - AnnualSubscription
+          type: string
+      required:
+      - type
+      - start
+      - expiry
+    v1Plan:
+      description: Plan
       properties:
-        alloy:
-          $ref: '#/components/schemas/v1PlanLimitSpec'
-        isOnDemand:
-          description: is onDemand plan and has no limit
-          type: boolean
-          x-omitempty: false
-        isUnlimited:
-          description: is unlimited cpu core hours
-          type: boolean
-          x-omitempty: false
-        pure:
-          $ref: '#/components/schemas/v1PlanLimitSpec'
-    v1DeveloperCredit:
-      description: Credits allocated for each tenant/user
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1PlanSpec'
+        status:
+          $ref: '#/components/schemas/v1PlanStatus'
+    v1PlanLimitUpdate:
+      description: Plan limit change update entity
       properties:
-        cpu:
-          description: cpu in cores
-          format: int32
-          type: number
-          x-omitempty: false
-        memoryGiB:
-          description: memory in GiB
-          format: int32
-          type: number
-          x-omitempty: false
-        storageGiB:
-          description: storage in GiB
-          format: int32
-          type: integer
-          x-omitempty: false
-        virtualClustersLimit:
-          description: number of active virtual clusters
-          format: int32
-          type: number
-          x-omitempty: false
+        planLimit:
+          $ref: '#/components/schemas/v1PlanLimit'
+      required:
+      - planLimit
+    v1PlanExpiry:
+      description: Plan expiry
+      properties:
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: plan expiry time
+      required:
+      - expiry
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

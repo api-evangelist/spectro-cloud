@@ -42,6 +42,19 @@ paths:
               $ref: '#/components/schemas/v1SpectroInstallerInputEntity'
 components:
   schemas:
+    v1SpectroInstallerInputEntity:
+      description: Spectro installer entity for create
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+      type: object
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
     v1ObjectMetaInputEntity:
       description: ObjectMeta input entity for object creation
       properties:
@@ -58,19 +71,6 @@ components:
         name:
           description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
           type: string
-      type: object
-    v1SpectroInstallerInputEntity:
-      description: Spectro installer entity for create
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
       type: object
   securitySchemes:
     ApiKey:

@@ -31,13 +31,13 @@ paths:
       - Authorization: []
 components:
   schemas:
-    apiError:
-      type: string
     v1Ping:
       type: object
       properties:
         msg:
           type: string
+    apiError:
+      type: string
   securitySchemes:
     Authorization:
       description: JWT authorization token obtained using /v1/users/default/login API

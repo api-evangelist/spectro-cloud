@@ -136,6 +136,12 @@ paths:
       - pcg
 components:
   schemas:
+    v1PairingCode:
+      description: Pairing code response
+      properties:
+        pairingCode:
+          type: string
+      type: object
     v1PcgSelfHostedParams:
       properties:
         cloudType:
@@ -154,12 +160,6 @@ components:
           type: string
       required:
       - kubectlCommands
-      type: object
-    v1PairingCode:
-      description: Pairing code response
-      properties:
-        pairingCode:
-          type: string
       type: object
   securitySchemes:
     ApiKey:

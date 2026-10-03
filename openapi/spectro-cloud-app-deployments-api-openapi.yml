@@ -385,15 +385,251 @@ paths:
       - App Deployments
 components:
   schemas:
-    v1ManifestData:
-      description: Published manifest object
+    v1AppDeploymentVirtualClusterTargetSpec:
+      description: Application deployment virtual cluster target spec
       properties:
-        content:
-          description: Manifest content in yaml
+        clusterUid:
+          description: Application deployment virtual cluster uid
           type: string
-        digest:
-          description: Manifest digest
+      required:
+      - clusterUid
+      type: object
+    v1AppDeploymentClusterGroupTargetSpec:
+      description: Application deployment cluster group target spec
+      properties:
+        clusterGroupUid:
+          description: Application deployment cluster group uid
           type: string
+        clusterLimits:
+          $ref: '#/components/schemas/v1AppDeploymentTargetClusterLimits'
+        clusterName:
+          description: Application deployment virtual cluster name
+          type: string
+      required:
+      - clusterName
+      - clusterGroupUid
+      type: object
+    v1AppTierType:
+      default: manifest
+      enum:
+      - manifest
+      - helm
+      - operator-instance
+      - container
+      type: string
+    v1LoadBalancerService:
+      properties:
+        host:
+          description: IP or Host from svc.Status.LoadBalancerStatus.Ingress
+          type: string
+        name:
+          description: name of the loadbalancer service
+          type: string
+        ports:
+          description: port this service exposed
+          items:
+            $ref: '#/components/schemas/v1ServicePort'
+          type: array
+      type: object
+    v1AppTierUpdateEntity:
+      description: Application tier update request payload
+      properties:
+        containerRegistryUid:
+          description: Application tier container registry uid
+          type: string
+        installOrder:
+          description: Application tier installation order
+          format: int32
+          type: integer
+        manifests:
+          description: Application tier manifests
+          items:
+            $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
+          type: array
+        name:
+          description: Application tier name
+          type: string
+        properties:
+          description: Application tier properties
+          items:
+            $ref: '#/components/schemas/v1AppTierPropertyEntity'
+          type: array
+        values:
+          description: Application tier configuration values in yaml format
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      type: object
+    v1AppDeploymentSpec:
+      description: Application deployment spec
+      properties:
+        config:
+          $ref: '#/components/schemas/v1AppDeploymentConfig'
+        profile:
+          $ref: '#/components/schemas/v1AppDeploymentProfile'
+      type: object
+    v1AppDeploymentVirtualClusterConfigEntity:
+      description: Application deployment virtual cluster config
+      properties:
+        targetSpec:
+          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterTargetSpec'
+      type: object
+    v1AppDeploymentTargetConfig:
+      description: Application deployment target config response
+      properties:
+        clusterRef:
+          $ref: '#/components/schemas/v1AppDeploymentClusterRef'
+        envRef:
+          $ref: '#/components/schemas/v1AppDeploymentTargetEnvironmentRef'
+      type: object
+    v1Manifest:
+      description: Manifest object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ManifestPublishedSpec'
+    v1AppTierSpec:
+      description: Application tier specs
+      properties:
+        containerRegistryUid:
+          description: Application tier container registry uid
+          type: string
+        installOrder:
+          description: Application tier installation order
+          format: int32
+          type: integer
+        manifests:
+          description: Application tier attached manifest content in yaml format
+          items:
+            $ref: '#/components/schemas/v1ObjectReference'
+          type: array
+        properties:
+          description: Application tier properties
+          items:
+            $ref: '#/components/schemas/v1AppTierProperty'
+          type: array
+        registryUid:
+          description: Registry uid
+          type: string
+        sourceAppTierUid:
+          description: Application tier source pack uid
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AppTierType'
+          description: Application tier type
+        values:
+          description: Application tier configuration values in yaml format
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      type: object
+    v1AppDeploymentStatus:
+      description: Application deployment status
+      properties:
+        appTiers:
+          description: Application deployment tiers
+          items:
+            $ref: '#/components/schemas/v1ClusterPackStatus'
+          type: array
+        lifecycleStatus:
+          $ref: '#/components/schemas/v1LifecycleStatus'
+        state:
+          description: Application deployment state [ "Pending", "Deploying", "Deployed", "Updating" ]
+          type: string
+      type: object
+    v1ClusterCondition:
+      properties:
+        lastProbeTime:
+          $ref: '#/components/schemas/v1Time'
+        lastTransitionTime:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: Human-readable message indicating details about last transition.
+          type: string
+        reason:
+          description: Unique, one-word, CamelCase reason for the condition's last transition.
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+      required:
+      - type
+      - status
+      type: object
+    v1AppDeploymentProfileVersions:
+      description: Application deployment profile versions
+      properties:
+        availableVersions:
+          description: Application deployment profile available versions
+          items:
+            $ref: '#/components/schemas/v1AppDeploymentProfileVersion'
+          type: array
+        latestVersions:
+          description: Application deployment profile latest versions
+          items:
+            $ref: '#/components/schemas/v1AppDeploymentProfileVersion'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/v1AppDeploymentProfileMeta'
+      type: object
+    v1ObjectReference:
+      description: ObjectReference contains enough information to let you inspect or modify the referred object.
+      properties:
+        kind:
+          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        name:
+          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+          type: string
+        uid:
+          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+          type: string
+      type: object
+    v1ClusterPackStatus:
+      properties:
+        condition:
+          $ref: '#/components/schemas/v1ClusterCondition'
+        endTime:
+          $ref: '#/components/schemas/v1Time'
+        manifests:
+          items:
+            $ref: '#/components/schemas/v1ClusterPackManifestStatus'
+          type: array
+        name:
+          type: string
+        profileUid:
+          type: string
+        services:
+          items:
+            $ref: '#/components/schemas/v1LoadBalancerService'
+          type: array
+        startTime:
+          $ref: '#/components/schemas/v1Time'
+        type:
+          type: string
+        version:
+          type: string
+      type: object
+    v1ClusterPackManifestStatus:
+      properties:
+        condition:
+          $ref: '#/components/schemas/v1ClusterCondition'
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1AppDeploymentVirtualClusterSpec:
+      description: Application deployment virtual cluster spec
+      properties:
+        config:
+          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterConfigEntity'
+        profile:
+          $ref: '#/components/schemas/v1AppDeploymentProfileEntity'
       type: object
     v1ObjectMetaInputEntity:
       description: ObjectMeta input entity for object creation
@@ -412,14 +648,23 @@ components:
           description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
           type: string
       type: object
-    v1AppTierManifests:
-      description: Application tier manifests data
+    v1ServicePort:
       properties:
-        manifests:
-          description: Application tier manifests array
-          items:
-            $ref: '#/components/schemas/v1Manifest'
-          type: array
+        port:
+          description: The port that will be exposed by this service.
+          format: int32
+          type: integer
+        protocol:
+          type: string
+      required:
+      - port
+      type: object
+    v1AppDeploymentClusterGroupConfigEntity:
+      description: Application deployment cluster group config
+      properties:
+        targetSpec:
+          $ref: '#/components/schemas/v1AppDeploymentClusterGroupTargetSpec'
+      type: object
     v1AppDeploymentProfileEntity:
       description: Application deployment profile request payload
       properties:
@@ -429,72 +674,34 @@ components:
       required:
       - appProfileUid
       type: object
-    v1LifecycleStatus:
+    v1Uid:
       properties:
-        msg:
-          description: error or success msg of lifecycle
-          type: string
-        status:
-          description: lifecycle status
-          enum:
-          - Pausing
-          - Paused
-          - Resuming
-          - Running
-          - Error
-          type: string
-    v1AppTierProperty:
-      description: Application tier property object
-      properties:
-        format:
-          description: Application tier property format
-          type: string
-        name:
-          description: Application tier property name
-          type: string
-        type:
-          description: Application tier property data type
-          type: string
-        value:
-          description: Application tier property value
-          type: string
-    v1AppTierPropertyEntity:
-      description: Application tier property object
-      properties:
-        name:
-          description: Application tier property name
-          type: string
-        value:
-          description: Application tier property value
-          type: string
-    v1ClusterPackManifestStatus:
-      properties:
-        condition:
-          $ref: '#/components/schemas/v1ClusterCondition'
-        name:
-          type: string
         uid:
           type: string
+      required:
+      - uid
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1AppDeploymentClusterGroupEntity:
-      description: Application deployment cluster group request payload
+    v1AppTierRef:
+      description: Application tier reference
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1AppDeploymentClusterGroupSpec'
+        name:
+          description: Application tier name
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AppTierType'
+        uid:
+          description: Application tier uid to uniquely identify the tier
+          type: string
+        version:
+          description: Application tier version
+          type: string
       type: object
-    v1Manifest:
-      description: Manifest object
+    v1AppDeploymentConfig:
+      description: Application deployment config response
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ManifestPublishedSpec'
+        target:
+          $ref: '#/components/schemas/v1AppDeploymentTargetConfig'
+      type: object
     v1AppDeploymentProfileSpec:
       description: Application deployment profile spec
       properties:
@@ -503,46 +710,77 @@ components:
         template:
           $ref: '#/components/schemas/v1AppProfileTemplateSpec'
       type: object
-    v1AppDeploymentTargetEnvironmentRef:
-      description: Application deployment target environment reference
+    v1ManifestPublishedSpec:
+      description: Manifest spec
       properties:
-        name:
-          description: Application deployment target resource name
+        published:
+          $ref: '#/components/schemas/v1ManifestData'
+    v1AppDeploymentProfileVersion:
+      description: Application deployment profile version
+      properties:
+        uid:
+          description: Application deployment profile uid
           type: string
-        type:
-          description: Application deployment target resource type [ "nestedCluster", "clusterGroup" ]
+        version:
+          description: Application deployment profile version
+          type: string
+      type: object
+    v1AppDeploymentProfile:
+      description: Application deployment profile
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1AppDeploymentProfileMeta'
+        template:
+          $ref: '#/components/schemas/v1AppProfileTemplate'
+      type: object
+    v1AppDeploymentClusterRef:
+      description: Application deployment cluster reference
+      properties:
+        deploymentClusterType:
+          description: Application deployment source cluster type[ "virtualCluster", "hostCluster" ]
+          enum:
+          - virtual
+          - host
+          type: string
+        name:
+          description: Application deployment cluster name
           type: string
         uid:
-          description: Application deployment target resource uid
+          description: Application deployment cluster uid
           type: string
       type: object
-    v1AppDeploymentClusterGroupSpec:
-      description: Application deployment cluster group spec
+    v1AppProfileTemplateSpec:
+      description: Application profile template specs
       properties:
-        config:
-          $ref: '#/components/schemas/v1AppDeploymentClusterGroupConfigEntity'
-        profile:
-          $ref: '#/components/schemas/v1AppDeploymentProfileEntity'
+        appTiers:
+          description: Application profile tiers
+          items:
+            $ref: '#/components/schemas/v1AppTier'
+          type: array
+          uniqueItems: true
+        registryRefs:
+          description: Application profile registries reference
+          items:
+            $ref: '#/components/schemas/v1ObjectReference'
+          type: array
       type: object
-    v1ManifestRefUpdateEntity:
-      description: Manifest update request payload
+    v1ManifestData:
+      description: Published manifest object
       properties:
         content:
           description: Manifest content in yaml
           type: string
-        name:
-          description: Manifest name
+        digest:
+          description: Manifest digest
           type: string
-        uid:
-          description: Manifest uid
-          type: string
-      required:
-      - name
-    v1AppDeploymentClusterGroupConfigEntity:
-      description: Application deployment cluster group config
+      type: object
+    v1AppDeploymentVirtualClusterEntity:
+      description: Application deployment virtual cluster request payload
       properties:
-        targetSpec:
-          $ref: '#/components/schemas/v1AppDeploymentClusterGroupTargetSpec'
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterSpec'
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -585,38 +823,78 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1ObjectReference:
-      description: ObjectReference contains enough information to let you inspect or modify the referred object.
-      properties:
-        kind:
-          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
-          type: string
-        name:
-          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-          type: string
-        uid:
-          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
-          type: string
-      type: object
     v1AppTier:
       properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
           $ref: '#/components/schemas/v1AppTierSpec'
-    v1AppDeploymentVirtualClusterConfigEntity:
-      description: Application deployment virtual cluster config
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1AppDeploymentClusterGroupEntity:
+      description: Application deployment cluster group request payload
       properties:
-        targetSpec:
-          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterTargetSpec'
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1AppDeploymentClusterGroupSpec'
       type: object
-    v1AppDeploymentSpec:
-      description: Application deployment spec
+    v1AppDeploymentClusterGroupSpec:
+      description: Application deployment cluster group spec
       properties:
         config:
-          $ref: '#/components/schemas/v1AppDeploymentConfig'
+          $ref: '#/components/schemas/v1AppDeploymentClusterGroupConfigEntity'
         profile:
-          $ref: '#/components/schemas/v1AppDeploymentProfile'
+          $ref: '#/components/schemas/v1AppDeploymentProfileEntity'
+      type: object
+    v1AppTierProperty:
+      description: Application tier property object
+      properties:
+        format:
+          description: Application tier property format
+          type: string
+        name:
+          description: Application tier property name
+          type: string
+        type:
+          description: Application tier property data type
+          type: string
+        value:
+          description: Application tier property value
+          type: string
+    v1AppTierManifests:
+      description: Application tier manifests data
+      properties:
+        manifests:
+          description: Application tier manifests array
+          items:
+            $ref: '#/components/schemas/v1Manifest'
+          type: array
+    v1AppTierPropertyEntity:
+      description: Application tier property object
+      properties:
+        name:
+          description: Application tier property name
+          type: string
+        value:
+          description: Application tier property value
+          type: string
+    v1AppProfileTemplate:
+      description: Application profile template information
+      properties:
+        appTiers:
+          description: Application profile tiers
+          items:
+            $ref: '#/components/schemas/v1AppTierRef'
+          type: array
+          uniqueItems: true
+        registryRefs:
+          description: Application profile registries reference
+          items:
+            $ref: '#/components/schemas/v1ObjectReference'
+          type: array
       type: object
     v1AppDeploymentTargetClusterLimits:
       description: Application deployment target cluster limits
@@ -633,251 +911,28 @@ components:
           description: Storage in GiB
           format: int32
           type: integer
-    v1AppDeploymentVirtualClusterSpec:
-      description: Application deployment virtual cluster spec
+    v1AppDeploymentTargetEnvironmentRef:
+      description: Application deployment target environment reference
       properties:
-        config:
-          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterConfigEntity'
-        profile:
-          $ref: '#/components/schemas/v1AppDeploymentProfileEntity'
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1ManifestPublishedSpec:
-      description: Manifest spec
-      properties:
-        published:
-          $ref: '#/components/schemas/v1ManifestData'
-    v1ClusterPackStatus:
-      properties:
-        condition:
-          $ref: '#/components/schemas/v1ClusterCondition'
-        endTime:
-          $ref: '#/components/schemas/v1Time'
-        manifests:
-          items:
-            $ref: '#/components/schemas/v1ClusterPackManifestStatus'
-          type: array
         name:
-          type: string
-        profileUid:
-          type: string
-        services:
-          items:
-            $ref: '#/components/schemas/v1LoadBalancerService'
-          type: array
-        startTime:
-          $ref: '#/components/schemas/v1Time'
-        type:
-          type: string
-        version:
-          type: string
-      type: object
-    v1AppDeploymentClusterRef:
-      description: Application deployment cluster reference
-      properties:
-        deploymentClusterType:
-          description: Application deployment source cluster type[ "virtualCluster", "hostCluster" ]
-          enum:
-          - virtual
-          - host
-          type: string
-        name:
-          description: Application deployment cluster name
-          type: string
-        uid:
-          description: Application deployment cluster uid
-          type: string
-      type: object
-    v1ServicePort:
-      properties:
-        port:
-          description: The port that will be exposed by this service.
-          format: int32
-          type: integer
-        protocol:
-          type: string
-      required:
-      - port
-      type: object
-    v1AppDeploymentClusterGroupTargetSpec:
-      description: Application deployment cluster group target spec
-      properties:
-        clusterGroupUid:
-          description: Application deployment cluster group uid
-          type: string
-        clusterLimits:
-          $ref: '#/components/schemas/v1AppDeploymentTargetClusterLimits'
-        clusterName:
-          description: Application deployment virtual cluster name
-          type: string
-      required:
-      - clusterName
-      - clusterGroupUid
-      type: object
-    v1AppTierSpec:
-      description: Application tier specs
-      properties:
-        containerRegistryUid:
-          description: Application tier container registry uid
-          type: string
-        installOrder:
-          description: Application tier installation order
-          format: int32
-          type: integer
-        manifests:
-          description: Application tier attached manifest content in yaml format
-          items:
-            $ref: '#/components/schemas/v1ObjectReference'
-          type: array
-        properties:
-          description: Application tier properties
-          items:
-            $ref: '#/components/schemas/v1AppTierProperty'
-          type: array
-        registryUid:
-          description: Registry uid
-          type: string
-        sourceAppTierUid:
-          description: Application tier source pack uid
+          description: Application deployment target resource name
           type: string
         type:
-          $ref: '#/components/schemas/v1AppTierType'
-          description: Application tier type
-        values:
-          description: Application tier configuration values in yaml format
+          description: Application deployment target resource type [ "nestedCluster", "clusterGroup" ]
           type: string
-        version:
-          description: Application tier version
+        uid:
+          description: Application deployment target resource uid
           type: string
       type: object
-    v1AppDeploymentProfileVersions:
-      description: Application deployment profile versions
+    v1AppDeployment:
+      description: Application deployment response
       properties:
-        availableVersions:
-          description: Application deployment profile available versions
-          items:
-            $ref: '#/components/schemas/v1AppDeploymentProfileVersion'
-          type: array
-        latestVersions:
-          description: Application deployment profile latest versions
-          items:
-            $ref: '#/components/schemas/v1AppDeploymentProfileVersion'
-          type: array
         metadata:
-          $ref: '#/components/schemas/v1AppDeploymentProfileMeta'
-      type: object
-    v1AppDeploymentVirtualClusterTargetSpec:
-      description: Application deployment virtual cluster target spec
-      properties:
-        clusterUid:
-          description: Application deployment virtual cluster uid
-          type: string
-      required:
-      - clusterUid
-      type: object
-    v1AppTierUpdateEntity:
-      description: Application tier update request payload
-      properties:
-        containerRegistryUid:
-          description: Application tier container registry uid
-          type: string
-        installOrder:
-          description: Application tier installation order
-          format: int32
-          type: integer
-        manifests:
-          description: Application tier manifests
-          items:
-            $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
-          type: array
-        name:
-          description: Application tier name
-          type: string
-        properties:
-          description: Application tier properties
-          items:
-            $ref: '#/components/schemas/v1AppTierPropertyEntity'
-          type: array
-        values:
-          description: Application tier configuration values in yaml format
-          type: string
-        version:
-          description: Application tier version
-          type: string
-      type: object
-    v1AppDeploymentTargetConfig:
-      description: Application deployment target config response
-      properties:
-        clusterRef:
-          $ref: '#/components/schemas/v1AppDeploymentClusterRef'
-        envRef:
-          $ref: '#/components/schemas/v1AppDeploymentTargetEnvironmentRef'
-      type: object
-    v1AppDeploymentStatus:
-      description: Application deployment status
-      properties:
-        appTiers:
-          description: Application deployment tiers
-          items:
-            $ref: '#/components/schemas/v1ClusterPackStatus'
-          type: array
-        lifecycleStatus:
-          $ref: '#/components/schemas/v1LifecycleStatus'
-        state:
-          description: Application deployment state [ "Pending", "Deploying", "Deployed", "Updating" ]
-          type: string
-      type: object
-    v1AppProfileTemplateSpec:
-      description: Application profile template specs
-      properties:
-        appTiers:
-          description: Application profile tiers
-          items:
-            $ref: '#/components/schemas/v1AppTier'
-          type: array
-          uniqueItems: true
-        registryRefs:
-          description: Application profile registries reference
-          items:
-            $ref: '#/components/schemas/v1ObjectReference'
-          type: array
-      type: object
-    v1AppProfileTemplate:
-      description: Application profile template information
-      properties:
-        appTiers:
-          description: Application profile tiers
-          items:
-            $ref: '#/components/schemas/v1AppTierRef'
-          type: array
-          uniqueItems: true
-        registryRefs:
-          description: Application profile registries reference
-          items:
-            $ref: '#/components/schemas/v1ObjectReference'
-          type: array
-      type: object
-    v1AppDeploymentProfileVersion:
-      description: Application deployment profile version
-      properties:
-        uid:
-          description: Application deployment profile uid
-          type: string
-        version:
-          description: Application deployment profile version
-          type: string
-      type: object
-    v1AppDeploymentConfig:
-      description: Application deployment config response
-      properties:
-        target:
-          $ref: '#/components/schemas/v1AppDeploymentTargetConfig'
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AppDeploymentSpec'
+        status:
+          $ref: '#/components/schemas/v1AppDeploymentStatus'
       type: object
     v1AppDeploymentProfileMeta:
       description: Application deployment profile metadata
@@ -892,89 +947,34 @@ components:
           description: Application deployment profile version
           type: string
       type: object
-    v1AppDeployment:
-      description: Application deployment response
+    v1ManifestRefUpdateEntity:
+      description: Manifest update request payload
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AppDeploymentSpec'
-        status:
-          $ref: '#/components/schemas/v1AppDeploymentStatus'
-      type: object
-    v1AppDeploymentProfile:
-      description: Application deployment profile
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1AppDeploymentProfileMeta'
-        template:
-          $ref: '#/components/schemas/v1AppProfileTemplate'
-      type: object
-    v1LoadBalancerService:
-      properties:
-        host:
-          description: IP or Host from svc.Status.LoadBalancerStatus.Ingress
+        content:
+          description: Manifest content in yaml
           type: string
         name:
-          description: name of the loadbalancer service
+          description: Manifest name
           type: string
-        ports:
-          description: port this service exposed
-          items:
-            $ref: '#/components/schemas/v1ServicePort'
-          type: array
-      type: object
-    v1AppTierType:
-      default: manifest
-      enum:
-      - manifest
-      - helm
-      - operator-instance
-      - container
-      type: string
-    v1ClusterCondition:
-      properties:
-        lastProbeTime:
-          $ref: '#/components/schemas/v1Time'
-        lastTransitionTime:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          description: Human-readable message indicating details about last transition.
-          type: string
-        reason:
-          description: Unique, one-word, CamelCase reason for the condition's last transition.
-          type: string
-        status:
-          type: string
-        type:
+        uid:
+          description: Manifest uid
           type: string
       required:
-      - type
-      - status
-      type: object
-    v1AppTierRef:
-      description: Application tier reference
+      - name
+    v1LifecycleStatus:
       properties:
-        name:
-          description: Application tier name
+        msg:
+          description: error or success msg of lifecycle
           type: string
-        type:
-          $ref: '#/components/schemas/v1AppTierType'
-        uid:
-          description: Application tier uid to uniquely identify the tier
+        status:
+          description: lifecycle status
+          enum:
+          - Pausing
+          - Paused
+          - Resuming
+          - Running
+          - Error
           type: string
-        version:
-          description: Application tier version
-          type: string
-      type: object
-    v1AppDeploymentVirtualClusterEntity:
-      description: Application deployment virtual cluster request payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1AppDeploymentVirtualClusterSpec'
-      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

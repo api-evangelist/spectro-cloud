@@ -178,6 +178,26 @@ paths:
               $ref: '#/components/schemas/v1TagFilter'
 components:
   schemas:
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
     v1FiltersMetadata:
       properties:
         items:
@@ -188,16 +208,15 @@ components:
       required:
       - items
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1Uid:
+    v1FilterMetadata:
+      description: Filter metadata object
       properties:
+        filterType:
+          type: string
+        name:
+          type: string
         uid:
           type: string
-      required:
-      - uid
       type: object
     v1FiltersSummary:
       properties:
@@ -211,41 +230,6 @@ components:
       required:
       - items
       type: object
-    v1TagFilterSpec:
-      description: Filter create spec
-      properties:
-        filterGroup:
-          $ref: '#/components/schemas/v1TagFilterGroup'
-      type: object
-    v1TagFilter:
-      description: Tag Filter create spec
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1TagFilterSpec'
-      type: object
-    v1ObjectMetaInputEntity:
-      description: ObjectMeta input entity for object creation
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-      type: object
-    v1FilterSummarySpec:
-      properties:
-        filterType:
-          type: string
     v1FilterSummary:
       description: Filter summary object
       properties:
@@ -271,35 +255,56 @@ components:
       enum:
       - eq
       type: string
-    v1TagFilterGroup:
+    v1ObjectMetaInputEntity:
+      description: ObjectMeta input entity for object creation
       properties:
-        conjunction:
-          $ref: '#/components/schemas/v1SearchFilterConjunctionOperator'
-        filters:
-          items:
-            $ref: '#/components/schemas/v1TagFilterItem'
-          type: array
-          uniqueItems: true
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
           type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
       type: object
+    v1TagFilterSummary:
+      description: Filter summary object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1TagFilterSpec'
+      type: object
+    v1SearchFilterConjunctionOperator:
+      enum:
+      - and
+      - or
+      type:
+      - string
+      - 'null'
+    v1TagFilterSpec:
+      description: Filter create spec
+      properties:
+        filterGroup:
+          $ref: '#/components/schemas/v1TagFilterGroup'
+      type: object
+    v1TagFilter:
+      description: Tag Filter create spec
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1TagFilterSpec'
+      type: object
+    v1FilterSummarySpec:
+      properties:
+        filterType:
+          type: string
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -341,31 +346,26 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1FilterMetadata:
-      description: Filter metadata object
+    v1Uid:
       properties:
-        filterType:
-          type: string
-        name:
-          type: string
         uid:
           type: string
+      required:
+      - uid
       type: object
-    v1SearchFilterConjunctionOperator:
-      enum:
-      - and
-      - or
-      type:
-      - string
-      - 'null'
-    v1TagFilterSummary:
-      description: Filter summary object
+    v1TagFilterGroup:
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1TagFilterSpec'
-      type: object
+        conjunction:
+          $ref: '#/components/schemas/v1SearchFilterConjunctionOperator'
+        filters:
+          items:
+            $ref: '#/components/schemas/v1TagFilterItem'
+          type: array
+          uniqueItems: true
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

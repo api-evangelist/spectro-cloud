@@ -272,6 +272,55 @@ paths:
       - Packs
 components:
   schemas:
+    v1FilterString:
+      properties:
+        beginsWith:
+          type:
+          - string
+          - 'null'
+        contains:
+          type:
+          - string
+          - 'null'
+        eq:
+          type:
+          - string
+          - 'null'
+        ignoreCase:
+          default: true
+          type: boolean
+        ne:
+          type:
+          - string
+          - 'null'
+      type: object
+    v1PackPreset:
+      description: PackPreset defines the preset pack values
+      properties:
+        add:
+          type: string
+          x-omitempty: false
+        displayName:
+          type: string
+          x-omitempty: false
+        group:
+          type: string
+          x-omitempty: false
+        name:
+          type: string
+          x-omitempty: false
+        remove:
+          items:
+            type: string
+          type: array
+          x-omitempty: false
+      type: object
+    v1SortOrder:
+      default: asc
+      enum:
+      - asc
+      - desc
+      type: string
     v1PackTemplateParameterOption:
       description: Pack template parameter option
       properties:
@@ -287,6 +336,32 @@ components:
           description: Pack template parameter label
           type: string
       type: object
+    v1RegistryPackMetadata:
+      description: Registry metadata information
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: Pack annotations is used to allow pack to add more arbitrary configurations
+          type: object
+        latestPackUid:
+          description: Latest pack uid
+          type: string
+        latestVersion:
+          description: Pack latest version
+          type: string
+        logoUrl:
+          description: Pack logo url
+          type: string
+        name:
+          description: Pack registry name
+          type: string
+        scope:
+          description: Pack registry scope
+          type: string
+        uid:
+          description: Pack registry uid
+          type: string
     v1PackSchema:
       description: PackSchema defines the schema definition, hints for the pack values
       properties:
@@ -319,19 +394,20 @@ components:
           type: string
           x-omitempty: false
       type: object
-    v1PackTemplateParameters:
-      description: Pack template parameters
+    v1PackSummaries:
+      description: List of packs
       properties:
-        inputParameters:
-          description: Pack template input parameters array
+        items:
+          description: Packs array
           items:
-            $ref: '#/components/schemas/v1PackTemplateParameter'
+            $ref: '#/components/schemas/v1PackSummary'
           type: array
-        outputParameters:
-          description: Pack template output parameters array
-          items:
-            $ref: '#/components/schemas/v1PackTemplateParameter'
-          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
     v1PackTemplateParameter:
       description: Pack template parameter
       properties:
@@ -379,25 +455,32 @@ components:
         value:
           description: Pack template parameter value
           type: string
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
+    v1ObjectReference:
+      description: ObjectReference contains enough information to let you inspect or modify the referred object.
       properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        kind:
+          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
           type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
+        name:
+          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+          type: string
+        uid:
+          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+          type: string
+      type: object
+    v1PackMetadataList:
+      description: List of packs metadata
+      properties:
+        items:
+          description: Packs metadata array
+          items:
+            $ref: '#/components/schemas/v1PackMetadata'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
       type: object
     v1PackTagEntity:
       description: Pack object
@@ -438,61 +521,6 @@ components:
             $ref: '#/components/schemas/v1PackTags'
           type: array
       type: object
-    v1PackSummary:
-      description: Pack summary object
-      properties:
-        apiVersion:
-          description: Pack api version
-          type: string
-        kind:
-          description: Pack kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1PackSummarySpec'
-        status:
-          $ref: '#/components/schemas/v1PackSummaryStatus'
-      type: object
-    v1PackDependency:
-      description: Pack template dependency
-      properties:
-        layer:
-          description: Pack template dependency pack layer
-          type: string
-        name:
-          description: Pack template dependency pack name
-          type: string
-        readOnly:
-          description: If true then dependency pack values can't be overridden
-          type: boolean
-      type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1PackDependencyMeta:
-      description: Pack dependency metadata
-      properties:
-        displayName:
-          description: Pack display name
-          type: string
-        logoUrl:
-          description: Pack logo url
-          type: string
-        name:
-          description: Pack name
-          type: string
-        registryUid:
-          description: Pack registry uid
-          type: string
-        uid:
-          description: Pack uid
-          type: string
-        version:
-          description: Pack version
-          type: string
-      type: object
     v1PackUidValues:
       properties:
         annotations:
@@ -527,267 +555,26 @@ components:
           description: Pack values represents the values.yaml used as input parameters
           type: string
       type: object
-    v1PackSummaries:
-      description: List of packs
-      properties:
-        items:
-          description: Packs array
-          items:
-            $ref: '#/components/schemas/v1PackSummary'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1PackLayer:
+    v1PackType:
+      default: spectro
       enum:
-      - kernel
-      - os
-      - k8s
-      - cni
-      - csi
-      - addon
+      - spectro
+      - helm
+      - manifest
+      - oci
       type: string
-    v1PackSummaryStatus:
-      description: Pack status
-      type: object
-    v1ObjectMeta:
-      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    v1PackDependency:
+      description: Pack template dependency
       properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        deletionTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
-
-
-            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        lastModifiedTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-        uid:
-          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
-
-
-            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
-          type: string
-      type: object
-    v1PackTemplate:
-      description: Pack template configuration
-      properties:
-        manifest:
-          description: Pack template manifest content
-          type: string
-        parameters:
-          $ref: '#/components/schemas/v1PackTemplateParameters'
-        values:
-          description: Pack template values
-          type: string
-    v1ObjectReference:
-      description: ObjectReference contains enough information to let you inspect or modify the referred object.
-      properties:
-        kind:
-          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
-          type: string
-        name:
-          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-          type: string
-        uid:
-          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
-          type: string
-      type: object
-    v1PackMetadataList:
-      description: List of packs metadata
-      properties:
-        items:
-          description: Packs metadata array
-          items:
-            $ref: '#/components/schemas/v1PackMetadata'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1RegistryPackMetadata:
-      description: Registry metadata information
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: Pack annotations is used to allow pack to add more arbitrary configurations
-          type: object
-        latestPackUid:
-          description: Latest pack uid
-          type: string
-        latestVersion:
-          description: Pack latest version
-          type: string
-        logoUrl:
-          description: Pack logo url
-          type: string
-        name:
-          description: Pack registry name
-          type: string
-        scope:
-          description: Pack registry scope
-          type: string
-        uid:
-          description: Pack registry uid
-          type: string
-    v1FilterString:
-      properties:
-        beginsWith:
-          type:
-          - string
-          - 'null'
-        contains:
-          type:
-          - string
-          - 'null'
-        eq:
-          type:
-          - string
-          - 'null'
-        ignoreCase:
-          default: true
-          type: boolean
-        ne:
-          type:
-          - string
-          - 'null'
-      type: object
-    v1PackFilterSpec:
-      description: Packs filter spec
-      properties:
-        addOnSubType:
-          description: Pack add-on sub type such as monitoring, db etc
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        addOnType:
-          description: Pack add-on type such as logging, monitoring, security etc
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        displayName:
-          $ref: '#/components/schemas/v1FilterString'
-        environment:
-          description: Pack supported cloud types
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        isFips:
-          description: isFips compliant
-          type: boolean
         layer:
-          description: Pack layer
-          items:
-            $ref: '#/components/schemas/v1PackLayer'
-          type: array
-          uniqueItems: true
+          description: Pack template dependency pack layer
+          type: string
         name:
-          $ref: '#/components/schemas/v1FilterString'
-        registryUid:
-          description: Pack registry uid
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        source:
-          description: The source filter describes the creation origin/source of the pack. Ex. source can be "spectrocloud" or "community"
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        state:
-          description: Pack state such as deprecated or disabled
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        type:
-          description: Pack type
-          items:
-            $ref: '#/components/schemas/v1PackType'
-          type: array
-          uniqueItems: true
-    v1SortOrder:
-      default: asc
-      enum:
-      - asc
-      - desc
-      type: string
-    v1PacksFilterSpec:
-      description: Packs filter spec
-      properties:
-        filter:
-          $ref: '#/components/schemas/v1PackFilterSpec'
-        sort:
-          items:
-            $ref: '#/components/schemas/v1PackSortSpec'
-          type: array
-          uniqueItems: true
-    v1PackMetadata:
-      description: Pack metadata object
-      properties:
-        apiVersion:
-          description: Pack api version
+          description: Pack template dependency pack name
           type: string
-        kind:
-          description: Pack kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1PackMetadataSpec'
-      type: object
-    v1PackPreset:
-      description: PackPreset defines the preset pack values
-      properties:
-        add:
-          type: string
-          x-omitempty: false
-        displayName:
-          type: string
-          x-omitempty: false
-        group:
-          type: string
-          x-omitempty: false
-        name:
-          type: string
-          x-omitempty: false
-        remove:
-          items:
-            type: string
-          type: array
-          x-omitempty: false
+        readOnly:
+          description: If true then dependency pack values can't be overridden
+          type: boolean
       type: object
     v1PackSortFields:
       description: Packs sort by fields
@@ -800,52 +587,11 @@ components:
       type:
       - string
       - 'null'
-    v1PackType:
-      default: spectro
-      enum:
-      - spectro
-      - helm
-      - manifest
-      - oci
-      type: string
     v1PackReadme:
       properties:
         readme:
           description: Readme describes the documentation of the specified pack
           type: string
-    v1PackMetadataSpec:
-      description: Pack metadata spec
-      properties:
-        addonSubType:
-          description: Pack add-on sub type such as monitoring, db etc
-          type: string
-        addonType:
-          description: Pack add-on type such as logging, monitoring, security etc
-          type: string
-        cloudTypes:
-          description: Pack supported cloud types
-          items:
-            type: string
-          type: array
-        displayName:
-          description: Pack display name
-          type: string
-        group:
-          description: Pack group
-          type: string
-        layer:
-          $ref: '#/components/schemas/v1PackLayer'
-        name:
-          description: Pack name
-          type: string
-        registries:
-          description: Pack registries array
-          items:
-            $ref: '#/components/schemas/v1RegistryPackMetadata'
-          type: array
-        type:
-          $ref: '#/components/schemas/v1PackType'
-      type: object
     v1PackSummarySpec:
       description: Pack object
       properties:
@@ -914,6 +660,154 @@ components:
           description: Pack version
           type: string
       type: object
+    v1PackSummary:
+      description: Pack summary object
+      properties:
+        apiVersion:
+          description: Pack api version
+          type: string
+        kind:
+          description: Pack kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1PackSummarySpec'
+        status:
+          $ref: '#/components/schemas/v1PackSummaryStatus'
+      type: object
+    v1PackSortSpec:
+      description: Packs sort spec
+      properties:
+        field:
+          $ref: '#/components/schemas/v1PackSortFields'
+        order:
+          $ref: '#/components/schemas/v1SortOrder'
+    v1PackTemplate:
+      description: Pack template configuration
+      properties:
+        manifest:
+          description: Pack template manifest content
+          type: string
+        parameters:
+          $ref: '#/components/schemas/v1PackTemplateParameters'
+        values:
+          description: Pack template values
+          type: string
+    v1PacksFilterSpec:
+      description: Packs filter spec
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1PackFilterSpec'
+        sort:
+          items:
+            $ref: '#/components/schemas/v1PackSortSpec'
+          type: array
+          uniqueItems: true
+    v1PackMetadata:
+      description: Pack metadata object
+      properties:
+        apiVersion:
+          description: Pack api version
+          type: string
+        kind:
+          description: Pack kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1PackMetadataSpec'
+      type: object
+    v1ObjectMeta:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        deletionTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1PackSummaryStatus:
+      description: Pack status
+      type: object
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1PackDependencyMeta:
+      description: Pack dependency metadata
+      properties:
+        displayName:
+          description: Pack display name
+          type: string
+        logoUrl:
+          description: Pack logo url
+          type: string
+        name:
+          description: Pack name
+          type: string
+        registryUid:
+          description: Pack registry uid
+          type: string
+        uid:
+          description: Pack uid
+          type: string
+        version:
+          description: Pack version
+          type: string
+      type: object
     v1PackTags:
       properties:
         group:
@@ -934,13 +828,119 @@ components:
           description: Pack version
           type: string
       type: object
-    v1PackSortSpec:
-      description: Packs sort spec
+    v1PackLayer:
+      enum:
+      - kernel
+      - os
+      - k8s
+      - cni
+      - csi
+      - addon
+      type: string
+    v1PackFilterSpec:
+      description: Packs filter spec
       properties:
-        field:
-          $ref: '#/components/schemas/v1PackSortFields'
-        order:
-          $ref: '#/components/schemas/v1SortOrder'
+        addOnSubType:
+          description: Pack add-on sub type such as monitoring, db etc
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        addOnType:
+          description: Pack add-on type such as logging, monitoring, security etc
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        displayName:
+          $ref: '#/components/schemas/v1FilterString'
+        environment:
+          description: Pack supported cloud types
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        isFips:
+          description: isFips compliant
+          type: boolean
+        layer:
+          description: Pack layer
+          items:
+            $ref: '#/components/schemas/v1PackLayer'
+          type: array
+          uniqueItems: true
+        name:
+          $ref: '#/components/schemas/v1FilterString'
+        registryUid:
+          description: Pack registry uid
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        source:
+          description: The source filter describes the creation origin/source of the pack. Ex. source can be "spectrocloud" or "community"
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        state:
+          description: Pack state such as deprecated or disabled
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        type:
+          description: Pack type
+          items:
+            $ref: '#/components/schemas/v1PackType'
+          type: array
+          uniqueItems: true
+    v1PackMetadataSpec:
+      description: Pack metadata spec
+      properties:
+        addonSubType:
+          description: Pack add-on sub type such as monitoring, db etc
+          type: string
+        addonType:
+          description: Pack add-on type such as logging, monitoring, security etc
+          type: string
+        cloudTypes:
+          description: Pack supported cloud types
+          items:
+            type: string
+          type: array
+        displayName:
+          description: Pack display name
+          type: string
+        group:
+          description: Pack group
+          type: string
+        layer:
+          $ref: '#/components/schemas/v1PackLayer'
+        name:
+          description: Pack name
+          type: string
+        registries:
+          description: Pack registries array
+          items:
+            $ref: '#/components/schemas/v1RegistryPackMetadata'
+          type: array
+        type:
+          $ref: '#/components/schemas/v1PackType'
+      type: object
+    v1PackTemplateParameters:
+      description: Pack template parameters
+      properties:
+        inputParameters:
+          description: Pack template input parameters array
+          items:
+            $ref: '#/components/schemas/v1PackTemplateParameter'
+          type: array
+        outputParameters:
+          description: Pack template output parameters array
+          items:
+            $ref: '#/components/schemas/v1PackTemplateParameter'
+          type: array
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys

@@ -39,6 +39,17 @@ paths:
       - Activations
 components:
   schemas:
+    v1Error:
+      properties:
+        code:
+          type: string
+        details:
+          type: object
+        message:
+          type: string
+        ref:
+          type: string
+      type: object
     v1ActivationsSystemResponse:
       properties:
         status:
@@ -59,17 +70,6 @@ components:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
-    v1Error:
-      properties:
-        code:
-          type: string
-        details:
-          type: object
-        message:
-          type: string
-        ref:
-          type: string
-      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
