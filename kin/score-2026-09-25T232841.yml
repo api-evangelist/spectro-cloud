@@ -1,24 +1,22 @@
-# Kin Score artifact — spectro-cloud — 2026-08-25T154045
+# Kin Score artifact — spectro-cloud — 2026-09-25T232841
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: spectro-cloud
-  schema_version: 0.14.0
-  scored_at: '2026-08-25'
-  run_ts: 2026-08-25T154045
-  composite: 51.1
-  band: developing
+  schema_version: 0.23.0
+  scored_at: '2026-09-25'
+  run_ts: 2026-09-25T232841
+  composite: 58.6
+  band: strong
   facets:
-    discoverability: 81.5
-    contract_quality: 44.9
-    governance: 30.3
+    discoverability: 73.2
+    contract_quality: 43.1
+    contract_governance: 18.2
     operational_transparency: 26.3
     developer_ergonomics: 73.2
-    commercial_clarity: 50.0
-    contract_governance: 30.3
     access_clarity: 50.0
   agent_readiness:
-    score: 25.3
+    score: 28.2
     band: agent-aware
     dimensions:
       spec_presence: true
@@ -27,7 +25,7 @@ kin_score:
       mcp_server: false
       auth_clarity: bearer
       idempotency: false
-      error_semantics: documented
+      error_semantics: verified
       openapi_examples: false
       rate_limit_signal: documented
       event_surface_described: false
@@ -40,6 +38,12 @@ kin_score:
       protected_resource_metadata: false
       dynamic_client_registration: false
       agentic_commerce: false
+  regulatory:
+    applies: true
+    regime: Horizontal (data, software, accessibility, platform)
+    regime_id: horizontal
+    score: 29.4
+    matched_via: fallback
   provenance:
     mcp: derived
     skills: derived
@@ -49,4 +53,4 @@ kin_score:
       total: 42
       derived: 0
       coverage: 0.0
-      callable: 0.0
+      callable: 95.2

@@ -573,6 +573,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -609,6 +611,8 @@ apis:
   humanURL: https://docs.spectrocloud.com/api/
   baseURL: https://api.spectrocloud.com
   tags:
+  - ClusterGroups
+  tags_raw:
   - cluster groups
   properties:
   - type: OpenAPI
