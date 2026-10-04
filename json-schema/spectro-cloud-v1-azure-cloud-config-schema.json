@@ -1,0 +1,685 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-azure-cloud-config-schema.json",
+  "title": "v1AzureCloudConfig",
+  "description": "AzureCloudConfig is the Schema for the azurecloudconfigs API",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-cloudconfigs-api-openapi.yml#/components/schemas/v1AzureCloudConfig",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1AzureCloudConfigSpec"
+    },
+    "status": {
+      "$ref": "#/$defs/v1AzureCloudConfigStatus"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1AADProfile": {
+      "description": "AADProfile - AAD integration is managed by AKS.",
+      "properties": {
+        "adminGroupObjectIDs": {
+          "description": "AdminGroupObjectIDs - AAD group object IDs that will have admin role of the cluster.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "managed": {
+          "description": "Managed - Whether to enable managed AAD.",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "managed",
+        "adminGroupObjectIDs"
+      ],
+      "type": "object"
+    },
+    "v1APIServerAccessProfile": {
+      "description": "APIServerAccessProfile - access profile for AKS API server.",
+      "properties": {
+        "authorizedIPRanges": {
+          "description": "AuthorizedIPRanges - Authorized IP Ranges to kubernetes API server.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "enablePrivateCluster": {
+          "description": "EnablePrivateCluster - Whether to create the cluster as a private cluster or not.",
+          "type": "boolean"
+        },
+        "enablePrivateClusterPublicFQDN": {
+          "description": "EnablePrivateClusterPublicFQDN - Whether to create additional public FQDN for private cluster or not.",
+          "type": "boolean"
+        },
+        "privateDNSZone": {
+          "description": "PrivateDNSZone - Private dns zone mode for private cluster.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ArchType": {
+      "default": "amd64",
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "type": "string"
+    },
+    "v1AzureCloudConfigSpec": {
+      "description": "AzureCloudConfigSpec defines the cloud configuration input by user This will translate to clusterspec/machinespec for cluster-api",
+      "properties": {
+        "cloudAccountRef": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "cloudAccountRef should point to the secret which contains AzureCloudAccount"
+        },
+        "clusterConfig": {
+          "$ref": "#/$defs/v1AzureClusterConfig"
+        },
+        "machinePoolConfig": {
+          "items": {
+            "$ref": "#/$defs/v1AzureMachinePoolConfig"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1AzureCloudConfigStatus": {
+      "description": "AzureCloudConfigStatus defines the observed state of AzureCloudConfig The cloudimage info built by Mold is stored here image should be mapped to a specific machinepool",
+      "properties": {
+        "ansibleRoleDigest": {
+          "description": "For mold controller to identify if is there any changes in Pack",
+          "type": "string"
+        },
+        "conditions": {
+          "description": "spectroAnsibleProvisioner: should be added only once, subsequent recocile will use the same provisioner SpectroAnsiblePacker bool `json:\"spectroAnsiblePacker,omitempty\"`",
+          "items": {
+            "$ref": "#/$defs/v1ClusterCondition"
+          },
+          "type": "array"
+        },
+        "images": {
+          "$ref": "#/$defs/v1AzureImage",
+          "description": "Images array items should be 1-to-1 mapping to Spec.MachinePoolConfig"
+        },
+        "isAddonLayer": {
+          "description": "addon layers present in spc",
+          "type": "boolean"
+        },
+        "roleDigest": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "this map will be for ansible roles present in eack pack",
+          "type": "object"
+        },
+        "sourceImageId": {
+          "description": "sourceImageId, it can be from packref's annotations or from pack.json",
+          "type": "string"
+        },
+        "useCapiImage": {
+          "description": "PackerVariableDigest string `json:\"packerDigest,omitempty\"` If no ansible roles found in Packs then Mold should tell Drive to use capi image and not create custom image, because there is nothing to add",
+          "type": "boolean"
+        },
+        "vhdImage": {
+          "$ref": "#/$defs/v1AzureVHDImage"
+        }
+      },
+      "type": "object"
+    },
+    "v1AzureClusterConfig": {
+      "description": "Cluster level configuration for Azure cloud and applicable for all the machine pools",
+      "properties": {
+        "aadProfile": {
+          "$ref": "#/$defs/v1AADProfile",
+          "description": "AadProfile is Azure Active Directory configuration to integrate with AKS for aad authentication."
+        },
+        "apiServerAccessProfile": {
+          "$ref": "#/$defs/v1APIServerAccessProfile",
+          "description": "APIServerAccessProfile is the access profile for AKS API server."
+        },
+        "containerName": {
+          "type": "string"
+        },
+        "controlPlaneSubnet": {
+          "$ref": "#/$defs/v1Subnet",
+          "description": "Subnet for Kubernetes control-plane node"
+        },
+        "enablePrivateCluster": {
+          "description": "Deprecated. use apiServerAccessProfile.enablePrivateCluster",
+          "type": "boolean"
+        },
+        "infraLBConfig": {
+          "$ref": "#/$defs/v1InfraLBConfig",
+          "description": "APIServerLB is the configuration for the control-plane load balancer."
+        },
+        "location": {
+          "description": "Location is the Azure datacenter location",
+          "type": "string"
+        },
+        "overrideClusterAPIConfig": {
+          "description": "YAML override for CAPI properties at cluster level.\nOverrides pack-level and Palette-managed values. See PCP-4787.\n",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "sshKey": {
+          "type": "string"
+        },
+        "storageAccountName": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "description": "Subscription ID is unique identifier for the subscription used to access Azure services",
+          "type": "string"
+        },
+        "vnetCidrBlock": {
+          "type": "string"
+        },
+        "vnetName": {
+          "description": "VNETName is the virtual network in which the cluster is to be provisioned.",
+          "type": "string"
+        },
+        "vnetResourceGroup": {
+          "type": "string"
+        },
+        "workerSubnet": {
+          "$ref": "#/$defs/v1Subnet",
+          "description": "Subnet for Kubernetes worker node"
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "location",
+        "sshKey"
+      ],
+      "type": "object"
+    },
+    "v1AzureImage": {
+      "description": "Refers to Azure Shared Gallery image",
+      "properties": {
+        "gallery": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "resourceGroup": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "subscriptionID": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AzureMachinePoolConfig": {
+      "properties": {
+        "additionalAnnotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Custom annotations for CAPI machine objects and nodes.\n",
+          "type": "object"
+        },
+        "additionalLabels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "additionalLabels",
+          "type": "object"
+        },
+        "additionalTags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "AdditionalTags is an optional set of tags to add to resources managed by the provider, in addition to the ones added by default. For eg., tags for EKS nodeGroup or EKS NodegroupIAMRole",
+          "type": "object"
+        },
+        "azs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "instanceConfig": {
+          "$ref": "#/$defs/v1InstanceConfig"
+        },
+        "instanceType": {
+          "description": "Instance type stands for VMSize in Azure",
+          "type": "string"
+        },
+        "isControlPlane": {
+          "description": "whether this pool is for control plane",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isSystemNodePool": {
+          "description": "whether this pool is for system node Pool",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "labels": {
+          "description": "labels for this pool, example: control-plane/worker, gpu, windows",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "machinePoolProperties": {
+          "$ref": "#/$defs/v1MachinePoolProperties"
+        },
+        "maxSize": {
+          "description": "max size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minSize": {
+          "description": "min size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nodeRepaveInterval": {
+          "description": "Minimum number of seconds a node should be Ready, before the next node is selected for repave. Applicable only for workerpools in infrastructure cluster",
+          "format": "int32",
+          "type": "integer"
+        },
+        "osDisk": {
+          "$ref": "#/$defs/v1AzureOSDisk"
+        },
+        "osSku": {
+          "$ref": "#/$defs/v1OsSku",
+          "description": "OS SKU for the AKS node pool. Valid values - Ubuntu, AzureLinux, Windows2022. Immutable after creation.",
+          "x-omitempty": true
+        },
+        "osType": {
+          "$ref": "#/$defs/v1OsType",
+          "type": "string"
+        },
+        "overrideClusterAPIConfig": {
+          "description": "YAML override for CAPI properties at pool level.\nOverrides pack-level and Palette-managed values. See PCP-4787.\n",
+          "type": "string"
+        },
+        "overrideHealthCheckConfiguration": {
+          "description": "YAML config to override Machine Health Check values at the node pool level.\nAccepts CAPI MachineHealthCheck fields such as maxUnhealthy, nodeStartupTimeout,\nand unhealthyNodeConditions. Falls back to Palette defaults when unset and\nremains subject to the project/tenant Cluster Auto Remediation setting.\n",
+          "type": "string"
+        },
+        "overrideKubeadmConfiguration": {
+          "description": "YAML config for kubeletExtraArgs, preKubeadmCommands, postKubeadmCommands.\nOverrides pack-level settings. Worker pools only.\n",
+          "type": "string"
+        },
+        "size": {
+          "description": "size of the pool, number of machines",
+          "format": "int32",
+          "type": "integer"
+        },
+        "spotVMOptions": {
+          "$ref": "#/$defs/v1SpotVMOptions",
+          "description": "SpotVMOptions allows the ability to specify the Machine should use a Spot VM"
+        },
+        "taints": {
+          "description": "control plane or worker taints",
+          "items": {
+            "$ref": "#/$defs/v1Taint"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "updateStrategy": {
+          "$ref": "#/$defs/v1UpdateStrategy",
+          "description": "rolling update strategy for this machinepool if not specified, will use ScaleOut"
+        },
+        "useControlPlaneAsWorker": {
+          "description": "if IsControlPlane==true && useControlPlaneAsWorker==true, then will remove control plane taint this will not be used for worker pools",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "isControlPlane"
+      ],
+      "type": "object"
+    },
+    "v1AzureOSDisk": {
+      "properties": {
+        "diskSizeGB": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "managedDisk": {
+          "$ref": "#/$defs/v1ManagedDisk"
+        },
+        "osType": {
+          "$ref": "#/$defs/v1OsType",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AzureVHDImage": {
+      "description": "Mold always create VHD image for custom image, and this can be use as golden images",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterCondition": {
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "lastTransitionTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "message": {
+          "description": "Human-readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Unique, one-word, CamelCase reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "type": "object"
+    },
+    "v1InfraLBConfig": {
+      "properties": {
+        "apiServerLB": {
+          "$ref": "#/$defs/v1LoadBalancerSpec",
+          "description": "APIServerLB is the configuration for the control-plane load balancer."
+        }
+      },
+      "type": "object"
+    },
+    "v1InstanceConfig": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "cpuSet": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "diskGiB": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "memoryMiB": {
+          "description": "MemoryMiB is the size of a virtual machine's memory, in MiB",
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "numCPUs": {
+          "description": "NumCPUs is the number of virtual processors in a virtual machine",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "v1LoadBalancerSpec": {
+      "description": "LoadBalancerSpec defines an Azure load balancer.",
+      "properties": {
+        "apiServerLBStaticIP": {
+          "type": "string"
+        },
+        "ipAllocationMethod": {
+          "default": "Dynamic",
+          "enum": [
+            "Static",
+            "Dynamic"
+          ],
+          "type": "string"
+        },
+        "privateDNSName": {
+          "type": "string"
+        },
+        "privateDNSZoneResourceGroup": {
+          "description": "PrivateDNSZoneResourceGroup defines the resource group to be used for Azure Private DNS Zone.\nIf not specified, the resource group of the cluster will be used to create the Azure Private DNS Zone.",
+          "type": "string"
+        },
+        "type": {
+          "default": "Public",
+          "description": "Load Balancer type",
+          "enum": [
+            "Internal",
+            "Public"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1MachinePoolProperties": {
+      "description": "Machine pool specific properties",
+      "properties": {
+        "archType": {
+          "$ref": "#/$defs/v1ArchType",
+          "description": "Architecture type of the pool. Default value is 'amd64'",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ManagedDisk": {
+      "properties": {
+        "storageAccountType": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1OsSku": {
+      "description": "OS SKU for AKS node pools. Immutable after creation.",
+      "enum": [
+        "Ubuntu",
+        "AzureLinux",
+        "Windows2022"
+      ],
+      "type": "string"
+    },
+    "v1OsType": {
+      "default": "Linux",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "type": "string"
+    },
+    "v1SpotVMOptions": {
+      "description": "SpotVMOptions defines the options relevant to running the Machine on Spot VMs",
+      "properties": {
+        "maxPrice": {
+          "description": "MaxPrice defines the maximum price the user is willing to pay for Spot VM instances",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Subnet": {
+      "properties": {
+        "cidrBlock": {
+          "description": "CidrBlock is the CIDR block to be used when the provider creates a managed Vnet.",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nsgResourceGroup": {
+          "description": "Resource group associated with a network security group",
+          "type": "string"
+        },
+        "securityGroupName": {
+          "description": "Network Security Group(NSG) to be attached to subnet. NSG for a control plane subnet, should allow inbound to port 6443, as port 6443 is used by kubeadm to bootstrap the control planes",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Taint": {
+      "description": "Taint",
+      "properties": {
+        "effect": {
+          "enum": [
+            "NoSchedule",
+            "PreferNoSchedule",
+            "NoExecute"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "description": "The taint key to be applied to a node",
+          "type": "string"
+        },
+        "timeAdded": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "value": {
+          "description": "The taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1UpdateStrategy": {
+      "description": "UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1 OverrideScaling => maxSurge and maxUnavailable are user-specified (both required)",
+      "properties": {
+        "maxSurge": {
+          "description": "Max extra nodes during rolling update. Integer or percentage (e.g., \"1\" or \"20%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "maxUnavailable": {
+          "description": "Max unavailable nodes during rolling update. Integer or percentage (e.g., \"0\" or \"10%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "type": {
+          "description": "Update strategy type. Defaults to RollingUpdateScaleOut if empty.",
+          "enum": [
+            "RollingUpdateScaleOut",
+            "RollingUpdateScaleIn",
+            "OverrideScaling"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

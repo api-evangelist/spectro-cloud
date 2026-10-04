@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-user-token-schema.json",
+  "title": "v1UserToken",
+  "description": "Returns the Authorization token. To be used for further api calls",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-auth-api-openapi.yml#/components/schemas/v1UserToken",
+  "properties": {
+    "Authorization": {
+      "description": "Describes the authentication token in jwt format.",
+      "type": "string"
+    },
+    "isMfa": {
+      "description": "Indicates the authentication flow using MFA",
+      "type": "boolean",
+      "x-omitempty": false
+    }
+  },
+  "type": "object"
+}

@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 App Profiles API
+  title: Spectro Cloud App Profiles API
   version: v1
+  description: 'Operations tagged appProfiles across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: appProfiles
   x-displayName: App Profiles
@@ -40,6 +42,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppProfileEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/macros:
     get:
       operationId: v1AppProfilesMacrosList
@@ -62,6 +66,8 @@ paths:
       summary: Retrieves a list of application profile macros
       tags:
       - appProfiles
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}:
     parameters:
     - in: path
@@ -129,6 +135,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppProfileEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/clone:
     parameters:
     - description: Application profile uid
@@ -168,6 +176,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppProfileCloneEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/clone/validate:
     parameters:
     - description: Application profile uid
@@ -203,6 +213,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppProfileCloneMetaInputEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/metadata:
     parameters:
     - description: Application profile uid
@@ -233,6 +245,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppProfileMetaEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/tiers:
     parameters:
     - description: Application profile uid
@@ -324,6 +338,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppTierEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/tiers/{tierUid}:
     parameters:
     - description: Application profile uid
@@ -398,6 +414,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AppTierUpdateEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/tiers/{tierUid}/manifests:
     parameters:
     - description: Application profile uid
@@ -464,6 +482,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ManifestInputEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/tiers/{tierUid}/manifests/{manifestUid}:
     parameters:
     - description: Application profile uid
@@ -544,6 +564,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/appProfiles/{uid}/tiers/{tierUid}/resolvedValues:
     parameters:
     - description: Application profile uid
@@ -579,151 +601,10 @@ paths:
       summary: Returns the specified application profile tier resolved values
       tags:
       - appProfiles
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1Macro:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    v1AppProfileEntity:
-      description: Application profile request payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          description: Application profile spec
-          properties:
-            template:
-              $ref: '#/components/schemas/v1AppProfileTemplateEntity'
-            version:
-              description: Application profile version
-              type: string
-          type: object
-      type: object
-    v1AppProfileCloneTarget:
-      description: Application profile clone target
-      properties:
-        projectUid:
-          description: Application profile clone target project uid
-          type: string
-      type: object
-    v1AppProfileTemplateEntity:
-      description: Application profile template spec
-      properties:
-        appTiers:
-          description: Application profile tiers
-          items:
-            $ref: '#/components/schemas/v1AppTierEntity'
-          type: array
-          uniqueItems: true
-      type: object
-    v1AppProfileTiersSpec:
-      description: Application profile tiers information
-      properties:
-        appTiers:
-          description: Application profile tiers
-          items:
-            $ref: '#/components/schemas/v1AppTier'
-          type: array
-          uniqueItems: true
-      type: object
-    v1AppTierType:
-      default: manifest
-      enum:
-      - manifest
-      - helm
-      - operator-instance
-      - container
-      type: string
-    v1AppTierUpdateEntity:
-      description: Application tier update request payload
-      properties:
-        containerRegistryUid:
-          description: Application tier container registry uid
-          type: string
-        installOrder:
-          description: Application tier installation order
-          format: int32
-          type: integer
-        manifests:
-          description: Application tier manifests
-          items:
-            $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
-          type: array
-        name:
-          description: Application tier name
-          type: string
-        properties:
-          description: Application tier properties
-          items:
-            $ref: '#/components/schemas/v1AppTierPropertyEntity'
-          type: array
-        values:
-          description: Application tier configuration values in yaml format
-          type: string
-        version:
-          description: Application tier version
-          type: string
-      type: object
-    v1AppProfileMetaUpdateEntity:
-      description: Application profile metadata update request payload
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: Application profile annotations
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: Application profile labels
-          type: object
-      type: object
-    v1Manifest:
-      description: Manifest object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ManifestPublishedSpec'
-    v1AppTierSpec:
-      description: Application tier specs
-      properties:
-        containerRegistryUid:
-          description: Application tier container registry uid
-          type: string
-        installOrder:
-          description: Application tier installation order
-          format: int32
-          type: integer
-        manifests:
-          description: Application tier attached manifest content in yaml format
-          items:
-            $ref: '#/components/schemas/v1ObjectReference'
-          type: array
-        properties:
-          description: Application tier properties
-          items:
-            $ref: '#/components/schemas/v1AppTierProperty'
-          type: array
-        registryUid:
-          description: Registry uid
-          type: string
-        sourceAppTierUid:
-          description: Application tier source pack uid
-          type: string
-        type:
-          $ref: '#/components/schemas/v1AppTierType'
-          description: Application tier type
-        values:
-          description: Application tier configuration values in yaml format
-          type: string
-        version:
-          description: Application tier version
-          type: string
-      type: object
     v1AppProfileVersion:
       description: Application profile version
       properties:
@@ -731,186 +612,6 @@ components:
           type: string
         version:
           type: string
-      type: object
-    v1AppProfileCloneEntity:
-      description: Application profile clone request payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1AppProfileCloneMetaInputEntity'
-      type: object
-    v1AppProfile:
-      description: Application profile response
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          properties:
-            parentUid:
-              description: Application profile parent profile uid
-              type: string
-            template:
-              $ref: '#/components/schemas/v1AppProfileTemplate'
-            version:
-              description: Application profile version
-              type: string
-            versions:
-              description: Application profile versions list
-              items:
-                $ref: '#/components/schemas/v1AppProfileVersion'
-              type: array
-          type: object
-        status:
-          description: Application profile status
-          properties:
-            inUseApps:
-              description: Application profile apps array
-              items:
-                $ref: '#/components/schemas/v1ObjectResReference'
-              type: array
-          type: object
-      type: object
-    v1ObjectReference:
-      description: ObjectReference contains enough information to let you inspect or modify the referred object.
-      properties:
-        kind:
-          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
-          type: string
-        name:
-          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
-          type: string
-        uid:
-          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
-          type: string
-      type: object
-    v1AppProfileTiers:
-      description: Application profile tiers information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AppProfileTiersSpec'
-      type: object
-    v1ObjectMetaInputEntity:
-      description: ObjectMeta input entity for object creation
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-      type: object
-    v1ManifestInputEntity:
-      description: Manifest request payload
-      properties:
-        content:
-          description: Manifest content
-          type: string
-        name:
-          description: Manifest name
-          type: string
-    v1AppTierResolvedValues:
-      description: Application tier resolved macro values
-      properties:
-        resolved:
-          additionalProperties:
-            type: string
-          description: Application tier resolved macro values map
-          type: object
-    v1AppProfileMetaEntity:
-      description: Application profile metadata request payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1AppProfileMetaUpdateEntity'
-        version:
-          description: Application profile version
-          type: string
-      required:
-      - metadata
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1AppTierRef:
-      description: Application tier reference
-      properties:
-        name:
-          description: Application tier name
-          type: string
-        type:
-          $ref: '#/components/schemas/v1AppTierType'
-        uid:
-          description: Application tier uid to uniquely identify the tier
-          type: string
-        version:
-          description: Application tier version
-          type: string
-      type: object
-    v1ManifestPublishedSpec:
-      description: Manifest spec
-      properties:
-        published:
-          $ref: '#/components/schemas/v1ManifestData'
-    v1ManifestData:
-      description: Published manifest object
-      properties:
-        content:
-          description: Manifest content in yaml
-          type: string
-        digest:
-          description: Manifest digest
-          type: string
-      type: object
-    v1AppTierEntity:
-      description: Application tier request payload
-      properties:
-        containerRegistryUid:
-          description: Application tier container registry uid
-          type: string
-        installOrder:
-          description: Application tier installation order
-          format: int32
-          type: integer
-        manifests:
-          description: Application tier manifests
-          items:
-            $ref: '#/components/schemas/v1ManifestInputEntity'
-          type: array
-        name:
-          description: Application tier name
-          type: string
-        properties:
-          description: Application tier properties
-          items:
-            $ref: '#/components/schemas/v1AppTierPropertyEntity'
-          type: array
-        registryUid:
-          description: Application tier registry uid
-          type: string
-        sourceAppTierUid:
-          description: Application tier source pack uid
-          type: string
-        type:
-          $ref: '#/components/schemas/v1AppTierType'
-        values:
-          description: Application tier configuration values in yaml format
-          type: string
-        version:
-          description: Application tier version
-          type: string
-      required:
-      - name
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -953,12 +654,147 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1AppTier:
+    v1AppTierSpec:
+      description: Application tier specs
+      properties:
+        containerRegistryUid:
+          description: Application tier container registry uid
+          type: string
+        installOrder:
+          description: Application tier installation order
+          format: int32
+          type: integer
+        manifests:
+          description: Application tier attached manifest content in yaml format
+          items:
+            $ref: '#/components/schemas/v1ObjectReference'
+          type: array
+        properties:
+          description: Application tier properties
+          items:
+            $ref: '#/components/schemas/v1AppTierProperty'
+          type: array
+        registryUid:
+          description: Registry uid
+          type: string
+        sourceAppTierUid:
+          description: Application tier source pack uid
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AppTierType'
+          description: Application tier type
+        values:
+          description: Application tier configuration values in yaml format
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      type: object
+    v1AppTierUpdateEntity:
+      description: Application tier update request payload
+      properties:
+        containerRegistryUid:
+          description: Application tier container registry uid
+          type: string
+        installOrder:
+          description: Application tier installation order
+          format: int32
+          type: integer
+        manifests:
+          description: Application tier manifests
+          items:
+            $ref: '#/components/schemas/v1ManifestRefUpdateEntity'
+          type: array
+        name:
+          description: Application tier name
+          type: string
+        properties:
+          description: Application tier properties
+          items:
+            $ref: '#/components/schemas/v1AppTierPropertyEntity'
+          type: array
+        values:
+          description: Application tier configuration values in yaml format
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      type: object
+    v1AppTierPatchEntity:
+      description: Application tier patch request payload
+      properties:
+        appTier:
+          $ref: '#/components/schemas/v1AppTierEntity'
+        replaceWithAppTier:
+          description: Application tier UID to be replaced with new tier
+          type: string
+    v1AppTierRef:
+      description: Application tier reference
+      properties:
+        name:
+          description: Application tier name
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AppTierType'
+        uid:
+          description: Application tier uid to uniquely identify the tier
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      type: object
+    v1Macro:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    v1AppProfileCloneEntity:
+      description: Application profile clone request payload
       properties:
         metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AppTierSpec'
+          $ref: '#/components/schemas/v1AppProfileCloneMetaInputEntity'
+      type: object
+    v1AppTierEntity:
+      description: Application tier request payload
+      properties:
+        containerRegistryUid:
+          description: Application tier container registry uid
+          type: string
+        installOrder:
+          description: Application tier installation order
+          format: int32
+          type: integer
+        manifests:
+          description: Application tier manifests
+          items:
+            $ref: '#/components/schemas/v1ManifestInputEntity'
+          type: array
+        name:
+          description: Application tier name
+          type: string
+        properties:
+          description: Application tier properties
+          items:
+            $ref: '#/components/schemas/v1AppTierPropertyEntity'
+          type: array
+        registryUid:
+          description: Application tier registry uid
+          type: string
+        sourceAppTierUid:
+          description: Application tier source pack uid
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AppTierType'
+        values:
+          description: Application tier configuration values in yaml format
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      required:
+      - name
+      type: object
     v1ObjectResReference:
       description: Object resource reference
       properties:
@@ -973,10 +809,109 @@ components:
         uid:
           type: string
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1ObjectReference:
+      description: ObjectReference contains enough information to let you inspect or modify the referred object.
+      properties:
+        kind:
+          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        name:
+          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+          type: string
+        uid:
+          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+          type: string
+      type: object
+    v1AppProfile:
+      description: Application profile response
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          properties:
+            parentUid:
+              description: Application profile parent profile uid
+              type: string
+            template:
+              $ref: '#/components/schemas/v1AppProfileTemplate'
+            version:
+              description: Application profile version
+              type: string
+            versions:
+              description: Application profile versions list
+              items:
+                $ref: '#/components/schemas/v1AppProfileVersion'
+              type: array
+          type: object
+        status:
+          description: Application profile status
+          properties:
+            inUseApps:
+              description: Application profile apps array
+              items:
+                $ref: '#/components/schemas/v1ObjectResReference'
+              type: array
+          type: object
+      type: object
+    v1Manifest:
+      description: Manifest object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ManifestPublishedSpec'
+    v1AppProfileCloneMetaInputEntity:
+      description: Application profile clone metadata
+      properties:
+        name:
+          description: Application profile name
+          type: string
+        target:
+          $ref: '#/components/schemas/v1AppProfileCloneTarget'
+        version:
+          description: Application profile version
+          type: string
+      required:
+      - name
+      type: object
+    v1ManifestInputEntity:
+      description: Manifest request payload
+      properties:
+        content:
+          description: Manifest content
+          type: string
+        name:
+          description: Manifest name
+          type: string
+    v1AppProfileTiersSpec:
+      description: Application profile tiers information
+      properties:
+        appTiers:
+          description: Application profile tiers
+          items:
+            $ref: '#/components/schemas/v1AppTier'
+          type: array
+          uniqueItems: true
+      type: object
+    v1Macros:
+      properties:
+        macros:
+          items:
+            $ref: '#/components/schemas/v1Macro'
+          type: array
+          uniqueItems: true
+    v1ManifestPublishedSpec:
+      description: Manifest spec
+      properties:
+        published:
+          $ref: '#/components/schemas/v1ManifestData'
     v1AppTierProperty:
       description: Application tier property object
       properties:
@@ -992,6 +927,93 @@ components:
         value:
           description: Application tier property value
           type: string
+    v1ManifestRefUpdateEntity:
+      description: Manifest update request payload
+      properties:
+        content:
+          description: Manifest content in yaml
+          type: string
+        name:
+          description: Manifest name
+          type: string
+        uid:
+          description: Manifest uid
+          type: string
+      required:
+      - name
+    v1ObjectMetaInputEntity:
+      description: ObjectMeta input entity for object creation
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1AppProfileEntity:
+      description: Application profile request payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          description: Application profile spec
+          properties:
+            template:
+              $ref: '#/components/schemas/v1AppProfileTemplateEntity'
+            version:
+              description: Application profile version
+              type: string
+          type: object
+      type: object
+    v1AppTier:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AppTierSpec'
+    v1AppTierResolvedValues:
+      description: Application tier resolved macro values
+      properties:
+        resolved:
+          additionalProperties:
+            type: string
+          description: Application tier resolved macro values map
+          type: object
+    v1AppProfileMetaEntity:
+      description: Application profile metadata request payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1AppProfileMetaUpdateEntity'
+        version:
+          description: Application profile version
+          type: string
+      required:
+      - metadata
+      type: object
+    v1AppProfileTiers:
+      description: Application profile tiers information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AppProfileTiersSpec'
+      type: object
+    v1AppTierType:
+      default: manifest
+      enum:
+      - manifest
+      - helm
+      - operator-instance
+      - container
+      type: string
     v1AppTierManifests:
       description: Application tier manifests data
       properties:
@@ -1000,36 +1022,6 @@ components:
           items:
             $ref: '#/components/schemas/v1Manifest'
           type: array
-    v1AppProfileCloneMetaInputEntity:
-      description: Application profile clone metadata
-      properties:
-        name:
-          description: Application profile name
-          type: string
-        target:
-          $ref: '#/components/schemas/v1AppProfileCloneTarget'
-        version:
-          description: Application profile version
-          type: string
-      required:
-      - name
-      type: object
-    v1AppTierPropertyEntity:
-      description: Application tier property object
-      properties:
-        name:
-          description: Application tier property name
-          type: string
-        value:
-          description: Application tier property value
-          type: string
-    v1Macros:
-      properties:
-        macros:
-          items:
-            $ref: '#/components/schemas/v1Macro'
-          type: array
-          uniqueItems: true
     v1AppProfileTemplate:
       description: Application profile template information
       properties:
@@ -1045,7 +1037,176 @@ components:
             $ref: '#/components/schemas/v1ObjectReference'
           type: array
       type: object
-    v1AppTierPatchEntity:
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1AppProfileCloneTarget:
+      description: Application profile clone target
+      properties:
+        projectUid:
+          description: Application profile clone target project uid
+          type: string
+      type: object
+    v1AppTierPropertyEntity:
+      description: Application tier property object
+      properties:
+        name:
+          description: Application tier property name
+          type: string
+        value:
+          description: Application tier property value
+          type: string
+    v1AppProfileMetaUpdateEntity:
+      description: Application profile metadata update request payload
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: Application profile annotations
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: Application profile labels
+          type: object
+      type: object
+    v1ManifestData:
+      description: Published manifest object
+      properties:
+        content:
+          description: Manifest content in yaml
+          type: string
+        digest:
+          description: Manifest digest
+          type: string
+      type: object
+    v1AppProfileTemplateEntity:
+      description: Application profile template spec
+      properties:
+        appTiers:
+          description: Application profile tiers
+          items:
+            $ref: '#/components/schemas/v1AppTierEntity'
+          type: array
+          uniqueItems: true
+      type: object
+    v1AppProfileVersion_2:
+      description: Application profile version
+      example:
+        uid: uid
+        version: version
+      properties:
+        uid:
+          type: string
+        version:
+          type: string
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1AppTierSpec_2:
+      description: Application tier specs
+      example:
+        registryUid: registryUid
+        values: values
+        manifests:
+        - uid: uid
+          kind: kind
+          name: name
+        - uid: uid
+          kind: kind
+          name: name
+        containerRegistryUid: containerRegistryUid
+        sourceAppTierUid: sourceAppTierUid
+        type: manifest
+        installOrder: 0
+        version: version
+        properties:
+        - format: format
+          name: name
+          type: type
+          value: value
+        - format: format
+          name: name
+          type: type
+          value: value
+      properties:
+        containerRegistryUid:
+          description: Application tier container registry uid
+          type: string
+        installOrder:
+          description: Application tier installation order
+          format: int32
+          type: integer
+        manifests:
+          description: Application tier attached manifest content in yaml format
+          items:
+            $ref: '#/components/schemas/v1ObjectReference_2'
+          type: array
+        properties:
+          description: Application tier properties
+          items:
+            $ref: '#/components/schemas/v1AppTierProperty_2'
+          type: array
+        registryUid:
+          description: Registry uid
+          type: string
+        sourceAppTierUid:
+          description: Application tier source pack uid
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AppTierType'
+        values:
+          description: Application tier configuration values in yaml format
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      type: object
+    v1AppTierPatchEntity_2:
       description: Application tier patch request payload
       properties:
         appTier:
@@ -1053,7 +1214,350 @@ components:
         replaceWithAppTier:
           description: Application tier UID to be replaced with new tier
           type: string
-    v1ManifestRefUpdateEntity:
+      type: object
+    v1AppTierRef_2:
+      description: Application tier reference
+      example:
+        uid: uid
+        name: name
+        type: manifest
+        version: version
+      properties:
+        name:
+          description: Application tier name
+          type: string
+        type:
+          $ref: '#/components/schemas/v1AppTierType'
+        uid:
+          description: Application tier uid to uniquely identify the tier
+          type: string
+        version:
+          description: Application tier version
+          type: string
+      type: object
+    v1Macro_2:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    v1ObjectResReference_2:
+      description: Object resource reference
+      example:
+        uid: uid
+        projectUid: projectUid
+        kind: kind
+        tenantUid: tenantUid
+        name: name
+      properties:
+        kind:
+          type: string
+        name:
+          type: string
+        projectUid:
+          type: string
+        tenantUid:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1ObjectReference_2:
+      description: ObjectReference contains enough information to let you inspect or modify the referred object.
+      example:
+        uid: uid
+        kind: kind
+        name: name
+      properties:
+        kind:
+          description: 'Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds'
+          type: string
+        name:
+          description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+          type: string
+        uid:
+          description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+          type: string
+      type: object
+    v1AppProfile_2:
+      description: Application profile response
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          parentUid: parentUid
+          template:
+            appTiers:
+            - uid: uid
+              name: name
+              type: manifest
+              version: version
+            - uid: uid
+              name: name
+              type: manifest
+              version: version
+            registryRefs:
+            - uid: uid
+              kind: kind
+              name: name
+            - uid: uid
+              kind: kind
+              name: name
+          versions:
+          - uid: uid
+            version: version
+          - uid: uid
+            version: version
+          version: version
+        status:
+          inUseApps:
+          - uid: uid
+            projectUid: projectUid
+            kind: kind
+            tenantUid: tenantUid
+            name: name
+          - uid: uid
+            projectUid: projectUid
+            kind: kind
+            tenantUid: tenantUid
+            name: name
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1AppProfile_spec'
+        status:
+          $ref: '#/components/schemas/v1AppProfile_status'
+      type: object
+    v1AppProfile_spec:
+      example:
+        parentUid: parentUid
+        template:
+          appTiers:
+          - uid: uid
+            name: name
+            type: manifest
+            version: version
+          - uid: uid
+            name: name
+            type: manifest
+            version: version
+          registryRefs:
+          - uid: uid
+            kind: kind
+            name: name
+          - uid: uid
+            kind: kind
+            name: name
+        versions:
+        - uid: uid
+          version: version
+        - uid: uid
+          version: version
+        version: version
+      properties:
+        parentUid:
+          description: Application profile parent profile uid
+          type: string
+        template:
+          $ref: '#/components/schemas/v1AppProfileTemplate_2'
+        version:
+          description: Application profile version
+          type: string
+        versions:
+          description: Application profile versions list
+          items:
+            $ref: '#/components/schemas/v1AppProfileVersion_2'
+          type: array
+      type: object
+    v1Manifest_2:
+      description: Manifest object
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          published:
+            digest: digest
+            content: content
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1ManifestPublishedSpec_2'
+      type: object
+    v1ManifestInputEntity_2:
+      description: Manifest request payload
+      properties:
+        content:
+          description: Manifest content
+          type: string
+        name:
+          description: Manifest name
+          type: string
+      type: object
+    v1AppProfileTiersSpec_2:
+      description: Application profile tiers information
+      example:
+        appTiers:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            registryUid: registryUid
+            values: values
+            manifests:
+            - uid: uid
+              kind: kind
+              name: name
+            - uid: uid
+              kind: kind
+              name: name
+            containerRegistryUid: containerRegistryUid
+            sourceAppTierUid: sourceAppTierUid
+            type: manifest
+            installOrder: 0
+            version: version
+            properties:
+            - format: format
+              name: name
+              type: type
+              value: value
+            - format: format
+              name: name
+              type: type
+              value: value
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            registryUid: registryUid
+            values: values
+            manifests:
+            - uid: uid
+              kind: kind
+              name: name
+            - uid: uid
+              kind: kind
+              name: name
+            containerRegistryUid: containerRegistryUid
+            sourceAppTierUid: sourceAppTierUid
+            type: manifest
+            installOrder: 0
+            version: version
+            properties:
+            - format: format
+              name: name
+              type: type
+              value: value
+            - format: format
+              name: name
+              type: type
+              value: value
+      properties:
+        appTiers:
+          description: Application profile tiers
+          items:
+            $ref: '#/components/schemas/v1AppTier_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1Macros_2:
+      example:
+        macros:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        macros:
+          items:
+            $ref: '#/components/schemas/v1Macro_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1AppProfileEntity_spec:
+      description: Application profile spec
+      properties:
+        template:
+          $ref: '#/components/schemas/v1AppProfileTemplateEntity'
+        version:
+          description: Application profile version
+          type: string
+      type: object
+    v1ManifestPublishedSpec_2:
+      description: Manifest spec
+      example:
+        published:
+          digest: digest
+          content: content
+      properties:
+        published:
+          $ref: '#/components/schemas/v1ManifestData_2'
+      type: object
+    v1AppTierProperty_2:
+      description: Application tier property object
+      example:
+        format: format
+        name: name
+        type: type
+        value: value
+      properties:
+        format:
+          description: Application tier property format
+          type: string
+        name:
+          description: Application tier property name
+          type: string
+        type:
+          description: Application tier property data type
+          type: string
+        value:
+          description: Application tier property value
+          type: string
+      type: object
+    v1ManifestRefUpdateEntity_2:
       description: Manifest update request payload
       properties:
         content:
@@ -1067,6 +1571,296 @@ components:
           type: string
       required:
       - name
+      type: object
+    v1ObjectMetaInputEntity_2:
+      description: ObjectMeta input entity for object creation
+      example:
+        name: name
+        annotations:
+          key: annotations
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1AppProfileEntity_2:
+      description: Application profile request payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity_2'
+        spec:
+          $ref: '#/components/schemas/v1AppProfileEntity_spec'
+      type: object
+    v1AppTier_2:
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          registryUid: registryUid
+          values: values
+          manifests:
+          - uid: uid
+            kind: kind
+            name: name
+          - uid: uid
+            kind: kind
+            name: name
+          containerRegistryUid: containerRegistryUid
+          sourceAppTierUid: sourceAppTierUid
+          type: manifest
+          installOrder: 0
+          version: version
+          properties:
+          - format: format
+            name: name
+            type: type
+            value: value
+          - format: format
+            name: name
+            type: type
+            value: value
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1AppTierSpec_2'
+      type: object
+    v1AppTierResolvedValues_2:
+      description: Application tier resolved macro values
+      example:
+        resolved:
+          key: resolved
+      properties:
+        resolved:
+          additionalProperties:
+            type: string
+          description: Application tier resolved macro values map
+          type: object
+      type: object
+    v1AppProfileTiers_2:
+      description: Application profile tiers information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          appTiers:
+          - metadata:
+              uid: uid
+              creationTimestamp: 2000-01-23 04:56:07+00:00
+              name: name
+              annotations:
+                key: annotations
+              lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+              deletionTimestamp: 2000-01-23 04:56:07+00:00
+              labels:
+                key: labels
+            spec:
+              registryUid: registryUid
+              values: values
+              manifests:
+              - uid: uid
+                kind: kind
+                name: name
+              - uid: uid
+                kind: kind
+                name: name
+              containerRegistryUid: containerRegistryUid
+              sourceAppTierUid: sourceAppTierUid
+              type: manifest
+              installOrder: 0
+              version: version
+              properties:
+              - format: format
+                name: name
+                type: type
+                value: value
+              - format: format
+                name: name
+                type: type
+                value: value
+          - metadata:
+              uid: uid
+              creationTimestamp: 2000-01-23 04:56:07+00:00
+              name: name
+              annotations:
+                key: annotations
+              lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+              deletionTimestamp: 2000-01-23 04:56:07+00:00
+              labels:
+                key: labels
+            spec:
+              registryUid: registryUid
+              values: values
+              manifests:
+              - uid: uid
+                kind: kind
+                name: name
+              - uid: uid
+                kind: kind
+                name: name
+              containerRegistryUid: containerRegistryUid
+              sourceAppTierUid: sourceAppTierUid
+              type: manifest
+              installOrder: 0
+              version: version
+              properties:
+              - format: format
+                name: name
+                type: type
+                value: value
+              - format: format
+                name: name
+                type: type
+                value: value
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1AppProfileTiersSpec_2'
+      type: object
+    v1AppTierManifests_2:
+      description: Application tier manifests data
+      example:
+        manifests:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            published:
+              digest: digest
+              content: content
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            published:
+              digest: digest
+              content: content
+      properties:
+        manifests:
+          description: Application tier manifests array
+          items:
+            $ref: '#/components/schemas/v1Manifest_2'
+          type: array
+      type: object
+    v1AppProfileTemplate_2:
+      description: Application profile template information
+      example:
+        appTiers:
+        - uid: uid
+          name: name
+          type: manifest
+          version: version
+        - uid: uid
+          name: name
+          type: manifest
+          version: version
+        registryRefs:
+        - uid: uid
+          kind: kind
+          name: name
+        - uid: uid
+          kind: kind
+          name: name
+      properties:
+        appTiers:
+          description: Application profile tiers
+          items:
+            $ref: '#/components/schemas/v1AppTierRef_2'
+          type: array
+          uniqueItems: true
+        registryRefs:
+          description: Application profile registries reference
+          items:
+            $ref: '#/components/schemas/v1ObjectReference_2'
+          type: array
+      type: object
+    v1AppProfile_status:
+      description: Application profile status
+      example:
+        inUseApps:
+        - uid: uid
+          projectUid: projectUid
+          kind: kind
+          tenantUid: tenantUid
+          name: name
+        - uid: uid
+          projectUid: projectUid
+          kind: kind
+          tenantUid: tenantUid
+          name: name
+      properties:
+        inUseApps:
+          description: Application profile apps array
+          items:
+            $ref: '#/components/schemas/v1ObjectResReference_2'
+          type: array
+      type: object
+    v1AppTierPropertyEntity_2:
+      description: Application tier property object
+      properties:
+        name:
+          description: Application tier property name
+          type: string
+        value:
+          description: Application tier property value
+          type: string
+      type: object
+    v1ManifestData_2:
+      description: Published manifest object
+      example:
+        digest: digest
+        content: content
+      properties:
+        content:
+          description: Manifest content in yaml
+          type: string
+        digest:
+          description: Manifest digest
+          type: string
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -1078,3 +1872,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

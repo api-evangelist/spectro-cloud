@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-app-tier-entity-schema.json",
+  "title": "v1AppTierEntity",
+  "description": "Application tier request payload",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppTierEntity",
+  "properties": {
+    "containerRegistryUid": {
+      "description": "Application tier container registry uid",
+      "type": "string"
+    },
+    "installOrder": {
+      "description": "Application tier installation order",
+      "format": "int32",
+      "type": "integer"
+    },
+    "manifests": {
+      "description": "Application tier manifests",
+      "items": {
+        "$ref": "#/$defs/v1ManifestInputEntity"
+      },
+      "type": "array"
+    },
+    "name": {
+      "description": "Application tier name",
+      "type": "string"
+    },
+    "properties": {
+      "description": "Application tier properties",
+      "items": {
+        "$ref": "#/$defs/v1AppTierPropertyEntity"
+      },
+      "type": "array"
+    },
+    "registryUid": {
+      "description": "Application tier registry uid",
+      "type": "string"
+    },
+    "sourceAppTierUid": {
+      "description": "Application tier source pack uid",
+      "type": "string"
+    },
+    "type": {
+      "$ref": "#/$defs/v1AppTierType"
+    },
+    "values": {
+      "description": "Application tier configuration values in yaml format",
+      "type": "string"
+    },
+    "version": {
+      "description": "Application tier version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "name"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1AppTierPropertyEntity": {
+      "description": "Application tier property object",
+      "properties": {
+        "name": {
+          "description": "Application tier property name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Application tier property value",
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierType": {
+      "default": "manifest",
+      "enum": [
+        "manifest",
+        "helm",
+        "operator-instance",
+        "container"
+      ],
+      "type": "string"
+    },
+    "v1ManifestInputEntity": {
+      "description": "Manifest request payload",
+      "properties": {
+        "content": {
+          "description": "Manifest content",
+          "type": "string"
+        },
+        "name": {
+          "description": "Manifest name",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

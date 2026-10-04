@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-marketplace-register-entity-schema.json",
+  "title": "v1MarketplaceRegisterEntity",
+  "description": "Registration request submitted when a marketplace user is redirected to Palette after purchasing a SaaS contract (e.g., from AWS Marketplace). Contains the temporary registration token from the redirect and the user's profile information for tenant and user creation.\n",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-tenants-api-openapi.yml#/components/schemas/v1MarketplaceRegisterEntity",
+  "properties": {
+    "emailId": {
+      "description": "User's email address",
+      "type": "string"
+    },
+    "firstName": {
+      "description": "User's first name for the admin user profile",
+      "type": "string"
+    },
+    "lastName": {
+      "description": "User's last name for the admin user profile",
+      "type": "string"
+    },
+    "orgName": {
+      "description": "Organization name used as the tenant name. Must be unique across the platform.",
+      "type": "string"
+    },
+    "providerType": {
+      "description": "Marketplace provider type. Defaults to \"aws\" if empty or omitted.",
+      "enum": [
+        "aws"
+      ],
+      "type": "string"
+    },
+    "registrationToken": {
+      "description": "Temporary token provided by the marketplace provider during the redirect after purchase. Must be resolved promptly as it is short-lived (e.g., x-amzn-marketplace-token for AWS).\n",
+      "type": "string"
+    }
+  },
+  "required": [
+    "registrationToken",
+    "emailId",
+    "firstName",
+    "lastName",
+    "orgName"
+  ]
+}

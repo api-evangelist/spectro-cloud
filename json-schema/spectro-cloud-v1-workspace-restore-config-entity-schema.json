@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-workspace-restore-config-entity-schema.json",
+  "title": "v1WorkspaceRestoreConfigEntity",
+  "description": "Cluster restore config",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-workspaces-api-openapi.yml#/components/schemas/v1WorkspaceRestoreConfigEntity",
+  "properties": {
+    "backupRequestUid": {
+      "type": "string"
+    },
+    "restoreConfigs": {
+      "items": {
+        "$ref": "#/$defs/v1WorkspaceRestoreConfig"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "backupRequestUid"
+  ],
+  "$defs": {
+    "v1IncludeClusterResourceMode": {
+      "description": "Specifies the scope of cluster-wide resources to include in the backup based on the flag'--include-cluster-resources':\n- \"Always\": --include-cluster-resources=true, which includes all cluster-wide resources; restores only on the original cluster.\n- \"Auto\": don't specify --include-cluster-resources, which exclude general cluster-wide resources, but includes PersistentVolumes linked to selected namespaces.\n- \"Never\": --include-cluster-resources=false, exclude all cluster-wide resources, including PersistentVolumes.\n",
+      "enum": [
+        "Always",
+        "Auto",
+        "Never"
+      ],
+      "type": "string"
+    },
+    "v1WorkspaceRestoreConfig": {
+      "description": "Workspace cluster restore config",
+      "properties": {
+        "backupName": {
+          "type": "string"
+        },
+        "includeClusterResourceMode": {
+          "$ref": "#/$defs/v1IncludeClusterResourceMode"
+        },
+        "includeClusterResources": {
+          "description": "Deprecated. Use includeClusterResourceMode",
+          "type": "boolean"
+        },
+        "includeNamespaces": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "preserveNodePorts": {
+          "type": "boolean"
+        },
+        "restorePVs": {
+          "type": "boolean"
+        },
+        "sourceClusterUid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "backupName",
+        "sourceClusterUid"
+      ]
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-helm-registry-spec-schema.json",
+  "title": "v1HelmRegistrySpec",
+  "description": "Helm registry credentials spec",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-registries-api-openapi.yml#/components/schemas/v1HelmRegistrySpec",
+  "properties": {
+    "auth": {
+      "$ref": "#/$defs/v1RegistryAuth"
+    },
+    "endpoint": {
+      "type": "string"
+    },
+    "isPrivate": {
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "name": {
+      "type": "string"
+    },
+    "registryUid": {
+      "description": "Helm registry uid",
+      "type": "string"
+    },
+    "scope": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "endpoint",
+    "auth"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1RegistryAuth": {
+      "description": "Auth credentials of the registry",
+      "properties": {
+        "password": {
+          "format": "password",
+          "type": "string"
+        },
+        "tls": {
+          "$ref": "#/$defs/v1TlsConfiguration"
+        },
+        "token": {
+          "format": "password",
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "noAuth",
+            "basic",
+            "token"
+          ],
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1TlsConfiguration": {
+      "description": "TLS configuration",
+      "properties": {
+        "ca": {
+          "type": "string"
+        },
+        "certificate": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "insecureSkipVerify": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "key": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,622 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-vsphere-cloud-config-schema.json",
+  "title": "v1VsphereCloudConfig",
+  "description": "VsphereCloudConfig is the Schema for the vspherecloudconfigs API",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-cloudconfigs-api-openapi.yml#/components/schemas/v1VsphereCloudConfig",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1VsphereCloudConfigSpec"
+    },
+    "status": {
+      "$ref": "#/$defs/v1VsphereCloudConfigStatus"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ArchType": {
+      "default": "amd64",
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "type": "string"
+    },
+    "v1ClusterCondition": {
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "lastTransitionTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "message": {
+          "description": "Human-readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Unique, one-word, CamelCase reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "type": "object"
+    },
+    "v1ControlPlaneEndPoint": {
+      "properties": {
+        "ddnsSearchDomain": {
+          "description": "DDNSSearchDomain is the search domain used for resolving IP addresses when the EndpointType is DDNS. This search domain is appended to the generated Hostname to obtain the complete DNS name for the endpoint. If Host is already a DDNS FQDN, DDNSSearchDomain is not required",
+          "type": "string"
+        },
+        "host": {
+          "description": "IP or FQDN(External/DDNS)",
+          "type": "string"
+        },
+        "type": {
+          "description": "VIP or External",
+          "enum": [
+            "VIP",
+            "External",
+            "DDNS"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1IPPool": {
+      "description": "IPPool defines static IPs available. Gateway, Prefix, Nameserver, if defined, will be default values for all Pools",
+      "properties": {
+        "gateway": {
+          "description": "Gateway is the gateway ip address",
+          "type": "string"
+        },
+        "nameserver": {
+          "$ref": "#/$defs/v1Nameserver",
+          "description": "Nameserver provide information for dns resolvation"
+        },
+        "pools": {
+          "description": "Pools contains the list of IP addresses pools",
+          "items": {
+            "$ref": "#/$defs/v1Pool"
+          },
+          "type": "array"
+        },
+        "prefix": {
+          "description": "Prefix is the mask of the network as integer (max 128)",
+          "format": "int32",
+          "type": "integer"
+        },
+        "uid": {
+          "description": "UID is the UID of this IPPool, used by Hubble",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1MachinePoolProperties": {
+      "description": "Machine pool specific properties",
+      "properties": {
+        "archType": {
+          "$ref": "#/$defs/v1ArchType",
+          "description": "Architecture type of the pool. Default value is 'amd64'",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1Nameserver": {
+      "description": "Nameserver define search domains and nameserver addresses",
+      "properties": {
+        "addresses": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "search": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Pool": {
+      "description": "Pool defines IP ranges or with CIDR for available IPs Gateway, Prefix and Nameserver if provided, will overwrite values in IPPool",
+      "properties": {
+        "end": {
+          "description": "End is the last IP address that can be rendered. It is used as a validation that the rendered IP is in bound.",
+          "type": "string"
+        },
+        "gateway": {
+          "description": "Gateway is the gateway ip address",
+          "type": "string"
+        },
+        "nameserver": {
+          "$ref": "#/$defs/v1Nameserver",
+          "description": "Nameserver provide information for dns resolvation"
+        },
+        "prefix": {
+          "description": "Prefix is the mask of the network as integer (max 128)",
+          "format": "int32",
+          "type": "integer"
+        },
+        "start": {
+          "description": "Start is the first ip address that can be rendered",
+          "type": "string"
+        },
+        "subnet": {
+          "description": "Subnet is used to validate that the rendered IP is in bounds. eg: 192.168.0.0/24 If Start value is not given, start value is derived from the subnet ip incremented by 1 (start value is `192.168.0.1` for subnet `192.168.0.0/24`)",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Taint": {
+      "description": "Taint",
+      "properties": {
+        "effect": {
+          "enum": [
+            "NoSchedule",
+            "PreferNoSchedule",
+            "NoExecute"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "description": "The taint key to be applied to a node",
+          "type": "string"
+        },
+        "timeAdded": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "value": {
+          "description": "The taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1UpdateStrategy": {
+      "description": "UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1 OverrideScaling => maxSurge and maxUnavailable are user-specified (both required)",
+      "properties": {
+        "maxSurge": {
+          "description": "Max extra nodes during rolling update. Integer or percentage (e.g., \"1\" or \"20%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "maxUnavailable": {
+          "description": "Max unavailable nodes during rolling update. Integer or percentage (e.g., \"0\" or \"10%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "type": {
+          "description": "Update strategy type. Defaults to RollingUpdateScaleOut if empty.",
+          "enum": [
+            "RollingUpdateScaleOut",
+            "RollingUpdateScaleIn",
+            "OverrideScaling"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1VsphereCloudConfigSpec": {
+      "description": "VsphereCloudConfigSpec defines the desired state of VsphereCloudConfig",
+      "properties": {
+        "cloudAccountRef": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "cloudAccountRef should point to the secret which contains VsphereCloudAccount"
+        },
+        "clusterConfig": {
+          "$ref": "#/$defs/v1VsphereClusterConfig"
+        },
+        "edgeHostRef": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "Appliance (Edge Host) uid for Edge env"
+        },
+        "machinePoolConfig": {
+          "items": {
+            "$ref": "#/$defs/v1VsphereMachinePoolConfig"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "clusterConfig",
+        "machinePoolConfig"
+      ],
+      "type": "object"
+    },
+    "v1VsphereCloudConfigStatus": {
+      "description": "VsphereCloudConfigStatus defines the observed state of VsphereCloudConfig",
+      "properties": {
+        "ansibleDigest": {
+          "type": "string"
+        },
+        "conditions": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterCondition"
+          },
+          "type": "array"
+        },
+        "isAddonLayer": {
+          "description": "addon layers present in spc",
+          "type": "boolean"
+        },
+        "lastOVACreated": {
+          "type": "string"
+        },
+        "lastVMExported": {
+          "type": "string"
+        },
+        "nodeImage": {
+          "$ref": "#/$defs/v1VsphereImage"
+        },
+        "roleDigest": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "this map will be for ansible roles present in eack pack",
+          "type": "object"
+        },
+        "sourceImageId": {
+          "description": "sourceImageId, it can be from packref's annotations or from pack.json",
+          "type": "string"
+        },
+        "uploadOvaS3": {
+          "description": "UploadOVAS3 will hold last image name which uploaded to S3",
+          "type": "string"
+        },
+        "useCapiImage": {
+          "description": "If no ansible roles found in Packs then Mold should tell Drive to use capi image and not create custom image, because there is nothing to add",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "v1VsphereClusterConfig": {
+      "properties": {
+        "controlPlaneEndpoint": {
+          "$ref": "#/$defs/v1ControlPlaneEndPoint",
+          "description": "The optional control plane endpoint, which can be an IP or FQDN"
+        },
+        "ntpServers": {
+          "description": "NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "placement": {
+          "$ref": "#/$defs/v1VspherePlacementConfig",
+          "description": "Placement configuration Placement config in ClusterConfig serve as default values for each MachinePool"
+        },
+        "sshKeys": {
+          "description": "SSHKeys specifies a list of ssh authorized keys for the 'spectro' user",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "staticIp": {
+          "description": "whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "placement"
+      ],
+      "type": "object"
+    },
+    "v1VsphereImage": {
+      "description": "A generated Image should always be a template which resides inside vsphere Will not generate a OVA file out of the image OVA can be used as a base input of the os pack, that's internal to the pack",
+      "properties": {
+        "fullPath": {
+          "description": "full path of the image template location it contains datacenter/folder/templatename etc eg: /mydc/vm/template/spectro/workerpool-1-centos",
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1VsphereInstanceType": {
+      "properties": {
+        "diskGiB": {
+          "description": "DiskGiB is the size of a virtual machine's disk, in GiB. Defaults to the analogue property value in the template from which this machine is cloned.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "memoryMiB": {
+          "description": "MemoryMiB is the size of a virtual machine's memory, in MiB. Defaults to the analogue property value in the template from which this machine is cloned.",
+          "format": "int64",
+          "type": "integer"
+        },
+        "numCPUs": {
+          "description": "NumCPUs is the number of virtual processors in a virtual machine. Defaults to the analogue property value in the template from which this machine is cloned.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "numCPUs",
+        "memoryMiB",
+        "diskGiB"
+      ],
+      "type": "object"
+    },
+    "v1VsphereMachinePoolConfig": {
+      "properties": {
+        "additionalAnnotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Custom annotations for CAPI machine objects and nodes.\n",
+          "type": "object"
+        },
+        "additionalLabels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "additionalLabels",
+          "type": "object"
+        },
+        "additionalTags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "AdditionalTags is an optional set of tags to add to resources managed by the provider, in addition to the ones added by default. For eg., tags for EKS nodeGroup or EKS NodegroupIAMRole",
+          "type": "object"
+        },
+        "instanceType": {
+          "$ref": "#/$defs/v1VsphereInstanceType",
+          "description": "InstanceType defines the required CPU, Memory, Storage"
+        },
+        "isControlPlane": {
+          "description": "whether this pool is for control plane",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "labels": {
+          "description": "labels for this pool, example: control-plane/worker, gpu, windows",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "machinePoolProperties": {
+          "$ref": "#/$defs/v1MachinePoolProperties"
+        },
+        "maxSize": {
+          "description": "max size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minSize": {
+          "description": "min size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nodeRepaveInterval": {
+          "description": "Minimum number of seconds a node should be Ready, before the next node is selected for repave. Applicable only for workerpools in infrastructure cluster",
+          "format": "int32",
+          "type": "integer"
+        },
+        "overrideClusterAPIConfig": {
+          "description": "YAML override for CAPI properties at pool level.\nOverrides pack-level and Palette-managed values. See PCP-4787.\n",
+          "type": "string"
+        },
+        "overrideHealthCheckConfiguration": {
+          "description": "YAML config to override Machine Health Check values at the node pool level.\nAccepts CAPI MachineHealthCheck fields such as maxUnhealthy, nodeStartupTimeout,\nand unhealthyNodeConditions. Falls back to Palette defaults when unset and\nremains subject to the project/tenant Cluster Auto Remediation setting.\n",
+          "type": "string"
+        },
+        "overrideKubeadmConfiguration": {
+          "description": "YAML config for kubeletExtraArgs, preKubeadmCommands, postKubeadmCommands.\nOverrides pack-level settings. Worker pools only.\n",
+          "type": "string"
+        },
+        "placements": {
+          "description": "Placements configuration Placements If defined, will replace default values defined in VsphereClusterConfig Array means one MachinePool can span across multiple vsphere compute cluster",
+          "items": {
+            "$ref": "#/$defs/v1VspherePlacementConfig"
+          },
+          "type": "array"
+        },
+        "size": {
+          "description": "size of the pool, number of machines",
+          "format": "int32",
+          "type": "integer"
+        },
+        "skipK8sUpgrade": {
+          "default": "disabled",
+          "description": "Skip Kubernetes version upgrade validation for worker pools with N-3 version skew.\n- enabled: Bypasses version skew validation, allows Control Plane upgrade even when this worker pool is >3 minor versions behind\n- disabled: Automatically upgrade worker pool to match Control Plane Kubernetes version (default)\n",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-omitempty": true
+        },
+        "taints": {
+          "description": "control plane or worker taints",
+          "items": {
+            "$ref": "#/$defs/v1Taint"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "updateStrategy": {
+          "$ref": "#/$defs/v1UpdateStrategy",
+          "description": "rolling update strategy for this machinepool if not specified, will use ScaleOut"
+        },
+        "useControlPlaneAsWorker": {
+          "description": "if IsControlPlane==true && useControlPlaneAsWorker==true, then will remove control plane taint this will not be used for worker pools",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "isControlPlane",
+        "instanceType"
+      ],
+      "type": "object"
+    },
+    "v1VsphereNetworkConfig": {
+      "properties": {
+        "ipPool": {
+          "$ref": "#/$defs/v1IPPool",
+          "description": "when staticIP=true, need to provide IPPool"
+        },
+        "networkName": {
+          "description": "NetworkName is the name of the network in which VMs are created/located.",
+          "type": "string"
+        },
+        "parentPoolRef": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "ParentPoolRef reference to the ParentPool which allocates IPs for this IPPool"
+        },
+        "staticIp": {
+          "description": "support dhcp or static IP, if false, use DHCP",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "networkName"
+      ],
+      "type": "object"
+    },
+    "v1VspherePlacementConfig": {
+      "description": "Both ClusterConfig and MachinePoolConfig will have PlacementConfig MachinePoolconfig.Placements will overwrite values defined in ClusterConfig Currently the convention is: Datacenter / Folder / ImageTemplateFolder / Network should be defined at ClusterConfig Cluster / ResourcePool / Datastore / Network is defined at MachinePool ClusterConfig Network should only indicate use DHCP or not MachinePool Network should contain the actual network and IPPool",
+      "properties": {
+        "cluster": {
+          "description": "Cluster is the computecluster in vsphere",
+          "type": "string"
+        },
+        "datacenter": {
+          "description": "Datacenter is the name or inventory path of the datacenter where this machine's VM is created/located.",
+          "type": "string"
+        },
+        "datastore": {
+          "description": "Datastore is the datastore in which VMs are created/located.",
+          "type": "string"
+        },
+        "folder": {
+          "description": "Folder is the folder in which VMs are created/located.",
+          "type": "string"
+        },
+        "imageTemplateFolder": {
+          "description": "ImageTemplateFolder is the folder in which VMs templates are created/located. if empty will use default value spectro-templates",
+          "type": "string"
+        },
+        "network": {
+          "$ref": "#/$defs/v1VsphereNetworkConfig",
+          "description": "network info"
+        },
+        "resourcePool": {
+          "description": "ResourcePool is the resource pool within the above computecluster Cluster",
+          "type": "string"
+        },
+        "storagePolicyName": {
+          "description": "StoragePolicyName of the storage policy to use with this Virtual Machine",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID for this placement",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

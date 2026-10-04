@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-tenant-oidc-client-spec-schema.json",
+  "title": "v1TenantOidcClientSpec",
+  "description": "Tenant",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-tenants-api-openapi.yml#/components/schemas/v1TenantOidcClientSpec",
+  "properties": {
+    "callbackUrl": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "clientId": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "clientSecret": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "defaultTeams": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "x-omitempty": false
+    },
+    "isSsoEnabled": {
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "issuerTls": {
+      "$ref": "#/$defs/v1OidcIssuerTls"
+    },
+    "issuerUrl": {
+      "description": "the issuer is the URL identifier for the service",
+      "type": "string",
+      "x-omitempty": false
+    },
+    "logoutUrl": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "requiredClaims": {
+      "$ref": "#/$defs/v1TenantOidcClaims"
+    },
+    "scopes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "x-omitempty": false
+    },
+    "scopesDelimiter": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "syncSsoTeams": {
+      "description": "When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved",
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "userInfo": {
+      "$ref": "#/$defs/v1OidcUserInfo"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1OidcIssuerTls": {
+      "properties": {
+        "caCertificateBase64": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "insecureSkipVerify": {
+          "default": false,
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1OidcUserInfo": {
+      "properties": {
+        "claims": {
+          "$ref": "#/$defs/v1TenantOidcClaims"
+        },
+        "useUserInfo": {
+          "default": false,
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1TenantOidcClaims": {
+      "properties": {
+        "Email": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "FirstName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "LastName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "SpectroTeam": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    }
+  }
+}

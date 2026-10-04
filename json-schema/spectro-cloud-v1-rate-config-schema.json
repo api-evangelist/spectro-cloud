@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-rate-config-schema.json",
+  "title": "v1RateConfig",
+  "description": "Rate config",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-tenants-api-openapi.yml#/components/schemas/v1RateConfig",
+  "properties": {
+    "apache-cloudstack": {
+      "$ref": "#/$defs/v1PrivateCloudRateConfig"
+    },
+    "aws": {
+      "$ref": "#/$defs/v1PublicCloudRateConfig"
+    },
+    "azure": {
+      "$ref": "#/$defs/v1PublicCloudRateConfig"
+    },
+    "custom": {
+      "items": {
+        "$ref": "#/$defs/v1CustomCloudRateConfig"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "edge": {
+      "$ref": "#/$defs/v1PrivateCloudRateConfig"
+    },
+    "edgeNative": {
+      "$ref": "#/$defs/v1PrivateCloudRateConfig"
+    },
+    "gcp": {
+      "$ref": "#/$defs/v1PublicCloudRateConfig"
+    },
+    "generic": {
+      "$ref": "#/$defs/v1PrivateCloudRateConfig"
+    },
+    "maas": {
+      "$ref": "#/$defs/v1PrivateCloudRateConfig"
+    },
+    "vsphere": {
+      "$ref": "#/$defs/v1PrivateCloudRateConfig"
+    }
+  },
+  "$defs": {
+    "v1CloudInstanceRateConfig": {
+      "description": "Cloud instance rate config",
+      "properties": {
+        "computeRateProportion": {
+          "format": "float",
+          "type": "number"
+        },
+        "memoryRateProportion": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
+    "v1CustomCloudRateConfig": {
+      "description": "Private cloud rate config",
+      "properties": {
+        "cloudType": {
+          "type": "string"
+        },
+        "rateConfig": {
+          "$ref": "#/$defs/v1PrivateCloudRateConfig"
+        }
+      }
+    },
+    "v1PrivateCloudRateConfig": {
+      "description": "Private cloud rate config",
+      "properties": {
+        "cpuUnitPricePerHour": {
+          "format": "float64",
+          "type": "number"
+        },
+        "gpuUnitPricePerHour": {
+          "format": "float64",
+          "type": "number"
+        },
+        "memoryUnitPriceGiBPerHour": {
+          "format": "float64",
+          "type": "number"
+        },
+        "storageUnitPriceGiBPerHour": {
+          "format": "float64",
+          "type": "number"
+        }
+      }
+    },
+    "v1PublicCloudRateConfig": {
+      "description": "Public cloud rate config",
+      "properties": {
+        "computeOptimized": {
+          "$ref": "#/$defs/v1CloudInstanceRateConfig"
+        },
+        "memoryOptimized": {
+          "$ref": "#/$defs/v1CloudInstanceRateConfig"
+        }
+      }
+    }
+  }
+}

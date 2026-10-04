@@ -39,17 +39,6 @@ paths:
       - Activations
 components:
   schemas:
-    v1Error:
-      properties:
-        code:
-          type: string
-        details:
-          type: object
-        message:
-          type: string
-        ref:
-          type: string
-      type: object
     v1ActivationsSystemResponse:
       properties:
         status:
@@ -65,6 +54,17 @@ components:
           required:
           - state
           type: object
+      type: object
+    v1Error:
+      properties:
+        code:
+          type: string
+        details:
+          type: object
+        message:
+          type: string
+        ref:
+          type: string
       type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.

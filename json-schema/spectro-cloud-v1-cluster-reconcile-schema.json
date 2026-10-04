@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-reconcile-schema.json",
+  "title": "v1ClusterReconcile",
+  "description": "Cluster reconcile document containing all reconciliation information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clustertemplates-api-openapi.yml#/components/schemas/v1ClusterReconcile",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1ClusterReconcileSpec"
+    },
+    "status": {
+      "$ref": "#/$defs/v1ClusterReconcileStatus"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ClusterReconcileLog": {
+      "description": "Cluster reconciliation log entry",
+      "properties": {
+        "appliedTimestamp": {
+          "description": "Timestamp when this log entry was created",
+          "format": "date-time",
+          "type": "string"
+        },
+        "message": {
+          "description": "Log message",
+          "type": "string"
+        },
+        "profileUids": {
+          "description": "List of profile UIDs involved in this reconciliation",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "state": {
+          "description": "Reconciliation state for this log entry",
+          "enum": [
+            "Created",
+            "Pending",
+            "InProgress",
+            "Applied",
+            "Failed"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterReconcileSpec": {
+      "description": "Cluster reconcile specification",
+      "properties": {
+        "profiles": {
+          "description": "List of cluster profiles with reconciliation information",
+          "items": {
+            "$ref": "#/$defs/v1ClusterTemplateProfileVariables"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterReconcileStatus": {
+      "description": "Cluster reconcile status",
+      "properties": {
+        "lastAppliedTimestamp": {
+          "description": "Timestamp when reconciliation was last applied",
+          "format": "date-time",
+          "type": "string"
+        },
+        "message": {
+          "description": "Status message",
+          "type": "string"
+        },
+        "state": {
+          "description": "Current reconciliation state",
+          "enum": [
+            "Created",
+            "Pending",
+            "InProgress",
+            "Applied",
+            "Failed"
+          ],
+          "type": "string"
+        },
+        "updateLogs": {
+          "description": "List of reconciliation update logs",
+          "items": {
+            "$ref": "#/$defs/v1ClusterReconcileLog"
+          },
+          "type": "array"
+        },
+        "variableStatus": {
+          "$ref": "#/$defs/v1ClusterVariableReconcileStatus"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterTemplateProfileVariables": {
+      "description": "Profile variables with grouped resolved and unresolved variables",
+      "properties": {
+        "name": {
+          "description": "Profile name",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Profile UID",
+          "type": "string"
+        },
+        "variables": {
+          "description": "List of resolved and unresolved variables belonging to a cluster launched from template",
+          "properties": {
+            "resolvedVariables": {
+              "description": "List of resolved variables",
+              "items": {
+                "$ref": "#/$defs/v1SpectroClusterVariable"
+              },
+              "type": "array"
+            },
+            "unResolvedVariables": {
+              "description": "List of unresolved variables",
+              "items": {
+                "$ref": "#/$defs/v1SpectroClusterVariable"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "uid"
+      ],
+      "type": "object"
+    },
+    "v1ClusterVariableReconcileStatus": {
+      "description": "Cluster variable reconciliation status",
+      "properties": {
+        "state": {
+          "description": "Variable reconciliation state",
+          "enum": [
+            "Resolved",
+            "Unresolved"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterVariable": {
+      "description": "Variable with value which will be used within the packs of cluster profile",
+      "properties": {
+        "name": {
+          "description": "Variable name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Actual value of the variable to be used within the cluster",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

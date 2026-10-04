@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-maas-cloud-account-schema.json",
+  "title": "v1MaasCloudAccount",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clouds-api-openapi.yml#/components/schemas/v1MaasCloudAccount",
+  "properties": {
+    "apiEndpoint": {
+      "type": "string"
+    },
+    "apiKey": {
+      "type": "string"
+    },
+    "preferredSubnets": {
+      "description": "list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet \"10.11.130.0/24,10.10.10.0/24\"",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "apiKey",
+    "apiEndpoint"
+  ],
+  "type": "object"
+}

@@ -1,0 +1,171 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-workspace-clusters-workload-daemon-sets-schema.json",
+  "title": "v1WorkspaceClustersWorkloadDaemonSets",
+  "description": "Workspace clusters workload statefulsets summary",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-dashboard-api-openapi.yml#/components/schemas/v1WorkspaceClustersWorkloadDaemonSets",
+  "properties": {
+    "clusters": {
+      "items": {
+        "$ref": "#/$defs/v1WorkspaceClusterWorkloadDaemonSets"
+      },
+      "type": "array"
+    },
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMetaInputEntity"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ClusterWorkloadDaemonSet": {
+      "description": "Cluster workload daemonset summary",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/v1ClusterWorkloadMetadata"
+        },
+        "status": {
+          "$ref": "#/$defs/v1ClusterWorkloadDaemonSetStatus"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterWorkloadDaemonSetStatus": {
+      "description": "Cluster workload daemonset status",
+      "properties": {
+        "available": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "currentScheduled": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "desiredScheduled": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "misScheduled": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ready": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "updatedScheduled": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterWorkloadMetadata": {
+      "description": "Cluster workload metadata",
+      "properties": {
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "entity": {
+          "$ref": "#/$defs/v1ClusterWorkloadRef"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "namespace": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterWorkloadRef": {
+      "description": "Cluster workload ref",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMetaInputEntity": {
+      "description": "ObjectMeta input entity for object creation",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1RelatedObject": {
+      "description": "Object for which the resource is related",
+      "properties": {
+        "kind": {
+          "enum": [
+            "spectrocluster",
+            "machine",
+            "cloudconfig",
+            "clusterprofile",
+            "pack",
+            "appprofile",
+            "appdeployment",
+            "edgehost"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1WorkspaceClusterWorkloadDaemonSets": {
+      "description": "Workspace cluster workload daemonsets summary",
+      "properties": {
+        "daemonSets": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterWorkloadDaemonSet"
+          },
+          "type": "array"
+        },
+        "metadata": {
+          "$ref": "#/$defs/v1RelatedObject"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-user-spec-schema.json",
+  "title": "v1UserSpec",
+  "description": "Current user information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-users-api-openapi.yml#/components/schemas/v1UserSpec",
+  "type": "object",
+  "properties": {
+    "disablePasswordUpdate": {
+      "description": "Flag to indicate if the user is allowed to update the password",
+      "type": "boolean",
+      "default": false
+    },
+    "sshKeys": {
+      "description": "Current user's ssh keys",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "userName": {
+      "description": "Current user's username",
+      "type": "string"
+    }
+  }
+}

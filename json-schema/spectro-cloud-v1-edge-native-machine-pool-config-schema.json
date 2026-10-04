@@ -1,0 +1,346 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-edge-native-machine-pool-config-schema.json",
+  "title": "v1EdgeNativeMachinePoolConfig",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edge-mgmt-api-openapi.yml#/components/schemas/v1EdgeNativeMachinePoolConfig",
+  "type": "object",
+  "required": [
+    "hosts"
+  ],
+  "properties": {
+    "additionalLabels": {
+      "description": "AdditionalLabels",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    "additionalTags": {
+      "description": "AdditionalTags is an optional set of tags to add to resources managed by the provider, in addition to the ones added by default. For eg., tags for EKS nodeGroup or EKS NodegroupIAMRole",
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    "hosts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1EdgeNativeHost"
+      }
+    },
+    "isControlPlane": {
+      "description": "whether this pool is for control plane",
+      "type": "boolean"
+    },
+    "labels": {
+      "description": "labels for this pool, example: master/worker, gpu, windows",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    "machinePoolProperties": {
+      "$ref": "#/$defs/v1MachinePoolProperties"
+    },
+    "maxSize": {
+      "description": "max size of the pool, for scaling",
+      "type": "integer",
+      "format": "int32"
+    },
+    "minSize": {
+      "description": "min size of the pool, for scaling",
+      "type": "integer",
+      "format": "int32"
+    },
+    "name": {
+      "type": "string"
+    },
+    "nodeRepaveInterval": {
+      "description": "Minimum number of seconds a node should be Ready, before the next node is selected for repave. Applicable only for workerpools in infrastructure cluster",
+      "type": "integer",
+      "format": "int32"
+    },
+    "osType": {
+      "description": "the os type for the pool, must be supported by the provider",
+      "type": "string"
+    },
+    "size": {
+      "description": "size of the pool, number of machines",
+      "type": "integer",
+      "format": "int32"
+    },
+    "skipK8sUpgrade": {
+      "description": "Skip Kubernetes version upgrade validation for worker pools with N-3 version skew.\n- enabled: Bypasses version skew validation, allows Control Plane upgrade even when this worker pool is >3 minor versions behind\n- disabled: Automatically upgrade worker pool to match Control Plane Kubernetes version\n",
+      "type": "string",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "x-omitempty": true
+    },
+    "taints": {
+      "description": "master or worker taints",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/v1Taint"
+      }
+    },
+    "updateStrategy": {
+      "description": "rolling update strategy for this machinepool if not specified, will use ScaleOut",
+      "$ref": "#/$defs/v1UpdateStrategy"
+    },
+    "useControlPlaneAsWorker": {
+      "description": "if IsControlPlane==true && useControlPlaneAsWorker==true, then will remove master taint this will not be used for worker pools",
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "v1ArchType": {
+      "description": "Architecture type of the edge host",
+      "type": "string",
+      "default": "amd64",
+      "enum": [
+        "arm64",
+        "amd64"
+      ]
+    },
+    "v1Condition": {
+      "required": [
+        "type",
+        "status"
+      ],
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "lastTransitionTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "message": {
+          "description": "Human readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Unique, one word reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "v1EdgeNativeHost": {
+      "description": "EdgeNativeHost is the underlying appliance",
+      "type": "object",
+      "properties": {
+        "IsCandidateCaption": {
+          "description": "Is Edge host nominated as candidate",
+          "type": "boolean",
+          "default": false,
+          "x-omitempty": false
+        },
+        "caCert": {
+          "description": "CACert for TLS connections",
+          "type": "string"
+        },
+        "hostAddress": {
+          "description": "HostAddress is a FQDN or IP address of the Host",
+          "type": "string",
+          "default": ""
+        },
+        "hostName": {
+          "description": "Qualified name of host",
+          "type": "string",
+          "default": ""
+        },
+        "hostUid": {
+          "description": "HostUid is the ID of the EdgeHost",
+          "type": "string",
+          "default": ""
+        },
+        "networkInfo": {
+          "description": "List network interfaces of an EH",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/v1Nic"
+          }
+        },
+        "nic": {
+          "description": "Edge native nic. (Depricated)",
+          "$ref": "#/$defs/v1Nic"
+        },
+        "nicName": {
+          "description": "Deprecated. Edge host nic name",
+          "type": "string"
+        },
+        "nodeInfo": {
+          "description": "node information if edgehost is part of a cluster",
+          "x-omitempty": true,
+          "$ref": "#/$defs/v1NodeInfo"
+        },
+        "staticIP": {
+          "description": "Deprecated. Edge host static IP",
+          "type": "string"
+        },
+        "tags": {
+          "description": "tags set via userdata.",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "x-omitempty": true
+        },
+        "twoNodeCandidatePriority": {
+          "description": "Set the edgehost candidate priority as primary or secondary, if the edgehost is nominated as two node candidate",
+          "type": "string",
+          "enum": [
+            "primary",
+            "secondary"
+          ]
+        }
+      }
+    },
+    "v1Health": {
+      "description": "Health provides details about the resource health.",
+      "type": "object",
+      "properties": {
+        "reason": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Healthy",
+            "Unhealthy"
+          ]
+        }
+      }
+    },
+    "v1MachinePoolProperties": {
+      "description": "Machine pool specific properties",
+      "type": "object",
+      "properties": {
+        "archType": {
+          "description": "Architecture type of the pool. Default value is 'amd64'",
+          "x-omitempty": false,
+          "$ref": "#/$defs/v1ArchType"
+        }
+      }
+    },
+    "v1Nic": {
+      "description": "Nic is the specification of the network interface card on the edge host.",
+      "type": "object",
+      "properties": {
+        "dns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "boolean"
+        },
+        "macAddr": {
+          "type": "string"
+        },
+        "nicName": {
+          "type": "string"
+        },
+        "subnet": {
+          "type": "string"
+        }
+      }
+    },
+    "v1NodeInfo": {
+      "type": "object",
+      "properties": {
+        "age": {
+          "type": "string"
+        },
+        "architecture": {
+          "type": "string"
+        },
+        "conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/v1Condition"
+          }
+        },
+        "health": {
+          "$ref": "#/$defs/v1Health"
+        },
+        "ipv4": {
+          "type": "string",
+          "x-go-name": "IPV4"
+        },
+        "k8sVersion": {
+          "type": "string"
+        },
+        "nodeName": {
+          "type": "string"
+        },
+        "nodeState": {
+          "type": "string"
+        }
+      }
+    },
+    "v1Taint": {
+      "description": "Taint",
+      "type": "object",
+      "properties": {
+        "effect": {
+          "type": "string",
+          "enum": [
+            "NoSchedule",
+            "PreferNoSchedule",
+            "NoExecute"
+          ]
+        },
+        "key": {
+          "description": "The taint key to be applied to a node",
+          "type": "string"
+        },
+        "timeAdded": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "value": {
+          "description": "The taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      }
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "v1UpdateStrategy": {
+      "description": "UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "update strategy, either ScaleOut or ScaleIn if empty, will default to RollingUpdateScaleOut",
+          "type": "string",
+          "enum": [
+            "RollingUpdateScaleOut",
+            "RollingUpdateScaleIn"
+          ]
+        }
+      }
+    }
+  }
+}

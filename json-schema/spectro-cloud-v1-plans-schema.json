@@ -1,0 +1,373 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-plans-schema.json",
+  "title": "v1Plans",
+  "description": "Array of Plans",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-plans-api-openapi.yml#/components/schemas/v1Plans",
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/v1Plan"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "listmeta": {
+      "$ref": "#/$defs/v1ListMetaData"
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1DeveloperCredit": {
+      "description": "Credits allocated for each tenant/user",
+      "properties": {
+        "cpu": {
+          "description": "cpu in cores",
+          "format": "int32",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "memoryGiB": {
+          "description": "memory in GiB",
+          "format": "int32",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "storageGiB": {
+          "description": "storage in GiB",
+          "format": "int32",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "virtualClustersLimit": {
+          "description": "number of active virtual clusters",
+          "format": "int32",
+          "type": "number",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1ListMetaData": {
+      "description": "ListMeta describes metadata for the resource listing",
+      "properties": {
+        "continue": {
+          "description": "Next token for the pagination. Next token is equal to empty string indicates end of result set.",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "count": {
+          "description": "Total count of the resources which might change during pagination based on the resources addition or deletion",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "limit": {
+          "description": "Number of records feteched",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "offset": {
+          "description": "The next offset for the pagination. Starting index for which next request will be placed.",
+          "type": "integer",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Plan": {
+      "description": "Plan",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/$defs/v1PlanSpec"
+        },
+        "status": {
+          "$ref": "#/$defs/v1PlanStatus"
+        }
+      }
+    },
+    "v1PlanCost": {
+      "description": "Plan Cost",
+      "properties": {
+        "discount": {
+          "format": "float",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "price": {
+          "format": "float",
+          "type": "number",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1PlanCredit": {
+      "description": "Plan Credit",
+      "properties": {
+        "cpuCoreHours": {
+          "format": "int64",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "creditUid": {
+          "type": "string"
+        },
+        "expiry": {
+          "$ref": "#/$defs/v1Time",
+          "description": "credit expiry time"
+        },
+        "name": {
+          "type": "string"
+        },
+        "start": {
+          "$ref": "#/$defs/v1Time",
+          "description": "credit start time"
+        },
+        "type": {
+          "enum": [
+            "Pure",
+            "Alloy"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "v1PlanLimit": {
+      "description": "Monthly Plan Limit",
+      "properties": {
+        "alloy": {
+          "$ref": "#/$defs/v1PlanLimitSpec"
+        },
+        "isOnDemand": {
+          "description": "is onDemand plan and has no limit",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isUnlimited": {
+          "description": "is unlimited cpu core hours",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "pure": {
+          "$ref": "#/$defs/v1PlanLimitSpec"
+        }
+      }
+    },
+    "v1PlanLimitSpec": {
+      "description": "Monthly Plan Limit spec",
+      "properties": {
+        "cpuCoreHours": {
+          "description": "cpu cores hours",
+          "format": "int64",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "overageLimitPercentage": {
+          "default": 25,
+          "description": "overage limit in percentage",
+          "format": "int8",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "warnLimitPercentage": {
+          "default": 90,
+          "description": "warning limit in percentage",
+          "format": "int8",
+          "type": "integer",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1PlanRenewal": {
+      "description": "Plan Renewal",
+      "properties": {
+        "expiry": {
+          "$ref": "#/$defs/v1Time",
+          "description": "credit expiry time"
+        },
+        "planLimit": {
+          "$ref": "#/$defs/v1PlanLimit"
+        },
+        "start": {
+          "$ref": "#/$defs/v1Time",
+          "description": "credit start time"
+        },
+        "type": {
+          "enum": [
+            "Trial",
+            "MonthlyOnDemand",
+            "AnnualSubscription"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start",
+        "expiry"
+      ]
+    },
+    "v1PlanSpec": {
+      "description": "Plan specifications",
+      "properties": {
+        "cost": {
+          "$ref": "#/$defs/v1PlanCost"
+        },
+        "developerCredits": {
+          "$ref": "#/$defs/v1DeveloperCredit"
+        },
+        "expiry": {
+          "$ref": "#/$defs/v1Time",
+          "description": "plan expiry time"
+        },
+        "freeCredits": {
+          "items": {
+            "$ref": "#/$defs/v1PlanCredit"
+          },
+          "type": "array"
+        },
+        "planLimit": {
+          "$ref": "#/$defs/v1PlanLimit"
+        },
+        "renewal": {
+          "$ref": "#/$defs/v1PlanRenewal"
+        },
+        "slaCredits": {
+          "items": {
+            "$ref": "#/$defs/v1PlanCredit"
+          },
+          "type": "array"
+        },
+        "start": {
+          "$ref": "#/$defs/v1Time",
+          "description": "plan start time"
+        },
+        "tierPricing": {
+          "$ref": "#/$defs/v1TierPrice"
+        },
+        "type": {
+          "enum": [
+            "Trial",
+            "MonthlyOnDemand",
+            "AnnualSubscription"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "start",
+        "expiry"
+      ]
+    },
+    "v1PlanStatus": {
+      "properties": {
+        "changeLogs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1PriceRange": {
+      "description": "tier price range",
+      "properties": {
+        "discount": {
+          "format": "int64",
+          "type": "number"
+        },
+        "startFrom": {
+          "format": "float64",
+          "type": "number"
+        },
+        "unitAmount": {
+          "format": "float64",
+          "type": "number"
+        },
+        "upTo": {
+          "format": "float64",
+          "type": "number"
+        },
+        "upToInfinity": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1TierPrice": {
+      "description": "tier price",
+      "properties": {
+        "alloyPricing": {
+          "items": {
+            "$ref": "#/$defs/v1PriceRange"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "purePricing": {
+          "items": {
+            "$ref": "#/$defs/v1PriceRange"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      }
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

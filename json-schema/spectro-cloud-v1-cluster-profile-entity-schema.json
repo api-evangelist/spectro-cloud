@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-profile-entity-schema.json",
+  "title": "v1ClusterProfileEntity",
+  "description": "Cluster profile request payload",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clusterprofiles-api-openapi.yml#/components/schemas/v1ClusterProfileEntity",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "properties": {
+        "template": {
+          "$ref": "#/$defs/v1ClusterProfileTemplateDraft"
+        },
+        "variables": {
+          "description": "List of unique variable fields defined for a cluster profile with schema constraints",
+          "items": {
+            "$ref": "#/$defs/v1Variable"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "version": {
+          "description": "Cluster profile version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ClusterProfileTemplateDraft": {
+      "description": "Cluster profile template spec",
+      "properties": {
+        "cloudType": {
+          "type": "string"
+        },
+        "packs": {
+          "description": "Cluster profile packs array",
+          "items": {
+            "$ref": "#/$defs/v1PackManifestEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "type": {
+          "$ref": "#/$defs/v1ProfileType"
+        }
+      },
+      "type": "object"
+    },
+    "v1ManifestInputEntity": {
+      "description": "Manifest request payload",
+      "properties": {
+        "content": {
+          "description": "Manifest content",
+          "type": "string"
+        },
+        "name": {
+          "description": "Manifest name",
+          "type": "string"
+        }
+      }
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackManifestEntity": {
+      "description": "Pack request payload",
+      "properties": {
+        "layer": {
+          "description": "Pack layer",
+          "type": "string"
+        },
+        "manifests": {
+          "description": "Pack manifests are additional content as part of the profile",
+          "items": {
+            "$ref": "#/$defs/v1ManifestInputEntity"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Pack name",
+          "type": "string"
+        },
+        "registryUid": {
+          "description": "Pack registry uid",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Pack tag",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/v1PackType"
+        },
+        "uid": {
+          "description": "Pack uid",
+          "type": "string"
+        },
+        "values": {
+          "description": "Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1PackType": {
+      "default": "spectro",
+      "enum": [
+        "spectro",
+        "helm",
+        "manifest",
+        "oci"
+      ],
+      "type": "string"
+    },
+    "v1ProfileType": {
+      "default": "cluster",
+      "enum": [
+        "cluster",
+        "infra",
+        "add-on",
+        "system"
+      ],
+      "type": "string"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1Variable": {
+      "description": "Unique variable field with schema definition",
+      "properties": {
+        "defaultValue": {
+          "description": "The default value of the variable",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "description": {
+          "description": "Variable description",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Unique display name of the variable",
+          "type": "string"
+        },
+        "format": {
+          "$ref": "#/$defs/v1VariableFormat"
+        },
+        "hidden": {
+          "description": "If true, then variable will be hidden for overriding the value. By default the hidden flag will be set to false",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "immutable": {
+          "description": "If true, then variable value can't be editable. By default the immutable flag will be set to false",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "inputType": {
+          "$ref": "#/$defs/v1VariableInputType",
+          "description": "Input type for the variable - text or dropdown. Defaults to text for backward compatibility"
+        },
+        "isSensitive": {
+          "description": "If true, then default value will be masked. By default the isSensitive flag will be set to false",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "name": {
+          "description": "Variable name",
+          "type": "string"
+        },
+        "options": {
+          "description": "Available options for dropdown input type",
+          "items": {
+            "$ref": "#/$defs/v1VariableOption"
+          },
+          "type": "array"
+        },
+        "regex": {
+          "description": "Regular expression pattern which the variable value must match",
+          "type": "string"
+        },
+        "required": {
+          "description": "Flag to specify if the variable is optional or mandatory. If it is mandatory then default value must be provided",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1VariableFormat": {
+      "default": "string",
+      "description": "Format type of the variable value",
+      "enum": [
+        "string",
+        "number",
+        "boolean",
+        "ipv4",
+        "ipv4cidr",
+        "ipv6",
+        "version",
+        "base64"
+      ],
+      "type": "string"
+    },
+    "v1VariableInputType": {
+      "default": "text",
+      "description": "Input type for the variable",
+      "enum": [
+        "text",
+        "dropdown",
+        "multiline"
+      ],
+      "type": "string"
+    },
+    "v1VariableOption": {
+      "description": "Option for dropdown variable input type",
+      "properties": {
+        "default": {
+          "description": "Mark this option as the default selection",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "description": {
+          "description": "Optional tooltip/description for the option",
+          "type": "string"
+        },
+        "label": {
+          "description": "Display text for the option",
+          "type": "string"
+        },
+        "value": {
+          "description": "Actual value for the option",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-app-deployment-profile-versions-schema.json",
+  "title": "v1AppDeploymentProfileVersions",
+  "description": "Application deployment profile versions",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentProfileVersions",
+  "properties": {
+    "availableVersions": {
+      "description": "Application deployment profile available versions",
+      "items": {
+        "$ref": "#/$defs/v1AppDeploymentProfileVersion"
+      },
+      "type": "array"
+    },
+    "latestVersions": {
+      "description": "Application deployment profile latest versions",
+      "items": {
+        "$ref": "#/$defs/v1AppDeploymentProfileVersion"
+      },
+      "type": "array"
+    },
+    "metadata": {
+      "$ref": "#/$defs/v1AppDeploymentProfileMeta"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1AppDeploymentProfileMeta": {
+      "description": "Application deployment profile metadata",
+      "properties": {
+        "name": {
+          "description": "Application deployment profile name",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Application deployment profile uid",
+          "type": "string"
+        },
+        "version": {
+          "description": "Application deployment profile version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentProfileVersion": {
+      "description": "Application deployment profile version",
+      "properties": {
+        "uid": {
+          "description": "Application deployment profile uid",
+          "type": "string"
+        },
+        "version": {
+          "description": "Application deployment profile version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

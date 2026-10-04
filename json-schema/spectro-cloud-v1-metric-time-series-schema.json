@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-metric-time-series-schema.json",
+  "title": "v1MetricTimeSeries",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-metrics-api-openapi.yml#/components/schemas/v1MetricTimeSeries",
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/v1Metrics"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1MetricAggregation": {
+      "description": "Aggregation values",
+      "properties": {
+        "avg": {
+          "type": "number",
+          "x-omitempty": false
+        },
+        "count": {
+          "format": "int64",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "max": {
+          "type": "number",
+          "x-omitempty": false
+        },
+        "min": {
+          "type": "number",
+          "x-omitempty": false
+        },
+        "sum": {
+          "type": "number",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1MetricPoint": {
+      "description": "Metric Info",
+      "properties": {
+        "avg": {
+          "type": "number"
+        },
+        "count": {
+          "format": "int64",
+          "type": "number"
+        },
+        "max": {
+          "type": "number"
+        },
+        "min": {
+          "type": "number"
+        },
+        "sum": {
+          "type": "number"
+        },
+        "timestamp": {
+          "format": "int64",
+          "type": "number"
+        },
+        "value": {
+          "type": "number",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1Metrics": {
+      "properties": {
+        "aggregation": {
+          "$ref": "#/$defs/v1MetricAggregation"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "points": {
+          "items": {
+            "$ref": "#/$defs/v1MetricPoint"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

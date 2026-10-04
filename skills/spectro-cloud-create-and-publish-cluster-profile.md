@@ -1,5 +1,5 @@
 ---
-name: Create and publish a Palette cluster profile
+name: create-and-publish-cluster-profile
 description: Create a Palette cluster profile, review it, and publish it for use in cluster deployments.
 api: openapi/spectro-cloud-palette-openapi.json
 operations:

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-registry-sync-status-schema.json",
+  "title": "v1RegistrySyncStatus",
+  "description": "Status of the registry sync",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-registries-api-openapi.yml#/components/schemas/v1RegistrySyncStatus",
+  "properties": {
+    "isSyncSupported": {
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "lastRunTime": {
+      "$ref": "#/$defs/v1Time"
+    },
+    "lastSyncedTime": {
+      "$ref": "#/$defs/v1Time"
+    },
+    "message": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "syncRecovery": {
+      "$ref": "#/$defs/v1SyncRecovery"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1SyncRecovery": {
+      "description": "Sync recovery lifecycle details set by the orphan-recovery scheduler",
+      "properties": {
+        "message": {
+          "description": "Recovery-specific failure message, if any",
+          "type": "string"
+        },
+        "syncRecoveryState": {
+          "description": "Sync recovery state: Interrupted, Recovering, or Recovered",
+          "enum": [
+            "Interrupted",
+            "Recovering",
+            "Recovered"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

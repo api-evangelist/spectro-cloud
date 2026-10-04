@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Auth API
+  title: Spectro Cloud Auth API
   version: v1
+  description: 'Operations tagged auth across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Auth
   x-displayName: Auth
@@ -36,6 +38,8 @@ paths:
               $ref: '#/components/schemas/v1AuthLogin'
         description: Describes the credential details required for authentication
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/mfa/devices:
     get:
       operationId: V1AuthMfaDevicesList
@@ -51,6 +55,8 @@ paths:
       - Auth
       x-ApiScopes:
       - mfa
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/org:
     get:
       description: Returns the allowed login method and information with the organization details
@@ -70,6 +76,8 @@ paths:
       summary: Returns the user organization details
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/org/{org}/oidc/callback:
     parameters:
     - description: Organization name
@@ -111,6 +119,8 @@ paths:
       summary: Idp authorization code callback
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/org/{org}/oidc/logout:
     parameters:
     - description: Organization name
@@ -138,6 +148,8 @@ paths:
       summary: Identity provider logout url for the Oidc
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/org/{org}/saml/callback:
     parameters:
     - description: Organization name
@@ -176,6 +188,8 @@ paths:
                 RelayState:
                   type: string
                   description: Describes a state to validate and associate request and response
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/org/{org}/saml/logout:
     parameters:
     - description: Organization name
@@ -212,6 +226,8 @@ paths:
                 SAMLResponse:
                   type: string
                   description: Describe the SAML compliant response sent by IDP which will be validated by Palette to perform logout.
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/orgs:
     get:
       description: Returns a list of user's organizations details and login methods
@@ -226,6 +242,8 @@ paths:
       summary: Returns a list of user's organizations
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/password/{passwordToken}/activate:
     parameters:
     - description: Describes the expirable password token for the user to be used for authentication of user
@@ -256,6 +274,8 @@ paths:
               - password
               type: object
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/password/{passwordToken}/reset:
     parameters:
     - description: Describes the expirable password token for the user to be used for authentication of user
@@ -286,6 +306,8 @@ paths:
               - password
               type: object
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/refresh/{token}:
     parameters:
     - description: Describes a way to set cookie from backend.
@@ -313,6 +335,8 @@ paths:
       summary: Refreshes authentication token
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/sso/idps:
     get:
       operationId: V1SsoIdps
@@ -326,6 +350,8 @@ paths:
       summary: Returns a list of predefined Identity Provider (IDP)
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/sso/logins:
     get:
       description: Returns a list of supported sso logins and their authentication mechanism
@@ -345,6 +371,8 @@ paths:
       summary: Returns a list of supported sso logins
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/sso/providers:
     get:
       operationId: V1AuthSsoProviders
@@ -358,6 +386,8 @@ paths:
       summary: Returns a list of supported sso auth providers
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/sso/{ssoApp}/callback:
     parameters:
     - description: Describes the sso app use to login into the system
@@ -399,6 +429,8 @@ paths:
       summary: Returns Authorization token.
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/user/org/forgot:
     get:
       description: Returns No Content. Sends the user organization(s) information via email
@@ -421,6 +453,8 @@ paths:
       summary: Returns No Content. Sends the user organization information via email
       tags:
       - Auth
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/auth/user/password/reset:
     post:
       description: Creates request to reset password via email. Password reset email will be sent to the user. Sends 204 No Content.
@@ -448,17 +482,25 @@ paths:
               - emailId
               type: object
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1Organizations:
-      description: Returns a list of user's organizations details and login methods
+    v1SsoLogin:
+      description: Describes the allowed sso login details
       properties:
-        organizations:
-          description: Describes a list of user's organization
-          items:
-            $ref: '#/components/schemas/v1Organization'
-          type: array
-          uniqueItems: true
+        displayName:
+          description: Describes the display name for the sso login
+          type: string
+        logo:
+          description: Describes the url path for the sso login
+          type: string
+        name:
+          description: Describes the processed name for the sso login
+          type: string
+        redirectUri:
+          description: Describes the sso login url for the authentication
+          type: string
       type: object
     v1LoginResponse:
       description: Returns the allowed login method and information with the organization details
@@ -501,23 +543,6 @@ components:
         name:
           type: string
       type: object
-    v1UserToken:
-      description: Returns the Authorization token. To be used for further api calls
-      properties:
-        Authorization:
-          description: Describes the authentication token in jwt format.
-          type: string
-        isMfa:
-          description: Indicates the authentication flow using MFA
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1SsoLogins:
-      description: Describes the allowed sso logins
-      items:
-        $ref: '#/components/schemas/v1SsoLogin'
-      type: array
-      uniqueItems: true
     v1Organization:
       description: Describes user's organization details
       properties:
@@ -534,6 +559,10 @@ components:
           $ref: '#/components/schemas/v1SsoLogins'
           description: Describes a list of allowed social logins for the organization
       type: object
+    v1MfaDevices:
+      items:
+        $ref: '#/components/schemas/v1MfaDeviceMeta'
+      type: array
     v1MfaDeviceMeta:
       properties:
         creationTimestamp:
@@ -541,31 +570,16 @@ components:
         deviceName:
           type: string
       type: object
-    v1IdentityProviders:
-      description: Describes a list of predefined Identity Provider (IDP)
-      items:
-        $ref: '#/components/schemas/v1IdentityProvider'
-      type: array
-      uniqueItems: true
-    v1MfaDevices:
-      items:
-        $ref: '#/components/schemas/v1MfaDeviceMeta'
-      type: array
-    v1SsoLogin:
-      description: Describes the allowed sso login details
+    v1UserToken:
+      description: Returns the Authorization token. To be used for further api calls
       properties:
-        displayName:
-          description: Describes the display name for the sso login
+        Authorization:
+          description: Describes the authentication token in jwt format.
           type: string
-        logo:
-          description: Describes the url path for the sso login
-          type: string
-        name:
-          description: Describes the processed name for the sso login
-          type: string
-        redirectUri:
-          description: Describes the sso login url for the authentication
-          type: string
+        isMfa:
+          description: Indicates the authentication flow using MFA
+          type: boolean
+          x-omitempty: false
       type: object
     v1AuthLogin:
       description: Describes the credential details required for authentication
@@ -581,10 +595,231 @@ components:
           format: password
           type: string
       type: object
+    v1SsoLogins:
+      description: Describes the allowed sso logins
+      items:
+        $ref: '#/components/schemas/v1SsoLogin'
+      type: array
+      uniqueItems: true
+    v1Organizations:
+      description: Returns a list of user's organizations details and login methods
+      properties:
+        organizations:
+          description: Describes a list of user's organization
+          items:
+            $ref: '#/components/schemas/v1Organization'
+          type: array
+          uniqueItems: true
+      type: object
+    v1IdentityProviders:
+      description: Describes a list of predefined Identity Provider (IDP)
+      items:
+        $ref: '#/components/schemas/v1IdentityProvider'
+      type: array
+      uniqueItems: true
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
+    v1SsoLogin_2:
+      description: Describes the allowed sso login details
+      example:
+        redirectUri: redirectUri
+        displayName: displayName
+        name: name
+        logo: logo
+      properties:
+        displayName:
+          description: Describes the display name for the sso login
+          type: string
+        logo:
+          description: Describes the url path for the sso login
+          type: string
+        name:
+          description: Describes the processed name for the sso login
+          type: string
+        redirectUri:
+          description: Describes the sso login url for the authentication
+          type: string
+      type: object
+    v1LoginResponse_2:
+      description: Returns the allowed login method and information with the organization details
+      example:
+        orgName: orgName
+        redirectUrl: redirectUrl
+        appEnv: appEnv
+        rootDomain: rootDomain
+        totalTenants: 0.8008281904610115
+        securityMode: securityMode
+        authType: password
+        ssoLogins:
+        - redirectUri: redirectUri
+          displayName: displayName
+          name: name
+          logo: logo
+        - redirectUri: redirectUri
+          displayName: displayName
+          name: name
+          logo: logo
+      properties:
+        appEnv:
+          description: Describes the env type. Possible values [ saas, self-hosted, quick-start, enterprise, airgap]
+          type: string
+        authType:
+          description: Describes the default mode of authentication. Possible values [password, sso]
+          enum:
+          - password
+          - sso
+          type: string
+        orgName:
+          description: Organization name.
+          type: string
+        redirectUrl:
+          description: Describes the default redirect Url for authentication. If authType is sso, it will have tenant configured saml/oidc idp url else it will be users organization url
+          type: string
+          x-omitempty: false
+        rootDomain:
+          description: Describes the domain url on which the saas is available
+          type: string
+        securityMode:
+          description: Describes which security mode is enabled
+          type: string
+        ssoLogins:
+          description: Describes the allowed sso logins
+          items:
+            $ref: '#/components/schemas/v1SsoLogin_2'
+          type: array
+          uniqueItems: true
+        totalTenants:
+          description: Describes the total number of tenant present in the system
+          format: int64
+          type: number
+      type: object
+    v1IdentityProvider_2:
+      description: Describes a predefined Identity Provider (IDP)
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    v1Organization_2:
+      description: Describes user's organization details
+      example:
+        redirectUrl: redirectUrl
+        name: name
+        authType: authType
+        ssoLogins:
+        - redirectUri: redirectUri
+          displayName: displayName
+          name: name
+          logo: logo
+        - redirectUri: redirectUri
+          displayName: displayName
+          name: name
+          logo: logo
+      properties:
+        authType:
+          description: Describes user's enabled authorization mode
+          type: string
+        name:
+          description: Describes user's organization name
+          type: string
+        redirectUrl:
+          description: Describes user's organization authentication url
+          type: string
+        ssoLogins:
+          description: Describes the allowed sso logins
+          items:
+            $ref: '#/components/schemas/v1SsoLogin_2'
+          type: array
+          uniqueItems: true
+      type: object
+    V1SamlCallback_request:
+      properties:
+        SAMLResponse:
+          description: Describe the SAML compliant response sent by IDP which will be validated by Palette
+          type: string
+        RelayState:
+          description: Describes a state to validate and associate request and response
+          type: string
+      type: object
+    v1PasswordActivate_request:
+      properties:
+        password:
+          description: Describes the new password for the user
+          format: password
+          type: string
+      required:
+      - password
+      type: object
+    V1SamlLogout_request:
+      properties:
+        SAMLResponse:
+          description: Describe the SAML compliant response sent by IDP which will be validated by Palette to perform logout.
+          type: string
+      type: object
+    v1UserToken_2:
+      description: Returns the Authorization token. To be used for further api calls
+      example:
+        Authorization: Authorization
+        isMfa: true
+      properties:
+        Authorization:
+          description: Describes the authentication token in jwt format.
+          type: string
+        isMfa:
+          description: Indicates the authentication flow using MFA
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1PasswordResetRequest_request:
+      properties:
+        emailId:
+          description: Describes email if for which password reset email has to be sent
+          type: string
+      required:
+      - emailId
+      type: object
+    v1Organizations_2:
+      description: Returns a list of user's organizations details and login methods
+      example:
+        organizations:
+        - redirectUrl: redirectUrl
+          name: name
+          authType: authType
+          ssoLogins:
+          - redirectUri: redirectUri
+            displayName: displayName
+            name: name
+            logo: logo
+          - redirectUri: redirectUri
+            displayName: displayName
+            name: name
+            logo: logo
+        - redirectUrl: redirectUrl
+          name: name
+          authType: authType
+          ssoLogins:
+          - redirectUri: redirectUri
+            displayName: displayName
+            name: name
+            logo: logo
+          - redirectUri: redirectUri
+            displayName: displayName
+            name: name
+            logo: logo
+      properties:
+        organizations:
+          description: Describes a list of user's organization
+          items:
+            $ref: '#/components/schemas/v1Organization_2'
+          type: array
+          uniqueItems: true
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -596,3 +831,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

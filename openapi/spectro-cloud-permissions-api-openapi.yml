@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Permissions API
+  title: Spectro Cloud Permissions API
   version: v1
+  description: 'Operations tagged permissions across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Permissions
   x-displayName: Permissions
@@ -39,8 +41,22 @@ paths:
       summary: Retrieves a list of permissions
       tags:
       - Permissions
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
+    v1Permission:
+      description: Permission information
+      properties:
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        scope:
+          $ref: '#/components/schemas/v1Scope'
+      type: object
     v1Scope:
       enum:
       - system
@@ -53,8 +69,14 @@ components:
       items:
         $ref: '#/components/schemas/v1Permission'
       type: array
-    v1Permission:
+    v1Permission_2:
       description: Permission information
+      example:
+        permissions:
+        - permissions
+        - permissions
+        scope: system
+        name: name
       properties:
         name:
           type: string
@@ -76,3 +98,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

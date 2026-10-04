@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-bridge-request-schema.json",
+  "title": "v1BridgeRequest",
+  "description": "Bridge interface request payload",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edge-mgmt-api-openapi.yml#/components/schemas/v1BridgeRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "gateway": {
+      "description": "Gateway IP address",
+      "type": "string"
+    },
+    "ip": {
+      "description": "IP address (required for static type)",
+      "type": "string"
+    },
+    "members": {
+      "description": "Member interfaces to attach to this bridge (NICs, Bonds, or VLANs e.g., eth0, bond0, eth0.100)",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mtu": {
+      "description": "MTU for the bridge interface",
+      "type": "integer",
+      "format": "int64"
+    },
+    "name": {
+      "description": "Bridge interface name (e.g., br0)",
+      "type": "string"
+    },
+    "nameservers": {
+      "description": "DNS nameservers",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "stpEnabled": {
+      "description": "Spanning Tree Protocol toggle for the bridge.\nOmit to keep the legacy \"no STP\" behavior (no STP= written to the netdev unit).\nSet to true to enable STP (recommended for any bridge with multiple members).\nSet to false to explicitly disable STP and acknowledge the loop risk.\n",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "subnet": {
+      "description": "Subnet mask (required for static type)",
+      "type": "string"
+    },
+    "type": {
+      "description": "Network configuration type. Default is dhcp.",
+      "type": "string",
+      "enum": [
+        "dhcp",
+        "static",
+        "none"
+      ]
+    }
+  }
+}

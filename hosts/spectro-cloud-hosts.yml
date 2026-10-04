@@ -1,0 +1,229 @@
+generated: '2026-10-04'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 18
+  own: 12
+  other_domain: 3
+  platform: 3
+  roles:
+  - api
+  - identity
+  - other
+  - partner
+  - portal
+  - source
+  - support
+  - website
+hosts:
+- host: api.atlassian.net
+  found_by:
+  - contract-discovery
+  types: []
+  serves: []
+  registrable_domain: atlassian.net
+  role: api
+  relation: other-domain
+- host: api.spectrocloud.com
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves:
+  - api
+  registrable_domain: spectrocloud.com
+  role: api
+  relation: own
+- host: artifact-studio.spectrocloud.com
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: spectrocloud.com
+  role: other
+  relation: own
+- host: careers.spectrocloud.com
+  found_by:
+  - probed
+  - site-links
+  - docs-index
+  - well-known
+  types: []
+  serves:
+  - docs
+  registrable_domain: spectrocloud.com
+  role: other
+  relation: own
+- host: console.spectrocloud.com
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types:
+  - Login
+  serves: []
+  registrable_domain: spectrocloud.com
+  role: identity
+  relation: own
+- host: dashboard.spectrocloud.com
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: spectrocloud.com
+  role: other
+  relation: own
+- host: dev.spectrocloud.com
+  found_by:
+  - probed
+  - site-links
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: spectrocloud.com
+  role: other
+  relation: own
+- host: docs.spectrocloud.com
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - Deprecation
+  serves:
+  - docs
+  - cdn
+  - documentation
+  vendor: cloudfront
+  registrable_domain: spectrocloud.com
+  role: portal
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  - docs-index
+  types:
+  - GitHubOrganization
+  serves:
+  - docs
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: info.spectrocloud.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: spectrocloud.com
+  role: other
+  relation: own
+- host: partners.spectrocloud.com
+  found_by:
+  - probed
+  - site-links
+  - namespace-probe
+  types: []
+  serves: []
+  title: Spectro Cloud Partner Mission Control
+  status: 200
+  registrable_domain: spectrocloud.com
+  role: partner
+  relation: own
+- host: registry.terraform.io
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: terraform.io
+  role: other
+  relation: other-domain
+- host: spectrocloud.atlassian.net
+  found_by:
+  - pointer
+  - probed
+  - contract-discovery
+  - well-known
+  types:
+  - Support
+  serves: []
+  registrable_domain: atlassian.net
+  role: support
+  relation: other-domain
+- host: spectrocloud.com
+  found_by:
+  - probed
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: spectrocloud.com
+  role: other
+  relation: own
+- host: watch.spectrocloud.com
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: spectrocloud.com
+  role: other
+  relation: own
+- host: www.linkedin.com
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: linkedin.com
+  role: other
+  relation: platform
+- host: www.spectrocloud.com
+  found_by:
+  - pointer
+  - probed
+  - docs-index
+  - well-known
+  - vendor-detect
+  types:
+  - Newsroom
+  - Website
+  - TermsOfService
+  - PrivacyPolicy
+  - SignUp
+  - Blog
+  - Compliance
+  serves:
+  - docs
+  - cdn
+  vendor: cloudflare
+  registrable_domain: spectrocloud.com
+  role: website
+  relation: own
+- host: www.youtube.com
+  found_by:
+  - docs-index
+  types: []
+  serves:
+  - docs
+  registrable_domain: youtube.com
+  role: other
+  relation: platform

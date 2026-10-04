@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-plan-change-update-schema.json",
+  "title": "v1PlanChangeUpdate",
+  "description": "Plan change update entity",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-plans-api-openapi.yml#/components/schemas/v1PlanChangeUpdate",
+  "properties": {
+    "expiry": {
+      "$ref": "#/$defs/v1Time",
+      "description": "plan expiry time"
+    },
+    "isPaymentGateway": {
+      "type": "boolean"
+    },
+    "planLimit": {
+      "$ref": "#/$defs/v1PlanLimit"
+    },
+    "start": {
+      "$ref": "#/$defs/v1Time",
+      "description": "plan start time"
+    },
+    "tierPrice": {
+      "$ref": "#/$defs/v1TierPrice"
+    },
+    "type": {
+      "enum": [
+        "Trial",
+        "MonthlyOnDemand",
+        "AnnualSubscription"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "type",
+    "start",
+    "expiry"
+  ],
+  "$defs": {
+    "v1PlanLimit": {
+      "description": "Monthly Plan Limit",
+      "properties": {
+        "alloy": {
+          "$ref": "#/$defs/v1PlanLimitSpec"
+        },
+        "isOnDemand": {
+          "description": "is onDemand plan and has no limit",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isUnlimited": {
+          "description": "is unlimited cpu core hours",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "pure": {
+          "$ref": "#/$defs/v1PlanLimitSpec"
+        }
+      }
+    },
+    "v1PlanLimitSpec": {
+      "description": "Monthly Plan Limit spec",
+      "properties": {
+        "cpuCoreHours": {
+          "description": "cpu cores hours",
+          "format": "int64",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "overageLimitPercentage": {
+          "default": 25,
+          "description": "overage limit in percentage",
+          "format": "int8",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "warnLimitPercentage": {
+          "default": 90,
+          "description": "warning limit in percentage",
+          "format": "int8",
+          "type": "integer",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1PriceRange": {
+      "description": "tier price range",
+      "properties": {
+        "discount": {
+          "format": "int64",
+          "type": "number"
+        },
+        "startFrom": {
+          "format": "float64",
+          "type": "number"
+        },
+        "unitAmount": {
+          "format": "float64",
+          "type": "number"
+        },
+        "upTo": {
+          "format": "float64",
+          "type": "number"
+        },
+        "upToInfinity": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1TierPrice": {
+      "description": "tier price",
+      "properties": {
+        "alloyPricing": {
+          "items": {
+            "$ref": "#/$defs/v1PriceRange"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "purePricing": {
+          "items": {
+            "$ref": "#/$defs/v1PriceRange"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      }
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

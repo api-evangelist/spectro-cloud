@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-template-variables-update-entity-schema.json",
+  "title": "v1ClusterTemplateVariablesUpdateEntity",
+  "description": "Cluster template variables update entity",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clustertemplates-api-openapi.yml#/components/schemas/v1ClusterTemplateVariablesUpdateEntity",
+  "properties": {
+    "profiles": {
+      "description": "List of cluster profile references belonging to the cluster",
+      "items": {
+        "$ref": "#/$defs/v1ClusterTemplateProfileVariable"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "profiles"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1ClusterTemplateProfileVariable": {
+      "description": "Cluster template profile information",
+      "properties": {
+        "uid": {
+          "description": "UID of the cluster profile",
+          "type": "string"
+        },
+        "variables": {
+          "description": "List of cluster profile variable values for the cluster to be updated.",
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterVariable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterVariable": {
+      "description": "Variable with value which will be used within the packs of cluster profile",
+      "properties": {
+        "name": {
+          "description": "Variable name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Actual value of the variable to be used within the cluster",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

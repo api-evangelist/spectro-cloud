@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-workspace-backup-config-entity-schema.json",
+  "title": "v1WorkspaceBackupConfigEntity",
+  "description": "Cluster backup config",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-workspaces-api-openapi.yml#/components/schemas/v1WorkspaceBackupConfigEntity",
+  "properties": {
+    "backupConfig": {
+      "$ref": "#/$defs/v1ClusterBackupConfig"
+    },
+    "clusterUids": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "includeAllClusters": {
+      "type": "boolean"
+    }
+  },
+  "$defs": {
+    "v1ClusterBackupConfig": {
+      "description": "Cluster backup config",
+      "properties": {
+        "backupLocationName": {
+          "type": "string"
+        },
+        "backupLocationUid": {
+          "type": "string"
+        },
+        "backupName": {
+          "type": "string"
+        },
+        "backupPrefix": {
+          "type": "string"
+        },
+        "durationInHours": {
+          "format": "int64",
+          "type": "number"
+        },
+        "includeAllDisks": {
+          "type": "boolean"
+        },
+        "includeClusterResourceMode": {
+          "$ref": "#/$defs/v1IncludeClusterResourceMode"
+        },
+        "includeClusterResources": {
+          "description": "Deprecated. Use includeClusterResourceMode",
+          "type": "boolean"
+        },
+        "locationType": {
+          "type": "string"
+        },
+        "namespaces": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "schedule": {
+          "$ref": "#/$defs/v1ClusterFeatureSchedule"
+        }
+      }
+    },
+    "v1ClusterFeatureSchedule": {
+      "description": "Cluster feature schedule",
+      "properties": {
+        "scheduledRunTime": {
+          "type": "string"
+        }
+      }
+    },
+    "v1IncludeClusterResourceMode": {
+      "description": "Specifies the scope of cluster-wide resources to include in the backup based on the flag'--include-cluster-resources':\n- \"Always\": --include-cluster-resources=true, which includes all cluster-wide resources; restores only on the original cluster.\n- \"Auto\": don't specify --include-cluster-resources, which exclude general cluster-wide resources, but includes PersistentVolumes linked to selected namespaces.\n- \"Never\": --include-cluster-resources=false, exclude all cluster-wide resources, including PersistentVolumes.\n",
+      "enum": [
+        "Always",
+        "Auto",
+        "Never"
+      ],
+      "type": "string"
+    }
+  }
+}

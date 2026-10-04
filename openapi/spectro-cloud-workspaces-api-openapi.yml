@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Workspaces API
+  title: Spectro Cloud Workspaces API
   version: v1
+  description: 'Operations tagged workspaces across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Workspaces
   x-displayName: Workspaces
@@ -40,6 +42,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1WorkspaceEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/teams/{teamUid}/roles:
     parameters:
     - in: path
@@ -91,6 +95,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1WorkspacesRolesPatch'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/users/{userUid}/roles:
     parameters:
     - in: path
@@ -144,6 +150,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1WorkspacesRolesPatch'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/validate/name:
     get:
       operationId: v1WorkspacesValidateName
@@ -172,6 +180,8 @@ paths:
       summary: Validates the workspace name
       tags:
       - Workspaces
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}:
     parameters:
     - in: path
@@ -217,6 +227,8 @@ paths:
       summary: Returns the specified workspace
       tags:
       - Workspaces
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/backup:
     parameters:
     - in: path
@@ -324,6 +336,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1WorkspaceBackupConfigEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/backup/onDemand:
     parameters:
     - in: path
@@ -362,6 +376,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1WorkspaceBackupConfigEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/clusterNamespaces:
     parameters:
     - in: path
@@ -391,6 +407,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1WorkspaceClusterNamespacesEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/clusterRbacs:
     parameters:
     - in: path
@@ -429,6 +447,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ClusterRbac'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/clusterRbacs/{clusterRbacUid}:
     parameters:
     - in: path
@@ -480,6 +500,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ClusterRbac'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/meta:
     parameters:
     - in: path
@@ -509,6 +531,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ObjectMeta'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/resourceAllocations:
     parameters:
     - in: path
@@ -539,6 +563,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1WorkspaceResourceAllocationsEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/restore:
     parameters:
     - in: path
@@ -571,6 +597,8 @@ paths:
       summary: Returns the workspace restore result
       tags:
       - Workspaces
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/workspaces/{uid}/restore/onDemand:
     parameters:
     - in: path
@@ -609,504 +637,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1WorkspaceRestoreConfigEntity'
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1WorkspaceBackupState:
-      description: Workspace backup state
-      properties:
-        deleteState:
-          type: string
-        state:
-          type: string
-    v1WorkspaceBackupStatusConfig:
-      description: Workspace backup status config
-      properties:
-        backupName:
-          type: string
-        durationInHours:
-          format: int64
-          type: number
-        includeAllDisks:
-          type: boolean
-        includeClusterResourceMode:
-          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
-        includeClusterResources:
-          description: Deprecated. Use includeClusterResourceMode
-          type: boolean
-        namespaces:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-    v1WorkspaceRolesUidSummary:
-      properties:
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1RelatedObject:
-      description: Object for which the resource is related
-      properties:
-        kind:
-          enum:
-          - spectrocluster
-          - machine
-          - cloudconfig
-          - clusterprofile
-          - pack
-          - appprofile
-          - appdeployment
-          - edgehost
-          type: string
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ProjectsWorkspaces:
-      description: List projects and its workspaces
-      properties:
-        name:
-          type: string
-        uid:
-          type: string
-        workspaces:
-          items:
-            $ref: '#/components/schemas/v1WorkspacesRoles'
-          type: array
-          uniqueItems: true
-    v1WorkspaceRestoreConfigEntity:
-      description: Cluster restore config
-      properties:
-        backupRequestUid:
-          type: string
-        restoreConfigs:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceRestoreConfig'
-          type: array
-          uniqueItems: true
-      required:
-      - backupRequestUid
-    v1ClusterRbacSubjects:
-      description: Cluster role ref
-      properties:
-        name:
-          type: string
-        namespace:
-          type: string
-        type:
-          enum:
-          - User
-          - Group
-          - ServiceAccount
-          type: string
-      type: object
-    v1WorkspaceNamespaceImage:
-      description: Workspace namespace image information
-      properties:
-        blackListedImages:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-    v1WorkspaceRolesPatch:
-      properties:
-        roles:
-          items:
-            type: string
-          type: array
-        uid:
-          type: string
-      type: object
-    v1WorkspaceClusterRef:
-      description: Workspace cluster reference
-      properties:
-        clusterName:
-          type: string
-        clusterUid:
-          type: string
-    v1WorkspaceBackupSpec:
-      description: Workspace backup spec
-      properties:
-        config:
-          $ref: '#/components/schemas/v1WorkspaceBackupConfig'
-        workspaceUid:
-          type: string
-    v1GpuConfig:
-      description: GPU configuration for resource allocation
-      properties:
-        limit:
-          description: GPU resource limit
-          format: int32
-          minimum: -1
-          type: integer
-          x-omitempty: false
-        provider:
-          default: nvidia
-          description: GPU provider (only nvidia is supported currently)
-          enum:
-          - nvidia
-          type: string
-    v1WorkspaceRestore:
-      description: Workspace restore
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1WorkspaceRestoreSpec'
-        status:
-          $ref: '#/components/schemas/v1WorkspaceRestoreStatus'
-    v1ClusterFeatureActor:
-      description: Compliance Scan actor
-      properties:
-        actorType:
-          type: string
-        uid:
-          type: string
-    v1BackupStatusMeta:
-      description: Backup  status meta
-      properties:
-        backupName:
-          type: string
-        backupState:
-          $ref: '#/components/schemas/v1BackupState'
-        backupedNamespaces:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        expiryDate:
-          $ref: '#/components/schemas/v1Time'
-    v1WorkspaceClusterRestoreResponse:
-      description: Workspace cluster restore response
-      properties:
-        backupName:
-          type: string
-        clusterName:
-          type: string
-        clusterUid:
-          type: string
-        restoreStatusMeta:
-          $ref: '#/components/schemas/v1WorkspaceClusterRestoreState'
-        restoreUid:
-          type: string
-    v1WorkspaceClusterRestoreConfig:
-      description: Workspace cluster restore config
-      properties:
-        backupName:
-          type: string
-        clusterRestoreRefs:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceClusterRestoreResponse'
-          type: array
-        restoreState:
-          $ref: '#/components/schemas/v1WorkspaceRestoreState'
-        restoreTime:
-          $ref: '#/components/schemas/v1Time'
-    v1ClusterRbacStatus:
-      description: Cluster rbac status
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/v1ClusterResourceError'
-          type: array
-          uniqueItems: true
-    v1WorkspaceSpec:
-      description: Workspace specifications
-      properties:
-        clusterNamespaces:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceClusterNamespace'
-          type: array
-          uniqueItems: true
-        clusterRbacs:
-          items:
-            $ref: '#/components/schemas/v1ClusterRbac'
-          type: array
-          uniqueItems: true
-        clusterRefs:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceClusterRef'
-          type: array
-          uniqueItems: true
-        policies:
-          $ref: '#/components/schemas/v1WorkspacePolicies'
-        quota:
-          $ref: '#/components/schemas/v1WorkspaceQuota'
-    v1WorkspacesRolesPatch:
-      properties:
-        workspaces:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceRolesPatch'
-          type: array
-      type: object
-    v1WorkspaceRestoreConfig:
-      description: Workspace cluster restore config
-      properties:
-        backupName:
-          type: string
-        includeClusterResourceMode:
-          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
-        includeClusterResources:
-          description: Deprecated. Use includeClusterResourceMode
-          type: boolean
-        includeNamespaces:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        preserveNodePorts:
-          type: boolean
-        restorePVs:
-          type: boolean
-        sourceClusterUid:
-          type: string
-      required:
-      - backupName
-      - sourceClusterUid
-    v1ClusterResourceAllocation:
-      description: Workspace resource allocation
-      properties:
-        clusterUid:
-          type: string
-        resourceAllocation:
-          $ref: '#/components/schemas/v1WorkspaceResourceAllocation'
-    v1WorkspaceBackupClusterRef:
-      description: Workspace backup cluster ref
-      properties:
-        backupName:
-          type: string
-        clusterUid:
-          type: string
-    v1ClusterRbacBinding:
-      description: Cluster RBAC binding
-      properties:
-        namespace:
-          type: string
-        role:
-          $ref: '#/components/schemas/v1ClusterRoleRef'
-        subjects:
-          items:
-            $ref: '#/components/schemas/v1ClusterRbacSubjects'
-          type: array
-          uniqueItems: true
-        type:
-          enum:
-          - RoleBinding
-          - ClusterRoleBinding
-          type: string
-      type: object
-    v1WorkspaceRestoreStatus:
-      description: Workspace restore status
-      properties:
-        workspaceRestoreStatuses:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceRestoreStatusMeta'
-          type: array
-    v1WorkspaceEntity:
-      description: Workspace information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1WorkspaceSpec'
-    v1WorkspaceClusterRestoreState:
-      description: Workspace cluster restore state
-      properties:
-        msg:
-          type: string
-        restoreTime:
-          $ref: '#/components/schemas/v1Time'
-        state:
-          type: string
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1WorkspaceRestoreStatusMeta:
-      description: Workspace restore status meta
-      properties:
-        actor:
-          $ref: '#/components/schemas/v1ClusterFeatureActor'
-        requestUid:
-          type: string
-        workspaceRestoreConfig:
-          $ref: '#/components/schemas/v1WorkspaceClusterRestoreConfig'
-    v1ClusterRbac:
-      description: Cluster RBAC role binding defintion
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ClusterRbacSpec'
-        status:
-          $ref: '#/components/schemas/v1ClusterRbacStatus'
-      type: object
-    v1WorkspacesRoles:
-      description: Workspace users and their roles
-      properties:
-        inheritedRoles:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceRolesUidSummary'
-          type: array
-        name:
-          type: string
-        roles:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceRolesUidSummary'
-          type: array
-        uid:
-          type: string
-    v1WorkspaceBackupDeleteEntity:
-      description: Cluster backup delete config
-      properties:
-        clusterConfigs:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceBackupClusterRef'
-          type: array
-          uniqueItems: true
-        requestUid:
-          type: string
-    v1ClusterRbacSpec:
-      description: Cluster RBAC spec
-      properties:
-        bindings:
-          items:
-            $ref: '#/components/schemas/v1ClusterRbacBinding'
-          type: array
-          uniqueItems: true
-        isSystem:
-          default: false
-          description: Set to true when the binding is created automatically by the system, rather than manually by the user
-          type: boolean
-        relatedObject:
-          $ref: '#/components/schemas/v1RelatedObject'
-      type: object
-    v1IncludeClusterResourceMode:
-      description: 'Specifies the scope of cluster-wide resources to include in the backup based on the flag''--include-cluster-resources'':
-
-        - "Always": --include-cluster-resources=true, which includes all cluster-wide resources; restores only on the original cluster.
-
-        - "Auto": don''t specify --include-cluster-resources, which exclude general cluster-wide resources, but includes PersistentVolumes linked to selected namespaces.
-
-        - "Never": --include-cluster-resources=false, exclude all cluster-wide resources, including PersistentVolumes.
-
-        '
-      enum:
-      - Always
-      - Auto
-      - Never
-      type: string
-    v1WorkspaceClusterNamespace:
-      description: Workspace cluster namespace
-      properties:
-        image:
-          $ref: '#/components/schemas/v1WorkspaceNamespaceImage'
-        isRegex:
-          type: boolean
-          x-omitempty: false
-        name:
-          type: string
-        namespaceResourceAllocation:
-          $ref: '#/components/schemas/v1WorkspaceNamespaceResourceAllocation'
-    v1WorkspaceBackupConfig:
-      description: Workspace backup config
-      properties:
-        backupConfig:
-          $ref: '#/components/schemas/v1ClusterBackupConfig'
-        clusterUids:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        includeAllClusters:
-          type: boolean
-    v1WorkspaceError:
-      description: Workspace error
-      properties:
-        clusterUid:
-          type: string
-        msg:
-          type: string
-        name:
-          type: string
-        resourceType:
-          type: string
-    v1BackupState:
-      description: Backup state
-      properties:
-        backupTime:
-          $ref: '#/components/schemas/v1Time'
-        deleteState:
-          type: string
-        msg:
-          type: string
-        state:
-          type: string
-    v1WorkspaceResourceAllocation:
-      description: Workspace resource allocation
-      properties:
-        cpuCores:
-          minimum: -1
-          type: number
-          x-omitempty: false
-        gpuConfig:
-          $ref: '#/components/schemas/v1GpuConfig'
-        memoryMiB:
-          minimum: -1
-          type: number
-          x-omitempty: false
-    v1ClusterFeatureSchedule:
-      description: Cluster feature schedule
-      properties:
-        scheduledRunTime:
-          type: string
-    v1WorkspaceRestoreState:
-      description: Workspace restore state
-      properties:
-        deleteState:
-          type: string
-        state:
-          type: string
-    v1WorkspacePolicies:
-      description: Workspace policies
-      properties:
-        backupPolicy:
-          $ref: '#/components/schemas/v1WorkspaceBackupConfigEntity'
-    v1ClusterBackupConfig:
-      description: Cluster backup config
-      properties:
-        backupLocationName:
-          type: string
-        backupLocationUid:
-          type: string
-        backupName:
-          type: string
-        backupPrefix:
-          type: string
-        durationInHours:
-          format: int64
-          type: number
-        includeAllDisks:
-          type: boolean
-        includeClusterResourceMode:
-          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
-        includeClusterResources:
-          description: Deprecated. Use includeClusterResourceMode
-          type: boolean
-        locationType:
-          type: string
-        namespaces:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        schedule:
-          $ref: '#/components/schemas/v1ClusterFeatureSchedule'
     v1WorkspaceBackup:
       description: Workspace backup
       properties:
@@ -1116,15 +650,6 @@ components:
           $ref: '#/components/schemas/v1WorkspaceBackupSpec'
         status:
           $ref: '#/components/schemas/v1WorkspaceBackupStatus'
-    v1ClusterResourceError:
-      description: Cluster resource error
-      properties:
-        msg:
-          type: string
-        name:
-          type: string
-        resourceType:
-          type: string
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -1166,6 +691,243 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1ClusterRbacBinding:
+      description: Cluster RBAC binding
+      properties:
+        namespace:
+          type: string
+        role:
+          $ref: '#/components/schemas/v1ClusterRoleRef'
+        subjects:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbacSubjects'
+          type: array
+          uniqueItems: true
+        type:
+          enum:
+          - RoleBinding
+          - ClusterRoleBinding
+          type: string
+      type: object
+    v1ClusterFeatureActor:
+      description: Compliance Scan actor
+      properties:
+        actorType:
+          type: string
+        uid:
+          type: string
+    v1WorkspaceStatus:
+      description: Workspace status
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceError'
+          type: array
+          uniqueItems: true
+    v1WorkspaceClusterBackupResponse:
+      description: Workspace cluster backup response
+      properties:
+        backupStatusMeta:
+          $ref: '#/components/schemas/v1BackupStatusMeta'
+        backupUid:
+          type: string
+        clusterName:
+          type: string
+        clusterUid:
+          type: string
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1WorkspaceBackupStatusConfig:
+      description: Workspace backup status config
+      properties:
+        backupName:
+          type: string
+        durationInHours:
+          format: int64
+          type: number
+        includeAllDisks:
+          type: boolean
+        includeClusterResourceMode:
+          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
+        includeClusterResources:
+          description: Deprecated. Use includeClusterResourceMode
+          type: boolean
+        namespaces:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+    v1ClusterResourceError:
+      description: Cluster resource error
+      properties:
+        msg:
+          type: string
+        name:
+          type: string
+        resourceType:
+          type: string
+    v1IncludeClusterResourceMode:
+      description: 'Specifies the scope of cluster-wide resources to include in the backup based on the flag''--include-cluster-resources'':
+
+        - "Always": --include-cluster-resources=true, which includes all cluster-wide resources; restores only on the original cluster.
+
+        - "Auto": don''t specify --include-cluster-resources, which exclude general cluster-wide resources, but includes PersistentVolumes linked to selected namespaces.
+
+        - "Never": --include-cluster-resources=false, exclude all cluster-wide resources, including PersistentVolumes.
+
+        '
+      enum:
+      - Always
+      - Auto
+      - Never
+      type: string
+    v1WorkspaceBackupStatusMeta:
+      description: Workspace backup status meta
+      properties:
+        actor:
+          $ref: '#/components/schemas/v1ClusterFeatureActor'
+        requestUid:
+          type: string
+        workspaceBackupConfig:
+          $ref: '#/components/schemas/v1WorkspaceClusterBackupConfig'
+    v1ClusterFeatureSchedule:
+      description: Cluster feature schedule
+      properties:
+        scheduledRunTime:
+          type: string
+    v1WorkspaceNamespaceResourceAllocation:
+      description: Workspace namespace resource allocation
+      properties:
+        clusterResourceAllocations:
+          items:
+            $ref: '#/components/schemas/v1ClusterResourceAllocation'
+          type: array
+          uniqueItems: true
+        defaultResourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceResourceAllocation'
+    v1WorkspaceRolesUidSummary:
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1WorkspaceBackupSpec:
+      description: Workspace backup spec
+      properties:
+        config:
+          $ref: '#/components/schemas/v1WorkspaceBackupConfig'
+        workspaceUid:
+          type: string
+    v1GpuConfig:
+      description: GPU configuration for resource allocation
+      properties:
+        limit:
+          description: GPU resource limit
+          format: int32
+          minimum: -1
+          type: integer
+          x-omitempty: false
+        provider:
+          default: nvidia
+          description: GPU provider (only nvidia is supported currently)
+          enum:
+          - nvidia
+          type: string
+    v1WorkspaceNamespaceImage:
+      description: Workspace namespace image information
+      properties:
+        blackListedImages:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+    v1WorkspaceRestoreConfigEntity:
+      description: Cluster restore config
+      properties:
+        backupRequestUid:
+          type: string
+        restoreConfigs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRestoreConfig'
+          type: array
+          uniqueItems: true
+      required:
+      - backupRequestUid
+    v1WorkspaceRestoreStatusMeta:
+      description: Workspace restore status meta
+      properties:
+        actor:
+          $ref: '#/components/schemas/v1ClusterFeatureActor'
+        requestUid:
+          type: string
+        workspaceRestoreConfig:
+          $ref: '#/components/schemas/v1WorkspaceClusterRestoreConfig'
+    v1WorkspaceError:
+      description: Workspace error
+      properties:
+        clusterUid:
+          type: string
+        msg:
+          type: string
+        name:
+          type: string
+        resourceType:
+          type: string
+    v1WorkspaceClusterRestoreConfig:
+      description: Workspace cluster restore config
+      properties:
+        backupName:
+          type: string
+        clusterRestoreRefs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterRestoreResponse'
+          type: array
+        restoreState:
+          $ref: '#/components/schemas/v1WorkspaceRestoreState'
+        restoreTime:
+          $ref: '#/components/schemas/v1Time'
+    v1ClusterRbacStatus:
+      description: Cluster rbac status
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/v1ClusterResourceError'
+          type: array
+          uniqueItems: true
+    v1WorkspaceClusterRestoreState:
+      description: Workspace cluster restore state
+      properties:
+        msg:
+          type: string
+        restoreTime:
+          $ref: '#/components/schemas/v1Time'
+        state:
+          type: string
+    v1RelatedObject:
+      description: Object for which the resource is related
+      properties:
+        kind:
+          enum:
+          - spectrocluster
+          - machine
+          - cloudconfig
+          - clusterprofile
+          - pack
+          - appprofile
+          - appdeployment
+          - edgehost
+          type: string
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
     v1WorkspaceBackupConfigEntity:
       description: Cluster backup config
       properties:
@@ -1178,17 +940,20 @@ components:
           uniqueItems: true
         includeAllClusters:
           type: boolean
-    v1WorkspaceClusterBackupResponse:
-      description: Workspace cluster backup response
+    v1WorkspaceRestoreSpec:
+      description: Workspace restore spec
       properties:
-        backupStatusMeta:
-          $ref: '#/components/schemas/v1BackupStatusMeta'
-        backupUid:
+        workspaceUid:
           type: string
-        clusterName:
-          type: string
-        clusterUid:
-          type: string
+    v1Workspace:
+      description: Workspace information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1WorkspaceSpec'
+        status:
+          $ref: '#/components/schemas/v1WorkspaceStatus'
     v1WorkspaceBackupStatus:
       description: Workspace backup status
       properties:
@@ -1196,39 +961,38 @@ components:
           items:
             $ref: '#/components/schemas/v1WorkspaceBackupStatusMeta'
           type: array
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1WorkspaceNamespaceResourceAllocation:
-      description: Workspace namespace resource allocation
+    v1ClusterBackupConfig:
+      description: Cluster backup config
       properties:
-        clusterResourceAllocations:
-          items:
-            $ref: '#/components/schemas/v1ClusterResourceAllocation'
-          type: array
-          uniqueItems: true
-        defaultResourceAllocation:
-          $ref: '#/components/schemas/v1WorkspaceResourceAllocation'
-    v1WorkspaceBackupStatusMeta:
-      description: Workspace backup status meta
-      properties:
-        actor:
-          $ref: '#/components/schemas/v1ClusterFeatureActor'
-        requestUid:
+        backupLocationName:
           type: string
-        workspaceBackupConfig:
-          $ref: '#/components/schemas/v1WorkspaceClusterBackupConfig'
-    v1WorkspaceScopeRoles:
-      description: List all workspaces with the roles assigned to the users
-      properties:
-        projects:
+        backupLocationUid:
+          type: string
+        backupName:
+          type: string
+        backupPrefix:
+          type: string
+        durationInHours:
+          format: int64
+          type: number
+        includeAllDisks:
+          type: boolean
+        includeClusterResourceMode:
+          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
+        includeClusterResources:
+          description: Deprecated. Use includeClusterResourceMode
+          type: boolean
+        locationType:
+          type: string
+        namespaces:
           items:
-            $ref: '#/components/schemas/v1ProjectsWorkspaces'
+            type: string
           type: array
           uniqueItems: true
-    v1WorkspaceClusterNamespacesEntity:
-      description: Workspace cluster namespaces update entity
+        schedule:
+          $ref: '#/components/schemas/v1ClusterFeatureSchedule'
+    v1WorkspaceResourceAllocationsEntity:
+      description: Workspace resource allocation update entity
       properties:
         clusterNamespaces:
           items:
@@ -1242,38 +1006,102 @@ components:
           uniqueItems: true
         quota:
           $ref: '#/components/schemas/v1WorkspaceQuota'
-    v1WorkspaceRestoreSpec:
-      description: Workspace restore spec
+    v1WorkspaceRestoreStatus:
+      description: Workspace restore status
       properties:
-        workspaceUid:
+        workspaceRestoreStatuses:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRestoreStatusMeta'
+          type: array
+    v1WorkspacesRoles:
+      description: Workspace users and their roles
+      properties:
+        inheritedRoles:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRolesUidSummary'
+          type: array
+        name:
           type: string
-    v1WorkspaceClusterBackupConfig:
-      description: Workspace cluster backup config
+        roles:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRolesUidSummary'
+          type: array
+        uid:
+          type: string
+    v1ClusterResourceAllocation:
+      description: Workspace resource allocation
+      properties:
+        clusterUid:
+          type: string
+        resourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceResourceAllocation'
+    v1WorkspaceRestoreConfig:
+      description: Workspace cluster restore config
       properties:
         backupName:
           type: string
-        backupState:
-          $ref: '#/components/schemas/v1WorkspaceBackupState'
-        backupTime:
-          $ref: '#/components/schemas/v1Time'
-        clusterBackupRefs:
+        includeClusterResourceMode:
+          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
+        includeClusterResources:
+          description: Deprecated. Use includeClusterResourceMode
+          type: boolean
+        includeNamespaces:
           items:
-            $ref: '#/components/schemas/v1WorkspaceClusterBackupResponse'
-          type: array
-        config:
-          $ref: '#/components/schemas/v1WorkspaceBackupStatusConfig'
-        requestTime:
-          $ref: '#/components/schemas/v1Time'
-    v1WorkspaceStatus:
-      description: Workspace status
-      properties:
-        errors:
-          items:
-            $ref: '#/components/schemas/v1WorkspaceError'
+            type: string
           type: array
           uniqueItems: true
-    v1WorkspaceResourceAllocationsEntity:
-      description: Workspace resource allocation update entity
+        preserveNodePorts:
+          type: boolean
+        restorePVs:
+          type: boolean
+        sourceClusterUid:
+          type: string
+      required:
+      - backupName
+      - sourceClusterUid
+    v1WorkspaceSpec:
+      description: Workspace specifications
+      properties:
+        clusterNamespaces:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterNamespace'
+          type: array
+          uniqueItems: true
+        clusterRbacs:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbac'
+          type: array
+          uniqueItems: true
+        clusterRefs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterRef'
+          type: array
+          uniqueItems: true
+        policies:
+          $ref: '#/components/schemas/v1WorkspacePolicies'
+        quota:
+          $ref: '#/components/schemas/v1WorkspaceQuota'
+    v1WorkspacePolicies:
+      description: Workspace policies
+      properties:
+        backupPolicy:
+          $ref: '#/components/schemas/v1WorkspaceBackupConfigEntity'
+    v1ClusterRbacSubjects:
+      description: Cluster role ref
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        type:
+          enum:
+          - User
+          - Group
+          - ServiceAccount
+          type: string
+      type: object
+    v1WorkspaceClusterNamespacesEntity:
+      description: Workspace cluster namespaces update entity
       properties:
         clusterNamespaces:
           items:
@@ -1298,20 +1126,2321 @@ components:
         name:
           type: string
       type: object
-    v1WorkspaceQuota:
-      description: Workspace resource quota
+    v1WorkspaceClusterRef:
+      description: Workspace cluster reference
       properties:
-        resourceAllocation:
-          $ref: '#/components/schemas/v1WorkspaceResourceAllocation'
-    v1Workspace:
+        clusterName:
+          type: string
+        clusterUid:
+          type: string
+    v1WorkspaceClusterBackupConfig:
+      description: Workspace cluster backup config
+      properties:
+        backupName:
+          type: string
+        backupState:
+          $ref: '#/components/schemas/v1WorkspaceBackupState'
+        backupTime:
+          $ref: '#/components/schemas/v1Time'
+        clusterBackupRefs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterBackupResponse'
+          type: array
+        config:
+          $ref: '#/components/schemas/v1WorkspaceBackupStatusConfig'
+        requestTime:
+          $ref: '#/components/schemas/v1Time'
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1WorkspaceResourceAllocation:
+      description: Workspace resource allocation
+      properties:
+        cpuCores:
+          minimum: -1
+          type: number
+          x-omitempty: false
+        gpuConfig:
+          $ref: '#/components/schemas/v1GpuConfig'
+        memoryMiB:
+          minimum: -1
+          type: number
+          x-omitempty: false
+    v1WorkspaceEntity:
       description: Workspace information
       properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
           $ref: '#/components/schemas/v1WorkspaceSpec'
+    v1WorkspaceBackupClusterRef:
+      description: Workspace backup cluster ref
+      properties:
+        backupName:
+          type: string
+        clusterUid:
+          type: string
+    v1WorkspaceScopeRoles:
+      description: List all workspaces with the roles assigned to the users
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1ProjectsWorkspaces'
+          type: array
+          uniqueItems: true
+    v1WorkspaceClusterNamespace:
+      description: Workspace cluster namespace
+      properties:
+        image:
+          $ref: '#/components/schemas/v1WorkspaceNamespaceImage'
+        isRegex:
+          type: boolean
+          x-omitempty: false
+        name:
+          type: string
+        namespaceResourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceNamespaceResourceAllocation'
+    v1WorkspaceQuota:
+      description: Workspace resource quota
+      properties:
+        resourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceResourceAllocation'
+    v1WorkspaceBackupState:
+      description: Workspace backup state
+      properties:
+        deleteState:
+          type: string
+        state:
+          type: string
+    v1ClusterRbacSpec:
+      description: Cluster RBAC spec
+      properties:
+        bindings:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbacBinding'
+          type: array
+          uniqueItems: true
+        isSystem:
+          default: false
+          description: Set to true when the binding is created automatically by the system, rather than manually by the user
+          type: boolean
+        relatedObject:
+          $ref: '#/components/schemas/v1RelatedObject'
+      type: object
+    v1ClusterRbac:
+      description: Cluster RBAC role binding defintion
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ClusterRbacSpec'
         status:
-          $ref: '#/components/schemas/v1WorkspaceStatus'
+          $ref: '#/components/schemas/v1ClusterRbacStatus'
+      type: object
+    v1WorkspaceBackupConfig:
+      description: Workspace backup config
+      properties:
+        backupConfig:
+          $ref: '#/components/schemas/v1ClusterBackupConfig'
+        clusterUids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        includeAllClusters:
+          type: boolean
+    v1BackupStatusMeta:
+      description: Backup  status meta
+      properties:
+        backupName:
+          type: string
+        backupState:
+          $ref: '#/components/schemas/v1BackupState'
+        backupedNamespaces:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        expiryDate:
+          $ref: '#/components/schemas/v1Time'
+    v1ProjectsWorkspaces:
+      description: List projects and its workspaces
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+        workspaces:
+          items:
+            $ref: '#/components/schemas/v1WorkspacesRoles'
+          type: array
+          uniqueItems: true
+    v1WorkspaceRolesPatch:
+      properties:
+        roles:
+          items:
+            type: string
+          type: array
+        uid:
+          type: string
+      type: object
+    v1BackupState:
+      description: Backup state
+      properties:
+        backupTime:
+          $ref: '#/components/schemas/v1Time'
+        deleteState:
+          type: string
+        msg:
+          type: string
+        state:
+          type: string
+    v1WorkspaceRestoreState:
+      description: Workspace restore state
+      properties:
+        deleteState:
+          type: string
+        state:
+          type: string
+    v1WorkspacesRolesPatch:
+      properties:
+        workspaces:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRolesPatch'
+          type: array
+      type: object
+    v1WorkspaceBackupDeleteEntity:
+      description: Cluster backup delete config
+      properties:
+        clusterConfigs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceBackupClusterRef'
+          type: array
+          uniqueItems: true
+        requestUid:
+          type: string
+    v1WorkspaceClusterRestoreResponse:
+      description: Workspace cluster restore response
+      properties:
+        backupName:
+          type: string
+        clusterName:
+          type: string
+        clusterUid:
+          type: string
+        restoreStatusMeta:
+          $ref: '#/components/schemas/v1WorkspaceClusterRestoreState'
+        restoreUid:
+          type: string
+    v1WorkspaceRestore:
+      description: Workspace restore
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1WorkspaceRestoreSpec'
+        status:
+          $ref: '#/components/schemas/v1WorkspaceRestoreStatus'
+    v1WorkspaceBackup_2:
+      description: Workspace backup
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          config:
+            backupConfig:
+              backupLocationName: backupLocationName
+              includeClusterResourceMode: Always
+              backupLocationUid: backupLocationUid
+              schedule:
+                scheduledRunTime: scheduledRunTime
+              backupPrefix: backupPrefix
+              durationInHours: 0.8008281904610115
+              locationType: locationType
+              includeAllDisks: true
+              backupName: backupName
+              includeClusterResources: true
+              namespaces:
+              - namespaces
+              - namespaces
+            clusterUids:
+            - clusterUids
+            - clusterUids
+            includeAllClusters: true
+          workspaceUid: workspaceUid
+        status:
+          workspaceBackupStatuses:
+          - actor:
+              uid: uid
+              actorType: actorType
+            requestUid: requestUid
+            workspaceBackupConfig:
+              requestTime: 2000-01-23 04:56:07+00:00
+              clusterBackupRefs:
+              - backupStatusMeta:
+                  backupedNamespaces:
+                  - backupedNamespaces
+                  - backupedNamespaces
+                  expiryDate: 2000-01-23 04:56:07+00:00
+                  backupState:
+                    msg: msg
+                    state: state
+                    backupTime: 2000-01-23 04:56:07+00:00
+                    deleteState: deleteState
+                  backupName: backupName
+                clusterUid: clusterUid
+                backupUid: backupUid
+                clusterName: clusterName
+              - backupStatusMeta:
+                  backupedNamespaces:
+                  - backupedNamespaces
+                  - backupedNamespaces
+                  expiryDate: 2000-01-23 04:56:07+00:00
+                  backupState:
+                    msg: msg
+                    state: state
+                    backupTime: 2000-01-23 04:56:07+00:00
+                    deleteState: deleteState
+                  backupName: backupName
+                clusterUid: clusterUid
+                backupUid: backupUid
+                clusterName: clusterName
+              backupState:
+                state: state
+                deleteState: deleteState
+              backupTime: 2000-01-23 04:56:07+00:00
+              backupName: backupName
+              config:
+                includeClusterResourceMode: Always
+                durationInHours: 0.8008281904610115
+                includeAllDisks: true
+                backupName: backupName
+                includeClusterResources: true
+                namespaces:
+                - namespaces
+                - namespaces
+          - actor:
+              uid: uid
+              actorType: actorType
+            requestUid: requestUid
+            workspaceBackupConfig:
+              requestTime: 2000-01-23 04:56:07+00:00
+              clusterBackupRefs:
+              - backupStatusMeta:
+                  backupedNamespaces:
+                  - backupedNamespaces
+                  - backupedNamespaces
+                  expiryDate: 2000-01-23 04:56:07+00:00
+                  backupState:
+                    msg: msg
+                    state: state
+                    backupTime: 2000-01-23 04:56:07+00:00
+                    deleteState: deleteState
+                  backupName: backupName
+                clusterUid: clusterUid
+                backupUid: backupUid
+                clusterName: clusterName
+              - backupStatusMeta:
+                  backupedNamespaces:
+                  - backupedNamespaces
+                  - backupedNamespaces
+                  expiryDate: 2000-01-23 04:56:07+00:00
+                  backupState:
+                    msg: msg
+                    state: state
+                    backupTime: 2000-01-23 04:56:07+00:00
+                    deleteState: deleteState
+                  backupName: backupName
+                clusterUid: clusterUid
+                backupUid: backupUid
+                clusterName: clusterName
+              backupState:
+                state: state
+                deleteState: deleteState
+              backupTime: 2000-01-23 04:56:07+00:00
+              backupName: backupName
+              config:
+                includeClusterResourceMode: Always
+                durationInHours: 0.8008281904610115
+                includeAllDisks: true
+                backupName: backupName
+                includeClusterResources: true
+                namespaces:
+                - namespaces
+                - namespaces
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1WorkspaceBackupSpec_2'
+        status:
+          $ref: '#/components/schemas/v1WorkspaceBackupStatus_2'
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1ClusterRbacBinding_2:
+      description: Cluster RBAC binding
+      example:
+        role:
+          kind: Role
+          name: name
+        subjects:
+        - name: name
+          namespace: namespace
+          type: User
+        - name: name
+          namespace: namespace
+          type: User
+        namespace: namespace
+        type: RoleBinding
+      properties:
+        namespace:
+          type: string
+        role:
+          $ref: '#/components/schemas/v1ClusterRoleRef_2'
+        subjects:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbacSubjects_2'
+          type: array
+          uniqueItems: true
+        type:
+          enum:
+          - RoleBinding
+          - ClusterRoleBinding
+          type: string
+      type: object
+    v1ClusterFeatureActor_2:
+      description: Compliance Scan actor
+      example:
+        uid: uid
+        actorType: actorType
+      properties:
+        actorType:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1WorkspaceStatus_2:
+      description: Workspace status
+      example:
+        errors:
+        - msg: msg
+          clusterUid: clusterUid
+          name: name
+          resourceType: resourceType
+        - msg: msg
+          clusterUid: clusterUid
+          name: name
+          resourceType: resourceType
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceError_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1WorkspaceClusterBackupResponse_2:
+      description: Workspace cluster backup response
+      example:
+        backupStatusMeta:
+          backupedNamespaces:
+          - backupedNamespaces
+          - backupedNamespaces
+          expiryDate: 2000-01-23 04:56:07+00:00
+          backupState:
+            msg: msg
+            state: state
+            backupTime: 2000-01-23 04:56:07+00:00
+            deleteState: deleteState
+          backupName: backupName
+        clusterUid: clusterUid
+        backupUid: backupUid
+        clusterName: clusterName
+      properties:
+        backupStatusMeta:
+          $ref: '#/components/schemas/v1BackupStatusMeta_2'
+        backupUid:
+          type: string
+        clusterName:
+          type: string
+        clusterUid:
+          type: string
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1WorkspaceBackupStatusConfig_2:
+      description: Workspace backup status config
+      example:
+        includeClusterResourceMode: Always
+        durationInHours: 0.8008281904610115
+        includeAllDisks: true
+        backupName: backupName
+        includeClusterResources: true
+        namespaces:
+        - namespaces
+        - namespaces
+      properties:
+        backupName:
+          type: string
+        durationInHours:
+          format: int64
+          type: number
+        includeAllDisks:
+          type: boolean
+        includeClusterResourceMode:
+          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
+        includeClusterResources:
+          description: Deprecated. Use includeClusterResourceMode
+          type: boolean
+        namespaces:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1ClusterResourceError_2:
+      description: Cluster resource error
+      example:
+        msg: msg
+        name: name
+        resourceType: resourceType
+      properties:
+        msg:
+          type: string
+        name:
+          type: string
+        resourceType:
+          type: string
+      type: object
+    v1WorkspaceBackupStatusMeta_2:
+      description: Workspace backup status meta
+      example:
+        actor:
+          uid: uid
+          actorType: actorType
+        requestUid: requestUid
+        workspaceBackupConfig:
+          requestTime: 2000-01-23 04:56:07+00:00
+          clusterBackupRefs:
+          - backupStatusMeta:
+              backupedNamespaces:
+              - backupedNamespaces
+              - backupedNamespaces
+              expiryDate: 2000-01-23 04:56:07+00:00
+              backupState:
+                msg: msg
+                state: state
+                backupTime: 2000-01-23 04:56:07+00:00
+                deleteState: deleteState
+              backupName: backupName
+            clusterUid: clusterUid
+            backupUid: backupUid
+            clusterName: clusterName
+          - backupStatusMeta:
+              backupedNamespaces:
+              - backupedNamespaces
+              - backupedNamespaces
+              expiryDate: 2000-01-23 04:56:07+00:00
+              backupState:
+                msg: msg
+                state: state
+                backupTime: 2000-01-23 04:56:07+00:00
+                deleteState: deleteState
+              backupName: backupName
+            clusterUid: clusterUid
+            backupUid: backupUid
+            clusterName: clusterName
+          backupState:
+            state: state
+            deleteState: deleteState
+          backupTime: 2000-01-23 04:56:07+00:00
+          backupName: backupName
+          config:
+            includeClusterResourceMode: Always
+            durationInHours: 0.8008281904610115
+            includeAllDisks: true
+            backupName: backupName
+            includeClusterResources: true
+            namespaces:
+            - namespaces
+            - namespaces
+      properties:
+        actor:
+          $ref: '#/components/schemas/v1ClusterFeatureActor_2'
+        requestUid:
+          type: string
+        workspaceBackupConfig:
+          $ref: '#/components/schemas/v1WorkspaceClusterBackupConfig_2'
+      type: object
+    v1ClusterFeatureSchedule_2:
+      description: Cluster feature schedule
+      example:
+        scheduledRunTime: scheduledRunTime
+      properties:
+        scheduledRunTime:
+          type: string
+      type: object
+    v1WorkspaceNamespaceResourceAllocation_2:
+      description: Workspace namespace resource allocation
+      example:
+        clusterResourceAllocations:
+        - resourceAllocation:
+            cpuCores: -0.9199171809538988
+            gpuConfig:
+              provider: nvidia
+              limit: 0
+            memoryMiB: -0.3972543816929597
+          clusterUid: clusterUid
+        - resourceAllocation:
+            cpuCores: -0.9199171809538988
+            gpuConfig:
+              provider: nvidia
+              limit: 0
+            memoryMiB: -0.3972543816929597
+          clusterUid: clusterUid
+        defaultResourceAllocation:
+          cpuCores: -0.9199171809538988
+          gpuConfig:
+            provider: nvidia
+            limit: 0
+          memoryMiB: -0.3972543816929597
+      properties:
+        clusterResourceAllocations:
+          items:
+            $ref: '#/components/schemas/v1ClusterResourceAllocation_2'
+          type: array
+          uniqueItems: true
+        defaultResourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceResourceAllocation_2'
+      type: object
+    v1WorkspaceRolesUidSummary_2:
+      example:
+        uid: uid
+        name: name
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1WorkspaceBackupSpec_2:
+      description: Workspace backup spec
+      example:
+        config:
+          backupConfig:
+            backupLocationName: backupLocationName
+            includeClusterResourceMode: Always
+            backupLocationUid: backupLocationUid
+            schedule:
+              scheduledRunTime: scheduledRunTime
+            backupPrefix: backupPrefix
+            durationInHours: 0.8008281904610115
+            locationType: locationType
+            includeAllDisks: true
+            backupName: backupName
+            includeClusterResources: true
+            namespaces:
+            - namespaces
+            - namespaces
+          clusterUids:
+          - clusterUids
+          - clusterUids
+          includeAllClusters: true
+        workspaceUid: workspaceUid
+      properties:
+        config:
+          $ref: '#/components/schemas/v1WorkspaceBackupConfig_2'
+        workspaceUid:
+          type: string
+      type: object
+    v1GpuConfig_2:
+      description: GPU configuration for resource allocation
+      example:
+        provider: nvidia
+        limit: 0
+      properties:
+        limit:
+          description: GPU resource limit
+          format: int32
+          minimum: -1
+          type: integer
+          x-omitempty: false
+        provider:
+          default: nvidia
+          description: GPU provider (only nvidia is supported currently)
+          enum:
+          - nvidia
+          type: string
+      type: object
+    v1WorkspaceNamespaceImage_2:
+      description: Workspace namespace image information
+      example:
+        blackListedImages:
+        - blackListedImages
+        - blackListedImages
+      properties:
+        blackListedImages:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1WorkspaceRestoreConfigEntity_2:
+      description: Cluster restore config
+      properties:
+        backupRequestUid:
+          type: string
+        restoreConfigs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRestoreConfig_2'
+          type: array
+          uniqueItems: true
+      required:
+      - backupRequestUid
+      type: object
+    v1WorkspaceRestoreStatusMeta_2:
+      description: Workspace restore status meta
+      example:
+        actor:
+          uid: uid
+          actorType: actorType
+        workspaceRestoreConfig:
+          restoreTime: 2000-01-23 04:56:07+00:00
+          restoreState:
+            state: state
+            deleteState: deleteState
+          clusterRestoreRefs:
+          - clusterUid: clusterUid
+            clusterName: clusterName
+            restoreStatusMeta:
+              msg: msg
+              restoreTime: 2000-01-23 04:56:07+00:00
+              state: state
+            backupName: backupName
+            restoreUid: restoreUid
+          - clusterUid: clusterUid
+            clusterName: clusterName
+            restoreStatusMeta:
+              msg: msg
+              restoreTime: 2000-01-23 04:56:07+00:00
+              state: state
+            backupName: backupName
+            restoreUid: restoreUid
+          backupName: backupName
+        requestUid: requestUid
+      properties:
+        actor:
+          $ref: '#/components/schemas/v1ClusterFeatureActor_2'
+        requestUid:
+          type: string
+        workspaceRestoreConfig:
+          $ref: '#/components/schemas/v1WorkspaceClusterRestoreConfig_2'
+      type: object
+    v1WorkspaceError_2:
+      description: Workspace error
+      example:
+        msg: msg
+        clusterUid: clusterUid
+        name: name
+        resourceType: resourceType
+      properties:
+        clusterUid:
+          type: string
+        msg:
+          type: string
+        name:
+          type: string
+        resourceType:
+          type: string
+      type: object
+    v1WorkspaceClusterRestoreConfig_2:
+      description: Workspace cluster restore config
+      example:
+        restoreTime: 2000-01-23 04:56:07+00:00
+        restoreState:
+          state: state
+          deleteState: deleteState
+        clusterRestoreRefs:
+        - clusterUid: clusterUid
+          clusterName: clusterName
+          restoreStatusMeta:
+            msg: msg
+            restoreTime: 2000-01-23 04:56:07+00:00
+            state: state
+          backupName: backupName
+          restoreUid: restoreUid
+        - clusterUid: clusterUid
+          clusterName: clusterName
+          restoreStatusMeta:
+            msg: msg
+            restoreTime: 2000-01-23 04:56:07+00:00
+            state: state
+          backupName: backupName
+          restoreUid: restoreUid
+        backupName: backupName
+      properties:
+        backupName:
+          type: string
+        clusterRestoreRefs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterRestoreResponse_2'
+          type: array
+        restoreState:
+          $ref: '#/components/schemas/v1WorkspaceRestoreState_2'
+        restoreTime:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1ClusterRbacStatus_2:
+      description: Cluster rbac status
+      example:
+        errors:
+        - msg: msg
+          name: name
+          resourceType: resourceType
+        - msg: msg
+          name: name
+          resourceType: resourceType
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/v1ClusterResourceError_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1WorkspaceClusterRestoreState_2:
+      description: Workspace cluster restore state
+      example:
+        msg: msg
+        restoreTime: 2000-01-23 04:56:07+00:00
+        state: state
+      properties:
+        msg:
+          type: string
+        restoreTime:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        state:
+          type: string
+      type: object
+    v1RelatedObject_2:
+      description: Object for which the resource is related
+      example:
+        uid: uid
+        kind: spectrocluster
+        name: name
+      properties:
+        kind:
+          enum:
+          - spectrocluster
+          - machine
+          - cloudconfig
+          - clusterprofile
+          - pack
+          - appprofile
+          - appdeployment
+          - edgehost
+          type: string
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1WorkspaceBackupConfigEntity_2:
+      description: Cluster backup config
+      example:
+        backupConfig:
+          backupLocationName: backupLocationName
+          includeClusterResourceMode: Always
+          backupLocationUid: backupLocationUid
+          schedule:
+            scheduledRunTime: scheduledRunTime
+          backupPrefix: backupPrefix
+          durationInHours: 0.8008281904610115
+          locationType: locationType
+          includeAllDisks: true
+          backupName: backupName
+          includeClusterResources: true
+          namespaces:
+          - namespaces
+          - namespaces
+        clusterUids:
+        - clusterUids
+        - clusterUids
+        includeAllClusters: true
+      properties:
+        backupConfig:
+          $ref: '#/components/schemas/v1ClusterBackupConfig_2'
+        clusterUids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        includeAllClusters:
+          type: boolean
+      type: object
+    v1WorkspaceRestoreSpec_2:
+      description: Workspace restore spec
+      example:
+        workspaceUid: workspaceUid
+      properties:
+        workspaceUid:
+          type: string
+      type: object
+    v1Workspace_2:
+      description: Workspace information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          clusterRbacs:
+          - metadata:
+              uid: uid
+              creationTimestamp: 2000-01-23 04:56:07+00:00
+              name: name
+              annotations:
+                key: annotations
+              lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+              deletionTimestamp: 2000-01-23 04:56:07+00:00
+              labels:
+                key: labels
+            spec:
+              isSystem: false
+              relatedObject:
+                uid: uid
+                kind: spectrocluster
+                name: name
+              bindings:
+              - role:
+                  kind: Role
+                  name: name
+                subjects:
+                - name: name
+                  namespace: namespace
+                  type: User
+                - name: name
+                  namespace: namespace
+                  type: User
+                namespace: namespace
+                type: RoleBinding
+              - role:
+                  kind: Role
+                  name: name
+                subjects:
+                - name: name
+                  namespace: namespace
+                  type: User
+                - name: name
+                  namespace: namespace
+                  type: User
+                namespace: namespace
+                type: RoleBinding
+            status:
+              errors:
+              - msg: msg
+                name: name
+                resourceType: resourceType
+              - msg: msg
+                name: name
+                resourceType: resourceType
+          - metadata:
+              uid: uid
+              creationTimestamp: 2000-01-23 04:56:07+00:00
+              name: name
+              annotations:
+                key: annotations
+              lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+              deletionTimestamp: 2000-01-23 04:56:07+00:00
+              labels:
+                key: labels
+            spec:
+              isSystem: false
+              relatedObject:
+                uid: uid
+                kind: spectrocluster
+                name: name
+              bindings:
+              - role:
+                  kind: Role
+                  name: name
+                subjects:
+                - name: name
+                  namespace: namespace
+                  type: User
+                - name: name
+                  namespace: namespace
+                  type: User
+                namespace: namespace
+                type: RoleBinding
+              - role:
+                  kind: Role
+                  name: name
+                subjects:
+                - name: name
+                  namespace: namespace
+                  type: User
+                - name: name
+                  namespace: namespace
+                  type: User
+                namespace: namespace
+                type: RoleBinding
+            status:
+              errors:
+              - msg: msg
+                name: name
+                resourceType: resourceType
+              - msg: msg
+                name: name
+                resourceType: resourceType
+          quota:
+            resourceAllocation:
+              cpuCores: -0.9199171809538988
+              gpuConfig:
+                provider: nvidia
+                limit: 0
+              memoryMiB: -0.3972543816929597
+          policies:
+            backupPolicy:
+              backupConfig:
+                backupLocationName: backupLocationName
+                includeClusterResourceMode: Always
+                backupLocationUid: backupLocationUid
+                schedule:
+                  scheduledRunTime: scheduledRunTime
+                backupPrefix: backupPrefix
+                durationInHours: 0.8008281904610115
+                locationType: locationType
+                includeAllDisks: true
+                backupName: backupName
+                includeClusterResources: true
+                namespaces:
+                - namespaces
+                - namespaces
+              clusterUids:
+              - clusterUids
+              - clusterUids
+              includeAllClusters: true
+          clusterNamespaces:
+          - namespaceResourceAllocation:
+              clusterResourceAllocations:
+              - resourceAllocation:
+                  cpuCores: -0.9199171809538988
+                  gpuConfig:
+                    provider: nvidia
+                    limit: 0
+                  memoryMiB: -0.3972543816929597
+                clusterUid: clusterUid
+              - resourceAllocation:
+                  cpuCores: -0.9199171809538988
+                  gpuConfig:
+                    provider: nvidia
+                    limit: 0
+                  memoryMiB: -0.3972543816929597
+                clusterUid: clusterUid
+              defaultResourceAllocation:
+                cpuCores: -0.9199171809538988
+                gpuConfig:
+                  provider: nvidia
+                  limit: 0
+                memoryMiB: -0.3972543816929597
+            image:
+              blackListedImages:
+              - blackListedImages
+              - blackListedImages
+            isRegex: true
+            name: name
+          - namespaceResourceAllocation:
+              clusterResourceAllocations:
+              - resourceAllocation:
+                  cpuCores: -0.9199171809538988
+                  gpuConfig:
+                    provider: nvidia
+                    limit: 0
+                  memoryMiB: -0.3972543816929597
+                clusterUid: clusterUid
+              - resourceAllocation:
+                  cpuCores: -0.9199171809538988
+                  gpuConfig:
+                    provider: nvidia
+                    limit: 0
+                  memoryMiB: -0.3972543816929597
+                clusterUid: clusterUid
+              defaultResourceAllocation:
+                cpuCores: -0.9199171809538988
+                gpuConfig:
+                  provider: nvidia
+                  limit: 0
+                memoryMiB: -0.3972543816929597
+            image:
+              blackListedImages:
+              - blackListedImages
+              - blackListedImages
+            isRegex: true
+            name: name
+          clusterRefs:
+          - clusterUid: clusterUid
+            clusterName: clusterName
+          - clusterUid: clusterUid
+            clusterName: clusterName
+        status:
+          errors:
+          - msg: msg
+            clusterUid: clusterUid
+            name: name
+            resourceType: resourceType
+          - msg: msg
+            clusterUid: clusterUid
+            name: name
+            resourceType: resourceType
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1WorkspaceSpec_2'
+        status:
+          $ref: '#/components/schemas/v1WorkspaceStatus_2'
+      type: object
+    v1WorkspaceBackupStatus_2:
+      description: Workspace backup status
+      example:
+        workspaceBackupStatuses:
+        - actor:
+            uid: uid
+            actorType: actorType
+          requestUid: requestUid
+          workspaceBackupConfig:
+            requestTime: 2000-01-23 04:56:07+00:00
+            clusterBackupRefs:
+            - backupStatusMeta:
+                backupedNamespaces:
+                - backupedNamespaces
+                - backupedNamespaces
+                expiryDate: 2000-01-23 04:56:07+00:00
+                backupState:
+                  msg: msg
+                  state: state
+                  backupTime: 2000-01-23 04:56:07+00:00
+                  deleteState: deleteState
+                backupName: backupName
+              clusterUid: clusterUid
+              backupUid: backupUid
+              clusterName: clusterName
+            - backupStatusMeta:
+                backupedNamespaces:
+                - backupedNamespaces
+                - backupedNamespaces
+                expiryDate: 2000-01-23 04:56:07+00:00
+                backupState:
+                  msg: msg
+                  state: state
+                  backupTime: 2000-01-23 04:56:07+00:00
+                  deleteState: deleteState
+                backupName: backupName
+              clusterUid: clusterUid
+              backupUid: backupUid
+              clusterName: clusterName
+            backupState:
+              state: state
+              deleteState: deleteState
+            backupTime: 2000-01-23 04:56:07+00:00
+            backupName: backupName
+            config:
+              includeClusterResourceMode: Always
+              durationInHours: 0.8008281904610115
+              includeAllDisks: true
+              backupName: backupName
+              includeClusterResources: true
+              namespaces:
+              - namespaces
+              - namespaces
+        - actor:
+            uid: uid
+            actorType: actorType
+          requestUid: requestUid
+          workspaceBackupConfig:
+            requestTime: 2000-01-23 04:56:07+00:00
+            clusterBackupRefs:
+            - backupStatusMeta:
+                backupedNamespaces:
+                - backupedNamespaces
+                - backupedNamespaces
+                expiryDate: 2000-01-23 04:56:07+00:00
+                backupState:
+                  msg: msg
+                  state: state
+                  backupTime: 2000-01-23 04:56:07+00:00
+                  deleteState: deleteState
+                backupName: backupName
+              clusterUid: clusterUid
+              backupUid: backupUid
+              clusterName: clusterName
+            - backupStatusMeta:
+                backupedNamespaces:
+                - backupedNamespaces
+                - backupedNamespaces
+                expiryDate: 2000-01-23 04:56:07+00:00
+                backupState:
+                  msg: msg
+                  state: state
+                  backupTime: 2000-01-23 04:56:07+00:00
+                  deleteState: deleteState
+                backupName: backupName
+              clusterUid: clusterUid
+              backupUid: backupUid
+              clusterName: clusterName
+            backupState:
+              state: state
+              deleteState: deleteState
+            backupTime: 2000-01-23 04:56:07+00:00
+            backupName: backupName
+            config:
+              includeClusterResourceMode: Always
+              durationInHours: 0.8008281904610115
+              includeAllDisks: true
+              backupName: backupName
+              includeClusterResources: true
+              namespaces:
+              - namespaces
+              - namespaces
+      properties:
+        workspaceBackupStatuses:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceBackupStatusMeta_2'
+          type: array
+      type: object
+    v1ClusterBackupConfig_2:
+      description: Cluster backup config
+      example:
+        backupLocationName: backupLocationName
+        includeClusterResourceMode: Always
+        backupLocationUid: backupLocationUid
+        schedule:
+          scheduledRunTime: scheduledRunTime
+        backupPrefix: backupPrefix
+        durationInHours: 0.8008281904610115
+        locationType: locationType
+        includeAllDisks: true
+        backupName: backupName
+        includeClusterResources: true
+        namespaces:
+        - namespaces
+        - namespaces
+      properties:
+        backupLocationName:
+          type: string
+        backupLocationUid:
+          type: string
+        backupName:
+          type: string
+        backupPrefix:
+          type: string
+        durationInHours:
+          format: int64
+          type: number
+        includeAllDisks:
+          type: boolean
+        includeClusterResourceMode:
+          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
+        includeClusterResources:
+          description: Deprecated. Use includeClusterResourceMode
+          type: boolean
+        locationType:
+          type: string
+        namespaces:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        schedule:
+          $ref: '#/components/schemas/v1ClusterFeatureSchedule_2'
+      type: object
+    v1WorkspaceRestoreStatus_2:
+      description: Workspace restore status
+      example:
+        workspaceRestoreStatuses:
+        - actor:
+            uid: uid
+            actorType: actorType
+          workspaceRestoreConfig:
+            restoreTime: 2000-01-23 04:56:07+00:00
+            restoreState:
+              state: state
+              deleteState: deleteState
+            clusterRestoreRefs:
+            - clusterUid: clusterUid
+              clusterName: clusterName
+              restoreStatusMeta:
+                msg: msg
+                restoreTime: 2000-01-23 04:56:07+00:00
+                state: state
+              backupName: backupName
+              restoreUid: restoreUid
+            - clusterUid: clusterUid
+              clusterName: clusterName
+              restoreStatusMeta:
+                msg: msg
+                restoreTime: 2000-01-23 04:56:07+00:00
+                state: state
+              backupName: backupName
+              restoreUid: restoreUid
+            backupName: backupName
+          requestUid: requestUid
+        - actor:
+            uid: uid
+            actorType: actorType
+          workspaceRestoreConfig:
+            restoreTime: 2000-01-23 04:56:07+00:00
+            restoreState:
+              state: state
+              deleteState: deleteState
+            clusterRestoreRefs:
+            - clusterUid: clusterUid
+              clusterName: clusterName
+              restoreStatusMeta:
+                msg: msg
+                restoreTime: 2000-01-23 04:56:07+00:00
+                state: state
+              backupName: backupName
+              restoreUid: restoreUid
+            - clusterUid: clusterUid
+              clusterName: clusterName
+              restoreStatusMeta:
+                msg: msg
+                restoreTime: 2000-01-23 04:56:07+00:00
+                state: state
+              backupName: backupName
+              restoreUid: restoreUid
+            backupName: backupName
+          requestUid: requestUid
+      properties:
+        workspaceRestoreStatuses:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRestoreStatusMeta_2'
+          type: array
+      type: object
+    v1WorkspacesRoles_2:
+      description: Workspace users and their roles
+      example:
+        uid: uid
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        name: name
+        inheritedRoles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        inheritedRoles:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRolesUidSummary_2'
+          type: array
+        name:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceRolesUidSummary_2'
+          type: array
+        uid:
+          type: string
+      type: object
+    v1ClusterResourceAllocation_2:
+      description: Workspace resource allocation
+      example:
+        resourceAllocation:
+          cpuCores: -0.9199171809538988
+          gpuConfig:
+            provider: nvidia
+            limit: 0
+          memoryMiB: -0.3972543816929597
+        clusterUid: clusterUid
+      properties:
+        clusterUid:
+          type: string
+        resourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceResourceAllocation_2'
+      type: object
+    v1WorkspaceRestoreConfig_2:
+      description: Workspace cluster restore config
+      properties:
+        backupName:
+          type: string
+        includeClusterResourceMode:
+          $ref: '#/components/schemas/v1IncludeClusterResourceMode'
+        includeClusterResources:
+          description: Deprecated. Use includeClusterResourceMode
+          type: boolean
+        includeNamespaces:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        preserveNodePorts:
+          type: boolean
+        restorePVs:
+          type: boolean
+        sourceClusterUid:
+          type: string
+      required:
+      - backupName
+      - sourceClusterUid
+      type: object
+    v1WorkspaceSpec_2:
+      description: Workspace specifications
+      example:
+        clusterRbacs:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            isSystem: false
+            relatedObject:
+              uid: uid
+              kind: spectrocluster
+              name: name
+            bindings:
+            - role:
+                kind: Role
+                name: name
+              subjects:
+              - name: name
+                namespace: namespace
+                type: User
+              - name: name
+                namespace: namespace
+                type: User
+              namespace: namespace
+              type: RoleBinding
+            - role:
+                kind: Role
+                name: name
+              subjects:
+              - name: name
+                namespace: namespace
+                type: User
+              - name: name
+                namespace: namespace
+                type: User
+              namespace: namespace
+              type: RoleBinding
+          status:
+            errors:
+            - msg: msg
+              name: name
+              resourceType: resourceType
+            - msg: msg
+              name: name
+              resourceType: resourceType
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            isSystem: false
+            relatedObject:
+              uid: uid
+              kind: spectrocluster
+              name: name
+            bindings:
+            - role:
+                kind: Role
+                name: name
+              subjects:
+              - name: name
+                namespace: namespace
+                type: User
+              - name: name
+                namespace: namespace
+                type: User
+              namespace: namespace
+              type: RoleBinding
+            - role:
+                kind: Role
+                name: name
+              subjects:
+              - name: name
+                namespace: namespace
+                type: User
+              - name: name
+                namespace: namespace
+                type: User
+              namespace: namespace
+              type: RoleBinding
+          status:
+            errors:
+            - msg: msg
+              name: name
+              resourceType: resourceType
+            - msg: msg
+              name: name
+              resourceType: resourceType
+        quota:
+          resourceAllocation:
+            cpuCores: -0.9199171809538988
+            gpuConfig:
+              provider: nvidia
+              limit: 0
+            memoryMiB: -0.3972543816929597
+        policies:
+          backupPolicy:
+            backupConfig:
+              backupLocationName: backupLocationName
+              includeClusterResourceMode: Always
+              backupLocationUid: backupLocationUid
+              schedule:
+                scheduledRunTime: scheduledRunTime
+              backupPrefix: backupPrefix
+              durationInHours: 0.8008281904610115
+              locationType: locationType
+              includeAllDisks: true
+              backupName: backupName
+              includeClusterResources: true
+              namespaces:
+              - namespaces
+              - namespaces
+            clusterUids:
+            - clusterUids
+            - clusterUids
+            includeAllClusters: true
+        clusterNamespaces:
+        - namespaceResourceAllocation:
+            clusterResourceAllocations:
+            - resourceAllocation:
+                cpuCores: -0.9199171809538988
+                gpuConfig:
+                  provider: nvidia
+                  limit: 0
+                memoryMiB: -0.3972543816929597
+              clusterUid: clusterUid
+            - resourceAllocation:
+                cpuCores: -0.9199171809538988
+                gpuConfig:
+                  provider: nvidia
+                  limit: 0
+                memoryMiB: -0.3972543816929597
+              clusterUid: clusterUid
+            defaultResourceAllocation:
+              cpuCores: -0.9199171809538988
+              gpuConfig:
+                provider: nvidia
+                limit: 0
+              memoryMiB: -0.3972543816929597
+          image:
+            blackListedImages:
+            - blackListedImages
+            - blackListedImages
+          isRegex: true
+          name: name
+        - namespaceResourceAllocation:
+            clusterResourceAllocations:
+            - resourceAllocation:
+                cpuCores: -0.9199171809538988
+                gpuConfig:
+                  provider: nvidia
+                  limit: 0
+                memoryMiB: -0.3972543816929597
+              clusterUid: clusterUid
+            - resourceAllocation:
+                cpuCores: -0.9199171809538988
+                gpuConfig:
+                  provider: nvidia
+                  limit: 0
+                memoryMiB: -0.3972543816929597
+              clusterUid: clusterUid
+            defaultResourceAllocation:
+              cpuCores: -0.9199171809538988
+              gpuConfig:
+                provider: nvidia
+                limit: 0
+              memoryMiB: -0.3972543816929597
+          image:
+            blackListedImages:
+            - blackListedImages
+            - blackListedImages
+          isRegex: true
+          name: name
+        clusterRefs:
+        - clusterUid: clusterUid
+          clusterName: clusterName
+        - clusterUid: clusterUid
+          clusterName: clusterName
+      properties:
+        clusterNamespaces:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterNamespace_2'
+          type: array
+          uniqueItems: true
+        clusterRbacs:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbac_2'
+          type: array
+          uniqueItems: true
+        clusterRefs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterRef_2'
+          type: array
+          uniqueItems: true
+        policies:
+          $ref: '#/components/schemas/v1WorkspacePolicies_2'
+        quota:
+          $ref: '#/components/schemas/v1WorkspaceQuota_2'
+      type: object
+    v1WorkspacePolicies_2:
+      description: Workspace policies
+      example:
+        backupPolicy:
+          backupConfig:
+            backupLocationName: backupLocationName
+            includeClusterResourceMode: Always
+            backupLocationUid: backupLocationUid
+            schedule:
+              scheduledRunTime: scheduledRunTime
+            backupPrefix: backupPrefix
+            durationInHours: 0.8008281904610115
+            locationType: locationType
+            includeAllDisks: true
+            backupName: backupName
+            includeClusterResources: true
+            namespaces:
+            - namespaces
+            - namespaces
+          clusterUids:
+          - clusterUids
+          - clusterUids
+          includeAllClusters: true
+      properties:
+        backupPolicy:
+          $ref: '#/components/schemas/v1WorkspaceBackupConfigEntity_2'
+      type: object
+    v1ClusterRbacSubjects_2:
+      description: Cluster role ref
+      example:
+        name: name
+        namespace: namespace
+        type: User
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        type:
+          enum:
+          - User
+          - Group
+          - ServiceAccount
+          type: string
+      type: object
+    v1WorkspaceClusterNamespacesEntity_2:
+      description: Workspace cluster namespaces update entity
+      properties:
+        clusterNamespaces:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterNamespace_2'
+          type: array
+          uniqueItems: true
+        clusterRefs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterRef_2'
+          type: array
+          uniqueItems: true
+        quota:
+          $ref: '#/components/schemas/v1WorkspaceQuota_2'
+      type: object
+    v1ClusterRoleRef_2:
+      description: Cluster role ref
+      example:
+        kind: Role
+        name: name
+      properties:
+        kind:
+          enum:
+          - Role
+          - ClusterRole
+          type: string
+        name:
+          type: string
+      type: object
+    v1WorkspaceClusterRef_2:
+      description: Workspace cluster reference
+      example:
+        clusterUid: clusterUid
+        clusterName: clusterName
+      properties:
+        clusterName:
+          type: string
+        clusterUid:
+          type: string
+      type: object
+    v1WorkspaceClusterBackupConfig_2:
+      description: Workspace cluster backup config
+      example:
+        requestTime: 2000-01-23 04:56:07+00:00
+        clusterBackupRefs:
+        - backupStatusMeta:
+            backupedNamespaces:
+            - backupedNamespaces
+            - backupedNamespaces
+            expiryDate: 2000-01-23 04:56:07+00:00
+            backupState:
+              msg: msg
+              state: state
+              backupTime: 2000-01-23 04:56:07+00:00
+              deleteState: deleteState
+            backupName: backupName
+          clusterUid: clusterUid
+          backupUid: backupUid
+          clusterName: clusterName
+        - backupStatusMeta:
+            backupedNamespaces:
+            - backupedNamespaces
+            - backupedNamespaces
+            expiryDate: 2000-01-23 04:56:07+00:00
+            backupState:
+              msg: msg
+              state: state
+              backupTime: 2000-01-23 04:56:07+00:00
+              deleteState: deleteState
+            backupName: backupName
+          clusterUid: clusterUid
+          backupUid: backupUid
+          clusterName: clusterName
+        backupState:
+          state: state
+          deleteState: deleteState
+        backupTime: 2000-01-23 04:56:07+00:00
+        backupName: backupName
+        config:
+          includeClusterResourceMode: Always
+          durationInHours: 0.8008281904610115
+          includeAllDisks: true
+          backupName: backupName
+          includeClusterResources: true
+          namespaces:
+          - namespaces
+          - namespaces
+      properties:
+        backupName:
+          type: string
+        backupState:
+          $ref: '#/components/schemas/v1WorkspaceBackupState_2'
+        backupTime:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        clusterBackupRefs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceClusterBackupResponse_2'
+          type: array
+        config:
+          $ref: '#/components/schemas/v1WorkspaceBackupStatusConfig_2'
+        requestTime:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1WorkspaceResourceAllocation_2:
+      description: Workspace resource allocation
+      example:
+        cpuCores: -0.9199171809538988
+        gpuConfig:
+          provider: nvidia
+          limit: 0
+        memoryMiB: -0.3972543816929597
+      properties:
+        cpuCores:
+          minimum: -1
+          type: number
+          x-omitempty: false
+        gpuConfig:
+          $ref: '#/components/schemas/v1GpuConfig_2'
+        memoryMiB:
+          minimum: -1
+          type: number
+          x-omitempty: false
+      type: object
+    v1WorkspaceEntity_2:
+      description: Workspace information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1WorkspaceSpec_2'
+      type: object
+    v1WorkspaceBackupClusterRef_2:
+      description: Workspace backup cluster ref
+      properties:
+        backupName:
+          type: string
+        clusterUid:
+          type: string
+      type: object
+    v1WorkspaceScopeRoles_2:
+      description: List all workspaces with the roles assigned to the users
+      example:
+        projects:
+        - uid: uid
+          name: name
+          workspaces:
+          - uid: uid
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            name: name
+            inheritedRoles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+          - uid: uid
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            name: name
+            inheritedRoles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+        - uid: uid
+          name: name
+          workspaces:
+          - uid: uid
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            name: name
+            inheritedRoles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+          - uid: uid
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            name: name
+            inheritedRoles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1ProjectsWorkspaces_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1WorkspaceClusterNamespace_2:
+      description: Workspace cluster namespace
+      example:
+        namespaceResourceAllocation:
+          clusterResourceAllocations:
+          - resourceAllocation:
+              cpuCores: -0.9199171809538988
+              gpuConfig:
+                provider: nvidia
+                limit: 0
+              memoryMiB: -0.3972543816929597
+            clusterUid: clusterUid
+          - resourceAllocation:
+              cpuCores: -0.9199171809538988
+              gpuConfig:
+                provider: nvidia
+                limit: 0
+              memoryMiB: -0.3972543816929597
+            clusterUid: clusterUid
+          defaultResourceAllocation:
+            cpuCores: -0.9199171809538988
+            gpuConfig:
+              provider: nvidia
+              limit: 0
+            memoryMiB: -0.3972543816929597
+        image:
+          blackListedImages:
+          - blackListedImages
+          - blackListedImages
+        isRegex: true
+        name: name
+      properties:
+        image:
+          $ref: '#/components/schemas/v1WorkspaceNamespaceImage_2'
+        isRegex:
+          type: boolean
+          x-omitempty: false
+        name:
+          type: string
+        namespaceResourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceNamespaceResourceAllocation_2'
+      type: object
+    v1WorkspaceQuota_2:
+      description: Workspace resource quota
+      example:
+        resourceAllocation:
+          cpuCores: -0.9199171809538988
+          gpuConfig:
+            provider: nvidia
+            limit: 0
+          memoryMiB: -0.3972543816929597
+      properties:
+        resourceAllocation:
+          $ref: '#/components/schemas/v1WorkspaceResourceAllocation_2'
+      type: object
+    v1WorkspaceBackupState_2:
+      description: Workspace backup state
+      example:
+        state: state
+        deleteState: deleteState
+      properties:
+        deleteState:
+          type: string
+        state:
+          type: string
+      type: object
+    v1ClusterRbacSpec_2:
+      description: Cluster RBAC spec
+      example:
+        isSystem: false
+        relatedObject:
+          uid: uid
+          kind: spectrocluster
+          name: name
+        bindings:
+        - role:
+            kind: Role
+            name: name
+          subjects:
+          - name: name
+            namespace: namespace
+            type: User
+          - name: name
+            namespace: namespace
+            type: User
+          namespace: namespace
+          type: RoleBinding
+        - role:
+            kind: Role
+            name: name
+          subjects:
+          - name: name
+            namespace: namespace
+            type: User
+          - name: name
+            namespace: namespace
+            type: User
+          namespace: namespace
+          type: RoleBinding
+      properties:
+        bindings:
+          items:
+            $ref: '#/components/schemas/v1ClusterRbacBinding_2'
+          type: array
+          uniqueItems: true
+        isSystem:
+          default: false
+          description: Set to true when the binding is created automatically by the system, rather than manually by the user
+          type: boolean
+        relatedObject:
+          $ref: '#/components/schemas/v1RelatedObject_2'
+      type: object
+    v1ClusterRbac_2:
+      description: Cluster RBAC role binding defintion
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          isSystem: false
+          relatedObject:
+            uid: uid
+            kind: spectrocluster
+            name: name
+          bindings:
+          - role:
+              kind: Role
+              name: name
+            subjects:
+            - name: name
+              namespace: namespace
+              type: User
+            - name: name
+              namespace: namespace
+              type: User
+            namespace: namespace
+            type: RoleBinding
+          - role:
+              kind: Role
+              name: name
+            subjects:
+            - name: name
+              namespace: namespace
+              type: User
+            - name: name
+              namespace: namespace
+              type: User
+            namespace: namespace
+            type: RoleBinding
+        status:
+          errors:
+          - msg: msg
+            name: name
+            resourceType: resourceType
+          - msg: msg
+            name: name
+            resourceType: resourceType
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1ClusterRbacSpec_2'
+        status:
+          $ref: '#/components/schemas/v1ClusterRbacStatus_2'
+      type: object
+    v1WorkspaceBackupConfig_2:
+      description: Workspace backup config
+      example:
+        backupConfig:
+          backupLocationName: backupLocationName
+          includeClusterResourceMode: Always
+          backupLocationUid: backupLocationUid
+          schedule:
+            scheduledRunTime: scheduledRunTime
+          backupPrefix: backupPrefix
+          durationInHours: 0.8008281904610115
+          locationType: locationType
+          includeAllDisks: true
+          backupName: backupName
+          includeClusterResources: true
+          namespaces:
+          - namespaces
+          - namespaces
+        clusterUids:
+        - clusterUids
+        - clusterUids
+        includeAllClusters: true
+      properties:
+        backupConfig:
+          $ref: '#/components/schemas/v1ClusterBackupConfig_2'
+        clusterUids:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        includeAllClusters:
+          type: boolean
+      type: object
+    v1BackupStatusMeta_2:
+      description: Backup  status meta
+      example:
+        backupedNamespaces:
+        - backupedNamespaces
+        - backupedNamespaces
+        expiryDate: 2000-01-23 04:56:07+00:00
+        backupState:
+          msg: msg
+          state: state
+          backupTime: 2000-01-23 04:56:07+00:00
+          deleteState: deleteState
+        backupName: backupName
+      properties:
+        backupName:
+          type: string
+        backupState:
+          $ref: '#/components/schemas/v1BackupState_2'
+        backupedNamespaces:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        expiryDate:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1ProjectsWorkspaces_2:
+      description: List projects and its workspaces
+      example:
+        uid: uid
+        name: name
+        workspaces:
+        - uid: uid
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          name: name
+          inheritedRoles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        - uid: uid
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          name: name
+          inheritedRoles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+        workspaces:
+          items:
+            $ref: '#/components/schemas/v1WorkspacesRoles_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1BackupState_2:
+      description: Backup state
+      example:
+        msg: msg
+        state: state
+        backupTime: 2000-01-23 04:56:07+00:00
+        deleteState: deleteState
+      properties:
+        backupTime:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deleteState:
+          type: string
+        msg:
+          type: string
+        state:
+          type: string
+      type: object
+    v1WorkspaceRestoreState_2:
+      description: Workspace restore state
+      example:
+        state: state
+        deleteState: deleteState
+      properties:
+        deleteState:
+          type: string
+        state:
+          type: string
+      type: object
+    v1WorkspaceBackupDeleteEntity_2:
+      description: Cluster backup delete config
+      properties:
+        clusterConfigs:
+          items:
+            $ref: '#/components/schemas/v1WorkspaceBackupClusterRef_2'
+          type: array
+          uniqueItems: true
+        requestUid:
+          type: string
+      type: object
+    v1WorkspaceClusterRestoreResponse_2:
+      description: Workspace cluster restore response
+      example:
+        clusterUid: clusterUid
+        clusterName: clusterName
+        restoreStatusMeta:
+          msg: msg
+          restoreTime: 2000-01-23 04:56:07+00:00
+          state: state
+        backupName: backupName
+        restoreUid: restoreUid
+      properties:
+        backupName:
+          type: string
+        clusterName:
+          type: string
+        clusterUid:
+          type: string
+        restoreStatusMeta:
+          $ref: '#/components/schemas/v1WorkspaceClusterRestoreState_2'
+        restoreUid:
+          type: string
+      type: object
+    v1WorkspaceRestore_2:
+      description: Workspace restore
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          workspaceUid: workspaceUid
+        status:
+          workspaceRestoreStatuses:
+          - actor:
+              uid: uid
+              actorType: actorType
+            workspaceRestoreConfig:
+              restoreTime: 2000-01-23 04:56:07+00:00
+              restoreState:
+                state: state
+                deleteState: deleteState
+              clusterRestoreRefs:
+              - clusterUid: clusterUid
+                clusterName: clusterName
+                restoreStatusMeta:
+                  msg: msg
+                  restoreTime: 2000-01-23 04:56:07+00:00
+                  state: state
+                backupName: backupName
+                restoreUid: restoreUid
+              - clusterUid: clusterUid
+                clusterName: clusterName
+                restoreStatusMeta:
+                  msg: msg
+                  restoreTime: 2000-01-23 04:56:07+00:00
+                  state: state
+                backupName: backupName
+                restoreUid: restoreUid
+              backupName: backupName
+            requestUid: requestUid
+          - actor:
+              uid: uid
+              actorType: actorType
+            workspaceRestoreConfig:
+              restoreTime: 2000-01-23 04:56:07+00:00
+              restoreState:
+                state: state
+                deleteState: deleteState
+              clusterRestoreRefs:
+              - clusterUid: clusterUid
+                clusterName: clusterName
+                restoreStatusMeta:
+                  msg: msg
+                  restoreTime: 2000-01-23 04:56:07+00:00
+                  state: state
+                backupName: backupName
+                restoreUid: restoreUid
+              - clusterUid: clusterUid
+                clusterName: clusterName
+                restoreStatusMeta:
+                  msg: msg
+                  restoreTime: 2000-01-23 04:56:07+00:00
+                  state: state
+                backupName: backupName
+                restoreUid: restoreUid
+              backupName: backupName
+            requestUid: requestUid
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1WorkspaceRestoreSpec_2'
+        status:
+          $ref: '#/components/schemas/v1WorkspaceRestoreStatus_2'
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -1323,3 +3452,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

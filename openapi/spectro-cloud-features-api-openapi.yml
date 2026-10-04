@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Features API
+  title: Spectro Cloud Features API
   version: v1
+  description: 'Operations tagged features across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Features
   x-displayName: Features
@@ -30,6 +32,8 @@ paths:
       summary: Retrieves the list of features
       tags:
       - Features
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/features/{uid}:
     parameters:
     - description: Specify the feature uid
@@ -60,6 +64,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1FeatureUpdate'
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
     v1FeatureUpdate:
@@ -69,54 +75,13 @@ components:
           $ref: '#/components/schemas/v1ObjectMetaInputEntity'
         spec:
           $ref: '#/components/schemas/v1FeatureUpdateSpec'
-    v1FeatureUpdateSpec:
-      description: Feature update spec
+    v1Feature:
+      description: Feature response
       properties:
-        description:
-          description: Feature description
-          type: string
-        docLink:
-          description: Feature doc link
-          type: string
-    v1Features:
-      properties:
-        items:
-          description: List of features
-          items:
-            $ref: '#/components/schemas/v1Feature'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1FeatureSpec:
-      description: Feature spec
-      properties:
-        description:
-          description: Feature description
-          type: string
-        docLink:
-          description: Feature doc link
-          type: string
-        key:
-          description: Feature key
-          type: string
-    v1ObjectMetaInputEntity:
-      description: ObjectMeta input entity for object creation
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1FeatureSpec'
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -159,18 +124,226 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1Feature:
-      description: Feature response
+    v1ObjectMetaInputEntity:
+      description: ObjectMeta input entity for object creation
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1FeatureSpec'
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1Features:
+      properties:
+        items:
+          description: List of features
+          items:
+            $ref: '#/components/schemas/v1Feature'
+          type: array
+          uniqueItems: true
+      required:
+      - items
       type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
+    v1FeatureSpec:
+      description: Feature spec
+      properties:
+        description:
+          description: Feature description
+          type: string
+        docLink:
+          description: Feature doc link
+          type: string
+        key:
+          description: Feature key
+          type: string
+    v1FeatureUpdateSpec:
+      description: Feature update spec
+      properties:
+        description:
+          description: Feature description
+          type: string
+        docLink:
+          description: Feature doc link
+          type: string
+    v1FeatureUpdate_2:
+      description: Feature update spec
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity_2'
+        spec:
+          $ref: '#/components/schemas/v1FeatureUpdateSpec_2'
+      type: object
+    v1Feature_2:
+      description: Feature response
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          docLink: docLink
+          description: description
+          key: key
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1FeatureSpec_2'
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1ObjectMetaInputEntity_2:
+      description: ObjectMeta input entity for object creation
+      example:
+        name: name
+        annotations:
+          key: annotations
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1Features_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            docLink: docLink
+            description: description
+            key: key
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            docLink: docLink
+            description: description
+            key: key
+      properties:
+        items:
+          description: List of features
+          items:
+            $ref: '#/components/schemas/v1Feature_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1FeatureSpec_2:
+      description: Feature spec
+      example:
+        docLink: docLink
+        description: description
+        key: key
+      properties:
+        description:
+          description: Feature description
+          type: string
+        docLink:
+          description: Feature doc link
+          type: string
+        key:
+          description: Feature key
+          type: string
+      type: object
+    v1FeatureUpdateSpec_2:
+      description: Feature update spec
+      properties:
+        description:
+          description: Feature description
+          type: string
+        docLink:
+          description: Feature doc link
+          type: string
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -182,3 +355,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

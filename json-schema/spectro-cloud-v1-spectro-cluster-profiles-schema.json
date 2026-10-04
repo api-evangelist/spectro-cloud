@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-spectro-cluster-profiles-schema.json",
+  "title": "v1SpectroClusterProfiles",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edgehosts-api-openapi.yml#/components/schemas/v1SpectroClusterProfiles",
+  "properties": {
+    "profiles": {
+      "items": {
+        "$ref": "#/$defs/v1SpectroClusterProfileEntity"
+      },
+      "type": "array"
+    },
+    "spcApplySettings": {
+      "$ref": "#/$defs/v1SpcApplySettings"
+    }
+  },
+  "required": [
+    "profiles"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1ManifestRefUpdateEntity": {
+      "description": "Manifest update request payload",
+      "properties": {
+        "content": {
+          "description": "Manifest content in yaml",
+          "type": "string"
+        },
+        "name": {
+          "description": "Manifest name",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Manifest uid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "v1PackType": {
+      "default": "spectro",
+      "enum": [
+        "spectro",
+        "helm",
+        "manifest",
+        "oci"
+      ],
+      "type": "string"
+    },
+    "v1PackValuesEntity": {
+      "description": "Pack values entity to refer the existing pack for the values override",
+      "properties": {
+        "manifests": {
+          "description": "Pack manifests are additional content as part of the profile",
+          "items": {
+            "$ref": "#/$defs/v1ManifestRefUpdateEntity"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Pack name",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Pack version tag",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/v1PackType"
+        },
+        "values": {
+          "description": "Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1SpcApplySettings": {
+      "properties": {
+        "actionType": {
+          "enum": [
+            "DownloadAndInstall",
+            "DownloadAndInstallLater"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterProfileEntity": {
+      "description": "Cluster profile request payload",
+      "properties": {
+        "packValues": {
+          "description": "Cluster profile packs array",
+          "items": {
+            "$ref": "#/$defs/v1PackValuesEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "replaceWithProfile": {
+          "description": "Cluster profile uid to be replaced with new profile",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Cluster profile uid",
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterVariable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterVariable": {
+      "description": "Variable with value which will be used within the packs of cluster profile",
+      "properties": {
+        "name": {
+          "description": "Variable name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Actual value of the variable to be used within the cluster",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    }
+  }
+}

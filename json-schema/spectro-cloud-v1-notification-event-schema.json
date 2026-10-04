@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-notification-event-schema.json",
+  "title": "v1NotificationEvent",
+  "description": "Describes notification event details",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-notifications-api-openapi.yml#/components/schemas/v1NotificationEvent",
+  "properties": {
+    "component": {
+      "description": "Describes component of notification event",
+      "type": "string"
+    },
+    "digest": {
+      "description": "Describes notification event digest",
+      "type": "string"
+    },
+    "message": {
+      "description": "Describes a information for the notification event",
+      "type": "string"
+    },
+    "meta": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Describes a event messages with meta digest as the key",
+      "type": "object"
+    },
+    "type": {
+      "description": "Describes notification event type",
+      "enum": [
+        "NotificationPackSync",
+        "NotificationClusterProfileSync"
+      ],
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

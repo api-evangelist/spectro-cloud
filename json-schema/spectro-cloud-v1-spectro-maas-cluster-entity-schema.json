@@ -1,0 +1,1114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-spectro-maas-cluster-entity-schema.json",
+  "title": "v1SpectroMaasClusterEntity",
+  "description": "Spectro Maas cluster request payload for create and update",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-spectroclusters-api-openapi.yml#/components/schemas/v1SpectroMaasClusterEntity",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "properties": {
+        "cloudAccountUid": {
+          "description": "Cloud account uid to be used for cluster provisioning",
+          "type": "string"
+        },
+        "cloudConfig": {
+          "$ref": "#/$defs/v1MaasClusterConfig"
+        },
+        "clusterConfig": {
+          "$ref": "#/$defs/v1ClusterConfigEntity",
+          "description": "General cluster configuration like health, patching settings, namespace resource allocation, rbac"
+        },
+        "clusterTemplate": {
+          "$ref": "#/$defs/v1ClusterTemplateRef"
+        },
+        "clusterType": {
+          "$ref": "#/$defs/v1ClusterType"
+        },
+        "machinepoolconfig": {
+          "items": {
+            "$ref": "#/$defs/v1MaasMachinePoolConfigEntity"
+          },
+          "type": "array"
+        },
+        "policies": {
+          "$ref": "#/$defs/v1SpectroClusterPolicies"
+        },
+        "profiles": {
+          "description": "Cluster profile references that specify which profiles to apply to the cluster. Supports overriding pack values and variables. When template references are used, pack values cannot be overridden as they are retrieved from the template's pre-configured definitions.",
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterProfileEntity"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cloudType",
+        "cloudAccountUid",
+        "cloudConfig"
+      ],
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ArchType": {
+      "default": "amd64",
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "type": "string"
+    },
+    "v1ClusterBackupConfig": {
+      "description": "Cluster backup config",
+      "properties": {
+        "backupLocationName": {
+          "type": "string"
+        },
+        "backupLocationUid": {
+          "type": "string"
+        },
+        "backupName": {
+          "type": "string"
+        },
+        "backupPrefix": {
+          "type": "string"
+        },
+        "durationInHours": {
+          "format": "int64",
+          "type": "number"
+        },
+        "includeAllDisks": {
+          "type": "boolean"
+        },
+        "includeClusterResourceMode": {
+          "$ref": "#/$defs/v1IncludeClusterResourceMode"
+        },
+        "includeClusterResources": {
+          "description": "Deprecated. Use includeClusterResourceMode",
+          "type": "boolean"
+        },
+        "locationType": {
+          "type": "string"
+        },
+        "namespaces": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "schedule": {
+          "$ref": "#/$defs/v1ClusterFeatureSchedule"
+        }
+      }
+    },
+    "v1ClusterComplianceScanKubeBenchScheduleConfig": {
+      "description": "Cluster compliance scan schedule config for kube bench driver",
+      "properties": {
+        "schedule": {
+          "$ref": "#/$defs/v1ClusterFeatureSchedule"
+        }
+      }
+    },
+    "v1ClusterComplianceScanKubeHunterScheduleConfig": {
+      "description": "Cluster compliance scan schedule config for kube hunter driver",
+      "properties": {
+        "schedule": {
+          "$ref": "#/$defs/v1ClusterFeatureSchedule"
+        }
+      }
+    },
+    "v1ClusterComplianceScanSonobuoyScheduleConfig": {
+      "description": "Cluster compliance scan schedule config for sonobuoy driver",
+      "properties": {
+        "schedule": {
+          "$ref": "#/$defs/v1ClusterFeatureSchedule"
+        }
+      }
+    },
+    "v1ClusterComplianceScheduleConfig": {
+      "description": "Cluster compliance scan schedule configuration",
+      "properties": {
+        "kubeBench": {
+          "$ref": "#/$defs/v1ClusterComplianceScanKubeBenchScheduleConfig"
+        },
+        "kubeHunter": {
+          "$ref": "#/$defs/v1ClusterComplianceScanKubeHunterScheduleConfig"
+        },
+        "sonobuoy": {
+          "$ref": "#/$defs/v1ClusterComplianceScanSonobuoyScheduleConfig"
+        }
+      }
+    },
+    "v1ClusterConfigEntity": {
+      "properties": {
+        "clusterMetaAttribute": {
+          "description": "ClusterMetaAttribute can be used to set additional cluster metadata information.",
+          "type": "string"
+        },
+        "controlPlaneHealthCheckTimeout": {
+          "type": "string"
+        },
+        "hostClusterConfig": {
+          "$ref": "#/$defs/v1HostClusterConfig"
+        },
+        "hyperShiftConfig": {
+          "$ref": "#/$defs/v1HyperShiftConfig"
+        },
+        "lifecycleConfig": {
+          "$ref": "#/$defs/v1LifecycleConfig"
+        },
+        "location": {
+          "$ref": "#/$defs/v1ClusterLocation"
+        },
+        "machineManagementConfig": {
+          "$ref": "#/$defs/v1MachineManagementConfig"
+        },
+        "resources": {
+          "$ref": "#/$defs/v1ClusterResourcesEntity"
+        },
+        "timezone": {
+          "description": "Timezone of a cluster in IANA standard format. It is mandatory field if cluster is deployed through template, else it is optional",
+          "type": "string"
+        },
+        "updateWorkerPoolsInParallel": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterDeploymentType": {
+      "description": "Defines the deployment type for HyperShift-enabled clusters.\n- 'hypershift': Indicates a HyperShift management cluster that hosts control planes for other clusters.\n- 'openshift': Indicates an OpenShift cluster whose control plane is hosted on a HyperShift management cluster.",
+      "enum": [
+        "hypershift",
+        "openshift"
+      ],
+      "type": "string"
+    },
+    "v1ClusterFeatureSchedule": {
+      "description": "Cluster feature schedule",
+      "properties": {
+        "scheduledRunTime": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterLocation": {
+      "description": "Cluster location information",
+      "properties": {
+        "countryCode": {
+          "description": "country code for cluster location",
+          "type": "string"
+        },
+        "countryName": {
+          "description": "country name for cluster location",
+          "type": "string"
+        },
+        "geoLoc": {
+          "$ref": "#/$defs/v1GeolocationLatlong"
+        },
+        "regionCode": {
+          "description": "region code for cluster location",
+          "type": "string"
+        },
+        "regionName": {
+          "description": "region name for cluster location",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterNamespaceResourceAllocation": {
+      "description": "Cluster namespace resource allocation",
+      "properties": {
+        "cpuCores": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gpuConfig": {
+          "$ref": "#/$defs/v1GpuConfig"
+        },
+        "memoryMiB": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "v1ClusterNamespaceResourceInputEntity": {
+      "description": "Cluster Namespace resource definition",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/v1ObjectMetaUpdateEntity"
+        },
+        "spec": {
+          "$ref": "#/$defs/v1ClusterNamespaceSpec"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterNamespaceSpec": {
+      "description": "Cluster namespace spec",
+      "properties": {
+        "isRegex": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "relatedObject": {
+          "$ref": "#/$defs/v1RelatedObject"
+        },
+        "resourceAllocation": {
+          "$ref": "#/$defs/v1ClusterNamespaceResourceAllocation"
+        }
+      }
+    },
+    "v1ClusterRbacBinding": {
+      "description": "Cluster RBAC binding",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/v1ClusterRoleRef"
+        },
+        "subjects": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterRbacSubjects"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "type": {
+          "enum": [
+            "RoleBinding",
+            "ClusterRoleBinding"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRbacInputEntity": {
+      "description": "Cluster RBAC role binding defintion",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/v1ObjectMetaUpdateEntity"
+        },
+        "spec": {
+          "$ref": "#/$defs/v1ClusterRbacSpec"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRbacSpec": {
+      "description": "Cluster RBAC spec",
+      "properties": {
+        "bindings": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterRbacBinding"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "isSystem": {
+          "default": false,
+          "description": "Set to true when the binding is created automatically by the system, rather than manually by the user",
+          "type": "boolean"
+        },
+        "relatedObject": {
+          "$ref": "#/$defs/v1RelatedObject"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRbacSubjects": {
+      "description": "Cluster role ref",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "User",
+            "Group",
+            "ServiceAccount"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterResourcesEntity": {
+      "properties": {
+        "namespaces": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterNamespaceResourceInputEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rbacs": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterRbacInputEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRoleRef": {
+      "description": "Cluster role ref",
+      "properties": {
+        "kind": {
+          "enum": [
+            "Role",
+            "ClusterRole"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterTemplateRef": {
+      "description": "Cluster template configuration to launch a cluster from a template.",
+      "properties": {
+        "uid": {
+          "description": "Uid of the cluster template from which the cluster is created. When a cluster is launched using a template, the packs configuration is automatically derived from the template and does not need to be set manually.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterType": {
+      "default": "PureManage",
+      "enum": [
+        "PureManage",
+        "PureAttach",
+        "PureAdopt"
+      ],
+      "type": "string"
+    },
+    "v1GeolocationLatlong": {
+      "description": "Geolocation Latlong entity",
+      "properties": {
+        "latitude": {
+          "description": "Latitude of a resource",
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "longitude": {
+          "description": "Longitude of a resource",
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1GpuConfig": {
+      "description": "GPU configuration for resource allocation",
+      "properties": {
+        "limit": {
+          "description": "GPU resource limit",
+          "format": "int32",
+          "minimum": -1,
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "provider": {
+          "default": "nvidia",
+          "description": "GPU provider (only nvidia is supported currently)",
+          "enum": [
+            "nvidia"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "v1HostClusterConfig": {
+      "properties": {
+        "clusterEndpoint": {
+          "$ref": "#/$defs/v1HostClusterEndpoint",
+          "description": "host cluster configuration"
+        },
+        "clusterGroup": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "cluster group reference"
+        },
+        "hostCluster": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "host cluster reference"
+        },
+        "isHostCluster": {
+          "default": false,
+          "description": "is enabled as host cluster",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1HostClusterEndpoint": {
+      "properties": {
+        "config": {
+          "$ref": "#/$defs/v1HostClusterEndpointConfig"
+        },
+        "type": {
+          "description": "is enabled as host cluster",
+          "enum": [
+            "Ingress",
+            "LoadBalancer"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "v1HostClusterEndpointConfig": {
+      "properties": {
+        "ingressConfig": {
+          "$ref": "#/$defs/v1IngressConfig"
+        },
+        "loadBalancerConfig": {
+          "$ref": "#/$defs/v1LoadBalancerConfig"
+        }
+      }
+    },
+    "v1HyperShiftConfig": {
+      "description": "HyperShiftConfig defines the configuration for HyperShift and OpenShift clusters.\nThis configuration is only applicable to MaaS clusters.\n",
+      "properties": {
+        "clusterDeploymentType": {
+          "$ref": "#/$defs/v1ClusterDeploymentType"
+        },
+        "hostClusterUid": {
+          "description": "The UID of the host HyperShift cluster.\nThis field is required only when clusterDeploymentType is set to 'openshift'.\nMust reference a valid HyperShift cluster.\n",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1IncludeClusterResourceMode": {
+      "description": "Specifies the scope of cluster-wide resources to include in the backup based on the flag'--include-cluster-resources':\n- \"Always\": --include-cluster-resources=true, which includes all cluster-wide resources; restores only on the original cluster.\n- \"Auto\": don't specify --include-cluster-resources, which exclude general cluster-wide resources, but includes PersistentVolumes linked to selected namespaces.\n- \"Never\": --include-cluster-resources=false, exclude all cluster-wide resources, including PersistentVolumes.\n",
+      "enum": [
+        "Always",
+        "Auto",
+        "Never"
+      ],
+      "type": "string"
+    },
+    "v1IngressConfig": {
+      "description": "Ingress configuration for exposing the virtual cluster's kube-apiserver",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "v1LifecycleConfig": {
+      "properties": {
+        "pause": {
+          "default": false,
+          "description": "enable pause life cycle config",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1LoadBalancerConfig": {
+      "description": "Load balancer configuration for exposing the virtual cluster's kube-apiserver",
+      "properties": {
+        "externalIPs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "externalTrafficPolicy": {
+          "type": "string"
+        },
+        "loadBalancerSourceRanges": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "v1MaasClusterConfig": {
+      "description": "Cluster level configuration for MAAS cloud and applicable for all the machine pools",
+      "properties": {
+        "domain": {
+          "description": "Domain name of the cluster to be provisioned",
+          "type": "string"
+        },
+        "enableLxdVm": {
+          "description": "enableLxdVm controls MaaS KVM host enablement for the Host ControlPlane cluster only.\nWhen true, Palette configures MaasMachineTemplate LXD settings so LXD initialization\nis triggered on nodes of this (host) cluster. This does not affect workload clusters.\nCannot be enabled for clusters where useLxdVm is enabled for any of the control plane machine pool configs.",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "ntpServers": {
+          "description": "NTPServers is a list of NTP servers to use instead of the machine image's default NTP server list.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sshKeys": {
+          "description": "SSH keys specifies a list of ssh authorized keys for the 'spectro' user",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "staticIp": {
+          "description": "whether this cluster should use dhcp or static IP, if false, use DHCP if this is set, then all machinepools should have staticIP with provided IPPool adding this as an additional standalone flag without relating to placement.Nework main reason is to enable more validation for placement.Network.StaticIP which should come together with valid Network.IPPool and Network.Name",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "domain"
+      ],
+      "type": "object"
+    },
+    "v1MaasInstanceType": {
+      "properties": {
+        "minCPU": {
+          "description": "Minimum CPU cores",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minDiskSizeInGB": {
+          "description": "Minimum disk size in GiB",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minMemInMB": {
+          "description": "Minimum memory in MiB",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1MaasMachinePoolCloudConfigEntity": {
+      "properties": {
+        "azs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "instanceType": {
+          "$ref": "#/$defs/v1MaasInstanceType"
+        },
+        "network": {
+          "$ref": "#/$defs/v1MaasNetworkConfigEntity",
+          "description": "network info"
+        },
+        "resourcePool": {
+          "description": "the resource pool",
+          "type": "string"
+        },
+        "tags": {
+          "description": "Tags in maas environment",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "useLxdVm": {
+          "description": "useLxdVm enables on-demand LXD VM provisioning for this machine pool (workload clusters only).\nWhen true, machines in this pool are created as MAAS LXD-backed VMs instead of bare metal.",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "instanceType",
+        "resourcePool"
+      ],
+      "type": "object"
+    },
+    "v1MaasMachinePoolConfigEntity": {
+      "properties": {
+        "cloudConfig": {
+          "$ref": "#/$defs/v1MaasMachinePoolCloudConfigEntity"
+        },
+        "poolConfig": {
+          "$ref": "#/$defs/v1MachinePoolConfigEntity"
+        }
+      },
+      "required": [
+        "cloudConfig"
+      ],
+      "type": "object"
+    },
+    "v1MaasNetworkConfigEntity": {
+      "properties": {
+        "networkName": {
+          "description": "NetworkName is the name of the network in which VMs are created/located.",
+          "type": "string"
+        },
+        "parentPoolUid": {
+          "description": "ParentPoolRef Uid to the ParentPool which allocates IPs for this IPPool",
+          "type": "string"
+        },
+        "staticIp": {
+          "description": "support dhcp or static IP, if false, use DHCP",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "networkName"
+      ],
+      "type": "object"
+    },
+    "v1MachineManagementConfig": {
+      "properties": {
+        "osPatchConfig": {
+          "$ref": "#/$defs/v1OsPatchConfig",
+          "description": "OS patch config contains properties to patch node os with latest security packages. \nIf OsPatchConfig is not provided then node os will not be patched with latest security updates.\nNote: For edge based cluster (like edge-native type) the osPatchConfig is NOT applicable, the values will be ignored.\n"
+        }
+      },
+      "type": "object"
+    },
+    "v1MachinePoolConfigEntity": {
+      "description": "Machine pool configuration for the cluster",
+      "properties": {
+        "additionalAnnotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Custom annotations for CAPI machine objects and nodes.\nCurrently implemented for CloudStack only.\n",
+          "type": "object"
+        },
+        "additionalLabels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional labels to be part of the machine pool",
+          "type": "object"
+        },
+        "additionalTags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "AdditionalTags is an optional set of tags to add to resources managed by the provider, in addition to the ones added by default. For eg., tags for EKS nodeGroup or EKS NodegroupIAMRole",
+          "type": "object"
+        },
+        "isControlPlane": {
+          "description": "Whether this pool is for control plane",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "labels": {
+          "description": "Labels for this machine pool, example: control-plane/worker, gpu, windows",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "machinePoolProperties": {
+          "$ref": "#/$defs/v1MachinePoolProperties"
+        },
+        "maxSize": {
+          "description": "Max size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minSize": {
+          "description": "Min size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nodeRepaveInterval": {
+          "description": "Minimum number of seconds a node should be Ready, before the next node is selected for repave. Applicable only for workerpools in infrastructure cluster",
+          "format": "int32",
+          "type": "integer"
+        },
+        "overrideClusterAPIConfig": {
+          "description": "YAML override for CAPI properties at pool level.\nOverrides pack-level and Palette-managed values. See PCP-4787.\n",
+          "type": "string"
+        },
+        "overrideHealthCheckConfiguration": {
+          "description": "YAML config to override Machine Health Check values at the node pool level.\nAccepts CAPI MachineHealthCheck fields such as maxUnhealthy, nodeStartupTimeout,\nand unhealthyNodeConditions. Falls back to Palette defaults when unset and\nremains subject to the project/tenant Cluster Auto Remediation setting.\n",
+          "type": "string"
+        },
+        "overrideKubeadmConfiguration": {
+          "description": "YAML config for kubeletExtraArgs, preKubeadmCommands, postKubeadmCommands.\nOverrides pack-level settings. Worker pools only.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "size": {
+          "description": "Size of the pool, number of nodes/machines",
+          "format": "int32",
+          "type": "integer"
+        },
+        "skipK8sUpgrade": {
+          "default": "disabled",
+          "description": "Skip Kubernetes version upgrade validation for worker pools with N-3 version skew.\n- enabled: Bypasses version skew validation, allows Control Plane upgrade even when this worker pool is >3 minor versions behind\n- disabled: Automatically upgrade worker pool to match Control Plane Kubernetes version (default)\n",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-omitempty": true
+        },
+        "taints": {
+          "description": "control plane or worker taints",
+          "items": {
+            "$ref": "#/$defs/v1Taint"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "updateStrategy": {
+          "$ref": "#/$defs/v1UpdateStrategy",
+          "description": "Rolling update strategy for this machine pool if not specified, will use ScaleOut"
+        },
+        "useControlPlaneAsWorker": {
+          "description": "If IsControlPlane==true && useControlPlaneAsWorker==true, then will remove control plane taint this will not be used for worker pools",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "name",
+        "size",
+        "labels"
+      ],
+      "type": "object"
+    },
+    "v1MachinePoolProperties": {
+      "description": "Machine pool specific properties",
+      "properties": {
+        "archType": {
+          "$ref": "#/$defs/v1ArchType",
+          "description": "Architecture type of the pool. Default value is 'amd64'",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ManifestRefUpdateEntity": {
+      "description": "Manifest update request payload",
+      "properties": {
+        "content": {
+          "description": "Manifest content in yaml",
+          "type": "string"
+        },
+        "name": {
+          "description": "Manifest name",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Manifest uid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMetaUpdateEntity": {
+      "description": "ObjectMeta update entity with uid as input",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1OsPatchConfig": {
+      "properties": {
+        "onDemandPatchAfter": {
+          "$ref": "#/$defs/v1Time",
+          "description": "OnDemandPatchAfter is the desired time for one time on-demand patch"
+        },
+        "patchOnBoot": {
+          "description": "PatchOnBoot indicates need to do patch when node first boot up, only once",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "rebootIfRequired": {
+          "description": "Reboot once the OS patch is applied",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "schedule": {
+          "description": "The schedule at which security patches will be applied to OS. Schedule should be in Cron format, see https://en.wikipedia.org/wiki/Cron for more help.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackType": {
+      "default": "spectro",
+      "enum": [
+        "spectro",
+        "helm",
+        "manifest",
+        "oci"
+      ],
+      "type": "string"
+    },
+    "v1PackValuesEntity": {
+      "description": "Pack values entity to refer the existing pack for the values override",
+      "properties": {
+        "manifests": {
+          "description": "Pack manifests are additional content as part of the profile",
+          "items": {
+            "$ref": "#/$defs/v1ManifestRefUpdateEntity"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Pack name",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Pack version tag",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/v1PackType"
+        },
+        "values": {
+          "description": "Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1RelatedObject": {
+      "description": "Object for which the resource is related",
+      "properties": {
+        "kind": {
+          "enum": [
+            "spectrocluster",
+            "machine",
+            "cloudconfig",
+            "clusterprofile",
+            "pack",
+            "appprofile",
+            "appdeployment",
+            "edgehost"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterPolicies": {
+      "description": "Cluster policies",
+      "properties": {
+        "backupPolicy": {
+          "$ref": "#/$defs/v1ClusterBackupConfig"
+        },
+        "scanPolicy": {
+          "$ref": "#/$defs/v1ClusterComplianceScheduleConfig"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterProfileEntity": {
+      "description": "Cluster profile request payload",
+      "properties": {
+        "packValues": {
+          "description": "Cluster profile packs array",
+          "items": {
+            "$ref": "#/$defs/v1PackValuesEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "replaceWithProfile": {
+          "description": "Cluster profile uid to be replaced with new profile",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Cluster profile uid",
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterVariable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterVariable": {
+      "description": "Variable with value which will be used within the packs of cluster profile",
+      "properties": {
+        "name": {
+          "description": "Variable name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Actual value of the variable to be used within the cluster",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1Taint": {
+      "description": "Taint",
+      "properties": {
+        "effect": {
+          "enum": [
+            "NoSchedule",
+            "PreferNoSchedule",
+            "NoExecute"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "description": "The taint key to be applied to a node",
+          "type": "string"
+        },
+        "timeAdded": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "value": {
+          "description": "The taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1UpdateStrategy": {
+      "description": "UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1 OverrideScaling => maxSurge and maxUnavailable are user-specified (both required)",
+      "properties": {
+        "maxSurge": {
+          "description": "Max extra nodes during rolling update. Integer or percentage (e.g., \"1\" or \"20%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "maxUnavailable": {
+          "description": "Max unavailable nodes during rolling update. Integer or percentage (e.g., \"0\" or \"10%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "type": {
+          "description": "Update strategy type. Defaults to RollingUpdateScaleOut if empty.",
+          "enum": [
+            "RollingUpdateScaleOut",
+            "RollingUpdateScaleIn",
+            "OverrideScaling"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

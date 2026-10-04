@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Spc Policies API
+  title: Spectro Cloud Spc Policies API
   version: v1
+  description: 'Operations tagged spcPolicies across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: spcPolicies
   x-displayName: Spc Policies
@@ -40,6 +42,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1SpcPolicyEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/spcPolicies/maintenance/{uid}:
     parameters:
     - description: Policy uid
@@ -91,6 +95,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1SpcPolicyEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/spcPolicies/tags:
     get:
       operationId: V1SpcPoliciesTagsGet
@@ -113,6 +119,8 @@ paths:
       summary: Retrieves a list of spc policy tags
       tags:
       - spcPolicies
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/spcPolicies/{policyType}/validate/name:
     parameters:
     - description: Spc policy type
@@ -148,6 +156,8 @@ paths:
       summary: Validates the spc policy name
       tags:
       - spcPolicies
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/spcPolicies/{uid}:
     parameters:
     - in: path
@@ -172,43 +182,10 @@ paths:
       summary: Delete a policy by uid
       tags:
       - spcPolicies
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1SpcPolicySpec:
-      description: Policy specification
-      properties:
-        schedules:
-          items:
-            $ref: '#/components/schemas/v1Schedule'
-          type: array
-      type: object
-    v1Schedule:
-      description: Information about a schedule for the policy
-      properties:
-        durationHrs:
-          description: Specifies the time window in hours during which the system is allowed to start upgrades on eligible clusters. Actual upgrade completion may vary due to cluster-specific factors like bandwidth, capacity, or environment.
-          maximum: 24
-          minimum: 1
-          type: integer
-        name:
-          description: Name of the upgrade schedule
-          type: string
-        startCron:
-          description: Cron expression for the start time of the schedule
-          type: string
-      required:
-      - durationHrs
-      - startCron
-      - name
-      type: object
-    v1SpcPolicyEntity:
-      description: Policy entity information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1SpcPolicySpec'
-      type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -250,6 +227,14 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1SpcPolicySpec:
+      description: Policy specification
+      properties:
+        schedules:
+          items:
+            $ref: '#/components/schemas/v1Schedule'
+          type: array
+      type: object
     v1Uid:
       properties:
         uid:
@@ -266,10 +251,170 @@ components:
             type: string
           type: array
       type: object
+    v1Schedule:
+      description: Information about a schedule for the policy
+      properties:
+        durationHrs:
+          description: Specifies the time window in hours during which the system is allowed to start upgrades on eligible clusters. Actual upgrade completion may vary due to cluster-specific factors like bandwidth, capacity, or environment.
+          maximum: 24
+          minimum: 1
+          type: integer
+        name:
+          description: Name of the upgrade schedule
+          type: string
+        startCron:
+          description: Cron expression for the start time of the schedule
+          type: string
+      required:
+      - durationHrs
+      - startCron
+      - name
+      type: object
+    v1SpcPolicyEntity:
+      description: Policy entity information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1SpcPolicySpec'
+      type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1SpcPolicySpec_2:
+      description: Policy specification
+      example:
+        schedules:
+        - durationHrs: 2
+          name: name
+          startCron: startCron
+        - durationHrs: 2
+          name: name
+          startCron: startCron
+      properties:
+        schedules:
+          items:
+            $ref: '#/components/schemas/v1Schedule_2'
+          type: array
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1SpcPolicyTags_2:
+      description: Spc policy tags response
+      example:
+        tags:
+        - tags
+        - tags
+      properties:
+        tags:
+          description: Array of spc policy tags
+          items:
+            type: string
+          type: array
+      type: object
+    v1Schedule_2:
+      description: Information about a schedule for the policy
+      example:
+        durationHrs: 2
+        name: name
+        startCron: startCron
+      properties:
+        durationHrs:
+          description: Specifies the time window in hours during which the system is allowed to start upgrades on eligible clusters. Actual upgrade completion may vary due to cluster-specific factors like bandwidth, capacity, or environment.
+          maximum: 24
+          minimum: 1
+          type: integer
+        name:
+          description: Name of the upgrade schedule
+          type: string
+        startCron:
+          description: Cron expression for the start time of the schedule
+          type: string
+      required:
+      - durationHrs
+      - name
+      - startCron
+      type: object
+    v1SpcPolicyEntity_2:
+      description: Policy entity information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          schedules:
+          - durationHrs: 2
+            name: name
+            startCron: startCron
+          - durationHrs: 2
+            name: name
+            startCron: startCron
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1SpcPolicySpec_2'
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -281,3 +426,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

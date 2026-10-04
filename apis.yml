@@ -1,15 +1,11 @@
 aid: spectro-cloud
 name: Spectro Cloud
-description: 'Spectro Cloud provides Palette, an enterprise platform for managing the full
-  lifecycle of Kubernetes clusters and cloud-native and AI infrastructure across data
-  centers, public clouds, bare metal, and the edge. Palette uses declarative cluster
-  profiles (packs, Helm charts, manifests) for repeatable deployments, unified VM,
-  container, and AI-workload management, and granular governance across distributed and
-  air-gapped environments. Palette VerteX adds FIPS 140 and FedRAMP posture for regulated
-  and public-sector organizations. The Palette API is a large REST surface (1,200+
-  operations) covering clusters, cluster profiles, cloud accounts, projects, tenants,
-  registries, and edge hosts, with Go/TypeScript SDKs, a Terraform provider, a Crossplane
-  provider, and the Palette CLI for automation.'
+description: Spectro Cloud provides Palette, an enterprise platform for managing the full lifecycle of Kubernetes clusters and cloud-native and
+  AI infrastructure across data centers, public clouds, bare metal, and the edge. Palette uses declarative cluster profiles (packs, Helm charts,
+  manifests) for repeatable deployments, unified VM, container, and AI-workload management, and granular governance across distributed and air-gapped
+  environments. Palette VerteX adds FIPS 140 and FedRAMP posture for regulated and public-sector organizations. The Palette API is a large REST
+  surface (1,200+ operations) covering clusters, cluster profiles, cloud accounts, projects, tenants, registries, and edge hosts, with Go/TypeScript
+  SDKs, a Terraform provider, a Crossplane provider, and the Palette CLI for automation.
 url: https://raw.githubusercontent.com/api-evangelist/spectro-cloud/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -67,579 +63,31 @@ tags_raw:
 - Multi-Cloud
 - DevOps
 - AI Infrastructure
-apis:
-- aid: spectro-cloud:spectro-cloud-activations-api
-  name: Spectro Cloud Activations API
-  description: The activations API from Spectro Cloud — 1 operation(s) for activations.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Activations
-  tags_raw:
-  - activations
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-activations-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-appprofiles-api
-  name: Spectro Cloud App Profiles API
-  description: The appProfiles API from Spectro Cloud — 11 operation(s) for appprofiles.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags: []
-  tags_raw:
-  - appProfiles
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-appprofiles-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-audits-api
-  name: Spectro Cloud Audits API
-  description: The audits API from Spectro Cloud — 4 operation(s) for audits.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Audit
-  tags_raw:
-  - audits
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-audits-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-auth-api
-  name: Spectro Cloud Auth API
-  description: The auth API from Spectro Cloud — 17 operation(s) for auth.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Authentication
-  tags_raw:
-  - auth
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-auth-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-cloudconfigs-api
-  name: Spectro Cloud Cloudconfigs API
-  description: The cloudconfigs API from Spectro Cloud — 87 operation(s) for cloudconfigs.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - cloudconfigs
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-cloudconfigs-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-clouds-api
-  name: Spectro Cloud Clouds API
-  description: The clouds API from Spectro Cloud — 95 operation(s) for clouds.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Clouds
-  tags_raw:
-  - clouds
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-clouds-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-clusterprofiles-api
-  name: Spectro Cloud Clusterprofiles API
-  description: The clusterprofiles API from Spectro Cloud — 26 operation(s) for clusterprofiles.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - clusterprofiles
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-clusterprofiles-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-clustertemplates-api
-  name: Spectro Cloud Cluster Templates API
-  description: The clusterTemplates API from Spectro Cloud — 11 operation(s) for clustertemplates.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags: []
-  tags_raw:
-  - clusterTemplates
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-clustertemplates-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-dashboard-api
-  name: Spectro Cloud Dashboard API
-  description: The dashboard API from Spectro Cloud — 61 operation(s) for dashboard.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Dashboards
-  tags_raw:
-  - dashboard
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-dashboard-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-edge-mgmt-api
-  name: Spectro Cloud Edge Mgmt API
-  description: The edge-mgmt API from Spectro Cloud — 64 operation(s) for edge-mgmt.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - edge-mgmt
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-edge-mgmt-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-edgehosts-api
-  name: Spectro Cloud Edgehosts API
-  description: The edgehosts API from Spectro Cloud — 22 operation(s) for edgehosts.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - edgehosts
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-edgehosts-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-events-api
-  name: Spectro Cloud Events API
-  description: The events API from Spectro Cloud — 3 operation(s) for events.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Event
-  tags_raw:
-  - events
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-events-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-features-api
-  name: Spectro Cloud Features API
-  description: The features API from Spectro Cloud — 2 operation(s) for features.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Features
-  tags_raw:
-  - features
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-features-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-filters-api
-  name: Spectro Cloud Filters API
-  description: The filters API from Spectro Cloud — 4 operation(s) for filters.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Filters
-  tags_raw:
-  - filters
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-filters-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-grpc-api
-  name: Spectro Cloud Grpc API
-  description: The grpc API from Spectro Cloud — 1 operation(s) for grpc.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - gRPC
-  tags_raw:
-  - grpc
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-grpc-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-health-api
-  name: Spectro Cloud Health API
-  description: The health API from Spectro Cloud — 2 operation(s) for health.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Health
-  tags_raw:
-  - health
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-health-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-installers-api
-  name: Spectro Cloud Installers API
-  description: The installers API from Spectro Cloud — 1 operation(s) for installers.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Installers
-  tags_raw:
-  - installers
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-installers-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-metrics-api
-  name: Spectro Cloud Metrics API
-  description: The metrics API from Spectro Cloud — 2 operation(s) for metrics.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Metrics
-  tags_raw:
-  - metrics
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-metrics-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-notifications-api
-  name: Spectro Cloud Notifications API
-  description: The notifications API from Spectro Cloud — 5 operation(s) for notifications.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Notification
-  tags_raw:
-  - notifications
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-notifications-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-overlords-api
-  name: Spectro Cloud Overlords API
-  description: The overlords API from Spectro Cloud — 29 operation(s) for overlords.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - overlords
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-overlords-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-packs-api
-  name: Spectro Cloud Packs API
-  description: The packs API from Spectro Cloud — 6 operation(s) for packs.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Packs
-  tags_raw:
-  - packs
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-packs-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-pcg-api
-  name: Spectro Cloud Pcg API
-  description: The pcg API from Spectro Cloud — 4 operation(s) for pcg.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - pcg
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-pcg-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-permissions-api
-  name: Spectro Cloud Permissions API
-  description: The permissions API from Spectro Cloud — 1 operation(s) for permissions.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Permissions
-  tags_raw:
-  - permissions
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-permissions-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-ping-api
-  name: Spectro Cloud Ping API
-  description: The ping API from Spectro Cloud — 1 operation(s) for ping.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Ping
-  tags_raw:
-  - ping
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-ping-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-plans-api
-  name: Spectro Cloud Plans API
-  description: The plans API from Spectro Cloud — 9 operation(s) for plans.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Plans
-  tags_raw:
-  - plans
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-plans-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-projects-api
-  name: Spectro Cloud Projects API
-  description: The projects API from Spectro Cloud — 12 operation(s) for projects.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Project
-  tags_raw:
-  - projects
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-projects-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-registries-api
-  name: Spectro Cloud Registries API
-  description: The registries API from Spectro Cloud — 28 operation(s) for registries.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Registries
-  tags_raw:
-  - registries
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-registries-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-roles-api
-  name: Spectro Cloud Roles API
-  description: The roles API from Spectro Cloud — 3 operation(s) for roles.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Roles
-  tags_raw:
-  - roles
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-roles-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-services-api
-  name: Spectro Cloud Services API
-  description: The services API from Spectro Cloud — 2 operation(s) for services.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Services
-  tags_raw:
-  - services
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-services-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-spcpolicies-api
-  name: Spectro Cloud Spc Policies API
-  description: The spcPolicies API from Spectro Cloud — 5 operation(s) for spcpolicies.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags: []
-  tags_raw:
-  - spcPolicies
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-spcpolicies-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-spectroclusters-api
-  name: Spectro Cloud Spectroclusters API
-  description: The spectroclusters API from Spectro Cloud — 158 operation(s) for spectroclusters.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - spectroclusters
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-spectroclusters-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-system-api
-  name: Spectro Cloud System API
-  description: The system API from Spectro Cloud — 95 operation(s) for system.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - System
-  tags_raw:
-  - system
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-system-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-teams-api
-  name: Spectro Cloud Teams API
-  description: The teams API from Spectro Cloud — 7 operation(s) for teams.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Team
-  tags_raw:
-  - teams
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-teams-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-tenants-api
-  name: Spectro Cloud Tenants API
-  description: The tenants API from Spectro Cloud — 51 operation(s) for tenants.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Tenants
-  tags_raw:
-  - tenants
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-tenants-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-tunnel-api
-  name: Spectro Cloud Tunnel API
-  description: The tunnel API from Spectro Cloud — 1 operation(s) for tunnel.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - tunnel
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-tunnel-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-users-api
-  name: Spectro Cloud Users API
-  description: The users API from Spectro Cloud — 44 operation(s) for users.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - User
-  tags_raw:
-  - users
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-users-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-workspaces-api
-  name: Spectro Cloud Workspaces API
-  description: The workspaces API from Spectro Cloud — 14 operation(s) for workspaces.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Workspace
-  tags_raw:
-  - workspaces
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-workspaces-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-api-keys-api
-  name: Spectro Cloud API Keys API
-  description: The API Keys API from Spectro Cloud — 3 operation(s) for api keys.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - API Keys
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-api-keys-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-app-deployments-api
-  name: Spectro Cloud App Deployments API
-  description: The App Deployments API from Spectro Cloud — 9 operation(s) for app deployments.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - App Deployments
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-app-deployments-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-cloud-accounts-api
-  name: Spectro Cloud Cloud Accounts API
-  description: The Cloud Accounts API from Spectro Cloud — 32 operation(s) for cloud accounts.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Cloud Accounts
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-cloud-accounts-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-cluster-groups-api
-  name: Spectro Cloud cluster groups API
-  description: The cluster groups API from Spectro Cloud — 10 operation(s) for cluster groups.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - cluster groups
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-cluster-groups-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
-- aid: spectro-cloud:spectro-cloud-data-sinks-api
-  name: Spectro Cloud Data Sinks API
-  description: The Data Sinks API from Spectro Cloud — 1 operation(s) for data sinks.
-  humanURL: https://docs.spectrocloud.com/api/
-  baseURL: https://api.spectrocloud.com
-  tags:
-  - Data Sinks
-  properties:
-  - type: OpenAPI
-    url: openapi/spectro-cloud-data-sinks-api-openapi.yml
-  - type: Documentation
-    url: https://docs.spectrocloud.com/api/introduction/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Spectral
+  url: rules/spectro-cloud-rules.yml
+- type: JSONLD
+  url: json-ld/spectro-cloud-context.jsonld
+- type: Vocabulary
+  url: vocabulary/spectro-cloud-vocabulary.yml
+- type: Hosts
+  url: hosts/spectro-cloud-hosts.yml
+- type: Vendors
+  url: vendors/spectro-cloud-vendors.yml
+- type: Newsroom
+  url: https://www.spectrocloud.com/news
 - type: CapabilityMap
   url: capabilities/spectro-cloud-capability-edges.yml
   name: Spectro Cloud Business Capability Map
 - type: AgenticAccess
   url: agentic-access/spectro-cloud-agentic-access.yml
 - type: Website
-  url: https://spectrocloud.com/
+  url: https://www.spectrocloud.com/
 - type: DeveloperPortal
   url: https://docs.spectrocloud.com/
 - type: Documentation
@@ -666,15 +114,13 @@ common:
   url: authentication/spectro-cloud-authentication.yml
 - type: OpenAPI
   url: openapi/_original/spectro-cloud-palette-openapi.json
-- type: Packages
-  url: packages/spectro-cloud-packages.yml
-- type: SDKs
-  url: packages/spectro-cloud-packages.yml
 - type: CLI
   url: cli/spectro-cloud-cli.yml
 - type: X-MCPServerCandidate
   url: mcp/spectro-cloud-mcp.yml
-  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published
+    API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting
+    the artifact-type surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/spectro-cloud-llms.txt
 - type: AgentSkill
@@ -705,8 +151,1130 @@ common:
   url: security/spectro-cloud-domain-security.yml
 - type: TrustCenter
   url: security/spectro-cloud-trust-center.yml
+apis:
+- aid: spectro-cloud:spectro-cloud-activations-api
+  name: Spectro Cloud Activations API
+  description: The activations API from Spectro Cloud — 1 operation(s) for activations.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Activations
+  tags_raw:
+  - activations
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-activations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-activations-system-response-schema.json
+- aid: spectro-cloud:spectro-cloud-appprofiles-api
+  name: Spectro Cloud App Profiles API
+  description: The appProfiles API from Spectro Cloud — 11 operation(s) for appprofiles.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags: []
+  tags_raw:
+  - appProfiles
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-appprofiles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-tier-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-tier-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-profile-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-profile-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-profile-clone-meta-input-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-manifest-ref-update-entity-schema.json
+- aid: spectro-cloud:spectro-cloud-audits-api
+  name: Spectro Cloud Audits API
+  description: The audits API from Spectro Cloud — 4 operation(s) for audits.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Audit
+  tags_raw:
+  - audits
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-audits-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-audits-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-audit-sys-msg-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-audit-msg-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-audit-schema.json
+- aid: spectro-cloud:spectro-cloud-auth-api
+  name: Spectro Cloud Auth API
+  description: The auth API from Spectro Cloud — 17 operation(s) for auth.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Authentication
+  tags_raw:
+  - auth
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-auth-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-login-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-auth-login-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-user-token-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-organizations-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-identity-providers-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-sso-logins-schema.json
+- aid: spectro-cloud:spectro-cloud-cloudconfigs-api
+  name: Spectro Cloud Cloudconfigs API
+  description: The cloudconfigs API from Spectro Cloud — 87 operation(s) for cloudconfigs.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - cloudconfigs
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-cloudconfigs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-virtual-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vsphere-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-azure-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-maas-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-aws-cloud-config-schema.json
+- aid: spectro-cloud:spectro-cloud-clouds-api
+  name: Spectro Cloud Clouds API
+  description: The clouds API from Spectro Cloud — 95 operation(s) for clouds.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Clouds
+  tags_raw:
+  - clouds
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-clouds-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-aws-cloud-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-azure-cloud-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-cloud-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-aws-account-sts-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-maas-cloud-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-aws-s3-bucket-credentials-schema.json
+- aid: spectro-cloud:spectro-cloud-clusterprofiles-api
+  name: Spectro Cloud Clusterprofiles API
+  description: The clusterprofiles API from Spectro Cloud — 26 operation(s) for clusterprofiles.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - clusterprofiles
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-clusterprofiles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-packs-manifests-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-notification-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-clone-meta-input-entity-schema.json
+- aid: spectro-cloud:spectro-cloud-clustertemplates-api
+  name: Spectro Cloud Cluster Templates API
+  description: The clusterTemplates API from Spectro Cloud — 11 operation(s) for clustertemplates.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags: []
+  tags_raw:
+  - clusterTemplates
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-clustertemplates-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-template-profiles-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-reconcile-schema.json
+  - type: JSONSchema
+    url: >-
+      json-schema/spectro-cloud-v1-cluster-template-profiles-variables-batch-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-template-profile-variables-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-template-variables-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-template-policies-update-entity-schema.json
+- aid: spectro-cloud:spectro-cloud-dashboard-api
+  name: Spectro Cloud Dashboard API
+  description: The dashboard API from Spectro Cloud — 61 operation(s) for dashboard.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Dashboards
+  tags_raw:
+  - dashboard
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-dashboard-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-uid-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-resources-consumption-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-workspace-clusters-workload-role-bindings-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-workspace-clusters-workload-stateful-sets-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-workspace-clusters-workload-daemon-sets-schema.json
+- aid: spectro-cloud:spectro-cloud-edge-mgmt-api
+  name: Spectro Cloud Edge Mgmt API
+  description: The edge-mgmt API from Spectro Cloud — 64 operation(s) for edge-mgmt.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - edge-mgmt
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-edge-mgmt-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-edge-native-machine-pool-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-bridge-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vlan-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-bridge-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vlanrequest-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-bond-schema.json
+- aid: spectro-cloud:spectro-cloud-edgehosts-api
+  name: Spectro Cloud Edgehosts API
+  description: The edgehosts API from Spectro Cloud — 22 operation(s) for edgehosts.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - edgehosts
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-edgehosts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-tunnel-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-edge-host-device-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-edge-token-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-edge-host-health-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-edge-host-devices-schema.json
+- aid: spectro-cloud:spectro-cloud-events-api
+  name: Spectro Cloud Events API
+  description: The events API from Spectro Cloud — 3 operation(s) for events.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Event
+  tags_raw:
+  - events
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-event-schema.json
+- aid: spectro-cloud:spectro-cloud-features-api
+  name: Spectro Cloud Features API
+  description: The features API from Spectro Cloud — 2 operation(s) for features.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Features
+  tags_raw:
+  - features
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-features-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-features-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-feature-update-schema.json
+- aid: spectro-cloud:spectro-cloud-filters-api
+  name: Spectro Cloud Filters API
+  description: The filters API from Spectro Cloud — 4 operation(s) for filters.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Filters
+  tags_raw:
+  - filters
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-filters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-filters-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-tag-filter-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-tag-filter-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-filters-metadata-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-uid-schema.json
+- aid: spectro-cloud:spectro-cloud-grpc-api
+  name: Spectro Cloud Grpc API
+  description: The grpc API from Spectro Cloud — 1 operation(s) for grpc.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - gRPC
+  tags_raw:
+  - grpc
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-grpc-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-grpc-configuration-schema.json
+- aid: spectro-cloud:spectro-cloud-health-api
+  name: Spectro Cloud Health API
+  description: The health API from Spectro Cloud — 2 operation(s) for health.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Health
+  tags_raw:
+  - health
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-health-ping-schema.json
+- aid: spectro-cloud:spectro-cloud-installers-api
+  name: Spectro Cloud Installers API
+  description: The installers API from Spectro Cloud — 1 operation(s) for installers.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Installers
+  tags_raw:
+  - installers
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-installers-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-installer-input-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-uid-schema.json
+- aid: spectro-cloud:spectro-cloud-metrics-api
+  name: Spectro Cloud Metrics API
+  description: The metrics API from Spectro Cloud — 2 operation(s) for metrics.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Metrics
+  tags_raw:
+  - metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-metric-time-series-list-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-metric-time-series-schema.json
+- aid: spectro-cloud:spectro-cloud-notifications-api
+  name: Spectro Cloud Notifications API
+  description: The notifications API from Spectro Cloud — 5 operation(s) for notifications.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Notification
+  tags_raw:
+  - notifications
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-notifications-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-notification-event-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-notifications-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-uid-schema.json
+- aid: spectro-cloud:spectro-cloud-overlords-api
+  name: Spectro Cloud Overlords API
+  description: The overlords API from Spectro Cloud — 29 operation(s) for overlords.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - overlords
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-overlords-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-profile-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-overlord-cloud-stack-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-overlord-maas-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-overlord-vsphere-cloud-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-cloud-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-maas-cloud-account-schema.json
+- aid: spectro-cloud:spectro-cloud-packs-api
+  name: Spectro Cloud Packs API
+  description: The packs API from Spectro Cloud — 6 operation(s) for packs.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Packs
+  tags_raw:
+  - packs
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-packs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pack-tag-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pack-metadata-list-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pack-summaries-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-packs-filter-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pack-readme-schema.json
+- aid: spectro-cloud:spectro-cloud-pcg-api
+  name: Spectro Cloud Pcg API
+  description: The pcg API from Spectro Cloud — 4 operation(s) for pcg.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - pcg
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-pcg-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pcg-service-kubectl-commands-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pairing-code-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pcg-self-hosted-params-schema.json
+- aid: spectro-cloud:spectro-cloud-permissions-api
+  name: Spectro Cloud Permissions API
+  description: The permissions API from Spectro Cloud — 1 operation(s) for permissions.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Permissions
+  tags_raw:
+  - permissions
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-permissions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-permissions-schema.json
+- aid: spectro-cloud:spectro-cloud-ping-api
+  name: Spectro Cloud Ping API
+  description: The ping API from Spectro Cloud — 1 operation(s) for ping.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Ping
+  tags_raw:
+  - ping
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-ping-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-ping-schema.json
+- aid: spectro-cloud:spectro-cloud-plans-api
+  name: Spectro Cloud Plans API
+  description: The plans API from Spectro Cloud — 9 operation(s) for plans.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Plans
+  tags_raw:
+  - plans
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-plans-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-plan-change-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-plans-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-plan-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-plan-expiry-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-plan-limit-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-plan-add-free-credit-update-schema.json
+- aid: spectro-cloud:spectro-cloud-projects-api
+  name: Spectro Cloud Projects API
+  description: The projects API from Spectro Cloud — 12 operation(s) for projects.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Project
+  tags_raw:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-object-meta-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-channel-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-project-active-resources-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-project-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-project-cleanup-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-projects-schema.json
+- aid: spectro-cloud:spectro-cloud-registries-api
+  name: Spectro Cloud Registries API
+  description: The registries API from Spectro Cloud — 28 operation(s) for registries.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Registries
+  tags_raw:
+  - registries
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-registries-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-ecr-registry-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-basic-oci-registry-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-oci-image-registry-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-helm-registry-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-pack-registry-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-registry-sync-status-schema.json
+- aid: spectro-cloud:spectro-cloud-roles-api
+  name: Spectro Cloud Roles API
+  description: The roles API from Spectro Cloud — 3 operation(s) for roles.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Roles
+  tags_raw:
+  - roles
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-roles-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-role-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-role-clone-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-uid-schema.json
+- aid: spectro-cloud:spectro-cloud-services-api
+  name: Spectro Cloud Services API
+  description: The services API from Spectro Cloud — 2 operation(s) for services.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Services
+  tags_raw:
+  - services
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-services-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-service-manifest-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-service-version-schema.json
+- aid: spectro-cloud:spectro-cloud-spcpolicies-api
+  name: Spectro Cloud Spc Policies API
+  description: The spcPolicies API from Spectro Cloud — 5 operation(s) for spcpolicies.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags: []
+  tags_raw:
+  - spcPolicies
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-spcpolicies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spc-policy-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spc-policy-tags-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-uid-schema.json
+- aid: spectro-cloud:spectro-cloud-spectroclusters-api
+  name: Spectro Cloud Spectroclusters API
+  description: The spectroclusters API from Spectro Cloud — 158 operation(s) for spectroclusters.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - spectroclusters
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-spectroclusters-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-eks-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-vsphere-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-maas-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-aws-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-custom-cluster-entity-schema.json
+- aid: spectro-cloud:spectro-cloud-system-api
+  name: Spectro Cloud System API
+  description: The system API from Spectro Cloud — 95 operation(s) for system.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - System
+  tags_raw:
+  - system
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-system-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-system-password-policy-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-system-oidc-client-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-preference-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-system-activation-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-system-resource-limits-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-login-banner-settings-schema.json
+- aid: spectro-cloud:spectro-cloud-teams-api
+  name: Spectro Cloud Teams API
+  description: The teams API from Spectro Cloud — 7 operation(s) for teams.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Team
+  tags_raw:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-teams-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-teams-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-team-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-teams-summary-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-teams-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-resource-roles-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-teams-summary-list-schema.json
+- aid: spectro-cloud:spectro-cloud-tenants-api
+  name: Spectro Cloud Tenants API
+  description: The tenants API from Spectro Cloud — 51 operation(s) for tenants.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Tenants
+  tags_raw:
+  - tenants
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-tenants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-tenant-oidc-client-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-marketplace-register-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-tenant-saml-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-splunk-sink-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-rate-config-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-tenant-saml-request-spec-schema.json
+- aid: spectro-cloud:spectro-cloud-tunnel-api
+  name: Spectro Cloud Tunnel API
+  description: The tunnel API from Spectro Cloud — 1 operation(s) for tunnel.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - tunnel
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-tunnel-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-tunnel-configuration-schema.json
+- aid: spectro-cloud:spectro-cloud-users-api
+  name: Spectro Cloud Users API
+  description: The users API from Spectro Cloud — 44 operation(s) for users.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - User
+  tags_raw:
+  - users
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-mfa-credential-creation-request-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-user-kubectl-session-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-user-spec-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-user-token-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-users-summary-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-password-reset-request-schema.json
+- aid: spectro-cloud:spectro-cloud-workspaces-api
+  name: Spectro Cloud Workspaces API
+  description: The workspaces API from Spectro Cloud — 14 operation(s) for workspaces.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Workspace
+  tags_raw:
+  - workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-object-meta-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-workspace-resource-allocations-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-workspace-cluster-namespaces-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-rbac-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-workspace-restore-config-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-workspace-backup-config-entity-schema.json
+- aid: spectro-cloud:spectro-cloud-api-keys-api
+  name: Spectro Cloud API Keys API
+  description: The API Keys API from Spectro Cloud — 3 operation(s) for api keys.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-api-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-keys-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-active-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-tier-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-profile-versions-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-manifest-ref-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-virtual-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-cluster-group-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vsphere-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-custom-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-azure-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-object-meta-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-host-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-groups-developer-credit-usage-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-resolved-values-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-data-sink-cloud-watch-config-schema.json
+- aid: spectro-cloud:spectro-cloud-app-deployments-api
+  name: Spectro Cloud App Deployments API
+  description: The App Deployments API from Spectro Cloud — 9 operation(s) for app deployments.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - App Deployments
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-app-deployments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-keys-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-active-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-tier-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-profile-versions-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-manifest-ref-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-virtual-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-cluster-group-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vsphere-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-custom-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-azure-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-object-meta-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-host-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-groups-developer-credit-usage-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-resolved-values-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-data-sink-cloud-watch-config-schema.json
+- aid: spectro-cloud:spectro-cloud-cloud-accounts-api
+  name: Spectro Cloud Cloud Accounts API
+  description: The Cloud Accounts API from Spectro Cloud — 40 operation(s) for cloud accounts.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Cloud Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-cloud-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-keys-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-active-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-tier-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-profile-versions-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-manifest-ref-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-virtual-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-cluster-group-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vsphere-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-custom-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-azure-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-object-meta-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-host-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-groups-developer-credit-usage-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-resolved-values-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-data-sink-cloud-watch-config-schema.json
+- aid: spectro-cloud:spectro-cloud-cluster-groups-api
+  name: Spectro Cloud cluster groups API
+  description: The cluster groups API from Spectro Cloud — 10 operation(s) for cluster groups.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - cluster groups
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-cluster-groups-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-keys-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-active-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-tier-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-profile-versions-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-manifest-ref-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-virtual-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-cluster-group-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vsphere-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-custom-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-azure-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-object-meta-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-host-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-groups-developer-credit-usage-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-resolved-values-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-data-sink-cloud-watch-config-schema.json
+- aid: spectro-cloud:spectro-cloud-data-sinks-api
+  name: Spectro Cloud Data Sinks API
+  description: The Data Sinks API from Spectro Cloud — 1 operation(s) for data sinks.
+  humanURL: https://docs.spectrocloud.com/api/
+  baseURL: https://api.spectrocloud.com
+  tags:
+  - Data Sinks
+  properties:
+  - type: OpenAPI
+    url: openapi/spectro-cloud-data-sinks-api-openapi.yml
+  - type: Documentation
+    url: https://docs.spectrocloud.com/api/introduction/
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-create-response-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-update-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-keys-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-api-key-active-state-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-tier-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-profile-versions-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-manifest-ref-update-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-virtual-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-app-deployment-cluster-group-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cloud-stack-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-vsphere-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-custom-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-azure-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-gcp-account-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-object-meta-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-host-cluster-entity-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-group-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-cluster-groups-developer-credit-usage-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-spectro-cluster-profiles-resolved-values-schema.json
+  - type: JSONSchema
+    url: json-schema/spectro-cloud-v1-data-sink-cloud-watch-config-schema.json
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-10-04'
   status: enriched
-  artifacts_added: 1
-  pass: local-v1
+  artifacts_added: 125
+  pass: modular-v1
+  engine: identity=local,contract=local,surfaces=local,docs=local,regulatory=local

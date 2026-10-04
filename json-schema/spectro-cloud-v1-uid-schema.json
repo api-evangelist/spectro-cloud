@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-uid-schema.json",
+  "title": "v1Uid",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-filters-api-openapi.yml#/components/schemas/v1Uid",
+  "properties": {
+    "uid": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "uid"
+  ],
+  "type": "object"
+}

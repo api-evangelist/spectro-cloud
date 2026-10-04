@@ -1,0 +1,694 @@
+{
+  "@context": {
+    "@vocab": "https://spectrocloud.com/schema#",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+    "spectro": "https://spectrocloud.com/schema#",
+    "v1Error": "spectro:v1Error",
+    "code": {
+      "@id": "spectro:code",
+      "@type": "xsd:string"
+    },
+    "details": {
+      "@id": "spectro:details"
+    },
+    "message": {
+      "@id": "spectro:message",
+      "@type": "xsd:string"
+    },
+    "ref": {
+      "@id": "spectro:ref",
+      "@type": "xsd:string"
+    },
+    "v1ActivationsSystemResponse": "spectro:v1ActivationsSystemResponse",
+    "status": {
+      "@id": "spectro:status"
+    },
+    "v1ApiKeyActiveState": "spectro:v1ApiKeyActiveState",
+    "isActive": {
+      "@id": "spectro:isActive",
+      "@type": "xsd:boolean"
+    },
+    "v1ApiKeys": "spectro:v1ApiKeys",
+    "items": {
+      "@id": "spectro:items",
+      "@container": "@list"
+    },
+    "v1ApiKeyEntity": "spectro:v1ApiKeyEntity",
+    "metadata": {
+      "@id": "spectro:metadata",
+      "@type": "@id"
+    },
+    "spec": {
+      "@id": "spectro:spec",
+      "@type": "@id"
+    },
+    "v1ApiKeySpecUpdate": "spectro:v1ApiKeySpecUpdate",
+    "expiry": {
+      "@id": "spectro:expiry",
+      "@type": "@id"
+    },
+    "v1ApiKeySpec": "spectro:v1ApiKeySpec",
+    "key": {
+      "@id": "spectro:key",
+      "@type": "xsd:string"
+    },
+    "user": {
+      "@id": "spectro:user",
+      "@type": "@id"
+    },
+    "v1ApiKeySpecEntity": "spectro:v1ApiKeySpecEntity",
+    "userUid": {
+      "@id": "spectro:userUid",
+      "@type": "xsd:string"
+    },
+    "v1ApiKeyUpdate": "spectro:v1ApiKeyUpdate",
+    "v1ApiKeyUser": "spectro:v1ApiKeyUser",
+    "firstName": {
+      "@id": "spectro:firstName",
+      "@type": "xsd:string"
+    },
+    "lastName": {
+      "@id": "spectro:lastName",
+      "@type": "xsd:string"
+    },
+    "uid": {
+      "@id": "spectro:uid",
+      "@type": "xsd:string"
+    },
+    "v1ApiKeyCreateResponse": "spectro:v1ApiKeyCreateResponse",
+    "apiKey": {
+      "@id": "spectro:apiKey",
+      "@type": "xsd:string"
+    },
+    "v1ApiKeyStatus": "spectro:v1ApiKeyStatus",
+    "v1ApiKey": "spectro:v1ApiKey",
+    "v1ObjectMeta": "spectro:v1ObjectMeta",
+    "annotations": {
+      "@id": "spectro:annotations"
+    },
+    "creationTimestamp": {
+      "@id": "spectro:creationTimestamp",
+      "@type": "@id"
+    },
+    "deletionTimestamp": {
+      "@id": "spectro:deletionTimestamp",
+      "@type": "@id"
+    },
+    "labels": {
+      "@id": "spectro:labels"
+    },
+    "lastModifiedTimestamp": {
+      "@id": "spectro:lastModifiedTimestamp",
+      "@type": "@id"
+    },
+    "name": {
+      "@id": "spectro:name",
+      "@type": "xsd:string"
+    },
+    "v1AppDeploymentVirtualClusterTargetSpec": "spectro:v1AppDeploymentVirtualClusterTargetSpec",
+    "clusterUid": {
+      "@id": "spectro:clusterUid",
+      "@type": "xsd:string"
+    },
+    "v1AppDeploymentClusterGroupTargetSpec": "spectro:v1AppDeploymentClusterGroupTargetSpec",
+    "clusterGroupUid": {
+      "@id": "spectro:clusterGroupUid",
+      "@type": "xsd:string"
+    },
+    "clusterLimits": {
+      "@id": "spectro:clusterLimits",
+      "@type": "@id"
+    },
+    "clusterName": {
+      "@id": "spectro:clusterName",
+      "@type": "xsd:string"
+    },
+    "v1AppTierType": "spectro:v1AppTierType",
+    "v1LoadBalancerService": "spectro:v1LoadBalancerService",
+    "host": {
+      "@id": "spectro:host",
+      "@type": "xsd:string"
+    },
+    "ports": {
+      "@id": "spectro:ports",
+      "@container": "@list"
+    },
+    "v1AppTierUpdateEntity": "spectro:v1AppTierUpdateEntity",
+    "containerRegistryUid": {
+      "@id": "spectro:containerRegistryUid",
+      "@type": "xsd:string"
+    },
+    "installOrder": {
+      "@id": "spectro:installOrder",
+      "@type": "xsd:integer"
+    },
+    "manifests": {
+      "@id": "spectro:manifests",
+      "@container": "@list"
+    },
+    "properties": {
+      "@id": "spectro:properties",
+      "@container": "@list"
+    },
+    "values": {
+      "@id": "spectro:values",
+      "@type": "xsd:string"
+    },
+    "version": {
+      "@id": "spectro:version",
+      "@type": "xsd:string"
+    },
+    "v1AppDeploymentSpec": "spectro:v1AppDeploymentSpec",
+    "config": {
+      "@id": "spectro:config",
+      "@type": "@id"
+    },
+    "profile": {
+      "@id": "spectro:profile",
+      "@type": "@id"
+    },
+    "v1AppDeploymentVirtualClusterConfigEntity": "spectro:v1AppDeploymentVirtualClusterConfigEntity",
+    "targetSpec": {
+      "@id": "spectro:targetSpec",
+      "@type": "@id"
+    },
+    "v1AppDeploymentTargetConfig": "spectro:v1AppDeploymentTargetConfig",
+    "clusterRef": {
+      "@id": "spectro:clusterRef",
+      "@type": "@id"
+    },
+    "envRef": {
+      "@id": "spectro:envRef",
+      "@type": "@id"
+    },
+    "v1Manifest": "spectro:v1Manifest",
+    "v1AppTierSpec": "spectro:v1AppTierSpec",
+    "registryUid": {
+      "@id": "spectro:registryUid",
+      "@type": "xsd:string"
+    },
+    "sourceAppTierUid": {
+      "@id": "spectro:sourceAppTierUid",
+      "@type": "xsd:string"
+    },
+    "type": {
+      "@id": "spectro:type",
+      "@type": "@id"
+    },
+    "v1AppDeploymentStatus": "spectro:v1AppDeploymentStatus",
+    "appTiers": {
+      "@id": "spectro:appTiers",
+      "@container": "@list"
+    },
+    "lifecycleStatus": {
+      "@id": "spectro:lifecycleStatus",
+      "@type": "@id"
+    },
+    "state": {
+      "@id": "spectro:state",
+      "@type": "xsd:string"
+    },
+    "v1ClusterCondition": "spectro:v1ClusterCondition",
+    "lastProbeTime": {
+      "@id": "spectro:lastProbeTime",
+      "@type": "@id"
+    },
+    "lastTransitionTime": {
+      "@id": "spectro:lastTransitionTime",
+      "@type": "@id"
+    },
+    "reason": {
+      "@id": "spectro:reason",
+      "@type": "xsd:string"
+    },
+    "v1AppDeploymentProfileVersions": "spectro:v1AppDeploymentProfileVersions",
+    "availableVersions": {
+      "@id": "spectro:availableVersions",
+      "@container": "@list"
+    },
+    "latestVersions": {
+      "@id": "spectro:latestVersions",
+      "@container": "@list"
+    },
+    "v1ObjectReference": "spectro:v1ObjectReference",
+    "kind": {
+      "@id": "spectro:kind",
+      "@type": "xsd:string"
+    },
+    "v1ClusterPackStatus": "spectro:v1ClusterPackStatus",
+    "condition": {
+      "@id": "spectro:condition",
+      "@type": "@id"
+    },
+    "endTime": {
+      "@id": "spectro:endTime",
+      "@type": "@id"
+    },
+    "profileUid": {
+      "@id": "spectro:profileUid",
+      "@type": "xsd:string"
+    },
+    "services": {
+      "@id": "spectro:services",
+      "@container": "@list"
+    },
+    "startTime": {
+      "@id": "spectro:startTime",
+      "@type": "@id"
+    },
+    "v1ClusterPackManifestStatus": "spectro:v1ClusterPackManifestStatus",
+    "v1AppDeploymentVirtualClusterSpec": "spectro:v1AppDeploymentVirtualClusterSpec",
+    "v1ObjectMetaInputEntity": "spectro:v1ObjectMetaInputEntity",
+    "v1ServicePort": "spectro:v1ServicePort",
+    "port": {
+      "@id": "spectro:port",
+      "@type": "xsd:integer"
+    },
+    "protocol": {
+      "@id": "spectro:protocol",
+      "@type": "xsd:string"
+    },
+    "v1AppDeploymentClusterGroupConfigEntity": "spectro:v1AppDeploymentClusterGroupConfigEntity",
+    "v1AppDeploymentProfileEntity": "spectro:v1AppDeploymentProfileEntity",
+    "appProfileUid": {
+      "@id": "spectro:appProfileUid",
+      "@type": "xsd:string"
+    },
+    "v1Uid": "spectro:v1Uid",
+    "v1AppTierRef": "spectro:v1AppTierRef",
+    "v1AppDeploymentConfig": "spectro:v1AppDeploymentConfig",
+    "target": {
+      "@id": "spectro:target",
+      "@type": "@id"
+    },
+    "v1AppDeploymentProfileSpec": "spectro:v1AppDeploymentProfileSpec",
+    "template": {
+      "@id": "spectro:template",
+      "@type": "@id"
+    },
+    "v1ManifestPublishedSpec": "spectro:v1ManifestPublishedSpec",
+    "published": {
+      "@id": "spectro:published",
+      "@type": "@id"
+    },
+    "v1AppDeploymentProfileVersion": "spectro:v1AppDeploymentProfileVersion",
+    "v1AppDeploymentProfile": "spectro:v1AppDeploymentProfile",
+    "v1AppDeploymentClusterRef": "spectro:v1AppDeploymentClusterRef",
+    "deploymentClusterType": {
+      "@id": "spectro:deploymentClusterType",
+      "@type": "xsd:string"
+    },
+    "v1AppProfileTemplateSpec": "spectro:v1AppProfileTemplateSpec",
+    "registryRefs": {
+      "@id": "spectro:registryRefs",
+      "@container": "@list"
+    },
+    "v1ManifestData": "spectro:v1ManifestData",
+    "content": {
+      "@id": "spectro:content",
+      "@type": "xsd:string"
+    },
+    "digest": {
+      "@id": "spectro:digest",
+      "@type": "xsd:string"
+    },
+    "v1AppDeploymentVirtualClusterEntity": "spectro:v1AppDeploymentVirtualClusterEntity",
+    "v1AppTier": "spectro:v1AppTier",
+    "v1AppDeploymentClusterGroupEntity": "spectro:v1AppDeploymentClusterGroupEntity",
+    "v1AppDeploymentClusterGroupSpec": "spectro:v1AppDeploymentClusterGroupSpec",
+    "v1AppTierProperty": "spectro:v1AppTierProperty",
+    "format": {
+      "@id": "spectro:format",
+      "@type": "xsd:string"
+    },
+    "value": {
+      "@id": "spectro:value",
+      "@type": "xsd:string"
+    },
+    "v1AppTierManifests": "spectro:v1AppTierManifests",
+    "v1AppTierPropertyEntity": "spectro:v1AppTierPropertyEntity",
+    "v1AppProfileTemplate": "spectro:v1AppProfileTemplate",
+    "v1AppDeploymentTargetClusterLimits": "spectro:v1AppDeploymentTargetClusterLimits",
+    "cpu": {
+      "@id": "spectro:cpu",
+      "@type": "xsd:integer"
+    },
+    "memoryMiB": {
+      "@id": "spectro:memoryMiB",
+      "@type": "xsd:integer"
+    },
+    "storageGiB": {
+      "@id": "spectro:storageGiB",
+      "@type": "xsd:integer"
+    },
+    "v1AppDeploymentTargetEnvironmentRef": "spectro:v1AppDeploymentTargetEnvironmentRef",
+    "v1AppDeployment": "spectro:v1AppDeployment",
+    "v1AppDeploymentProfileMeta": "spectro:v1AppDeploymentProfileMeta",
+    "v1ManifestRefUpdateEntity": "spectro:v1ManifestRefUpdateEntity",
+    "v1LifecycleStatus": "spectro:v1LifecycleStatus",
+    "msg": {
+      "@id": "spectro:msg",
+      "@type": "xsd:string"
+    },
+    "v1Macro": "spectro:v1Macro",
+    "v1AppProfileEntity": "spectro:v1AppProfileEntity",
+    "v1AppProfileCloneTarget": "spectro:v1AppProfileCloneTarget",
+    "projectUid": {
+      "@id": "spectro:projectUid",
+      "@type": "xsd:string"
+    },
+    "v1AppProfileTemplateEntity": "spectro:v1AppProfileTemplateEntity",
+    "v1AppProfileTiersSpec": "spectro:v1AppProfileTiersSpec",
+    "v1AppProfileMetaUpdateEntity": "spectro:v1AppProfileMetaUpdateEntity",
+    "v1AppProfileVersion": "spectro:v1AppProfileVersion",
+    "v1AppProfileCloneEntity": "spectro:v1AppProfileCloneEntity",
+    "v1AppProfile": "spectro:v1AppProfile",
+    "v1AppProfileTiers": "spectro:v1AppProfileTiers",
+    "v1ManifestInputEntity": "spectro:v1ManifestInputEntity",
+    "v1AppTierResolvedValues": "spectro:v1AppTierResolvedValues",
+    "resolved": {
+      "@id": "spectro:resolved"
+    },
+    "v1AppProfileMetaEntity": "spectro:v1AppProfileMetaEntity",
+    "v1AppTierEntity": "spectro:v1AppTierEntity",
+    "v1ObjectResReference": "spectro:v1ObjectResReference",
+    "tenantUid": {
+      "@id": "spectro:tenantUid",
+      "@type": "xsd:string"
+    },
+    "v1AppProfileCloneMetaInputEntity": "spectro:v1AppProfileCloneMetaInputEntity",
+    "v1Macros": "spectro:v1Macros",
+    "macros": {
+      "@id": "spectro:macros",
+      "@container": "@list"
+    },
+    "v1AppTierPatchEntity": "spectro:v1AppTierPatchEntity",
+    "appTier": {
+      "@id": "spectro:appTier",
+      "@type": "@id"
+    },
+    "replaceWithAppTier": {
+      "@id": "spectro:replaceWithAppTier",
+      "@type": "xsd:string"
+    },
+    "v1AuditResourceReference": "spectro:v1AuditResourceReference",
+    "label": {
+      "@id": "spectro:label",
+      "@type": "xsd:string"
+    },
+    "v1ListMetaData": "spectro:v1ListMetaData",
+    "continue": {
+      "@id": "spectro:continue",
+      "@type": "xsd:string"
+    },
+    "count": {
+      "@id": "spectro:count",
+      "@type": "xsd:integer"
+    },
+    "limit": {
+      "@id": "spectro:limit",
+      "@type": "xsd:integer"
+    },
+    "offset": {
+      "@id": "spectro:offset",
+      "@type": "xsd:integer"
+    },
+    "v1AuditSpec": "spectro:v1AuditSpec",
+    "actionMsg": {
+      "@id": "spectro:actionMsg",
+      "@type": "xsd:string"
+    },
+    "actionType": {
+      "@id": "spectro:actionType",
+      "@type": "xsd:string"
+    },
+    "actor": {
+      "@id": "spectro:actor",
+      "@type": "@id"
+    },
+    "contentMsg": {
+      "@id": "spectro:contentMsg",
+      "@type": "xsd:string"
+    },
+    "resource": {
+      "@id": "spectro:resource",
+      "@type": "@id"
+    },
+    "userMsg": {
+      "@id": "spectro:userMsg",
+      "@type": "xsd:string"
+    },
+    "v1AuditSysMsg": "spectro:v1AuditSysMsg",
+    "v1Audit": "spectro:v1Audit",
+    "v1ProjectMeta": "spectro:v1ProjectMeta",
+    "v1UserMeta": "spectro:v1UserMeta",
+    "emailId": {
+      "@id": "spectro:emailId",
+      "@type": "xsd:string"
+    },
+    "org": {
+      "@id": "spectro:org",
+      "@type": "xsd:string"
+    },
+    "v1AuditActor": "spectro:v1AuditActor",
+    "actorType": {
+      "@id": "spectro:actorType",
+      "@type": "xsd:string"
+    },
+    "project": {
+      "@id": "spectro:project",
+      "@type": "@id"
+    },
+    "serviceName": {
+      "@id": "spectro:serviceName",
+      "@type": "xsd:string"
+    },
+    "v1AuditMsgUpdate": "spectro:v1AuditMsgUpdate",
+    "v1Audits": "spectro:v1Audits",
+    "listmeta": {
+      "@id": "spectro:listmeta",
+      "@type": "@id"
+    },
+    "v1Organizations": "spectro:v1Organizations",
+    "organizations": {
+      "@id": "spectro:organizations",
+      "@container": "@list"
+    },
+    "v1LoginResponse": "spectro:v1LoginResponse",
+    "appEnv": {
+      "@id": "spectro:appEnv",
+      "@type": "xsd:string"
+    },
+    "authType": {
+      "@id": "spectro:authType",
+      "@type": "xsd:string"
+    },
+    "orgName": {
+      "@id": "spectro:orgName",
+      "@type": "xsd:string"
+    },
+    "redirectUrl": {
+      "@id": "spectro:redirectUrl",
+      "@type": "xsd:string"
+    },
+    "rootDomain": {
+      "@id": "spectro:rootDomain",
+      "@type": "xsd:string"
+    },
+    "securityMode": {
+      "@id": "spectro:securityMode",
+      "@type": "xsd:string"
+    },
+    "ssoLogins": {
+      "@id": "spectro:ssoLogins",
+      "@type": "@id"
+    },
+    "totalTenants": {
+      "@id": "spectro:totalTenants",
+      "@type": "xsd:decimal"
+    },
+    "v1IdentityProvider": "spectro:v1IdentityProvider",
+    "id": {
+      "@id": "spectro:id",
+      "@type": "xsd:string"
+    },
+    "v1UserToken": "spectro:v1UserToken",
+    "Authorization": {
+      "@id": "spectro:Authorization",
+      "@type": "xsd:string"
+    },
+    "isMfa": {
+      "@id": "spectro:isMfa",
+      "@type": "xsd:boolean"
+    },
+    "v1Organization": "spectro:v1Organization",
+    "v1MfaDeviceMeta": "spectro:v1MfaDeviceMeta",
+    "deviceName": {
+      "@id": "spectro:deviceName",
+      "@type": "xsd:string"
+    },
+    "v1SsoLogin": "spectro:v1SsoLogin",
+    "displayName": {
+      "@id": "spectro:displayName",
+      "@type": "xsd:string"
+    },
+    "logo": {
+      "@id": "spectro:logo",
+      "@type": "xsd:string"
+    },
+    "redirectUri": {
+      "@id": "spectro:redirectUri",
+      "@type": "xsd:string"
+    },
+    "v1AuthLogin": "spectro:v1AuthLogin",
+    "password": {
+      "@id": "spectro:password",
+      "@type": "xsd:string"
+    },
+    "v1CloudStackOfferings": "spectro:v1CloudStackOfferings",
+    "offerings": {
+      "@id": "spectro:offerings",
+      "@container": "@list"
+    },
+    "v1CustomCloudAccount": "spectro:v1CustomCloudAccount",
+    "credentials": {
+      "@id": "spectro:credentials"
+    },
+    "v1CustomAccounts": "spectro:v1CustomAccounts",
+    "v1CloudStackNetworks": "spectro:v1CloudStackNetworks",
+    "networks": {
+      "@id": "spectro:networks",
+      "@container": "@list"
+    },
+    "v1AwsStsCredentials": "spectro:v1AwsStsCredentials",
+    "arn": {
+      "@id": "spectro:arn",
+      "@type": "xsd:string"
+    },
+    "externalId": {
+      "@id": "spectro:externalId",
+      "@type": "xsd:string"
+    },
+    "v1MaasAccounts": "spectro:v1MaasAccounts",
+    "v1AzureCloudAccount": "spectro:v1AzureCloudAccount",
+    "azureEnvironment": {
+      "@id": "spectro:azureEnvironment",
+      "@type": "xsd:string"
+    },
+    "clientId": {
+      "@id": "spectro:clientId",
+      "@type": "xsd:string"
+    },
+    "clientSecret": {
+      "@id": "spectro:clientSecret",
+      "@type": "xsd:string"
+    },
+    "settings": {
+      "@id": "spectro:settings",
+      "@type": "@id"
+    },
+    "tenantId": {
+      "@id": "spectro:tenantId",
+      "@type": "xsd:string"
+    },
+    "tenantName": {
+      "@id": "spectro:tenantName",
+      "@type": "xsd:string"
+    },
+    "tls": {
+      "@id": "spectro:tls",
+      "@type": "@id"
+    },
+    "v1VsphereComputeClusterResources": "spectro:v1VsphereComputeClusterResources",
+    "computecluster": {
+      "@id": "spectro:computecluster",
+      "@type": "@id"
+    },
+    "datacenter": {
+      "@id": "spectro:datacenter",
+      "@type": "xsd:string"
+    },
+    "v1CloudStackCloudAccount": "spectro:v1CloudStackCloudAccount",
+    "apiUrl": {
+      "@id": "spectro:apiUrl",
+      "@type": "xsd:string"
+    },
+    "domain": {
+      "@id": "spectro:domain",
+      "@type": "xsd:string"
+    },
+    "insecure": {
+      "@id": "spectro:insecure",
+      "@type": "xsd:boolean"
+    },
+    "secretKey": {
+      "@id": "spectro:secretKey",
+      "@type": "xsd:string"
+    },
+    "v1MaasTags": "spectro:v1MaasTags",
+    "v1MaasZone": "spectro:v1MaasZone",
+    "description": {
+      "@id": "spectro:description",
+      "@type": "xsd:string"
+    },
+    "v1VsphereComputeCluster": "spectro:v1VsphereComputeCluster",
+    "datastores": {
+      "@id": "spectro:datastores",
+      "@container": "@list"
+    },
+    "resourcePools": {
+      "@id": "spectro:resourcePools",
+      "@container": "@list"
+    },
+    "v1CloudStackTemplates": "spectro:v1CloudStackTemplates",
+    "templates": {
+      "@id": "spectro:templates",
+      "@container": "@list"
+    },
+    "v1GcpAccounts": "spectro:v1GcpAccounts",
+    "v1CustomAccountEntity": "spectro:v1CustomAccountEntity",
+    "v1MaasVlan": "spectro:v1MaasVlan",
+    "fabric": {
+      "@id": "spectro:fabric",
+      "@type": "xsd:string"
+    },
+    "v1GcpAccount": "spectro:v1GcpAccount",
+    "apiVersion": {
+      "@id": "spectro:apiVersion",
+      "@type": "xsd:string"
+    },
+    "v1CloudStackAccountInputEntity": "spectro:v1CloudStackAccountInputEntity",
+    "v1CloudStackZones": "spectro:v1CloudStackZones",
+    "zones": {
+      "@id": "spectro:zones",
+      "@container": "@list"
+    },
+    "v1CloudStackAccount": "spectro:v1CloudStackAccount",
+    "v1CloudStackVpcs": "spectro:v1CloudStackVpcs",
+    "v1VsphereAccount": "spectro:v1VsphereAccount",
+    "v1CloudStackKeypair": "spectro:v1CloudStackKeypair",
+    "fingerprint": {
+      "@id": "spectro:fingerprint",
+      "@type": "xsd:string"
+    },
+    "v1MaasSubnets": "spectro:v1MaasSubnets",
+    "v1GcpAccountSpec": "spectro:v1GcpAccountSpec",
+    "jsonCredentials": {
+      "@id": "spectro:jsonCredentials",
+      "@type": "xsd:string"
+    }
+  },
+  "@type": "schema:Dataset",
+  "schema:name": "Spectro Cloud API JSON-LD context",
+  "schema:description": "A JSON-LD @context for the objects Spectro Cloud's own API contract declares: one class per component schema, one property per declared field, typed from the contract. Derived by script (derive-json-ld.py, 2026-10-04) from openapi/spectro-cloud-activations-api-openapi.yml, openapi/spectro-cloud-api-keys-api-openapi.yml, openapi/spectro-cloud-app-deployments-api-openapi.yml.",
+  "dcterms:created": "2026-10-04",
+  "dcterms:source": [
+    "openapi/spectro-cloud-activations-api-openapi.yml",
+    "openapi/spectro-cloud-api-keys-api-openapi.yml",
+    "openapi/spectro-cloud-app-deployments-api-openapi.yml",
+    "openapi/spectro-cloud-appprofiles-api-openapi.yml",
+    "openapi/spectro-cloud-audits-api-openapi.yml"
+  ]
+}

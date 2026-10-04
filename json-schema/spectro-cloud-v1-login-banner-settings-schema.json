@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-login-banner-settings-schema.json",
+  "title": "v1LoginBannerSettings",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-system-api-openapi.yml#/components/schemas/v1LoginBannerSettings",
+  "properties": {
+    "Message": {
+      "description": "Login banner message displayed to the user",
+      "type": "string",
+      "x-omitempty": false
+    },
+    "isEnabled": {
+      "description": "Set to 'true' if login banner has to be displayed for user",
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "title": {
+      "description": "Banner title displayed to the user",
+      "type": "string",
+      "x-omitempty": false
+    }
+  }
+}

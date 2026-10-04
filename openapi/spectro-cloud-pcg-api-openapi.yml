@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Pcg API
+  title: Spectro Cloud Pcg API
   version: v1
+  description: 'Operations tagged pcg across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: pcg
   x-displayName: Pcg
@@ -35,6 +37,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1PcgSelfHostedParams'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/pcg/{uid}/register:
     post:
       operationId: v1PcgUidRegister
@@ -68,6 +72,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1PairingCode'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/pcg/{uid}/services/ally/manifest:
     parameters:
     - in: path
@@ -101,6 +107,8 @@ paths:
       summary: Returns the pcg ally manifest
       tags:
       - pcg
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/pcg/{uid}/services/jet/manifest:
     parameters:
     - in: path
@@ -134,6 +142,8 @@ paths:
       summary: Returns the pcg jet manifest
       tags:
       - pcg
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
     v1PairingCode:
@@ -161,6 +171,39 @@ components:
       required:
       - kubectlCommands
       type: object
+    v1PairingCode_2:
+      description: Pairing code response
+      example:
+        pairingCode: pairingCode
+      properties:
+        pairingCode:
+          type: string
+      type: object
+    v1PcgSelfHostedParams_2:
+      properties:
+        cloudType:
+          type: string
+        name:
+          type: string
+      type: object
+    v1PcgServiceKubectlCommands_2:
+      description: Array of kubectl commands
+      example:
+        kubectlCommands:
+        - kubectlCommands
+        - kubectlCommands
+        overlordUid: overlordUid
+      properties:
+        kubectlCommands:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        overlordUid:
+          type: string
+      required:
+      - kubectlCommands
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -172,3 +215,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

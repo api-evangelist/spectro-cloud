@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-aws-cloud-account-schema.json",
+  "title": "v1AwsCloudAccount",
+  "description": "AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clouds-api-openapi.yml#/components/schemas/v1AwsCloudAccount",
+  "properties": {
+    "accessKey": {
+      "description": "AWS account access key",
+      "type": "string"
+    },
+    "credentialType": {
+      "$ref": "#/$defs/v1AwsCloudAccountCredentialType"
+    },
+    "partition": {
+      "default": "aws",
+      "description": "AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values",
+      "enum": [
+        "aws",
+        "aws-us-gov",
+        "aws-iso",
+        "aws-iso-b"
+      ],
+      "type": "string"
+    },
+    "podIdentity": {
+      "$ref": "#/$defs/v1AwsPodIdentityCredentials",
+      "description": "AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types"
+    },
+    "policyARNs": {
+      "description": "List of policy ARNs required in case of credentialType sts.",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "secretKey": {
+      "description": "AWS account secret key",
+      "type": "string"
+    },
+    "secretSpec": {
+      "$ref": "#/$defs/v1AwsSecretSpec"
+    },
+    "secretToken": {
+      "description": "AWS account secret token; in case of aws-iso and aws-iso-b",
+      "type": "string"
+    },
+    "sts": {
+      "$ref": "#/$defs/v1AwsStsCredentials",
+      "description": "AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1AwsCloudAccountCredentialType": {
+      "default": "secret",
+      "description": "Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.",
+      "enum": [
+        "secret",
+        "sts",
+        "pod-identity"
+      ],
+      "type": "string"
+    },
+    "v1AwsPodIdentityCredentials": {
+      "description": "AWS EKS Pod Identity credentials for role assumption",
+      "properties": {
+        "permissionBoundaryArn": {
+          "description": "Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble",
+          "type": "string"
+        },
+        "roleArn": {
+          "description": "IAM Role ARN for the AWS EKS Pod Identity in cloud account",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AwsSecretSpec": {
+      "description": "AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects",
+      "properties": {
+        "accountName": {
+          "description": "AWS secret accountName; only for aws-iso-b environment",
+          "type": "string"
+        },
+        "agency": {
+          "description": "AWS secret agency",
+          "type": "string"
+        },
+        "isCapValidationEnabled": {
+          "description": "Flag to rotate the secret region credentials",
+          "type": "boolean"
+        },
+        "mission": {
+          "description": "AWS secret mission; only for aws-iso environment",
+          "type": "string"
+        },
+        "namePrefix": {
+          "description": "Policy Boundary",
+          "type": "string"
+        },
+        "permissionBoundary": {
+          "description": "Role or Policy Prefix",
+          "type": "string"
+        },
+        "policy": {
+          "description": "AWS secret policy; JSON string",
+          "type": "string"
+        },
+        "role": {
+          "description": "AWS secret role",
+          "type": "string"
+        },
+        "tls": {
+          "$ref": "#/$defs/v1AwsSecretTlsConfig",
+          "description": "TLS configuration for the AWS secret"
+        }
+      },
+      "type": "object"
+    },
+    "v1AwsSecretTlsConfig": {
+      "description": "TLS configuration for the AWS secret",
+      "properties": {
+        "ca": {
+          "description": "CA certificate",
+          "type": "string"
+        },
+        "cert": {
+          "description": "Certificate",
+          "type": "string"
+        },
+        "key": {
+          "description": "Key",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AwsStsCredentials": {
+      "description": "Aws sts credentials",
+      "properties": {
+        "arn": {
+          "description": "Arn for the aws sts credentials in cloud account",
+          "type": "string"
+        },
+        "externalId": {
+          "description": "ExternalId for the aws sts credentials in cloud account",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+generated: '2026-10-04'
+method: probed
+generator: harvest-llms.py
+source: https://docs.spectrocloud.com/llms.txt
+bytes: 8869
+note: saved verbatim; the provider's own document

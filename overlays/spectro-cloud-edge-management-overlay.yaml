@@ -2,7 +2,7 @@ overlay: 1.0.0
 info:
   title: API Evangelist enhancements for Spectro Cloud Edge Local Management APIs
   version: 1.0.0
-extends: openapi/spectro-cloud-edge-management-openapi.json
+extends: ../openapi/_original/spectro-cloud-edge-management-openapi.json
 actions:
 - target: $.info
   update:

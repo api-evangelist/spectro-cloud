@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-oci-image-registry-schema.json",
+  "title": "v1OciImageRegistry",
+  "description": "Oci Image Registry",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-registries-api-openapi.yml#/components/schemas/v1OciImageRegistry",
+  "properties": {
+    "baseContentPath": {
+      "description": "baseContentPath is the root path for the registry content",
+      "type": "string"
+    },
+    "caCert": {
+      "type": "string"
+    },
+    "endpoint": {
+      "type": "string"
+    },
+    "insecureSkipVerify": {
+      "type": "boolean"
+    },
+    "mirrorRegistries": {
+      "description": "mirrorRegistries contains the array of image sources like gcr.io, ghcr.io, docker.io",
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "password": {
+      "type": "string"
+    },
+    "username": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

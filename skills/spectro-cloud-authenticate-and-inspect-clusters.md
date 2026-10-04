@@ -1,5 +1,5 @@
 ---
-name: Authenticate and inspect Palette clusters
+name: authenticate-and-inspect-clusters
 description: Authenticate to the Palette API and list/inspect Kubernetes clusters and their status.
 api: openapi/spectro-cloud-palette-openapi.json
 operations:

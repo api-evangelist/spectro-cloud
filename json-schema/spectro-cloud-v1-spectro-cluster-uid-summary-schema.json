@@ -1,0 +1,1016 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-spectro-cluster-uid-summary-schema.json",
+  "title": "v1SpectroClusterUidSummary",
+  "description": "Spectro cluster summary",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-dashboard-api-openapi.yml#/components/schemas/v1SpectroClusterUidSummary",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "description": "Spectro cluster spec summary",
+      "properties": {
+        "archTypes": {
+          "description": "Architecture types of the cluster",
+          "items": {
+            "$ref": "#/$defs/v1ArchType"
+          },
+          "type": "array"
+        },
+        "cloudConfig": {
+          "$ref": "#/$defs/v1CloudConfigMeta"
+        },
+        "cloudaccount": {
+          "$ref": "#/$defs/v1CloudAccountMeta"
+        },
+        "clusterProfileTemplate": {
+          "$ref": "#/$defs/v1ClusterProfileTemplateMeta"
+        },
+        "clusterProfileTemplates": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterProfileTemplateMeta"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "status": {
+      "$ref": "#/$defs/v1SpectroClusterUidStatusSummary"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1APIEndpoint": {
+      "description": "APIEndpoint represents a reachable Kubernetes API endpoint.",
+      "properties": {
+        "host": {
+          "description": "The hostname on which the API server is serving.",
+          "type": "string"
+        },
+        "port": {
+          "description": "The port on which the API server is serving.",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "host",
+        "port"
+      ],
+      "type": "object"
+    },
+    "v1ArchType": {
+      "default": "amd64",
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "type": "string"
+    },
+    "v1CloudAccountMeta": {
+      "description": "Cloud account meta information",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudConfigMeta": {
+      "properties": {
+        "cloudType": {
+          "type": "string"
+        },
+        "hybridMachinePools": {
+          "description": "Hybrid Machine pools meta information",
+          "items": {
+            "$ref": "#/$defs/v1MachinePoolMeta"
+          },
+          "type": "array"
+        },
+        "machinePools": {
+          "description": "Machine pools meta information",
+          "items": {
+            "$ref": "#/$defs/v1MachinePoolMeta"
+          },
+          "type": "array"
+        },
+        "uid": {
+          "description": "Cluster's cloud config uid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudCost": {
+      "description": "Cloud cost information",
+      "properties": {
+        "compute": {
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "storage": {
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "total": {
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterCondition": {
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "lastTransitionTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "message": {
+          "description": "Human-readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Unique, one-word, CamelCase reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "type": "object"
+    },
+    "v1ClusterFips": {
+      "properties": {
+        "mode": {
+          "$ref": "#/$defs/v1ClusterFipsMode"
+        }
+      }
+    },
+    "v1ClusterFipsMode": {
+      "default": "none",
+      "enum": [
+        "full",
+        "none",
+        "partial",
+        "unknown"
+      ],
+      "type": "string"
+    },
+    "v1ClusterImport": {
+      "properties": {
+        "importLink": {
+          "description": "import link to download and install ally-lite, palette-lite",
+          "type": "string"
+        },
+        "isBrownfield": {
+          "description": "Deprecated. Use the 'spec.clusterType'",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "state": {
+          "description": "cluster import status",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterMetaSpecLocation": {
+      "description": "Cluster location information",
+      "properties": {
+        "coordinates": {
+          "items": {
+            "format": "float64",
+            "type": "number"
+          },
+          "type": "array"
+        },
+        "countryCode": {
+          "type": "string"
+        },
+        "countryName": {
+          "type": "string"
+        },
+        "regionCode": {
+          "type": "string"
+        },
+        "regionName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterNotificationStatus": {
+      "description": "Cluster notifications status",
+      "properties": {
+        "isAvailable": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "isTemplateVariableResolutionPending": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      }
+    },
+    "v1ClusterPackManifestStatus": {
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/v1ClusterCondition"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterPackStatus": {
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/v1ClusterCondition"
+        },
+        "endTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "manifests": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterPackManifestStatus"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "profileUid": {
+          "type": "string"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/$defs/v1LoadBalancerService"
+          },
+          "type": "array"
+        },
+        "startTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterProfileTemplateMeta": {
+      "description": "Cluster profile template meta information",
+      "properties": {
+        "cloudType": {
+          "type": "string"
+        },
+        "name": {
+          "description": "Cluster profile name",
+          "type": "string"
+        },
+        "packs": {
+          "description": "Cluster profile packs array",
+          "items": {
+            "$ref": "#/$defs/v1PackRef"
+          },
+          "type": "array"
+        },
+        "scope": {
+          "description": "scope or context(system, tenant or project)",
+          "type": "string"
+        },
+        "type": {
+          "description": "Cluster profile type [ \"cluster\", \"infra\", \"add-on\", \"system\" ]",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Cluster profile uid",
+          "type": "string"
+        },
+        "version": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1ComputeMetrics": {
+      "description": "Compute metrics",
+      "properties": {
+        "lastUpdatedTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "limit": {
+          "type": "number",
+          "x-omitempty": false
+        },
+        "request": {
+          "type": "number",
+          "x-omitempty": false
+        },
+        "total": {
+          "type": "number",
+          "x-omitempty": false
+        },
+        "unit": {
+          "type": "string"
+        },
+        "usage": {
+          "type": "number",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1KubeMeta": {
+      "description": "Spectro cluster kube meta",
+      "properties": {
+        "hasKubeConfig": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "hasKubeConfigClient": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "hasManifest": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "kubernetesVersion": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1LifecycleStatus": {
+      "properties": {
+        "msg": {
+          "description": "error or success msg of lifecycle",
+          "type": "string"
+        },
+        "status": {
+          "description": "lifecycle status",
+          "enum": [
+            "Pausing",
+            "Paused",
+            "Resuming",
+            "Running",
+            "Error"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "v1LoadBalancerService": {
+      "properties": {
+        "host": {
+          "description": "IP or Host from svc.Status.LoadBalancerStatus.Ingress",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the loadbalancer service",
+          "type": "string"
+        },
+        "ports": {
+          "description": "port this service exposed",
+          "items": {
+            "$ref": "#/$defs/v1ServicePort"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1MachinePoolMeta": {
+      "properties": {
+        "cloudType": {
+          "type": "string"
+        },
+        "healthy": {
+          "description": "number of healthy machines",
+          "format": "int32",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "infraProfileTemplate": {
+          "$ref": "#/$defs/v1ClusterProfileTemplateMeta",
+          "description": "InfraClusterProfile contains OS/Kernel for this NodePool"
+        },
+        "isControlPlane": {
+          "description": "whether this pool is for control plane",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "labels": {
+          "description": "labels for this pool, example: control-plane/worker, gpu, windows",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "maintenanceMode": {
+          "description": "number of machines under maintenance",
+          "format": "int32",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "size": {
+          "description": "size of the pool, number of machines",
+          "format": "int32",
+          "type": "integer",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectResReference": {
+      "description": "Object resource reference",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectUid": {
+          "type": "string"
+        },
+        "tenantUid": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackPreset": {
+      "description": "PackPreset defines the preset pack values",
+      "properties": {
+        "add": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "displayName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "group": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "remove": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1PackRef": {
+      "description": "PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml",
+          "type": "object"
+        },
+        "digest": {
+          "description": "digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade",
+          "type": "string"
+        },
+        "inValidReason": {
+          "type": "string"
+        },
+        "isInvalid": {
+          "description": "pack is invalid when the associated tag is deleted from the registry",
+          "type": "boolean"
+        },
+        "layer": {
+          "enum": [
+            "kernel",
+            "os",
+            "k8s",
+            "cni",
+            "csi",
+            "addon"
+          ],
+          "type": "string"
+        },
+        "logo": {
+          "description": "path to the pack logo",
+          "type": "string"
+        },
+        "manifests": {
+          "items": {
+            "$ref": "#/$defs/v1ObjectReference"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "pack name",
+          "type": "string"
+        },
+        "packUid": {
+          "description": "PackUID is Hubble packUID, not palette Pack.UID It is used by Hubble only.",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "params passed as env variables to be consumed at installation time",
+          "type": "object"
+        },
+        "presets": {
+          "items": {
+            "$ref": "#/$defs/v1PackPreset"
+          },
+          "type": "array"
+        },
+        "registryUid": {
+          "description": "pack registry uid",
+          "type": "string"
+        },
+        "schema": {
+          "items": {
+            "$ref": "#/$defs/v1PackSchema"
+          },
+          "type": "array"
+        },
+        "server": {
+          "description": "pack registry server or helm repo",
+          "type": "string"
+        },
+        "tag": {
+          "description": "pack tag",
+          "type": "string"
+        },
+        "type": {
+          "description": "type of the pack",
+          "enum": [
+            "spectro",
+            "helm",
+            "manifest",
+            "oci"
+          ],
+          "type": "string"
+        },
+        "values": {
+          "description": "values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values",
+          "type": "string"
+        },
+        "version": {
+          "description": "pack version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "layer",
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1PackSchema": {
+      "description": "PackSchema defines the schema definition, hints for the pack values",
+      "properties": {
+        "format": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "hints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "listOptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "readonly": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "regex": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "required": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1RelatedObject": {
+      "description": "Object for which the resource is related",
+      "properties": {
+        "kind": {
+          "enum": [
+            "spectrocluster",
+            "machine",
+            "cloudconfig",
+            "clusterprofile",
+            "pack",
+            "appprofile",
+            "appdeployment",
+            "edgehost"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ResourceCost": {
+      "description": "Resource Cost information",
+      "properties": {
+        "cloud": {
+          "$ref": "#/$defs/v1CloudCost"
+        },
+        "total": {
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ResourceReference": {
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "uid"
+      ],
+      "type": "object"
+    },
+    "v1ServicePort": {
+      "properties": {
+        "port": {
+          "description": "The port that will be exposed by this service.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "v1SpcApply": {
+      "properties": {
+        "actionType": {
+          "enum": [
+            "DownloadAndInstall",
+            "DownloadAndInstallLater"
+          ],
+          "type": "string"
+        },
+        "canBeApplied": {
+          "description": "If it is true then Agent can apply the changes to the palette",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "crdDigest": {
+          "type": "string"
+        },
+        "lastModifiedTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "patchAppliedTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "spcHash": {
+          "type": "string"
+        },
+        "spcInfraHash": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterAddOnServiceSummary": {
+      "description": "Spectro cluster status summary",
+      "properties": {
+        "endpoint": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SpectroClusterHealthCondition": {
+      "description": "Spectro cluster health condition",
+      "properties": {
+        "message": {
+          "type": "string"
+        },
+        "relatedObject": {
+          "$ref": "#/$defs/v1RelatedObject",
+          "type": "object"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SpectroClusterHealthStatus": {
+      "description": "Spectro cluster health status",
+      "properties": {
+        "agentVersion": {
+          "type": "string"
+        },
+        "conditions": {
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterHealthCondition"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "lastHeartBeatTimestamp": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "state": {
+          "type": "string"
+        }
+      }
+    },
+    "v1SpectroClusterMetrics": {
+      "description": "Spectro cluster metrics",
+      "properties": {
+        "cpu": {
+          "$ref": "#/$defs/v1ComputeMetrics"
+        },
+        "memory": {
+          "$ref": "#/$defs/v1ComputeMetrics"
+        }
+      }
+    },
+    "v1SpectroClusterUidStatusSummary": {
+      "description": "Spectro cluster status summary",
+      "properties": {
+        "abortTimestamp": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "addOnServices": {
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterAddOnServiceSummary"
+          },
+          "type": "array"
+        },
+        "apiEndpoints": {
+          "items": {
+            "$ref": "#/$defs/v1APIEndpoint"
+          },
+          "type": "array"
+        },
+        "clusterImport": {
+          "$ref": "#/$defs/v1ClusterImport"
+        },
+        "conditions": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterCondition"
+          },
+          "type": "array"
+        },
+        "cost": {
+          "$ref": "#/$defs/v1ResourceCost"
+        },
+        "fips": {
+          "$ref": "#/$defs/v1ClusterFips"
+        },
+        "health": {
+          "$ref": "#/$defs/v1SpectroClusterHealthStatus"
+        },
+        "hourlyRate": {
+          "$ref": "#/$defs/v1ResourceCost"
+        },
+        "kubeMeta": {
+          "$ref": "#/$defs/v1KubeMeta"
+        },
+        "location": {
+          "$ref": "#/$defs/v1ClusterMetaSpecLocation"
+        },
+        "metrics": {
+          "$ref": "#/$defs/v1SpectroClusterMetrics"
+        },
+        "notifications": {
+          "$ref": "#/$defs/v1ClusterNotificationStatus"
+        },
+        "packs": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterPackStatus"
+          },
+          "type": "array"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/$defs/v1LoadBalancerService"
+          },
+          "type": "array"
+        },
+        "spcApply": {
+          "$ref": "#/$defs/v1SpcApply"
+        },
+        "state": {
+          "description": "current operational state",
+          "type": "string"
+        },
+        "upgrades": {
+          "items": {
+            "$ref": "#/$defs/v1Upgrades"
+          },
+          "type": "array"
+        },
+        "virtual": {
+          "$ref": "#/$defs/v1Virtual"
+        },
+        "workspaces": {
+          "items": {
+            "$ref": "#/$defs/v1ResourceReference"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1Upgrades": {
+      "description": "Upgrades represent the reason of the last upgrade that took place",
+      "properties": {
+        "reason": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "timestamp": {
+          "$ref": "#/$defs/v1Time"
+        }
+      },
+      "type": "object"
+    },
+    "v1Virtual": {
+      "properties": {
+        "appDeployments": {
+          "description": "list of apps deployed on the virtual cluster",
+          "items": {
+            "$ref": "#/$defs/v1ObjectResReference"
+          },
+          "type": "array"
+        },
+        "clusterGroup": {
+          "$ref": "#/$defs/v1ObjectResReference",
+          "description": "cluster group details of virtual cluster"
+        },
+        "hostCluster": {
+          "$ref": "#/$defs/v1ObjectResReference",
+          "description": "host cluster reference"
+        },
+        "lifecycleStatus": {
+          "$ref": "#/$defs/v1LifecycleStatus",
+          "description": "cluster life cycle status of virtual cluster"
+        },
+        "state": {
+          "description": "cluster virtual host status",
+          "type": "string"
+        },
+        "virtualClusters": {
+          "description": "list of virtual clusters deployed on the cluster",
+          "items": {
+            "$ref": "#/$defs/v1ObjectResReference"
+          },
+          "type": "array"
+        }
+      }
+    }
+  }
+}

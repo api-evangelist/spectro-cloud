@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-bond-schema.json",
+  "title": "v1Bond",
+  "description": "Bond interface configuration",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edge-mgmt-api-openapi.yml#/components/schemas/v1Bond",
+  "type": "object",
+  "properties": {
+    "bridgeName": {
+      "description": "Name of the bridge this bond is a member of, empty if not part of any bridge",
+      "type": "string"
+    },
+    "configStatus": {
+      "description": "Detailed configuration status from networkctl",
+      "type": "string"
+    },
+    "gateway": {
+      "type": "string"
+    },
+    "ip": {
+      "type": "string"
+    },
+    "lacpTransmitRate": {
+      "type": "string"
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "miiMonitorSec": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string"
+    },
+    "mtu": {
+      "type": "integer",
+      "format": "int64"
+    },
+    "name": {
+      "type": "string"
+    },
+    "nameservers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "description": "Status of the bond interface (up/down/applying/unknown)",
+      "type": "string"
+    },
+    "subnet": {
+      "type": "string"
+    },
+    "transmitHashPolicy": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "dhcp",
+        "static",
+        "none"
+      ]
+    },
+    "vlanID": {
+      "type": "string"
+    }
+  }
+}

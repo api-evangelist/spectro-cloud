@@ -27,6 +27,7 @@ pagination:
   note: List endpoints return at most 50 items per payload; pass the continue token as a
     query parameter to page forward.
 idempotency:
+  coverage: none
   supported: false
   note: Palette does not document an idempotency-key header; no Idempotency-Key parameter
     appears in the OpenAPI. Writes are not advertised as idempotent-by-key.

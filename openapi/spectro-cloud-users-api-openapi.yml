@@ -2,10 +2,11 @@ openapi: 3.2.0
 info:
   title: Spectro Cloud Users API
   version: v1
-  description: 'Operations tagged users across 2 of this provider''s published API definitions: spectro-cloud-edge-management-openapi.json, spectro-cloud-palette-openapi.json. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged users across 3 of this provider''s published API definitions: spectro-cloud-edge-management-openapi.json, spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://edge-host-ip:5080
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Users
   x-displayName: Users
@@ -1716,18 +1717,33 @@ paths:
     - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1NoContent:
-      description: No Content
-    v1LoginSuccess:
-      description: System login success response
+    v1AuthLogin:
       type: object
       properties:
-        IsFirstLogin:
-          description: Flag to indicate if the user is logging in for the first time
-          type: boolean
-        Token:
-          description: System login token
-          $ref: '#/components/schemas/v1UserToken'
+        password:
+          description: The user's password to authenticate user for system login
+          type: string
+          format: password
+        username:
+          description: The username of the user trying to do system login
+          type: string
+    v1NoContent:
+      description: No Content
+    v1Error:
+      type: object
+      properties:
+        code:
+          type: string
+        details:
+          type: object
+        message:
+          type: string
+        ref:
+          type: string
+    v1Unauthorized:
+      description: Unauthorized
+    v1BadRequest:
+      description: Bad request
     v1PasswordResetRequest:
       type: object
       properties:
@@ -1739,8 +1755,33 @@ components:
           description: The old password which is required to authenticate the user
           type: string
           format: password
-    v1Unauthorized:
-      description: Unauthorized
+    v1UserToken:
+      description: Authorization token response
+      type: object
+      properties:
+        Authorization:
+          description: The token granting the authorization access to the user
+          type: string
+        RefreshToken:
+          description: Refresh token for renewing the access token (optional - also available via RefreshToken cookie)
+          type: string
+    v1InternalServerError:
+      description: Internal Server Error
+    v1LoginSuccess:
+      description: System login success response
+      type: object
+      properties:
+        IsFirstLogin:
+          description: Flag to indicate if the user is logging in for the first time
+          type: boolean
+        Token:
+          description: System login token
+          $ref: '#/components/schemas/v1UserToken'
+    v1AcceptedResponseWithMessage:
+      description: Accepted response with message
+      properties:
+        message:
+          type: string
     v1UserSpec:
       description: Current user information
       type: object
@@ -1757,53 +1798,87 @@ components:
         userName:
           description: Current user's username
           type: string
-    v1UserToken:
-      description: Authorization token response
-      type: object
-      properties:
-        Authorization:
-          description: The token granting the authorization access to the user
-          type: string
-        RefreshToken:
-          description: Refresh token for renewing the access token (optional - also available via RefreshToken cookie)
-          type: string
-    v1AcceptedResponseWithMessage:
-      description: Accepted response with message
-      properties:
-        message:
-          type: string
-    v1Error:
-      type: object
-      properties:
-        code:
-          type: string
-        details:
-          type: object
-        message:
-          type: string
-        ref:
-          type: string
-    v1InternalServerError:
-      description: Internal Server Error
-    v1BadRequest:
-      description: Bad request
-    v1AuthLogin:
-      type: object
-      properties:
-        password:
-          description: The user's password to authenticate user for system login
-          type: string
-          format: password
-        username:
-          description: The username of the user trying to do system login
-          type: string
-    v1UserAssetSsh:
-      description: SSH key information
+    v1UserAssetSshEntity:
+      description: SSH Key request payload
       properties:
         metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
         spec:
           $ref: '#/components/schemas/v1UserAssetSshSpec'
+      type: object
+    v1MfaUserEntity:
+      properties:
+        displayName:
+          type: string
+        id:
+          type: object
+        name:
+          type: string
+      type: object
+    v1AuthTokenRevoke:
+      properties:
+        tokens:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1UserPatch:
+      items:
+        $ref: '#/components/schemas/v1HttpPatch'
+      type: array
+    v1SystemScarSpec:
+      description: system scar config spec
+      properties:
+        baseContentPath:
+          type: string
+        caCert:
+          type: string
+        endpoint:
+          type: string
+        insecureVerify:
+          type: boolean
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    v1ProjectRolesEntity:
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1UidRoleSummary'
+          type: array
+      type: object
+    v1VsphereDnsMappings:
+      properties:
+        items:
+          description: List of vSphere DNS mapping
+          items:
+            $ref: '#/components/schemas/v1VsphereDnsMapping'
+          type: array
+          uniqueItems: true
+      required:
+      - items
       type: object
     v1UsersSummary:
       description: Deprecated, Use v1UsersSummaryList - Returns User summary
@@ -1818,15 +1893,41 @@ components:
       required:
       - items
       type: object
-    v1AwsStsCredentials:
-      description: Aws sts credentials
+    v1UserAssetSshSpec:
+      description: SSH key specification
       properties:
-        arn:
-          description: Arn for the aws sts credentials in cloud account
+        publicKey:
           type: string
-        externalId:
-          description: ExternalId for the aws sts credentials in cloud account
+      type: object
+    v1S3StorageConfig:
+      description: S3 storage config object
+      properties:
+        bucketName:
+          description: S3 storage bucket name
           type: string
+        caCert:
+          description: CA Certificate
+          type: string
+        credentials:
+          $ref: '#/components/schemas/v1AwsCloudAccount'
+          description: AWS cloud account credentials
+        region:
+          description: AWS region name
+          type: string
+        s3ForcePathStyle:
+          default: true
+          type: boolean
+        s3Url:
+          description: Custom hosted S3 URL
+          type: string
+        useRestic:
+          default: true
+          description: Set to 'true', to use Restic plugin for the backup
+          type: boolean
+      required:
+      - bucketName
+      - region
+      - credentials
       type: object
     v1UserUpdateSpecEntity:
       description: User Entity input
@@ -1844,100 +1945,145 @@ components:
           type: array
           uniqueItems: true
       type: object
-    v1MfaUserEntity:
-      properties:
-        displayName:
-          type: string
-        id:
-          type: object
-        name:
-          type: string
-      type: object
-    v1GcpStorageConfig:
-      description: GCP storage config object
-      properties:
-        bucketName:
-          description: GCP storage bucket name
-          type: string
-        credentials:
-          $ref: '#/components/schemas/v1.GcpAccountEntitySpec'
-          description: GCP cloud account credentials
-        projectId:
-          description: GCP project id
-          type: string
-      required:
-      - bucketName
-      - credentials
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1UserSummary:
-      description: User summary
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1UserSpecSummary'
-        status:
-          $ref: '#/components/schemas/v1UserStatus'
-      type: object
-    v1VsphereDnsMappings:
+    v1UsersSummaryList:
       properties:
         items:
-          description: List of vSphere DNS mapping
           items:
-            $ref: '#/components/schemas/v1VsphereDnsMapping'
+            $ref: '#/components/schemas/v1UserSummary'
           type: array
           uniqueItems: true
       required:
       - items
       type: object
-    v1MfaAuthenticationExtensions:
-      additionalProperties:
-        type: object
-      type: object
-    v1UserSpec_2:
-      description: User specifications
+    v1ResourceRolesEntity:
       properties:
-        emailId:
-          description: User's email id
+        filterRefs:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        projectUids:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        uid:
           type: string
-        firstName:
+      type: object
+    v1SystemFeature:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1SystemFeaturesSpec'
+      type: object
+    v1MfaCredentialDescriptor:
+      properties:
+        attestationType:
           type: string
-        lastName:
+        id:
+          $ref: '#/components/schemas/urlEncodedBase64'
+        transports:
+          items:
+            type: string
+          type: array
+        type:
           type: string
+      type: object
+    v1UserSummarySortSpec:
+      properties:
+        field:
+          $ref: '#/components/schemas/v1UserSummarySortFields'
+        order:
+          $ref: '#/components/schemas/v1SortOrder'
+    v1MfaDevices:
+      items:
+        $ref: '#/components/schemas/v1MfaDeviceMeta'
+      type: array
+    v1UserRoleUIDs:
+      properties:
         roles:
           items:
             type: string
           type: array
-          uniqueItems: true
-    v1UserAssetsLocationGcp:
-      description: GCP location object
+      type: object
+    v1MfaRegistrationStart:
+      properties:
+        publicKey:
+          $ref: '#/components/schemas/v1MfaPublicKeyCredentialCreationOptions'
+      type: object
+    v1UserAssetsLocationAzure:
+      description: Azure location object
       properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMetaInputEntity'
         spec:
-          $ref: '#/components/schemas/v1UserAssetsLocationGcpSpec'
+          $ref: '#/components/schemas/v1UserAssetsLocationAzureSpec'
       type: object
-    v1SystemFeaturesSpec:
+    v1UsersFilterSpec:
+      description: Users filter spec
       properties:
-        description:
-          description: Feature description
-          type: string
-        docLink:
-          description: Feature doc link
-          type: string
-        isAllowed:
-          description: Flag which specifies if feature is allowed or not
+        emailId:
+          $ref: '#/components/schemas/v1FilterString'
+        name:
+          $ref: '#/components/schemas/v1FilterString'
+    v1MfaAuthenticationExtensions:
+      additionalProperties:
+        type: object
+      type: object
+    v1UserAssetsLocationGcpSpec:
+      description: GCP location specification
+      properties:
+        config:
+          $ref: '#/components/schemas/v1GcpStorageConfig'
+        isDefault:
+          description: Set to 'true', if location has to be set as default
           type: boolean
-          x-omitempty: false
+        type:
+          description: GCP location type [gcp]
+          type: string
+      required:
+      - config
+      type: object
+    URLEncodedBase64:
+      format: url-encoded-base64
+      type: string
+    v1AwsSecretTlsConfig:
+      description: TLS configuration for the AWS secret
+      properties:
+        ca:
+          description: CA certificate
+          type: string
+        cert:
+          description: Certificate
+          type: string
         key:
-          description: Unique Feature key
+          description: Key
+          type: string
+      type: object
+    v1UserStatusLoginMode:
+      properties:
+        loginMode:
+          enum:
+          - dev
+          - devops
+          type: string
+      type: object
+    v1UidRoleSummary:
+      properties:
+        inheritedRoles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        name:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        uid:
           type: string
       type: object
     v1UserEntity:
@@ -1948,6 +2094,98 @@ components:
         spec:
           $ref: '#/components/schemas/v1UserSpecEntity'
       type: object
+    v1MfaCredentialCreationRequest:
+      properties:
+        _type:
+          type: string
+        authenticatorAttachment:
+          type: string
+        clientExtensionResults:
+          additionalProperties:
+            type: object
+          type: object
+        deviceName:
+          type: string
+        id:
+          type: string
+        rawId:
+          $ref: '#/components/schemas/URLEncodedBase64'
+        response:
+          properties:
+            attestationObject:
+              $ref: '#/components/schemas/URLEncodedBase64'
+            clientDataJSON:
+              $ref: '#/components/schemas/URLEncodedBase64'
+            transports:
+              items:
+                type: string
+              type: array
+          type: object
+        transports:
+          items:
+            type: string
+          type: array
+      type: object
+    v1SortOrder:
+      default: asc
+      enum:
+      - asc
+      - desc
+      type: string
+    v1MfaRelyingPartyEntity:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+      type: object
+    v1UserAssetsLocationS3:
+      description: S3 location object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetsLocationS3Spec'
+      type: object
+    v1AwsCloudAccountCredentialType:
+      default: secret
+      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+      enum:
+      - secret
+      - sts
+      - pod-identity
+      type: string
+    v1AzureStorageConfig:
+      description: Azure storage config object
+      properties:
+        containerName:
+          description: Azure container name
+          type: string
+        credentials:
+          $ref: '#/components/schemas/v1.AzureAccountEntitySpec'
+          description: Azure cloud account credentials
+        resourceGroup:
+          description: Azure resource group name, to which the storage account is mapped
+          type: string
+        sku:
+          description: Azure sku
+          type: string
+        storageName:
+          description: Azure storage name
+          type: string
+      required:
+      - resourceGroup
+      - containerName
+      - storageName
+      - credentials
+      type: object
+    v1UserSummarySortFields:
+      enum:
+      - name
+      - creationTimestamp
+      type:
+      - string
+      - 'null'
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -1989,37 +2227,161 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1MfaCredentialCreationRequest:
+    v1Macro:
       properties:
-        _type:
+        name:
           type: string
-        authenticatorAttachment:
+        value:
           type: string
-        clientExtensionResults:
-          additionalProperties:
-            type: object
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1UserAssetsLocation:
+      description: Location object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetsLocationSpec'
+      type: object
+    v1GcpStorageConfig:
+      description: GCP storage config object
+      properties:
+        bucketName:
+          description: GCP storage bucket name
+          type: string
+        credentials:
+          $ref: '#/components/schemas/v1.GcpAccountEntitySpec'
+          description: GCP cloud account credentials
+        projectId:
+          description: GCP project id
+          type: string
+      required:
+      - bucketName
+      - credentials
+      type: object
+    v1User:
+      description: User
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1UserSpec_2'
+        status:
+          $ref: '#/components/schemas/v1UserStatus'
+      type: object
+    v1HttpPatch:
+      properties:
+        from:
+          description: A path to the pointer from which reference will be taken
+          type: string
+        op:
+          description: The operation to be performed
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          type: string
+        path:
+          description: A path to the pointer on which operation will be done
+          type: string
+        value:
+          description: The value to be used within the operations.
           type: object
-        deviceName:
-          type: string
-        id:
-          type: string
-        rawId:
-          $ref: '#/components/schemas/URLEncodedBase64'
-        response:
-          properties:
-            attestationObject:
-              $ref: '#/components/schemas/URLEncodedBase64'
-            clientDataJSON:
-              $ref: '#/components/schemas/URLEncodedBase64'
-            transports:
-              items:
-                type: string
-              type: array
-          type: object
-        transports:
+      required:
+      - op
+      - path
+      type: object
+    v1ProjectRolesPatch:
+      properties:
+        projects:
           items:
-            type: string
+            properties:
+              projectUid:
+                type: string
+              roles:
+                items:
+                  type: string
+                type: array
+            type: object
           type: array
+      type: object
+    v1Macros:
+      properties:
+        macros:
+          items:
+            $ref: '#/components/schemas/v1Macro'
+          type: array
+          uniqueItems: true
+    v1UsersMetadata:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1UserMetaEntity'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1ObjectMetaInputEntity:
+      description: ObjectMeta input entity for object creation
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1UserStatus:
+      description: User status
+      properties:
+        activationLink:
+          description: provides the link to activate or reset the user password
+          type: string
+          x-omitempty: false
+        isActive:
+          description: Specifies if user account is active/disabled
+          type: boolean
+          x-omitempty: false
+        isPasswordResetting:
+          description: Specifies if user in multi org requested password reset
+          type: boolean
+          x-omitempty: false
+        lastSignIn:
+          $ref: '#/components/schemas/v1Time'
+          description: user's last sign in time
+    v1.AzureAccountEntitySpec:
+      properties:
+        clientCloud:
+          default: public
+          description: Contains configuration for Azure cloud
+          enum:
+          - azure-china
+          - azure-government
+          - public
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        subscriptionId:
+          type: string
+        tenantId:
+          type: string
       type: object
     v1UserInfo:
       description: User basic information
@@ -2031,119 +2393,62 @@ components:
           type: string
         userUid:
           type: string
-    v1UidSummary:
-      properties:
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1UsersFilterSpec:
-      description: Users filter spec
-      properties:
-        emailId:
-          $ref: '#/components/schemas/v1FilterString'
-        name:
-          $ref: '#/components/schemas/v1FilterString'
-    v1MfaRegistrationStart:
-      properties:
-        publicKey:
-          $ref: '#/components/schemas/v1MfaPublicKeyCredentialCreationOptions'
-      type: object
-    v1Macros:
-      properties:
-        macros:
-          items:
-            $ref: '#/components/schemas/v1Macro'
-          type: array
-          uniqueItems: true
-    v1MfaPublicKeyCredentialCreationOptions:
-      properties:
-        attestation:
-          $ref: '#/components/schemas/v1MfaConveyancePreference'
-        authenticatorSelection:
-          $ref: '#/components/schemas/v1MfaAuthenticatorSelection'
-        challenge:
-          $ref: '#/components/schemas/URLEncodedBase64'
-        excludeCredentials:
-          items:
-            $ref: '#/components/schemas/v1MfaCredentialDescriptor'
-          type: array
-        extensions:
-          $ref: '#/components/schemas/v1MfaAuthenticationExtensions'
-        pubKeyCredParams:
-          items:
-            $ref: '#/components/schemas/v1MfaCredentialParameter'
-          type: array
-        rp:
-          $ref: '#/components/schemas/v1MfaRelyingPartyEntity'
-        timeout:
-          type: integer
-        user:
-          $ref: '#/components/schemas/v1MfaUserEntity'
-      type: object
-    v1UserUpdateEntity:
-      description: User
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1UserUpdateSpecEntity'
-      type: object
-    v1UserAssetsSsh:
-      properties:
-        items:
-          description: List of SSH keys
-          items:
-            $ref: '#/components/schemas/v1UserAssetSsh'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1UserAssetsLocationGcpSpec:
-      description: GCP location specification
+    v1UserAssetsLocationS3Spec:
+      description: S3 location specification
       properties:
         config:
-          $ref: '#/components/schemas/v1GcpStorageConfig'
+          $ref: '#/components/schemas/v1S3StorageConfig'
         isDefault:
           description: Set to 'true', if location has to be set as default
           type: boolean
         type:
-          description: GCP location type [gcp]
+          description: S3 location type [s3/minio]
           type: string
       required:
       - config
       type: object
-    v1SortOrder:
-      default: asc
-      enum:
-      - asc
-      - desc
-      type: string
-    v1MfaDeviceName:
+    v1AwsStsCredentials:
+      description: Aws sts credentials
       properties:
-        deviceName:
+        arn:
+          description: Arn for the aws sts credentials in cloud account
+          type: string
+        externalId:
+          description: ExternalId for the aws sts credentials in cloud account
           type: string
       type: object
-    v1UserAssetsLocationAzure:
-      description: Azure location object
+    v1FilterString:
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1UserAssetsLocationAzureSpec'
+        beginsWith:
+          type:
+          - string
+          - 'null'
+        contains:
+          type:
+          - string
+          - 'null'
+        eq:
+          type:
+          - string
+          - 'null'
+        ignoreCase:
+          default: true
+          type: boolean
+        ne:
+          type:
+          - string
+          - 'null'
       type: object
-    v1UserSummarySortSpec:
+    v1UserAssetsLocationSpec:
+      description: Location specification
       properties:
-        field:
-          $ref: '#/components/schemas/v1UserSummarySortFields'
-        order:
-          $ref: '#/components/schemas/v1SortOrder'
+        isDefault:
+          type: boolean
+        storage:
+          $ref: '#/components/schemas/v1LocationType'
+        type:
+          type: string
+      type: object
     v1ResourceRolesUpdateEntity:
       properties:
         filterRefs:
@@ -2159,6 +2464,64 @@ components:
             type: string
           type: array
       type: object
+    v1ResourceRoles:
+      properties:
+        resourceRoles:
+          items:
+            $ref: '#/components/schemas/v1ResourceRolesEntity'
+          type: array
+      type: object
+    v1UserAssetsLocations:
+      properties:
+        items:
+          description: List of locations
+          items:
+            $ref: '#/components/schemas/v1UserAssetsLocation'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1SystemFeatures:
+      properties:
+        items:
+          description: List of system features
+          items:
+            $ref: '#/components/schemas/v1SystemFeature'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1UserRolesEntity:
+      properties:
+        inheritedRoles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+      type: object
+    v1LocationType:
+      default: s3
+      description: Location type
+      enum:
+      - s3
+      - gcp
+      - minio
+      type: string
+    v1UserMetaEntity:
+      description: User meta entity
+      properties:
+        emailId:
+          type: string
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
     v1VsphereDnsMapping:
       description: VSphere DNS Mapping
       properties:
@@ -2167,12 +2530,101 @@ components:
         spec:
           $ref: '#/components/schemas/v1VsphereDnsMappingSpec'
       type: object
-    v1UserRoleUIDs:
+    v1UserAssetsLocationGcp:
+      description: GCP location object
       properties:
-        roles:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetsLocationGcpSpec'
+      type: object
+    v1MfaDeviceMeta:
+      properties:
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        deviceName:
+          type: string
+      type: object
+    v1.GcpAccountEntitySpec:
+      properties:
+        jsonCredentials:
+          type: string
+      type: object
+    v1MfaAuthenticatorSelection:
+      properties:
+        authenticatorAttachment:
+          type: string
+        requireResidentKey:
+          type: boolean
+        residentKey:
+          type: string
+        userVerification:
+          type: string
+      type: object
+    v1MfaDeviceName:
+      properties:
+        deviceName:
+          type: string
+      type: object
+    v1UserUpdateEntity:
+      description: User
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1UserUpdateSpecEntity'
+      type: object
+    v1VsphereDnsMappingSpec:
+      description: VSphere DNS Mapping Spec
+      properties:
+        datacenter:
+          description: VSphere datacenter name
+          type: string
+        dnsName:
+          description: VSphere DNS name
+          type: string
+        network:
+          description: VSphere network name
+          type: string
+        networkUrl:
+          description: VSphere network URL
+          readOnly: true
+          type: string
+        privateGatewayUid:
+          description: VSphere private gateway uid
+          type: string
+      required:
+      - privateGatewayUid
+      - datacenter
+      - network
+      - dnsName
+      type: object
+    v1SystemFeaturesSpec:
+      properties:
+        description:
+          description: Feature description
+          type: string
+        docLink:
+          description: Feature doc link
+          type: string
+        isAllowed:
+          description: Flag which specifies if feature is allowed or not
+          type: boolean
+          x-omitempty: false
+        key:
+          description: Unique Feature key
+          type: string
+      type: object
+    v1UserAssetsSsh:
+      properties:
+        items:
+          description: List of SSH keys
           items:
-            type: string
+            $ref: '#/components/schemas/v1UserAssetSsh'
           type: array
+          uniqueItems: true
+      required:
+      - items
       type: object
     v1Users:
       properties:
@@ -2185,6 +2637,90 @@ components:
           $ref: '#/components/schemas/v1ListMetaData'
       required:
       - items
+      type: object
+    v1AwsSecretSpec:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+      properties:
+        accountName:
+          description: AWS secret accountName; only for aws-iso-b environment
+          type: string
+        agency:
+          description: AWS secret agency
+          type: string
+        isCapValidationEnabled:
+          description: Flag to rotate the secret region credentials
+          type: boolean
+        mission:
+          description: AWS secret mission; only for aws-iso environment
+          type: string
+        namePrefix:
+          description: Policy Boundary
+          type: string
+        permissionBoundary:
+          description: Role or Policy Prefix
+          type: string
+        policy:
+          description: AWS secret policy; JSON string
+          type: string
+        role:
+          description: AWS secret role
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
+          description: TLS configuration for the AWS secret
+      type: object
+    v1UserSpecEntity:
+      description: User Entity input
+      properties:
+        emailId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        loginMode:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        teams:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1AwsPodIdentityCredentials:
+      description: AWS EKS Pod Identity credentials for role assumption
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
+    v1MfaCredentialParameter:
+      properties:
+        alg:
+          type: integer
+        type:
+          type: string
+      type: object
+    v1UserAssetsLocationAzureSpec:
+      description: Azure location specification
+      properties:
+        config:
+          $ref: '#/components/schemas/v1AzureStorageConfig'
+        isDefault:
+          description: Set to 'true', if location has to be set as default
+          type: boolean
+        type:
+          description: Azure location type [azure]
+          type: string
+      required:
+      - config
       type: object
     v1AwsCloudAccount:
       description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
@@ -2223,646 +2759,13 @@ components:
           $ref: '#/components/schemas/v1AwsStsCredentials'
           description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
       type: object
-    v1AuthTokenRevoke:
-      properties:
-        tokens:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-    v1UserAssetsLocationS3:
-      description: S3 location object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1UserAssetsLocationS3Spec'
-      type: object
-    v1MfaCredentialParameter:
-      properties:
-        alg:
-          type: integer
-        type:
-          type: string
-      type: object
-    v1User:
-      description: User
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1UserSpec_2'
-        status:
-          $ref: '#/components/schemas/v1UserStatus'
-      type: object
-    v1UserAssetsLocation:
-      description: Location object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1UserAssetsLocationSpec'
-      type: object
-    v1SystemScarSpec:
-      description: system scar config spec
-      properties:
-        baseContentPath:
-          type: string
-        caCert:
-          type: string
-        endpoint:
-          type: string
-        insecureVerify:
-          type: boolean
-        password:
-          type: string
-        username:
-          type: string
-      type: object
-    v1UserRolesEntity:
-      properties:
-        inheritedRoles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        roles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-      type: object
-    v1AwsPodIdentityCredentials:
-      description: AWS EKS Pod Identity credentials for role assumption
-      properties:
-        permissionBoundaryArn:
-          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
-          type: string
-        roleArn:
-          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
-          type: string
-      type: object
-    v1UserAssetsLocations:
-      properties:
-        items:
-          description: List of locations
-          items:
-            $ref: '#/components/schemas/v1UserAssetsLocation'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1UserStatus:
-      description: User status
-      properties:
-        activationLink:
-          description: provides the link to activate or reset the user password
-          type: string
-          x-omitempty: false
-        isActive:
-          description: Specifies if user account is active/disabled
-          type: boolean
-          x-omitempty: false
-        isPasswordResetting:
-          description: Specifies if user in multi org requested password reset
-          type: boolean
-          x-omitempty: false
-        lastSignIn:
-          $ref: '#/components/schemas/v1Time'
-          description: user's last sign in time
-    v1Macro:
+    v1UidSummary:
       properties:
         name:
           type: string
-        value:
-          type: string
-    v1UsersSummarySpec:
-      description: Users filter summary spec
-      properties:
-        filter:
-          $ref: '#/components/schemas/v1UsersFilterSpec'
-        sort:
-          items:
-            $ref: '#/components/schemas/v1UserSummarySortSpec'
-          type: array
-          uniqueItems: true
-    v1UserStatusLoginMode:
-      properties:
-        loginMode:
-          enum:
-          - dev
-          - devops
-          type: string
-      type: object
-    v1UserSpecEntity:
-      description: User Entity input
-      properties:
-        emailId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        loginMode:
-          type: string
-        roles:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        teams:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-      type: object
-    v1UserAssetsLocationAzureSpec:
-      description: Azure location specification
-      properties:
-        config:
-          $ref: '#/components/schemas/v1AzureStorageConfig'
-        isDefault:
-          description: Set to 'true', if location has to be set as default
-          type: boolean
-        type:
-          description: Azure location type [azure]
-          type: string
-      required:
-      - config
-      type: object
-    v1ProjectRolesEntity:
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/v1UidRoleSummary'
-          type: array
-      type: object
-    v1UsersSummaryList:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1UserSummary'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1AwsSecretSpec:
-      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
-      properties:
-        accountName:
-          description: AWS secret accountName; only for aws-iso-b environment
-          type: string
-        agency:
-          description: AWS secret agency
-          type: string
-        isCapValidationEnabled:
-          description: Flag to rotate the secret region credentials
-          type: boolean
-        mission:
-          description: AWS secret mission; only for aws-iso environment
-          type: string
-        namePrefix:
-          description: Policy Boundary
-          type: string
-        permissionBoundary:
-          description: Role or Policy Prefix
-          type: string
-        policy:
-          description: AWS secret policy; JSON string
-          type: string
-        role:
-          description: AWS secret role
-          type: string
-        tls:
-          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
-          description: TLS configuration for the AWS secret
-      type: object
-    v1UsersMetadata:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1UserMetaEntity'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1MfaCredentialDescriptor:
-      properties:
-        attestationType:
-          type: string
-        id:
-          $ref: '#/components/schemas/urlEncodedBase64'
-        transports:
-          items:
-            type: string
-          type: array
-        type:
-          type: string
-      type: object
-    v1SystemFeature:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1SystemFeaturesSpec'
-      type: object
-    v1ResourceRoles:
-      properties:
-        resourceRoles:
-          items:
-            $ref: '#/components/schemas/v1ResourceRolesEntity'
-          type: array
-      type: object
-    v1ObjectMetaInputEntity:
-      description: ObjectMeta input entity for object creation
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-      type: object
-    v1LocationType:
-      default: s3
-      description: Location type
-      enum:
-      - s3
-      - gcp
-      - minio
-      type: string
-    v1HttpPatch:
-      properties:
-        from:
-          description: A path to the pointer from which reference will be taken
-          type: string
-        op:
-          description: The operation to be performed
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          type: string
-        path:
-          description: A path to the pointer on which operation will be done
-          type: string
-        value:
-          description: The value to be used within the operations.
-          type: object
-      required:
-      - op
-      - path
-      type: object
-    v1MfaDeviceMeta:
-      properties:
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        deviceName:
-          type: string
-      type: object
-    v1UserAssetsLocationSpec:
-      description: Location specification
-      properties:
-        isDefault:
-          type: boolean
-        storage:
-          $ref: '#/components/schemas/v1LocationType'
-        type:
-          type: string
-      type: object
-    urlEncodedBase64:
-      format: url-encoded-base64
-      type: string
-    v1UserAssetSshSpec:
-      description: SSH key specification
-      properties:
-        publicKey:
-          type: string
-      type: object
-    v1SystemFeatures:
-      properties:
-        items:
-          description: List of system features
-          items:
-            $ref: '#/components/schemas/v1SystemFeature'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1ResourceRolesEntity:
-      properties:
-        filterRefs:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        projectUids:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        roles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
         uid:
           type: string
       type: object
-    v1S3StorageConfig:
-      description: S3 storage config object
-      properties:
-        bucketName:
-          description: S3 storage bucket name
-          type: string
-        caCert:
-          description: CA Certificate
-          type: string
-        credentials:
-          $ref: '#/components/schemas/v1AwsCloudAccount'
-          description: AWS cloud account credentials
-        region:
-          description: AWS region name
-          type: string
-        s3ForcePathStyle:
-          default: true
-          type: boolean
-        s3Url:
-          description: Custom hosted S3 URL
-          type: string
-        useRestic:
-          default: true
-          description: Set to 'true', to use Restic plugin for the backup
-          type: boolean
-      required:
-      - bucketName
-      - region
-      - credentials
-      type: object
-    v1UserPatch:
-      items:
-        $ref: '#/components/schemas/v1HttpPatch'
-      type: array
-    v1AwsSecretTlsConfig:
-      description: TLS configuration for the AWS secret
-      properties:
-        ca:
-          description: CA certificate
-          type: string
-        cert:
-          description: Certificate
-          type: string
-        key:
-          description: Key
-          type: string
-      type: object
-    v1.GcpAccountEntitySpec:
-      properties:
-        jsonCredentials:
-          type: string
-      type: object
-    v1UidRoleSummary:
-      properties:
-        inheritedRoles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        name:
-          type: string
-        roles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        uid:
-          type: string
-      type: object
-    v1AwsCloudAccountCredentialType:
-      default: secret
-      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
-      enum:
-      - secret
-      - sts
-      - pod-identity
-      type: string
-    v1FilterString:
-      properties:
-        beginsWith:
-          type:
-          - string
-          - 'null'
-        contains:
-          type:
-          - string
-          - 'null'
-        eq:
-          type:
-          - string
-          - 'null'
-        ignoreCase:
-          default: true
-          type: boolean
-        ne:
-          type:
-          - string
-          - 'null'
-      type: object
-    v1MfaRelyingPartyEntity:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-      type: object
-    v1.AzureAccountEntitySpec:
-      properties:
-        clientCloud:
-          default: public
-          description: Contains configuration for Azure cloud
-          enum:
-          - azure-china
-          - azure-government
-          - public
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          type: string
-        subscriptionId:
-          type: string
-        tenantId:
-          type: string
-      type: object
-    v1MfaAuthenticatorSelection:
-      properties:
-        authenticatorAttachment:
-          type: string
-        requireResidentKey:
-          type: boolean
-        residentKey:
-          type: string
-        userVerification:
-          type: string
-      type: object
-    v1AzureStorageConfig:
-      description: Azure storage config object
-      properties:
-        containerName:
-          description: Azure container name
-          type: string
-        credentials:
-          $ref: '#/components/schemas/v1.AzureAccountEntitySpec'
-          description: Azure cloud account credentials
-        resourceGroup:
-          description: Azure resource group name, to which the storage account is mapped
-          type: string
-        sku:
-          description: Azure sku
-          type: string
-        storageName:
-          description: Azure storage name
-          type: string
-      required:
-      - resourceGroup
-      - containerName
-      - storageName
-      - credentials
-      type: object
-    v1VsphereDnsMappingSpec:
-      description: VSphere DNS Mapping Spec
-      properties:
-        datacenter:
-          description: VSphere datacenter name
-          type: string
-        dnsName:
-          description: VSphere DNS name
-          type: string
-        network:
-          description: VSphere network name
-          type: string
-        networkUrl:
-          description: VSphere network URL
-          readOnly: true
-          type: string
-        privateGatewayUid:
-          description: VSphere private gateway uid
-          type: string
-      required:
-      - privateGatewayUid
-      - datacenter
-      - network
-      - dnsName
-      type: object
-    v1MfaConveyancePreference:
-      enum:
-      - none
-      - indirect
-      - direct
-      - enterprise
-      type: string
-    v1UserAssetSshEntity:
-      description: SSH Key request payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1UserAssetSshSpec'
-      type: object
-    URLEncodedBase64:
-      format: url-encoded-base64
-      type: string
-    v1ProjectRolesPatch:
-      properties:
-        projects:
-          items:
-            properties:
-              projectUid:
-                type: string
-              roles:
-                items:
-                  type: string
-                type: array
-            type: object
-          type: array
-      type: object
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
-      type: object
-    v1UserAssetsLocationS3Spec:
-      description: S3 location specification
-      properties:
-        config:
-          $ref: '#/components/schemas/v1S3StorageConfig'
-        isDefault:
-          description: Set to 'true', if location has to be set as default
-          type: boolean
-        type:
-          description: S3 location type [s3/minio]
-          type: string
-      required:
-      - config
-      type: object
-    v1UserSummarySortFields:
-      enum:
-      - name
-      - creationTimestamp
-      type:
-      - string
-      - 'null'
-    v1UserSpecSummary:
-      properties:
-        emailId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        projects:
-          description: Deprecated.
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        projectsCount:
-          format: int32
-          type: integer
-          x-omitempty: false
-        roles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        teams:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-      type: object
-    v1MfaDevices:
-      items:
-        $ref: '#/components/schemas/v1MfaDeviceMeta'
-      type: array
     v1UserKubectlSession:
       properties:
         clusterUid:
@@ -2890,8 +2793,211 @@ components:
         userUid:
           type: string
       type: object
-    v1UserMetaEntity:
+    v1MfaConveyancePreference:
+      enum:
+      - none
+      - indirect
+      - direct
+      - enterprise
+      type: string
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1MfaPublicKeyCredentialCreationOptions:
+      properties:
+        attestation:
+          $ref: '#/components/schemas/v1MfaConveyancePreference'
+        authenticatorSelection:
+          $ref: '#/components/schemas/v1MfaAuthenticatorSelection'
+        challenge:
+          $ref: '#/components/schemas/URLEncodedBase64'
+        excludeCredentials:
+          items:
+            $ref: '#/components/schemas/v1MfaCredentialDescriptor'
+          type: array
+        extensions:
+          $ref: '#/components/schemas/v1MfaAuthenticationExtensions'
+        pubKeyCredParams:
+          items:
+            $ref: '#/components/schemas/v1MfaCredentialParameter'
+          type: array
+        rp:
+          $ref: '#/components/schemas/v1MfaRelyingPartyEntity'
+        timeout:
+          type: integer
+        user:
+          $ref: '#/components/schemas/v1MfaUserEntity'
+      type: object
+    v1UserAssetSsh:
+      description: SSH key information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetSshSpec'
+      type: object
+    v1UserSpecSummary:
+      properties:
+        emailId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        projects:
+          description: Deprecated.
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        projectsCount:
+          format: int32
+          type: integer
+          x-omitempty: false
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        teams:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+      type: object
+    v1UsersSummarySpec:
+      description: Users filter summary spec
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1UsersFilterSpec'
+        sort:
+          items:
+            $ref: '#/components/schemas/v1UserSummarySortSpec'
+          type: array
+          uniqueItems: true
+    urlEncodedBase64:
+      format: url-encoded-base64
+      type: string
+    v1UserSummary:
+      description: User summary
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1UserSpecSummary'
+        status:
+          $ref: '#/components/schemas/v1UserStatus'
+      type: object
+    v1UserSpec_2:
+      description: User specifications
+      properties:
+        emailId:
+          description: User's email id
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    V1UsersPasswordChange_request:
+      properties:
+        currentPassword:
+          type: string
+        emailId:
+          type: string
+        newPassword:
+          type: string
+      required:
+      - currentPassword
+      - emailId
+      - newPassword
+      type: object
+    v1UserSpec_3:
+      description: User specifications
+      example:
+        firstName: firstName
+        lastName: lastName
+        roles:
+        - roles
+        - roles
+        emailId: emailId
+      properties:
+        emailId:
+          description: User's email id
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1Macro_2:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    v1UserMetaEntity_2:
       description: User meta entity
+      example:
+        uid: uid
+        name: name
+        emailId: emailId
       properties:
         emailId:
           type: string
@@ -2900,6 +3006,1579 @@ components:
         uid:
           type: string
       type: object
+    v1UserAssetsLocation_2:
+      description: Location object
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          isDefault: true
+          storage: s3
+          type: type
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetsLocationSpec_2'
+      type: object
+    v1GcpStorageConfig_2:
+      description: GCP storage config object
+      example:
+        bucketName: bucketName
+        credentials:
+          jsonCredentials: jsonCredentials
+        projectId: projectId
+      properties:
+        bucketName:
+          description: GCP storage bucket name
+          type: string
+        credentials:
+          $ref: '#/components/schemas/v1GcpAccountEntitySpec'
+        projectId:
+          description: GCP project id
+          type: string
+      required:
+      - bucketName
+      - credentials
+      type: object
+    v1VsphereDnsMapping_2:
+      description: VSphere DNS Mapping
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          privateGatewayUid: privateGatewayUid
+          dnsName: dnsName
+          datacenter: datacenter
+          network: network
+          networkUrl: networkUrl
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1VsphereDnsMappingSpec_2'
+      type: object
+    v1UserAssetsLocationGcp_2:
+      description: GCP location object
+      example:
+        metadata:
+          name: name
+          annotations:
+            key: annotations
+          labels:
+            key: labels
+        spec:
+          isDefault: true
+          type: type
+          config:
+            bucketName: bucketName
+            credentials:
+              jsonCredentials: jsonCredentials
+            projectId: projectId
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity_2'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetsLocationGcpSpec_2'
+      type: object
+    v1User_2:
+      description: User
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          firstName: firstName
+          lastName: lastName
+          roles:
+          - roles
+          - roles
+          emailId: emailId
+        status:
+          lastSignIn: 2000-01-23 04:56:07+00:00
+          isPasswordResetting: true
+          activationLink: activationLink
+          isActive: true
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1UserSpec_3'
+        status:
+          $ref: '#/components/schemas/v1UserStatus_2'
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1AuthTokenRevoke_2:
+      properties:
+        tokens:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1ListMetaData_2:
+      description: ListMeta describes metadata for the resource listing
+      example:
+        offset: 1
+        continue: continue
+        count: 0
+        limit: 6
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1UserAssetsLocationAzure_2:
+      description: Azure location object
+      example:
+        metadata:
+          name: name
+          annotations:
+            key: annotations
+          labels:
+            key: labels
+        spec:
+          isDefault: true
+          type: type
+          config:
+            resourceGroup: resourceGroup
+            credentials:
+              clientId: clientId
+              tenantId: tenantId
+              clientSecret: clientSecret
+              subscriptionId: subscriptionId
+              clientCloud: public
+            containerName: containerName
+            sku: sku
+            storageName: storageName
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity_2'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetsLocationAzureSpec_2'
+      type: object
+    v1HttpPatch_2:
+      example:
+        op: add
+        path: path
+        from: from
+        value: '{}'
+      properties:
+        from:
+          description: A path to the pointer from which reference will be taken
+          type: string
+        op:
+          description: The operation to be performed
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          type: string
+        path:
+          description: A path to the pointer on which operation will be done
+          type: string
+        value:
+          description: The value to be used within the operations.
+          properties: {}
+          type: object
+      required:
+      - op
+      - path
+      type: object
+    v1UsersFilterSpec_2:
+      description: Users filter spec
+      properties:
+        emailId:
+          $ref: '#/components/schemas/v1FilterString'
+        name:
+          $ref: '#/components/schemas/v1FilterString'
+      type: object
+    v1Macros_2:
+      example:
+        macros:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        macros:
+          items:
+            $ref: '#/components/schemas/v1Macro_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1VsphereDnsMappingSpec_2:
+      description: VSphere DNS Mapping Spec
+      example:
+        privateGatewayUid: privateGatewayUid
+        dnsName: dnsName
+        datacenter: datacenter
+        network: network
+        networkUrl: networkUrl
+      properties:
+        datacenter:
+          description: VSphere datacenter name
+          type: string
+        dnsName:
+          description: VSphere DNS name
+          type: string
+        network:
+          description: VSphere network name
+          type: string
+        networkUrl:
+          description: VSphere network URL
+          readOnly: true
+          type: string
+        privateGatewayUid:
+          description: VSphere private gateway uid
+          type: string
+      required:
+      - datacenter
+      - dnsName
+      - network
+      - privateGatewayUid
+      type: object
+    v1SystemFeaturesSpec_2:
+      example:
+        isAllowed: true
+        docLink: docLink
+        description: description
+        key: key
+      properties:
+        description:
+          description: Feature description
+          type: string
+        docLink:
+          description: Feature doc link
+          type: string
+        isAllowed:
+          description: Flag which specifies if feature is allowed or not
+          type: boolean
+          x-omitempty: false
+        key:
+          description: Unique Feature key
+          type: string
+      type: object
+    v1UserAssetsSsh_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            publicKey: publicKey
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            publicKey: publicKey
+      properties:
+        items:
+          description: List of SSH keys
+          items:
+            $ref: '#/components/schemas/v1UserAssetSsh_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1ProjectRolesPatch_2:
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1ProjectRolesPatch_projects_inner'
+          type: array
+      type: object
+    v1Users_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            firstName: firstName
+            lastName: lastName
+            roles:
+            - roles
+            - roles
+            emailId: emailId
+          status:
+            lastSignIn: 2000-01-23 04:56:07+00:00
+            isPasswordResetting: true
+            activationLink: activationLink
+            isActive: true
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            firstName: firstName
+            lastName: lastName
+            roles:
+            - roles
+            - roles
+            emailId: emailId
+          status:
+            lastSignIn: 2000-01-23 04:56:07+00:00
+            isPasswordResetting: true
+            activationLink: activationLink
+            isActive: true
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1User_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1UsersUidPasswordChange_request:
+      properties:
+        currentPassword:
+          type: string
+        newPassword:
+          type: string
+      required:
+      - newPassword
+      type: object
+    v1AwsSecretSpec_2:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+      example:
+        mission: mission
+        permissionBoundary: permissionBoundary
+        role: role
+        agency: agency
+        accountName: accountName
+        namePrefix: namePrefix
+        tls:
+          cert: cert
+          ca: ca
+          key: key
+        isCapValidationEnabled: true
+        policy: policy
+      properties:
+        accountName:
+          description: AWS secret accountName; only for aws-iso-b environment
+          type: string
+        agency:
+          description: AWS secret agency
+          type: string
+        isCapValidationEnabled:
+          description: Flag to rotate the secret region credentials
+          type: boolean
+        mission:
+          description: AWS secret mission; only for aws-iso environment
+          type: string
+        namePrefix:
+          description: Policy Boundary
+          type: string
+        permissionBoundary:
+          description: Role or Policy Prefix
+          type: string
+        policy:
+          description: AWS secret policy; JSON string
+          type: string
+        role:
+          description: AWS secret role
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AwsSecretTlsConfig_2'
+      type: object
+    v1UsersEmailPasswordReset_request:
+      properties:
+        emailId:
+          type: string
+      required:
+      - emailId
+      type: object
+    v1ObjectMetaInputEntity_2:
+      description: ObjectMeta input entity for object creation
+      example:
+        name: name
+        annotations:
+          key: annotations
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1UsersMetadata_2:
+      example:
+        items:
+        - uid: uid
+          name: name
+          emailId: emailId
+        - uid: uid
+          name: name
+          emailId: emailId
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1UserMetaEntity_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1UserAssetsLocationGcpSpec_2:
+      description: GCP location specification
+      example:
+        isDefault: true
+        type: type
+        config:
+          bucketName: bucketName
+          credentials:
+            jsonCredentials: jsonCredentials
+          projectId: projectId
+      properties:
+        config:
+          $ref: '#/components/schemas/v1GcpStorageConfig_2'
+        isDefault:
+          description: Set to 'true', if location has to be set as default
+          type: boolean
+        type:
+          description: GCP location type [gcp]
+          type: string
+      required:
+      - config
+      type: object
+    v1GcpAccountEntitySpec:
+      example:
+        jsonCredentials: jsonCredentials
+      properties:
+        jsonCredentials:
+          description: Gcp cloud account json credentials
+          type: string
+      type: object
+    v1UserStatus_2:
+      description: User status
+      example:
+        lastSignIn: 2000-01-23 04:56:07+00:00
+        isPasswordResetting: true
+        activationLink: activationLink
+        isActive: true
+      properties:
+        activationLink:
+          description: provides the link to activate or reset the user password
+          type: string
+          x-omitempty: false
+        isActive:
+          description: Specifies if user account is active/disabled
+          type: boolean
+          x-omitempty: false
+        isPasswordResetting:
+          description: Specifies if user in multi org requested password reset
+          type: boolean
+          x-omitempty: false
+        lastSignIn:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1AwsPodIdentityCredentials_2:
+      description: AWS EKS Pod Identity credentials for role assumption
+      example:
+        roleArn: roleArn
+        permissionBoundaryArn: permissionBoundaryArn
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
+    v1AwsSecretTlsConfig_2:
+      description: TLS configuration for the AWS secret
+      example:
+        cert: cert
+        ca: ca
+        key: key
+      properties:
+        ca:
+          description: CA certificate
+          type: string
+        cert:
+          description: Certificate
+          type: string
+        key:
+          description: Key
+          type: string
+      type: object
+    v1SystemScarSpec_2:
+      description: system scar config spec
+      example:
+        endpoint: endpoint
+        password: password
+        caCert: caCert
+        baseContentPath: baseContentPath
+        insecureVerify: true
+        username: username
+      properties:
+        baseContentPath:
+          type: string
+        caCert:
+          type: string
+        endpoint:
+          type: string
+        insecureVerify:
+          type: boolean
+        password:
+          type: string
+        username:
+          type: string
+      type: object
+    v1.AzureAccountEntitySpec_2:
+      example:
+        clientId: clientId
+        tenantId: tenantId
+        clientSecret: clientSecret
+        subscriptionId: subscriptionId
+        clientCloud: public
+      properties:
+        clientCloud:
+          default: public
+          description: Contains configuration for Azure cloud
+          enum:
+          - azure-china
+          - azure-government
+          - public
+          type: string
+        clientId:
+          type: string
+        clientSecret:
+          type: string
+        subscriptionId:
+          type: string
+        tenantId:
+          type: string
+      type: object
+    v1UserAssetsLocationAzureSpec_2:
+      description: Azure location specification
+      example:
+        isDefault: true
+        type: type
+        config:
+          resourceGroup: resourceGroup
+          credentials:
+            clientId: clientId
+            tenantId: tenantId
+            clientSecret: clientSecret
+            subscriptionId: subscriptionId
+            clientCloud: public
+          containerName: containerName
+          sku: sku
+          storageName: storageName
+      properties:
+        config:
+          $ref: '#/components/schemas/v1AzureStorageConfig_2'
+        isDefault:
+          description: Set to 'true', if location has to be set as default
+          type: boolean
+        type:
+          description: Azure location type [azure]
+          type: string
+      required:
+      - config
+      type: object
+    v1ProjectRolesEntity_2:
+      example:
+        projects:
+        - uid: uid
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          name: name
+          inheritedRoles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        - uid: uid
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          name: name
+          inheritedRoles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1UidRoleSummary_2'
+          type: array
+      type: object
+    v1AwsCloudAccount_2:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+      example:
+        credentialType: secret
+        secretSpec:
+          mission: mission
+          permissionBoundary: permissionBoundary
+          role: role
+          agency: agency
+          accountName: accountName
+          namePrefix: namePrefix
+          tls:
+            cert: cert
+            ca: ca
+            key: key
+          isCapValidationEnabled: true
+          policy: policy
+        partition: aws
+        sts:
+          externalId: externalId
+          arn: arn
+        secretKey: secretKey
+        accessKey: accessKey
+        podIdentity:
+          roleArn: roleArn
+          permissionBoundaryArn: permissionBoundaryArn
+        secretToken: secretToken
+        policyARNs:
+        - policyARNs
+        - policyARNs
+      properties:
+        accessKey:
+          description: AWS account access key
+          type: string
+        credentialType:
+          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
+        partition:
+          default: aws
+          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+          enum:
+          - aws
+          - aws-us-gov
+          - aws-iso
+          - aws-iso-b
+          type: string
+        podIdentity:
+          $ref: '#/components/schemas/v1AwsPodIdentityCredentials_2'
+        policyARNs:
+          description: List of policy ARNs required in case of credentialType sts.
+          items:
+            type: string
+          type: array
+        secretKey:
+          description: AWS account secret key
+          type: string
+        secretSpec:
+          $ref: '#/components/schemas/v1AwsSecretSpec_2'
+        secretToken:
+          description: AWS account secret token; in case of aws-iso and aws-iso-b
+          type: string
+        sts:
+          $ref: '#/components/schemas/v1AwsStsCredentials_2'
+      type: object
+    v1UserInfo_2:
+      description: User basic information
+      example:
+        orgName: orgName
+        tenantUid: tenantUid
+        userUid: userUid
+      properties:
+        orgName:
+          description: Organization name
+          type: string
+        tenantUid:
+          type: string
+        userUid:
+          type: string
+      type: object
+    v1UidSummary_2:
+      example:
+        uid: uid
+        name: name
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1UserAssetsLocationS3Spec_2:
+      description: S3 location specification
+      example:
+        isDefault: true
+        type: type
+        config:
+          useRestic: true
+          bucketName: bucketName
+          s3Url: s3Url
+          caCert: caCert
+          credentials:
+            credentialType: secret
+            secretSpec:
+              mission: mission
+              permissionBoundary: permissionBoundary
+              role: role
+              agency: agency
+              accountName: accountName
+              namePrefix: namePrefix
+              tls:
+                cert: cert
+                ca: ca
+                key: key
+              isCapValidationEnabled: true
+              policy: policy
+            partition: aws
+            sts:
+              externalId: externalId
+              arn: arn
+            secretKey: secretKey
+            accessKey: accessKey
+            podIdentity:
+              roleArn: roleArn
+              permissionBoundaryArn: permissionBoundaryArn
+            secretToken: secretToken
+            policyARNs:
+            - policyARNs
+            - policyARNs
+          region: region
+          s3ForcePathStyle: true
+      properties:
+        config:
+          $ref: '#/components/schemas/v1S3StorageConfig_2'
+        isDefault:
+          description: Set to 'true', if location has to be set as default
+          type: boolean
+        type:
+          description: S3 location type [s3/minio]
+          type: string
+      required:
+      - config
+      type: object
+    v1VsphereDnsMappings_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            privateGatewayUid: privateGatewayUid
+            dnsName: dnsName
+            datacenter: datacenter
+            network: network
+            networkUrl: networkUrl
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            privateGatewayUid: privateGatewayUid
+            dnsName: dnsName
+            datacenter: datacenter
+            network: network
+            networkUrl: networkUrl
+      properties:
+        items:
+          description: List of vSphere DNS mapping
+          items:
+            $ref: '#/components/schemas/v1VsphereDnsMapping_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1UserKubectlSession_2:
+      example:
+        podIp: podIp
+        projectUid: projectUid
+        clusterUid: clusterUid
+        creationTime: creationTime
+        port: port
+        sessionUid: sessionUid
+        podName: podName
+        tenantClusterEndpoint: tenantClusterEndpoint
+        isActive: true
+        userName: userName
+        shellyCluster: shellyCluster
+        userUid: userUid
+      properties:
+        clusterUid:
+          type: string
+        creationTime:
+          type: string
+        isActive:
+          type: boolean
+        podIp:
+          type: string
+        podName:
+          type: string
+        port:
+          type: string
+        projectUid:
+          type: string
+        sessionUid:
+          type: string
+        shellyCluster:
+          type: string
+        tenantClusterEndpoint:
+          type: string
+        userName:
+          type: string
+        userUid:
+          type: string
+      type: object
+    v1AwsStsCredentials_2:
+      description: Aws sts credentials
+      example:
+        externalId: externalId
+        arn: arn
+      properties:
+        arn:
+          description: Arn for the aws sts credentials in cloud account
+          type: string
+        externalId:
+          description: ExternalId for the aws sts credentials in cloud account
+          type: string
+      type: object
+    v1UserAssetSshSpec_2:
+      description: SSH key specification
+      example:
+        publicKey: publicKey
+      properties:
+        publicKey:
+          type: string
+      type: object
+    v1S3StorageConfig_2:
+      description: S3 storage config object
+      example:
+        useRestic: true
+        bucketName: bucketName
+        s3Url: s3Url
+        caCert: caCert
+        credentials:
+          credentialType: secret
+          secretSpec:
+            mission: mission
+            permissionBoundary: permissionBoundary
+            role: role
+            agency: agency
+            accountName: accountName
+            namePrefix: namePrefix
+            tls:
+              cert: cert
+              ca: ca
+              key: key
+            isCapValidationEnabled: true
+            policy: policy
+          partition: aws
+          sts:
+            externalId: externalId
+            arn: arn
+          secretKey: secretKey
+          accessKey: accessKey
+          podIdentity:
+            roleArn: roleArn
+            permissionBoundaryArn: permissionBoundaryArn
+          secretToken: secretToken
+          policyARNs:
+          - policyARNs
+          - policyARNs
+        region: region
+        s3ForcePathStyle: true
+      properties:
+        bucketName:
+          description: S3 storage bucket name
+          type: string
+        caCert:
+          description: CA Certificate
+          type: string
+        credentials:
+          $ref: '#/components/schemas/v1AwsCloudAccount_2'
+        region:
+          description: AWS region name
+          type: string
+        s3ForcePathStyle:
+          default: true
+          type: boolean
+        s3Url:
+          description: Custom hosted S3 URL
+          type: string
+        useRestic:
+          default: true
+          description: Set to 'true', to use Restic plugin for the backup
+          type: boolean
+      required:
+      - bucketName
+      - credentials
+      - region
+      type: object
+    v1UserAssetsLocationSpec_2:
+      description: Location specification
+      example:
+        isDefault: true
+        storage: s3
+        type: type
+      properties:
+        isDefault:
+          type: boolean
+        storage:
+          $ref: '#/components/schemas/v1LocationType'
+        type:
+          type: string
+      type: object
+    v1UidRoleSummary_2:
+      example:
+        uid: uid
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        name: name
+        inheritedRoles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        inheritedRoles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        name:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        uid:
+          type: string
+      type: object
+    v1ResourceRoles_2:
+      example:
+        resourceRoles:
+        - uid: uid
+          filterRefs:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          projectUids:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        - uid: uid
+          filterRefs:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          projectUids:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+      properties:
+        resourceRoles:
+          items:
+            $ref: '#/components/schemas/v1ResourceRolesEntity_2'
+          type: array
+      type: object
+    v1UserAssetsLocations_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            isDefault: true
+            storage: s3
+            type: type
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            isDefault: true
+            storage: s3
+            type: type
+      properties:
+        items:
+          description: List of locations
+          items:
+            $ref: '#/components/schemas/v1UserAssetsLocation_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1UserAssetSsh_2:
+      description: SSH key information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          publicKey: publicKey
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetSshSpec_2'
+      type: object
+    v1ResourceRolesEntity_2:
+      example:
+        uid: uid
+        filterRefs:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        projectUids:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        filterRefs:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        projectUids:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        uid:
+          type: string
+      type: object
+    v1UsersSummaryList_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            firstName: firstName
+            lastName: lastName
+            projects:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            teams:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            emailId: emailId
+            projectsCount: 0
+          status:
+            lastSignIn: 2000-01-23 04:56:07+00:00
+            isPasswordResetting: true
+            activationLink: activationLink
+            isActive: true
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            firstName: firstName
+            lastName: lastName
+            projects:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            teams:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            emailId: emailId
+            projectsCount: 0
+          status:
+            lastSignIn: 2000-01-23 04:56:07+00:00
+            isPasswordResetting: true
+            activationLink: activationLink
+            isActive: true
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1UserSummary_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1SystemFeatures_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            isAllowed: true
+            docLink: docLink
+            description: description
+            key: key
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            isAllowed: true
+            docLink: docLink
+            description: description
+            key: key
+      properties:
+        items:
+          description: List of system features
+          items:
+            $ref: '#/components/schemas/v1SystemFeature_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1UserSpecSummary_2:
+      example:
+        firstName: firstName
+        lastName: lastName
+        projects:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        teams:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        emailId: emailId
+        projectsCount: 0
+      properties:
+        emailId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        projects:
+          description: Deprecated.
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        projectsCount:
+          format: int32
+          type: integer
+          x-omitempty: false
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        teams:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+      type: object
+    v1SystemFeature_2:
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          isAllowed: true
+          docLink: docLink
+          description: description
+          key: key
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1SystemFeaturesSpec_2'
+      type: object
+    v1UserRolesEntity_2:
+      example:
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        inheritedRoles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        inheritedRoles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+      type: object
+    v1UsersSummarySpec_2:
+      description: Users filter summary spec
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1UsersFilterSpec_2'
+        sort:
+          items:
+            $ref: '#/components/schemas/v1UserSummarySortSpec_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ProjectRolesPatch_projects_inner:
+      properties:
+        projectUid:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+      type: object
+    v1UserSummarySortSpec_2:
+      properties:
+        field:
+          $ref: '#/components/schemas/v1UserSummarySortFields_2'
+        order:
+          $ref: '#/components/schemas/v1SortOrder'
+      type: object
+    v1UserSummary_2:
+      description: User summary
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          firstName: firstName
+          lastName: lastName
+          projects:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          teams:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          emailId: emailId
+          projectsCount: 0
+        status:
+          lastSignIn: 2000-01-23 04:56:07+00:00
+          isPasswordResetting: true
+          activationLink: activationLink
+          isActive: true
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1UserSpecSummary_2'
+        status:
+          $ref: '#/components/schemas/v1UserStatus_2'
+      type: object
+    v1UserAssetsLocationS3_2:
+      description: S3 location object
+      example:
+        metadata:
+          name: name
+          annotations:
+            key: annotations
+          labels:
+            key: labels
+        spec:
+          isDefault: true
+          type: type
+          config:
+            useRestic: true
+            bucketName: bucketName
+            s3Url: s3Url
+            caCert: caCert
+            credentials:
+              credentialType: secret
+              secretSpec:
+                mission: mission
+                permissionBoundary: permissionBoundary
+                role: role
+                agency: agency
+                accountName: accountName
+                namePrefix: namePrefix
+                tls:
+                  cert: cert
+                  ca: ca
+                  key: key
+                isCapValidationEnabled: true
+                policy: policy
+              partition: aws
+              sts:
+                externalId: externalId
+                arn: arn
+              secretKey: secretKey
+              accessKey: accessKey
+              podIdentity:
+                roleArn: roleArn
+                permissionBoundaryArn: permissionBoundaryArn
+              secretToken: secretToken
+              policyARNs:
+              - policyARNs
+              - policyARNs
+            region: region
+            s3ForcePathStyle: true
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity_2'
+        spec:
+          $ref: '#/components/schemas/v1UserAssetsLocationS3Spec_2'
+      type: object
+    v1AzureStorageConfig_2:
+      description: Azure storage config object
+      example:
+        resourceGroup: resourceGroup
+        credentials:
+          clientId: clientId
+          tenantId: tenantId
+          clientSecret: clientSecret
+          subscriptionId: subscriptionId
+          clientCloud: public
+        containerName: containerName
+        sku: sku
+        storageName: storageName
+      properties:
+        containerName:
+          description: Azure container name
+          type: string
+        credentials:
+          $ref: '#/components/schemas/v1.AzureAccountEntitySpec_2'
+        resourceGroup:
+          description: Azure resource group name, to which the storage account is mapped
+          type: string
+        sku:
+          description: Azure sku
+          type: string
+        storageName:
+          description: Azure storage name
+          type: string
+      required:
+      - containerName
+      - credentials
+      - resourceGroup
+      - storageName
+      type: object
+    v1UserSummarySortFields_2:
+      enum:
+      - name
+      - creationTimestamp
+      type:
+      - string
+      - 'null'
+      x-nullable: true
   securitySchemes:
     Authorization:
       description: JWT authorization token obtained using /v1/users/default/login API
@@ -2914,3 +4593,4 @@ components:
 x-refined-from:
 - spectro-cloud-edge-management-openapi.json
 - spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml
