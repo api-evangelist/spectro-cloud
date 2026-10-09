@@ -1,1207 +1,41 @@
-generated: '2026-07-21'
+generated: '2026-09-23'
 method: generated
-source: openapi/spectro-cloud-edge-management-openapi.json, openapi/spectro-cloud-palette-openapi.json
+source: openapi/spectro-cloud-activations-api-openapi.yml, openapi/spectro-cloud-api-keys-api-openapi.yml,
+  openapi/spectro-cloud-app-deployments-api-openapi.yml, openapi/spectro-cloud-appprofiles-api-openapi.yml,
+  openapi/spectro-cloud-audits-api-openapi.yml, openapi/spectro-cloud-auth-api-openapi.yml,
+  openapi/spectro-cloud-cloud-accounts-api-openapi.yml, openapi/spectro-cloud-cloudconfigs-api-openapi.yml,
+  openapi/spectro-cloud-clouds-api-openapi.yml, openapi/spectro-cloud-cluster-groups-api-openapi.yml,
+  openapi/spectro-cloud-clusterprofiles-api-openapi.yml, openapi/spectro-cloud-clustertemplates-api-openapi.yml,
+  openapi/spectro-cloud-dashboard-api-openapi.yml, openapi/spectro-cloud-data-sinks-api-openapi.yml,
+  openapi/spectro-cloud-edge-mgmt-api-openapi.yml, openapi/spectro-cloud-edgehosts-api-openapi.yml,
+  openapi/spectro-cloud-events-api-openapi.yml, openapi/spectro-cloud-features-api-openapi.yml,
+  openapi/spectro-cloud-filters-api-openapi.yml, openapi/spectro-cloud-grpc-api-openapi.yml,
+  openapi/spectro-cloud-health-api-openapi.yml, openapi/spectro-cloud-installers-api-openapi.yml,
+  openapi/spectro-cloud-metrics-api-openapi.yml, openapi/spectro-cloud-notifications-api-openapi.yml,
+  openapi/spectro-cloud-overlords-api-openapi.yml, openapi/spectro-cloud-packs-api-openapi.yml,
+  openapi/spectro-cloud-pcg-api-openapi.yml, openapi/spectro-cloud-permissions-api-openapi.yml,
+  openapi/spectro-cloud-ping-api-openapi.yml, openapi/spectro-cloud-plans-api-openapi.yml, openapi/spectro-cloud-projects-api-openapi.yml,
+  openapi/spectro-cloud-registries-api-openapi.yml, openapi/spectro-cloud-roles-api-openapi.yml,
+  openapi/spectro-cloud-services-api-openapi.yml, openapi/spectro-cloud-spcpolicies-api-openapi.yml,
+  openapi/spectro-cloud-spectroclusters-api-openapi.yml, openapi/spectro-cloud-system-api-openapi.yml,
+  openapi/spectro-cloud-teams-api-openapi.yml, openapi/spectro-cloud-tenants-api-openapi.yml,
+  openapi/spectro-cloud-tunnel-api-openapi.yml, openapi/spectro-cloud-users-api-openapi.yml,
+  openapi/spectro-cloud-workspaces-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
   operations: 1302
   by_action_class:
-    connected: 543
-    acting: 759
+    connected: 554
+    acting: 748
   by_consequence:
-    read: 543
-    write: 716
+    read: 554
+    write: 706
     safety-critical: 29
-    physical: 14
+    physical: 13
   human_in_the_loop_required: 29
 operations:
-- path: /v1/edge-mgmt/cluster
-  method: get
-  operationId: v1ClusterConfig
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster
-  method: post
-  operationId: v1CreateCluster
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster
-  method: delete
-  operationId: v1DeleteCluster
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster
-  method: patch
-  operationId: v1PatchCluster
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/applications
-  method: get
-  operationId: v1ClusterApplications
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/certificates
-  method: get
-  operationId: v1CertificateDetails
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/details
-  method: get
-  operationId: v1ClusterGet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/events
-  method: get
-  operationId: v1GetClusterEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/pair
-  method: post
-  operationId: v1ClusterPair
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/pair/details
-  method: get
-  operationId: v1ClusterPairDetails
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/pair/reject
-  method: post
-  operationId: v1ClusterPairReject
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/pair/verify-connection
-  method: post
-  operationId: v1ClusterPairVerifyConnection
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/profiles
-  method: put
-  operationId: v1UpdateClusterProfiles
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/profiles/variables/validate
-  method: post
-  operationId: v1ValidateClusterProfileVariables
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/registry/content/details
-  method: get
-  operationId: v1HarborContentsDetails
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/registry/content/sync-status/details
-  method: get
-  operationId: v1HarborContentsSyncStatusDetails
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/registry/health
-  method: get
-  operationId: V1HarborHealth
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/cluster/renew-certificates
-  method: post
-  operationId: v1RenewCerts
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/settings
-  method: put
-  operationId: v1EdgeNativeClusterSettings
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/{clusterName}
-  method: put
-  operationId: v1UpdateClusterConfig
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/cluster/{clusterName}
-  method: patch
-  operationId: v1PatchClusterConfig
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/clusters/archive/embedded/details
-  method: get
-  operationId: V1ClusterConfigArchiveEmbedded
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/clusters/archive/overridden/details
-  method: get
-  operationId: v1ClusterConfigArchiveOverriden
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/clusters/archive/update
-  method: delete
-  operationId: v1DeleteClusterUpdateArchive
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/clusters/archive/update/details
-  method: get
-  operationId: v1ClusterConfigArchiveUpdate
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/clusters/current/machinepools
-  method: get
-  operationId: v1MachinePoolDetail
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/clusters/current/machinepools
-  method: post
-  operationId: v1ClusterMachinePoolCreate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}
-  method: put
-  operationId: v1ClusterMachinePoolUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}
-  method: delete
-  operationId: v1ClusterMachinePoolDelete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}
-  method: patch
-  operationId: v1ClusterMachinePoolPatch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}/nodes/{nodeName}
-  method: delete
-  operationId: v1ClusterMachinePoolNodeDelete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/clusters/current/nodes
-  method: get
-  operationId: v1ClusterNodes
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/connectivity/ping
-  method: get
-  operationId: v1PingHost
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/connectivity/traceroute
-  method: get
-  operationId: v1TraceRouteHost
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current
-  method: get
-  operationId: v1EdgeHostInfo
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/actions/content/signing-public-key
-  method: get
-  operationId: V1GetContentSigningPublicKey
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/actions/reboot
-  method: post
-  operationId: v1EdgeHostActionReboot
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/actions/reset
-  method: post
-  operationId: v1EdgeHostActionReset
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/actions/shutdown
-  method: post
-  operationId: v1EdgeHostActionShutdown
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/actions/upload-clusterconfig
-  method: post
-  operationId: V1ClusterConfigUpload
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/actions/upload-content
-  method: post
-  operationId: V1ContentUpload
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/audits
-  method: get
-  operationId: v1Audits
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/audits/download
-  method: get
-  operationId: v1AuditDownload
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/audits/filters
-  method: get
-  operationId: v1AuditFilter
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/configurations
-  method: get
-  operationId: V1EdgeHostConfigurationsGet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/configurations
-  method: put
-  operationId: V1EdgeHostConfigurationsUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/configurations/status
-  method: get
-  operationId: v1EdgeHostConfigurationStatus
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/download-logs
-  method: get
-  operationId: v1EdgeHostDownloadLogs
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/error-logs
-  method: get
-  operationId: V1EdgeHostErrorLogs
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/file-download/files
-  method: get
-  operationId: v1EdgeHostListCustomFiles
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/file-download/{filePath}
-  method: get
-  operationId: v1EdgeHostCustomFileDownload
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/generate-logs
-  method: post
-  operationId: v1EdgeHostGenerateLogs
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/generate-logs-status
-  method: get
-  operationId: v1EdgeHostGenerateLogsStatus
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/link
-  method: post
-  operationId: v1EdgeHostLink
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/link/generate-token
-  method: post
-  operationId: v1EdgeHostLinkGenerateToken
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/link/status
-  method: get
-  operationId: v1EdgeHostLinkStatus
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/unlink
-  method: post
-  operationId: v1EdgeHostUnlink
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/uploaded-content/details
-  method: get
-  operationId: v1UploadedContentDetails
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/userdata
-  method: get
-  operationId: v1GetEdgeHostUserdata
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/edgehosts/current/userdata
-  method: put
-  operationId: v1PutEdgeHostUserdata
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/edgehosts/current/userdata
-  method: post
-  operationId: v1PostEdgeHostUserdata
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/events/lifecycle
-  method: get
-  operationId: v1GetLifecycleEvents
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/bonds
-  method: get
-  operationId: V1NetworkBonds
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/bonds/{name}
-  method: get
-  operationId: V1NetworkBond
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/bonds/{name}
-  method: put
-  operationId: V1NetworkBondUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/bonds/{name}
-  method: post
-  operationId: V1NetworkBondCreate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/bonds/{name}
-  method: delete
-  operationId: V1NetworkBondDelete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/bridges
-  method: get
-  operationId: V1NetworkBridges
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/bridges/{name}
-  method: get
-  operationId: V1NetworkBridge
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/bridges/{name}
-  method: put
-  operationId: V1NetworkBridgeUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/bridges/{name}
-  method: post
-  operationId: V1NetworkBridgeCreate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/bridges/{name}
-  method: delete
-  operationId: V1NetworkBridgeDelete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/config-options
-  method: get
-  operationId: V1NetworkConfigOptions
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/interfaces
-  method: get
-  operationId: V1NetworkInterfaces
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/interfaces/{name}
-  method: get
-  operationId: V1NetworkInterface
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/interfaces/{name}/config
-  method: put
-  operationId: V1NetworkInterfaceUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/management-interface
-  method: get
-  operationId: V1ManagementInterface
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/management-interface
-  method: put
-  operationId: V1ManagementInterfaceUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/vlans
-  method: get
-  operationId: V1NetworkVLANs
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/vlans/{name}
-  method: get
-  operationId: V1NetworkVLAN
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/edge-mgmt/network/vlans/{name}
-  method: put
-  operationId: V1NetworkVLANUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/vlans/{name}
-  method: post
-  operationId: V1NetworkVLANCreate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/network/vlans/{name}
-  method: delete
-  operationId: V1NetworkVLANDelete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/edge-mgmt/settings
-  method: get
-  operationId: v1Settings
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/ping
-  method: get
-  operationId: V1Ping
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/users/current
-  method: get
-  operationId: V1CurrentUser
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/users/current
-  method: patch
-  operationId: v1PatchCurrentUser
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/users/default/login
-  method: post
-  operationId: V1UserLogin
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/users/default/logout
-  method: post
-  operationId: V1UserLogout
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/users/default/password/reset
-  method: post
-  operationId: V1UserPasswordReset
-  x-agentic-access:
-    action-class: acting
-    consequence: safety-critical
-    subject: required
-    audience: null
-    token:
-      max-ttl: 120
-      exchange: true
-      purpose-required: true
-      proof-of-possession: true
-    escalation:
-      human-in-the-loop: required
-    audit: required
-- path: /v1/users/default/token/renewal
-  method: post
-  operationId: V1UserTokenRenewal
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /v1/activations/system
   method: get
   operationId: v1ActivationsSystemGet
@@ -6082,168 +4916,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /v1/clusterTemplates
-  method: post
-  operationId: V1ClusterTemplatesCreate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/clusterTemplates/spectroclusters/{clusterUid}/variables
-  method: patch
-  operationId: V1ClusterTemplatesUidSpectroClustersUidVariablesPatch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/clusterTemplates/tags
-  method: get
-  operationId: V1ClusterTemplatesTagsGet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/clusterTemplates/validate/name
-  method: get
-  operationId: V1ClusterTemplatesValidateName
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/clusterTemplates/{uid}
-  method: delete
-  operationId: V1ClusterTemplatesUidDelete
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/clusterTemplates/{uid}
-  method: get
-  operationId: V1ClusterTemplatesUidGet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/clusterTemplates/{uid}/metadata
-  method: patch
-  operationId: V1ClusterTemplatesUidMetadataUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/clusterTemplates/{uid}/policies
-  method: patch
-  operationId: V1ClusterTemplatesUidPoliciesUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/clusterTemplates/{uid}/profiles
-  method: put
-  operationId: V1ClusterTemplatesUidProfilesUpdate
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/clusterTemplates/{uid}/profiles/variables
-  method: patch
-  operationId: V1ClusterTemplatesUidProfilesVariablesPatch
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /v1/clusterTemplates/{uid}/profiles/{profileUid}/variables
-  method: get
-  operationId: V1ClusterTemplatesUidProfilesProfileUidVariablesGet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /v1/clusterTemplates/{uid}/spectroclusters/{clusterUid}/reconcile
-  method: get
-  operationId: V1ClusterTemplatesUidClusterReconcileClusterUidGet
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /v1/clustergroups
   method: post
   operationId: v1ClusterGroupsCreate
@@ -6902,6 +5574,168 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/clusterTemplates
+  method: post
+  operationId: V1ClusterTemplatesCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/clusterTemplates/spectroclusters/{clusterUid}/variables
+  method: patch
+  operationId: V1ClusterTemplatesUidSpectroClustersUidVariablesPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/clusterTemplates/tags
+  method: get
+  operationId: V1ClusterTemplatesTagsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/clusterTemplates/validate/name
+  method: get
+  operationId: V1ClusterTemplatesValidateName
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/clusterTemplates/{uid}
+  method: delete
+  operationId: V1ClusterTemplatesUidDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/clusterTemplates/{uid}
+  method: get
+  operationId: V1ClusterTemplatesUidGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/clusterTemplates/{uid}/metadata
+  method: patch
+  operationId: V1ClusterTemplatesUidMetadataUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/clusterTemplates/{uid}/policies
+  method: patch
+  operationId: V1ClusterTemplatesUidPoliciesUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/clusterTemplates/{uid}/profiles
+  method: put
+  operationId: V1ClusterTemplatesUidProfilesUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/clusterTemplates/{uid}/profiles/variables
+  method: patch
+  operationId: V1ClusterTemplatesUidProfilesVariablesPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/clusterTemplates/{uid}/profiles/{profileUid}/variables
+  method: get
+  operationId: V1ClusterTemplatesUidProfilesProfileUidVariablesGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/clusterTemplates/{uid}/spectroclusters/{clusterUid}/reconcile
+  method: get
+  operationId: V1ClusterTemplatesUidClusterReconcileClusterUidGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/dashboard/appDeployments
   method: post
   operationId: v1DashboardAppDeployments
@@ -7804,6 +6638,1092 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /v1/edge-mgmt/cluster
+  method: get
+  operationId: v1ClusterConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster
+  method: post
+  operationId: v1CreateCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster
+  method: delete
+  operationId: v1DeleteCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster
+  method: patch
+  operationId: v1PatchCluster
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/applications
+  method: get
+  operationId: v1ClusterApplications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/certificates
+  method: get
+  operationId: v1CertificateDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/details
+  method: get
+  operationId: v1ClusterGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/events
+  method: get
+  operationId: v1GetClusterEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/pair
+  method: post
+  operationId: v1ClusterPair
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/pair/details
+  method: get
+  operationId: v1ClusterPairDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/pair/reject
+  method: post
+  operationId: v1ClusterPairReject
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/pair/verify-connection
+  method: post
+  operationId: v1ClusterPairVerifyConnection
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/profiles
+  method: put
+  operationId: v1UpdateClusterProfiles
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/profiles/variables/validate
+  method: post
+  operationId: v1ValidateClusterProfileVariables
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/registry/content/details
+  method: get
+  operationId: v1HarborContentsDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/registry/content/sync-status/details
+  method: get
+  operationId: v1HarborContentsSyncStatusDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/registry/health
+  method: get
+  operationId: V1HarborHealth
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/cluster/renew-certificates
+  method: post
+  operationId: v1RenewCerts
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/settings
+  method: put
+  operationId: v1EdgeNativeClusterSettings
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/{clusterName}
+  method: put
+  operationId: v1UpdateClusterConfig
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/cluster/{clusterName}
+  method: patch
+  operationId: v1PatchClusterConfig
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/clusters/archive/embedded/details
+  method: get
+  operationId: V1ClusterConfigArchiveEmbedded
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/clusters/archive/overridden/details
+  method: get
+  operationId: v1ClusterConfigArchiveOverriden
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/clusters/archive/update
+  method: delete
+  operationId: v1DeleteClusterUpdateArchive
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/clusters/archive/update/details
+  method: get
+  operationId: v1ClusterConfigArchiveUpdate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/clusters/current/machinepools
+  method: get
+  operationId: v1MachinePoolDetail
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/clusters/current/machinepools
+  method: post
+  operationId: v1ClusterMachinePoolCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}
+  method: put
+  operationId: v1ClusterMachinePoolUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}
+  method: delete
+  operationId: v1ClusterMachinePoolDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}
+  method: patch
+  operationId: v1ClusterMachinePoolPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/clusters/current/machinepools/{poolName}/nodes/{nodeName}
+  method: delete
+  operationId: v1ClusterMachinePoolNodeDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/clusters/current/nodes
+  method: get
+  operationId: v1ClusterNodes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/connectivity/ping
+  method: get
+  operationId: v1PingHost
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/connectivity/traceroute
+  method: get
+  operationId: v1TraceRouteHost
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current
+  method: get
+  operationId: v1EdgeHostInfo
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/actions/content/signing-public-key
+  method: get
+  operationId: V1GetContentSigningPublicKey
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/actions/reboot
+  method: post
+  operationId: v1EdgeHostActionReboot
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/actions/reset
+  method: post
+  operationId: v1EdgeHostActionReset
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/actions/shutdown
+  method: post
+  operationId: v1EdgeHostActionShutdown
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/actions/upload-clusterconfig
+  method: post
+  operationId: V1ClusterConfigUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/actions/upload-content
+  method: post
+  operationId: V1ContentUpload
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/audits
+  method: get
+  operationId: v1Audits
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/audits/download
+  method: get
+  operationId: v1AuditDownload
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/audits/filters
+  method: get
+  operationId: v1AuditFilter
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/configurations
+  method: get
+  operationId: V1EdgeHostConfigurationsGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/configurations
+  method: put
+  operationId: V1EdgeHostConfigurationsUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/configurations/status
+  method: get
+  operationId: v1EdgeHostConfigurationStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/download-logs
+  method: get
+  operationId: v1EdgeHostDownloadLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/error-logs
+  method: get
+  operationId: V1EdgeHostErrorLogs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/file-download/files
+  method: get
+  operationId: v1EdgeHostListCustomFiles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/file-download/{filePath}
+  method: get
+  operationId: v1EdgeHostCustomFileDownload
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/generate-logs
+  method: post
+  operationId: v1EdgeHostGenerateLogs
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/generate-logs-status
+  method: get
+  operationId: v1EdgeHostGenerateLogsStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/link
+  method: post
+  operationId: v1EdgeHostLink
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/link/generate-token
+  method: post
+  operationId: v1EdgeHostLinkGenerateToken
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/link/status
+  method: get
+  operationId: v1EdgeHostLinkStatus
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/unlink
+  method: post
+  operationId: v1EdgeHostUnlink
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/uploaded-content/details
+  method: get
+  operationId: v1UploadedContentDetails
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/userdata
+  method: get
+  operationId: v1GetEdgeHostUserdata
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/edgehosts/current/userdata
+  method: put
+  operationId: v1PutEdgeHostUserdata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/edgehosts/current/userdata
+  method: post
+  operationId: v1PostEdgeHostUserdata
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/events/lifecycle
+  method: get
+  operationId: v1GetLifecycleEvents
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/bonds
+  method: get
+  operationId: V1NetworkBonds
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/bonds/{name}
+  method: get
+  operationId: V1NetworkBond
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/bonds/{name}
+  method: put
+  operationId: V1NetworkBondUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/bonds/{name}
+  method: post
+  operationId: V1NetworkBondCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/bonds/{name}
+  method: delete
+  operationId: V1NetworkBondDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/bridges
+  method: get
+  operationId: V1NetworkBridges
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/bridges/{name}
+  method: get
+  operationId: V1NetworkBridge
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/bridges/{name}
+  method: put
+  operationId: V1NetworkBridgeUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/bridges/{name}
+  method: post
+  operationId: V1NetworkBridgeCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/bridges/{name}
+  method: delete
+  operationId: V1NetworkBridgeDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/config-options
+  method: get
+  operationId: V1NetworkConfigOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/interfaces
+  method: get
+  operationId: V1NetworkInterfaces
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/interfaces/{name}
+  method: get
+  operationId: V1NetworkInterface
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/interfaces/{name}/config
+  method: put
+  operationId: V1NetworkInterfaceUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/management-interface
+  method: get
+  operationId: V1ManagementInterface
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/management-interface
+  method: put
+  operationId: V1ManagementInterfaceUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/vlans
+  method: get
+  operationId: V1NetworkVLANs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/vlans/{name}
+  method: get
+  operationId: V1NetworkVLAN
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/edge-mgmt/network/vlans/{name}
+  method: put
+  operationId: V1NetworkVLANUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/vlans/{name}
+  method: post
+  operationId: V1NetworkVLANCreate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/network/vlans/{name}
+  method: delete
+  operationId: V1NetworkVLANDelete
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/edge-mgmt/settings
+  method: get
+  operationId: v1Settings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/edgehosts
   method: get
   operationId: v1EdgeHostDevicesList
@@ -9230,6 +9150,16 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /v1/ping
+  method: get
+  operationId: V1Ping
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /v1/plans
   method: get
   operationId: v1PlansList
@@ -10434,18 +10364,12 @@ operations:
   method: post
   operationId: v1SpectroClustersAksRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/aks/validate
   method: post
   operationId: v1SpectroClustersAksValidate
@@ -10498,18 +10422,12 @@ operations:
   method: post
   operationId: v1SpectroClustersCloudStackRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/apache-cloudstack/validate
   method: post
   operationId: v1SpectroClustersCloudStackValidate
@@ -10562,18 +10480,12 @@ operations:
   method: post
   operationId: v1SpectroClustersAwsRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/aws/validate
   method: post
   operationId: v1SpectroClustersAwsValidate
@@ -10626,18 +10538,12 @@ operations:
   method: post
   operationId: v1SpectroClustersAzureRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/azure/validate
   method: post
   operationId: v1SpectroClustersAzureValidate
@@ -10784,18 +10690,12 @@ operations:
   method: post
   operationId: v1SpectroClustersEdgeNativeRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/edge-native/validate
   method: post
   operationId: v1SpectroClustersEdgeNativeValidate
@@ -10832,18 +10732,12 @@ operations:
   method: post
   operationId: v1SpectroClustersEksRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/eks/validate
   method: post
   operationId: v1SpectroClustersEksValidate
@@ -10948,18 +10842,12 @@ operations:
   method: post
   operationId: v1SpectroClustersGcpRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/gcp/validate
   method: post
   operationId: v1SpectroClustersGcpValidate
@@ -10996,18 +10884,12 @@ operations:
   method: post
   operationId: v1SpectroClustersGenericRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/gke
   method: post
   operationId: v1SpectroClustersGkeCreate
@@ -11028,18 +10910,12 @@ operations:
   method: post
   operationId: v1SpectroClustersGkeRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/gke/validate
   method: post
   operationId: v1SpectroClustersGkeValidate
@@ -11092,18 +10968,12 @@ operations:
   method: post
   operationId: v1SpectroClustersMaasRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/maas/validate
   method: post
   operationId: v1SpectroClustersMaasValidate
@@ -11286,18 +11156,12 @@ operations:
   method: post
   operationId: v1SpectroClustersVsphereRate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /v1/spectroclusters/vsphere/validate
   method: post
   operationId: v1SpectroClustersVsphereValidate
@@ -15415,13 +15279,11 @@ operations:
   operationId: v1MarketplaceRegister
   x-agentic-access:
     action-class: acting
-    consequence: physical
+    consequence: write
     subject: required
     audience: null
     token:
-      max-ttl: 300
-      exchange: true
-      purpose-required: true
+      max-ttl: 900
     escalation:
       human-in-the-loop: conditional
       triggers:
@@ -16438,6 +16300,96 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /v1/users/current
+  method: get
+  operationId: V1CurrentUser
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/users/current
+  method: patch
+  operationId: v1PatchCurrentUser
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users/default/login
+  method: post
+  operationId: V1UserLogin
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users/default/logout
+  method: post
+  operationId: V1UserLogout
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /v1/users/default/password/reset
+  method: post
+  operationId: V1UserPasswordReset
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /v1/users/default/token/renewal
+  method: post
+  operationId: V1UserTokenRenewal
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /v1/users
   method: get
   operationId: v1UsersList
