@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-template-profiles-variables-batch-entity-schema.json",
+  "title": "v1ClusterTemplateProfilesVariablesBatchEntity",
+  "description": "Cluster template profiles variables batch entity",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clustertemplates-api-openapi.yml#/components/schemas/v1ClusterTemplateProfilesVariablesBatchEntity",
+  "properties": {
+    "profiles": {
+      "description": "List of profiles with variables and cluster assignments",
+      "items": {
+        "$ref": "#/$defs/v1ClusterTemplateProfileVariablesGroup"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "profiles"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1ClusterTemplateProfileVariablesGroup": {
+      "description": "Profile with variables and cluster assignments",
+      "properties": {
+        "uid": {
+          "description": "UID of the cluster profile",
+          "type": "string"
+        },
+        "variables": {
+          "description": "List of variables with cluster assignments",
+          "items": {
+            "$ref": "#/$defs/v1ClusterTemplateVariableClusterMapping"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "uid",
+        "variables"
+      ],
+      "type": "object"
+    },
+    "v1ClusterTemplateVariableClusterMapping": {
+      "description": "Variable with cluster assignments",
+      "properties": {
+        "clusters": {
+          "description": "List of clusters with variable values",
+          "items": {
+            "$ref": "#/$defs/v1ClusterVariableValue"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Name of the variable",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "clusters"
+      ],
+      "type": "object"
+    },
+    "v1ClusterVariableValue": {
+      "description": "Cluster along with specific variable value",
+      "properties": {
+        "uid": {
+          "description": "UID of the cluster",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the variable",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-template-profiles-update-entity-schema.json",
+  "title": "v1ClusterTemplateProfilesUpdateEntity",
+  "description": "Cluster template profiles update entity",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clustertemplates-api-openapi.yml#/components/schemas/v1ClusterTemplateProfilesUpdateEntity",
+  "properties": {
+    "profiles": {
+      "description": "List of cluster profile references with updated variable values and assign strategies",
+      "items": {
+        "$ref": "#/$defs/v1ClusterTemplateProfile"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "profiles"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1ClusterTemplateProfile": {
+      "description": "Cluster template profile information",
+      "properties": {
+        "uid": {
+          "description": "UID of the cluster profile",
+          "type": "string"
+        },
+        "variables": {
+          "description": "List of cluster profile variable values and assign strategies. This is specified when clusters are launched from the template",
+          "items": {
+            "$ref": "#/$defs/v1ClusterTemplateVariable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterTemplateVariable": {
+      "description": "Cluster template variable",
+      "properties": {
+        "assignStrategy": {
+          "description": "Assignment strategy for the variable",
+          "enum": [
+            "all",
+            "cluster"
+          ],
+          "type": "string"
+        },
+        "clusters": {
+          "description": "List of clusters with the specific variable",
+          "items": {
+            "$ref": "#/$defs/v1ClusterVariableValue"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Name of the variable",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the variable to be applied to all clusters launched from this template. This value is specified when assignStrategy is set to all",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterVariableValue": {
+      "description": "Cluster along with specific variable value",
+      "properties": {
+        "uid": {
+          "description": "UID of the cluster",
+          "type": "string"
+        },
+        "value": {
+          "description": "Value of the variable",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

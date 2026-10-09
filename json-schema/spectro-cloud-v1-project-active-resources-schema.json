@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-project-active-resources-schema.json",
+  "title": "v1ProjectActiveResources",
+  "description": "Active project resources",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-projects-api-openapi.yml#/components/schemas/v1ProjectActiveResources",
+  "properties": {
+    "appDeployments": {
+      "$ref": "#/$defs/v1ProjectActiveAppDeployments"
+    },
+    "clusters": {
+      "$ref": "#/$defs/v1ProjectActiveClusters"
+    },
+    "virtualClusters": {
+      "$ref": "#/$defs/v1ProjectActiveClusters"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ObjectEntity": {
+      "description": "Object identity meta",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ProjectActiveAppDeployment": {
+      "description": "Active app deployment",
+      "properties": {
+        "appRef": {
+          "$ref": "#/$defs/v1ObjectEntity"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ProjectActiveAppDeployments": {
+      "description": "Active app deployment",
+      "properties": {
+        "apps": {
+          "items": {
+            "$ref": "#/$defs/v1ProjectActiveAppDeployment"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1ProjectActiveCluster": {
+      "description": "Active clusters",
+      "properties": {
+        "clusterRef": {
+          "$ref": "#/$defs/v1ObjectEntity"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ProjectActiveClusters": {
+      "description": "Active clusters",
+      "properties": {
+        "clusters": {
+          "items": {
+            "$ref": "#/$defs/v1ProjectActiveCluster"
+          },
+          "type": "array"
+        },
+        "count": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

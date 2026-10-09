@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-grpc-configuration-schema.json",
+  "title": "v1GrpcConfiguration",
+  "description": "Describes the response that contains the grpc configuration to establish connection",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-grpc-api-openapi.yml#/components/schemas/v1GrpcConfiguration",
+  "properties": {
+    "preferredServer": {
+      "$ref": "#/$defs/v1GrpcEndpoint"
+    },
+    "servers": {
+      "items": {
+        "$ref": "#/$defs/v1GrpcEndpoint"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1GrpcEndpoint": {
+      "properties": {
+        "endpoint": {
+          "description": "Describes the URL where the client has to connect to the grpc server",
+          "type": "string"
+        },
+        "tls": {
+          "description": "Describes the Grpc tls config which client will use to make a request to the grpc server",
+          "properties": {
+            "caCert": {
+              "type": "string"
+            },
+            "enabled": {
+              "type": "boolean"
+            },
+            "insecureSkipVerify": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

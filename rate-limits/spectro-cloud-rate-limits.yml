@@ -1,8 +1,10 @@
 generated: '2026-07-21'
 method: searched
 source: https://docs.spectrocloud.com/api/introduction/
+name: Spectro Cloud API Rate Limits
 scope: per-source-IP
-default:
+limits:
+- name: default
   limit_count: 10
   window: 1s
   unit: requests-per-second

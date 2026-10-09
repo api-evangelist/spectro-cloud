@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-app-profile-entity-schema.json",
+  "title": "v1AppProfileEntity",
+  "description": "Application profile request payload",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileEntity",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMetaInputEntity"
+    },
+    "spec": {
+      "description": "Application profile spec",
+      "properties": {
+        "template": {
+          "$ref": "#/$defs/v1AppProfileTemplateEntity"
+        },
+        "version": {
+          "description": "Application profile version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1AppProfileTemplateEntity": {
+      "description": "Application profile template spec",
+      "properties": {
+        "appTiers": {
+          "description": "Application profile tiers",
+          "items": {
+            "$ref": "#/$defs/v1AppTierEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "v1AppTierEntity": {
+      "description": "Application tier request payload",
+      "properties": {
+        "containerRegistryUid": {
+          "description": "Application tier container registry uid",
+          "type": "string"
+        },
+        "installOrder": {
+          "description": "Application tier installation order",
+          "format": "int32",
+          "type": "integer"
+        },
+        "manifests": {
+          "description": "Application tier manifests",
+          "items": {
+            "$ref": "#/$defs/v1ManifestInputEntity"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Application tier name",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Application tier properties",
+          "items": {
+            "$ref": "#/$defs/v1AppTierPropertyEntity"
+          },
+          "type": "array"
+        },
+        "registryUid": {
+          "description": "Application tier registry uid",
+          "type": "string"
+        },
+        "sourceAppTierUid": {
+          "description": "Application tier source pack uid",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/v1AppTierType"
+        },
+        "values": {
+          "description": "Application tier configuration values in yaml format",
+          "type": "string"
+        },
+        "version": {
+          "description": "Application tier version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1AppTierPropertyEntity": {
+      "description": "Application tier property object",
+      "properties": {
+        "name": {
+          "description": "Application tier property name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Application tier property value",
+          "type": "string"
+        }
+      }
+    },
+    "v1AppTierType": {
+      "default": "manifest",
+      "enum": [
+        "manifest",
+        "helm",
+        "operator-instance",
+        "container"
+      ],
+      "type": "string"
+    },
+    "v1ManifestInputEntity": {
+      "description": "Manifest request payload",
+      "properties": {
+        "content": {
+          "description": "Manifest content",
+          "type": "string"
+        },
+        "name": {
+          "description": "Manifest name",
+          "type": "string"
+        }
+      }
+    },
+    "v1ObjectMetaInputEntity": {
+      "description": "ObjectMeta input entity for object creation",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

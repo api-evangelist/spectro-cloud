@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-filters-metadata-schema.json",
+  "title": "v1FiltersMetadata",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-filters-api-openapi.yml#/components/schemas/v1FiltersMetadata",
+  "properties": {
+    "items": {
+      "items": {
+        "$ref": "#/$defs/v1FilterMetadata"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1FilterMetadata": {
+      "description": "Filter metadata object",
+      "properties": {
+        "filterType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

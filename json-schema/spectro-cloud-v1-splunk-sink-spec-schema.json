@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-splunk-sink-spec-schema.json",
+  "title": "v1SplunkSinkSpec",
+  "description": "Splunk HEC connection configuration.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-tenants-api-openapi.yml#/components/schemas/v1SplunkSinkSpec",
+  "properties": {
+    "hecUrl": {
+      "description": "Splunk HEC URL, e.g. https://stack.splunkcloud.com:8088 or\nhttps://http-inputs-<stack>.splunkcloud.com:443. Must use https,\nexcept http://localhost:* / http://127.0.0.1:* permitted for dev.\n",
+      "type": "string"
+    },
+    "index": {
+      "description": "Optional. If empty, the HEC token's default index is used.",
+      "type": "string"
+    },
+    "source": {
+      "description": "Optional. If empty, the HEC token's default source is used.",
+      "type": "string"
+    },
+    "tlsConfig": {
+      "$ref": "#/$defs/v1TlsCA"
+    },
+    "token": {
+      "description": "HEC token. Returned masked ('***') on GET. PUT with the masked literal\n'***' preserves the existing encrypted value; PUT with any other value\nre-encrypts and replaces.\n",
+      "format": "password",
+      "type": "string"
+    }
+  },
+  "required": [
+    "hecUrl",
+    "token"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1TlsCA": {
+      "properties": {
+        "caCertBase64": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "insecureSkipVerify": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

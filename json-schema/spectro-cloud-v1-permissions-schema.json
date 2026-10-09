@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-permissions-schema.json",
+  "title": "v1Permissions",
+  "description": "Array of permissions",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-permissions-api-openapi.yml#/components/schemas/v1Permissions",
+  "items": {
+    "$ref": "#/$defs/v1Permission"
+  },
+  "type": "array",
+  "$defs": {
+    "v1Permission": {
+      "description": "Permission information",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "permissions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "scope": {
+          "$ref": "#/$defs/v1Scope"
+        }
+      },
+      "type": "object"
+    },
+    "v1Scope": {
+      "enum": [
+        "system",
+        "tenant",
+        "project",
+        "resource"
+      ],
+      "type": "string"
+    }
+  }
+}

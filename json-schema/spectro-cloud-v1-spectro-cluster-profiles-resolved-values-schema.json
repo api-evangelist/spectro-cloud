@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-spectro-cluster-profiles-resolved-values-schema.json",
+  "title": "v1SpectroClusterProfilesResolvedValues",
+  "description": "Cluster profiles resolved values response",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-cluster-groups-api-openapi.yml#/components/schemas/v1SpectroClusterProfilesResolvedValues",
+  "properties": {
+    "profiles": {
+      "items": {
+        "$ref": "#/$defs/v1ProfileResolvedValues"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ProfileResolvedValues": {
+      "description": "Cluster profile resolved pack values",
+      "properties": {
+        "resolved": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Cluster profile pack resolved values",
+          "type": "object"
+        },
+        "uid": {
+          "description": "Cluster profile uid",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

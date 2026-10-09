@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Services API
+  title: Spectro Cloud Services API
   version: v1
+  description: 'Operations tagged services across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Services
   x-displayName: Services
@@ -66,6 +68,8 @@ paths:
       summary: Returns a latest version for a given service name
       tags:
       - Services
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/services/{serviceName}/versions/{version}/manifest:
     get:
       operationId: v1ServiceManifestGet
@@ -145,45 +149,10 @@ paths:
       summary: Returns a service manifest for a given service name and version
       tags:
       - Services
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1GitRepoFileContent:
-      properties:
-        content:
-          type: string
-        name:
-          type: string
-        path:
-          type: string
-        repoName:
-          type: string
-        sha:
-          type: string
-      type: object
-    v1ServiceManifest:
-      description: Service manifest information
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ServiceManifestSpec'
-      type: object
-    v1ServiceVersion:
-      description: Service version information
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ServiceVersionSpec'
-      type: object
     v1ServiceManifestSpec:
       properties:
         manifests:
@@ -194,13 +163,6 @@ components:
         name:
           type: string
         version:
-          type: string
-      type: object
-    v1ServiceVersionSpec:
-      properties:
-        latestVersion:
-          $ref: '#/components/schemas/v1GitRepoFileContent'
-        name:
           type: string
       type: object
     v1ObjectMeta:
@@ -244,10 +206,231 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1GitRepoFileContent:
+      properties:
+        content:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        repoName:
+          type: string
+        sha:
+          type: string
+      type: object
+    v1ServiceVersion:
+      description: Service version information
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ServiceVersionSpec'
+      type: object
+    v1ServiceVersionSpec:
+      properties:
+        latestVersion:
+          $ref: '#/components/schemas/v1GitRepoFileContent'
+        name:
+          type: string
+      type: object
+    v1ServiceManifest:
+      description: Service manifest information
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ServiceManifestSpec'
+      type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
+    v1ServiceManifestSpec_2:
+      example:
+        manifests:
+        - path: path
+          repoName: repoName
+          name: name
+          sha: sha
+          content: content
+        - path: path
+          repoName: repoName
+          name: name
+          sha: sha
+          content: content
+        name: name
+        version: version
+      properties:
+        manifests:
+          items:
+            $ref: '#/components/schemas/v1GitRepoFileContent_2'
+          type: array
+          uniqueItems: true
+        name:
+          type: string
+        version:
+          type: string
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1GitRepoFileContent_2:
+      example:
+        path: path
+        repoName: repoName
+        name: name
+        sha: sha
+        content: content
+      properties:
+        content:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        repoName:
+          type: string
+        sha:
+          type: string
+      type: object
+    v1ServiceVersion_2:
+      description: Service version information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          latestVersion:
+            path: path
+            repoName: repoName
+            name: name
+            sha: sha
+            content: content
+          name: name
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1ServiceVersionSpec_2'
+      type: object
+    v1ServiceVersionSpec_2:
+      example:
+        latestVersion:
+          path: path
+          repoName: repoName
+          name: name
+          sha: sha
+          content: content
+        name: name
+      properties:
+        latestVersion:
+          $ref: '#/components/schemas/v1GitRepoFileContent_2'
+        name:
+          type: string
+      type: object
+    v1ServiceManifest_2:
+      description: Service manifest information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          manifests:
+          - path: path
+            repoName: repoName
+            name: name
+            sha: sha
+            content: content
+          - path: path
+            repoName: repoName
+            name: name
+            sha: sha
+            content: content
+          name: name
+          version: version
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1ServiceManifestSpec_2'
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -259,3 +442,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

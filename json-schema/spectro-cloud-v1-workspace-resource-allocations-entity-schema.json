@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-workspace-resource-allocations-entity-schema.json",
+  "title": "v1WorkspaceResourceAllocationsEntity",
+  "description": "Workspace resource allocation update entity",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-workspaces-api-openapi.yml#/components/schemas/v1WorkspaceResourceAllocationsEntity",
+  "properties": {
+    "clusterNamespaces": {
+      "items": {
+        "$ref": "#/$defs/v1WorkspaceClusterNamespace"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "clusterRefs": {
+      "items": {
+        "$ref": "#/$defs/v1WorkspaceClusterRef"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "quota": {
+      "$ref": "#/$defs/v1WorkspaceQuota"
+    }
+  },
+  "$defs": {
+    "v1ClusterResourceAllocation": {
+      "description": "Workspace resource allocation",
+      "properties": {
+        "clusterUid": {
+          "type": "string"
+        },
+        "resourceAllocation": {
+          "$ref": "#/$defs/v1WorkspaceResourceAllocation"
+        }
+      }
+    },
+    "v1GpuConfig": {
+      "description": "GPU configuration for resource allocation",
+      "properties": {
+        "limit": {
+          "description": "GPU resource limit",
+          "format": "int32",
+          "minimum": -1,
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "provider": {
+          "default": "nvidia",
+          "description": "GPU provider (only nvidia is supported currently)",
+          "enum": [
+            "nvidia"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "v1WorkspaceClusterNamespace": {
+      "description": "Workspace cluster namespace",
+      "properties": {
+        "image": {
+          "$ref": "#/$defs/v1WorkspaceNamespaceImage"
+        },
+        "isRegex": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespaceResourceAllocation": {
+          "$ref": "#/$defs/v1WorkspaceNamespaceResourceAllocation"
+        }
+      }
+    },
+    "v1WorkspaceClusterRef": {
+      "description": "Workspace cluster reference",
+      "properties": {
+        "clusterName": {
+          "type": "string"
+        },
+        "clusterUid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1WorkspaceNamespaceImage": {
+      "description": "Workspace namespace image information",
+      "properties": {
+        "blackListedImages": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      }
+    },
+    "v1WorkspaceNamespaceResourceAllocation": {
+      "description": "Workspace namespace resource allocation",
+      "properties": {
+        "clusterResourceAllocations": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterResourceAllocation"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "defaultResourceAllocation": {
+          "$ref": "#/$defs/v1WorkspaceResourceAllocation"
+        }
+      }
+    },
+    "v1WorkspaceQuota": {
+      "description": "Workspace resource quota",
+      "properties": {
+        "resourceAllocation": {
+          "$ref": "#/$defs/v1WorkspaceResourceAllocation"
+        }
+      }
+    },
+    "v1WorkspaceResourceAllocation": {
+      "description": "Workspace resource allocation",
+      "properties": {
+        "cpuCores": {
+          "minimum": -1,
+          "type": "number",
+          "x-omitempty": false
+        },
+        "gpuConfig": {
+          "$ref": "#/$defs/v1GpuConfig"
+        },
+        "memoryMiB": {
+          "minimum": -1,
+          "type": "number",
+          "x-omitempty": false
+        }
+      }
+    }
+  }
+}

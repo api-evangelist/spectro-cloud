@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Audits API
+  title: Spectro Cloud Audits API
   version: v1
+  description: 'Operations tagged audits across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Audits
   x-displayName: Audits
@@ -99,6 +101,8 @@ paths:
       summary: Retrieves the list of audit logs
       tags:
       - Audits
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/audits/{uid}:
     parameters:
     - description: Specify the audit uid
@@ -128,6 +132,8 @@ paths:
       summary: Returns the specified audit log
       tags:
       - Audits
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/audits/{uid}/sysMsg:
     parameters:
     - description: Specify the audit uid
@@ -157,6 +163,8 @@ paths:
       summary: Returns the specified system audit message
       tags:
       - Audits
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/audits/{uid}/userMsg:
     parameters:
     - description: Specify the audit uid
@@ -187,133 +195,22 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AuditMsgUpdate'
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1AuditResourceReference:
-      description: Audit resource reference object
+    v1Audits:
       properties:
-        kind:
-          description: Audit resource type
-          type: string
-        label:
-          description: Audit resource label
-          type: string
-        name:
-          description: Audit resource name
-          type: string
-        uid:
-          description: Audit resource uid
-          type: string
+        items:
+          description: List of audit message
+          items:
+            $ref: '#/components/schemas/v1Audit'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
       required:
-      - uid
-      type: object
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
-      type: object
-    v1AuditSpec:
-      description: Audit specifications
-      properties:
-        actionMsg:
-          description: Audit action message
-          type: string
-        actionType:
-          enum:
-          - create
-          - update
-          - delete
-          - publish
-          - deploy
-          - activity
-          - action
-          type: string
-        actor:
-          $ref: '#/components/schemas/v1AuditActor'
-        contentMsg:
-          description: Audit content message
-          type: string
-        resource:
-          $ref: '#/components/schemas/v1AuditResourceReference'
-        userMsg:
-          description: Audit user message
-          type: string
-    v1AuditSysMsg:
-      description: Audit system message
-      properties:
-        actionMsg:
-          description: Audit resource action message
-          type: string
-        contentMsg:
-          description: Audit resource content message
-          type: string
-      type: object
-    v1Audit:
-      description: Audit response payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AuditSpec'
-      type: object
-    v1ProjectMeta:
-      properties:
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1UserMeta:
-      properties:
-        emailId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        org:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1AuditActor:
-      description: Audit actor object
-      properties:
-        actorType:
-          enum:
-          - user
-          - system
-          - service
-          type: string
-        project:
-          $ref: '#/components/schemas/v1ProjectMeta'
-        serviceName:
-          type: string
-        user:
-          $ref: '#/components/schemas/v1UserMeta'
-    v1AuditMsgUpdate:
-      description: Audit user message update request payload
-      properties:
-        userMsg:
-          description: User message
-          maxLength: 255
-          minLength: 3
-          type: string
+      - items
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -356,23 +253,473 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1Audits:
+    v1AuditSpec:
+      description: Audit specifications
       properties:
-        items:
-          description: List of audit message
-          items:
-            $ref: '#/components/schemas/v1Audit'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
+        actionMsg:
+          description: Audit action message
+          type: string
+        actionType:
+          enum:
+          - create
+          - update
+          - delete
+          - publish
+          - deploy
+          - activity
+          - action
+          type: string
+        actor:
+          $ref: '#/components/schemas/v1AuditActor'
+        contentMsg:
+          description: Audit content message
+          type: string
+        resource:
+          $ref: '#/components/schemas/v1AuditResourceReference'
+        userMsg:
+          description: Audit user message
+          type: string
+    v1UserMeta:
+      properties:
+        emailId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        org:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1ProjectMeta:
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1AuditSysMsg:
+      description: Audit system message
+      properties:
+        actionMsg:
+          description: Audit resource action message
+          type: string
+        contentMsg:
+          description: Audit resource content message
+          type: string
+      type: object
+    v1AuditResourceReference:
+      description: Audit resource reference object
+      properties:
+        kind:
+          description: Audit resource type
+          type: string
+        label:
+          description: Audit resource label
+          type: string
+        name:
+          description: Audit resource name
+          type: string
+        uid:
+          description: Audit resource uid
+          type: string
       required:
-      - items
+      - uid
+      type: object
+    v1AuditMsgUpdate:
+      description: Audit user message update request payload
+      properties:
+        userMsg:
+          description: User message
+          maxLength: 255
+          minLength: 3
+          type: string
+      type: object
+    v1Audit:
+      description: Audit response payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AuditSpec'
+      type: object
+    v1AuditActor:
+      description: Audit actor object
+      properties:
+        actorType:
+          enum:
+          - user
+          - system
+          - service
+          type: string
+        project:
+          $ref: '#/components/schemas/v1ProjectMeta'
+        serviceName:
+          type: string
+        user:
+          $ref: '#/components/schemas/v1UserMeta'
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
       type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
+    v1Audits_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            actor:
+              actorType: user
+              project:
+                uid: uid
+                name: name
+              serviceName: serviceName
+              user:
+                firstName: firstName
+                lastName: lastName
+                uid: uid
+                org: org
+                emailId: emailId
+            actionType: create
+            resource:
+              uid: uid
+              kind: kind
+              name: name
+              label: label
+            actionMsg: actionMsg
+            contentMsg: contentMsg
+            userMsg: userMsg
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            actor:
+              actorType: user
+              project:
+                uid: uid
+                name: name
+              serviceName: serviceName
+              user:
+                firstName: firstName
+                lastName: lastName
+                uid: uid
+                org: org
+                emailId: emailId
+            actionType: create
+            resource:
+              uid: uid
+              kind: kind
+              name: name
+              label: label
+            actionMsg: actionMsg
+            contentMsg: contentMsg
+            userMsg: userMsg
+      properties:
+        items:
+          description: List of audit message
+          items:
+            $ref: '#/components/schemas/v1Audit_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1AuditSpec_2:
+      description: Audit specifications
+      example:
+        actor:
+          actorType: user
+          project:
+            uid: uid
+            name: name
+          serviceName: serviceName
+          user:
+            firstName: firstName
+            lastName: lastName
+            uid: uid
+            org: org
+            emailId: emailId
+        actionType: create
+        resource:
+          uid: uid
+          kind: kind
+          name: name
+          label: label
+        actionMsg: actionMsg
+        contentMsg: contentMsg
+        userMsg: userMsg
+      properties:
+        actionMsg:
+          description: Audit action message
+          type: string
+        actionType:
+          enum:
+          - create
+          - update
+          - delete
+          - publish
+          - deploy
+          - activity
+          - action
+          type: string
+        actor:
+          $ref: '#/components/schemas/v1AuditActor_2'
+        contentMsg:
+          description: Audit content message
+          type: string
+        resource:
+          $ref: '#/components/schemas/v1AuditResourceReference_2'
+        userMsg:
+          description: Audit user message
+          type: string
+      type: object
+    v1UserMeta_2:
+      example:
+        firstName: firstName
+        lastName: lastName
+        uid: uid
+        org: org
+        emailId: emailId
+      properties:
+        emailId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        org:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1ProjectMeta_2:
+      example:
+        uid: uid
+        name: name
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1AuditSysMsg_2:
+      description: Audit system message
+      example:
+        actionMsg: actionMsg
+        contentMsg: contentMsg
+      properties:
+        actionMsg:
+          description: Audit resource action message
+          type: string
+        contentMsg:
+          description: Audit resource content message
+          type: string
+      type: object
+    v1AuditResourceReference_2:
+      description: Audit resource reference object
+      example:
+        uid: uid
+        kind: kind
+        name: name
+        label: label
+      properties:
+        kind:
+          description: Audit resource type
+          type: string
+        label:
+          description: Audit resource label
+          type: string
+        name:
+          description: Audit resource name
+          type: string
+        uid:
+          description: Audit resource uid
+          type: string
+      required:
+      - uid
+      type: object
+    v1Audit_2:
+      description: Audit response payload
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          actor:
+            actorType: user
+            project:
+              uid: uid
+              name: name
+            serviceName: serviceName
+            user:
+              firstName: firstName
+              lastName: lastName
+              uid: uid
+              org: org
+              emailId: emailId
+          actionType: create
+          resource:
+            uid: uid
+            kind: kind
+            name: name
+            label: label
+          actionMsg: actionMsg
+          contentMsg: contentMsg
+          userMsg: userMsg
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1AuditSpec_2'
+      type: object
+    v1AuditActor_2:
+      description: Audit actor object
+      example:
+        actorType: user
+        project:
+          uid: uid
+          name: name
+        serviceName: serviceName
+        user:
+          firstName: firstName
+          lastName: lastName
+          uid: uid
+          org: org
+          emailId: emailId
+      properties:
+        actorType:
+          enum:
+          - user
+          - system
+          - service
+          type: string
+        project:
+          $ref: '#/components/schemas/v1ProjectMeta_2'
+        serviceName:
+          type: string
+        user:
+          $ref: '#/components/schemas/v1UserMeta_2'
+      type: object
+    v1ListMetaData_2:
+      description: ListMeta describes metadata for the resource listing
+      example:
+        offset: 1
+        continue: continue
+        count: 0
+        limit: 6
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -384,3 +731,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

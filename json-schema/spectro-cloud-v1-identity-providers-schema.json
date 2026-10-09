@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-identity-providers-schema.json",
+  "title": "v1IdentityProviders",
+  "description": "Describes a list of predefined Identity Provider (IDP)",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-auth-api-openapi.yml#/components/schemas/v1IdentityProviders",
+  "items": {
+    "$ref": "#/$defs/v1IdentityProvider"
+  },
+  "type": "array",
+  "uniqueItems": true,
+  "$defs": {
+    "v1IdentityProvider": {
+      "description": "Describes a predefined Identity Provider (IDP)",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

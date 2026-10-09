@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-group-host-cluster-entity-schema.json",
+  "title": "v1ClusterGroupHostClusterEntity",
+  "description": "Clusters and clusters config of cluster group",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-cluster-groups-api-openapi.yml#/components/schemas/v1ClusterGroupHostClusterEntity",
+  "properties": {
+    "clusterRefs": {
+      "items": {
+        "$ref": "#/$defs/v1ClusterGroupClusterRef"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "clustersConfig": {
+      "$ref": "#/$defs/v1ClusterGroupClustersConfig"
+    }
+  },
+  "$defs": {
+    "v1ClusterGroupClusterRef": {
+      "description": "Cluster group cluster reference",
+      "properties": {
+        "clusterName": {
+          "type": "string"
+        },
+        "clusterUid": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterGroupClustersConfig": {
+      "description": "Clusters config of cluster group",
+      "properties": {
+        "endpointType": {
+          "description": "Host cluster endpoint type",
+          "enum": [
+            "Ingress",
+            "LoadBalancer"
+          ],
+          "type": "string"
+        },
+        "hostClustersConfig": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterGroupHostClusterConfig"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "kubernetesDistroType": {
+          "$ref": "#/$defs/v1ClusterKubernetesDistroType"
+        },
+        "limitConfig": {
+          "$ref": "#/$defs/v1ClusterGroupLimitConfig"
+        },
+        "values": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ClusterGroupHostClusterConfig": {
+      "properties": {
+        "clusterUid": {
+          "type": "string"
+        },
+        "endpointConfig": {
+          "$ref": "#/$defs/v1HostClusterEndpointConfig",
+          "description": "host cluster endpoint configuration"
+        }
+      }
+    },
+    "v1ClusterGroupLimitConfig": {
+      "description": "Cluster group limit config",
+      "properties": {
+        "cpu": {
+          "description": "Deprecated. Use field cpuMilliCore",
+          "format": "int32",
+          "type": "integer"
+        },
+        "cpuMilliCore": {
+          "description": "CPU in milli cores",
+          "format": "int32",
+          "type": "integer"
+        },
+        "memory": {
+          "description": "Deprecated. Use field memoryMiB",
+          "format": "int32",
+          "type": "integer"
+        },
+        "memoryMiB": {
+          "description": "Memory in MiB",
+          "format": "int32",
+          "type": "integer"
+        },
+        "overSubscription": {
+          "description": "Over subscription percentage",
+          "format": "int32",
+          "type": "integer"
+        },
+        "storageGiB": {
+          "description": "Storage in GiB",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "v1ClusterKubernetesDistroType": {
+      "default": "k3s",
+      "enum": [
+        "k3s",
+        "cncf_k8s",
+        "vcluster-generic"
+      ],
+      "type": "string"
+    },
+    "v1HostClusterEndpointConfig": {
+      "properties": {
+        "ingressConfig": {
+          "$ref": "#/$defs/v1IngressConfig"
+        },
+        "loadBalancerConfig": {
+          "$ref": "#/$defs/v1LoadBalancerConfig"
+        }
+      }
+    },
+    "v1IngressConfig": {
+      "description": "Ingress configuration for exposing the virtual cluster's kube-apiserver",
+      "properties": {
+        "host": {
+          "type": "string"
+        },
+        "port": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "v1LoadBalancerConfig": {
+      "description": "Load balancer configuration for exposing the virtual cluster's kube-apiserver",
+      "properties": {
+        "externalIPs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "externalTrafficPolicy": {
+          "type": "string"
+        },
+        "loadBalancerSourceRanges": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      }
+    }
+  }
+}

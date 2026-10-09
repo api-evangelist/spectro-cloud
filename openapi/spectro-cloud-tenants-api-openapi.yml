@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Tenants API
+  title: Spectro Cloud Tenants API
   version: v1
+  description: 'Operations tagged tenants across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Tenants
   x-displayName: Tenants
@@ -99,6 +101,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/marketplace/aws/setup:
     post:
       operationId: v1MarketplaceAwsSetup
@@ -122,6 +126,8 @@ paths:
                   description: Temporary registration token from AWS Marketplace
               required:
               - x-amzn-marketplace-token
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/marketplace/register:
     post:
       description: Called after a user completes a SaaS contract purchase on a marketplace (e.g., AWS Marketplace) and is redirected to the Palette registration landing page. The flow resolves the temporary registration token to obtain the user's account identifier and product code, fetches the user's entitlements and creates a new tenant with the corresponding plan and admin user. The registration token is short-lived and must be resolved promptly.
@@ -149,6 +155,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1MarketplaceRegisterEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/signup:
     post:
       operationId: v1TenantsSelfSignUp
@@ -171,6 +179,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantSelfSignUpSpec'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/signup/{signupToken}/activate:
     parameters:
     - in: path
@@ -189,6 +199,8 @@ paths:
       summary: Activates the self signed tenant using the password token
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/validate:
     post:
       operationId: v1TenantsValidate
@@ -211,6 +223,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantBasicEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}:
     parameters:
     - in: path
@@ -244,6 +258,8 @@ paths:
       summary: Returns the specified tenant
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/activate:
     parameters:
     - in: path
@@ -267,6 +283,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantActivate'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/address:
     parameters:
     - in: path
@@ -290,6 +308,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantAddressPatch'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/assets/certs:
     parameters:
     - in: path
@@ -337,6 +357,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantAssetCert'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/assets/certs/{certificateUid}:
     parameters:
     - in: path
@@ -391,6 +413,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantAssetCert'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/assets/dataSinks:
     parameters:
     - in: path
@@ -465,6 +489,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1DataSinkConfig'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/authTokenSettings:
     parameters:
     - in: path
@@ -508,6 +534,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AuthTokenSettings'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/cleanUp:
     parameters:
     - in: path
@@ -534,6 +562,8 @@ paths:
       summary: Clean up tenant resources
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/contract:
     parameters:
     - in: path
@@ -557,6 +587,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantContractSpec'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/contract/accept:
     parameters:
     - in: path
@@ -580,6 +612,8 @@ paths:
       summary: Tenant to accept the contract agreement
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/creditAccount/aws:
     parameters:
     - in: path
@@ -619,6 +653,8 @@ paths:
       summary: Get the credit accounts for the tenants with free tier access
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/datasinks/splunk:
     post:
       operationId: V1TenantUidDatasinksSplunkCreate
@@ -676,6 +712,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1SplunkSinkEntity'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/datasinks/splunk/validate:
     post:
       operationId: V1TenantUidDatasinksSplunkValidate
@@ -729,6 +767,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1SplunkSinkSpec'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/datasinks/splunk/{uid}:
     delete:
       operationId: V1TenantUidDatasinksSplunkDelete
@@ -871,6 +911,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1SplunkSinkEntity'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/datasinks/summary:
     get:
       operationId: V1TenantUidDatasinksSummaryGet
@@ -905,6 +947,8 @@ paths:
       summary: Returns a summary of all data sinks configured for the specified tenant
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/domains:
     parameters:
     - in: path
@@ -943,6 +987,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantDomains'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/emailId:
     parameters:
     - in: path
@@ -966,6 +1012,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantEmailPatch'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/freemium:
     parameters:
     - in: path
@@ -1004,6 +1052,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantFreemium'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/freemiumUsage:
     parameters:
     - in: path
@@ -1026,6 +1076,8 @@ paths:
       summary: Get tenant freemium usage
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/idp/palette/config:
     parameters:
     - in: path
@@ -1048,6 +1100,8 @@ paths:
       summary: Returns the Palette IDP config for the tenant
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/invoices/{invoiceUid}:
     parameters:
     - description: Specify the tenant uid
@@ -1077,6 +1131,8 @@ paths:
       summary: Returns a specified invoice
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/invoices/{invoiceUid}/report/invoice/pdf:
     parameters:
     - description: Specify the tenant uid
@@ -1114,6 +1170,8 @@ paths:
       summary: Downloads the specified invoice report
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/invoices/{invoiceUid}/report/pdf:
     parameters:
     - description: Specify the tenant uid
@@ -1151,6 +1209,8 @@ paths:
       summary: Downloads the specified monthly invoice report
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/invoices/{invoiceUid}/report/usage/pdf:
     parameters:
     - description: Specify the tenant uid
@@ -1188,6 +1248,8 @@ paths:
       summary: Downloads the specified tenant usage
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/isCleanedUp:
     parameters:
     - in: path
@@ -1210,6 +1272,8 @@ paths:
       summary: Get cleaned up tenant resources
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/loginBanner:
     parameters:
     - in: path
@@ -1253,6 +1317,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1LoginBannerSettings'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/macros:
     parameters:
     - in: path
@@ -1339,6 +1405,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1Macros'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/oidc/config:
     parameters:
     - in: path
@@ -1377,6 +1445,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantOidcClientSpec'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/password/policy:
     parameters:
     - in: path
@@ -1415,6 +1485,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantPasswordPolicyEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/plan:
     parameters:
     - in: path
@@ -1437,6 +1509,8 @@ paths:
       summary: Returns the current tenant's plan
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/plans/usage/monthly:
     parameters:
     - in: path
@@ -1470,6 +1544,8 @@ paths:
       summary: Returns the tenant's monthly planUsage grouped by projects
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/preferences/clusterGroup:
     parameters:
     - in: path
@@ -1508,6 +1584,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantEnableClusterGroup'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/preferences/clusterRbacSettings:
     parameters:
     - in: path
@@ -1551,6 +1629,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantClusterRbacSettings'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/preferences/clusterSettings:
     parameters:
     - in: path
@@ -1573,6 +1653,8 @@ paths:
       summary: Get tenant cluster settings
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/preferences/clusterSettings/nodesAutoRemediationSetting:
     parameters:
     - in: path
@@ -1601,6 +1683,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/preferences/developerCredit:
     parameters:
     - in: path
@@ -1639,6 +1723,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1DeveloperCredit'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/preferences/fips:
     parameters:
     - in: path
@@ -1682,6 +1768,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1FipsSettings'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/rateConfig:
     parameters:
     - in: path
@@ -1720,6 +1808,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1RateConfig'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/resourceLimits:
     parameters:
     - in: path
@@ -1758,6 +1848,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantResourceLimitsEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/saml/config:
     parameters:
     - in: path
@@ -1796,6 +1888,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantSamlRequestSpec'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/sso/auth/providers:
     parameters:
     - in: path
@@ -1834,6 +1928,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TenantSsoAuthProvidersEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/subscriptions/aws/{uid}:
     parameters:
     - in: path
@@ -1862,6 +1958,8 @@ paths:
       summary: Returns the details of a specific AWS marketplace subscription
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/subscriptions/metadata:
     parameters:
     - in: path
@@ -1885,6 +1983,8 @@ paths:
       summary: Returns the metadata of marketplace subscriptions for the tenant
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/usage/cpuCoreHours:
     parameters:
     - in: path
@@ -1919,6 +2019,8 @@ paths:
       summary: Returns the tenant's cpu corehours usages grouped by projects
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/tenants/{tenantUid}/user:
     parameters:
     - in: path
@@ -1941,181 +2043,17 @@ paths:
       summary: Returns the user object of the specified tenant
       tags:
       - Tenants
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1DataSinkSpec:
-      properties:
-        auditDataSinks:
-          items:
-            $ref: '#/components/schemas/v1DataSinkableSpec'
-          type: array
-          uniqueItems: true
-      type: object
-    v1SplunkSink:
-      description: Splunk HEC audit-log sink configuration.
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1SplunkSinkSpec'
-        status:
-          $ref: '#/components/schemas/v1SinkStatus'
-      type: object
-    v1ProjectMeta:
-      properties:
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ResourceUsage:
-      description: ResourceUsage
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/v1ProjectResourceUsage'
-          type: array
-          uniqueItems: true
-        timestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: resource usage time
-        totalAlloyCpuCoreHours:
-          type: number
-          x-omitempty: false
-        totalPureCpuCoreHours:
-          type: number
-          x-omitempty: false
-    v1ResourceLimitType:
-      enum:
-      - user
-      - project
-      - apiKey
-      - team
-      - role
-      - cloudaccount
-      - clusterprofile
-      - workspace
-      - registry
-      - privategateway
-      - location
-      - certificate
-      - macro
-      - sshkey
-      - alert
-      - spectrocluster
-      - edgehost
-      - appprofile
-      - appdeployment
-      - edgetoken
-      - clustergroup
-      - filter
-      - systemadmin
-      - spcpolicy
-      - clustertemplate
-      type: string
-    v1MarketplaceSubscriptionSummary:
-      description: Summary of a marketplace subscription for the tenant
-      properties:
-        kind:
-          description: Cloud provider kind
-          type: string
-        state:
-          description: Current subscription state
-          type: string
-        uid:
-          description: Subscription document UID
-          type: string
-    v1CloudInstanceRateConfig:
-      description: Cloud instance rate config
-      properties:
-        computeRateProportion:
-          format: float
-          type: number
-        memoryRateProportion:
-          format: float
-          type: number
-    v1InvoiceStatus:
-      description: Invoice Status
-      properties:
-        billableAmount:
-          description: Total billable amount
-          format: float64
-          type: number
-        productInvoice:
-          $ref: '#/components/schemas/v1InvoiceProduct'
-        projects:
-          description: List of project invoices
-          items:
-            $ref: '#/components/schemas/v1InvoiceProject'
-          type: array
-        states:
-          description: List of invoice states
-          items:
-            $ref: '#/components/schemas/v1InvoiceState'
-          type: array
-          uniqueItems: true
-        stripeInvoiceId:
-          description: Stripe invoice uid
-          type: string
-    v1AwsStsCredentials:
-      description: Aws sts credentials
-      properties:
-        arn:
-          description: Arn for the aws sts credentials in cloud account
-          type: string
-        externalId:
-          description: ExternalId for the aws sts credentials in cloud account
-          type: string
-      type: object
-    v1TierPrice:
-      description: tier price
-      properties:
-        alloyPricing:
-          items:
-            $ref: '#/components/schemas/v1PriceRange'
-          type: array
-          uniqueItems: true
-        purePricing:
-          items:
-            $ref: '#/components/schemas/v1PriceRange'
-          type: array
-          uniqueItems: true
-    v1ProjectUsage:
-      description: Project usage object
+    v1InvoiceProduct:
+      description: Product invoice object
       properties:
         alloy:
-          $ref: '#/components/schemas/v1ProjectUsageData'
+          $ref: '#/components/schemas/v1InvoiceProductData'
         pure:
-          $ref: '#/components/schemas/v1ProjectUsageData'
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1PlanCost:
-      description: Plan Cost
-      properties:
-        discount:
-          format: float
-          type: number
-          x-omitempty: false
-        price:
-          format: float
-          type: number
-          x-omitempty: false
-    v1ProjectResourceUsage:
-      description: project resource usage
-      properties:
-        alloyCpuCoreHours:
-          type: number
-          x-omitempty: false
-        project:
-          $ref: '#/components/schemas/v1ProjectMeta'
-        pureCpuCoreHours:
-          type: number
-          x-omitempty: false
+          $ref: '#/components/schemas/v1InvoiceProductData'
     v1PlanCredit:
       description: Plan Credit
       properties:
@@ -2140,141 +2078,35 @@ components:
           type: string
       required:
       - type
-    v1UserSpec:
-      description: User specifications
+    v1TenantEmailPatch:
+      description: Tenant EmailId
       properties:
         emailId:
-          description: User's email id
           type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        roles:
+      type: object
+    v1InvoiceStatus:
+      description: Invoice Status
+      properties:
+        billableAmount:
+          description: Total billable amount
+          format: float64
+          type: number
+        productInvoice:
+          $ref: '#/components/schemas/v1InvoiceProduct'
+        projects:
+          description: List of project invoices
           items:
-            type: string
+            $ref: '#/components/schemas/v1InvoiceProject'
+          type: array
+        states:
+          description: List of invoice states
+          items:
+            $ref: '#/components/schemas/v1InvoiceState'
           type: array
           uniqueItems: true
-    v1CloudWatch:
-      properties:
-        credentials:
-          $ref: '#/components/schemas/v1AwsCloudAccount'
-        group:
+        stripeInvoiceId:
+          description: Stripe invoice uid
           type: string
-        region:
-          type: string
-        stream:
-          type: string
-      type: object
-    v1InvoiceState:
-      description: Invoice state object
-      properties:
-        paymentMsg:
-          description: Payment status message
-          type: string
-        state:
-          enum:
-          - Paid
-          - PaymentPending
-          - PaymentInProgress
-          - PaymentFailed
-          type: string
-        timestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: Time on which the state has been updated
-    v1ObjectMeta:
-      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        deletionTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
-
-
-            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        lastModifiedTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-        uid:
-          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
-
-
-            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
-          type: string
-      type: object
-    v1TenantActivate:
-      description: Activate/Deactivate tenant
-      properties:
-        isActive:
-          default: true
-          type: boolean
-      type: object
-    v1MarketplaceRegisterResponse:
-      description: 'Response returned after successful marketplace registration.
-
-        '
-      properties:
-        tenantUid:
-          description: UID of the newly created tenant
-          type: string
-    v1PlanLimitSpec:
-      description: Monthly Plan Limit spec
-      properties:
-        cpuCoreHours:
-          description: cpu cores hours
-          format: int64
-          type: integer
-          x-omitempty: false
-        overageLimitPercentage:
-          default: 25
-          description: overage limit in percentage
-          format: int8
-          type: integer
-          x-omitempty: false
-        warnLimitPercentage:
-          default: 90
-          description: warning limit in percentage
-          format: int8
-          type: integer
-          x-omitempty: false
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1TenantFreemiumUsage:
-      properties:
-        isFreemium:
-          type: boolean
-          x-omitempty: false
-        isUnlimited:
-          type: boolean
-          x-omitempty: false
-        limit:
-          $ref: '#/components/schemas/v1FreemiumUsageLimit'
-        usage:
-          $ref: '#/components/schemas/v1FreemiumUsage'
-      type: object
     v1InvoicePlan:
       description: Invoice plan object
       properties:
@@ -2294,567 +2126,33 @@ components:
           items:
             $ref: '#/components/schemas/v1InvoicePlanCredit'
           type: array
-    v1SplunkSinkEntity:
-      description: Input payload for creating or updating a Splunk HEC sink.
-      properties:
-        name:
-          description: Human-readable name for this sink. Must be unique per tenant.
-          type: string
-        spec:
-          $ref: '#/components/schemas/v1SplunkSinkSpec'
-      required:
-      - name
-      - spec
-      type: object
-    v1TenantPasswordPolicyEntity:
-      description: Tenant Password Policy Entity
-      properties:
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-        expiryDurationInDays:
-          type: integer
-        firstReminderInDays:
-          type: integer
-        isRegex:
-          type: boolean
-        maxLength:
-          type: integer
-        minLength:
-          type: integer
-        minNumOfBlockLetters:
-          type: integer
-        minNumOfDigits:
-          type: integer
-        minNumOfSmallLetters:
-          type: integer
-        minNumOfSpecialCharacters:
-          type: integer
-        regex:
-          type: string
-        updateTimestamp:
-          $ref: '#/components/schemas/v1Time'
-      type: object
-    v1NonFipsConfig:
-      description: Non-FIPS configuration
-      properties:
-        mode:
-          default: nonFipsDisabled
-          description: enable or disable the non FIPS complaint
-          enum:
-          - nonFipsEnabled
-          - nonFipsDisabled
-          type: string
-    v1InvoicePlanCredit:
-      description: Invoice plan credit object
-      properties:
-        planCredit:
-          $ref: '#/components/schemas/v1PlanCredit'
-        totalCpuCoreHours:
-          description: Total used cpu core hours
-          format: int64
-          type: number
-    v1Plan:
-      description: Plan
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1PlanSpec'
-        status:
-          $ref: '#/components/schemas/v1PlanStatus'
-    v1Macros:
-      properties:
-        macros:
-          items:
-            $ref: '#/components/schemas/v1Macro'
-          type: array
-          uniqueItems: true
-    v1AwsMarketplaceSubscription:
-      description: AWS marketplace subscription with metadata, spec, and status
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1AwsMarketplaceSubscriptionMetadata'
-        spec:
-          $ref: '#/components/schemas/v1AwsMarketplaceSubscriptionSpec'
-        status:
-          $ref: '#/components/schemas/v1AwsMarketplaceSubscriptionStatus'
-    v1TenantStatus:
-      description: Tenant Status
-      properties:
-        cleanUpStatus:
-          $ref: '#/components/schemas/v1TenantCleanUpStatus'
-        isActive:
-          type: boolean
-          x-omitempty: false
-        toBeDeleted:
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1TenantSamlRequestSpec:
-      description: Tenant
-      properties:
-        attributes:
-          items:
-            $ref: '#/components/schemas/v1TenantSamlSpecAttribute'
-          type: array
-        defaultTeams:
-          items:
-            type: string
-          type: array
-        federationMetadata:
-          type: string
-        identityProvider:
-          type: string
-        isSingleLogoutEnabled:
-          type: boolean
-        isSsoEnabled:
-          type: boolean
-        nameIdFormat:
-          type: string
-        syncSsoTeams:
-          description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
-          type: boolean
-      type: object
-    v1NodesAutoRemediationSettings:
-      properties:
-        disableNodesAutoRemediation:
-          type: boolean
-          x-omitempty: false
-        isEnabled:
-          type: boolean
-          x-omitempty: false
-    v1PlanMonthlyUsages:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1PlanMonthlyUsage'
-          type: array
-      type: object
-    v1TenantSamlSpec:
-      description: Tenant
-      properties:
-        acsUrl:
-          type: string
-        attributes:
-          items:
-            $ref: '#/components/schemas/v1TenantSamlSpecAttribute'
-          type: array
-        audienceUrl:
-          description: same as entity id
-          type: string
-        certificate:
-          description: certificate for slo
-          type: string
-        defaultTeams:
-          items:
-            type: string
-          type: array
-        entityId:
-          type: string
-        federationMetadata:
-          type: string
-        identityProvider:
-          type: string
-        isSingleLogoutEnabled:
-          type: boolean
-          x-omitempty: false
-        isSsoEnabled:
-          type: boolean
-          x-omitempty: false
-        issuer:
-          description: same as entity id
-          type: string
-        nameIdFormat:
-          type: string
-        serviceProviderMetadata:
-          type: string
-        singleLogoutUrl:
-          description: slo url
-          type: string
-          x-omitempty: false
-        syncSsoTeams:
-          description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1TenantResourceLimitsEntity:
-      description: Tenant resource limits. Supported resources keys are 'user','project','apiKey','team','role','cloudaccount','clusterprofile','workspace','registry','privategateway','location','certificate','macro','sshkey','alert','spectrocluster','edgehost'.
-      properties:
-        resources:
-          items:
-            $ref: '#/components/schemas/v1TenantResourceLimitEntity'
-          type: array
-          uniqueItems: true
-    v1DataSinkSummary:
-      description: Data sink summary
-      properties:
-        kind:
-          description: 'Sink kind discriminator (e.g. splunk, cloudwatch). For legacy cloudwatch
-
-            entries the caller treats kind=cloudwatch as a presence signal and calls
-
-            /v1/tenants/{t}/assets/dataSinks to fetch the legacy CloudWatch configuration.
-
-            '
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        status:
-          $ref: '#/components/schemas/v1SinkStatus'
-      type: object
-    v1AwsMarketplaceSubscriptionStatus:
-      description: AWS marketplace subscription status
-      properties:
-        state:
-          description: Current subscription state
-          type: string
-    v1TenantClusterSettings:
-      properties:
-        nodesAutoRemediationSetting:
-          $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
-    v1AwsCreditAccountEntity:
-      properties:
-        creditLimitInDollars:
-          format: float64
-          type: number
-          x-omitempty: false
-        creditUsedInDollars:
-          format: float64
-          type: number
-          x-omitempty: false
-        loginCredentials:
-          $ref: '#/components/schemas/v1AwsLoginCredentials'
-        userCloudAccount:
-          $ref: '#/components/schemas/v1AwsUserCloudAccount'
-      type: object
-    v1PlanLimit:
-      description: Monthly Plan Limit
+    v1ProjectUsage:
+      description: Project usage object
       properties:
         alloy:
-          $ref: '#/components/schemas/v1PlanLimitSpec'
-        isOnDemand:
-          description: is onDemand plan and has no limit
-          type: boolean
-          x-omitempty: false
-        isUnlimited:
-          description: is unlimited cpu core hours
-          type: boolean
-          x-omitempty: false
+          $ref: '#/components/schemas/v1ProjectUsageData'
         pure:
-          $ref: '#/components/schemas/v1PlanLimitSpec'
-    v1InvoiceSpec:
-      description: Invoice specification
+          $ref: '#/components/schemas/v1ProjectUsageData'
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
       properties:
-        address:
-          $ref: '#/components/schemas/v1Address'
-        billingPeriod:
-          $ref: '#/components/schemas/v1InvoiceBillingPeriod'
-        credits:
-          $ref: '#/components/schemas/v1InvoiceCredits'
-        envType:
-          description: Environment type [Trial,MonthlyOnDemand,AnnualSubscription,OnPrem]
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
           type: string
-        month:
-          $ref: '#/components/schemas/v1Time'
-          description: Month for which invoice is generated
-        paymentUnit:
-          enum:
-          - usd
-          type: string
-        plan:
-          $ref: '#/components/schemas/v1InvoicePlan'
-    v1DeveloperCredit:
-      description: Credits allocated for each tenant/user
-      properties:
-        cpu:
-          description: cpu in cores
-          format: int32
-          type: number
           x-omitempty: false
-        memoryGiB:
-          description: memory in GiB
-          format: int32
-          type: number
-          x-omitempty: false
-        storageGiB:
-          description: storage in GiB
-          format: int32
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
           type: integer
           x-omitempty: false
-        virtualClustersLimit:
-          description: number of active virtual clusters
-          format: int32
-          type: number
+        limit:
+          description: Number of records feteched
+          type: integer
           x-omitempty: false
-    v1PlanMonthlyUsage:
-      description: Plan monthly usage entity
-      properties:
-        dailyUsages:
-          items:
-            $ref: '#/components/schemas/v1ResourceUsage'
-          type: array
-          uniqueItems: true
-        month:
-          $ref: '#/components/schemas/v1Time'
-          description: usage month
-        planLimit:
-          $ref: '#/components/schemas/v1PlanLimit'
-        planType:
-          enum:
-          - Trial
-          - MonthlyOnDemand
-          - AnnualSubscription
-          type: string
-        planUid:
-          type: string
-        totalMonthlyUsage:
-          $ref: '#/components/schemas/v1TotalResourceUsage'
-    v1TenantSpec:
-      description: Tenant Spec
-      properties:
-        address:
-          $ref: '#/components/schemas/v1Address'
-        authType:
-          type: string
-        defaultLoginMode:
-          type: string
-        orgEmailId:
-          type: string
-        orgName:
-          type: string
-        planUid:
-          type: string
-      type: object
-    v1TenantBasicEntity:
-      description: Tenant Basic param
-      properties:
-        emailId:
-          type: string
-        orgName:
-          type: string
-      type: object
-    v1OidcUserInfo:
-      properties:
-        claims:
-          $ref: '#/components/schemas/v1TenantOidcClaims'
-        useUserInfo:
-          default: false
-          type: boolean
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
           x-omitempty: false
       type: object
-    v1DataSinkableSpec:
-      properties:
-        cloudWatch:
-          $ref: '#/components/schemas/v1CloudWatch'
-        type:
-          enum:
-          - cloudwatch
-          type: string
-      type: object
-    v1AwsMarketplaceSubscriptionMetadata:
-      description: Subscription metadata
-      properties:
-        kind:
-          description: Cloud provider kind
-          type: string
-        uid:
-          description: Subscription document UID
-          type: string
-    v1AwsCloudAccount:
-      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
-      properties:
-        accessKey:
-          description: AWS account access key
-          type: string
-        credentialType:
-          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
-        partition:
-          default: aws
-          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
-          enum:
-          - aws
-          - aws-us-gov
-          - aws-iso
-          - aws-iso-b
-          type: string
-        podIdentity:
-          $ref: '#/components/schemas/v1AwsPodIdentityCredentials'
-          description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
-        policyARNs:
-          description: List of policy ARNs required in case of credentialType sts.
-          items:
-            type: string
-          type: array
-        secretKey:
-          description: AWS account secret key
-          type: string
-        secretSpec:
-          $ref: '#/components/schemas/v1AwsSecretSpec'
-        secretToken:
-          description: AWS account secret token; in case of aws-iso and aws-iso-b
-          type: string
-        sts:
-          $ref: '#/components/schemas/v1AwsStsCredentials'
-          description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
-      type: object
-    v1TenantSelfSignUpSpec:
-      description: Tenant sign up data
-      properties:
-        emailId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        loginMode:
-          default: devops
-          enum:
-          - dev
-          - devops
-          type: string
-        notifyTenantAdmin:
-          type: boolean
-        orgName:
-          type: string
-      required:
-      - firstName
-      - lastName
-      - emailId
-      - orgName
-      type: object
-    v1SinkSyncStatus:
-      description: Status of the data sink delivery sync loop
-      properties:
-        lastRunTime:
-          $ref: '#/components/schemas/v1Time'
-        lastSuccessTime:
-          $ref: '#/components/schemas/v1Time'
-        message:
-          description: Last error message when status=Failed. Empty when status=Success.
-          type: string
-        status:
-          description: Last known delivery status.
-          enum:
-          - Success
-          - Failed
-          type: string
-      type: object
-    v1TenantOidcClaims:
-      properties:
-        Email:
-          type: string
-          x-omitempty: false
-        FirstName:
-          type: string
-          x-omitempty: false
-        LastName:
-          type: string
-          x-omitempty: false
-        SpectroTeam:
-          type: string
-          x-omitempty: false
-      type: object
-    v1User:
-      description: User
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1UserSpec'
-        status:
-          $ref: '#/components/schemas/v1UserStatus'
-      type: object
-    v1TenantPaletteIdpConfigSpec:
-      description: Palette IDP configuration for the tenant
-      properties:
-        clientId:
-          description: The client ID for Palette OIDC
-          type: string
-          x-omitempty: false
-        clientSecret:
-          description: The client secret for Palette OIDC
-          type: string
-          x-omitempty: false
-        issuerUrl:
-          description: The issuer URL for Palette acting as OIDC identity provider
-          type: string
-          x-omitempty: false
-        scopes:
-          description: The OIDC scopes
-          items:
-            type: string
-          type: array
-          x-omitempty: false
-      type: object
-    v1InvoiceProduct:
-      description: Product invoice object
-      properties:
-        alloy:
-          $ref: '#/components/schemas/v1InvoiceProductData'
-        pure:
-          $ref: '#/components/schemas/v1InvoiceProductData'
-    v1CustomCloudRateConfig:
-      description: Private cloud rate config
-      properties:
-        cloudType:
-          type: string
-        rateConfig:
-          $ref: '#/components/schemas/v1PrivateCloudRateConfig'
-    v1Address:
-      description: Tenant Address
-      properties:
-        addressLine1:
-          type: string
-        addressLine2:
-          type: string
-        city:
-          type: string
-        country:
-          type: string
-        pincode:
-          type: string
-        state:
-          type: string
-      type: object
-    v1AwsPodIdentityCredentials:
-      description: AWS EKS Pod Identity credentials for role assumption
-      properties:
-        permissionBoundaryArn:
-          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
-          type: string
-        roleArn:
-          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
-          type: string
-      type: object
-    v1LoginBannerSettings:
-      properties:
-        Message:
-          description: Login banner message displayed to the user
-          type: string
-          x-omitempty: false
-        isEnabled:
-          description: Set to 'true' if login banner has to be displayed for user
-          type: boolean
-          x-omitempty: false
-        title:
-          description: Banner title displayed to the user
-          type: string
-          x-omitempty: false
-    v1ProjectUsageData:
-      description: Project usage data object
-      properties:
-        amount:
-          description: Billing amount for the project
-          format: float64
-          type: number
-        tierPrice:
-          description: Tier price based on the usage
-          format: float64
-          type: number
-        usedCredits:
-          description: Project used credits
-          format: float64
-          type: number
     v1RateConfig:
       description: Rate config
       properties:
@@ -2881,41 +2179,149 @@ components:
           $ref: '#/components/schemas/v1PrivateCloudRateConfig'
         vsphere:
           $ref: '#/components/schemas/v1PrivateCloudRateConfig'
-    v1UserStatus:
-      description: User status
+    v1CloudInstanceRateConfig:
+      description: Cloud instance rate config
       properties:
-        activationLink:
-          description: provides the link to activate or reset the user password
+        computeRateProportion:
+          format: float
+          type: number
+        memoryRateProportion:
+          format: float
+          type: number
+    v1Address:
+      description: Tenant Address
+      properties:
+        addressLine1:
           type: string
-          x-omitempty: false
+        addressLine2:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      type: object
+    v1ActiveTenantResources:
+      description: Active resources of tenant
+      properties:
+        activeResources:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+      type: object
+    v1TenantActivate:
+      description: Activate/Deactivate tenant
+      properties:
         isActive:
-          description: Specifies if user account is active/disabled
+          default: true
+          type: boolean
+      type: object
+    v1TenantEnableClusterGroup:
+      description: Enable or Disable cluster group for a tenant
+      properties:
+        hideSystemClusterGroups:
           type: boolean
           x-omitempty: false
-        isPasswordResetting:
-          description: Specifies if user in multi org requested password reset
+        isClusterGroupEnabled:
+          description: Deprecated. Use hideSystemClusterGroups field
           type: boolean
           x-omitempty: false
-        lastSignIn:
+    v1DataSinkableSpec:
+      properties:
+        cloudWatch:
+          $ref: '#/components/schemas/v1CloudWatch'
+        type:
+          enum:
+          - cloudwatch
+          type: string
+      type: object
+    v1TenantSpec:
+      description: Tenant Spec
+      properties:
+        address:
+          $ref: '#/components/schemas/v1Address'
+        authType:
+          type: string
+        defaultLoginMode:
+          type: string
+        orgEmailId:
+          type: string
+        orgName:
+          type: string
+        planUid:
+          type: string
+      type: object
+    v1SinkSyncStatus:
+      description: Status of the data sink delivery sync loop
+      properties:
+        lastRunTime:
           $ref: '#/components/schemas/v1Time'
-          description: user's last sign in time
-    v1Macro:
+        lastSuccessTime:
+          $ref: '#/components/schemas/v1Time'
+        message:
+          description: Last error message when status=Failed. Empty when status=Success.
+          type: string
+        status:
+          description: Last known delivery status.
+          enum:
+          - Success
+          - Failed
+          type: string
+      type: object
+    v1TotalResourceUsage:
+      description: Total Resource Usage
       properties:
-        name:
-          type: string
-        value:
-          type: string
-    v1Cert:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1ProjectResourceUsage'
+          type: array
+          uniqueItems: true
+        totalAlloyCpuCoreHours:
+          type: number
+          x-omitempty: false
+        totalPureCpuCoreHours:
+          type: number
+          x-omitempty: false
+    v1InvoiceState:
+      description: Invoice state object
       properties:
-        certificate:
+        paymentMsg:
+          description: Payment status message
           type: string
-          x-omitempty: false
-        isCA:
-          type: boolean
-          x-omitempty: false
-        key:
+        state:
+          enum:
+          - Paid
+          - PaymentPending
+          - PaymentInProgress
+          - PaymentFailed
           type: string
+        timestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: Time on which the state has been updated
+    v1ProjectResourceUsage:
+      description: project resource usage
+      properties:
+        alloyCpuCoreHours:
+          type: number
           x-omitempty: false
+        project:
+          $ref: '#/components/schemas/v1ProjectMeta'
+        pureCpuCoreHours:
+          type: number
+          x-omitempty: false
+    v1TenantDomains:
+      description: Tenant domains
+      properties:
+        domains:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
       type: object
     v1InvoiceProductData:
       description: Product invoice data
@@ -2963,6 +2369,43 @@ components:
           description: Used credits
           format: float64
           type: number
+    v1AwsMarketplaceSubscription:
+      description: AWS marketplace subscription with metadata, spec, and status
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1AwsMarketplaceSubscriptionMetadata'
+        spec:
+          $ref: '#/components/schemas/v1AwsMarketplaceSubscriptionSpec'
+        status:
+          $ref: '#/components/schemas/v1AwsMarketplaceSubscriptionStatus'
+    v1TenantResourceLimitsEntity:
+      description: Tenant resource limits. Supported resources keys are 'user','project','apiKey','team','role','cloudaccount','clusterprofile','workspace','registry','privategateway','location','certificate','macro','sshkey','alert','spectrocluster','edgehost'.
+      properties:
+        resources:
+          items:
+            $ref: '#/components/schemas/v1TenantResourceLimitEntity'
+          type: array
+          uniqueItems: true
+    v1InvoiceCredits:
+      description: Invoice credits object
+      properties:
+        alloyFreeCredits:
+          description: Credits allocated for import clusters
+          format: int64
+          type: number
+        pureFreeCredits:
+          description: Credits allocated for managed clusters
+          format: int64
+          type: number
+    v1InvoicePlanCredit:
+      description: Invoice plan credit object
+      properties:
+        planCredit:
+          $ref: '#/components/schemas/v1PlanCredit'
+        totalCpuCoreHours:
+          description: Total used cpu core hours
+          format: int64
+          type: number
     v1MarketplaceEntitlement:
       description: Entitlement details from the marketplace contract
       properties:
@@ -2976,252 +2419,6 @@ components:
           description: Contract start time
           format: date-time
           type: string
-    v1TenantFreemium:
-      description: Tenant freemium configuration
-      properties:
-        activeClustersLimit:
-          type: integer
-          x-omitempty: false
-        isFreemium:
-          type: boolean
-          x-omitempty: false
-        isUnlimited:
-          type: boolean
-          x-omitempty: false
-        overageUsageLimit:
-          format: float64
-          type: number
-          x-omitempty: false
-        totalUsageLimit:
-          format: float64
-          type: number
-          x-omitempty: false
-    v1PriceRange:
-      description: tier price range
-      properties:
-        discount:
-          format: int64
-          type: number
-        startFrom:
-          format: float64
-          type: number
-        unitAmount:
-          format: float64
-          type: number
-        upTo:
-          format: float64
-          type: number
-        upToInfinity:
-          type: boolean
-    v1AwsMarketplaceSubscriptionSpec:
-      description: AWS marketplace subscription specification
-      properties:
-        customerAccountId:
-          description: AWS account ID of the user
-          type: string
-        entitlement:
-          $ref: '#/components/schemas/v1MarketplaceEntitlement'
-        productId:
-          description: AWS Marketplace product ID (from the AWS license) the subscription belongs to
-          type: string
-    v1AwsSecretSpec:
-      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
-      properties:
-        accountName:
-          description: AWS secret accountName; only for aws-iso-b environment
-          type: string
-        agency:
-          description: AWS secret agency
-          type: string
-        isCapValidationEnabled:
-          description: Flag to rotate the secret region credentials
-          type: boolean
-        mission:
-          description: AWS secret mission; only for aws-iso environment
-          type: string
-        namePrefix:
-          description: Policy Boundary
-          type: string
-        permissionBoundary:
-          description: Role or Policy Prefix
-          type: string
-        policy:
-          description: AWS secret policy; JSON string
-          type: string
-        role:
-          description: AWS secret role
-          type: string
-        tls:
-          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
-          description: TLS configuration for the AWS secret
-      type: object
-    v1TenantResourceLimit:
-      properties:
-        kind:
-          $ref: '#/components/schemas/v1ResourceLimitType'
-          type: string
-        label:
-          type: string
-        limit:
-          format: int64
-          type: number
-          x-omitempty: false
-        maxLimit:
-          format: int64
-          type: number
-          x-omitempty: false
-    v1Tenants:
-      description: Tenants list
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1Tenant'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1CleanUpResource:
-      description: Resources of tenant
-      properties:
-        activeResources:
-          $ref: '#/components/schemas/v1ActiveTenantResources'
-        tenantStatus:
-          $ref: '#/components/schemas/v1TenantCleanUpStatus'
-      type: object
-    v1AwsLoginCredentials:
-      properties:
-        iamUser:
-          type: string
-        password:
-          format: password
-          type: string
-      type: object
-    v1PrivateCloudRateConfig:
-      description: Private cloud rate config
-      properties:
-        cpuUnitPricePerHour:
-          format: float64
-          type: number
-        gpuUnitPricePerHour:
-          format: float64
-          type: number
-        memoryUnitPriceGiBPerHour:
-          format: float64
-          type: number
-        storageUnitPriceGiBPerHour:
-          format: float64
-          type: number
-    v1OidcIssuerTls:
-      properties:
-        caCertificateBase64:
-          type: string
-          x-omitempty: false
-        insecureSkipVerify:
-          default: false
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1FreemiumUsage:
-      properties:
-        usage:
-          format: float64
-          type: number
-          x-omitempty: false
-      type: object
-    v1TenantResourceLimits:
-      description: Tenant resource limits
-      properties:
-        resources:
-          items:
-            $ref: '#/components/schemas/v1TenantResourceLimit'
-          type: array
-          uniqueItems: true
-    v1MarketplacePlanLimit:
-      description: Marketplace plan limit
-      properties:
-        cpuCoreHours:
-          description: Total CPU core-hours entitled
-          format: int64
-          type: integer
-          x-omitempty: false
-    v1TenantAddressPatch:
-      description: Tenant Address
-      properties:
-        address:
-          $ref: '#/components/schemas/v1Address'
-      type: object
-    v1DataSinkConfig:
-      description: Data sink
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1DataSinkSpec'
-      type: object
-    v1TenantSpecEntity:
-      description: Tenant Entity input
-      properties:
-        address:
-          $ref: '#/components/schemas/v1Address'
-        authType:
-          type: string
-        emailId:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        loginMode:
-          default: devops
-          enum:
-          - dev
-          - devops
-          type: string
-        orgEmailId:
-          type: string
-        orgName:
-          type: string
-        roles:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        ssoApp:
-          type: string
-      type: object
-    v1TenantResourceLimitEntity:
-      properties:
-        kind:
-          $ref: '#/components/schemas/v1ResourceLimitType'
-          type: string
-          x-omitempty: false
-        limit:
-          format: int64
-          type: number
-          x-omitempty: false
-    v1TlsCA:
-      properties:
-        caCertBase64:
-          type: string
-        enabled:
-          type: boolean
-        insecureSkipVerify:
-          type: boolean
-      type: object
-    v1Error:
-      properties:
-        code:
-          type: string
-        details:
-          type: object
-        message:
-          type: string
-        ref:
-          type: string
-      type: object
     v1TenantOidcClientSpec:
       description: Tenant
       properties:
@@ -3268,6 +2465,360 @@ components:
         userInfo:
           $ref: '#/components/schemas/v1OidcUserInfo'
       type: object
+    v1PlanMonthlyUsages:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1PlanMonthlyUsage'
+          type: array
+      type: object
+    v1OidcIssuerTls:
+      properties:
+        caCertificateBase64:
+          type: string
+          x-omitempty: false
+        insecureSkipVerify:
+          default: false
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1TenantAssetCerts:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1TenantAssetCert'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1ResourceLimitType:
+      enum:
+      - user
+      - project
+      - apiKey
+      - team
+      - role
+      - cloudaccount
+      - clusterprofile
+      - workspace
+      - registry
+      - privategateway
+      - location
+      - certificate
+      - macro
+      - sshkey
+      - alert
+      - spectrocluster
+      - edgehost
+      - appprofile
+      - appdeployment
+      - edgetoken
+      - clustergroup
+      - filter
+      - systemadmin
+      - spcpolicy
+      - clustertemplate
+      type: string
+    v1AwsMarketplaceSubscriptionMetadata:
+      description: Subscription metadata
+      properties:
+        kind:
+          description: Cloud provider kind
+          type: string
+        uid:
+          description: Subscription document UID
+          type: string
+    v1TenantClusterRbacSettings:
+      description: Tenant cluster RBAC settings
+      properties:
+        automaticClusterRoleBinding:
+          default: none
+          description: Specifies the mode for automatic creation and management of cluster role bindings for tenant clusters
+          enum:
+          - none
+          - enabled
+          - disabled
+          type: string
+          x-omitempty: false
+      type: object
+    v1NonFipsConfig:
+      description: Non-FIPS configuration
+      properties:
+        mode:
+          default: nonFipsDisabled
+          description: enable or disable the non FIPS complaint
+          enum:
+          - nonFipsEnabled
+          - nonFipsDisabled
+          type: string
+    v1LoginBannerSettings:
+      properties:
+        Message:
+          description: Login banner message displayed to the user
+          type: string
+          x-omitempty: false
+        isEnabled:
+          description: Set to 'true' if login banner has to be displayed for user
+          type: boolean
+          x-omitempty: false
+        title:
+          description: Banner title displayed to the user
+          type: string
+          x-omitempty: false
+    v1PlanCpuCoreHoursUsages:
+      properties:
+        hourlyUsages:
+          items:
+            $ref: '#/components/schemas/v1ResourceUsage'
+          type: array
+          uniqueItems: true
+      type: object
+    v1TenantSamlRequestSpec:
+      description: Tenant
+      properties:
+        attributes:
+          items:
+            $ref: '#/components/schemas/v1TenantSamlSpecAttribute'
+          type: array
+        defaultTeams:
+          items:
+            type: string
+          type: array
+        federationMetadata:
+          type: string
+        identityProvider:
+          type: string
+        isSingleLogoutEnabled:
+          type: boolean
+        isSsoEnabled:
+          type: boolean
+        nameIdFormat:
+          type: string
+        syncSsoTeams:
+          description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
+          type: boolean
+      type: object
+    v1TenantSsoAuthProvidersEntity:
+      properties:
+        isEnabled:
+          type: boolean
+          x-omitempty: false
+        ssoLogins:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1TenantSamlSpecAttribute:
+      properties:
+        attributeValue:
+          type: string
+        mappedAttribute:
+          type: string
+        name:
+          type: string
+        nameFormat:
+          type: string
+      type: object
+    v1AwsMarketplaceSubscriptionSpec:
+      description: AWS marketplace subscription specification
+      properties:
+        customerAccountId:
+          description: AWS account ID of the user
+          type: string
+        entitlement:
+          $ref: '#/components/schemas/v1MarketplaceEntitlement'
+        productId:
+          description: AWS Marketplace product ID (from the AWS license) the subscription belongs to
+          type: string
+    v1AwsSecretTlsConfig:
+      description: TLS configuration for the AWS secret
+      properties:
+        ca:
+          description: CA certificate
+          type: string
+        cert:
+          description: Certificate
+          type: string
+        key:
+          description: Key
+          type: string
+      type: object
+    v1PlanRenewal:
+      description: Plan Renewal
+      properties:
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: credit expiry time
+        planLimit:
+          $ref: '#/components/schemas/v1PlanLimit'
+        start:
+          $ref: '#/components/schemas/v1Time'
+          description: credit start time
+        type:
+          enum:
+          - Trial
+          - MonthlyOnDemand
+          - AnnualSubscription
+          type: string
+      required:
+      - type
+      - start
+      - expiry
+    v1SinkStatus:
+      description: Data sink status
+      properties:
+        sync:
+          $ref: '#/components/schemas/v1SinkSyncStatus'
+      type: object
+    v1DataSinksSummary:
+      description: Summary of all sinks configured for a tenant, across kinds.
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1DataSinkSummary'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1PublicCloudRateConfig:
+      description: Public cloud rate config
+      properties:
+        computeOptimized:
+          $ref: '#/components/schemas/v1CloudInstanceRateConfig'
+        memoryOptimized:
+          $ref: '#/components/schemas/v1CloudInstanceRateConfig'
+    v1MarketplaceSubscriptionSummaries:
+      description: List of marketplace subscription summaries
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MarketplaceSubscriptionSummary'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1TenantStatus:
+      description: Tenant Status
+      properties:
+        cleanUpStatus:
+          $ref: '#/components/schemas/v1TenantCleanUpStatus'
+        isActive:
+          type: boolean
+          x-omitempty: false
+        toBeDeleted:
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1PlanStatus:
+      properties:
+        changeLogs:
+          items:
+            type: string
+          type: array
+      type: object
+    v1TenantPaletteIdpConfigSpec:
+      description: Palette IDP configuration for the tenant
+      properties:
+        clientId:
+          description: The client ID for Palette OIDC
+          type: string
+          x-omitempty: false
+        clientSecret:
+          description: The client secret for Palette OIDC
+          type: string
+          x-omitempty: false
+        issuerUrl:
+          description: The issuer URL for Palette acting as OIDC identity provider
+          type: string
+          x-omitempty: false
+        scopes:
+          description: The OIDC scopes
+          items:
+            type: string
+          type: array
+          x-omitempty: false
+      type: object
+    v1TlsCA:
+      properties:
+        caCertBase64:
+          type: string
+        enabled:
+          type: boolean
+        insecureSkipVerify:
+          type: boolean
+      type: object
+    v1FipsSettings:
+      description: FIPS configuration
+      properties:
+        fipsClusterFeatureConfig:
+          $ref: '#/components/schemas/v1NonFipsConfig'
+        fipsClusterImportConfig:
+          $ref: '#/components/schemas/v1NonFipsConfig'
+        fipsPackConfig:
+          $ref: '#/components/schemas/v1NonFipsConfig'
+    v1MarketplacePlanLimit:
+      description: Marketplace plan limit
+      properties:
+        cpuCoreHours:
+          description: Total CPU core-hours entitled
+          format: int64
+          type: integer
+          x-omitempty: false
+    v1PlanCost:
+      description: Plan Cost
+      properties:
+        discount:
+          format: float
+          type: number
+          x-omitempty: false
+        price:
+          format: float
+          type: number
+          x-omitempty: false
+    v1TenantOidcClaims:
+      properties:
+        Email:
+          type: string
+          x-omitempty: false
+        FirstName:
+          type: string
+          x-omitempty: false
+        LastName:
+          type: string
+          x-omitempty: false
+        SpectroTeam:
+          type: string
+          x-omitempty: false
+      type: object
+    v1TenantSelfSignUpSpec:
+      description: Tenant sign up data
+      properties:
+        emailId:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        loginMode:
+          default: devops
+          enum:
+          - dev
+          - devops
+          type: string
+        notifyTenantAdmin:
+          type: boolean
+        orgName:
+          type: string
+      required:
+      - firstName
+      - lastName
+      - emailId
+      - orgName
+      type: object
     v1TenantCleanUpStatus:
       description: Tenant CleanUp Status
       properties:
@@ -3288,6 +2839,71 @@ components:
           type: boolean
           x-omitempty: false
       type: object
+    v1ProjectMeta:
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1DataSinkSpec:
+      properties:
+        auditDataSinks:
+          items:
+            $ref: '#/components/schemas/v1DataSinkableSpec'
+          type: array
+          uniqueItems: true
+      type: object
+    v1TenantClusterSettings:
+      properties:
+        nodesAutoRemediationSetting:
+          $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
+    v1TenantResourceLimits:
+      description: Tenant resource limits
+      properties:
+        resources:
+          items:
+            $ref: '#/components/schemas/v1TenantResourceLimit'
+          type: array
+          uniqueItems: true
+    v1Tenants:
+      description: Tenants list
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1Tenant'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1DataSinkSummary:
+      description: Data sink summary
+      properties:
+        kind:
+          description: 'Sink kind discriminator (e.g. splunk, cloudwatch). For legacy cloudwatch
+
+            entries the caller treats kind=cloudwatch as a presence signal and calls
+
+            /v1/tenants/{t}/assets/dataSinks to fetch the legacy CloudWatch configuration.
+
+            '
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        status:
+          $ref: '#/components/schemas/v1SinkStatus'
+      type: object
+    v1AwsCloudAccountCredentialType:
+      default: secret
+      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+      enum:
+      - secret
+      - sts
+      - pod-identity
+      type: string
     v1InvoiceBillingPeriod:
       description: Invoice billing period object
       properties:
@@ -3295,47 +2911,162 @@ components:
           $ref: '#/components/schemas/v1Time'
         start:
           $ref: '#/components/schemas/v1Time'
-    v1ActiveTenantResources:
-      description: Active resources of tenant
+    v1InvoiceSpec:
+      description: Invoice specification
       properties:
-        activeResources:
+        address:
+          $ref: '#/components/schemas/v1Address'
+        billingPeriod:
+          $ref: '#/components/schemas/v1InvoiceBillingPeriod'
+        credits:
+          $ref: '#/components/schemas/v1InvoiceCredits'
+        envType:
+          description: Environment type [Trial,MonthlyOnDemand,AnnualSubscription,OnPrem]
+          type: string
+        month:
+          $ref: '#/components/schemas/v1Time'
+          description: Month for which invoice is generated
+        paymentUnit:
+          enum:
+          - usd
+          type: string
+        plan:
+          $ref: '#/components/schemas/v1InvoicePlan'
+    v1ObjectMeta:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      properties:
+        annotations:
           additionalProperties:
-            items:
-              type: string
-            type: array
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
           type: object
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        deletionTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
       type: object
-    v1Invoice:
-      description: Invoice object
+    v1AwsLoginCredentials:
+      properties:
+        iamUser:
+          type: string
+        password:
+          format: password
+          type: string
+      type: object
+    v1TierPrice:
+      description: tier price
+      properties:
+        alloyPricing:
+          items:
+            $ref: '#/components/schemas/v1PriceRange'
+          type: array
+          uniqueItems: true
+        purePricing:
+          items:
+            $ref: '#/components/schemas/v1PriceRange'
+          type: array
+          uniqueItems: true
+    v1Macro:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    v1MarketplaceRegisterResponse:
+      description: 'Response returned after successful marketplace registration.
+
+        '
+      properties:
+        tenantUid:
+          description: UID of the newly created tenant
+          type: string
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1User:
+      description: User
       properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
-          $ref: '#/components/schemas/v1InvoiceSpec'
+          $ref: '#/components/schemas/v1UserSpec'
         status:
-          $ref: '#/components/schemas/v1InvoiceStatus'
-    v1TenantSamlSpecAttribute:
-      properties:
-        attributeValue:
-          type: string
-        mappedAttribute:
-          type: string
-        name:
-          type: string
-        nameFormat:
-          type: string
+          $ref: '#/components/schemas/v1UserStatus'
       type: object
-    v1MarketplaceSubscriptionSummaries:
-      description: List of marketplace subscription summaries
+    v1TenantAssetCert:
+      description: tenant cert
       properties:
-        items:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1Cert'
+      type: object
+    v1AuthTokenSettings:
+      description: System auth token settings
+      properties:
+        expiryTimeMinutes:
+          description: Auth token expiry time in minutes
+          format: int32
+          maximum: 1440
+          minimum: 15
+          type: integer
+          x-omitempty: false
+    v1Macros:
+      properties:
+        macros:
           items:
-            $ref: '#/components/schemas/v1MarketplaceSubscriptionSummary'
+            $ref: '#/components/schemas/v1Macro'
           type: array
           uniqueItems: true
-      required:
-      - items
-      type: object
+    v1PriceRange:
+      description: tier price range
+      properties:
+        discount:
+          format: int64
+          type: number
+        startFrom:
+          format: float64
+          type: number
+        unitAmount:
+          format: float64
+          type: number
+        upTo:
+          format: float64
+          type: number
+        upToInfinity:
+          type: boolean
     v1PlanSpec:
       description: Plan specifications
       properties:
@@ -3373,143 +3104,361 @@ components:
       - type
       - start
       - expiry
-    v1SinkStatus:
-      description: Data sink status
+    v1TenantFreemium:
+      description: Tenant freemium configuration
       properties:
-        sync:
-          $ref: '#/components/schemas/v1SinkSyncStatus'
-      type: object
-    v1TenantAssetCert:
-      description: tenant cert
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1Cert'
-      type: object
-    v1AwsSecretTlsConfig:
-      description: TLS configuration for the AWS secret
-      properties:
-        ca:
-          description: CA certificate
-          type: string
-        cert:
-          description: Certificate
-          type: string
-        key:
-          description: Key
-          type: string
-      type: object
-    v1PlanCpuCoreHoursUsages:
-      properties:
-        hourlyUsages:
-          items:
-            $ref: '#/components/schemas/v1ResourceUsage'
-          type: array
-          uniqueItems: true
-      type: object
-    v1AwsCloudAccountCredentialType:
-      default: secret
-      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
-      enum:
-      - secret
-      - sts
-      - pod-identity
-      type: string
-    v1TenantClusterRbacSettings:
-      description: Tenant cluster RBAC settings
-      properties:
-        automaticClusterRoleBinding:
-          default: none
-          description: Specifies the mode for automatic creation and management of cluster role bindings for tenant clusters
-          enum:
-          - none
-          - enabled
-          - disabled
-          type: string
+        activeClustersLimit:
+          type: integer
           x-omitempty: false
-      type: object
-    v1FipsSettings:
-      description: FIPS configuration
-      properties:
-        fipsClusterFeatureConfig:
-          $ref: '#/components/schemas/v1NonFipsConfig'
-        fipsClusterImportConfig:
-          $ref: '#/components/schemas/v1NonFipsConfig'
-        fipsPackConfig:
-          $ref: '#/components/schemas/v1NonFipsConfig'
-    v1PlanRenewal:
-      description: Plan Renewal
-      properties:
-        expiry:
-          $ref: '#/components/schemas/v1Time'
-          description: credit expiry time
-        planLimit:
-          $ref: '#/components/schemas/v1PlanLimit'
-        start:
-          $ref: '#/components/schemas/v1Time'
-          description: credit start time
-        type:
-          enum:
-          - Trial
-          - MonthlyOnDemand
-          - AnnualSubscription
-          type: string
-      required:
-      - type
-      - start
-      - expiry
-    v1TenantSsoAuthProvidersEntity:
-      properties:
-        isEnabled:
+        isFreemium:
           type: boolean
           x-omitempty: false
-        ssoLogins:
+        isUnlimited:
+          type: boolean
+          x-omitempty: false
+        overageUsageLimit:
+          format: float64
+          type: number
+          x-omitempty: false
+        totalUsageLimit:
+          format: float64
+          type: number
+          x-omitempty: false
+    v1TenantSamlSpec:
+      description: Tenant
+      properties:
+        acsUrl:
+          type: string
+        attributes:
+          items:
+            $ref: '#/components/schemas/v1TenantSamlSpecAttribute'
+          type: array
+        audienceUrl:
+          description: same as entity id
+          type: string
+        certificate:
+          description: certificate for slo
+          type: string
+        defaultTeams:
           items:
             type: string
           type: array
-          uniqueItems: true
+        entityId:
+          type: string
+        federationMetadata:
+          type: string
+        identityProvider:
+          type: string
+        isSingleLogoutEnabled:
+          type: boolean
+          x-omitempty: false
+        isSsoEnabled:
+          type: boolean
+          x-omitempty: false
+        issuer:
+          description: same as entity id
+          type: string
+        nameIdFormat:
+          type: string
+        serviceProviderMetadata:
+          type: string
+        singleLogoutUrl:
+          description: slo url
+          type: string
+          x-omitempty: false
+        syncSsoTeams:
+          description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
+          type: boolean
+          x-omitempty: false
       type: object
-    v1TenantEntity:
-      description: Tenant Entity
+    v1UserStatus:
+      description: User status
+      properties:
+        activationLink:
+          description: provides the link to activate or reset the user password
+          type: string
+          x-omitempty: false
+        isActive:
+          description: Specifies if user account is active/disabled
+          type: boolean
+          x-omitempty: false
+        isPasswordResetting:
+          description: Specifies if user in multi org requested password reset
+          type: boolean
+          x-omitempty: false
+        lastSignIn:
+          $ref: '#/components/schemas/v1Time'
+          description: user's last sign in time
+    v1Tenant:
+      description: Tenant
       properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
-          $ref: '#/components/schemas/v1TenantSpecEntity'
+          $ref: '#/components/schemas/v1TenantSpec'
+        status:
+          $ref: '#/components/schemas/v1TenantStatus'
       type: object
-    v1PublicCloudRateConfig:
-      description: Public cloud rate config
+    v1AwsMarketplaceSubscriptionStatus:
+      description: AWS marketplace subscription status
       properties:
-        computeOptimized:
-          $ref: '#/components/schemas/v1CloudInstanceRateConfig'
-        memoryOptimized:
-          $ref: '#/components/schemas/v1CloudInstanceRateConfig'
-    v1TotalResourceUsage:
-      description: Total Resource Usage
+        state:
+          description: Current subscription state
+          type: string
+    v1AwsUserCloudAccount:
+      properties:
+        accountId:
+          type: string
+        cloudAccount:
+          $ref: '#/components/schemas/v1AwsCloudAccount'
+    v1AwsStsCredentials:
+      description: Aws sts credentials
+      properties:
+        arn:
+          description: Arn for the aws sts credentials in cloud account
+          type: string
+        externalId:
+          description: ExternalId for the aws sts credentials in cloud account
+          type: string
+      type: object
+    v1TenantFreemiumUsage:
+      properties:
+        isFreemium:
+          type: boolean
+          x-omitempty: false
+        isUnlimited:
+          type: boolean
+          x-omitempty: false
+        limit:
+          $ref: '#/components/schemas/v1FreemiumUsageLimit'
+        usage:
+          $ref: '#/components/schemas/v1FreemiumUsage'
+      type: object
+    v1ProjectUsageData:
+      description: Project usage data object
+      properties:
+        amount:
+          description: Billing amount for the project
+          format: float64
+          type: number
+        tierPrice:
+          description: Tier price based on the usage
+          format: float64
+          type: number
+        usedCredits:
+          description: Project used credits
+          format: float64
+          type: number
+    v1AwsCreditAccountEntity:
+      properties:
+        creditLimitInDollars:
+          format: float64
+          type: number
+          x-omitempty: false
+        creditUsedInDollars:
+          format: float64
+          type: number
+          x-omitempty: false
+        loginCredentials:
+          $ref: '#/components/schemas/v1AwsLoginCredentials'
+        userCloudAccount:
+          $ref: '#/components/schemas/v1AwsUserCloudAccount'
+      type: object
+    v1TenantAddressPatch:
+      description: Tenant Address
+      properties:
+        address:
+          $ref: '#/components/schemas/v1Address'
+      type: object
+    v1CleanUpResource:
+      description: Resources of tenant
+      properties:
+        activeResources:
+          $ref: '#/components/schemas/v1ActiveTenantResources'
+        tenantStatus:
+          $ref: '#/components/schemas/v1TenantCleanUpStatus'
+      type: object
+    v1Error:
+      properties:
+        code:
+          type: string
+        details:
+          type: object
+        message:
+          type: string
+        ref:
+          type: string
+      type: object
+    v1DeveloperCredit:
+      description: Credits allocated for each tenant/user
+      properties:
+        cpu:
+          description: cpu in cores
+          format: int32
+          type: number
+          x-omitempty: false
+        memoryGiB:
+          description: memory in GiB
+          format: int32
+          type: number
+          x-omitempty: false
+        storageGiB:
+          description: storage in GiB
+          format: int32
+          type: integer
+          x-omitempty: false
+        virtualClustersLimit:
+          description: number of active virtual clusters
+          format: int32
+          type: number
+          x-omitempty: false
+    v1CloudWatch:
+      properties:
+        credentials:
+          $ref: '#/components/schemas/v1AwsCloudAccount'
+        group:
+          type: string
+        region:
+          type: string
+        stream:
+          type: string
+      type: object
+    v1Cert:
+      properties:
+        certificate:
+          type: string
+          x-omitempty: false
+        isCA:
+          type: boolean
+          x-omitempty: false
+        key:
+          type: string
+          x-omitempty: false
+      type: object
+    v1Invoice:
+      description: Invoice object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1InvoiceSpec'
+        status:
+          $ref: '#/components/schemas/v1InvoiceStatus'
+    v1PlanLimit:
+      description: Monthly Plan Limit
+      properties:
+        alloy:
+          $ref: '#/components/schemas/v1PlanLimitSpec'
+        isOnDemand:
+          description: is onDemand plan and has no limit
+          type: boolean
+          x-omitempty: false
+        isUnlimited:
+          description: is unlimited cpu core hours
+          type: boolean
+          x-omitempty: false
+        pure:
+          $ref: '#/components/schemas/v1PlanLimitSpec'
+    v1DataSinkConfig:
+      description: Data sink
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1DataSinkSpec'
+      type: object
+    v1ResourceUsage:
+      description: ResourceUsage
       properties:
         projects:
           items:
             $ref: '#/components/schemas/v1ProjectResourceUsage'
           type: array
           uniqueItems: true
+        timestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: resource usage time
         totalAlloyCpuCoreHours:
           type: number
           x-omitempty: false
         totalPureCpuCoreHours:
           type: number
           x-omitempty: false
-    v1InvoiceCredits:
-      description: Invoice credits object
+    v1NodesAutoRemediationSettings:
       properties:
-        alloyFreeCredits:
-          description: Credits allocated for import clusters
+        disableNodesAutoRemediation:
+          type: boolean
+          x-omitempty: false
+        isEnabled:
+          type: boolean
+          x-omitempty: false
+    v1PlanMonthlyUsage:
+      description: Plan monthly usage entity
+      properties:
+        dailyUsages:
+          items:
+            $ref: '#/components/schemas/v1ResourceUsage'
+          type: array
+          uniqueItems: true
+        month:
+          $ref: '#/components/schemas/v1Time'
+          description: usage month
+        planLimit:
+          $ref: '#/components/schemas/v1PlanLimit'
+        planType:
+          enum:
+          - Trial
+          - MonthlyOnDemand
+          - AnnualSubscription
+          type: string
+        planUid:
+          type: string
+        totalMonthlyUsage:
+          $ref: '#/components/schemas/v1TotalResourceUsage'
+    v1TenantContractSpec:
+      description: Tenant contract settings
+      properties:
+        acceptedTime:
+          $ref: '#/components/schemas/v1Time'
+          description: If the contract is accepted offline, set the accepted time
+        isAccepted:
+          description: If the contract is accepted offline, then set this field to true
+          type: boolean
+        isRequired:
+          description: Is the contract required, for on-prem installation it will be false
+          type: boolean
+      required:
+      - isRequired
+      - isAccepted
+      type: object
+    v1TenantBasicEntity:
+      description: Tenant Basic param
+      properties:
+        emailId:
+          type: string
+        orgName:
+          type: string
+      type: object
+    v1PlanLimitSpec:
+      description: Monthly Plan Limit spec
+      properties:
+        cpuCoreHours:
+          description: cpu cores hours
           format: int64
-          type: number
-        pureFreeCredits:
-          description: Credits allocated for managed clusters
-          format: int64
-          type: number
+          type: integer
+          x-omitempty: false
+        overageLimitPercentage:
+          default: 25
+          description: overage limit in percentage
+          format: int8
+          type: integer
+          x-omitempty: false
+        warnLimitPercentage:
+          default: 90
+          description: warning limit in percentage
+          format: int8
+          type: integer
+          x-omitempty: false
     v1SplunkSinkSpec:
       description: Splunk HEC connection configuration.
       properties:
@@ -3544,78 +3493,147 @@ components:
       - hecUrl
       - token
       type: object
-    v1TenantEnableClusterGroup:
-      description: Enable or Disable cluster group for a tenant
+    v1AwsSecretSpec:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
       properties:
-        hideSystemClusterGroups:
+        accountName:
+          description: AWS secret accountName; only for aws-iso-b environment
+          type: string
+        agency:
+          description: AWS secret agency
+          type: string
+        isCapValidationEnabled:
+          description: Flag to rotate the secret region credentials
           type: boolean
-          x-omitempty: false
-        isClusterGroupEnabled:
-          description: Deprecated. Use hideSystemClusterGroups field
-          type: boolean
-          x-omitempty: false
-    v1AuthTokenSettings:
-      description: System auth token settings
+        mission:
+          description: AWS secret mission; only for aws-iso environment
+          type: string
+        namePrefix:
+          description: Policy Boundary
+          type: string
+        permissionBoundary:
+          description: Role or Policy Prefix
+          type: string
+        policy:
+          description: AWS secret policy; JSON string
+          type: string
+        role:
+          description: AWS secret role
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
+          description: TLS configuration for the AWS secret
+      type: object
+    v1FreemiumUsage:
       properties:
-        expiryTimeMinutes:
-          description: Auth token expiry time in minutes
-          format: int32
-          maximum: 1440
-          minimum: 15
-          type: integer
+        usage:
+          format: float64
+          type: number
           x-omitempty: false
-    v1TenantContractSpec:
-      description: Tenant contract settings
+      type: object
+    v1Plan:
+      description: Plan
       properties:
-        acceptedTime:
-          $ref: '#/components/schemas/v1Time'
-          description: If the contract is accepted offline, set the accepted time
-        isAccepted:
-          description: If the contract is accepted offline, then set this field to true
-          type: boolean
-        isRequired:
-          description: Is the contract required, for on-prem installation it will be false
-          type: boolean
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1PlanSpec'
+        status:
+          $ref: '#/components/schemas/v1PlanStatus'
+    v1SplunkSink:
+      description: Splunk HEC audit-log sink configuration.
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1SplunkSinkSpec'
+        status:
+          $ref: '#/components/schemas/v1SinkStatus'
+      type: object
+    v1AwsPodIdentityCredentials:
+      description: AWS EKS Pod Identity credentials for role assumption
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
+    v1AwsCloudAccount:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+      properties:
+        accessKey:
+          description: AWS account access key
+          type: string
+        credentialType:
+          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
+        partition:
+          default: aws
+          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+          enum:
+          - aws
+          - aws-us-gov
+          - aws-iso
+          - aws-iso-b
+          type: string
+        podIdentity:
+          $ref: '#/components/schemas/v1AwsPodIdentityCredentials'
+          description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
+        policyARNs:
+          description: List of policy ARNs required in case of credentialType sts.
+          items:
+            type: string
+          type: array
+        secretKey:
+          description: AWS account secret key
+          type: string
+        secretSpec:
+          $ref: '#/components/schemas/v1AwsSecretSpec'
+        secretToken:
+          description: AWS account secret token; in case of aws-iso and aws-iso-b
+          type: string
+        sts:
+          $ref: '#/components/schemas/v1AwsStsCredentials'
+          description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
+      type: object
+    v1SplunkSinkEntity:
+      description: Input payload for creating or updating a Splunk HEC sink.
+      properties:
+        name:
+          description: Human-readable name for this sink. Must be unique per tenant.
+          type: string
+        spec:
+          $ref: '#/components/schemas/v1SplunkSinkSpec'
       required:
-      - isRequired
-      - isAccepted
+      - name
+      - spec
       type: object
-    v1PlanStatus:
+    v1TenantResourceLimitEntity:
       properties:
-        changeLogs:
-          items:
-            type: string
-          type: array
-      type: object
-    v1TenantDomains:
-      description: Tenant domains
-      properties:
-        domains:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-      type: object
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+        kind:
+          $ref: '#/components/schemas/v1ResourceLimitType'
           type: string
           x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
         limit:
-          description: Number of records feteched
-          type: integer
+          format: int64
+          type: number
           x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
-      type: object
+    v1PrivateCloudRateConfig:
+      description: Private cloud rate config
+      properties:
+        cpuUnitPricePerHour:
+          format: float64
+          type: number
+        gpuUnitPricePerHour:
+          format: float64
+          type: number
+        memoryUnitPriceGiBPerHour:
+          format: float64
+          type: number
+        storageUnitPriceGiBPerHour:
+          format: float64
+          type: number
     v1FreemiumUsageLimit:
       properties:
         activeClusters:
@@ -3629,43 +3647,50 @@ components:
           type: number
           x-omitempty: false
       type: object
-    v1TenantAssetCerts:
+    v1OidcUserInfo:
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1TenantAssetCert'
-          type: array
-          uniqueItems: true
-      required:
-      - items
+        claims:
+          $ref: '#/components/schemas/v1TenantOidcClaims'
+        useUserInfo:
+          default: false
+          type: boolean
+          x-omitempty: false
       type: object
-    v1DataSinksSummary:
-      description: Summary of all sinks configured for a tenant, across kinds.
+    v1TenantSpecEntity:
+      description: Tenant Entity input
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1DataSinkSummary'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1TenantEmailPatch:
-      description: Tenant EmailId
-      properties:
+        address:
+          $ref: '#/components/schemas/v1Address'
+        authType:
+          type: string
         emailId:
           type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        loginMode:
+          default: devops
+          enum:
+          - dev
+          - devops
+          type: string
+        orgEmailId:
+          type: string
+        orgName:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        ssoApp:
+          type: string
       type: object
-    v1Tenant:
-      description: Tenant
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1TenantSpec'
-        status:
-          $ref: '#/components/schemas/v1TenantStatus'
-      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
     v1MarketplaceRegisterEntity:
       description: 'Registration request submitted when a marketplace user is redirected to Palette after purchasing a SaaS contract (e.g., from AWS Marketplace). Contains the temporary registration token from the redirect and the user''s profile information for tenant and user creation.
 
@@ -3699,6 +3724,76 @@ components:
       - firstName
       - lastName
       - orgName
+    v1TenantPasswordPolicyEntity:
+      description: Tenant Password Policy Entity
+      properties:
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+        expiryDurationInDays:
+          type: integer
+        firstReminderInDays:
+          type: integer
+        isRegex:
+          type: boolean
+        maxLength:
+          type: integer
+        minLength:
+          type: integer
+        minNumOfBlockLetters:
+          type: integer
+        minNumOfDigits:
+          type: integer
+        minNumOfSmallLetters:
+          type: integer
+        minNumOfSpecialCharacters:
+          type: integer
+        regex:
+          type: string
+        updateTimestamp:
+          $ref: '#/components/schemas/v1Time'
+      type: object
+    v1TenantResourceLimit:
+      properties:
+        kind:
+          $ref: '#/components/schemas/v1ResourceLimitType'
+          type: string
+        label:
+          type: string
+        limit:
+          format: int64
+          type: number
+          x-omitempty: false
+        maxLimit:
+          format: int64
+          type: number
+          x-omitempty: false
+    v1TenantEntity:
+      description: Tenant Entity
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1TenantSpecEntity'
+      type: object
+    v1CustomCloudRateConfig:
+      description: Private cloud rate config
+      properties:
+        cloudType:
+          type: string
+        rateConfig:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig'
+    v1MarketplaceSubscriptionSummary:
+      description: Summary of a marketplace subscription for the tenant
+      properties:
+        kind:
+          description: Cloud provider kind
+          type: string
+        state:
+          description: Current subscription state
+          type: string
+        uid:
+          description: Subscription document UID
+          type: string
     v1InvoiceProject:
       description: Invoice project object
       properties:
@@ -3715,12 +3810,2035 @@ components:
         usage:
           $ref: '#/components/schemas/v1ProjectUsage'
           description: Usage by the project
-    v1AwsUserCloudAccount:
+    v1UserSpec:
+      description: User specifications
+      properties:
+        emailId:
+          description: User's email id
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+    v1DataSinkConfig_2:
+      description: Data sink
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          auditDataSinks:
+          - cloudWatch:
+              credentials:
+                credentialType: secret
+                secretSpec:
+                  mission: mission
+                  permissionBoundary: permissionBoundary
+                  role: role
+                  agency: agency
+                  accountName: accountName
+                  namePrefix: namePrefix
+                  tls:
+                    cert: cert
+                    ca: ca
+                    key: key
+                  isCapValidationEnabled: true
+                  policy: policy
+                partition: aws
+                sts:
+                  externalId: externalId
+                  arn: arn
+                secretKey: secretKey
+                accessKey: accessKey
+                podIdentity:
+                  roleArn: roleArn
+                  permissionBoundaryArn: permissionBoundaryArn
+                secretToken: secretToken
+                policyARNs:
+                - policyARNs
+                - policyARNs
+              stream: stream
+              region: region
+              group: group
+            type: cloudwatch
+          - cloudWatch:
+              credentials:
+                credentialType: secret
+                secretSpec:
+                  mission: mission
+                  permissionBoundary: permissionBoundary
+                  role: role
+                  agency: agency
+                  accountName: accountName
+                  namePrefix: namePrefix
+                  tls:
+                    cert: cert
+                    ca: ca
+                    key: key
+                  isCapValidationEnabled: true
+                  policy: policy
+                partition: aws
+                sts:
+                  externalId: externalId
+                  arn: arn
+                secretKey: secretKey
+                accessKey: accessKey
+                podIdentity:
+                  roleArn: roleArn
+                  permissionBoundaryArn: permissionBoundaryArn
+                secretToken: secretToken
+                policyARNs:
+                - policyARNs
+                - policyARNs
+              stream: stream
+              region: region
+              group: group
+            type: cloudwatch
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1DataSinkSpec_2'
+      type: object
+    v1InvoiceProduct_2:
+      description: Product invoice object
+      example:
+        alloy:
+          amount: 7.061401241503109
+          breachedCredits: 3.616076749251911
+          allocatedCredits: 2.3021358869347655
+          totalUsedCredits: 1.0246457001441578
+          tierName: tierName
+          billableCredits: 9.301444243932576
+          discount: 2.027123023002322
+          freeCredits: 4.145608029883936
+          usedCredits: 1.4894159098541704
+          overageLimitPercentage: 7.386281948385884
+          tierPrice: 1.2315135367772556
+        pure:
+          amount: 7.061401241503109
+          breachedCredits: 3.616076749251911
+          allocatedCredits: 2.3021358869347655
+          totalUsedCredits: 1.0246457001441578
+          tierName: tierName
+          billableCredits: 9.301444243932576
+          discount: 2.027123023002322
+          freeCredits: 4.145608029883936
+          usedCredits: 1.4894159098541704
+          overageLimitPercentage: 7.386281948385884
+          tierPrice: 1.2315135367772556
+      properties:
+        alloy:
+          $ref: '#/components/schemas/v1InvoiceProductData_2'
+        pure:
+          $ref: '#/components/schemas/v1InvoiceProductData_2'
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1PlanCredit_2:
+      description: Plan Credit
+      example:
+        cpuCoreHours: 1.4658129805029452
+        creditUid: creditUid
+        name: name
+        start: 2000-01-23 04:56:07+00:00
+        expiry: 2000-01-23 04:56:07+00:00
+        type: Pure
+      properties:
+        cpuCoreHours:
+          format: int64
+          type: number
+          x-omitempty: false
+        creditUid:
+          type: string
+        expiry:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          type: string
+        start:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        type:
+          enum:
+          - Pure
+          - Alloy
+          type: string
+      required:
+      - type
+      type: object
+    v1AwsLoginCredentials_2:
+      example:
+        password: password
+        iamUser: iamUser
+      properties:
+        iamUser:
+          type: string
+        password:
+          format: password
+          type: string
+      type: object
+    v1InvoiceStatus_2:
+      description: Invoice Status
+      example:
+        billableAmount: 5.637376656633329
+        productInvoice:
+          alloy:
+            amount: 7.061401241503109
+            breachedCredits: 3.616076749251911
+            allocatedCredits: 2.3021358869347655
+            totalUsedCredits: 1.0246457001441578
+            tierName: tierName
+            billableCredits: 9.301444243932576
+            discount: 2.027123023002322
+            freeCredits: 4.145608029883936
+            usedCredits: 1.4894159098541704
+            overageLimitPercentage: 7.386281948385884
+            tierPrice: 1.2315135367772556
+          pure:
+            amount: 7.061401241503109
+            breachedCredits: 3.616076749251911
+            allocatedCredits: 2.3021358869347655
+            totalUsedCredits: 1.0246457001441578
+            tierName: tierName
+            billableCredits: 9.301444243932576
+            discount: 2.027123023002322
+            freeCredits: 4.145608029883936
+            usedCredits: 1.4894159098541704
+            overageLimitPercentage: 7.386281948385884
+            tierPrice: 1.2315135367772556
+        projects:
+        - amount: 6.84685269835264
+          projectUid: projectUid
+          usage:
+            alloy:
+              amount: 7.457744773683766
+              usedCredits: 4.965218492984954
+              tierPrice: 1.1730742509559433
+            pure:
+              amount: 7.457744773683766
+              usedCredits: 4.965218492984954
+              tierPrice: 1.1730742509559433
+          projectName: projectName
+        - amount: 6.84685269835264
+          projectUid: projectUid
+          usage:
+            alloy:
+              amount: 7.457744773683766
+              usedCredits: 4.965218492984954
+              tierPrice: 1.1730742509559433
+            pure:
+              amount: 7.457744773683766
+              usedCredits: 4.965218492984954
+              tierPrice: 1.1730742509559433
+          projectName: projectName
+        stripeInvoiceId: stripeInvoiceId
+        states:
+        - paymentMsg: paymentMsg
+          state: Paid
+          timestamp: 2000-01-23 04:56:07+00:00
+        - paymentMsg: paymentMsg
+          state: Paid
+          timestamp: 2000-01-23 04:56:07+00:00
+      properties:
+        billableAmount:
+          description: Total billable amount
+          format: float64
+          type: number
+        productInvoice:
+          $ref: '#/components/schemas/v1InvoiceProduct_2'
+        projects:
+          description: List of project invoices
+          items:
+            $ref: '#/components/schemas/v1InvoiceProject_2'
+          type: array
+        states:
+          description: List of invoice states
+          items:
+            $ref: '#/components/schemas/v1InvoiceState_2'
+          type: array
+          uniqueItems: true
+        stripeInvoiceId:
+          description: Stripe invoice uid
+          type: string
+      type: object
+    v1Macro_2:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    v1InvoicePlan_2:
+      description: Invoice plan object
+      example:
+        slaCredits:
+        - planCredit:
+            cpuCoreHours: 1.4658129805029452
+            creditUid: creditUid
+            name: name
+            start: 2000-01-23 04:56:07+00:00
+            expiry: 2000-01-23 04:56:07+00:00
+            type: Pure
+          totalCpuCoreHours: 5.962133916683182
+        - planCredit:
+            cpuCoreHours: 1.4658129805029452
+            creditUid: creditUid
+            name: name
+            start: 2000-01-23 04:56:07+00:00
+            expiry: 2000-01-23 04:56:07+00:00
+            type: Pure
+          totalCpuCoreHours: 5.962133916683182
+        freeCredits:
+        - planCredit:
+            cpuCoreHours: 1.4658129805029452
+            creditUid: creditUid
+            name: name
+            start: 2000-01-23 04:56:07+00:00
+            expiry: 2000-01-23 04:56:07+00:00
+            type: Pure
+          totalCpuCoreHours: 5.962133916683182
+        - planCredit:
+            cpuCoreHours: 1.4658129805029452
+            creditUid: creditUid
+            name: name
+            start: 2000-01-23 04:56:07+00:00
+            expiry: 2000-01-23 04:56:07+00:00
+            type: Pure
+          totalCpuCoreHours: 5.962133916683182
+        plantype: Trial
+      properties:
+        freeCredits:
+          description: List of free credits
+          items:
+            $ref: '#/components/schemas/v1InvoicePlanCredit_2'
+          type: array
+        plantype:
+          enum:
+          - Trial
+          - MonthlyOnDemand
+          - AnnualSubscription
+          type: string
+        slaCredits:
+          description: List of SLA credits
+          items:
+            $ref: '#/components/schemas/v1InvoicePlanCredit_2'
+          type: array
+      type: object
+    v1NodesAutoRemediationSettings_2:
+      example:
+        isEnabled: true
+        disableNodesAutoRemediation: true
+      properties:
+        disableNodesAutoRemediation:
+          type: boolean
+          x-omitempty: false
+        isEnabled:
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1TenantAssetCert_2:
+      description: tenant cert
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          certificate: certificate
+          isCA: true
+          key: key
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1Cert_2'
+      type: object
+    v1TenantClusterRbacSettings_2:
+      description: Tenant cluster RBAC settings
+      example:
+        automaticClusterRoleBinding: none
+      properties:
+        automaticClusterRoleBinding:
+          default: none
+          description: Specifies the mode for automatic creation and management of cluster role bindings for tenant clusters
+          enum:
+          - none
+          - enabled
+          - disabled
+          type: string
+          x-omitempty: false
+      type: object
+    v1ProjectUsage_2:
+      description: Project usage object
+      example:
+        alloy:
+          amount: 7.457744773683766
+          usedCredits: 4.965218492984954
+          tierPrice: 1.1730742509559433
+        pure:
+          amount: 7.457744773683766
+          usedCredits: 4.965218492984954
+          tierPrice: 1.1730742509559433
+      properties:
+        alloy:
+          $ref: '#/components/schemas/v1ProjectUsageData_2'
+        pure:
+          $ref: '#/components/schemas/v1ProjectUsageData_2'
+      type: object
+    v1NonFipsConfig_2:
+      description: Non-FIPS configuration
+      example:
+        mode: nonFipsDisabled
+      properties:
+        mode:
+          default: nonFipsDisabled
+          description: enable or disable the non FIPS complaint
+          enum:
+          - nonFipsEnabled
+          - nonFipsDisabled
+          type: string
+      type: object
+    v1RateConfig_2:
+      description: Rate config
+      example:
+        edge:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+        vsphere:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+        gcp:
+          memoryOptimized:
+            memoryRateProportion: 2.302136
+            computeRateProportion: 5.637377
+          computeOptimized:
+            memoryRateProportion: 2.302136
+            computeRateProportion: 5.637377
+        maas:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+        custom:
+        - cloudType: cloudType
+          rateConfig:
+            gpuUnitPricePerHour: 6.027456183070403
+            storageUnitPriceGiBPerHour: 5.962133916683182
+            cpuUnitPricePerHour: 0.8008281904610115
+            memoryUnitPriceGiBPerHour: 1.4658129805029452
+        - cloudType: cloudType
+          rateConfig:
+            gpuUnitPricePerHour: 6.027456183070403
+            storageUnitPriceGiBPerHour: 5.962133916683182
+            cpuUnitPricePerHour: 0.8008281904610115
+            memoryUnitPriceGiBPerHour: 1.4658129805029452
+        apache-cloudstack:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+        openstack:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+        aws:
+          memoryOptimized:
+            memoryRateProportion: 2.302136
+            computeRateProportion: 5.637377
+          computeOptimized:
+            memoryRateProportion: 2.302136
+            computeRateProportion: 5.637377
+        edgeNative:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+        generic:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+        azure:
+          memoryOptimized:
+            memoryRateProportion: 2.302136
+            computeRateProportion: 5.637377
+          computeOptimized:
+            memoryRateProportion: 2.302136
+            computeRateProportion: 5.637377
+      properties:
+        apache-cloudstack:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+        aws:
+          $ref: '#/components/schemas/v1PublicCloudRateConfig_2'
+        azure:
+          $ref: '#/components/schemas/v1PublicCloudRateConfig_2'
+        custom:
+          items:
+            $ref: '#/components/schemas/v1CustomCloudRateConfig_2'
+          type: array
+          uniqueItems: true
+        edge:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+        edgeNative:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+        gcp:
+          $ref: '#/components/schemas/v1PublicCloudRateConfig_2'
+        generic:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+        maas:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+        openstack:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+        vsphere:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+      type: object
+    v1AuthTokenSettings_2:
+      description: System auth token settings
+      example:
+        expiryTimeMinutes: 129
+      properties:
+        expiryTimeMinutes:
+          description: Auth token expiry time in minutes
+          format: int32
+          maximum: 1440
+          minimum: 15
+          type: integer
+          x-omitempty: false
+      type: object
+    v1CloudInstanceRateConfig_2:
+      description: Cloud instance rate config
+      example:
+        memoryRateProportion: 2.302136
+        computeRateProportion: 5.637377
+      properties:
+        computeRateProportion:
+          format: float
+          type: number
+        memoryRateProportion:
+          format: float
+          type: number
+      type: object
+    v1LoginBannerSettings_2:
+      example:
+        Message: Message
+        isEnabled: true
+        title: title
+      properties:
+        Message:
+          description: Login banner message displayed to the user
+          type: string
+          x-omitempty: false
+        isEnabled:
+          description: Set to 'true' if login banner has to be displayed for user
+          type: boolean
+          x-omitempty: false
+        title:
+          description: Banner title displayed to the user
+          type: string
+          x-omitempty: false
+      type: object
+    v1Macros_2:
+      example:
+        macros:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        macros:
+          items:
+            $ref: '#/components/schemas/v1Macro_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1Address_2:
+      description: Tenant Address
+      example:
+        country: country
+        pincode: pincode
+        city: city
+        addressLine1: addressLine1
+        addressLine2: addressLine2
+        state: state
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          type: string
+        city:
+          type: string
+        country:
+          type: string
+        pincode:
+          type: string
+        state:
+          type: string
+      type: object
+    v1OidcIssuerTls_2:
+      example:
+        insecureSkipVerify: false
+        caCertificateBase64: caCertificateBase64
+      properties:
+        caCertificateBase64:
+          type: string
+          x-omitempty: false
+        insecureSkipVerify:
+          default: false
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1TenantEnableClusterGroup_2:
+      description: Enable or Disable cluster group for a tenant
+      example:
+        hideSystemClusterGroups: true
+        isClusterGroupEnabled: true
+      properties:
+        hideSystemClusterGroups:
+          type: boolean
+          x-omitempty: false
+        isClusterGroupEnabled:
+          description: Deprecated. Use hideSystemClusterGroups field
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1AwsSecretSpec_2:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+      example:
+        mission: mission
+        permissionBoundary: permissionBoundary
+        role: role
+        agency: agency
+        accountName: accountName
+        namePrefix: namePrefix
+        tls:
+          cert: cert
+          ca: ca
+          key: key
+        isCapValidationEnabled: true
+        policy: policy
+      properties:
+        accountName:
+          description: AWS secret accountName; only for aws-iso-b environment
+          type: string
+        agency:
+          description: AWS secret agency
+          type: string
+        isCapValidationEnabled:
+          description: Flag to rotate the secret region credentials
+          type: boolean
+        mission:
+          description: AWS secret mission; only for aws-iso environment
+          type: string
+        namePrefix:
+          description: Policy Boundary
+          type: string
+        permissionBoundary:
+          description: Role or Policy Prefix
+          type: string
+        policy:
+          description: AWS secret policy; JSON string
+          type: string
+        role:
+          description: AWS secret role
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AwsSecretTlsConfig_2'
+      type: object
+    v1FreemiumUsage_2:
+      example:
+        usage: 5.962133916683182
+      properties:
+        usage:
+          format: float64
+          type: number
+          x-omitempty: false
+      type: object
+    v1DataSinkableSpec_2:
+      example:
+        cloudWatch:
+          credentials:
+            credentialType: secret
+            secretSpec:
+              mission: mission
+              permissionBoundary: permissionBoundary
+              role: role
+              agency: agency
+              accountName: accountName
+              namePrefix: namePrefix
+              tls:
+                cert: cert
+                ca: ca
+                key: key
+              isCapValidationEnabled: true
+              policy: policy
+            partition: aws
+            sts:
+              externalId: externalId
+              arn: arn
+            secretKey: secretKey
+            accessKey: accessKey
+            podIdentity:
+              roleArn: roleArn
+              permissionBoundaryArn: permissionBoundaryArn
+            secretToken: secretToken
+            policyARNs:
+            - policyARNs
+            - policyARNs
+          stream: stream
+          region: region
+          group: group
+        type: cloudwatch
+      properties:
+        cloudWatch:
+          $ref: '#/components/schemas/v1CloudWatch_2'
+        type:
+          enum:
+          - cloudwatch
+          type: string
+      type: object
+    v1TenantFreemium_2:
+      description: Tenant freemium configuration
+      example:
+        totalUsageLimit: 1.4658129805029452
+        isUnlimited: true
+        activeClustersLimit: 0
+        overageUsageLimit: 6.027456183070403
+        isFreemium: true
+      properties:
+        activeClustersLimit:
+          type: integer
+          x-omitempty: false
+        isFreemium:
+          type: boolean
+          x-omitempty: false
+        isUnlimited:
+          type: boolean
+          x-omitempty: false
+        overageUsageLimit:
+          format: float64
+          type: number
+          x-omitempty: false
+        totalUsageLimit:
+          format: float64
+          type: number
+          x-omitempty: false
+      type: object
+    v1TenantSamlSpec_2:
+      description: Tenant
+      example:
+        isSingleLogoutEnabled: true
+        certificate: certificate
+        defaultTeams:
+        - defaultTeams
+        - defaultTeams
+        entityId: entityId
+        serviceProviderMetadata: serviceProviderMetadata
+        isSsoEnabled: true
+        identityProvider: identityProvider
+        issuer: issuer
+        acsUrl: acsUrl
+        audienceUrl: audienceUrl
+        syncSsoTeams: true
+        singleLogoutUrl: singleLogoutUrl
+        nameIdFormat: nameIdFormat
+        attributes:
+        - attributeValue: attributeValue
+          nameFormat: nameFormat
+          name: name
+          mappedAttribute: mappedAttribute
+        - attributeValue: attributeValue
+          nameFormat: nameFormat
+          name: name
+          mappedAttribute: mappedAttribute
+        federationMetadata: federationMetadata
+      properties:
+        acsUrl:
+          type: string
+        attributes:
+          items:
+            $ref: '#/components/schemas/v1TenantSamlSpecAttribute_2'
+          type: array
+        audienceUrl:
+          description: same as entity id
+          type: string
+        certificate:
+          description: certificate for slo
+          type: string
+        defaultTeams:
+          items:
+            type: string
+          type: array
+        entityId:
+          type: string
+        federationMetadata:
+          type: string
+        identityProvider:
+          type: string
+        isSingleLogoutEnabled:
+          type: boolean
+          x-omitempty: false
+        isSsoEnabled:
+          type: boolean
+          x-omitempty: false
+        issuer:
+          description: same as entity id
+          type: string
+        nameIdFormat:
+          type: string
+        serviceProviderMetadata:
+          type: string
+        singleLogoutUrl:
+          description: slo url
+          type: string
+          x-omitempty: false
+        syncSsoTeams:
+          description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1TenantSsoAuthProvidersEntity_2:
+      example:
+        isEnabled: true
+        ssoLogins:
+        - ssoLogins
+        - ssoLogins
+      properties:
+        isEnabled:
+          type: boolean
+          x-omitempty: false
+        ssoLogins:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1TenantSamlSpecAttribute_2:
+      example:
+        attributeValue: attributeValue
+        nameFormat: nameFormat
+        name: name
+        mappedAttribute: mappedAttribute
+      properties:
+        attributeValue:
+          type: string
+        mappedAttribute:
+          type: string
+        name:
+          type: string
+        nameFormat:
+          type: string
+      type: object
+    v1AwsPodIdentityCredentials_2:
+      description: AWS EKS Pod Identity credentials for role assumption
+      example:
+        roleArn: roleArn
+        permissionBoundaryArn: permissionBoundaryArn
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
+    v1AwsSecretTlsConfig_2:
+      description: TLS configuration for the AWS secret
+      example:
+        cert: cert
+        ca: ca
+        key: key
+      properties:
+        ca:
+          description: CA certificate
+          type: string
+        cert:
+          description: Certificate
+          type: string
+        key:
+          description: Key
+          type: string
+      type: object
+    v1PublicCloudRateConfig_2:
+      description: Public cloud rate config
+      example:
+        memoryOptimized:
+          memoryRateProportion: 2.302136
+          computeRateProportion: 5.637377
+        computeOptimized:
+          memoryRateProportion: 2.302136
+          computeRateProportion: 5.637377
+      properties:
+        computeOptimized:
+          $ref: '#/components/schemas/v1CloudInstanceRateConfig_2'
+        memoryOptimized:
+          $ref: '#/components/schemas/v1CloudInstanceRateConfig_2'
+      type: object
+    v1Invoice_2:
+      description: Invoice object
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          address:
+            country: country
+            pincode: pincode
+            city: city
+            addressLine1: addressLine1
+            addressLine2: addressLine2
+            state: state
+          month: 2000-01-23 04:56:07+00:00
+          billingPeriod:
+            start: 2000-01-23 04:56:07+00:00
+            end: 2000-01-23 04:56:07+00:00
+          credits:
+            pureFreeCredits: 6.027456183070403
+            alloyFreeCredits: 0.8008281904610115
+          envType: envType
+          paymentUnit: usd
+          plan:
+            slaCredits:
+            - planCredit:
+                cpuCoreHours: 1.4658129805029452
+                creditUid: creditUid
+                name: name
+                start: 2000-01-23 04:56:07+00:00
+                expiry: 2000-01-23 04:56:07+00:00
+                type: Pure
+              totalCpuCoreHours: 5.962133916683182
+            - planCredit:
+                cpuCoreHours: 1.4658129805029452
+                creditUid: creditUid
+                name: name
+                start: 2000-01-23 04:56:07+00:00
+                expiry: 2000-01-23 04:56:07+00:00
+                type: Pure
+              totalCpuCoreHours: 5.962133916683182
+            freeCredits:
+            - planCredit:
+                cpuCoreHours: 1.4658129805029452
+                creditUid: creditUid
+                name: name
+                start: 2000-01-23 04:56:07+00:00
+                expiry: 2000-01-23 04:56:07+00:00
+                type: Pure
+              totalCpuCoreHours: 5.962133916683182
+            - planCredit:
+                cpuCoreHours: 1.4658129805029452
+                creditUid: creditUid
+                name: name
+                start: 2000-01-23 04:56:07+00:00
+                expiry: 2000-01-23 04:56:07+00:00
+                type: Pure
+              totalCpuCoreHours: 5.962133916683182
+            plantype: Trial
+        status:
+          billableAmount: 5.637376656633329
+          productInvoice:
+            alloy:
+              amount: 7.061401241503109
+              breachedCredits: 3.616076749251911
+              allocatedCredits: 2.3021358869347655
+              totalUsedCredits: 1.0246457001441578
+              tierName: tierName
+              billableCredits: 9.301444243932576
+              discount: 2.027123023002322
+              freeCredits: 4.145608029883936
+              usedCredits: 1.4894159098541704
+              overageLimitPercentage: 7.386281948385884
+              tierPrice: 1.2315135367772556
+            pure:
+              amount: 7.061401241503109
+              breachedCredits: 3.616076749251911
+              allocatedCredits: 2.3021358869347655
+              totalUsedCredits: 1.0246457001441578
+              tierName: tierName
+              billableCredits: 9.301444243932576
+              discount: 2.027123023002322
+              freeCredits: 4.145608029883936
+              usedCredits: 1.4894159098541704
+              overageLimitPercentage: 7.386281948385884
+              tierPrice: 1.2315135367772556
+          projects:
+          - amount: 6.84685269835264
+            projectUid: projectUid
+            usage:
+              alloy:
+                amount: 7.457744773683766
+                usedCredits: 4.965218492984954
+                tierPrice: 1.1730742509559433
+              pure:
+                amount: 7.457744773683766
+                usedCredits: 4.965218492984954
+                tierPrice: 1.1730742509559433
+            projectName: projectName
+          - amount: 6.84685269835264
+            projectUid: projectUid
+            usage:
+              alloy:
+                amount: 7.457744773683766
+                usedCredits: 4.965218492984954
+                tierPrice: 1.1730742509559433
+              pure:
+                amount: 7.457744773683766
+                usedCredits: 4.965218492984954
+                tierPrice: 1.1730742509559433
+            projectName: projectName
+          stripeInvoiceId: stripeInvoiceId
+          states:
+          - paymentMsg: paymentMsg
+            state: Paid
+            timestamp: 2000-01-23 04:56:07+00:00
+          - paymentMsg: paymentMsg
+            state: Paid
+            timestamp: 2000-01-23 04:56:07+00:00
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1InvoiceSpec_2'
+        status:
+          $ref: '#/components/schemas/v1InvoiceStatus_2'
+      type: object
+    v1AwsCloudAccount_2:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+      example:
+        credentialType: secret
+        secretSpec:
+          mission: mission
+          permissionBoundary: permissionBoundary
+          role: role
+          agency: agency
+          accountName: accountName
+          namePrefix: namePrefix
+          tls:
+            cert: cert
+            ca: ca
+            key: key
+          isCapValidationEnabled: true
+          policy: policy
+        partition: aws
+        sts:
+          externalId: externalId
+          arn: arn
+        secretKey: secretKey
+        accessKey: accessKey
+        podIdentity:
+          roleArn: roleArn
+          permissionBoundaryArn: permissionBoundaryArn
+        secretToken: secretToken
+        policyARNs:
+        - policyARNs
+        - policyARNs
+      properties:
+        accessKey:
+          description: AWS account access key
+          type: string
+        credentialType:
+          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
+        partition:
+          default: aws
+          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+          enum:
+          - aws
+          - aws-us-gov
+          - aws-iso
+          - aws-iso-b
+          type: string
+        podIdentity:
+          $ref: '#/components/schemas/v1AwsPodIdentityCredentials_2'
+        policyARNs:
+          description: List of policy ARNs required in case of credentialType sts.
+          items:
+            type: string
+          type: array
+        secretKey:
+          description: AWS account secret key
+          type: string
+        secretSpec:
+          $ref: '#/components/schemas/v1AwsSecretSpec_2'
+        secretToken:
+          description: AWS account secret token; in case of aws-iso and aws-iso-b
+          type: string
+        sts:
+          $ref: '#/components/schemas/v1AwsStsCredentials_2'
+      type: object
+    v1AwsUserCloudAccount_2:
+      example:
+        accountId: accountId
+        cloudAccount:
+          credentialType: secret
+          secretSpec:
+            mission: mission
+            permissionBoundary: permissionBoundary
+            role: role
+            agency: agency
+            accountName: accountName
+            namePrefix: namePrefix
+            tls:
+              cert: cert
+              ca: ca
+              key: key
+            isCapValidationEnabled: true
+            policy: policy
+          partition: aws
+          sts:
+            externalId: externalId
+            arn: arn
+          secretKey: secretKey
+          accessKey: accessKey
+          podIdentity:
+            roleArn: roleArn
+            permissionBoundaryArn: permissionBoundaryArn
+          secretToken: secretToken
+          policyARNs:
+          - policyARNs
+          - policyARNs
       properties:
         accountId:
           type: string
         cloudAccount:
-          $ref: '#/components/schemas/v1AwsCloudAccount'
+          $ref: '#/components/schemas/v1AwsCloudAccount_2'
+      type: object
+    v1FipsSettings_2:
+      description: FIPS configuration
+      example:
+        fipsPackConfig:
+          mode: nonFipsDisabled
+        fipsClusterFeatureConfig:
+          mode: nonFipsDisabled
+        fipsClusterImportConfig:
+          mode: nonFipsDisabled
+      properties:
+        fipsClusterFeatureConfig:
+          $ref: '#/components/schemas/v1NonFipsConfig_2'
+        fipsClusterImportConfig:
+          $ref: '#/components/schemas/v1NonFipsConfig_2'
+        fipsPackConfig:
+          $ref: '#/components/schemas/v1NonFipsConfig_2'
+      type: object
+    v1InvoiceState_2:
+      description: Invoice state object
+      example:
+        paymentMsg: paymentMsg
+        state: Paid
+        timestamp: 2000-01-23 04:56:07+00:00
+      properties:
+        paymentMsg:
+          description: Payment status message
+          type: string
+        state:
+          enum:
+          - Paid
+          - PaymentPending
+          - PaymentInProgress
+          - PaymentFailed
+          type: string
+        timestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1AwsStsCredentials_2:
+      description: Aws sts credentials
+      example:
+        externalId: externalId
+        arn: arn
+      properties:
+        arn:
+          description: Arn for the aws sts credentials in cloud account
+          type: string
+        externalId:
+          description: ExternalId for the aws sts credentials in cloud account
+          type: string
+      type: object
+    v1TenantResourceLimitEntity_2:
+      properties:
+        kind:
+          $ref: '#/components/schemas/v1ResourceLimitType'
+        limit:
+          format: int64
+          type: number
+          x-omitempty: false
+      type: object
+    v1TenantFreemiumUsage_2:
+      example:
+        isUnlimited: true
+        usage:
+          usage: 5.962133916683182
+        limit:
+          activeClusters: 0
+          overageUsage: 6.027456183070403
+          usage: 1.4658129805029452
+        isFreemium: true
+      properties:
+        isFreemium:
+          type: boolean
+          x-omitempty: false
+        isUnlimited:
+          type: boolean
+          x-omitempty: false
+        limit:
+          $ref: '#/components/schemas/v1FreemiumUsageLimit_2'
+        usage:
+          $ref: '#/components/schemas/v1FreemiumUsage_2'
+      type: object
+    v1PrivateCloudRateConfig_2:
+      description: Private cloud rate config
+      example:
+        gpuUnitPricePerHour: 6.027456183070403
+        storageUnitPriceGiBPerHour: 5.962133916683182
+        cpuUnitPricePerHour: 0.8008281904610115
+        memoryUnitPriceGiBPerHour: 1.4658129805029452
+      properties:
+        cpuUnitPricePerHour:
+          format: float64
+          type: number
+        gpuUnitPricePerHour:
+          format: float64
+          type: number
+        memoryUnitPriceGiBPerHour:
+          format: float64
+          type: number
+        storageUnitPriceGiBPerHour:
+          format: float64
+          type: number
+      type: object
+    v1FreemiumUsageLimit_2:
+      example:
+        activeClusters: 0
+        overageUsage: 6.027456183070403
+        usage: 1.4658129805029452
+      properties:
+        activeClusters:
+          type: integer
+          x-omitempty: false
+        overageUsage:
+          type: number
+          x-omitempty: false
+        usage:
+          format: float64
+          type: number
+          x-omitempty: false
+      type: object
+    v1TenantDomains_2:
+      description: Tenant domains
+      example:
+        domains:
+        - domains
+        - domains
+      properties:
+        domains:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1ProjectUsageData_2:
+      description: Project usage data object
+      example:
+        amount: 7.457744773683766
+        usedCredits: 4.965218492984954
+        tierPrice: 1.1730742509559433
+      properties:
+        amount:
+          description: Billing amount for the project
+          format: float64
+          type: number
+        tierPrice:
+          description: Tier price based on the usage
+          format: float64
+          type: number
+        usedCredits:
+          description: Project used credits
+          format: float64
+          type: number
+      type: object
+    v1OidcUserInfo_2:
+      example:
+        useUserInfo: false
+        claims:
+          Email: Email
+          FirstName: FirstName
+          SpectroTeam: SpectroTeam
+          LastName: LastName
+      properties:
+        claims:
+          $ref: '#/components/schemas/v1TenantOidcClaims_2'
+        useUserInfo:
+          default: false
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1InvoiceProductData_2:
+      description: Product invoice data
+      example:
+        amount: 7.061401241503109
+        breachedCredits: 3.616076749251911
+        allocatedCredits: 2.3021358869347655
+        totalUsedCredits: 1.0246457001441578
+        tierName: tierName
+        billableCredits: 9.301444243932576
+        discount: 2.027123023002322
+        freeCredits: 4.145608029883936
+        usedCredits: 1.4894159098541704
+        overageLimitPercentage: 7.386281948385884
+        tierPrice: 1.2315135367772556
+      properties:
+        allocatedCredits:
+          description: Allocated credits
+          format: int64
+          type: number
+        amount:
+          description: Total amount
+          format: float64
+          type: number
+        billableCredits:
+          description: Credits to be billed
+          format: float64
+          type: number
+        breachedCredits:
+          description: Credits that are exceeds the allocated credits
+          format: float64
+          type: number
+        discount:
+          description: Applied discount
+          format: int64
+          type: number
+        freeCredits:
+          description: Allocated free credits
+          format: int64
+          type: number
+        overageLimitPercentage:
+          description: Allowed overage limit in percentage
+          format: int8
+          type: number
+        tierName:
+          description: Tier name
+          type: string
+        tierPrice:
+          description: Tier price
+          format: float64
+          type: number
+        totalUsedCredits:
+          description: Total used credits
+          format: float64
+          type: number
+        usedCredits:
+          description: Used credits
+          format: float64
+          type: number
+      type: object
+    v1TenantResourceLimitsEntity_2:
+      description: Tenant resource limits. Supported resources keys are 'user','project','apiKey','team','role','cloudaccount','clusterprofile','workspace','registry','privategateway','location','certificate','macro','sshkey','alert','spectrocluster','edgehost'.
+      properties:
+        resources:
+          items:
+            $ref: '#/components/schemas/v1TenantResourceLimitEntity_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1TenantPasswordPolicyEntity_2:
+      description: Tenant Password Policy Entity
+      example:
+        minNumOfSpecialCharacters: 9
+        regex: regex
+        isRegex: true
+        minNumOfBlockLetters: 5
+        minLength: 5
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        firstReminderInDays: 6
+        expiryDurationInDays: 0
+        minNumOfSmallLetters: 7
+        maxLength: 1
+        updateTimestamp: 2000-01-23 04:56:07+00:00
+        minNumOfDigits: 2
+      properties:
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        expiryDurationInDays:
+          type: integer
+        firstReminderInDays:
+          type: integer
+        isRegex:
+          type: boolean
+        maxLength:
+          type: integer
+        minLength:
+          type: integer
+        minNumOfBlockLetters:
+          type: integer
+        minNumOfDigits:
+          type: integer
+        minNumOfSmallLetters:
+          type: integer
+        minNumOfSpecialCharacters:
+          type: integer
+        regex:
+          type: string
+        updateTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1AwsCreditAccountEntity_2:
+      example:
+        creditLimitInDollars: 0.8008281904610115
+        creditUsedInDollars: 6.027456183070403
+        loginCredentials:
+          password: password
+          iamUser: iamUser
+        userCloudAccount:
+          accountId: accountId
+          cloudAccount:
+            credentialType: secret
+            secretSpec:
+              mission: mission
+              permissionBoundary: permissionBoundary
+              role: role
+              agency: agency
+              accountName: accountName
+              namePrefix: namePrefix
+              tls:
+                cert: cert
+                ca: ca
+                key: key
+              isCapValidationEnabled: true
+              policy: policy
+            partition: aws
+            sts:
+              externalId: externalId
+              arn: arn
+            secretKey: secretKey
+            accessKey: accessKey
+            podIdentity:
+              roleArn: roleArn
+              permissionBoundaryArn: permissionBoundaryArn
+            secretToken: secretToken
+            policyARNs:
+            - policyARNs
+            - policyARNs
+      properties:
+        creditLimitInDollars:
+          format: float64
+          type: number
+          x-omitempty: false
+        creditUsedInDollars:
+          format: float64
+          type: number
+          x-omitempty: false
+        loginCredentials:
+          $ref: '#/components/schemas/v1AwsLoginCredentials_2'
+        userCloudAccount:
+          $ref: '#/components/schemas/v1AwsUserCloudAccount_2'
+      type: object
+    v1TenantOidcClaims_2:
+      example:
+        Email: Email
+        FirstName: FirstName
+        SpectroTeam: SpectroTeam
+        LastName: LastName
+      properties:
+        Email:
+          type: string
+          x-omitempty: false
+        FirstName:
+          type: string
+          x-omitempty: false
+        LastName:
+          type: string
+          x-omitempty: false
+        SpectroTeam:
+          type: string
+          x-omitempty: false
+      type: object
+    v1InvoiceCredits_2:
+      description: Invoice credits object
+      example:
+        pureFreeCredits: 6.027456183070403
+        alloyFreeCredits: 0.8008281904610115
+      properties:
+        alloyFreeCredits:
+          description: Credits allocated for import clusters
+          format: int64
+          type: number
+        pureFreeCredits:
+          description: Credits allocated for managed clusters
+          format: int64
+          type: number
+      type: object
+    v1InvoicePlanCredit_2:
+      description: Invoice plan credit object
+      example:
+        planCredit:
+          cpuCoreHours: 1.4658129805029452
+          creditUid: creditUid
+          name: name
+          start: 2000-01-23 04:56:07+00:00
+          expiry: 2000-01-23 04:56:07+00:00
+          type: Pure
+        totalCpuCoreHours: 5.962133916683182
+      properties:
+        planCredit:
+          $ref: '#/components/schemas/v1PlanCredit_2'
+        totalCpuCoreHours:
+          description: Total used cpu core hours
+          format: int64
+          type: number
+      type: object
+    v1TenantResourceLimit_2:
+      example:
+        maxLimit: 6.027456183070403
+        kind: user
+        limit: 0.8008281904610115
+        label: label
+      properties:
+        kind:
+          $ref: '#/components/schemas/v1ResourceLimitType'
+        label:
+          type: string
+        limit:
+          format: int64
+          type: number
+          x-omitempty: false
+        maxLimit:
+          format: int64
+          type: number
+          x-omitempty: false
+      type: object
+    v1CustomCloudRateConfig_2:
+      description: Private cloud rate config
+      example:
+        cloudType: cloudType
+        rateConfig:
+          gpuUnitPricePerHour: 6.027456183070403
+          storageUnitPriceGiBPerHour: 5.962133916683182
+          cpuUnitPricePerHour: 0.8008281904610115
+          memoryUnitPriceGiBPerHour: 1.4658129805029452
+      properties:
+        cloudType:
+          type: string
+        rateConfig:
+          $ref: '#/components/schemas/v1PrivateCloudRateConfig_2'
+      type: object
+    v1DeveloperCredit_2:
+      description: Credits allocated for each tenant/user
+      example:
+        virtualClustersLimit: 5.962133916683182
+        memoryGiB: 6.027456183070403
+        cpu: 0.8008281904610115
+        storageGiB: 1
+      properties:
+        cpu:
+          description: cpu in cores
+          format: int32
+          type: number
+          x-omitempty: false
+        memoryGiB:
+          description: memory in GiB
+          format: int32
+          type: number
+          x-omitempty: false
+        storageGiB:
+          description: storage in GiB
+          format: int32
+          type: integer
+          x-omitempty: false
+        virtualClustersLimit:
+          description: number of active virtual clusters
+          format: int32
+          type: number
+          x-omitempty: false
+      type: object
+    v1DataSinkSpec_2:
+      example:
+        auditDataSinks:
+        - cloudWatch:
+            credentials:
+              credentialType: secret
+              secretSpec:
+                mission: mission
+                permissionBoundary: permissionBoundary
+                role: role
+                agency: agency
+                accountName: accountName
+                namePrefix: namePrefix
+                tls:
+                  cert: cert
+                  ca: ca
+                  key: key
+                isCapValidationEnabled: true
+                policy: policy
+              partition: aws
+              sts:
+                externalId: externalId
+                arn: arn
+              secretKey: secretKey
+              accessKey: accessKey
+              podIdentity:
+                roleArn: roleArn
+                permissionBoundaryArn: permissionBoundaryArn
+              secretToken: secretToken
+              policyARNs:
+              - policyARNs
+              - policyARNs
+            stream: stream
+            region: region
+            group: group
+          type: cloudwatch
+        - cloudWatch:
+            credentials:
+              credentialType: secret
+              secretSpec:
+                mission: mission
+                permissionBoundary: permissionBoundary
+                role: role
+                agency: agency
+                accountName: accountName
+                namePrefix: namePrefix
+                tls:
+                  cert: cert
+                  ca: ca
+                  key: key
+                isCapValidationEnabled: true
+                policy: policy
+              partition: aws
+              sts:
+                externalId: externalId
+                arn: arn
+              secretKey: secretKey
+              accessKey: accessKey
+              podIdentity:
+                roleArn: roleArn
+                permissionBoundaryArn: permissionBoundaryArn
+              secretToken: secretToken
+              policyARNs:
+              - policyARNs
+              - policyARNs
+            stream: stream
+            region: region
+            group: group
+          type: cloudwatch
+      properties:
+        auditDataSinks:
+          items:
+            $ref: '#/components/schemas/v1DataSinkableSpec_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1TenantClusterSettings_2:
+      example:
+        nodesAutoRemediationSetting:
+          isEnabled: true
+          disableNodesAutoRemediation: true
+      properties:
+        nodesAutoRemediationSetting:
+          $ref: '#/components/schemas/v1NodesAutoRemediationSettings_2'
+      type: object
+    v1TenantOidcClientSpec_2:
+      description: Tenant
+      example:
+        userInfo:
+          useUserInfo: false
+          claims:
+            Email: Email
+            FirstName: FirstName
+            SpectroTeam: SpectroTeam
+            LastName: LastName
+        clientId: clientId
+        issuerUrl: issuerUrl
+        defaultTeams:
+        - defaultTeams
+        - defaultTeams
+        isSsoEnabled: true
+        requiredClaims:
+          Email: Email
+          FirstName: FirstName
+          SpectroTeam: SpectroTeam
+          LastName: LastName
+        syncSsoTeams: true
+        scopesDelimiter: scopesDelimiter
+        issuerTls:
+          insecureSkipVerify: false
+          caCertificateBase64: caCertificateBase64
+        logoutUrl: logoutUrl
+        callbackUrl: callbackUrl
+        clientSecret: clientSecret
+        scopes:
+        - scopes
+        - scopes
+      properties:
+        callbackUrl:
+          type: string
+          x-omitempty: false
+        clientId:
+          type: string
+          x-omitempty: false
+        clientSecret:
+          type: string
+          x-omitempty: false
+        defaultTeams:
+          items:
+            type: string
+          type: array
+          x-omitempty: false
+        isSsoEnabled:
+          type: boolean
+          x-omitempty: false
+        issuerTls:
+          $ref: '#/components/schemas/v1OidcIssuerTls_2'
+        issuerUrl:
+          description: the issuer is the URL identifier for the service
+          type: string
+          x-omitempty: false
+        logoutUrl:
+          type: string
+          x-omitempty: false
+        requiredClaims:
+          $ref: '#/components/schemas/v1TenantOidcClaims_2'
+        scopes:
+          items:
+            type: string
+          type: array
+          x-omitempty: false
+        scopesDelimiter:
+          type: string
+          x-omitempty: false
+        syncSsoTeams:
+          description: When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved
+          type: boolean
+          x-omitempty: false
+        userInfo:
+          $ref: '#/components/schemas/v1OidcUserInfo_2'
+      type: object
+    v1CloudWatch_2:
+      example:
+        credentials:
+          credentialType: secret
+          secretSpec:
+            mission: mission
+            permissionBoundary: permissionBoundary
+            role: role
+            agency: agency
+            accountName: accountName
+            namePrefix: namePrefix
+            tls:
+              cert: cert
+              ca: ca
+              key: key
+            isCapValidationEnabled: true
+            policy: policy
+          partition: aws
+          sts:
+            externalId: externalId
+            arn: arn
+          secretKey: secretKey
+          accessKey: accessKey
+          podIdentity:
+            roleArn: roleArn
+            permissionBoundaryArn: permissionBoundaryArn
+          secretToken: secretToken
+          policyARNs:
+          - policyARNs
+          - policyARNs
+        stream: stream
+        region: region
+        group: group
+      properties:
+        credentials:
+          $ref: '#/components/schemas/v1AwsCloudAccount_2'
+        group:
+          type: string
+        region:
+          type: string
+        stream:
+          type: string
+      type: object
+    v1InvoiceProject_2:
+      description: Invoice project object
+      example:
+        amount: 6.84685269835264
+        projectUid: projectUid
+        usage:
+          alloy:
+            amount: 7.457744773683766
+            usedCredits: 4.965218492984954
+            tierPrice: 1.1730742509559433
+          pure:
+            amount: 7.457744773683766
+            usedCredits: 4.965218492984954
+            tierPrice: 1.1730742509559433
+        projectName: projectName
+      properties:
+        amount:
+          description: Billing amount for the project
+          format: float64
+          type: number
+        projectName:
+          description: Name of the project
+          type: string
+        projectUid:
+          description: Project identifier
+          type: string
+        usage:
+          $ref: '#/components/schemas/v1ProjectUsage_2'
+      type: object
+    v1TenantResourceLimits_2:
+      description: Tenant resource limits
+      example:
+        resources:
+        - maxLimit: 6.027456183070403
+          kind: user
+          limit: 0.8008281904610115
+          label: label
+        - maxLimit: 6.027456183070403
+          kind: user
+          limit: 0.8008281904610115
+          label: label
+      properties:
+        resources:
+          items:
+            $ref: '#/components/schemas/v1TenantResourceLimit_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1Cert_2:
+      example:
+        certificate: certificate
+        isCA: true
+        key: key
+      properties:
+        certificate:
+          type: string
+          x-omitempty: false
+        isCA:
+          type: boolean
+          x-omitempty: false
+        key:
+          type: string
+          x-omitempty: false
+      type: object
+    v1TenantAssetCerts_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            certificate: certificate
+            isCA: true
+            key: key
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            certificate: certificate
+            isCA: true
+            key: key
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1TenantAssetCert_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1InvoiceBillingPeriod_2:
+      description: Invoice billing period object
+      example:
+        start: 2000-01-23 04:56:07+00:00
+        end: 2000-01-23 04:56:07+00:00
+      properties:
+        end:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        start:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1InvoiceSpec_2:
+      description: Invoice specification
+      example:
+        address:
+          country: country
+          pincode: pincode
+          city: city
+          addressLine1: addressLine1
+          addressLine2: addressLine2
+          state: state
+        month: 2000-01-23 04:56:07+00:00
+        billingPeriod:
+          start: 2000-01-23 04:56:07+00:00
+          end: 2000-01-23 04:56:07+00:00
+        credits:
+          pureFreeCredits: 6.027456183070403
+          alloyFreeCredits: 0.8008281904610115
+        envType: envType
+        paymentUnit: usd
+        plan:
+          slaCredits:
+          - planCredit:
+              cpuCoreHours: 1.4658129805029452
+              creditUid: creditUid
+              name: name
+              start: 2000-01-23 04:56:07+00:00
+              expiry: 2000-01-23 04:56:07+00:00
+              type: Pure
+            totalCpuCoreHours: 5.962133916683182
+          - planCredit:
+              cpuCoreHours: 1.4658129805029452
+              creditUid: creditUid
+              name: name
+              start: 2000-01-23 04:56:07+00:00
+              expiry: 2000-01-23 04:56:07+00:00
+              type: Pure
+            totalCpuCoreHours: 5.962133916683182
+          freeCredits:
+          - planCredit:
+              cpuCoreHours: 1.4658129805029452
+              creditUid: creditUid
+              name: name
+              start: 2000-01-23 04:56:07+00:00
+              expiry: 2000-01-23 04:56:07+00:00
+              type: Pure
+            totalCpuCoreHours: 5.962133916683182
+          - planCredit:
+              cpuCoreHours: 1.4658129805029452
+              creditUid: creditUid
+              name: name
+              start: 2000-01-23 04:56:07+00:00
+              expiry: 2000-01-23 04:56:07+00:00
+              type: Pure
+            totalCpuCoreHours: 5.962133916683182
+          plantype: Trial
+      properties:
+        address:
+          $ref: '#/components/schemas/v1Address_2'
+        billingPeriod:
+          $ref: '#/components/schemas/v1InvoiceBillingPeriod_2'
+        credits:
+          $ref: '#/components/schemas/v1InvoiceCredits_2'
+        envType:
+          description: Environment type [Trial,MonthlyOnDemand,AnnualSubscription,OnPrem]
+          type: string
+        month:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        paymentUnit:
+          enum:
+          - usd
+          type: string
+        plan:
+          $ref: '#/components/schemas/v1InvoicePlan_2'
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -3732,3 +5850,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

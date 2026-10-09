@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-template-profile-variables-response-schema.json",
+  "title": "v1ClusterTemplateProfileVariablesResponse",
+  "description": "Response for retrieving variables for a specific profile in a cluster template",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clustertemplates-api-openapi.yml#/components/schemas/v1ClusterTemplateProfileVariablesResponse",
+  "properties": {
+    "variables": {
+      "description": "List of variables with cluster assignments",
+      "items": {
+        "$ref": "#/$defs/v1ClusterTemplateProfileVariableWithClusters"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ClusterTemplateProfileVariableWithClusters": {
+      "description": "Variable with cluster assignments",
+      "properties": {
+        "clusters": {
+          "description": "List of clusters with variable assignments",
+          "items": {
+            "$ref": "#/$defs/v1ClusterTemplateVariableClusterAssignment"
+          },
+          "type": "array"
+        },
+        "variable": {
+          "$ref": "#/$defs/v1Variable",
+          "description": "Variable field with schema definition",
+          "type": "object"
+        }
+      },
+      "required": [
+        "variable",
+        "clusters"
+      ],
+      "type": "object"
+    },
+    "v1ClusterTemplateVariableClusterAssignment": {
+      "description": "Cluster variable assignment information",
+      "properties": {
+        "assignedBy": {
+          "description": "Specifies the actor who has made the current variable assignment",
+          "enum": [
+            "spectrocluster",
+            "clustertemplate"
+          ],
+          "type": "string"
+        },
+        "assignedValue": {
+          "description": "Value assigned to the variable",
+          "type": "string"
+        },
+        "assignmentState": {
+          "description": "State of the variable assignment",
+          "enum": [
+            "Pending",
+            "Assigned"
+          ],
+          "type": "string"
+        },
+        "uid": {
+          "description": "Cluster UID",
+          "type": "string"
+        },
+        "value": {
+          "description": "Current running value of the variable",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uid",
+        "assignmentState"
+      ],
+      "type": "object"
+    },
+    "v1Variable": {
+      "description": "Unique variable field with schema definition",
+      "properties": {
+        "defaultValue": {
+          "description": "The default value of the variable",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "description": {
+          "description": "Variable description",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Unique display name of the variable",
+          "type": "string"
+        },
+        "format": {
+          "$ref": "#/$defs/v1VariableFormat"
+        },
+        "hidden": {
+          "description": "If true, then variable will be hidden for overriding the value. By default the hidden flag will be set to false",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "immutable": {
+          "description": "If true, then variable value can't be editable. By default the immutable flag will be set to false",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "inputType": {
+          "$ref": "#/$defs/v1VariableInputType",
+          "description": "Input type for the variable - text or dropdown. Defaults to text for backward compatibility"
+        },
+        "isSensitive": {
+          "description": "If true, then default value will be masked. By default the isSensitive flag will be set to false",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "name": {
+          "description": "Variable name",
+          "type": "string"
+        },
+        "options": {
+          "description": "Available options for dropdown input type",
+          "items": {
+            "$ref": "#/$defs/v1VariableOption"
+          },
+          "type": "array"
+        },
+        "regex": {
+          "description": "Regular expression pattern which the variable value must match",
+          "type": "string"
+        },
+        "required": {
+          "description": "Flag to specify if the variable is optional or mandatory. If it is mandatory then default value must be provided",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1VariableFormat": {
+      "default": "string",
+      "description": "Format type of the variable value",
+      "enum": [
+        "string",
+        "number",
+        "boolean",
+        "ipv4",
+        "ipv4cidr",
+        "ipv6",
+        "version",
+        "base64"
+      ],
+      "type": "string"
+    },
+    "v1VariableInputType": {
+      "default": "text",
+      "description": "Input type for the variable",
+      "enum": [
+        "text",
+        "dropdown",
+        "multiline"
+      ],
+      "type": "string"
+    },
+    "v1VariableOption": {
+      "description": "Option for dropdown variable input type",
+      "properties": {
+        "default": {
+          "description": "Mark this option as the default selection",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "description": {
+          "description": "Optional tooltip/description for the option",
+          "type": "string"
+        },
+        "label": {
+          "description": "Display text for the option",
+          "type": "string"
+        },
+        "value": {
+          "description": "Actual value for the option",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "type": "object"
+    }
+  }
+}

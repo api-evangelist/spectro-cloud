@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-teams-summary-spec-schema.json",
+  "title": "v1TeamsSummarySpec",
+  "description": "Teams filter summary spec",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-teams-api-openapi.yml#/components/schemas/v1TeamsSummarySpec",
+  "properties": {
+    "filter": {
+      "$ref": "#/$defs/v1TeamsFilterSpec"
+    },
+    "sort": {
+      "items": {
+        "$ref": "#/$defs/v1TeamSummarySortSpec"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "v1FilterString": {
+      "properties": {
+        "beginsWith": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contains": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eq": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ignoreCase": {
+          "default": true,
+          "type": "boolean"
+        },
+        "ne": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "v1SortOrder": {
+      "default": "asc",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "type": "string"
+    },
+    "v1TeamSummarySortFields": {
+      "enum": [
+        "name",
+        "creationTimestamp"
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "v1TeamSummarySortSpec": {
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/v1TeamSummarySortFields"
+        },
+        "order": {
+          "$ref": "#/$defs/v1SortOrder"
+        }
+      }
+    },
+    "v1TeamsFilterSpec": {
+      "description": "Teams filter spec",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/v1FilterString"
+        }
+      }
+    }
+  }
+}

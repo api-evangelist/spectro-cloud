@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-system-oidc-client-spec-schema.json",
+  "title": "v1SystemOidcClientSpec",
+  "description": "system sso oidc config spec",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-system-api-openapi.yml#/components/schemas/v1SystemOidcClientSpec",
+  "properties": {
+    "callbackUrl": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "clientId": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "clientSecret": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "isEnabled": {
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "issuerUrl": {
+      "description": "the issuer is the URL identifier for the service",
+      "type": "string",
+      "x-omitempty": false
+    },
+    "logoUrl": {
+      "type": "string",
+      "x-omitempty": false
+    },
+    "requiredClaims": {
+      "$ref": "#/$defs/v1SystemOidcClaims"
+    },
+    "scopes": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "x-omitempty": false
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1SystemOidcClaims": {
+      "properties": {
+        "Email": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "FirstName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "LastName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "SpectroTeam": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    }
+  }
+}

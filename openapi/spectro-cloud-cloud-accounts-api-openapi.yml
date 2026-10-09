@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Cloudaccounts API
+  title: Spectro Cloud Cloudaccounts API
   version: v1
+  description: 'Operations tagged cloudaccounts across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Cloud Accounts
   x-displayName: Cloudaccounts
@@ -104,6 +106,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1CloudStackAccountInputEntity'
         description: Request payload to validate CloudStack cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}:
     parameters:
     - description: CloudStack cloud account uid
@@ -172,6 +176,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1CloudStackAccountUpdateEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/diskofferings:
     parameters:
     - in: path
@@ -210,6 +216,8 @@ paths:
       summary: Get the cloudstack disk offerings for a given account and zone
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/domains:
     parameters:
     - in: path
@@ -238,6 +246,8 @@ paths:
       summary: Get the cloudstack domains for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/keypairs:
     parameters:
     - in: path
@@ -276,6 +286,8 @@ paths:
       summary: Get the cloudstack SSH key pairs for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/networks:
     parameters:
     - in: path
@@ -319,6 +331,8 @@ paths:
       summary: Get the cloudstack networks for a given account and zone
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/offerings:
     parameters:
     - in: path
@@ -362,6 +376,8 @@ paths:
       summary: Get the cloudstack compute offerings for a given account and zone
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/projects:
     parameters:
     - in: path
@@ -390,6 +406,8 @@ paths:
       summary: Get the cloudstack projects for a given account and domain
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/templates:
     parameters:
     - in: path
@@ -435,6 +453,8 @@ paths:
       summary: Get the cloudstack templates for a given account and zone
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/vpcs:
     parameters:
     - in: path
@@ -473,6 +493,8 @@ paths:
       summary: Get the cloudstack VPCs for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/apache-cloudstack/{uid}/properties/zones:
     parameters:
     - in: path
@@ -501,6 +523,8 @@ paths:
       summary: Get the cloudstack zones for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/aws:
     get:
       operationId: v1CloudAccountsAwsList
@@ -593,6 +617,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1AwsAccount'
         description: Request payload to validate AWS cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/aws/{uid}:
     parameters:
     - description: AWS cloud account uid
@@ -666,6 +692,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AwsAccount'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/azure:
     get:
       operationId: v1CloudAccountsAzureList
@@ -758,6 +786,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1AzureAccount'
         description: Request payload to validate Azure cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/azure/{uid}:
     parameters:
     - description: Azure cloud account uid
@@ -826,6 +856,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AzureAccount'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/cloudTypes/{cloudType}:
     parameters:
     - description: Custom cloud type
@@ -925,6 +957,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1CustomAccountEntity'
         description: Request payload to validate Custom cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/cloudTypes/{cloudType}/{uid}:
     parameters:
     - description: Custom cloud account uid
@@ -999,6 +1033,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1CustomAccountEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/gcp:
     get:
       operationId: v1CloudAccountsGcpList
@@ -1091,6 +1127,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1GcpAccountEntity'
         description: Request payload to validate GCP cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/gcp/{uid}:
     parameters:
     - description: GCP cloud account uid
@@ -1160,6 +1198,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1GcpAccountEntity'
         description: Request payload to validate GCP cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/maas:
     get:
       operationId: v1CloudAccountsMaasList
@@ -1252,6 +1292,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1MaasAccount'
         description: Request payload to validate Maas cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/maas/{uid}:
     parameters:
     - description: Maas cloud account uid
@@ -1343,6 +1385,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1MaasAccount'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/maas/{uid}/properties/azs:
     parameters:
     - in: path
@@ -1371,6 +1415,8 @@ paths:
       summary: Get the maas azs for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/maas/{uid}/properties/domains:
     parameters:
     - in: path
@@ -1399,6 +1445,8 @@ paths:
       summary: Get the maas domains for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/maas/{uid}/properties/resourcePools:
     parameters:
     - in: path
@@ -1427,6 +1475,8 @@ paths:
       summary: Get the maas pools for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/maas/{uid}/properties/subnets:
     parameters:
     - in: path
@@ -1455,6 +1505,8 @@ paths:
       summary: Get the maas subnets for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/maas/{uid}/properties/tags:
     parameters:
     - in: path
@@ -1483,6 +1535,8 @@ paths:
       summary: Get the maas tags for a given account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/summary:
     get:
       operationId: v1CloudAccountsListSummary
@@ -1538,6 +1592,8 @@ paths:
       summary: Retrieves a list of cloud accounts summary
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/vsphere:
     get:
       operationId: v1CloudAccountsVsphereList
@@ -1630,6 +1686,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1VsphereAccount'
         description: Request payload to validate VSphere cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/vsphere/{uid}:
     parameters:
     - description: VSphere cloud account uid
@@ -1699,6 +1757,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1VsphereAccount'
         description: Request payload to validate VSphere cloud account
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/vsphere/{uid}/properties/computecluster/resources:
     parameters:
     - in: path
@@ -1741,6 +1801,8 @@ paths:
       summary: Get the vSphere computecluster resources for the given overlord account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/vsphere/{uid}/properties/datacenters:
     parameters:
     - in: path
@@ -1769,6 +1831,8 @@ paths:
       summary: Get the vSphere datacenters & datacluster for the given overlord account
       tags:
       - Cloud Accounts
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/cloudaccounts/{uid}/geoLocation:
     parameters:
     - in: path
@@ -1799,16 +1863,539 @@ paths:
             schema:
               $ref: '#/components/schemas/v1GeolocationLatlong'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
+  /v1/cloudaccounts/openstack:
+    get:
+      operationId: v1CloudAccountsOpenStackList
+      parameters:
+      - description: 'Set of fields to be presented in the response with values. The fields are comma separated. Eg: metadata.uid,metadata.name'
+        in: query
+        name: fields
+        schema:
+          type: string
+      - description: 'Filters can be combined with AND, OR operators with field path name. Eg: metadata.name=TestServiceANDspec.cloudType=aws
+
+
+          Server will be restricted to certain fields based on the indexed data for each resource.'
+        in: query
+        name: filters
+        schema:
+          type: string
+      - description: 'Specify the fields with sort order. 1 indicates ascending and -1 for descending. Eg: orderBy=metadata.name=1,metadata.uid=-1'
+        in: query
+        name: orderBy
+        schema:
+          type: string
+      - description: 'limit is a maximum number of responses to return for a list call. Default and maximum value of the limit is 50.
+
+          If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results.'
+        in: query
+        name: limit
+        schema:
+          default: 50
+          format: int64
+          type: integer
+      - description: offset is the next index number from which the response will start. The response offset value can be used along with continue token for the pagination.
+        in: query
+        name: offset
+        schema:
+          format: int64
+          type: integer
+      - description: continue token to paginate the subsequent data items
+        in: query
+        name: continue
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackAccounts'
+          description: An array of cloud account items
+      summary: Retrieves a list of OpenStack cloud accounts
+      tags:
+      - Cloud Accounts
+    post:
+      operationId: v1CloudAccountsOpenStackCreate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1OpenStackAccount'
+        description: Request payload to validate OpenStack cloud account
+        required: false
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1Uid_2'
+          description: Created successfully
+          headers:
+            AuditUid:
+              description: Audit uid for the request
+              schema:
+                type: string
+      summary: Creates a OpenStack cloud account
+      tags:
+      - Cloud Accounts
+      x-codegen-request-body-name: body
+    servers:
+    - url: /
+  /v1/cloudaccounts/openstack/{uid}:
+    delete:
+      operationId: v1CloudAccountsOpenStackDelete
+      parameters:
+      - description: OpenStack cloud account uid
+        in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          content: {}
+          description: The resource was deleted successfully
+      summary: Deletes the specified OpenStack account
+      tags:
+      - Cloud Accounts
+    get:
+      operationId: v1CloudAccountsOpenStackGet
+      parameters:
+      - description: OpenStack cloud account uid
+        in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackAccount'
+          description: OK
+      summary: Returns the specified OpenStack account
+      tags:
+      - Cloud Accounts
+    put:
+      operationId: v1CloudAccountsOpenStackUpdate
+      parameters:
+      - description: OpenStack cloud account uid
+        in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1OpenStackAccount'
+        required: false
+      responses:
+        '204':
+          content: {}
+          description: The resource was updated successfully
+      summary: Updates the specified OpenStack account
+      tags:
+      - Cloud Accounts
+      x-codegen-request-body-name: body
+    servers:
+    - url: /
+  /v1/cloudaccounts/openstack/{uid}/properties/azs:
+    get:
+      operationId: v1OpenstackAccountsUidAzs
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: region
+        schema:
+          type: string
+      - in: query
+        name: project
+        schema:
+          type: string
+      - in: query
+        name: domain
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackAzs'
+          description: (empty)
+      summary: Get the openstack azs for a given account and region
+      tags:
+      - Cloud Accounts
+    servers:
+    - url: /
+  /v1/cloudaccounts/openstack/{uid}/properties/flavors:
+    get:
+      operationId: v1OpenstackAccountsUidFlavors
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: project
+        schema:
+          type: string
+      - in: query
+        name: region
+        schema:
+          type: string
+      - in: query
+        name: domain
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackFlavors'
+          description: (empty)
+      summary: Get the openstack keypairs for a given account and scope
+      tags:
+      - Cloud Accounts
+    servers:
+    - url: /
+  /v1/cloudaccounts/openstack/{uid}/properties/keypairs:
+    get:
+      operationId: v1OpenstackAccountsUidKeypairs
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: project
+        schema:
+          type: string
+      - in: query
+        name: region
+        schema:
+          type: string
+      - in: query
+        name: domain
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackKeypairs'
+          description: (empty)
+      summary: Get the openstack keypairs for a given account and scope
+      tags:
+      - Cloud Accounts
+    servers:
+    - url: /
+  /v1/cloudaccounts/openstack/{uid}/properties/networks:
+    get:
+      operationId: v1OpenstackAccountsUidNetworks
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: project
+        schema:
+          type: string
+      - in: query
+        name: region
+        schema:
+          type: string
+      - in: query
+        name: domain
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackNetworks'
+          description: (empty)
+      summary: Get the openstack networks for a given account and scope
+      tags:
+      - Cloud Accounts
+    servers:
+    - url: /
+  /v1/cloudaccounts/openstack/{uid}/properties/projects:
+    get:
+      operationId: v1OpenstackAccountsUidProjects
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackProjects'
+          description: (empty)
+      summary: Get the openstack projects for a given account
+      tags:
+      - Cloud Accounts
+    servers:
+    - url: /
+  /v1/cloudaccounts/openstack/{uid}/properties/regions:
+    get:
+      operationId: v1OpenstackAccountsUidRegions
+      parameters:
+      - in: path
+        name: uid
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1OpenStackRegions'
+          description: (empty)
+      summary: Get the openstack regions for a given account
+      tags:
+      - Cloud Accounts
+    servers:
+    - url: /
 components:
   schemas:
-    v1CloudStackOfferings:
-      description: List of CloudStack compute offerings
+    v1MaasSubnets:
+      description: List of Maas subnets
       properties:
-        offerings:
+        items:
           items:
-            $ref: '#/components/schemas/v1CloudStackOffering'
+            $ref: '#/components/schemas/v1MaasSubnet'
           type: array
           uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasCloudAccount:
+      properties:
+        apiEndpoint:
+          type: string
+        apiKey:
+          type: string
+        preferredSubnets:
+          description: list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet "10.11.130.0/24,10.10.10.0/24"
+          items:
+            type: string
+          type: array
+      required:
+      - apiKey
+      - apiEndpoint
+      type: object
+    v1CustomAccount:
+      description: Custom account information
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1CustomCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1CloudStackNetworks:
+      description: List of CloudStack networks
+      properties:
+        networks:
+          items:
+            $ref: '#/components/schemas/v1CloudStackNetwork'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ListMetaData:
+      description: ListMeta describes metadata for the resource listing
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1GcpAccountSpec:
+      properties:
+        jsonCredentials:
+          description: Gcp cloud account json credentials
+          type: string
+      type: object
+    v1CloudAccountsSummary:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudAccountSummary'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1MaasZone:
+      description: Maas zone
+      properties:
+        description:
+          description: Description of Maas domain
+          type: string
+        name:
+          description: Name of Maas zone
+          type: string
+      type: object
+    v1VsphereComputeCluster:
+      description: Vsphere compute cluster
+      properties:
+        datastores:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        name:
+          type: string
+        networks:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        resourcePools:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1CloudAccountSummary:
+      description: Cloud account summary
+      properties:
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        specSummary:
+          description: Cloud account spec summary
+          properties:
+            accountId:
+              type: string
+          type: object
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1GcpAccountEntitySpec:
+      properties:
+        jsonCredentials:
+          description: Gcp cloud account json credentials
+          type: string
+      type: object
+    v1CloudStackKeypairs:
+      description: List of CloudStack SSH key pairs
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudStackKeypair'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasDomains:
+      description: List of Maas domains
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasDomain'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasPools:
+      description: List of Maas pools
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasPool'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1VsphereAccounts:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1VsphereAccount'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1CloudAccountStatus:
+      description: Status of the account
+      properties:
+        state:
+          description: Cloud account status
+          type: string
+        tokenExpiry:
+          $ref: '#/components/schemas/v1Time'
+          description: Token expiry time
+        tokenGenerationTime:
+          $ref: '#/components/schemas/v1Time'
+          description: Token generation time
+      type: object
+    v1GcpAccount:
+      description: GCP account information
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1GcpAccountSpec'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
       type: object
     v1CustomCloudAccount:
       properties:
@@ -1820,11 +2407,87 @@ components:
       required:
       - credentials
       type: object
-    v1CustomAccounts:
+    v1MaasVlan:
+      description: Maas vlan entity
+      properties:
+        fabric:
+          description: Fabric associated with Maas Vlan
+          type: string
+        id:
+          description: Id of Maas Vlan
+          type: integer
+        name:
+          description: Name of Maas Vlan
+          type: string
+      type: object
+    v1CloudStackDomain:
+      description: CloudStack domain
+      properties:
+        id:
+          description: Domain ID
+          type: string
+        name:
+          description: Domain name
+          type: string
+      type: object
+    v1CloudStackOfferings:
+      description: List of CloudStack compute offerings
+      properties:
+        offerings:
+          items:
+            $ref: '#/components/schemas/v1CloudStackOffering'
+          type: array
+          uniqueItems: true
+      type: object
+    v1CloudStackVpc:
+      description: CloudStack Vpc
+      properties:
+        cidr:
+          description: Vpc Cidr
+          type: string
+        domainId:
+          description: Domain Id associated with Vpc
+          type: string
+        id:
+          description: Vpc id
+          type: string
+        name:
+          description: Vpc name
+          type: string
+        offeringId:
+          description: Vpc offering Id
+          type: string
+        projectId:
+          description: Project Id associated with Vpc
+          type: string
+        zoneId:
+          description: Zone Id associated with Vpc
+          type: string
+      type: object
+    v1CloudStackZone:
+      description: CloudStack zone
+      properties:
+        id:
+          description: Zone ID
+          type: string
+        name:
+          description: Zone name
+          type: string
+      type: object
+    v1CloudAccountSettings:
+      description: Cloud account settings
+      properties:
+        disablePropertiesRequest:
+          description: Will disable certain properties request to cloud and the input is collected directly from the user
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1AwsAccounts:
+      description: List of AWS accounts
       properties:
         items:
           items:
-            $ref: '#/components/schemas/v1CustomAccount'
+            $ref: '#/components/schemas/v1AwsAccount'
           type: array
           uniqueItems: true
         listmeta:
@@ -1832,36 +2495,18 @@ components:
       required:
       - items
       type: object
-    v1CloudStackNetworks:
-      description: List of CloudStack networks
+    v1AwsSecretTlsConfig:
+      description: TLS configuration for the AWS secret
       properties:
-        networks:
-          items:
-            $ref: '#/components/schemas/v1CloudStackNetwork'
-          type: array
-          uniqueItems: true
-      type: object
-    v1AwsStsCredentials:
-      description: Aws sts credentials
-      properties:
-        arn:
-          description: Arn for the aws sts credentials in cloud account
+        ca:
+          description: CA certificate
           type: string
-        externalId:
-          description: ExternalId for the aws sts credentials in cloud account
+        cert:
+          description: Certificate
           type: string
-      type: object
-    v1MaasAccounts:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MaasAccount'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
+        key:
+          description: Key
+          type: string
       type: object
     v1AzureCloudAccount:
       properties:
@@ -1897,980 +2542,6 @@ components:
       - tenantId
       - clientId
       - clientSecret
-      type: object
-    v1VsphereComputeClusterResources:
-      description: Datacenter and its resources like datastore, resoucepool, folders
-      properties:
-        computecluster:
-          $ref: '#/components/schemas/v1VsphereComputeCluster'
-        datacenter:
-          description: Name of the datacenter
-          type: string
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1CloudStackCloudAccount:
-      description: CloudStack cloud account credentials
-      properties:
-        apiKey:
-          description: API Key for CloudStack authentication
-          type: string
-        apiUrl:
-          description: API URL for CloudStack management server
-          type: string
-        domain:
-          description: Cloudstack domain
-          type: string
-        insecure:
-          description: 'Skip SSL certificate verification (default: false)'
-          type: boolean
-        secretKey:
-          description: Secret Key for CloudStack authentication
-          type: string
-      required:
-      - apiUrl
-      - apiKey
-      - secretKey
-      type: object
-    v1MaasTags:
-      description: List of Maas tags
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MaasTag'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1MaasZone:
-      description: Maas zone
-      properties:
-        description:
-          description: Description of Maas domain
-          type: string
-        name:
-          description: Name of Maas zone
-          type: string
-      type: object
-    v1VsphereComputeCluster:
-      description: Vsphere compute cluster
-      properties:
-        datastores:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        name:
-          type: string
-        networks:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        resourcePools:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-      type: object
-    v1ObjectMeta:
-      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        creationTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        deletionTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
-
-
-            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        lastModifiedTimestamp:
-          $ref: '#/components/schemas/v1Time'
-          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
-
-
-            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-        uid:
-          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
-
-
-            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
-          type: string
-      type: object
-    v1CloudStackTemplates:
-      description: List of CloudStack templates
-      properties:
-        templates:
-          items:
-            $ref: '#/components/schemas/v1CloudStackTemplate'
-          type: array
-          uniqueItems: true
-      type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1GcpAccounts:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1GcpAccount'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1CustomAccountEntity:
-      description: Custom account information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1CustomCloudAccount'
-      type: object
-    v1CloudAccountsPatch:
-      items:
-        $ref: '#/components/schemas/v1HttpPatch'
-      type: array
-    v1MaasVlan:
-      description: Maas vlan entity
-      properties:
-        fabric:
-          description: Fabric associated with Maas Vlan
-          type: string
-        id:
-          description: Id of Maas Vlan
-          type: integer
-        name:
-          description: Name of Maas Vlan
-          type: string
-      type: object
-    v1GcpAccount:
-      description: GCP account information
-      properties:
-        apiVersion:
-          description: Cloud account api version
-          type: string
-        kind:
-          description: Cloud account kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1GcpAccountSpec'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1CloudStackAccountInputEntity:
-      description: CloudStack account input entity
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
-        spec:
-          $ref: '#/components/schemas/v1CloudStackCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1CloudStackZones:
-      description: List of CloudStack zones
-      properties:
-        zones:
-          items:
-            $ref: '#/components/schemas/v1CloudStackZone'
-          type: array
-          uniqueItems: true
-      type: object
-    v1CloudStackAccount:
-      description: CloudStack account information
-      properties:
-        apiVersion:
-          description: Cloud account api version
-          type: string
-        kind:
-          description: Cloud account kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1CloudStackCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1CloudStackVpcs:
-      description: List of CloudStack SSH key pairs
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1CloudStackVpc'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1VsphereAccount:
-      description: VSphere account information
-      properties:
-        apiVersion:
-          description: Cloud account api version
-          type: string
-        kind:
-          description: Cloud account kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1VsphereCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1CloudStackKeypair:
-      description: CloudStack SSH key pair
-      properties:
-        fingerprint:
-          description: SSH key pair fingerprint
-          type: string
-        name:
-          description: SSH key pair name
-          type: string
-      type: object
-    v1MaasSubnets:
-      description: List of Maas subnets
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MaasSubnet'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1GcpAccountSpec:
-      properties:
-        jsonCredentials:
-          description: Gcp cloud account json credentials
-          type: string
-      type: object
-    v1MaasAccount:
-      description: Maas cloud account information
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1MaasCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1MaasPools:
-      description: List of Maas pools
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MaasPool'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1AwsCloudAccount:
-      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
-      properties:
-        accessKey:
-          description: AWS account access key
-          type: string
-        credentialType:
-          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
-        partition:
-          default: aws
-          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
-          enum:
-          - aws
-          - aws-us-gov
-          - aws-iso
-          - aws-iso-b
-          type: string
-        podIdentity:
-          $ref: '#/components/schemas/v1AwsPodIdentityCredentials'
-          description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
-        policyARNs:
-          description: List of policy ARNs required in case of credentialType sts.
-          items:
-            type: string
-          type: array
-        secretKey:
-          description: AWS account secret key
-          type: string
-        secretSpec:
-          $ref: '#/components/schemas/v1AwsSecretSpec'
-        secretToken:
-          description: AWS account secret token; in case of aws-iso and aws-iso-b
-          type: string
-        sts:
-          $ref: '#/components/schemas/v1AwsStsCredentials'
-          description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
-      type: object
-    v1CloudStackAccountUpdateEntity:
-      description: CloudStack account update entity
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMetaUpdateEntity'
-        spec:
-          $ref: '#/components/schemas/v1CloudStackCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1GcpAccountEntity:
-      description: GCP account information
-      properties:
-        apiVersion:
-          description: Cloud account api version
-          type: string
-        kind:
-          description: Cloud account kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1GcpAccountEntitySpec'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1CustomAccount:
-      description: Custom account information
-      properties:
-        apiVersion:
-          description: Cloud account api version
-          type: string
-        kind:
-          description: Cloud account kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1CustomCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1CloudStackDiskOffering:
-      description: CloudStack disk offering
-      properties:
-        id:
-          description: Disk offering ID
-          type: string
-        name:
-          description: Disk offering name
-          type: string
-      type: object
-    v1AwsAccount:
-      description: Aws cloud account information
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AwsCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1AwsPodIdentityCredentials:
-      description: AWS EKS Pod Identity credentials for role assumption
-      properties:
-        permissionBoundaryArn:
-          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
-          type: string
-        roleArn:
-          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
-          type: string
-      type: object
-    v1CloudStackVpc:
-      description: CloudStack Vpc
-      properties:
-        cidr:
-          description: Vpc Cidr
-          type: string
-        domainId:
-          description: Domain Id associated with Vpc
-          type: string
-        id:
-          description: Vpc id
-          type: string
-        name:
-          description: Vpc name
-          type: string
-        offeringId:
-          description: Vpc offering Id
-          type: string
-        projectId:
-          description: Project Id associated with Vpc
-          type: string
-        zoneId:
-          description: Zone Id associated with Vpc
-          type: string
-      type: object
-    v1CloudAccountsSummary:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1CloudAccountSummary'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1ObjectMetaUpdateEntity:
-      description: ObjectMeta update entity with uid as input
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          type: object
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1MaasSubnet:
-      description: Maas subnet
-      properties:
-        id:
-          description: Id of Maas subnet
-          type: integer
-        name:
-          description: Name of Maas subnet
-          type: string
-        space:
-          description: Space associated with Maas subnet
-          type: string
-        vlans:
-          $ref: '#/components/schemas/v1MaasVlan'
-      type: object
-    v1VsphereCloudAccount:
-      properties:
-        insecure:
-          description: Insecure is a flag that controls whether or not to validate the vSphere server's certificate.
-          type: boolean
-          x-omitempty: false
-        password:
-          type: string
-        username:
-          type: string
-        vcenterServer:
-          description: VcenterServer is the address of the vSphere endpoint
-          type: string
-      required:
-      - vcenterServer
-      - username
-      - password
-      type: object
-    v1AwsSecretSpec:
-      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
-      properties:
-        accountName:
-          description: AWS secret accountName; only for aws-iso-b environment
-          type: string
-        agency:
-          description: AWS secret agency
-          type: string
-        isCapValidationEnabled:
-          description: Flag to rotate the secret region credentials
-          type: boolean
-        mission:
-          description: AWS secret mission; only for aws-iso environment
-          type: string
-        namePrefix:
-          description: Policy Boundary
-          type: string
-        permissionBoundary:
-          description: Role or Policy Prefix
-          type: string
-        policy:
-          description: AWS secret policy; JSON string
-          type: string
-        role:
-          description: AWS secret role
-          type: string
-        tls:
-          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
-          description: TLS configuration for the AWS secret
-      type: object
-    v1CloudAccountStatus:
-      description: Status of the account
-      properties:
-        state:
-          description: Cloud account status
-          type: string
-        tokenExpiry:
-          $ref: '#/components/schemas/v1Time'
-          description: Token expiry time
-        tokenGenerationTime:
-          $ref: '#/components/schemas/v1Time'
-          description: Token generation time
-      type: object
-    v1AzureAccounts:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1AzureAccount'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1CloudStackAccounts:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1CloudStackAccount'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1ObjectMetaInputEntity:
-      description: ObjectMeta input entity for object creation
-      properties:
-        annotations:
-          additionalProperties:
-            type: string
-          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
-          type: object
-        labels:
-          additionalProperties:
-            type: string
-          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
-          type: object
-        name:
-          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
-          type: string
-      type: object
-    v1CloudStackNetwork:
-      description: CloudStack network
-      properties:
-        cidr:
-          description: CIDR block for the network
-          type: string
-        displayText:
-          description: Display text for the network
-          type: string
-        gateway:
-          description: Gateway IP address for the network
-          type: string
-        id:
-          description: Network ID
-          type: string
-        isDefault:
-          description: Whether this is the default network
-          type: boolean
-        isShared:
-          description: Whether the network is shared across accounts
-          type: boolean
-        name:
-          description: Network name
-          type: string
-        netmask:
-          description: Network mask for the network
-          type: string
-        networkDomain:
-          description: Network domain
-          type: string
-        networkOffering:
-          description: Network offering name
-          type: string
-        state:
-          description: Current state of the network (Setup, Allocated, etc.)
-          type: string
-        trafficType:
-          description: Traffic type of the network (Guest, Management, etc.)
-          type: string
-        type:
-          description: Network type - Isolated, Shared, etc.
-          type: string
-        zoneId:
-          description: Zone ID where the network is located
-          type: string
-        zoneName:
-          description: Zone name where the network is located
-          type: string
-      type: object
-    v1GeolocationLatlong:
-      description: Geolocation Latlong entity
-      properties:
-        latitude:
-          description: Latitude of a resource
-          format: float64
-          type: number
-          x-omitempty: false
-        longitude:
-          description: Longitude of a resource
-          format: float64
-          type: number
-          x-omitempty: false
-      type: object
-    v1VsphereAccounts:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1VsphereAccount'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1HttpPatch:
-      properties:
-        from:
-          description: A path to the pointer from which reference will be taken
-          type: string
-        op:
-          description: The operation to be performed
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          type: string
-        path:
-          description: A path to the pointer on which operation will be done
-          type: string
-        value:
-          description: The value to be used within the operations.
-          type: object
-      required:
-      - op
-      - path
-      type: object
-    v1CloudStackDomains:
-      description: List of CloudStack domains
-      properties:
-        domains:
-          items:
-            $ref: '#/components/schemas/v1CloudStackDomain'
-          type: array
-          uniqueItems: true
-      type: object
-    v1MaasDomains:
-      description: List of Maas domains
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MaasDomain'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1GcpAccountEntitySpec:
-      properties:
-        jsonCredentials:
-          description: Gcp cloud account json credentials
-          type: string
-      type: object
-    v1CloudStackTemplate:
-      description: CloudStack template
-      properties:
-        id:
-          description: Template ID
-          type: string
-        name:
-          description: Template name
-          type: string
-      type: object
-    v1MaasTag:
-      description: Maas tag
-      properties:
-        comment:
-          description: Comment on Maas tag
-          type: string
-        definition:
-          description: Definition of Maas tag
-          type: string
-        kernelOpts:
-          description: Kernel Opts on Maas tag
-          type: string
-        name:
-          description: Name of Maas tag
-          type: string
-        resourceUri:
-          description: Description of Maas tag
-          type: string
-      type: object
-    v1AzureSecretTlsConfig:
-      description: TLS configuration for the AWS secret
-      properties:
-        cert:
-          description: Certificate is the TLS certificate used to authenticate the Azure secret
-          type: string
-      type: object
-    v1CloudStackKeypairs:
-      description: List of CloudStack SSH key pairs
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1CloudStackKeypair'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1AwsSecretTlsConfig:
-      description: TLS configuration for the AWS secret
-      properties:
-        ca:
-          description: CA certificate
-          type: string
-        cert:
-          description: Certificate
-          type: string
-        key:
-          description: Key
-          type: string
-      type: object
-    v1AwsCloudAccountCredentialType:
-      default: secret
-      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
-      enum:
-      - secret
-      - sts
-      - pod-identity
-      type: string
-    v1MaasPool:
-      description: Maas pool
-      properties:
-        description:
-          description: Description of Maas domain
-          type: string
-        name:
-          description: Name of Maas pool
-          type: string
-      type: object
-    v1VsphereDatacenters:
-      description: List of Datacenters with computeclusters
-      properties:
-        items:
-          description: List of associated datacenters
-          items:
-            $ref: '#/components/schemas/v1VsphereDatacenter'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1CloudStackZone:
-      description: CloudStack zone
-      properties:
-        id:
-          description: Zone ID
-          type: string
-        name:
-          description: Zone name
-          type: string
-      type: object
-    v1MaasCloudAccount:
-      properties:
-        apiEndpoint:
-          type: string
-        apiKey:
-          type: string
-        preferredSubnets:
-          description: list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet "10.11.130.0/24,10.10.10.0/24"
-          items:
-            type: string
-          type: array
-      required:
-      - apiKey
-      - apiEndpoint
-      type: object
-    v1CloudAccountSettings:
-      description: Cloud account settings
-      properties:
-        disablePropertiesRequest:
-          description: Will disable certain properties request to cloud and the input is collected directly from the user
-          type: boolean
-          x-omitempty: false
-      type: object
-    v1VsphereDatacenter:
-      description: List of Datacenter with computeclusters
-      properties:
-        computeclusters:
-          description: List  of the VSphere compute clusters in datacenter
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        datacenter:
-          description: name of the datacenter of the VSphere
-          type: string
-        folders:
-          description: List  of the VSphere folders in datacenter
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-      type: object
-    v1AwsAccounts:
-      description: List of AWS accounts
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1AwsAccount'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1CloudStackDiskOfferings:
-      description: List of CloudStack disk offerings
-      properties:
-        diskOfferings:
-          items:
-            $ref: '#/components/schemas/v1CloudStackDiskOffering'
-          type: array
-          uniqueItems: true
-      type: object
-    v1CloudAccountSummary:
-      description: Cloud account summary
-      properties:
-        kind:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        specSummary:
-          description: Cloud account spec summary
-          properties:
-            accountId:
-              type: string
-          type: object
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1MaasDomain:
-      description: Maas domain
-      properties:
-        name:
-          description: Name of Maas domain
-          type: string
-      type: object
-    v1ListMetaData:
-      description: ListMeta describes metadata for the resource listing
-      properties:
-        continue:
-          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
-          type: string
-          x-omitempty: false
-        count:
-          description: Total count of the resources which might change during pagination based on the resources addition or deletion
-          type: integer
-          x-omitempty: false
-        limit:
-          description: Number of records feteched
-          type: integer
-          x-omitempty: false
-        offset:
-          description: The next offset for the pagination. Starting index for which next request will be placed.
-          type: integer
-          x-omitempty: false
-      type: object
-    v1CloudStackProjects:
-      description: List of CloudStack projects
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/v1CloudStackProject'
-          type: array
-          uniqueItems: true
-      type: object
-    v1AzureAccount:
-      description: Azure account information
-      properties:
-        apiVersion:
-          description: Cloud account api version
-          type: string
-        kind:
-          description: Cloud account kind
-          type: string
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1AzureCloudAccount'
-        status:
-          $ref: '#/components/schemas/v1CloudAccountStatus'
-      type: object
-    v1CloudStackProject:
-      description: CloudStack project
-      properties:
-        id:
-          description: Project ID
-          type: string
-        name:
-          description: Project name
-          type: string
-      type: object
-    v1CloudStackDomain:
-      description: CloudStack domain
-      properties:
-        id:
-          description: Domain ID
-          type: string
-        name:
-          description: Domain name
-          type: string
-      type: object
-    v1MaasZones:
-      description: List of Maas zones
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MaasZone'
-          type: array
-          uniqueItems: true
-      required:
-      - items
       type: object
     v1CloudStackOffering:
       description: CloudStack compute offering
@@ -2927,6 +2598,3265 @@ components:
           description: Storage type (local or shared)
           type: string
       type: object
+    v1CloudStackTemplate:
+      description: CloudStack template
+      properties:
+        id:
+          description: Template ID
+          type: string
+        name:
+          description: Template name
+          type: string
+      type: object
+    v1VsphereDatacenter:
+      description: List of Datacenter with computeclusters
+      properties:
+        computeclusters:
+          description: List  of the VSphere compute clusters in datacenter
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        datacenter:
+          description: name of the datacenter of the VSphere
+          type: string
+        folders:
+          description: List  of the VSphere folders in datacenter
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1CloudStackDiskOffering:
+      description: CloudStack disk offering
+      properties:
+        id:
+          description: Disk offering ID
+          type: string
+        name:
+          description: Disk offering name
+          type: string
+      type: object
+    v1MaasTags:
+      description: List of Maas tags
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasTag'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasAccounts:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasAccount'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1AwsCloudAccountCredentialType:
+      default: secret
+      description: Allowed Values [secret, sts, pod-identity]. STS type will be used for role assumption for sts type, accessKey/secretKey contains the source account, Arn is the target account. Pod Identity type will be used for EKS Pod Identity authentication with roleArn as the target account.
+      enum:
+      - secret
+      - sts
+      - pod-identity
+      type: string
+    v1ObjectMeta:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        deletionTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.
+
+
+            Populated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          $ref: '#/components/schemas/v1Time'
+          description: 'LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.
+
+
+            Populated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata'
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1AzureAccounts:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1AzureAccount'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1GcpAccounts:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1GcpAccount'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1CloudStackDomains:
+      description: List of CloudStack domains
+      properties:
+        domains:
+          items:
+            $ref: '#/components/schemas/v1CloudStackDomain'
+          type: array
+          uniqueItems: true
+      type: object
+    v1Uid:
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1AwsAccount:
+      description: Aws cloud account information
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AwsCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1CloudStackVpcs:
+      description: List of CloudStack SSH key pairs
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudStackVpc'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1GeolocationLatlong:
+      description: Geolocation Latlong entity
+      properties:
+        latitude:
+          description: Latitude of a resource
+          format: float64
+          type: number
+          x-omitempty: false
+        longitude:
+          description: Longitude of a resource
+          format: float64
+          type: number
+          x-omitempty: false
+      type: object
+    v1HttpPatch:
+      properties:
+        from:
+          description: A path to the pointer from which reference will be taken
+          type: string
+        op:
+          description: The operation to be performed
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          type: string
+        path:
+          description: A path to the pointer on which operation will be done
+          type: string
+        value:
+          description: The value to be used within the operations.
+          type: object
+      required:
+      - op
+      - path
+      type: object
+    v1CloudStackKeypair:
+      description: CloudStack SSH key pair
+      properties:
+        fingerprint:
+          description: SSH key pair fingerprint
+          type: string
+        name:
+          description: SSH key pair name
+          type: string
+      type: object
+    v1MaasTag:
+      description: Maas tag
+      properties:
+        comment:
+          description: Comment on Maas tag
+          type: string
+        definition:
+          description: Definition of Maas tag
+          type: string
+        kernelOpts:
+          description: Kernel Opts on Maas tag
+          type: string
+        name:
+          description: Name of Maas tag
+          type: string
+        resourceUri:
+          description: Description of Maas tag
+          type: string
+      type: object
+    v1MaasPool:
+      description: Maas pool
+      properties:
+        description:
+          description: Description of Maas domain
+          type: string
+        name:
+          description: Name of Maas pool
+          type: string
+      type: object
+    v1ObjectMetaInputEntity:
+      description: ObjectMeta input entity for object creation
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1GcpAccountEntity:
+      description: GCP account information
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1GcpAccountEntitySpec'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1CloudStackNetwork:
+      description: CloudStack network
+      properties:
+        cidr:
+          description: CIDR block for the network
+          type: string
+        displayText:
+          description: Display text for the network
+          type: string
+        gateway:
+          description: Gateway IP address for the network
+          type: string
+        id:
+          description: Network ID
+          type: string
+        isDefault:
+          description: Whether this is the default network
+          type: boolean
+        isShared:
+          description: Whether the network is shared across accounts
+          type: boolean
+        name:
+          description: Network name
+          type: string
+        netmask:
+          description: Network mask for the network
+          type: string
+        networkDomain:
+          description: Network domain
+          type: string
+        networkOffering:
+          description: Network offering name
+          type: string
+        state:
+          description: Current state of the network (Setup, Allocated, etc.)
+          type: string
+        trafficType:
+          description: Traffic type of the network (Guest, Management, etc.)
+          type: string
+        type:
+          description: Network type - Isolated, Shared, etc.
+          type: string
+        zoneId:
+          description: Zone ID where the network is located
+          type: string
+        zoneName:
+          description: Zone name where the network is located
+          type: string
+      type: object
+    v1VsphereComputeClusterResources:
+      description: Datacenter and its resources like datastore, resoucepool, folders
+      properties:
+        computecluster:
+          $ref: '#/components/schemas/v1VsphereComputeCluster'
+        datacenter:
+          description: Name of the datacenter
+          type: string
+      type: object
+    v1CloudStackAccounts:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudStackAccount'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1CloudAccountsPatch:
+      items:
+        $ref: '#/components/schemas/v1HttpPatch'
+      type: array
+    v1AzureSecretTlsConfig:
+      description: TLS configuration for the AWS secret
+      properties:
+        cert:
+          description: Certificate is the TLS certificate used to authenticate the Azure secret
+          type: string
+      type: object
+    v1AwsStsCredentials:
+      description: Aws sts credentials
+      properties:
+        arn:
+          description: Arn for the aws sts credentials in cloud account
+          type: string
+        externalId:
+          description: ExternalId for the aws sts credentials in cloud account
+          type: string
+      type: object
+    v1CloudStackDiskOfferings:
+      description: List of CloudStack disk offerings
+      properties:
+        diskOfferings:
+          items:
+            $ref: '#/components/schemas/v1CloudStackDiskOffering'
+          type: array
+          uniqueItems: true
+      type: object
+    v1CloudStackAccount:
+      description: CloudStack account information
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1CloudStackCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1AzureAccount:
+      description: Azure account information
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1AzureCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1CloudStackAccountUpdateEntity:
+      description: CloudStack account update entity
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaUpdateEntity'
+        spec:
+          $ref: '#/components/schemas/v1CloudStackCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1CloudStackAccountInputEntity:
+      description: CloudStack account input entity
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1CloudStackCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1CloudStackTemplates:
+      description: List of CloudStack templates
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/v1CloudStackTemplate'
+          type: array
+          uniqueItems: true
+      type: object
+    v1CloudStackProjects:
+      description: List of CloudStack projects
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1CloudStackProject'
+          type: array
+          uniqueItems: true
+      type: object
+    v1MaasAccount:
+      description: Maas cloud account information
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1MaasCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1CloudStackCloudAccount:
+      description: CloudStack cloud account credentials
+      properties:
+        apiKey:
+          description: API Key for CloudStack authentication
+          type: string
+        apiUrl:
+          description: API URL for CloudStack management server
+          type: string
+        domain:
+          description: Cloudstack domain
+          type: string
+        insecure:
+          description: 'Skip SSL certificate verification (default: false)'
+          type: boolean
+        secretKey:
+          description: Secret Key for CloudStack authentication
+          type: string
+      required:
+      - apiUrl
+      - apiKey
+      - secretKey
+      type: object
+    v1AwsSecretSpec:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+      properties:
+        accountName:
+          description: AWS secret accountName; only for aws-iso-b environment
+          type: string
+        agency:
+          description: AWS secret agency
+          type: string
+        isCapValidationEnabled:
+          description: Flag to rotate the secret region credentials
+          type: boolean
+        mission:
+          description: AWS secret mission; only for aws-iso environment
+          type: string
+        namePrefix:
+          description: Policy Boundary
+          type: string
+        permissionBoundary:
+          description: Role or Policy Prefix
+          type: string
+        policy:
+          description: AWS secret policy; JSON string
+          type: string
+        role:
+          description: AWS secret role
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AwsSecretTlsConfig'
+          description: TLS configuration for the AWS secret
+      type: object
+    v1CloudStackZones:
+      description: List of CloudStack zones
+      properties:
+        zones:
+          items:
+            $ref: '#/components/schemas/v1CloudStackZone'
+          type: array
+          uniqueItems: true
+      type: object
+    v1AwsPodIdentityCredentials:
+      description: AWS EKS Pod Identity credentials for role assumption
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
+    v1VsphereCloudAccount:
+      properties:
+        insecure:
+          description: Insecure is a flag that controls whether or not to validate the vSphere server's certificate.
+          type: boolean
+          x-omitempty: false
+        password:
+          type: string
+        username:
+          type: string
+        vcenterServer:
+          description: VcenterServer is the address of the vSphere endpoint
+          type: string
+      required:
+      - vcenterServer
+      - username
+      - password
+      type: object
+    v1AwsCloudAccount:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+      properties:
+        accessKey:
+          description: AWS account access key
+          type: string
+        credentialType:
+          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
+        partition:
+          default: aws
+          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+          enum:
+          - aws
+          - aws-us-gov
+          - aws-iso
+          - aws-iso-b
+          type: string
+        podIdentity:
+          $ref: '#/components/schemas/v1AwsPodIdentityCredentials'
+          description: AWS EKS Pod Identity credentials in case of credentialType podIdentity, will be empty in case of other credential types
+        policyARNs:
+          description: List of policy ARNs required in case of credentialType sts.
+          items:
+            type: string
+          type: array
+        secretKey:
+          description: AWS account secret key
+          type: string
+        secretSpec:
+          $ref: '#/components/schemas/v1AwsSecretSpec'
+        secretToken:
+          description: AWS account secret token; in case of aws-iso and aws-iso-b
+          type: string
+        sts:
+          $ref: '#/components/schemas/v1AwsStsCredentials'
+          description: AWS STS credentials in case of credentialType sts, will be empty in case of credential type secret
+      type: object
+    v1CustomAccountEntity:
+      description: Custom account information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMetaInputEntity'
+        spec:
+          $ref: '#/components/schemas/v1CustomCloudAccount'
+      type: object
+    v1MaasSubnet:
+      description: Maas subnet
+      properties:
+        id:
+          description: Id of Maas subnet
+          type: integer
+        name:
+          description: Name of Maas subnet
+          type: string
+        space:
+          description: Space associated with Maas subnet
+          type: string
+        vlans:
+          $ref: '#/components/schemas/v1MaasVlan'
+      type: object
+    v1VsphereAccount:
+      description: VSphere account information
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1VsphereCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus'
+      type: object
+    v1ObjectMetaUpdateEntity:
+      description: ObjectMeta update entity with uid as input
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          type: object
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1MaasZones:
+      description: List of Maas zones
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasZone'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1CloudStackProject:
+      description: CloudStack project
+      properties:
+        id:
+          description: Project ID
+          type: string
+        name:
+          description: Project name
+          type: string
+      type: object
+    v1VsphereDatacenters:
+      description: List of Datacenters with computeclusters
+      properties:
+        items:
+          description: List of associated datacenters
+          items:
+            $ref: '#/components/schemas/v1VsphereDatacenter'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasDomain:
+      description: Maas domain
+      properties:
+        name:
+          description: Name of Maas domain
+          type: string
+      type: object
+    v1CustomAccounts:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CustomAccount'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1MaasSubnets_2:
+      description: List of Maas subnets
+      example:
+        items:
+        - vlans:
+            fabric: fabric
+            name: name
+            id: 6
+          name: name
+          id: 0
+          space: space
+        - vlans:
+            fabric: fabric
+            name: name
+            id: 6
+          name: name
+          id: 0
+          space: space
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasSubnet_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasCloudAccount_2:
+      example:
+        preferredSubnets:
+        - ''
+        - ''
+        apiEndpoint: apiEndpoint
+        apiKey: apiKey
+      properties:
+        apiEndpoint:
+          type: string
+        apiKey:
+          type: string
+        preferredSubnets:
+          description: list of preferred subnets order in the list reflects order in which subnets will be selected for ip address selection in apiserver dns endpoint this way user can specify external or preferable subnet "10.11.130.0/24,10.10.10.0/24"
+          items:
+            default: ''
+            type: string
+          type: array
+      required:
+      - apiEndpoint
+      - apiKey
+      type: object
+    v1CustomAccount_2:
+      description: Custom account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          credentials:
+            key: credentials
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1CustomCloudAccount_2'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1CloudStackNetworks_2:
+      description: List of CloudStack networks
+      example:
+        networks:
+        - displayText: displayText
+          trafficType: trafficType
+          networkOffering: networkOffering
+          type: type
+          isDefault: true
+          netmask: netmask
+          name: name
+          zoneId: zoneId
+          cidr: cidr
+          id: id
+          state: state
+          zoneName: zoneName
+          gateway: gateway
+          isShared: true
+          networkDomain: networkDomain
+        - displayText: displayText
+          trafficType: trafficType
+          networkOffering: networkOffering
+          type: type
+          isDefault: true
+          netmask: netmask
+          name: name
+          zoneId: zoneId
+          cidr: cidr
+          id: id
+          state: state
+          zoneName: zoneName
+          gateway: gateway
+          isShared: true
+          networkDomain: networkDomain
+      properties:
+        networks:
+          items:
+            $ref: '#/components/schemas/v1CloudStackNetwork_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ListMetaData_2:
+      description: ListMeta describes metadata for the resource listing
+      example:
+        offset: 1
+        continue: continue
+        count: 0
+        limit: 6
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1GcpAccountSpec_2:
+      example:
+        jsonCredentials: jsonCredentials
+      properties:
+        jsonCredentials:
+          description: Gcp cloud account json credentials
+          type: string
+      type: object
+    v1CloudAccountsSummary_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          kind: kind
+          specSummary:
+            accountId: accountId
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          kind: kind
+          specSummary:
+            accountId: accountId
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudAccountSummary_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1MaasZone_2:
+      description: Maas zone
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          description: Description of Maas domain
+          type: string
+        name:
+          description: Name of Maas zone
+          type: string
+      type: object
+    v1VsphereComputeCluster_2:
+      description: Vsphere compute cluster
+      example:
+        resourcePools:
+        - resourcePools
+        - resourcePools
+        name: name
+        datastores:
+        - datastores
+        - datastores
+        networks:
+        - networks
+        - networks
+      properties:
+        datastores:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        name:
+          type: string
+        networks:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        resourcePools:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1OpenStackAz:
+      description: OpenStack az entity
+      example:
+        name: name
+      properties:
+        name:
+          description: Name of OpenStack az
+          type: string
+      type: object
+    v1CloudAccountSummary_2:
+      description: Cloud account summary
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        kind: kind
+        specSummary:
+          accountId: accountId
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        specSummary:
+          $ref: '#/components/schemas/v1CloudAccountSummary_specSummary'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1GcpAccountEntitySpec_2:
+      example:
+        jsonCredentials: jsonCredentials
+      properties:
+        jsonCredentials:
+          description: Gcp cloud account json credentials
+          type: string
+      type: object
+    v1CloudStackKeypairs_2:
+      description: List of CloudStack SSH key pairs
+      example:
+        items:
+        - fingerprint: fingerprint
+          name: name
+        - fingerprint: fingerprint
+          name: name
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudStackKeypair_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1OpenStackAzs:
+      description: List of OpenStack azs
+      example:
+        azs:
+        - name: name
+        - name: name
+      properties:
+        azs:
+          items:
+            $ref: '#/components/schemas/v1OpenStackAz'
+          type: array
+          uniqueItems: true
+      required:
+      - azs
+      type: object
+    v1MaasDomains_2:
+      description: List of Maas domains
+      example:
+        items:
+        - name: name
+        - name: name
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasDomain_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasPools_2:
+      description: List of Maas pools
+      example:
+        items:
+        - name: name
+          description: description
+        - name: name
+          description: description
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasPool_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1VsphereAccounts_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            password: password
+            insecure: true
+            vcenterServer: vcenterServer
+            username: username
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            password: password
+            insecure: true
+            vcenterServer: vcenterServer
+            username: username
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1VsphereAccount_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1OpenStackRegion:
+      description: OpenStack region entity
+      example:
+        parentRegionId: parentRegionId
+        description: description
+        id: id
+      properties:
+        description:
+          description: Description of OpenStack region
+          type: string
+        id:
+          description: Id of OpenStack region
+          type: string
+        parentRegionId:
+          description: Parent region id of OpenStack region
+          type: string
+      type: object
+    v1CloudAccountSummary_specSummary:
+      description: Cloud account spec summary
+      example:
+        accountId: accountId
+      properties:
+        accountId:
+          type: string
+      type: object
+    v1CloudAccountStatus_2:
+      description: Status of the account
+      example:
+        tokenGenerationTime: 2000-01-23 04:56:07+00:00
+        tokenExpiry: 2000-01-23 04:56:07+00:00
+        state: state
+      properties:
+        state:
+          description: Cloud account status
+          type: string
+        tokenExpiry:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        tokenGenerationTime:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1GcpAccount_2:
+      description: GCP account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          jsonCredentials: jsonCredentials
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1GcpAccountSpec_2'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1OpenStackProjects:
+      description: Array of OpenStack projects
+      example:
+        items:
+        - parentProjectId: parentProjectId
+          name: name
+          description: description
+          id: id
+          domainId: domainId
+        - parentProjectId: parentProjectId
+          name: name
+          description: description
+          id: id
+          domainId: domainId
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1OpenStackProject'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1CustomCloudAccount_2:
+      example:
+        credentials:
+          key: credentials
+      properties:
+        credentials:
+          additionalProperties:
+            type: string
+          description: Cloud account credentials
+          type: object
+      required:
+      - credentials
+      type: object
+    v1MaasVlan_2:
+      description: Maas vlan entity
+      example:
+        fabric: fabric
+        name: name
+        id: 6
+      properties:
+        fabric:
+          description: Fabric associated with Maas Vlan
+          type: string
+        id:
+          description: Id of Maas Vlan
+          type: integer
+        name:
+          description: Name of Maas Vlan
+          type: string
+      type: object
+    v1CloudStackDomain_2:
+      description: CloudStack domain
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Domain ID
+          type: string
+        name:
+          description: Domain name
+          type: string
+      type: object
+    v1CloudStackOfferings_2:
+      description: List of CloudStack compute offerings
+      example:
+        offerings:
+        - cpuNumber: 0
+          displayText: displayText
+          memory: 5
+          cpuSpeed: 6
+          isCustomized: true
+          maxIops: 5
+          isVolatile: true
+          name: name
+          isCustomizedIops: true
+          storageType: storageType
+          id: id
+          limitCpuUse: true
+          offerHA: true
+          hypervisorSnapshotReserve: 1
+          minIops: 2
+        - cpuNumber: 0
+          displayText: displayText
+          memory: 5
+          cpuSpeed: 6
+          isCustomized: true
+          maxIops: 5
+          isVolatile: true
+          name: name
+          isCustomizedIops: true
+          storageType: storageType
+          id: id
+          limitCpuUse: true
+          offerHA: true
+          hypervisorSnapshotReserve: 1
+          minIops: 2
+      properties:
+        offerings:
+          items:
+            $ref: '#/components/schemas/v1CloudStackOffering_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1CloudStackVpc_2:
+      description: CloudStack Vpc
+      example:
+        name: name
+        zoneId: zoneId
+        cidr: cidr
+        id: id
+        offeringId: offeringId
+        projectId: projectId
+        domainId: domainId
+      properties:
+        cidr:
+          description: Vpc Cidr
+          type: string
+        domainId:
+          description: Domain Id associated with Vpc
+          type: string
+        id:
+          description: Vpc id
+          type: string
+        name:
+          description: Vpc name
+          type: string
+        offeringId:
+          description: Vpc offering Id
+          type: string
+        projectId:
+          description: Project Id associated with Vpc
+          type: string
+        zoneId:
+          description: Zone Id associated with Vpc
+          type: string
+      type: object
+    v1CloudStackZone_2:
+      description: CloudStack zone
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Zone ID
+          type: string
+        name:
+          description: Zone name
+          type: string
+      type: object
+    v1CloudAccountSettings_2:
+      description: Cloud account settings
+      example:
+        disablePropertiesRequest: true
+      properties:
+        disablePropertiesRequest:
+          description: Will disable certain properties request to cloud and the input is collected directly from the user
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1AwsAccounts_2:
+      description: List of AWS accounts
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            credentialType: secret
+            secretSpec:
+              mission: mission
+              permissionBoundary: permissionBoundary
+              role: role
+              agency: agency
+              accountName: accountName
+              namePrefix: namePrefix
+              tls:
+                cert: cert
+                ca: ca
+                key: key
+              isCapValidationEnabled: true
+              policy: policy
+            partition: aws
+            sts:
+              externalId: externalId
+              arn: arn
+            secretKey: secretKey
+            accessKey: accessKey
+            podIdentity:
+              roleArn: roleArn
+              permissionBoundaryArn: permissionBoundaryArn
+            secretToken: secretToken
+            policyARNs:
+            - policyARNs
+            - policyARNs
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            credentialType: secret
+            secretSpec:
+              mission: mission
+              permissionBoundary: permissionBoundary
+              role: role
+              agency: agency
+              accountName: accountName
+              namePrefix: namePrefix
+              tls:
+                cert: cert
+                ca: ca
+                key: key
+              isCapValidationEnabled: true
+              policy: policy
+            partition: aws
+            sts:
+              externalId: externalId
+              arn: arn
+            secretKey: secretKey
+            accessKey: accessKey
+            podIdentity:
+              roleArn: roleArn
+              permissionBoundaryArn: permissionBoundaryArn
+            secretToken: secretToken
+            policyARNs:
+            - policyARNs
+            - policyARNs
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1AwsAccount_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1OpenStackDomain:
+      description: OpenStack domain. A Domain is a collection of projects, users, and roles
+      example:
+        name: name
+        description: description
+        id: id
+      properties:
+        description:
+          description: Description is the description of the Domain
+          type: string
+        id:
+          description: ID is the unique ID of the domain
+          type: string
+        name:
+          description: Name is the name of the domain
+          type: string
+      type: object
+    v1AzureCloudAccount_2:
+      example:
+        settings:
+          disablePropertiesRequest: true
+        clientId: clientId
+        tenantName: tenantName
+        azureEnvironment: AzurePublicCloud
+        tenantId: tenantId
+        clientSecret: clientSecret
+        tls:
+          cert: cert
+      properties:
+        azureEnvironment:
+          default: AzurePublicCloud
+          description: Contains configuration for Azure cloud
+          enum:
+          - AzureChinaCloud
+          - AzurePublicCloud
+          - AzureUSGovernment
+          - AzureUSGovernmentCloud
+          - AzureUSSecretCloud
+          type: string
+        clientId:
+          description: Client ID(Directory ID) is a unique identifier generated by Azure AD that is tied to an application
+          type: string
+        clientSecret:
+          description: ClientSecret is the secret associated with Client
+          type: string
+        settings:
+          $ref: '#/components/schemas/v1CloudAccountSettings_2'
+        tenantId:
+          description: Tenant ID is the ID for the Azure AD tenant that the user belongs to.
+          type: string
+        tenantName:
+          description: Tenant ID is the ID for the Azure AD tenant that the user belongs to.
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AzureSecretTlsConfig_2'
+      required:
+      - clientId
+      - clientSecret
+      - tenantId
+      type: object
+    v1AwsSecretTlsConfig_2:
+      description: TLS configuration for the AWS secret
+      example:
+        cert: cert
+        ca: ca
+        key: key
+      properties:
+        ca:
+          description: CA certificate
+          type: string
+        cert:
+          description: Certificate
+          type: string
+        key:
+          description: Key
+          type: string
+      type: object
+    v1CloudStackOffering_2:
+      description: CloudStack compute offering
+      example:
+        cpuNumber: 0
+        displayText: displayText
+        memory: 5
+        cpuSpeed: 6
+        isCustomized: true
+        maxIops: 5
+        isVolatile: true
+        name: name
+        isCustomizedIops: true
+        storageType: storageType
+        id: id
+        limitCpuUse: true
+        offerHA: true
+        hypervisorSnapshotReserve: 1
+        minIops: 2
+      properties:
+        cpuNumber:
+          description: Number of CPU cores
+          format: int32
+          type: integer
+        cpuSpeed:
+          description: CPU speed in MHz
+          format: int32
+          type: integer
+        displayText:
+          description: Display text for the offering
+          type: string
+        hypervisorSnapshotReserve:
+          description: Hypervisor snapshot reserve space as percentage
+          format: int32
+          type: integer
+        id:
+          description: Offering ID
+          type: string
+        isCustomized:
+          description: Whether the offering allows customization of CPU and memory
+          type: boolean
+        isCustomizedIops:
+          description: Whether the offering allows customization of IOPS
+          type: boolean
+        isVolatile:
+          description: Whether the VM is volatile (data is lost on stop/restart)
+          type: boolean
+        limitCpuUse:
+          description: Whether CPU usage is limited
+          type: boolean
+        maxIops:
+          description: Maximum IOPS for customized offerings
+          format: int64
+          type: integer
+        memory:
+          description: Memory size in MB
+          format: int64
+          type: integer
+        minIops:
+          description: Minimum IOPS for customized offerings
+          format: int64
+          type: integer
+        name:
+          description: Offering name
+          type: string
+        offerHA:
+          description: Whether the offering supports high availability
+          type: boolean
+        storageType:
+          description: Storage type (local or shared)
+          type: string
+      type: object
+    v1CloudStackTemplate_2:
+      description: CloudStack template
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Template ID
+          type: string
+        name:
+          description: Template name
+          type: string
+      type: object
+    v1VsphereDatacenter_2:
+      description: List of Datacenter with computeclusters
+      example:
+        folders:
+        - folders
+        - folders
+        computeclusters:
+        - computeclusters
+        - computeclusters
+        datacenter: datacenter
+      properties:
+        computeclusters:
+          description: List  of the VSphere compute clusters in datacenter
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        datacenter:
+          description: name of the datacenter of the VSphere
+          type: string
+        folders:
+          description: List  of the VSphere folders in datacenter
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1CloudStackDiskOffering_2:
+      description: CloudStack disk offering
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Disk offering ID
+          type: string
+        name:
+          description: Disk offering name
+          type: string
+      type: object
+    v1MaasTags_2:
+      description: List of Maas tags
+      example:
+        items:
+        - name: name
+          comment: comment
+          definition: definition
+          kernelOpts: kernelOpts
+          resourceUri: resourceUri
+        - name: name
+          comment: comment
+          definition: definition
+          kernelOpts: kernelOpts
+          resourceUri: resourceUri
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasTag_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasAccounts_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            preferredSubnets:
+            - ''
+            - ''
+            apiEndpoint: apiEndpoint
+            apiKey: apiKey
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            preferredSubnets:
+            - ''
+            - ''
+            apiEndpoint: apiEndpoint
+            apiKey: apiKey
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasAccount_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1OpenStackCloudAccount:
+      description: auth-url,project,username,password,domain,cacert etc
+      example:
+        password: password
+        caCert: caCert
+        identityEndpoint: identityEndpoint
+        insecure: true
+        parentRegion: parentRegion
+        defaultDomain: defaultDomain
+        defaultProject: defaultProject
+        username: username
+      properties:
+        caCert:
+          description: Ca cert for OpenStack
+          type: string
+        defaultDomain:
+          description: Default Domain name
+          type: string
+        defaultProject:
+          description: Default Project name
+          type: string
+        identityEndpoint:
+          description: Identity endpoint for OpenStack
+          type: string
+        insecure:
+          description: For self signed certs in IdentityEndpoint
+          type: boolean
+        parentRegion:
+          description: Parent region of OpenStack
+          type: string
+        password:
+          description: Password of OpenStack account
+          type: string
+        username:
+          description: Username of OpenStack account
+          type: string
+      required:
+      - identityEndpoint
+      - password
+      - username
+      type: object
+    v1OpenStackAccount:
+      description: OpenStack account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          password: password
+          caCert: caCert
+          identityEndpoint: identityEndpoint
+          insecure: true
+          parentRegion: parentRegion
+          defaultDomain: defaultDomain
+          defaultProject: defaultProject
+          username: username
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1OpenStackCloudAccount'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1OpenStackSubnet:
+      description: OpenStack subnet entity
+      example:
+        name: name
+        description: description
+        id: id
+      properties:
+        description:
+          description: Description for the network
+          type: string
+        id:
+          description: UUID for the network
+          type: string
+        name:
+          description: Human-readable name for the network. Might not be unique
+          type: string
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1AzureAccounts_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            settings:
+              disablePropertiesRequest: true
+            clientId: clientId
+            tenantName: tenantName
+            azureEnvironment: AzurePublicCloud
+            tenantId: tenantId
+            clientSecret: clientSecret
+            tls:
+              cert: cert
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            settings:
+              disablePropertiesRequest: true
+            clientId: clientId
+            tenantName: tenantName
+            azureEnvironment: AzurePublicCloud
+            tenantId: tenantId
+            clientSecret: clientSecret
+            tls:
+              cert: cert
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1AzureAccount_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1GcpAccounts_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            jsonCredentials: jsonCredentials
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            jsonCredentials: jsonCredentials
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1GcpAccount_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1CloudStackDomains_2:
+      description: List of CloudStack domains
+      example:
+        domains:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        domains:
+          items:
+            $ref: '#/components/schemas/v1CloudStackDomain_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1AwsAccount_2:
+      description: Aws cloud account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          credentialType: secret
+          secretSpec:
+            mission: mission
+            permissionBoundary: permissionBoundary
+            role: role
+            agency: agency
+            accountName: accountName
+            namePrefix: namePrefix
+            tls:
+              cert: cert
+              ca: ca
+              key: key
+            isCapValidationEnabled: true
+            policy: policy
+          partition: aws
+          sts:
+            externalId: externalId
+            arn: arn
+          secretKey: secretKey
+          accessKey: accessKey
+          podIdentity:
+            roleArn: roleArn
+            permissionBoundaryArn: permissionBoundaryArn
+          secretToken: secretToken
+          policyARNs:
+          - policyARNs
+          - policyARNs
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1AwsCloudAccount_2'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1CloudStackVpcs_2:
+      description: List of CloudStack SSH key pairs
+      example:
+        items:
+        - name: name
+          zoneId: zoneId
+          cidr: cidr
+          id: id
+          offeringId: offeringId
+          projectId: projectId
+          domainId: domainId
+        - name: name
+          zoneId: zoneId
+          cidr: cidr
+          id: id
+          offeringId: offeringId
+          projectId: projectId
+          domainId: domainId
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudStackVpc_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1GeolocationLatlong_2:
+      description: Geolocation Latlong entity
+      example:
+        latitude: 0.8008281904610115
+        longitude: 6.027456183070403
+      properties:
+        latitude:
+          description: Latitude of a resource
+          format: float64
+          type: number
+          x-omitempty: false
+        longitude:
+          description: Longitude of a resource
+          format: float64
+          type: number
+          x-omitempty: false
+      type: object
+    v1HttpPatch_2:
+      example:
+        op: add
+        path: path
+        from: from
+        value: '{}'
+      properties:
+        from:
+          description: A path to the pointer from which reference will be taken
+          type: string
+        op:
+          description: The operation to be performed
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          type: string
+        path:
+          description: A path to the pointer on which operation will be done
+          type: string
+        value:
+          description: The value to be used within the operations.
+          properties: {}
+          type: object
+      required:
+      - op
+      - path
+      type: object
+    v1CloudStackKeypair_2:
+      description: CloudStack SSH key pair
+      example:
+        fingerprint: fingerprint
+        name: name
+      properties:
+        fingerprint:
+          description: SSH key pair fingerprint
+          type: string
+        name:
+          description: SSH key pair name
+          type: string
+      type: object
+    v1MaasTag_2:
+      description: Maas tag
+      example:
+        name: name
+        comment: comment
+        definition: definition
+        kernelOpts: kernelOpts
+        resourceUri: resourceUri
+      properties:
+        comment:
+          description: Comment on Maas tag
+          type: string
+        definition:
+          description: Definition of Maas tag
+          type: string
+        kernelOpts:
+          description: Kernel Opts on Maas tag
+          type: string
+        name:
+          description: Name of Maas tag
+          type: string
+        resourceUri:
+          description: Description of Maas tag
+          type: string
+      type: object
+    v1MaasPool_2:
+      description: Maas pool
+      example:
+        name: name
+        description: description
+      properties:
+        description:
+          description: Description of Maas domain
+          type: string
+        name:
+          description: Name of Maas pool
+          type: string
+      type: object
+    v1ObjectMetaInputEntity_2:
+      description: ObjectMeta input entity for object creation
+      example:
+        name: name
+        annotations:
+          key: annotations
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+      type: object
+    v1CloudStackNetwork_2:
+      description: CloudStack network
+      example:
+        displayText: displayText
+        trafficType: trafficType
+        networkOffering: networkOffering
+        type: type
+        isDefault: true
+        netmask: netmask
+        name: name
+        zoneId: zoneId
+        cidr: cidr
+        id: id
+        state: state
+        zoneName: zoneName
+        gateway: gateway
+        isShared: true
+        networkDomain: networkDomain
+      properties:
+        cidr:
+          description: CIDR block for the network
+          type: string
+        displayText:
+          description: Display text for the network
+          type: string
+        gateway:
+          description: Gateway IP address for the network
+          type: string
+        id:
+          description: Network ID
+          type: string
+        isDefault:
+          description: Whether this is the default network
+          type: boolean
+        isShared:
+          description: Whether the network is shared across accounts
+          type: boolean
+        name:
+          description: Network name
+          type: string
+        netmask:
+          description: Network mask for the network
+          type: string
+        networkDomain:
+          description: Network domain
+          type: string
+        networkOffering:
+          description: Network offering name
+          type: string
+        state:
+          description: Current state of the network (Setup, Allocated, etc.)
+          type: string
+        trafficType:
+          description: Traffic type of the network (Guest, Management, etc.)
+          type: string
+        type:
+          description: Network type - Isolated, Shared, etc.
+          type: string
+        zoneId:
+          description: Zone ID where the network is located
+          type: string
+        zoneName:
+          description: Zone name where the network is located
+          type: string
+      type: object
+    v1VsphereComputeClusterResources_2:
+      description: Datacenter and its resources like datastore, resoucepool, folders
+      example:
+        computecluster:
+          resourcePools:
+          - resourcePools
+          - resourcePools
+          name: name
+          datastores:
+          - datastores
+          - datastores
+          networks:
+          - networks
+          - networks
+        datacenter: datacenter
+      properties:
+        computecluster:
+          $ref: '#/components/schemas/v1VsphereComputeCluster_2'
+        datacenter:
+          description: Name of the datacenter
+          type: string
+      type: object
+    v1CloudStackAccounts_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            apiKey: apiKey
+            apiUrl: apiUrl
+            secretKey: secretKey
+            domain: domain
+            insecure: true
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            apiKey: apiKey
+            apiUrl: apiUrl
+            secretKey: secretKey
+            domain: domain
+            insecure: true
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CloudStackAccount_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1AzureSecretTlsConfig_2:
+      description: TLS configuration for the AWS secret
+      example:
+        cert: cert
+      properties:
+        cert:
+          description: Certificate is the TLS certificate used to authenticate the Azure secret
+          type: string
+      type: object
+    v1AwsStsCredentials_2:
+      description: Aws sts credentials
+      example:
+        externalId: externalId
+        arn: arn
+      properties:
+        arn:
+          description: Arn for the aws sts credentials in cloud account
+          type: string
+        externalId:
+          description: ExternalId for the aws sts credentials in cloud account
+          type: string
+      type: object
+    v1CloudStackDiskOfferings_2:
+      description: List of CloudStack disk offerings
+      example:
+        diskOfferings:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        diskOfferings:
+          items:
+            $ref: '#/components/schemas/v1CloudStackDiskOffering_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1OpenStackFlavor:
+      description: OpenStack flavor entity. Flavor represent (virtual) hardware configurations for server resources
+      example:
+        disk: 0
+        memory: 1
+        name: name
+        ephemeral: 6
+        id: id
+        vcpus: 5
+      properties:
+        disk:
+          description: Disk is the amount of root disk, measured in GB
+          type: integer
+        ephemeral:
+          description: Ephemeral is the amount of ephemeral disk space, measured in GB
+          type: integer
+        id:
+          description: ID is the flavor's unique ID
+          type: string
+        memory:
+          description: Amount of memory, measured in MB
+          type: integer
+        name:
+          description: Name is the name of the flavor
+          type: string
+        vcpus:
+          description: VCPUs indicates how many (virtual) CPUs are available for this flavor
+          type: integer
+      type: object
+    v1CloudStackAccount_2:
+      description: CloudStack account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          apiKey: apiKey
+          apiUrl: apiUrl
+          secretKey: secretKey
+          domain: domain
+          insecure: true
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1CloudStackCloudAccount_2'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1OpenStackNetwork:
+      description: OpenStack network
+      example:
+        name: name
+        description: description
+        subnets:
+        - name: name
+          description: description
+          id: id
+        - name: name
+          description: description
+          id: id
+        id: id
+      properties:
+        description:
+          description: Description of OpenStack network
+          type: string
+        id:
+          description: Id of OpenStack network
+          type: string
+        name:
+          description: Name of OpenStack network
+          type: string
+        subnets:
+          description: Subnets associated with OpenStack network
+          items:
+            $ref: '#/components/schemas/v1OpenStackSubnet'
+          type: array
+          uniqueItems: true
+      type: object
+    v1AzureAccount_2:
+      description: Azure account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          settings:
+            disablePropertiesRequest: true
+          clientId: clientId
+          tenantName: tenantName
+          azureEnvironment: AzurePublicCloud
+          tenantId: tenantId
+          clientSecret: clientSecret
+          tls:
+            cert: cert
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1AzureCloudAccount_2'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1OpenStackKeypair:
+      description: OpenStack keypair. KeyPair is an SSH key known to the OpenStack Cloud that is available to be injected into servers
+      example:
+        name: name
+        publicKey: publicKey
+      properties:
+        name:
+          description: Name is used to refer to this keypair from other services within this region
+          type: string
+        publicKey:
+          description: PublicKey is the public key from this pair, in OpenSSH format
+          type: string
+      type: object
+    v1OpenStackFlavors:
+      description: List of OpenStack flavours
+      example:
+        items:
+        - disk: 0
+          memory: 1
+          name: name
+          ephemeral: 6
+          id: id
+          vcpus: 5
+        - disk: 0
+          memory: 1
+          name: name
+          ephemeral: 6
+          id: id
+          vcpus: 5
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1OpenStackFlavor'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1OpenStackKeypairs:
+      description: List of OpenStack keypairs
+      example:
+        items:
+        - name: name
+          publicKey: publicKey
+        - name: name
+          publicKey: publicKey
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1OpenStackKeypair'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1CloudStackTemplates_2:
+      description: List of CloudStack templates
+      example:
+        templates:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        templates:
+          items:
+            $ref: '#/components/schemas/v1CloudStackTemplate_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1OpenStackAccounts:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            password: password
+            caCert: caCert
+            identityEndpoint: identityEndpoint
+            insecure: true
+            parentRegion: parentRegion
+            defaultDomain: defaultDomain
+            defaultProject: defaultProject
+            username: username
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            password: password
+            caCert: caCert
+            identityEndpoint: identityEndpoint
+            insecure: true
+            parentRegion: parentRegion
+            defaultDomain: defaultDomain
+            defaultProject: defaultProject
+            username: username
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1OpenStackAccount'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1CloudStackProjects_2:
+      description: List of CloudStack projects
+      example:
+        projects:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1CloudStackProject_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1MaasAccount_2:
+      description: Maas cloud account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          preferredSubnets:
+          - ''
+          - ''
+          apiEndpoint: apiEndpoint
+          apiKey: apiKey
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1MaasCloudAccount_2'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1CloudStackCloudAccount_2:
+      description: CloudStack cloud account credentials
+      example:
+        apiKey: apiKey
+        apiUrl: apiUrl
+        secretKey: secretKey
+        domain: domain
+        insecure: true
+      properties:
+        apiKey:
+          description: API Key for CloudStack authentication
+          type: string
+        apiUrl:
+          description: API URL for CloudStack management server
+          type: string
+        domain:
+          description: Cloudstack domain
+          type: string
+        insecure:
+          description: 'Skip SSL certificate verification (default: false)'
+          type: boolean
+        secretKey:
+          description: Secret Key for CloudStack authentication
+          type: string
+      required:
+      - apiKey
+      - apiUrl
+      - secretKey
+      type: object
+    v1AwsSecretSpec_2:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. Partition is a group of AWS Region and Service objects
+      example:
+        mission: mission
+        permissionBoundary: permissionBoundary
+        role: role
+        agency: agency
+        accountName: accountName
+        namePrefix: namePrefix
+        tls:
+          cert: cert
+          ca: ca
+          key: key
+        isCapValidationEnabled: true
+        policy: policy
+      properties:
+        accountName:
+          description: AWS secret accountName; only for aws-iso-b environment
+          type: string
+        agency:
+          description: AWS secret agency
+          type: string
+        isCapValidationEnabled:
+          description: Flag to rotate the secret region credentials
+          type: boolean
+        mission:
+          description: AWS secret mission; only for aws-iso environment
+          type: string
+        namePrefix:
+          description: Policy Boundary
+          type: string
+        permissionBoundary:
+          description: Role or Policy Prefix
+          type: string
+        policy:
+          description: AWS secret policy; JSON string
+          type: string
+        role:
+          description: AWS secret role
+          type: string
+        tls:
+          $ref: '#/components/schemas/v1AwsSecretTlsConfig_2'
+      type: object
+    v1CloudStackZones_2:
+      description: List of CloudStack zones
+      example:
+        zones:
+        - name: name
+          id: id
+        - name: name
+          id: id
+      properties:
+        zones:
+          items:
+            $ref: '#/components/schemas/v1CloudStackZone_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1AwsPodIdentityCredentials_2:
+      description: AWS EKS Pod Identity credentials for role assumption
+      example:
+        roleArn: roleArn
+        permissionBoundaryArn: permissionBoundaryArn
+      properties:
+        permissionBoundaryArn:
+          description: Optional Permission Boundary ARN to limit the maximum permissions for roles created by Hubble
+          type: string
+        roleArn:
+          description: IAM Role ARN for the AWS EKS Pod Identity in cloud account
+          type: string
+      type: object
+    v1VsphereCloudAccount_2:
+      example:
+        password: password
+        insecure: true
+        vcenterServer: vcenterServer
+        username: username
+      properties:
+        insecure:
+          description: Insecure is a flag that controls whether or not to validate the vSphere server's certificate.
+          type: boolean
+          x-omitempty: false
+        password:
+          type: string
+        username:
+          type: string
+        vcenterServer:
+          description: VcenterServer is the address of the vSphere endpoint
+          type: string
+      required:
+      - password
+      - username
+      - vcenterServer
+      type: object
+    v1AwsCloudAccount_2:
+      description: AWS cloud account which includes access key and secret key in case of 'secret' credentials type. It includes policyARNS, ARN and externalId in case of sts. It includes roleArn and permissionBoundaryArn in case of podIdentity. Partition is a group of AWS Region and Service objects
+      example:
+        credentialType: secret
+        secretSpec:
+          mission: mission
+          permissionBoundary: permissionBoundary
+          role: role
+          agency: agency
+          accountName: accountName
+          namePrefix: namePrefix
+          tls:
+            cert: cert
+            ca: ca
+            key: key
+          isCapValidationEnabled: true
+          policy: policy
+        partition: aws
+        sts:
+          externalId: externalId
+          arn: arn
+        secretKey: secretKey
+        accessKey: accessKey
+        podIdentity:
+          roleArn: roleArn
+          permissionBoundaryArn: permissionBoundaryArn
+        secretToken: secretToken
+        policyARNs:
+        - policyARNs
+        - policyARNs
+      properties:
+        accessKey:
+          description: AWS account access key
+          type: string
+        credentialType:
+          $ref: '#/components/schemas/v1AwsCloudAccountCredentialType'
+        partition:
+          default: aws
+          description: AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values
+          enum:
+          - aws
+          - aws-us-gov
+          - aws-iso
+          - aws-iso-b
+          type: string
+        podIdentity:
+          $ref: '#/components/schemas/v1AwsPodIdentityCredentials_2'
+        policyARNs:
+          description: List of policy ARNs required in case of credentialType sts.
+          items:
+            type: string
+          type: array
+        secretKey:
+          description: AWS account secret key
+          type: string
+        secretSpec:
+          $ref: '#/components/schemas/v1AwsSecretSpec_2'
+        secretToken:
+          description: AWS account secret token; in case of aws-iso and aws-iso-b
+          type: string
+        sts:
+          $ref: '#/components/schemas/v1AwsStsCredentials_2'
+      type: object
+    v1MaasSubnet_2:
+      description: Maas subnet
+      example:
+        vlans:
+          fabric: fabric
+          name: name
+          id: 6
+        name: name
+        id: 0
+        space: space
+      properties:
+        id:
+          description: Id of Maas subnet
+          type: integer
+        name:
+          description: Name of Maas subnet
+          type: string
+        space:
+          description: Space associated with Maas subnet
+          type: string
+        vlans:
+          $ref: '#/components/schemas/v1MaasVlan_2'
+      type: object
+    v1VsphereAccount_2:
+      description: VSphere account information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        apiVersion: apiVersion
+        kind: kind
+        spec:
+          password: password
+          insecure: true
+          vcenterServer: vcenterServer
+          username: username
+        status:
+          tokenGenerationTime: 2000-01-23 04:56:07+00:00
+          tokenExpiry: 2000-01-23 04:56:07+00:00
+          state: state
+      properties:
+        apiVersion:
+          description: Cloud account api version
+          type: string
+        kind:
+          description: Cloud account kind
+          type: string
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1VsphereCloudAccount_2'
+        status:
+          $ref: '#/components/schemas/v1CloudAccountStatus_2'
+      type: object
+    v1OpenStackRegions:
+      description: List of OpenStack regions and domains
+      example:
+        regions:
+        - parentRegionId: parentRegionId
+          description: description
+          id: id
+        - parentRegionId: parentRegionId
+          description: description
+          id: id
+        domains:
+        - name: name
+          description: description
+          id: id
+        - name: name
+          description: description
+          id: id
+      properties:
+        domains:
+          description: List of OpenStack domains
+          items:
+            $ref: '#/components/schemas/v1OpenStackDomain'
+          type: array
+          uniqueItems: true
+        regions:
+          description: List of OpenStack regions
+          items:
+            $ref: '#/components/schemas/v1OpenStackRegion'
+          type: array
+          uniqueItems: true
+      required:
+      - domains
+      - regions
+      type: object
+    v1OpenStackProject:
+      description: Project represents an OpenStack Identity Project
+      example:
+        parentProjectId: parentProjectId
+        name: name
+        description: description
+        id: id
+        domainId: domainId
+      properties:
+        description:
+          description: Description is the description of the project
+          type: string
+        domainId:
+          description: DomainID is the domain ID the project belongs to
+          type: string
+        id:
+          description: ID is the unique ID of the project
+          type: string
+        name:
+          description: Name is the name of the project
+          type: string
+        parentProjectId:
+          description: ParentID is the parent_id of the project
+          type: string
+      type: object
+    v1MaasZones_2:
+      description: List of Maas zones
+      example:
+        items:
+        - name: name
+          description: description
+        - name: name
+          description: description
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MaasZone_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1CloudStackProject_2:
+      description: CloudStack project
+      example:
+        name: name
+        id: id
+      properties:
+        id:
+          description: Project ID
+          type: string
+        name:
+          description: Project name
+          type: string
+      type: object
+    v1OpenStackNetworks:
+      description: List of OpenStack networks
+      example:
+        items:
+        - name: name
+          description: description
+          subnets:
+          - name: name
+            description: description
+            id: id
+          - name: name
+            description: description
+            id: id
+          id: id
+        - name: name
+          description: description
+          subnets:
+          - name: name
+            description: description
+            id: id
+          - name: name
+            description: description
+            id: id
+          id: id
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1OpenStackNetwork'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1VsphereDatacenters_2:
+      description: List of Datacenters with computeclusters
+      example:
+        items:
+        - folders:
+          - folders
+          - folders
+          computeclusters:
+          - computeclusters
+          - computeclusters
+          datacenter: datacenter
+        - folders:
+          - folders
+          - folders
+          computeclusters:
+          - computeclusters
+          - computeclusters
+          datacenter: datacenter
+      properties:
+        items:
+          description: List of associated datacenters
+          items:
+            $ref: '#/components/schemas/v1VsphereDatacenter_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MaasDomain_2:
+      description: Maas domain
+      example:
+        name: name
+      properties:
+        name:
+          description: Name of Maas domain
+          type: string
+      type: object
+    v1CustomAccounts_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            credentials:
+              key: credentials
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          apiVersion: apiVersion
+          kind: kind
+          spec:
+            credentials:
+              key: credentials
+          status:
+            tokenGenerationTime: 2000-01-23 04:56:07+00:00
+            tokenExpiry: 2000-01-23 04:56:07+00:00
+            state: state
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1CustomAccount_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -2938,3 +5868,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

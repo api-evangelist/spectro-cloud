@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-audit-sys-msg-schema.json",
+  "title": "v1AuditSysMsg",
+  "description": "Audit system message",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-audits-api-openapi.yml#/components/schemas/v1AuditSysMsg",
+  "properties": {
+    "actionMsg": {
+      "description": "Audit resource action message",
+      "type": "string"
+    },
+    "contentMsg": {
+      "description": "Audit resource content message",
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

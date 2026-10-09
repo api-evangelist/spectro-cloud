@@ -1,0 +1,471 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-pack-summaries-schema.json",
+  "title": "v1PackSummaries",
+  "description": "List of packs",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-packs-api-openapi.yml#/components/schemas/v1PackSummaries",
+  "properties": {
+    "items": {
+      "description": "Packs array",
+      "items": {
+        "$ref": "#/$defs/v1PackSummary"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "listmeta": {
+      "$ref": "#/$defs/v1ListMetaData"
+    }
+  },
+  "required": [
+    "items"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1ListMetaData": {
+      "description": "ListMeta describes metadata for the resource listing",
+      "properties": {
+        "continue": {
+          "description": "Next token for the pagination. Next token is equal to empty string indicates end of result set.",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "count": {
+          "description": "Total count of the resources which might change during pagination based on the resources addition or deletion",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "limit": {
+          "description": "Number of records feteched",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "offset": {
+          "description": "The next offset for the pagination. Starting index for which next request will be placed.",
+          "type": "integer",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackDependency": {
+      "description": "Pack template dependency",
+      "properties": {
+        "layer": {
+          "description": "Pack template dependency pack layer",
+          "type": "string"
+        },
+        "name": {
+          "description": "Pack template dependency pack name",
+          "type": "string"
+        },
+        "readOnly": {
+          "description": "If true then dependency pack values can't be overridden",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackLayer": {
+      "enum": [
+        "kernel",
+        "os",
+        "k8s",
+        "cni",
+        "csi",
+        "addon"
+      ],
+      "type": "string"
+    },
+    "v1PackPreset": {
+      "description": "PackPreset defines the preset pack values",
+      "properties": {
+        "add": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "displayName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "group": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "remove": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1PackSchema": {
+      "description": "PackSchema defines the schema definition, hints for the pack values",
+      "properties": {
+        "format": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "hints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "listOptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "readonly": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "regex": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "required": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1PackSummary": {
+      "description": "Pack summary object",
+      "properties": {
+        "apiVersion": {
+          "description": "Pack api version",
+          "type": "string"
+        },
+        "kind": {
+          "description": "Pack kind",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/$defs/v1ObjectMeta"
+        },
+        "spec": {
+          "$ref": "#/$defs/v1PackSummarySpec"
+        },
+        "status": {
+          "$ref": "#/$defs/v1PackSummaryStatus"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackSummarySpec": {
+      "description": "Pack object",
+      "properties": {
+        "addonSubType": {
+          "description": "Pack add-on sub type such as monitoring, db etc",
+          "type": "string"
+        },
+        "addonType": {
+          "description": "Pack add-on type such as logging, monitoring, security etc",
+          "type": "string"
+        },
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Pack annotations is used to allow pack to add more arbitrary configurations",
+          "type": "object"
+        },
+        "cloudTypes": {
+          "description": "Pack supported cloud types",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "digest": {
+          "description": "Pack digest",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Pack display name",
+          "type": "string"
+        },
+        "eol": {
+          "description": "Pack end of life, date format: yyyy-MM-dd",
+          "type": "string"
+        },
+        "group": {
+          "description": "Pack group",
+          "type": "string"
+        },
+        "layer": {
+          "$ref": "#/$defs/v1PackLayer"
+        },
+        "logoUrl": {
+          "description": "Pack logo url",
+          "type": "string"
+        },
+        "manifests": {
+          "description": "Pack manifests are additional content as part of the cluster profile",
+          "items": {
+            "$ref": "#/$defs/v1ObjectReference"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Pack name",
+          "type": "string"
+        },
+        "presets": {
+          "description": "Pack presets are the set of configurations applied on user selection of presets",
+          "items": {
+            "$ref": "#/$defs/v1PackPreset"
+          },
+          "type": "array"
+        },
+        "registryUid": {
+          "description": "Pack registry uid",
+          "type": "string"
+        },
+        "schema": {
+          "description": "Pack schema contains constraints such as data type, format, hints for the pack values",
+          "items": {
+            "$ref": "#/$defs/v1PackSchema"
+          },
+          "type": "array"
+        },
+        "template": {
+          "$ref": "#/$defs/v1PackTemplate"
+        },
+        "type": {
+          "$ref": "#/$defs/v1PackType"
+        },
+        "values": {
+          "description": "Pack values",
+          "type": "string"
+        },
+        "version": {
+          "description": "Pack version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackSummaryStatus": {
+      "description": "Pack status",
+      "type": "object"
+    },
+    "v1PackTemplate": {
+      "description": "Pack template configuration",
+      "properties": {
+        "manifest": {
+          "description": "Pack template manifest content",
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/$defs/v1PackTemplateParameters"
+        },
+        "values": {
+          "description": "Pack template values",
+          "type": "string"
+        }
+      }
+    },
+    "v1PackTemplateParameter": {
+      "description": "Pack template parameter",
+      "properties": {
+        "description": {
+          "description": "Pack template parameter description",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Pack template parameter display name",
+          "type": "string"
+        },
+        "format": {
+          "description": "Pack template parameter format",
+          "type": "string"
+        },
+        "hidden": {
+          "description": "Pack template parameter hidden flag, if true then the parameter is hidden in the UI",
+          "type": "boolean"
+        },
+        "listOptions": {
+          "description": "Pack template parameter list options as string array",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Pack template parameter name",
+          "type": "string"
+        },
+        "optional": {
+          "description": "Pack template parameter optional flag, if true then the parameter value is not mandatory",
+          "type": "boolean"
+        },
+        "options": {
+          "additionalProperties": {
+            "$ref": "#/$defs/v1PackTemplateParameterOption",
+            "type": "object"
+          },
+          "description": "Pack template parameter options array",
+          "type": "object"
+        },
+        "readOnly": {
+          "description": "Pack template parameter readonly flag, if true then the parameter value can't be overridden",
+          "type": "boolean"
+        },
+        "regex": {
+          "description": "Pack template parameter regex, if set then parameter value must match with specified regex",
+          "type": "string"
+        },
+        "targetKey": {
+          "description": "Pack template parameter target key which is mapped to the key defined in the pack values",
+          "type": "string"
+        },
+        "type": {
+          "description": "Pack template parameter data type",
+          "type": "string"
+        },
+        "value": {
+          "description": "Pack template parameter value",
+          "type": "string"
+        }
+      }
+    },
+    "v1PackTemplateParameterOption": {
+      "description": "Pack template parameter option",
+      "properties": {
+        "dependencies": {
+          "description": "Pack template parameter dependencies",
+          "items": {
+            "$ref": "#/$defs/v1PackDependency"
+          },
+          "type": "array"
+        },
+        "description": {
+          "description": "Pack template parameter description",
+          "type": "string"
+        },
+        "label": {
+          "description": "Pack template parameter label",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackTemplateParameters": {
+      "description": "Pack template parameters",
+      "properties": {
+        "inputParameters": {
+          "description": "Pack template input parameters array",
+          "items": {
+            "$ref": "#/$defs/v1PackTemplateParameter"
+          },
+          "type": "array"
+        },
+        "outputParameters": {
+          "description": "Pack template output parameters array",
+          "items": {
+            "$ref": "#/$defs/v1PackTemplateParameter"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "v1PackType": {
+      "default": "spectro",
+      "enum": [
+        "spectro",
+        "helm",
+        "manifest",
+        "oci"
+      ],
+      "type": "string"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

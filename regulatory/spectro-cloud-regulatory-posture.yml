@@ -1,0 +1,32 @@
+generated: "2026-10-04"
+method: probed
+source: "https://www.spectrocloud.com/privacy-policy"
+signals:
+  data_subject_request:
+    evidence:
+      - source: "https://www.spectrocloud.com/privacy-policy"
+        http_status: 200
+        fetched: "/tmp/spectro_privacy.html"
+        quote: "Spectro Cloud obtains the categories of personal information listed above from the following categories of sources: Directly from you- For example, you provide your contact and professional information to us when you sign up to learn more about Spectro Cloud’s products and services, download content, register for an event, and visit our offices."
+        note: "Provides mechanisms for users to request their data and explains how data is collected directly from users."
+  data_retention:
+    evidence:
+      - source: "https://www.spectrocloud.com/privacy-policy"
+        http_status: 200
+        fetched: "/tmp/spectro_privacy.html"
+        quote: "We will retain your personal information for a period of time that is consistent with the original purpose of the data collection, or as necessary to comply with our legal obligations, resolve disputes, and enforce our agreements."
+        note: "Describes retention period policy."
+  ai_transparency:
+    evidence:
+      - source: "https://www.spectrocloud.com/privacy-policy"
+        http_status: 200
+        fetched: "/tmp/spectro_privacy.html"
+        quote: "Spectro Cloud does not use collected customer data to train or otherwise develop AI models."
+        note: "Explicit denial of AI model training with customer data."
+  age_assurance:
+    evidence:
+      - source: "https://www.spectrocloud.com/privacy-policy"
+        http_status: 200
+        fetched: "/tmp/spectro_privacy.html"
+        quote: "Spectro Cloud’s Sites are not directed at minors under the age of 18 and those under 18 are not permitted to use the Sites. We do not knowingly collect personal information from minors."
+        note: "States age restriction and lack of data collection from minors."

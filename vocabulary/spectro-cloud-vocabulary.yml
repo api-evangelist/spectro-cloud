@@ -1,0 +1,416 @@
+generated: '2026-10-04'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/spectro-cloud-activations-api-openapi.yml
+- openapi/spectro-cloud-api-keys-api-openapi.yml
+- openapi/spectro-cloud-app-deployments-api-openapi.yml
+- openapi/spectro-cloud-appprofiles-api-openapi.yml
+- openapi/spectro-cloud-audits-api-openapi.yml
+vocabulary:
+  name: Spectro Cloud Domain Vocabulary
+  description: 'Terms declared by Spectro Cloud''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-04'
+  terms:
+  - term: v1Error
+    definition: 'Object declared by the contract with fields: code, details, message, ref.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-activations-api-openapi.yml#/components/schemas/v1Error
+  - term: v1ActivationsSystemResponse
+    definition: 'Object declared by the contract with fields: status.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-activations-api-openapi.yml#/components/schemas/v1ActivationsSystemResponse
+  - term: v1Time
+    definition: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON. Wrappers are provided for many of the factory
+      methods that the time package offers.
+    tags:
+    - Object
+    source: openapi/spectro-cloud-activations-api-openapi.yml#/components/schemas/v1Time
+  - term: v1ApiKeyActiveState
+    definition: 'Object declared by the contract with fields: isActive.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeyActiveState
+  - term: v1ApiKeys
+    definition: 'Object declared by the contract with fields: items.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeys
+  - term: v1ApiKeyEntity
+    definition: API key request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeyEntity
+  - term: v1ApiKeySpecUpdate
+    definition: API key update request specification
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeySpecUpdate
+  - term: v1ApiKeySpec
+    definition: API key specification
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeySpec
+  - term: v1ApiKeySpecEntity
+    definition: API key specification
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeySpecEntity
+  - term: v1ApiKeyUpdate
+    definition: API key update request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeyUpdate
+  - term: v1ApiKeyUser
+    definition: API key user information
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeyUser
+  - term: v1ApiKeyCreateResponse
+    definition: Response of create API key
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeyCreateResponse
+  - term: v1ApiKeyStatus
+    definition: API key status
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeyStatus
+  - term: v1ApiKey
+    definition: API key information
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKey
+  - term: v1ObjectMeta
+    definition: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+    tags:
+    - Object
+    source: openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ObjectMeta
+  - term: v1AppDeploymentVirtualClusterTargetSpec
+    definition: Application deployment virtual cluster target spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentVirtualClusterTargetSpec
+  - term: v1AppDeploymentClusterGroupTargetSpec
+    definition: Application deployment cluster group target spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentClusterGroupTargetSpec
+  - term: v1AppTierType
+    definition: 'Enumeration declared by the contract with values: manifest, helm, operator-instance, container.'
+    tags:
+    - Enumeration
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTierType
+  - term: v1LoadBalancerService
+    definition: 'Object declared by the contract with fields: host, name, ports.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1LoadBalancerService
+  - term: v1AppTierUpdateEntity
+    definition: Application tier update request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTierUpdateEntity
+  - term: v1AppDeploymentSpec
+    definition: Application deployment spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentSpec
+  - term: v1AppDeploymentVirtualClusterConfigEntity
+    definition: Application deployment virtual cluster config
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentVirtualClusterConfigEntity
+  - term: v1AppDeploymentTargetConfig
+    definition: Application deployment target config response
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentTargetConfig
+  - term: v1Manifest
+    definition: Manifest object
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1Manifest
+  - term: v1AppTierSpec
+    definition: Application tier specs
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTierSpec
+  - term: v1AppDeploymentStatus
+    definition: Application deployment status
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentStatus
+  - term: v1ClusterCondition
+    definition: 'Object declared by the contract with fields: lastProbeTime, lastTransitionTime, message, reason, status, type.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ClusterCondition
+  - term: v1AppDeploymentProfileVersions
+    definition: Application deployment profile versions
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentProfileVersions
+  - term: v1ObjectReference
+    definition: ObjectReference contains enough information to let you inspect or modify the referred object.
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ObjectReference
+  - term: v1ClusterPackStatus
+    definition: 'Object declared by the contract with fields: condition, endTime, manifests, name, profileUid, services, startTime, type, version.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ClusterPackStatus
+  - term: v1ClusterPackManifestStatus
+    definition: 'Object declared by the contract with fields: condition, name, uid.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ClusterPackManifestStatus
+  - term: v1AppDeploymentVirtualClusterSpec
+    definition: Application deployment virtual cluster spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentVirtualClusterSpec
+  - term: v1ObjectMetaInputEntity
+    definition: ObjectMeta input entity for object creation
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ObjectMetaInputEntity
+  - term: v1ServicePort
+    definition: 'Object declared by the contract with fields: port, protocol.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ServicePort
+  - term: v1AppDeploymentClusterGroupConfigEntity
+    definition: Application deployment cluster group config
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentClusterGroupConfigEntity
+  - term: v1AppDeploymentProfileEntity
+    definition: Application deployment profile request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentProfileEntity
+  - term: v1Uid
+    definition: 'Object declared by the contract with fields: uid.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1Uid
+  - term: v1AppTierRef
+    definition: Application tier reference
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTierRef
+  - term: v1AppDeploymentConfig
+    definition: Application deployment config response
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentConfig
+  - term: v1AppDeploymentProfileSpec
+    definition: Application deployment profile spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentProfileSpec
+  - term: v1ManifestPublishedSpec
+    definition: Manifest spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ManifestPublishedSpec
+  - term: v1AppDeploymentProfileVersion
+    definition: Application deployment profile version
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentProfileVersion
+  - term: v1AppDeploymentProfile
+    definition: Application deployment profile
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentProfile
+  - term: v1AppDeploymentClusterRef
+    definition: Application deployment cluster reference
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentClusterRef
+  - term: v1AppProfileTemplateSpec
+    definition: Application profile template specs
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppProfileTemplateSpec
+  - term: v1ManifestData
+    definition: Published manifest object
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ManifestData
+  - term: v1AppDeploymentVirtualClusterEntity
+    definition: Application deployment virtual cluster request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentVirtualClusterEntity
+  - term: v1AppTier
+    definition: 'Object declared by the contract with fields: metadata, spec.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTier
+  - term: v1AppDeploymentClusterGroupEntity
+    definition: Application deployment cluster group request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentClusterGroupEntity
+  - term: v1AppDeploymentClusterGroupSpec
+    definition: Application deployment cluster group spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentClusterGroupSpec
+  - term: v1AppTierProperty
+    definition: Application tier property object
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTierProperty
+  - term: v1AppTierManifests
+    definition: Application tier manifests data
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTierManifests
+  - term: v1AppTierPropertyEntity
+    definition: Application tier property object
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppTierPropertyEntity
+  - term: v1AppProfileTemplate
+    definition: Application profile template information
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppProfileTemplate
+  - term: v1AppDeploymentTargetClusterLimits
+    definition: Application deployment target cluster limits
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentTargetClusterLimits
+  - term: v1AppDeploymentTargetEnvironmentRef
+    definition: Application deployment target environment reference
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentTargetEnvironmentRef
+  - term: v1AppDeployment
+    definition: Application deployment response
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeployment
+  - term: v1AppDeploymentProfileMeta
+    definition: Application deployment profile metadata
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentProfileMeta
+  - term: v1ManifestRefUpdateEntity
+    definition: Manifest update request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1ManifestRefUpdateEntity
+  - term: v1LifecycleStatus
+    definition: 'Object declared by the contract with fields: msg, status.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1LifecycleStatus
+  - term: v1Macro
+    definition: 'Object declared by the contract with fields: name, value.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1Macro
+  - term: v1AppProfileEntity
+    definition: Application profile request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileEntity
+  - term: v1AppProfileCloneTarget
+    definition: Application profile clone target
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileCloneTarget
+  - term: v1AppProfileTemplateEntity
+    definition: Application profile template spec
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileTemplateEntity
+  - term: v1AppProfileTiersSpec
+    definition: Application profile tiers information
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileTiersSpec
+  - term: v1AppProfileMetaUpdateEntity
+    definition: Application profile metadata update request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileMetaUpdateEntity
+  - term: v1AppProfileVersion
+    definition: Application profile version
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileVersion
+  - term: v1AppProfileCloneEntity
+    definition: Application profile clone request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileCloneEntity
+  - term: v1AppProfile
+    definition: Application profile response
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfile
+  - term: v1AppProfileTiers
+    definition: Application profile tiers information
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileTiers
+  - term: v1ManifestInputEntity
+    definition: Manifest request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1ManifestInputEntity
+  - term: v1AppTierResolvedValues
+    definition: Application tier resolved macro values
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppTierResolvedValues
+  - term: v1AppProfileMetaEntity
+    definition: Application profile metadata request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileMetaEntity
+  - term: v1AppTierEntity
+    definition: Application tier request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppTierEntity
+  - term: v1ObjectResReference
+    definition: Object resource reference
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1ObjectResReference
+  - term: v1AppProfileCloneMetaInputEntity
+    definition: Application profile clone metadata
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppProfileCloneMetaInputEntity
+  - term: v1Macros
+    definition: 'Object declared by the contract with fields: macros.'
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1Macros
+  - term: v1AppTierPatchEntity
+    definition: Application tier patch request payload
+    tags:
+    - Object
+    source: openapi/spectro-cloud-appprofiles-api-openapi.yml#/components/schemas/v1AppTierPatchEntity
+  - term: v1AuditResourceReference
+    definition: Audit resource reference object
+    tags:
+    - Object
+    source: openapi/spectro-cloud-audits-api-openapi.yml#/components/schemas/v1AuditResourceReference
+  - term: v1ListMetaData
+    definition: ListMeta describes metadata for the resource listing
+    tags:
+    - Object
+    source: openapi/spectro-cloud-audits-api-openapi.yml#/components/schemas/v1ListMetaData

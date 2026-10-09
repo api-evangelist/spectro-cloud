@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-activations-system-response-schema.json",
+  "title": "v1ActivationsSystemResponse",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-activations-api-openapi.yml#/components/schemas/v1ActivationsSystemResponse",
+  "properties": {
+    "status": {
+      "properties": {
+        "expiresAt": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "state": {
+          "enum": [
+            "Active",
+            "Pending",
+            "Inactive"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "state"
+      ],
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

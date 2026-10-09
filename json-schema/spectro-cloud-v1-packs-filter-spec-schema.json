@@ -1,0 +1,190 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-packs-filter-spec-schema.json",
+  "title": "v1PacksFilterSpec",
+  "description": "Packs filter spec",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-packs-api-openapi.yml#/components/schemas/v1PacksFilterSpec",
+  "properties": {
+    "filter": {
+      "$ref": "#/$defs/v1PackFilterSpec"
+    },
+    "sort": {
+      "items": {
+        "$ref": "#/$defs/v1PackSortSpec"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "v1FilterString": {
+      "properties": {
+        "beginsWith": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "contains": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "eq": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ignoreCase": {
+          "default": true,
+          "type": "boolean"
+        },
+        "ne": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "type": "object"
+    },
+    "v1PackFilterSpec": {
+      "description": "Packs filter spec",
+      "properties": {
+        "addOnSubType": {
+          "description": "Pack add-on sub type such as monitoring, db etc",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "addOnType": {
+          "description": "Pack add-on type such as logging, monitoring, security etc",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "displayName": {
+          "$ref": "#/$defs/v1FilterString"
+        },
+        "environment": {
+          "description": "Pack supported cloud types",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "isFips": {
+          "description": "isFips compliant",
+          "type": "boolean"
+        },
+        "layer": {
+          "description": "Pack layer",
+          "items": {
+            "$ref": "#/$defs/v1PackLayer"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "name": {
+          "$ref": "#/$defs/v1FilterString"
+        },
+        "registryUid": {
+          "description": "Pack registry uid",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "source": {
+          "description": "The source filter describes the creation origin/source of the pack. Ex. source can be \"spectrocloud\" or \"community\"",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "state": {
+          "description": "Pack state such as deprecated or disabled",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "type": {
+          "description": "Pack type",
+          "items": {
+            "$ref": "#/$defs/v1PackType"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      }
+    },
+    "v1PackLayer": {
+      "enum": [
+        "kernel",
+        "os",
+        "k8s",
+        "cni",
+        "csi",
+        "addon"
+      ],
+      "type": "string"
+    },
+    "v1PackSortFields": {
+      "description": "Packs sort by fields",
+      "enum": [
+        "name",
+        "type",
+        "layer",
+        "addOnType",
+        "displayName"
+      ],
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "v1PackSortSpec": {
+      "description": "Packs sort spec",
+      "properties": {
+        "field": {
+          "$ref": "#/$defs/v1PackSortFields"
+        },
+        "order": {
+          "$ref": "#/$defs/v1SortOrder"
+        }
+      }
+    },
+    "v1PackType": {
+      "default": "spectro",
+      "enum": [
+        "spectro",
+        "helm",
+        "manifest",
+        "oci"
+      ],
+      "type": "string"
+    },
+    "v1SortOrder": {
+      "default": "asc",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "type": "string"
+    }
+  }
+}

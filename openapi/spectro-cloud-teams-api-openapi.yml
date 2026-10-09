@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Teams API
+  title: Spectro Cloud Teams API
   version: v1
+  description: 'Operations tagged teams across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Teams
   x-displayName: Teams
@@ -99,6 +101,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1Team'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/teams/summary:
     get:
       description: Deprecated, Use Post api - Returns a list of team summaries
@@ -175,6 +179,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1TeamsSummarySpec'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/teams/{uid}:
     parameters:
     - in: path
@@ -241,6 +247,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1Team'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/teams/{uid}/projects:
     parameters:
     - in: path
@@ -280,6 +288,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1ProjectRolesPatch'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/teams/{uid}/resourceRoles:
     parameters:
     - in: path
@@ -321,6 +331,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1ResourceRolesUpdateEntity'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/teams/{uid}/resourceRoles/{resourceRoleUid}:
     parameters:
     - in: path
@@ -362,6 +374,8 @@ paths:
             schema:
               $ref: '#/components/schemas/v1ResourceRolesUpdateEntity'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/teams/{uid}/roles:
     parameters:
     - in: path
@@ -401,183 +415,19 @@ paths:
             schema:
               $ref: '#/components/schemas/v1TeamTenantRolesUpdate'
         required: true
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1FilterString:
-      properties:
-        beginsWith:
-          type:
-          - string
-          - 'null'
-        contains:
-          type:
-          - string
-          - 'null'
-        eq:
-          type:
-          - string
-          - 'null'
-        ignoreCase:
-          default: true
-          type: boolean
-        ne:
-          type:
-          - string
-          - 'null'
-      type: object
-    v1TeamPatch:
-      items:
-        $ref: '#/components/schemas/v1HttpPatch'
-      type: array
-    v1TeamsSummary:
-      description: Deprecated, Use v1UsersSummaryList - Returns User summary
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1TeamSummary'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1SortOrder:
-      default: asc
-      enum:
-      - asc
-      - desc
-      type: string
-    v1TeamSummary:
-      description: Team summary
+    v1Team:
+      description: Team information
       properties:
         metadata:
           $ref: '#/components/schemas/v1ObjectMeta'
         spec:
-          $ref: '#/components/schemas/v1TeamSpecSummary'
+          $ref: '#/components/schemas/v1TeamSpec'
         status:
           $ref: '#/components/schemas/v1TeamStatus'
-      type: object
-    v1TeamsSummaryList:
-      description: Returns Team summary
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1TeamSummary'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1ProjectRolesEntity:
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/v1UidRoleSummary'
-          type: array
-      type: object
-    v1ResourceRoles:
-      properties:
-        resourceRoles:
-          items:
-            $ref: '#/components/schemas/v1ResourceRolesEntity'
-          type: array
-      type: object
-    v1ResourceRolesUpdateEntity:
-      properties:
-        filterRefs:
-          items:
-            type: string
-          type: array
-        projectUids:
-          items:
-            type: string
-          type: array
-        roles:
-          items:
-            type: string
-          type: array
-      type: object
-    v1TeamsSummarySpec:
-      description: Teams filter summary spec
-      properties:
-        filter:
-          $ref: '#/components/schemas/v1TeamsFilterSpec'
-        sort:
-          items:
-            $ref: '#/components/schemas/v1TeamSummarySortSpec'
-          type: array
-          uniqueItems: true
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1TeamStatus:
-      description: Team status
-      type: object
-    v1TeamSpecSummary:
-      properties:
-        emailId:
-          type: string
-        projects:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        roles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        users:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-      type: object
-    v1TeamSummarySortSpec:
-      properties:
-        field:
-          $ref: '#/components/schemas/v1TeamSummarySortFields'
-        order:
-          $ref: '#/components/schemas/v1SortOrder'
-    v1HttpPatch:
-      properties:
-        from:
-          description: A path to the pointer from which reference will be taken
-          type: string
-        op:
-          description: The operation to be performed
-          enum:
-          - add
-          - remove
-          - replace
-          - move
-          - copy
-          type: string
-        path:
-          description: A path to the pointer on which operation will be done
-          type: string
-        value:
-          description: The value to be used within the operations.
-          type: object
-      required:
-      - op
-      - path
-      type: object
-    v1ProjectRolesPatch:
-      properties:
-        projects:
-          items:
-            properties:
-              projectUid:
-                type: string
-              roles:
-                items:
-                  type: string
-                type: array
-            type: object
-          type: array
       type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
@@ -620,33 +470,15 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1UidSummary:
+    v1Uid:
       properties:
-        name:
-          type: string
         uid:
           type: string
+      required:
+      - uid
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1ResourceRolesEntity:
-      properties:
-        filterRefs:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        projectUids:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        roles:
-          items:
-            $ref: '#/components/schemas/v1UidSummary'
-          type: array
-        uid:
-          type: string
+    v1TeamStatus:
+      description: Team status
       type: object
     v1ListMetaData:
       description: ListMeta describes metadata for the resource listing
@@ -668,20 +500,54 @@ components:
           type: integer
           x-omitempty: false
       type: object
-    v1TeamTenantRolesEntity:
+    v1TeamsSummarySpec:
+      description: Teams filter summary spec
       properties:
-        roles:
+        filter:
+          $ref: '#/components/schemas/v1TeamsFilterSpec'
+        sort:
           items:
-            $ref: '#/components/schemas/v1UidSummary'
+            $ref: '#/components/schemas/v1TeamSummarySortSpec'
+          type: array
+          uniqueItems: true
+    v1ProjectRolesPatch:
+      properties:
+        projects:
+          items:
+            properties:
+              projectUid:
+                type: string
+              roles:
+                items:
+                  type: string
+                type: array
+            type: object
           type: array
       type: object
-    v1TeamSummarySortFields:
-      enum:
-      - name
-      - creationTimestamp
-      type:
-      - string
-      - 'null'
+    v1HttpPatch:
+      properties:
+        from:
+          description: A path to the pointer from which reference will be taken
+          type: string
+        op:
+          description: The operation to be performed
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          type: string
+        path:
+          description: A path to the pointer on which operation will be done
+          type: string
+        value:
+          description: The value to be used within the operations.
+          type: object
+      required:
+      - op
+      - path
+      type: object
     v1TeamSpec:
       description: Team specifications
       properties:
@@ -700,11 +566,94 @@ components:
             type: string
           type: array
           uniqueItems: true
-    v1TeamsFilterSpec:
-      description: Teams filter spec
+    v1TeamSummarySortSpec:
+      properties:
+        field:
+          $ref: '#/components/schemas/v1TeamSummarySortFields'
+        order:
+          $ref: '#/components/schemas/v1SortOrder'
+    v1ProjectRolesEntity:
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1UidRoleSummary'
+          type: array
+      type: object
+    v1UidSummary:
       properties:
         name:
-          $ref: '#/components/schemas/v1FilterString'
+          type: string
+        uid:
+          type: string
+      type: object
+    v1TeamSummarySortFields:
+      enum:
+      - name
+      - creationTimestamp
+      type:
+      - string
+      - 'null'
+    v1TeamSpecSummary:
+      properties:
+        emailId:
+          type: string
+        projects:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+      type: object
+    v1TeamsSummary:
+      description: Deprecated, Use v1UsersSummaryList - Returns User summary
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1TeamSummary'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1SortOrder:
+      default: asc
+      enum:
+      - asc
+      - desc
+      type: string
+    v1TeamsSummaryList:
+      description: Returns Team summary
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1TeamSummary'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1TeamPatch:
+      items:
+        $ref: '#/components/schemas/v1HttpPatch'
+      type: array
+    v1TeamSummary:
+      description: Team summary
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1TeamSpecSummary'
+        status:
+          $ref: '#/components/schemas/v1TeamStatus'
+      type: object
     v1Teams:
       properties:
         items:
@@ -717,23 +666,37 @@ components:
       required:
       - items
       type: object
-    v1TeamTenantRolesUpdate:
+    v1FilterString:
       properties:
-        roles:
-          items:
-            type: string
-          type: array
+        beginsWith:
+          type:
+          - string
+          - 'null'
+        contains:
+          type:
+          - string
+          - 'null'
+        eq:
+          type:
+          - string
+          - 'null'
+        ignoreCase:
+          default: true
+          type: boolean
+        ne:
+          type:
+          - string
+          - 'null'
       type: object
-    v1Team:
-      description: Team information
+    v1TeamsFilterSpec:
+      description: Teams filter spec
       properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1TeamSpec'
-        status:
-          $ref: '#/components/schemas/v1TeamStatus'
-      type: object
+        name:
+          $ref: '#/components/schemas/v1FilterString'
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
     v1UidRoleSummary:
       properties:
         inheritedRoles:
@@ -749,6 +712,641 @@ components:
         uid:
           type: string
       type: object
+    v1ResourceRolesUpdateEntity:
+      properties:
+        filterRefs:
+          items:
+            type: string
+          type: array
+        projectUids:
+          items:
+            type: string
+          type: array
+        roles:
+          items:
+            type: string
+          type: array
+      type: object
+    v1ResourceRoles:
+      properties:
+        resourceRoles:
+          items:
+            $ref: '#/components/schemas/v1ResourceRolesEntity'
+          type: array
+      type: object
+    v1ResourceRolesEntity:
+      properties:
+        filterRefs:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        projectUids:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+        uid:
+          type: string
+      type: object
+    v1TeamTenantRolesUpdate:
+      properties:
+        roles:
+          items:
+            type: string
+          type: array
+      type: object
+    v1TeamTenantRolesEntity:
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary'
+          type: array
+      type: object
+    v1Team_2:
+      description: Team information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          sources:
+          - sources
+          - sources
+          roles:
+          - roles
+          - roles
+          users:
+          - users
+          - users
+        status: '{}'
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1TeamSpec_2'
+        status:
+          description: Team status
+          type: object
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1ListMetaData_2:
+      description: ListMeta describes metadata for the resource listing
+      example:
+        offset: 1
+        continue: continue
+        count: 0
+        limit: 6
+      properties:
+        continue:
+          description: Next token for the pagination. Next token is equal to empty string indicates end of result set.
+          type: string
+          x-omitempty: false
+        count:
+          description: Total count of the resources which might change during pagination based on the resources addition or deletion
+          type: integer
+          x-omitempty: false
+        limit:
+          description: Number of records feteched
+          type: integer
+          x-omitempty: false
+        offset:
+          description: The next offset for the pagination. Starting index for which next request will be placed.
+          type: integer
+          x-omitempty: false
+      type: object
+    v1TeamsSummarySpec_2:
+      description: Teams filter summary spec
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1TeamsFilterSpec_2'
+        sort:
+          items:
+            $ref: '#/components/schemas/v1TeamSummarySortSpec_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ProjectRolesPatch_2:
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1ProjectRolesPatch_projects_inner'
+          type: array
+      type: object
+    v1HttpPatch_2:
+      example:
+        op: add
+        path: path
+        from: from
+        value: '{}'
+      properties:
+        from:
+          description: A path to the pointer from which reference will be taken
+          type: string
+        op:
+          description: The operation to be performed
+          enum:
+          - add
+          - remove
+          - replace
+          - move
+          - copy
+          type: string
+        path:
+          description: A path to the pointer on which operation will be done
+          type: string
+        value:
+          description: The value to be used within the operations.
+          properties: {}
+          type: object
+      required:
+      - op
+      - path
+      type: object
+    v1TeamSpec_2:
+      description: Team specifications
+      example:
+        sources:
+        - sources
+        - sources
+        roles:
+        - roles
+        - roles
+        users:
+        - users
+        - users
+      properties:
+        roles:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        sources:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        users:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+      type: object
+    v1TeamSummarySortSpec_2:
+      properties:
+        field:
+          $ref: '#/components/schemas/v1TeamSummarySortFields_2'
+        order:
+          $ref: '#/components/schemas/v1SortOrder'
+      type: object
+    v1ProjectRolesEntity_2:
+      example:
+        projects:
+        - uid: uid
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          name: name
+          inheritedRoles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        - uid: uid
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          name: name
+          inheritedRoles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/v1UidRoleSummary_2'
+          type: array
+      type: object
+    v1UidSummary_2:
+      example:
+        uid: uid
+        name: name
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1TeamSummarySortFields_2:
+      enum:
+      - name
+      - creationTimestamp
+      type:
+      - string
+      - 'null'
+      x-nullable: true
+    v1TeamSpecSummary_2:
+      example:
+        projects:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        emailId: emailId
+        users:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        emailId:
+          type: string
+        projects:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        users:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+      type: object
+    v1TeamsSummaryList_2:
+      description: Returns Team summary
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            projects:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            emailId: emailId
+            users:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+          status: '{}'
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            projects:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            roles:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+            emailId: emailId
+            users:
+            - uid: uid
+              name: name
+            - uid: uid
+              name: name
+          status: '{}'
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1TeamSummary_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1TeamSummary_2:
+      description: Team summary
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          projects:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          emailId: emailId
+          users:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        status: '{}'
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1TeamSpecSummary_2'
+        status:
+          description: Team status
+          type: object
+      type: object
+    v1Teams_2:
+      example:
+        listmeta:
+          offset: 1
+          continue: continue
+          count: 0
+          limit: 6
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            sources:
+            - sources
+            - sources
+            roles:
+            - roles
+            - roles
+            users:
+            - users
+            - users
+          status: '{}'
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            sources:
+            - sources
+            - sources
+            roles:
+            - roles
+            - roles
+            users:
+            - users
+            - users
+          status: '{}'
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1Team_2'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData_2'
+      required:
+      - items
+      type: object
+    v1TeamsFilterSpec_2:
+      description: Teams filter spec
+      properties:
+        name:
+          $ref: '#/components/schemas/v1FilterString'
+      type: object
+    v1UidRoleSummary_2:
+      example:
+        uid: uid
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        name: name
+        inheritedRoles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        inheritedRoles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        name:
+          type: string
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        uid:
+          type: string
+      type: object
+    v1ResourceRoles_2:
+      example:
+        resourceRoles:
+        - uid: uid
+          filterRefs:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          projectUids:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+        - uid: uid
+          filterRefs:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          projectUids:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+          roles:
+          - uid: uid
+            name: name
+          - uid: uid
+            name: name
+      properties:
+        resourceRoles:
+          items:
+            $ref: '#/components/schemas/v1ResourceRolesEntity_2'
+          type: array
+      type: object
+    v1ResourceRolesEntity_2:
+      example:
+        uid: uid
+        filterRefs:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        projectUids:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        filterRefs:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        projectUids:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+        uid:
+          type: string
+      type: object
+    v1ProjectRolesPatch_projects_inner:
+      properties:
+        projectUid:
+          type: string
+        roles:
+          items:
+            type: string
+          type: array
+      type: object
+    v1TeamTenantRolesEntity_2:
+      example:
+        roles:
+        - uid: uid
+          name: name
+        - uid: uid
+          name: name
+      properties:
+        roles:
+          items:
+            $ref: '#/components/schemas/v1UidSummary_2'
+          type: array
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -760,3 +1358,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

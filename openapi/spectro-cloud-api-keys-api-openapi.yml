@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 API Keys API
+  title: Spectro Cloud API Keys API
   version: v1
+  description: 'Operations tagged apiKeys across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: API Keys
   x-displayName: Api Keys
@@ -44,6 +46,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ApiKeyEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/apiKeys/{uid}:
     parameters:
     - description: Specify API key uid
@@ -110,6 +114,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ApiKeyUpdate'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/apiKeys/{uid}/state:
     parameters:
     - description: Specify API key uid
@@ -134,99 +140,10 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ApiKeyActiveState'
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1ApiKeyActiveState:
-      properties:
-        isActive:
-          description: API key active state
-          type: boolean
-    v1ApiKeys:
-      properties:
-        items:
-          description: List of API keys
-          items:
-            $ref: '#/components/schemas/v1ApiKey'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1ApiKeyEntity:
-      description: API key request payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ApiKeySpecEntity'
-      type: object
-    v1ApiKeySpecUpdate:
-      description: API key update request specification
-      properties:
-        expiry:
-          $ref: '#/components/schemas/v1Time'
-          description: API key expiry date
-    v1ApiKeySpec:
-      description: API key specification
-      properties:
-        expiry:
-          $ref: '#/components/schemas/v1Time'
-          description: API key expiry date
-        key:
-          description: 'Deprecated: API key field will be no longer available'
-          type: string
-        user:
-          $ref: '#/components/schemas/v1ApiKeyUser'
-          description: User to whom the API key is created
-      type: object
-    v1ApiKeySpecEntity:
-      description: API key specification
-      properties:
-        expiry:
-          $ref: '#/components/schemas/v1Time'
-          description: API key expiry date
-        userUid:
-          description: User to whom the API key has to be created
-          type: string
-      type: object
-    v1ApiKeyUpdate:
-      description: API key update request payload
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ApiKeySpecUpdate'
-      type: object
-    v1ApiKeyUser:
-      description: API key user information
-      properties:
-        firstName:
-          description: First name of user
-          type: string
-        lastName:
-          description: Last name of user
-          type: string
-        uid:
-          description: User uid
-          type: string
-      type: object
-    v1ApiKeyCreateResponse:
-      description: Response of create API key
-      properties:
-        apiKey:
-          description: Api key is used for authentication
-          type: string
-        uid:
-          description: User uid
-          type: string
-      type: object
-    v1ApiKeyStatus:
-      description: API key status
-      properties:
-        isActive:
-          description: API key active state
-          type: boolean
-      type: object
     v1ApiKey:
       description: API key information
       properties:
@@ -278,10 +195,311 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
+    v1ApiKeySpecEntity:
+      description: API key specification
+      properties:
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: API key expiry date
+        userUid:
+          description: User to whom the API key has to be created
+          type: string
+      type: object
+    v1ApiKeySpecUpdate:
+      description: API key update request specification
+      properties:
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: API key expiry date
+    v1ApiKeyCreateResponse:
+      description: Response of create API key
+      properties:
+        apiKey:
+          description: Api key is used for authentication
+          type: string
+        uid:
+          description: User uid
+          type: string
+      type: object
+    v1ApiKeyStatus:
+      description: API key status
+      properties:
+        isActive:
+          description: API key active state
+          type: boolean
+      type: object
+    v1ApiKeys:
+      properties:
+        items:
+          description: List of API keys
+          items:
+            $ref: '#/components/schemas/v1ApiKey'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1ApiKeyActiveState:
+      properties:
+        isActive:
+          description: API key active state
+          type: boolean
+    v1ApiKeyUser:
+      description: API key user information
+      properties:
+        firstName:
+          description: First name of user
+          type: string
+        lastName:
+          description: Last name of user
+          type: string
+        uid:
+          description: User uid
+          type: string
+      type: object
+    v1ApiKeyEntity:
+      description: API key request payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ApiKeySpecEntity'
+      type: object
+    v1ApiKeyUpdate:
+      description: API key update request payload
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ApiKeySpecUpdate'
+      type: object
+    v1ApiKeySpec:
+      description: API key specification
+      properties:
+        expiry:
+          $ref: '#/components/schemas/v1Time'
+          description: API key expiry date
+        key:
+          description: 'Deprecated: API key field will be no longer available'
+          type: string
+        user:
+          $ref: '#/components/schemas/v1ApiKeyUser'
+          description: User to whom the API key is created
+      type: object
     v1Time:
       description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
       format: date-time
       type: string
+    v1ApiKey_2:
+      description: API key information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          expiry: 2000-01-23 04:56:07+00:00
+          user:
+            firstName: firstName
+            lastName: lastName
+            uid: uid
+          key: key
+        status:
+          isActive: true
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1ApiKeySpec_2'
+        status:
+          $ref: '#/components/schemas/v1ApiKeyStatus_2'
+      type: object
+    v1ApiKeySpecEntity_2:
+      description: API key specification
+      properties:
+        expiry:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        userUid:
+          description: User to whom the API key has to be created
+          type: string
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1ApiKeySpecUpdate_2:
+      description: API key update request specification
+      properties:
+        expiry:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1ApiKeyCreateResponse_2:
+      description: Response of create API key
+      example:
+        uid: uid
+        apiKey: apiKey
+      properties:
+        apiKey:
+          description: Api key is used for authentication
+          type: string
+        uid:
+          description: User uid
+          type: string
+      type: object
+    v1ApiKeyStatus_2:
+      description: API key status
+      example:
+        isActive: true
+      properties:
+        isActive:
+          description: API key active state
+          type: boolean
+      type: object
+    v1ApiKeys_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            expiry: 2000-01-23 04:56:07+00:00
+            user:
+              firstName: firstName
+              lastName: lastName
+              uid: uid
+            key: key
+          status:
+            isActive: true
+        - metadata:
+            uid: uid
+            creationTimestamp: 2000-01-23 04:56:07+00:00
+            name: name
+            annotations:
+              key: annotations
+            lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+            deletionTimestamp: 2000-01-23 04:56:07+00:00
+            labels:
+              key: labels
+          spec:
+            expiry: 2000-01-23 04:56:07+00:00
+            user:
+              firstName: firstName
+              lastName: lastName
+              uid: uid
+            key: key
+          status:
+            isActive: true
+      properties:
+        items:
+          description: List of API keys
+          items:
+            $ref: '#/components/schemas/v1ApiKey_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1ApiKeyActiveState_2:
+      properties:
+        isActive:
+          description: API key active state
+          type: boolean
+      type: object
+    v1ApiKeyUser_2:
+      description: API key user information
+      example:
+        firstName: firstName
+        lastName: lastName
+        uid: uid
+      properties:
+        firstName:
+          description: First name of user
+          type: string
+        lastName:
+          description: Last name of user
+          type: string
+        uid:
+          description: User uid
+          type: string
+      type: object
+    v1ApiKeySpec_2:
+      description: API key specification
+      example:
+        expiry: 2000-01-23 04:56:07+00:00
+        user:
+          firstName: firstName
+          lastName: lastName
+          uid: uid
+        key: key
+      properties:
+        expiry:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        key:
+          description: 'Deprecated: API key field will be no longer available'
+          type: string
+        user:
+          $ref: '#/components/schemas/v1ApiKeyUser_2'
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -293,3 +511,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

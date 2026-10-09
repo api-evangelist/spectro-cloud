@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Metrics API
+  title: Spectro Cloud Metrics API
   version: v1
+  description: 'Operations tagged metrics across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Metrics
   x-displayName: Metrics
@@ -87,6 +89,8 @@ paths:
       summary: Retrieves the list of metrics for a specified resource kind
       tags:
       - Metrics
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/metrics/{resourceKind}/{resourceUid}/values:
     delete:
       operationId: v1MetricsUidDelete
@@ -201,8 +205,20 @@ paths:
       summary: Returns the metrics for a specified resource uid
       tags:
       - Metrics
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
+    v1MetricsList:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1MetricMetadata'
+        metrics:
+          items:
+            $ref: '#/components/schemas/v1Metrics'
+          type: array
+          uniqueItems: true
+      type: object
     v1MetricTimeSeries:
       properties:
         items:
@@ -213,25 +229,25 @@ components:
       required:
       - items
       type: object
-    v1MetricTimeSeriesList:
+    v1MetricAggregation:
+      description: Aggregation values
       properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1MetricsList'
-          type: array
-          uniqueItems: true
-      required:
-      - items
-      type: object
-    v1MetricsList:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1MetricMetadata'
-        metrics:
-          items:
-            $ref: '#/components/schemas/v1Metrics'
-          type: array
-          uniqueItems: true
+        avg:
+          type: number
+          x-omitempty: false
+        count:
+          format: int64
+          type: number
+          x-omitempty: false
+        max:
+          type: number
+          x-omitempty: false
+        min:
+          type: number
+          x-omitempty: false
+        sum:
+          type: number
+          x-omitempty: false
       type: object
     v1MetricPoint:
       description: Metric Info
@@ -261,6 +277,16 @@ components:
         uid:
           type: string
       type: object
+    v1MetricTimeSeriesList:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MetricsList'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
     v1Metrics:
       properties:
         aggregation:
@@ -275,8 +301,133 @@ components:
         unit:
           type: string
       type: object
-    v1MetricAggregation:
+    v1MetricsList_2:
+      example:
+        metadata:
+          uid: uid
+          name: name
+        metrics:
+        - unit: unit
+          kind: kind
+          aggregation:
+            avg: 0.8008281904610115
+            min: 5.962133916683182
+            max: 1.4658129805029452
+            count: 6.027456183070403
+            sum: 5.637376656633329
+          points:
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+        - unit: unit
+          kind: kind
+          aggregation:
+            avg: 0.8008281904610115
+            min: 5.962133916683182
+            max: 1.4658129805029452
+            count: 6.027456183070403
+            sum: 5.637376656633329
+          points:
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1MetricMetadata_2'
+        metrics:
+          items:
+            $ref: '#/components/schemas/v1Metrics_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1MetricTimeSeries_2:
+      example:
+        items:
+        - unit: unit
+          kind: kind
+          aggregation:
+            avg: 0.8008281904610115
+            min: 5.962133916683182
+            max: 1.4658129805029452
+            count: 6.027456183070403
+            sum: 5.637376656633329
+          points:
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+        - unit: unit
+          kind: kind
+          aggregation:
+            avg: 0.8008281904610115
+            min: 5.962133916683182
+            max: 1.4658129805029452
+            count: 6.027456183070403
+            sum: 5.637376656633329
+          points:
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+          - avg: 2.3021358869347655
+            min: 3.616076749251911
+            max: 9.301444243932576
+            count: 7.061401241503109
+            sum: 2.027123023002322
+            value: 7.386281948385884
+            timestamp: 4.145608029883936
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1Metrics_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1MetricAggregation_2:
       description: Aggregation values
+      example:
+        avg: 0.8008281904610115
+        min: 5.962133916683182
+        max: 1.4658129805029452
+        count: 6.027456183070403
+        sum: 5.637376656633329
       properties:
         avg:
           type: number
@@ -295,6 +446,195 @@ components:
           type: number
           x-omitempty: false
       type: object
+    v1MetricPoint_2:
+      description: Metric Info
+      example:
+        avg: 2.3021358869347655
+        min: 3.616076749251911
+        max: 9.301444243932576
+        count: 7.061401241503109
+        sum: 2.027123023002322
+        value: 7.386281948385884
+        timestamp: 4.145608029883936
+      properties:
+        avg:
+          type: number
+        count:
+          format: int64
+          type: number
+        max:
+          type: number
+        min:
+          type: number
+        sum:
+          type: number
+        timestamp:
+          format: int64
+          type: number
+        value:
+          type: number
+          x-omitempty: false
+      type: object
+    v1MetricMetadata_2:
+      example:
+        uid: uid
+        name: name
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1MetricTimeSeriesList_2:
+      example:
+        items:
+        - metadata:
+            uid: uid
+            name: name
+          metrics:
+          - unit: unit
+            kind: kind
+            aggregation:
+              avg: 0.8008281904610115
+              min: 5.962133916683182
+              max: 1.4658129805029452
+              count: 6.027456183070403
+              sum: 5.637376656633329
+            points:
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+          - unit: unit
+            kind: kind
+            aggregation:
+              avg: 0.8008281904610115
+              min: 5.962133916683182
+              max: 1.4658129805029452
+              count: 6.027456183070403
+              sum: 5.637376656633329
+            points:
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+        - metadata:
+            uid: uid
+            name: name
+          metrics:
+          - unit: unit
+            kind: kind
+            aggregation:
+              avg: 0.8008281904610115
+              min: 5.962133916683182
+              max: 1.4658129805029452
+              count: 6.027456183070403
+              sum: 5.637376656633329
+            points:
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+          - unit: unit
+            kind: kind
+            aggregation:
+              avg: 0.8008281904610115
+              min: 5.962133916683182
+              max: 1.4658129805029452
+              count: 6.027456183070403
+              sum: 5.637376656633329
+            points:
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+            - avg: 2.3021358869347655
+              min: 3.616076749251911
+              max: 9.301444243932576
+              count: 7.061401241503109
+              sum: 2.027123023002322
+              value: 7.386281948385884
+              timestamp: 4.145608029883936
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1MetricsList_2'
+          type: array
+          uniqueItems: true
+      required:
+      - items
+      type: object
+    v1Metrics_2:
+      example:
+        unit: unit
+        kind: kind
+        aggregation:
+          avg: 0.8008281904610115
+          min: 5.962133916683182
+          max: 1.4658129805029452
+          count: 6.027456183070403
+          sum: 5.637376656633329
+        points:
+        - avg: 2.3021358869347655
+          min: 3.616076749251911
+          max: 9.301444243932576
+          count: 7.061401241503109
+          sum: 2.027123023002322
+          value: 7.386281948385884
+          timestamp: 4.145608029883936
+        - avg: 2.3021358869347655
+          min: 3.616076749251911
+          max: 9.301444243932576
+          count: 7.061401241503109
+          sum: 2.027123023002322
+          value: 7.386281948385884
+          timestamp: 4.145608029883936
+      properties:
+        aggregation:
+          $ref: '#/components/schemas/v1MetricAggregation_2'
+        kind:
+          type: string
+        points:
+          items:
+            $ref: '#/components/schemas/v1MetricPoint_2'
+          type: array
+          uniqueItems: true
+        unit:
+          type: string
+      type: object
   securitySchemes:
     ApiKey:
       description: API key authorization where API key can be generated from Palette console under Profile > My API Keys
@@ -306,3 +646,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

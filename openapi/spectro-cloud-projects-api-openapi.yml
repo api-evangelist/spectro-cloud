@@ -1,9 +1,11 @@
 openapi: 3.2.0
 info:
-  title: Palette APIs - 4.9 Projects API
+  title: Spectro Cloud Projects API
   version: v1
+  description: 'Operations tagged projects across 2 of this provider''s published API definitions: spectro-cloud-palette-openapi.json, spectrocloud-palette.yaml. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.spectrocloud.com
+- url: /
 tags:
 - name: Projects
   x-displayName: Projects
@@ -100,6 +102,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ProjectEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/alerts:
     get:
       operationId: v1ProjectsAlerts
@@ -116,6 +120,8 @@ paths:
       summary: Retrieves a list of supported alerts for a project
       tags:
       - Projects
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}:
     parameters:
     - in: path
@@ -175,6 +181,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ProjectEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/alerts/{component}:
     parameters:
     - in: path
@@ -239,6 +247,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1AlertEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/alerts/{component}/{alertUid}:
     parameters:
     - in: path
@@ -298,6 +308,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1Channel'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/macros:
     parameters:
     - in: path
@@ -384,6 +396,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1Macros'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/meta:
     parameters:
     - in: path
@@ -407,6 +421,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ObjectMeta'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/preferences/clusterSettings:
     parameters:
     - in: path
@@ -429,6 +445,8 @@ paths:
       summary: Get project cluster settings
       tags:
       - Projects
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/preferences/clusterSettings/nodesAutoRemediationSetting:
     parameters:
     - in: path
@@ -457,6 +475,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/teams:
     parameters:
     - in: path
@@ -480,6 +500,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ProjectTeamsEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/users:
     parameters:
     - in: path
@@ -503,6 +525,8 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/v1ProjectUsersEntity'
+    servers:
+    - url: https://api.spectrocloud.com
   /v1/projects/{uid}/validate:
     parameters:
     - in: path
@@ -525,237 +549,10 @@ paths:
       summary: Validate and returns active resource of project before delete
       tags:
       - Projects
+    servers:
+    - url: https://api.spectrocloud.com
 components:
   schemas:
-    v1Macro:
-      properties:
-        name:
-          type: string
-        value:
-          type: string
-    v1ObjectEntity:
-      description: Object identity meta
-      properties:
-        name:
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ProjectClusterSettings:
-      properties:
-        nodesAutoRemediationSetting:
-          $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
-        tenantClusterSettings:
-          $ref: '#/components/schemas/v1TenantClusterSettings'
-    v1UserRoleMap:
-      properties:
-        roles:
-          items:
-            type: string
-          type: array
-        userId:
-          type: string
-    v1ProjectAlertComponents:
-      description: Supported project alerts component
-      properties:
-        components:
-          items:
-            $ref: '#/components/schemas/v1ProjectAlertComponent'
-          type: array
-      type: object
-    v1Alert:
-      properties:
-        channels:
-          items:
-            $ref: '#/components/schemas/v1Channel'
-          type: array
-        component:
-          type: string
-      type: object
-    v1TenantClusterSettings:
-      properties:
-        nodesAutoRemediationSetting:
-          $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
-    v1Channel:
-      properties:
-        alertAllUsers:
-          type: boolean
-          x-omitempty: false
-        createdBy:
-          type: string
-        http:
-          properties:
-            body:
-              type: string
-            headers:
-              additionalProperties:
-                type: string
-            method:
-              type: string
-            url:
-              type: string
-          type: object
-        identifiers:
-          items:
-            type: string
-          type: array
-          uniqueItems: true
-        isActive:
-          type: boolean
-          x-omitempty: false
-        status:
-          $ref: '#/components/schemas/v1AlertNotificationStatus'
-        type:
-          enum:
-          - email
-          - app
-          - http
-          type: string
-        uid:
-          type: string
-      type: object
-    v1ProjectTeamsEntity:
-      properties:
-        teams:
-          items:
-            $ref: '#/components/schemas/v1TeamRoleMap'
-          type: array
-          uniqueItems: true
-    v1ProjectActiveCluster:
-      description: Active clusters
-      properties:
-        clusterRef:
-          $ref: '#/components/schemas/v1ObjectEntity'
-        state:
-          type: string
-      type: object
-    v1Project:
-      description: Project information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ProjectSpec'
-        status:
-          $ref: '#/components/schemas/v1ProjectStatus'
-      type: object
-    v1TeamRoleMap:
-      properties:
-        roles:
-          items:
-            type: string
-          type: array
-        teamId:
-          type: string
-    v1ProjectCleanUpStatus:
-      description: Project cleanup status
-      properties:
-        cleanedResources:
-          items:
-            type: string
-          type: array
-        msg:
-          type: string
-        state:
-          type: string
-      type: object
-    v1ProjectActiveResources:
-      description: Active project resources
-      properties:
-        appDeployments:
-          $ref: '#/components/schemas/v1ProjectActiveAppDeployments'
-        clusters:
-          $ref: '#/components/schemas/v1ProjectActiveClusters'
-        virtualClusters:
-          $ref: '#/components/schemas/v1ProjectActiveClusters'
-      type: object
-    v1Uid:
-      properties:
-        uid:
-          type: string
-      required:
-      - uid
-      type: object
-    v1ProjectSpec:
-      description: Project specifications
-      properties:
-        alerts:
-          items:
-            $ref: '#/components/schemas/v1Alert'
-          type: array
-          uniqueItems: true
-        logoUrl:
-          type: string
-        teams:
-          items:
-            $ref: '#/components/schemas/v1TeamRoleMap'
-          type: array
-          uniqueItems: true
-        users:
-          items:
-            $ref: '#/components/schemas/v1UserRoleMap'
-          type: array
-          uniqueItems: true
-    v1Projects:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/v1Project'
-          type: array
-          uniqueItems: true
-        listmeta:
-          $ref: '#/components/schemas/v1ListMetaData'
-      required:
-      - items
-      type: object
-    v1ProjectEntitySpec:
-      description: Project specifications
-      properties:
-        logoUid:
-          type: string
-        teams:
-          items:
-            $ref: '#/components/schemas/v1TeamRoleMap'
-          type: array
-          uniqueItems: true
-        users:
-          items:
-            $ref: '#/components/schemas/v1UserRoleMap'
-          type: array
-          uniqueItems: true
-    v1ProjectUsersEntity:
-      properties:
-        users:
-          items:
-            $ref: '#/components/schemas/v1UserRoleMap'
-          type: array
-          uniqueItems: true
-    v1ProjectStatus:
-      description: Project status
-      properties:
-        cleanUpStatus:
-          $ref: '#/components/schemas/v1ProjectCleanUpStatus'
-        isDisabled:
-          type: boolean
-    v1ProjectActiveClusters:
-      description: Active clusters
-      properties:
-        clusters:
-          items:
-            $ref: '#/components/schemas/v1ProjectActiveCluster'
-          type: array
-        count:
-          format: int32
-          type: integer
-      type: object
-    v1ProjectActiveAppDeployment:
-      description: Active app deployment
-      properties:
-        appRef:
-          $ref: '#/components/schemas/v1ObjectEntity'
-        state:
-          type: string
-      type: object
     v1ObjectMeta:
       description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
       properties:
@@ -797,19 +594,63 @@ components:
             Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
           type: string
       type: object
-    v1Time:
-      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
-      format: date-time
-      type: string
-    v1AlertNotificationStatus:
+    v1Project:
+      description: Project information
       properties:
-        isSucceeded:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ProjectSpec'
+        status:
+          $ref: '#/components/schemas/v1ProjectStatus'
+      type: object
+    v1ProjectActiveCluster:
+      description: Active clusters
+      properties:
+        clusterRef:
+          $ref: '#/components/schemas/v1ObjectEntity'
+        state:
+          type: string
+      type: object
+    v1Macro:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+    v1NodesAutoRemediationSettings:
+      properties:
+        disableNodesAutoRemediation:
           type: boolean
           x-omitempty: false
-        message:
+        isEnabled:
+          type: boolean
+          x-omitempty: false
+    v1Uid:
+      properties:
+        uid:
           type: string
-        time:
-          $ref: '#/components/schemas/v1Time'
+      required:
+      - uid
+      type: object
+    v1ProjectAlertComponent:
+      description: Project alert component
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        supportedChannels:
+          items:
+            type: string
+          type: array
+      type: object
+    v1AlertEntity:
+      properties:
+        channels:
+          items:
+            $ref: '#/components/schemas/v1Channel'
+          type: array
       type: object
     v1ListMetaData:
       description: ListMeta describes metadata for the resource listing
@@ -831,13 +672,85 @@ components:
           type: integer
           x-omitempty: false
       type: object
-    v1AlertEntity:
+    v1ProjectActiveAppDeployments:
+      description: Active app deployment
       properties:
-        channels:
+        apps:
           items:
-            $ref: '#/components/schemas/v1Channel'
+            $ref: '#/components/schemas/v1ProjectActiveAppDeployment'
+          type: array
+        count:
+          format: int32
+          type: integer
+      type: object
+    v1Macros:
+      properties:
+        macros:
+          items:
+            $ref: '#/components/schemas/v1Macro'
+          type: array
+          uniqueItems: true
+    v1ProjectUsersEntity:
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/v1UserRoleMap'
+          type: array
+          uniqueItems: true
+    v1ProjectActiveAppDeployment:
+      description: Active app deployment
+      properties:
+        appRef:
+          $ref: '#/components/schemas/v1ObjectEntity'
+        state:
+          type: string
+      type: object
+    v1ProjectTeamsEntity:
+      properties:
+        teams:
+          items:
+            $ref: '#/components/schemas/v1TeamRoleMap'
+          type: array
+          uniqueItems: true
+    v1ProjectAlertComponents:
+      description: Supported project alerts component
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/v1ProjectAlertComponent'
           type: array
       type: object
+    v1ProjectStatus:
+      description: Project status
+      properties:
+        cleanUpStatus:
+          $ref: '#/components/schemas/v1ProjectCleanUpStatus'
+        isDisabled:
+          type: boolean
+    v1ProjectClusterSettings:
+      properties:
+        nodesAutoRemediationSetting:
+          $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
+        tenantClusterSettings:
+          $ref: '#/components/schemas/v1TenantClusterSettings'
+    v1ProjectActiveResources:
+      description: Active project resources
+      properties:
+        appDeployments:
+          $ref: '#/components/schemas/v1ProjectActiveAppDeployments'
+        clusters:
+          $ref: '#/components/schemas/v1ProjectActiveClusters'
+        virtualClusters:
+          $ref: '#/components/schemas/v1ProjectActiveClusters'
+      type: object
+    v1UserRoleMap:
+      properties:
+        roles:
+          items:
+            type: string
+          type: array
+        userId:
+          type: string
     v1ProjectCleanup:
       description: Project delete request payload
       properties:
@@ -847,8 +760,384 @@ components:
         provisioningClusterDurationThresholdInMin:
           format: int32
           type: integer
-    v1ProjectAlertComponent:
+    v1Alert:
+      properties:
+        channels:
+          items:
+            $ref: '#/components/schemas/v1Channel'
+          type: array
+        component:
+          type: string
+      type: object
+    v1Projects:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/v1Project'
+          type: array
+          uniqueItems: true
+        listmeta:
+          $ref: '#/components/schemas/v1ListMetaData'
+      required:
+      - items
+      type: object
+    v1TeamRoleMap:
+      properties:
+        roles:
+          items:
+            type: string
+          type: array
+        teamId:
+          type: string
+    v1Channel:
+      properties:
+        alertAllUsers:
+          type: boolean
+          x-omitempty: false
+        createdBy:
+          type: string
+        http:
+          properties:
+            body:
+              type: string
+            headers:
+              additionalProperties:
+                type: string
+            method:
+              type: string
+            url:
+              type: string
+          type: object
+        identifiers:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        isActive:
+          type: boolean
+          x-omitempty: false
+        status:
+          $ref: '#/components/schemas/v1AlertNotificationStatus'
+        type:
+          enum:
+          - email
+          - app
+          - http
+          type: string
+        uid:
+          type: string
+      type: object
+    v1ProjectSpec:
+      description: Project specifications
+      properties:
+        alerts:
+          items:
+            $ref: '#/components/schemas/v1Alert'
+          type: array
+          uniqueItems: true
+        logoUrl:
+          type: string
+        teams:
+          items:
+            $ref: '#/components/schemas/v1TeamRoleMap'
+          type: array
+          uniqueItems: true
+        users:
+          items:
+            $ref: '#/components/schemas/v1UserRoleMap'
+          type: array
+          uniqueItems: true
+    v1Time:
+      description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+      format: date-time
+      type: string
+    v1ProjectCleanUpStatus:
+      description: Project cleanup status
+      properties:
+        cleanedResources:
+          items:
+            type: string
+          type: array
+        msg:
+          type: string
+        state:
+          type: string
+      type: object
+    v1ProjectEntitySpec:
+      description: Project specifications
+      properties:
+        logoUid:
+          type: string
+        teams:
+          items:
+            $ref: '#/components/schemas/v1TeamRoleMap'
+          type: array
+          uniqueItems: true
+        users:
+          items:
+            $ref: '#/components/schemas/v1UserRoleMap'
+          type: array
+          uniqueItems: true
+    v1ObjectEntity:
+      description: Object identity meta
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1TenantClusterSettings:
+      properties:
+        nodesAutoRemediationSetting:
+          $ref: '#/components/schemas/v1NodesAutoRemediationSettings'
+    v1ProjectEntity:
+      description: Project information
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta'
+        spec:
+          $ref: '#/components/schemas/v1ProjectEntitySpec'
+      type: object
+    v1AlertNotificationStatus:
+      properties:
+        isSucceeded:
+          type: boolean
+          x-omitempty: false
+        message:
+          type: string
+        time:
+          $ref: '#/components/schemas/v1Time'
+      type: object
+    v1ProjectActiveClusters:
+      description: Active clusters
+      properties:
+        clusters:
+          items:
+            $ref: '#/components/schemas/v1ProjectActiveCluster'
+          type: array
+        count:
+          format: int32
+          type: integer
+      type: object
+    v1ObjectMeta_2:
+      description: ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
+      example:
+        uid: uid
+        creationTimestamp: 2000-01-23 04:56:07+00:00
+        name: name
+        annotations:
+          key: annotations
+        lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+        deletionTimestamp: 2000-01-23 04:56:07+00:00
+        labels:
+          key: labels
+      properties:
+        annotations:
+          additionalProperties:
+            type: string
+          description: 'Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations'
+          type: object
+        creationTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        deletionTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        labels:
+          additionalProperties:
+            type: string
+          description: 'Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels'
+          type: object
+        lastModifiedTimestamp:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+        name:
+          description: 'Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names'
+          type: string
+        uid:
+          description: 'UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.
+
+
+            Populated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids'
+          type: string
+      type: object
+    v1Project_2:
+      description: Project information
+      example:
+        metadata:
+          uid: uid
+          creationTimestamp: 2000-01-23 04:56:07+00:00
+          name: name
+          annotations:
+            key: annotations
+          lastModifiedTimestamp: 2000-01-23 04:56:07+00:00
+          deletionTimestamp: 2000-01-23 04:56:07+00:00
+          labels:
+            key: labels
+        spec:
+          alerts:
+          - component: component
+            channels:
+            - uid: uid
+              createdBy: createdBy
+              identifiers:
+              - identifiers
+              - identifiers
+              alertAllUsers: true
+              http:
+                headers: '{}'
+                method: method
+                body: body
+                url: url
+              isActive: true
+              type: email
+              status:
+                isSucceeded: true
+                time: 2000-01-23 04:56:07+00:00
+                message: message
+            - uid: uid
+              createdBy: createdBy
+              identifiers:
+              - identifiers
+              - identifiers
+              alertAllUsers: true
+              http:
+                headers: '{}'
+                method: method
+                body: body
+                url: url
+              isActive: true
+              type: email
+              status:
+                isSucceeded: true
+                time: 2000-01-23 04:56:07+00:00
+                message: message
+          - component: component
+            channels:
+            - uid: uid
+              createdBy: createdBy
+              identifiers:
+              - identifiers
+              - identifiers
+              alertAllUsers: true
+              http:
+                headers: '{}'
+                method: method
+                body: body
+                url: url
+              isActive: true
+              type: email
+              status:
+                isSucceeded: true
+                time: 2000-01-23 04:56:07+00:00
+                message: message
+            - uid: uid
+              createdBy: createdBy
+              identifiers:
+              - identifiers
+              - identifiers
+              alertAllUsers: true
+              http:
+                headers: '{}'
+                method: method
+                body: body
+                url: url
+              isActive: true
+              type: email
+              status:
+                isSucceeded: true
+                time: 2000-01-23 04:56:07+00:00
+                message: message
+          teams:
+          - roles:
+            - roles
+            - roles
+            teamId: teamId
+          - roles:
+            - roles
+            - roles
+            teamId: teamId
+          logoUrl: logoUrl
+          users:
+          - roles:
+            - roles
+            - roles
+            userId: userId
+          - roles:
+            - roles
+            - roles
+            userId: userId
+        status:
+          cleanUpStatus:
+            msg: msg
+            cleanedResources:
+            - cleanedResources
+            - cleanedResources
+            state: state
+          isDisabled: true
+      properties:
+        metadata:
+          $ref: '#/components/schemas/v1ObjectMeta_2'
+        spec:
+          $ref: '#/components/schemas/v1ProjectSpec_2'
+        status:
+          $ref: '#/components/schemas/v1ProjectStatus_2'
+      type: object
+    v1ProjectActiveCluster_2:
+      description: Active clusters
+      example:
+        clusterRef:
+          uid: uid
+          name: name
+        state: state
+      properties:
+        clusterRef:
+          $ref: '#/components/schemas/v1ObjectEntity_2'
+        state:
+          type: string
+      type: object
+    v1Macro_2:
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    v1NodesAutoRemediationSettings_2:
+      example:
+        isEnabled: true
+        disableNodesAutoRemediation: true
+      properties:
+        disableNodesAutoRemediation:
+          type: boolean
+          x-omitempty: false
+        isEnabled:
+          type: boolean
+          x-omitempty: false
+      type: object
+    v1Uid_2:
+      example:
+        uid: uid
+      properties:
+        uid:
+          type: string
+      required:
+      - uid
+      type: object
+    v1ProjectAlertComponent_2:
       description: Project alert component
+      example:
+        supportedChannels:
+        - supportedChannels
+        - supportedChannels
+        name: name
+        description: description
       properties:
         description:
           type: string
@@ -859,35 +1148,513 @@ components:
             type: string
           type: array
       type: object
-    v1Macros:
-      properties:
-        macros:
-          items:
-            $ref: '#/components/schemas/v1Macro'
-          type: array
-          uniqueItems: true
-    v1ProjectEntity:
-      description: Project information
-      properties:
-        metadata:
-          $ref: '#/components/schemas/v1ObjectMeta'
-        spec:
-          $ref: '#/components/schemas/v1ProjectEntitySpec'
-      type: object
-    v1NodesAutoRemediationSettings:
-      properties:
-        disableNodesAutoRemediation:
-          type: boolean
-          x-omitempty: false
-        isEnabled:
-          type: boolean
-          x-omitempty: false
-    v1ProjectActiveAppDeployments:
+    v1ProjectActiveAppDeployments_2:
       description: Active app deployment
+      example:
+        count: 0
+        apps:
+        - appRef:
+            uid: uid
+            name: name
+          state: state
+        - appRef:
+            uid: uid
+            name: name
+          state: state
       properties:
         apps:
           items:
-            $ref: '#/components/schemas/v1ProjectActiveAppDeployment'
+            $ref: '#/components/schemas/v1ProjectActiveAppDeployment_2'
+          type: array
+        count:
+          format: int32
+          type: integer
+      type: object
+    v1Macros_2:
+      example:
+        macros:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        macros:
+          items:
+            $ref: '#/components/schemas/v1Macro_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1Channel_http:
+      example:
+        headers: '{}'
+        method: method
+        body: body
+        url: url
+      properties:
+        body:
+          type: string
+        headers:
+          type: object
+        method:
+          type: string
+        url:
+          type: string
+      type: object
+    v1ProjectUsersEntity_2:
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/v1UserRoleMap_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ProjectActiveAppDeployment_2:
+      description: Active app deployment
+      example:
+        appRef:
+          uid: uid
+          name: name
+        state: state
+      properties:
+        appRef:
+          $ref: '#/components/schemas/v1ObjectEntity_2'
+        state:
+          type: string
+      type: object
+    v1ProjectTeamsEntity_2:
+      properties:
+        teams:
+          items:
+            $ref: '#/components/schemas/v1TeamRoleMap_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ProjectAlertComponents_2:
+      description: Supported project alerts component
+      example:
+        components:
+        - supportedChannels:
+          - supportedChannels
+          - supportedChannels
+          name: name
+          description: description
+        - supportedChannels:
+          - supportedChannels
+          - supportedChannels
+          name: name
+          description: description
+      properties:
+        components:
+          items:
+            $ref: '#/components/schemas/v1ProjectAlertComponent_2'
+          type: array
+      type: object
+    v1ProjectStatus_2:
+      description: Project status
+      example:
+        cleanUpStatus:
+          msg: msg
+          cleanedResources:
+          - cleanedResources
+          - cleanedResources
+          state: state
+        isDisabled: true
+      properties:
+        cleanUpStatus:
+          $ref: '#/components/schemas/v1ProjectCleanUpStatus_2'
+        isDisabled:
+          type: boolean
+      type: object
+    v1ProjectClusterSettings_2:
+      example:
+        tenantClusterSettings:
+          nodesAutoRemediationSetting:
+            isEnabled: true
+            disableNodesAutoRemediation: true
+        nodesAutoRemediationSetting:
+          isEnabled: true
+          disableNodesAutoRemediation: true
+      properties:
+        nodesAutoRemediationSetting:
+          $ref: '#/components/schemas/v1NodesAutoRemediationSettings_2'
+        tenantClusterSettings:
+          $ref: '#/components/schemas/v1TenantClusterSettings_2'
+      type: object
+    v1ProjectActiveResources_2:
+      description: Active project resources
+      example:
+        appDeployments:
+          count: 0
+          apps:
+          - appRef:
+              uid: uid
+              name: name
+            state: state
+          - appRef:
+              uid: uid
+              name: name
+            state: state
+        virtualClusters:
+          count: 6
+          clusters:
+          - clusterRef:
+              uid: uid
+              name: name
+            state: state
+          - clusterRef:
+              uid: uid
+              name: name
+            state: state
+        clusters:
+          count: 6
+          clusters:
+          - clusterRef:
+              uid: uid
+              name: name
+            state: state
+          - clusterRef:
+              uid: uid
+              name: name
+            state: state
+      properties:
+        appDeployments:
+          $ref: '#/components/schemas/v1ProjectActiveAppDeployments_2'
+        clusters:
+          $ref: '#/components/schemas/v1ProjectActiveClusters_2'
+        virtualClusters:
+          $ref: '#/components/schemas/v1ProjectActiveClusters_2'
+      type: object
+    v1UserRoleMap_2:
+      example:
+        roles:
+        - roles
+        - roles
+        userId: userId
+      properties:
+        roles:
+          items:
+            type: string
+          type: array
+        userId:
+          type: string
+      type: object
+    v1ProjectCleanup_2:
+      description: Project delete request payload
+      properties:
+        deletingClusterDurationThresholdInMin:
+          format: int32
+          type: integer
+        provisioningClusterDurationThresholdInMin:
+          format: int32
+          type: integer
+      type: object
+    v1Alert_2:
+      example:
+        component: component
+        channels:
+        - uid: uid
+          createdBy: createdBy
+          identifiers:
+          - identifiers
+          - identifiers
+          alertAllUsers: true
+          http:
+            headers: '{}'
+            method: method
+            body: body
+            url: url
+          isActive: true
+          type: email
+          status:
+            isSucceeded: true
+            time: 2000-01-23 04:56:07+00:00
+            message: message
+        - uid: uid
+          createdBy: createdBy
+          identifiers:
+          - identifiers
+          - identifiers
+          alertAllUsers: true
+          http:
+            headers: '{}'
+            method: method
+            body: body
+            url: url
+          isActive: true
+          type: email
+          status:
+            isSucceeded: true
+            time: 2000-01-23 04:56:07+00:00
+            message: message
+      properties:
+        channels:
+          items:
+            $ref: '#/components/schemas/v1Channel_2'
+          type: array
+        component:
+          type: string
+      type: object
+    v1TeamRoleMap_2:
+      example:
+        roles:
+        - roles
+        - roles
+        teamId: teamId
+      properties:
+        roles:
+          items:
+            type: string
+          type: array
+        teamId:
+          type: string
+      type: object
+    v1Channel_2:
+      example:
+        uid: uid
+        createdBy: createdBy
+        identifiers:
+        - identifiers
+        - identifiers
+        alertAllUsers: true
+        http:
+          headers: '{}'
+          method: method
+          body: body
+          url: url
+        isActive: true
+        type: email
+        status:
+          isSucceeded: true
+          time: 2000-01-23 04:56:07+00:00
+          message: message
+      properties:
+        alertAllUsers:
+          type: boolean
+          x-omitempty: false
+        createdBy:
+          type: string
+        http:
+          $ref: '#/components/schemas/v1Channel_http'
+        identifiers:
+          items:
+            type: string
+          type: array
+          uniqueItems: true
+        isActive:
+          type: boolean
+          x-omitempty: false
+        status:
+          $ref: '#/components/schemas/v1AlertNotificationStatus_2'
+        type:
+          enum:
+          - email
+          - app
+          - http
+          type: string
+        uid:
+          type: string
+      type: object
+    v1ProjectSpec_2:
+      description: Project specifications
+      example:
+        alerts:
+        - component: component
+          channels:
+          - uid: uid
+            createdBy: createdBy
+            identifiers:
+            - identifiers
+            - identifiers
+            alertAllUsers: true
+            http:
+              headers: '{}'
+              method: method
+              body: body
+              url: url
+            isActive: true
+            type: email
+            status:
+              isSucceeded: true
+              time: 2000-01-23 04:56:07+00:00
+              message: message
+          - uid: uid
+            createdBy: createdBy
+            identifiers:
+            - identifiers
+            - identifiers
+            alertAllUsers: true
+            http:
+              headers: '{}'
+              method: method
+              body: body
+              url: url
+            isActive: true
+            type: email
+            status:
+              isSucceeded: true
+              time: 2000-01-23 04:56:07+00:00
+              message: message
+        - component: component
+          channels:
+          - uid: uid
+            createdBy: createdBy
+            identifiers:
+            - identifiers
+            - identifiers
+            alertAllUsers: true
+            http:
+              headers: '{}'
+              method: method
+              body: body
+              url: url
+            isActive: true
+            type: email
+            status:
+              isSucceeded: true
+              time: 2000-01-23 04:56:07+00:00
+              message: message
+          - uid: uid
+            createdBy: createdBy
+            identifiers:
+            - identifiers
+            - identifiers
+            alertAllUsers: true
+            http:
+              headers: '{}'
+              method: method
+              body: body
+              url: url
+            isActive: true
+            type: email
+            status:
+              isSucceeded: true
+              time: 2000-01-23 04:56:07+00:00
+              message: message
+        teams:
+        - roles:
+          - roles
+          - roles
+          teamId: teamId
+        - roles:
+          - roles
+          - roles
+          teamId: teamId
+        logoUrl: logoUrl
+        users:
+        - roles:
+          - roles
+          - roles
+          userId: userId
+        - roles:
+          - roles
+          - roles
+          userId: userId
+      properties:
+        alerts:
+          items:
+            $ref: '#/components/schemas/v1Alert_2'
+          type: array
+          uniqueItems: true
+        logoUrl:
+          type: string
+        teams:
+          items:
+            $ref: '#/components/schemas/v1TeamRoleMap_2'
+          type: array
+          uniqueItems: true
+        users:
+          items:
+            $ref: '#/components/schemas/v1UserRoleMap_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ProjectCleanUpStatus_2:
+      description: Project cleanup status
+      example:
+        msg: msg
+        cleanedResources:
+        - cleanedResources
+        - cleanedResources
+        state: state
+      properties:
+        cleanedResources:
+          items:
+            type: string
+          type: array
+        msg:
+          type: string
+        state:
+          type: string
+      type: object
+    v1ProjectEntitySpec_2:
+      description: Project specifications
+      properties:
+        logoUid:
+          type: string
+        teams:
+          items:
+            $ref: '#/components/schemas/v1TeamRoleMap_2'
+          type: array
+          uniqueItems: true
+        users:
+          items:
+            $ref: '#/components/schemas/v1UserRoleMap_2'
+          type: array
+          uniqueItems: true
+      type: object
+    v1ObjectEntity_2:
+      description: Object identity meta
+      example:
+        uid: uid
+        name: name
+      properties:
+        name:
+          type: string
+        uid:
+          type: string
+      type: object
+    v1TenantClusterSettings_2:
+      example:
+        nodesAutoRemediationSetting:
+          isEnabled: true
+          disableNodesAutoRemediation: true
+      properties:
+        nodesAutoRemediationSetting:
+          $ref: '#/components/schemas/v1NodesAutoRemediationSettings_2'
+      type: object
+    v1AlertNotificationStatus_2:
+      example:
+        isSucceeded: true
+        time: 2000-01-23 04:56:07+00:00
+        message: message
+      properties:
+        isSucceeded:
+          type: boolean
+          x-omitempty: false
+        message:
+          type: string
+        time:
+          description: Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.
+          format: date-time
+          type: string
+      type: object
+    v1ProjectActiveClusters_2:
+      description: Active clusters
+      example:
+        count: 6
+        clusters:
+        - clusterRef:
+            uid: uid
+            name: name
+          state: state
+        - clusterRef:
+            uid: uid
+            name: name
+          state: state
+      properties:
+        clusters:
+          items:
+            $ref: '#/components/schemas/v1ProjectActiveCluster_2'
           type: array
         count:
           format: int32
@@ -904,3 +1671,6 @@ components:
       in: header
       name: Authorization
       type: apiKey
+x-refined-from:
+- spectro-cloud-palette-openapi.json
+- spectrocloud-palette.yaml

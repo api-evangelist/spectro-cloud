@@ -22,11 +22,52 @@ standards:
   evidence: API uses apiKey/JWT header auth, not OAuth2 flows
 - id: rfc9457-problem-details
   conforms: false
-  evidence: Errors use a proprietary v1Error envelope (code/message/details/ref), not
-    application/problem+json
+  evidence: Errors use a proprietary v1Error envelope (code/message/details/ref), not application/problem+json
 - id: json-api
   conforms: false
 - id: fhir-r4
   conforms: false
 - id: scim2
   conforms: false
+- id: soc2
+  conforms: true
+  evidence: Spectro Cloud’s SOC 2 Type II audit report provides assurances of our organization’s security and availability.
+  source: https://docs.spectrocloud.com/legal-licenses/compliance/
+- id: fapi
+  conforms: true
+  evidence: Spectro Cloud is validated against FIPS 140-3 with Certificate number 5061 in compliance with the Cryptographic Module Validation
+    Program (CMVP).
+  source: https://docs.spectrocloud.com/legal-licenses/compliance/
+- id: csa-star
+  conforms: true
+  evidence: We maintain certification under the Joint Certification Program, a program between Canada’s Department of National Defense and the
+    U.S. Department of Defense, that helps to protect controlled Unclassified Military Critical Technical Data (MCTD) and technology from common
+    adversaries.
+  source: https://docs.spectrocloud.com/legal-licenses/compliance/
+- id: csa-star
+  conforms: true
+  evidence: Spectro Cloud is proud to be UK Cyber Essentials Plus certified, the advanced level of the UK Government-backed Cyber Essentials cybersecurity
+    standard.
+  source: https://docs.spectrocloud.com/legal-licenses/compliance/
+- id: csa-star
+  conforms: true
+  evidence: Spectro Cloud’s achievement of the UK Cyber Essentials certification underscores our commitment to maintaining the highest standards
+    of cybersecurity and data protection.
+  source: https://docs.spectrocloud.com/legal-licenses/compliance/
+- id: openapi-3.0
+  conforms: true
+  evidence: the document declares 3.0.1
+- id: openapi-3.2
+  conforms: true
+  evidence: the document declares 3.2.0
+- id: rfc9457
+  conforms: false
+  evidence: no response declares application/problem+json
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take limit, offset
+sources:
+- https://docs.spectrocloud.com/legal-licenses/compliance/

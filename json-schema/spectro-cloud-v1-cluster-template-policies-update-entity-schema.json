@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-template-policies-update-entity-schema.json",
+  "title": "v1ClusterTemplatePoliciesUpdateEntity",
+  "description": "Cluster template policies update entity",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clustertemplates-api-openapi.yml#/components/schemas/v1ClusterTemplatePoliciesUpdateEntity",
+  "properties": {
+    "policies": {
+      "description": "List of spc policy references to be updated in the cluster template",
+      "items": {
+        "$ref": "#/$defs/v1PolicyRef"
+      },
+      "type": "array"
+    }
+  },
+  "required": [
+    "policies"
+  ],
+  "type": "object",
+  "$defs": {
+    "v1PolicyRef": {
+      "description": "Policy reference",
+      "properties": {
+        "kind": {
+          "description": "Kind of the policy",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the policy",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,529 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cloud-stack-cloud-config-schema.json",
+  "title": "v1CloudStackCloudConfig",
+  "description": "CloudStackCloudConfig is the Schema for the CloudStackcloudconfigs API",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-cloudconfigs-api-openapi.yml#/components/schemas/v1CloudStackCloudConfig",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1CloudStackCloudConfigSpec"
+    },
+    "status": {
+      "$ref": "#/$defs/v1CloudStackCloudConfigStatus"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ArchType": {
+      "default": "amd64",
+      "enum": [
+        "amd64",
+        "arm64"
+      ],
+      "type": "string"
+    },
+    "v1CloudStackCloudConfigSpec": {
+      "description": "CloudStackCloudConfigSpec defines the cloud configuration input by user This will translate to clusterspec/machinespec for cluster-api",
+      "properties": {
+        "cloudAccountRef": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "cloudAccountRef should point to the secret which contains CloudStackCloudAccount"
+        },
+        "clusterConfig": {
+          "$ref": "#/$defs/v1CloudStackClusterConfig"
+        },
+        "machinePoolConfig": {
+          "items": {
+            "$ref": "#/$defs/v1CloudStackMachinePoolConfig"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackCloudConfigStatus": {
+      "description": "CloudStackCloudConfigStatus defines the observed state of CloudStackCloudConfig The cloudimage info built by Mold is stored here image should be mapped to a specific machinepool",
+      "properties": {
+        "conditions": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterCondition"
+          },
+          "type": "array"
+        },
+        "nodeImage": {
+          "type": "string"
+        },
+        "sourceImageId": {
+          "description": "sourceImageId, it can be from packref's annotations or from pack.json",
+          "type": "string"
+        },
+        "useCapiImage": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackClusterConfig": {
+      "description": "Cluster level configuration for CloudStack cloud, same for all machinepools",
+      "properties": {
+        "controlPlaneEndpoint": {
+          "description": "Endpoint IP to be used for API server, should only be enabled for static CloudStack network",
+          "type": "string"
+        },
+        "overrideClusterAPIConfig": {
+          "description": "YAML override for CAPI properties at cluster level.\nOverrides pack-level and Palette-managed values.\n",
+          "type": "string"
+        },
+        "project": {
+          "$ref": "#/$defs/v1CloudStackResource",
+          "description": "Project name for the cluster (optional)"
+        },
+        "sshKeyName": {
+          "description": "SSH Key name for accessing cluster nodes",
+          "type": "string"
+        },
+        "syncWithCKS": {
+          "description": "SyncWithCKS determines if an externalManaged CKS cluster should be created (optional)",
+          "type": "boolean"
+        },
+        "zones": {
+          "description": "Multiple zones for multi-AZ deployments. If only one zone is specified, it will be treated as single-zone deployment",
+          "items": {
+            "$ref": "#/$defs/v1CloudStackZoneSpec"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackMachineConfig": {
+      "description": "CloudStack-specific machine configuration",
+      "properties": {
+        "instanceConfig": {
+          "$ref": "#/$defs/v1InstanceConfig",
+          "description": "Instance Configuration"
+        },
+        "networks": {
+          "description": "Network configuration",
+          "items": {
+            "$ref": "#/$defs/v1CloudStackNetworkConfig"
+          },
+          "type": "array"
+        },
+        "offering": {
+          "$ref": "#/$defs/v1CloudStackResource",
+          "description": "Service offering (instance type/size)"
+        },
+        "template": {
+          "$ref": "#/$defs/v1CloudStackResource",
+          "description": "CloudStack template override for this machine pool. If not specified, inherits cluster default from profile."
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackMachinePoolConfig": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/v1MachinePoolBaseConfig"
+        },
+        {
+          "$ref": "#/$defs/v1CloudStackMachineConfig"
+        }
+      ],
+      "description": "Configuration for a CloudStack machine pool",
+      "type": "object"
+    },
+    "v1CloudStackNetworkConfig": {
+      "description": "Network configuration for CloudStack instances",
+      "properties": {
+        "id": {
+          "description": "Network id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Network name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackNetworkSpec": {
+      "description": "Enhanced network configuration for CloudStack",
+      "properties": {
+        "gateway": {
+          "description": "Gateway IP address for the network",
+          "type": "string"
+        },
+        "id": {
+          "description": "Network id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Network name",
+          "type": "string"
+        },
+        "netmask": {
+          "description": "Network mask for the network",
+          "type": "string"
+        },
+        "offering": {
+          "description": "Network offering name",
+          "type": "string"
+        },
+        "routingMode": {
+          "description": "Routing mode for the network",
+          "type": "string"
+        },
+        "type": {
+          "description": "Network type: Isolated, Shared, etc.",
+          "type": "string"
+        },
+        "vpc": {
+          "$ref": "#/$defs/v1CloudStackVPCSpec",
+          "description": "VPC configuration (optional, for VPC networks)"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackResource": {
+      "description": "Cloud stack resource information",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackVPCSpec": {
+      "description": "VPC configuration for CloudStack networks",
+      "properties": {
+        "cidr": {
+          "description": "CIDR block for the VPC",
+          "type": "string"
+        },
+        "id": {
+          "description": "VPC id",
+          "type": "string"
+        },
+        "name": {
+          "description": "VPC name",
+          "type": "string"
+        },
+        "offering": {
+          "description": "VPC offering name",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CloudStackZoneSpec": {
+      "description": "CloudStack zone with its network configuration",
+      "properties": {
+        "id": {
+          "description": "Zone Id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Zone name",
+          "type": "string"
+        },
+        "network": {
+          "$ref": "#/$defs/v1CloudStackNetworkSpec",
+          "description": "Network configuration specific to this zone"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterCondition": {
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "lastTransitionTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "message": {
+          "description": "Human-readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Unique, one-word, CamelCase reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "type": "object"
+    },
+    "v1InstanceConfig": {
+      "properties": {
+        "category": {
+          "type": "string"
+        },
+        "cpuSet": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "diskGiB": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "memoryMiB": {
+          "description": "MemoryMiB is the size of a virtual machine's memory, in MiB",
+          "format": "int64",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "numCPUs": {
+          "description": "NumCPUs is the number of virtual processors in a virtual machine",
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "v1MachinePoolBaseConfig": {
+      "properties": {
+        "additionalAnnotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Custom annotations for CAPI machine objects and nodes.\nCurrently implemented for CloudStack only.\n",
+          "type": "object"
+        },
+        "additionalLabels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "additionalLabels",
+          "type": "object"
+        },
+        "additionalTags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "AdditionalTags is an optional set of tags to add to resources managed by the provider, in addition to the ones added by default. For eg., tags for EKS nodeGroup or EKS NodegroupIAMRole",
+          "type": "object"
+        },
+        "isControlPlane": {
+          "description": "whether this pool is for control plane",
+          "type": "boolean"
+        },
+        "labels": {
+          "description": "labels for this pool, example: control-plane/worker, gpu, windows",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "machinePoolProperties": {
+          "$ref": "#/$defs/v1MachinePoolProperties"
+        },
+        "maxSize": {
+          "description": "max size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "minSize": {
+          "description": "min size of the pool, for scaling",
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nodeRepaveInterval": {
+          "description": "Minimum number of seconds a node should be Ready, before the next node is selected for repave. Applicable only for workerpools in infrastructure cluster",
+          "format": "int32",
+          "type": "integer"
+        },
+        "overrideClusterAPIConfig": {
+          "description": "YAML override for CAPI properties at pool level.\nOverrides pack-level and Palette-managed values. See PCP-4787.\n",
+          "type": "string"
+        },
+        "overrideHealthCheckConfiguration": {
+          "description": "YAML config to override Machine Health Check values at the node pool level.\nAccepts CAPI MachineHealthCheck fields such as maxUnhealthy, nodeStartupTimeout,\nand unhealthyNodeConditions. Falls back to Palette defaults when unset and\nremains subject to the project/tenant Cluster Auto Remediation setting.\n",
+          "type": "string"
+        },
+        "overrideKubeadmConfiguration": {
+          "description": "YAML config for kubeletExtraArgs, preKubeadmCommands, postKubeadmCommands.\nOverrides pack-level settings. Worker pools only.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "size": {
+          "description": "size of the pool, number of machines",
+          "format": "int32",
+          "type": "integer"
+        },
+        "taints": {
+          "description": "control plane or worker taints",
+          "items": {
+            "$ref": "#/$defs/v1Taint"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "updateStrategy": {
+          "$ref": "#/$defs/v1UpdateStrategy",
+          "description": "rolling update strategy for this machinepool if not specified, will use ScaleOut"
+        },
+        "useControlPlaneAsWorker": {
+          "description": "if IsControlPlane==true && useControlPlaneAsWorker==true, then will remove control plane taint this will not be used for worker pools",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "isControlPlane"
+      ],
+      "type": "object"
+    },
+    "v1MachinePoolProperties": {
+      "description": "Machine pool specific properties",
+      "properties": {
+        "archType": {
+          "$ref": "#/$defs/v1ArchType",
+          "description": "Architecture type of the pool. Default value is 'amd64'",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Taint": {
+      "description": "Taint",
+      "properties": {
+        "effect": {
+          "enum": [
+            "NoSchedule",
+            "PreferNoSchedule",
+            "NoExecute"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "description": "The taint key to be applied to a node",
+          "type": "string"
+        },
+        "timeAdded": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "value": {
+          "description": "The taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1UpdateStrategy": {
+      "description": "UpdatesStrategy will be used to translate to RollingUpdateStrategy of a MachineDeployment We'll start with default values for the translation, can expose more details later Following is details of parameters translated from the type ScaleOut => maxSurge=1, maxUnavailable=0 ScaleIn => maxSurge=0, maxUnavailable=1 OverrideScaling => maxSurge and maxUnavailable are user-specified (both required)",
+      "properties": {
+        "maxSurge": {
+          "description": "Max extra nodes during rolling update. Integer or percentage (e.g., \"1\" or \"20%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "maxUnavailable": {
+          "description": "Max unavailable nodes during rolling update. Integer or percentage (e.g., \"0\" or \"10%\").\nOnly valid when type=OverrideScaling. Both maxSurge and maxUnavailable are required.\nCurrently implemented for CloudStack only.\n",
+          "type": "string"
+        },
+        "type": {
+          "description": "Update strategy type. Defaults to RollingUpdateScaleOut if empty.",
+          "enum": [
+            "RollingUpdateScaleOut",
+            "RollingUpdateScaleIn",
+            "OverrideScaling"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

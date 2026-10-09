@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-api-key-active-state-schema.json",
+  "title": "v1ApiKeyActiveState",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-api-keys-api-openapi.yml#/components/schemas/v1ApiKeyActiveState",
+  "properties": {
+    "isActive": {
+      "description": "API key active state",
+      "type": "boolean"
+    }
+  }
+}

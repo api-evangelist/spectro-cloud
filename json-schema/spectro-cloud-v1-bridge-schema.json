@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-bridge-schema.json",
+  "title": "v1Bridge",
+  "description": "Bridge interface configuration",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edge-mgmt-api-openapi.yml#/components/schemas/v1Bridge",
+  "type": "object",
+  "properties": {
+    "configStatus": {
+      "description": "Detailed configuration status from networkctl",
+      "type": "string"
+    },
+    "gateway": {
+      "description": "Gateway IP address",
+      "type": "string"
+    },
+    "ip": {
+      "description": "IP address (for static type)",
+      "type": "string"
+    },
+    "members": {
+      "description": "Member interfaces attached to this bridge (NICs, Bonds, or VLANs e.g., eth0, bond0, eth0.100)",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "mtu": {
+      "description": "MTU for the bridge interface",
+      "type": "integer",
+      "format": "int64"
+    },
+    "name": {
+      "description": "Bridge interface name (e.g., br0)",
+      "type": "string"
+    },
+    "nameservers": {
+      "description": "DNS nameservers",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "description": "Status of the bridge interface (up/down/applying/unknown)",
+      "type": "string"
+    },
+    "stpEnabled": {
+      "description": "Spanning Tree Protocol setting persisted for this bridge.\nAbsent (omitted from the response) means the user did not configure STP — the bridge runs without STP (legacy behavior).\ntrue / false reflect the explicit configured value.\n",
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "subnet": {
+      "description": "Subnet mask (for static type)",
+      "type": "string"
+    },
+    "type": {
+      "description": "Network configuration type",
+      "type": "string",
+      "enum": [
+        "dhcp",
+        "static",
+        "none"
+      ]
+    }
+  }
+}

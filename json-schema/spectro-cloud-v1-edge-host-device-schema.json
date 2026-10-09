@@ -1,0 +1,1153 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-edge-host-device-schema.json",
+  "title": "v1EdgeHostDevice",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edgehosts-api-openapi.yml#/components/schemas/v1EdgeHostDevice",
+  "properties": {
+    "aclmeta": {
+      "$ref": "#/$defs/v1AclMeta"
+    },
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1EdgeHostDeviceSpec"
+    },
+    "status": {
+      "$ref": "#/$defs/v1EdgeHostDeviceStatus"
+    }
+  },
+  "$defs": {
+    "v1AclMeta": {
+      "description": "Resource access control information (Read-only response data)",
+      "properties": {
+        "ownerUid": {
+          "description": "User or service uid which created the resource",
+          "type": "string"
+        },
+        "projectUid": {
+          "description": "Project's uid if the resource is under a project",
+          "type": "string"
+        },
+        "tenantUid": {
+          "description": "Tenant's uid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CPU": {
+      "properties": {
+        "cores": {
+          "description": "number of cpu cores",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterCondition": {
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "lastTransitionTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "message": {
+          "description": "Human-readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Unique, one-word, CamelCase reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "type": "object"
+    },
+    "v1ClusterPackManifestStatus": {
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/v1ClusterCondition"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterPackStatus": {
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/v1ClusterCondition"
+        },
+        "endTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "manifests": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterPackManifestStatus"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "profileUid": {
+          "type": "string"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/$defs/v1LoadBalancerService"
+          },
+          "type": "array"
+        },
+        "startTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterProfileTemplate": {
+      "description": "ClusterProfileTemplate contains details of a clusterprofile definition",
+      "properties": {
+        "cloudType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "packServerRefs": {
+          "description": "PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array",
+          "items": {
+            "$ref": "#/$defs/v1ObjectReference"
+          },
+          "type": "array"
+        },
+        "packServerSecret": {
+          "description": "This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette",
+          "type": "string"
+        },
+        "packs": {
+          "description": "Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge",
+          "items": {
+            "$ref": "#/$defs/v1PackRef"
+          },
+          "type": "array"
+        },
+        "profileVersion": {
+          "description": "version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster",
+          "type": "string"
+        },
+        "relatedObject": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "description": "Deprecated. Use profileVersion",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1DeviceSpec": {
+      "description": "DeviceSpec defines the desired state of Device",
+      "properties": {
+        "archType": {
+          "default": "amd64",
+          "description": "Architecture type of the edge host",
+          "enum": [
+            "arm64",
+            "amd64"
+          ],
+          "type": "string"
+        },
+        "cpu": {
+          "$ref": "#/$defs/v1CPU"
+        },
+        "disks": {
+          "items": {
+            "$ref": "#/$defs/v1Disk"
+          },
+          "type": "array"
+        },
+        "gpus": {
+          "items": {
+            "$ref": "#/$defs/v1GPUDeviceSpec"
+          },
+          "type": "array"
+        },
+        "hostState": {
+          "default": "registration",
+          "description": "State of edge host device",
+          "enum": [
+            "registration",
+            "cluster",
+            "recovery"
+          ],
+          "type": "string"
+        },
+        "hostType": {
+          "default": "appliance",
+          "description": "Type of the edge host device",
+          "enum": [
+            "appliance",
+            "agent-mode"
+          ],
+          "type": "string"
+        },
+        "memory": {
+          "$ref": "#/$defs/v1Memory"
+        },
+        "nics": {
+          "items": {
+            "$ref": "#/$defs/v1Nic"
+          },
+          "type": "array"
+        },
+        "os": {
+          "$ref": "#/$defs/v1OS"
+        },
+        "secureBoot": {
+          "default": false,
+          "description": "Secure boot configuration",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "v1Disk": {
+      "properties": {
+        "controller": {
+          "type": "string"
+        },
+        "partitions": {
+          "items": {
+            "$ref": "#/$defs/v1Partition"
+          },
+          "type": "array"
+        },
+        "size": {
+          "description": "Size in GB",
+          "format": "int32",
+          "type": "integer"
+        },
+        "vendor": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1EdgeClusterObjectEntity": {
+      "description": "Object identity meta of the cluster",
+      "properties": {
+        "hybridCluster": {
+          "$ref": "#/$defs/v1HybridClusterMeta",
+          "description": "In case of hybrid edge clusters, it provides the object identity meta of hybrid cluster"
+        },
+        "name": {
+          "description": "Name of the cluster",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Uid of the cluster",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1EdgeHost": {
+      "description": "EdgeHost is the underlying appliance",
+      "properties": {
+        "disableAutoRegister": {
+          "description": "Set to true if auto register is disabled for the device",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "hostAddress": {
+          "description": "HostAddress is a FQDN or IP address of the Host",
+          "type": "string"
+        },
+        "hostAuthToken": {
+          "description": "HostAuthToken to authorize auto registration",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "hostChecksum": {
+          "description": "HostChecksum is the checksum provided by the edge host, to be persisted in SaaS",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "hostIdentity": {
+          "$ref": "#/$defs/v1EdgeHostIdentity",
+          "description": "HostIdentity is the identity to access the edge host"
+        },
+        "hostPairingKey": {
+          "description": "HostPairingKey is the one-time pairing key to pair the edge host with the device registered in SaaS",
+          "format": "password",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "hostUid": {
+          "description": "HostUid is the ID of the EdgeHost",
+          "type": "string"
+        },
+        "macAddress": {
+          "description": "Mac address of edgehost",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "project": {
+          "$ref": "#/$defs/v1ObjectEntity",
+          "description": "ProjectUid where the edgehost will be placed during auto registration",
+          "x-omitempty": false
+        },
+        "remoteSsh": {
+          "default": "enabled",
+          "description": "RemoteSsh controls the remote SSH access for this edge host",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "required": [
+        "hostUid",
+        "hostAddress"
+      ],
+      "type": "object"
+    },
+    "v1EdgeHostCloudProperties": {
+      "description": "Additional cloud properties of the edge host (applicable based on the cloud type)",
+      "properties": {
+        "vsphere": {
+          "$ref": "#/$defs/v1EdgeHostVsphereCloudProperties"
+        }
+      },
+      "type": "object"
+    },
+    "v1EdgeHostDeviceSpec": {
+      "description": "EdgeHostDeviceSpec defines the desired state of EdgeHostDevice",
+      "properties": {
+        "cloudProperties": {
+          "$ref": "#/$defs/v1EdgeHostCloudProperties"
+        },
+        "clusterProfileTemplates": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterProfileTemplate"
+          },
+          "type": "array"
+        },
+        "device": {
+          "$ref": "#/$defs/v1DeviceSpec"
+        },
+        "host": {
+          "$ref": "#/$defs/v1EdgeHost"
+        },
+        "properties": {
+          "$ref": "#/$defs/v1EdgeHostProperties"
+        },
+        "service": {
+          "$ref": "#/$defs/v1ServiceSpec"
+        },
+        "tunnelConfig": {
+          "$ref": "#/$defs/v1SpectroTunnelConfig"
+        },
+        "type": {
+          "description": "Deprecated. Cloudtype of the provisioned edge host",
+          "enum": [
+            "vsphere",
+            "edge-native"
+          ],
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1EdgeHostDeviceStatus": {
+      "description": "EdgeHostDeviceStatus defines the observed state of EdgeHostDevice",
+      "properties": {
+        "health": {
+          "$ref": "#/$defs/v1EdgeHostHealth"
+        },
+        "inUseClusters": {
+          "description": "Deprecated. Use inUseClustersRef",
+          "items": {
+            "$ref": "#/$defs/v1ObjectEntity"
+          },
+          "type": "array"
+        },
+        "inUseClustersRef": {
+          "items": {
+            "$ref": "#/$defs/v1EdgeClusterObjectEntity"
+          },
+          "type": "array"
+        },
+        "packs": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterPackStatus"
+          },
+          "type": "array"
+        },
+        "profileStatus": {
+          "$ref": "#/$defs/v1ProfileStatus"
+        },
+        "serviceAuthToken": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "ready",
+            "unpaired",
+            "in-use"
+          ],
+          "type": "string"
+        },
+        "tunnelStatus": {
+          "$ref": "#/$defs/v1SpectroTunnelStatus"
+        }
+      },
+      "type": "object"
+    },
+    "v1EdgeHostHealth": {
+      "description": "EdgeHostHealth defines the desired health state of EdgeHostDevice",
+      "properties": {
+        "agentVersion": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "healthy",
+            "unhealthy"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "v1EdgeHostIdentity": {
+      "properties": {
+        "caCert": {
+          "description": "CACert is the client CA certificate",
+          "type": "string"
+        },
+        "mode": {
+          "description": "Mode indicates a system or session connection to the host",
+          "type": "string"
+        },
+        "socketPath": {
+          "description": "SocketPath is an optional path to the socket on the host, if not using defaults",
+          "type": "string"
+        },
+        "sshSecret": {
+          "$ref": "#/$defs/v1EdgeHostSSHSecret",
+          "description": "SSHSecret to the secret containing ssh-username"
+        }
+      }
+    },
+    "v1EdgeHostNetwork": {
+      "description": "Network defines the network configuration for a virtual machine",
+      "properties": {
+        "networkName": {
+          "description": "NetworkName of the network where this machine will be connected",
+          "type": "string"
+        },
+        "networkType": {
+          "description": "NetworkType  specifies the type of network",
+          "enum": [
+            "default",
+            "bridge"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkName",
+        "networkType"
+      ],
+      "type": "object"
+    },
+    "v1EdgeHostProperties": {
+      "description": "Additional properties of edge host",
+      "properties": {
+        "networks": {
+          "items": {
+            "$ref": "#/$defs/v1EdgeHostNetwork"
+          },
+          "type": "array"
+        },
+        "storagePools": {
+          "items": {
+            "$ref": "#/$defs/v1EdgeHostStoragePool"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "v1EdgeHostSSHSecret": {
+      "properties": {
+        "name": {
+          "description": "SSH secret name",
+          "type": "string"
+        },
+        "privateKey": {
+          "description": "Private Key to access the host",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1EdgeHostStoragePool": {
+      "description": "StoragePool is the storage pool for the vm image",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "v1EdgeHostVsphereCloudProperties": {
+      "description": "Vsphere cloud properties of edge host",
+      "properties": {
+        "datacenters": {
+          "items": {
+            "$ref": "#/$defs/v1VsphereCloudDatacenter"
+          },
+          "type": "array"
+        }
+      }
+    },
+    "v1GPUDeviceSpec": {
+      "properties": {
+        "addresses": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Addresses is a map of PCI device entry name to its addresses.\nExample entry would be \"11:00.0 VGA compatible controller [0300]: NVIDIA\nCorporation Device [10de:1eb1] (rev a1)\"- > 0000_11_00_0\" The address is\nBDF (Bus Device Function) identifier format seperated by underscores. The\nfirst 4 bits are almost always 0000. In the above example 11 is Bus, 00\nis Device,0 is function. The values of these addreses are expected in hexadecimal\nformat\n",
+          "type": "object"
+        },
+        "gpuCount": {
+          "description": "Number of GPUs",
+          "format": "int32",
+          "type": "integer"
+        },
+        "memory": {
+          "description": "GPU memory specification",
+          "type": "string"
+        },
+        "migCapable": {
+          "description": "MIG capability flag",
+          "type": "boolean"
+        },
+        "migStrategy": {
+          "description": "MIG strategy configuration",
+          "type": "string"
+        },
+        "model": {
+          "description": "Model is the model of GPU, for a given vendor, for eg., TU104GL [Tesla T4]",
+          "type": "string"
+        },
+        "vendor": {
+          "description": "Vendor is the GPU vendor, for eg., NVIDIA or AMD",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1HybridClusterMeta": {
+      "description": "Object identity meta of hybrid cluster",
+      "properties": {
+        "name": {
+          "description": "Name of the hybrid cluster",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Uid of the hybrid cluster",
+          "type": "string"
+        }
+      }
+    },
+    "v1LoadBalancerService": {
+      "properties": {
+        "host": {
+          "description": "IP or Host from svc.Status.LoadBalancerStatus.Ingress",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the loadbalancer service",
+          "type": "string"
+        },
+        "ports": {
+          "description": "port this service exposed",
+          "items": {
+            "$ref": "#/$defs/v1ServicePort"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1Memory": {
+      "properties": {
+        "sizeInMB": {
+          "description": "memory size in bytes",
+          "format": "int64",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1Nic": {
+      "properties": {
+        "dns": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "gateway": {
+          "type": "string"
+        },
+        "ip": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "boolean"
+        },
+        "macAddr": {
+          "type": "string"
+        },
+        "nicName": {
+          "type": "string"
+        },
+        "subnet": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1OS": {
+      "properties": {
+        "family": {
+          "type": "string"
+        },
+        "kernel": {
+          "type": "string"
+        },
+        "kernelVersion": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectEntity": {
+      "description": "Object identity meta",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackPreset": {
+      "description": "PackPreset defines the preset pack values",
+      "properties": {
+        "add": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "displayName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "group": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "remove": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1PackRef": {
+      "description": "PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml",
+          "type": "object"
+        },
+        "digest": {
+          "description": "digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade",
+          "type": "string"
+        },
+        "inValidReason": {
+          "type": "string"
+        },
+        "isInvalid": {
+          "description": "pack is invalid when the associated tag is deleted from the registry",
+          "type": "boolean"
+        },
+        "layer": {
+          "enum": [
+            "kernel",
+            "os",
+            "k8s",
+            "cni",
+            "csi",
+            "addon"
+          ],
+          "type": "string"
+        },
+        "logo": {
+          "description": "path to the pack logo",
+          "type": "string"
+        },
+        "manifests": {
+          "items": {
+            "$ref": "#/$defs/v1ObjectReference"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "pack name",
+          "type": "string"
+        },
+        "packUid": {
+          "description": "PackUID is Hubble packUID, not palette Pack.UID It is used by Hubble only.",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "params passed as env variables to be consumed at installation time",
+          "type": "object"
+        },
+        "presets": {
+          "items": {
+            "$ref": "#/$defs/v1PackPreset"
+          },
+          "type": "array"
+        },
+        "registryUid": {
+          "description": "pack registry uid",
+          "type": "string"
+        },
+        "schema": {
+          "items": {
+            "$ref": "#/$defs/v1PackSchema"
+          },
+          "type": "array"
+        },
+        "server": {
+          "description": "pack registry server or helm repo",
+          "type": "string"
+        },
+        "tag": {
+          "description": "pack tag",
+          "type": "string"
+        },
+        "type": {
+          "description": "type of the pack",
+          "enum": [
+            "spectro",
+            "helm",
+            "manifest",
+            "oci"
+          ],
+          "type": "string"
+        },
+        "values": {
+          "description": "values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values",
+          "type": "string"
+        },
+        "version": {
+          "description": "pack version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "layer",
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1PackSchema": {
+      "description": "PackSchema defines the schema definition, hints for the pack values",
+      "properties": {
+        "format": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "hints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "listOptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "readonly": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "regex": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "required": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1Partition": {
+      "properties": {
+        "fileSystemType": {
+          "type": "string"
+        },
+        "freeSpace": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "mountPoint": {
+          "type": "string"
+        },
+        "totalSpace": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "usedSpace": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1ProfileStatus": {
+      "properties": {
+        "hasUserMacros": {
+          "description": "If it is true then profile pack values has a reference to user defined macros",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ServicePort": {
+      "properties": {
+        "port": {
+          "description": "The port that will be exposed by this service.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "v1ServiceSpec": {
+      "description": "ServiceSpec defines the specification of service registering edge",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroTunnelConfig": {
+      "description": "Spectro tunnel configuration",
+      "properties": {
+        "remoteSsh": {
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-omitempty": false
+        },
+        "remoteSshTempUser": {
+          "default": "disabled",
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroTunnelStatus": {
+      "description": "SpectroTunnelStatus is the status of the tunnel",
+      "properties": {
+        "ssh": {
+          "$ref": "#/$defs/v1SshTunnelStatus",
+          "description": "SshStatus is the status of the ssh tunnel"
+        }
+      },
+      "type": "object"
+    },
+    "v1SshTunnelStatus": {
+      "properties": {
+        "lastModifiedTime": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTime is the last modified time of the SSH tunnel"
+        },
+        "message": {
+          "description": "Message is the status message of the SSH tunnel",
+          "type": "string"
+        },
+        "state": {
+          "description": "State is the state of the SSH tunnel",
+          "enum": [
+            "Initiating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Failed"
+          ],
+          "type": "string"
+        },
+        "user": {
+          "$ref": "#/$defs/v1SshUserStatus",
+          "description": "User is the temporary user of the SSH tunnel"
+        }
+      },
+      "type": "object"
+    },
+    "v1SshUserCredentials": {
+      "properties": {
+        "password": {
+          "description": "Password is the temporary password of the SSH tunnel",
+          "type": "string"
+        },
+        "sshKey": {
+          "description": "SshKey is the ssh key of the SSH tunnel",
+          "type": "string"
+        },
+        "username": {
+          "description": "UserName is the temporary username of the SSH tunnel",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SshUserStatus": {
+      "properties": {
+        "credentials": {
+          "$ref": "#/$defs/v1SshUserCredentials",
+          "description": "Credentials is the temporary user credentials of the SSH tunnel"
+        },
+        "lastModifiedTime": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTime is the last modified time of the SSH tunnel"
+        },
+        "message": {
+          "description": "Message is the status message of the SSH tunnel",
+          "type": "string"
+        },
+        "state": {
+          "description": "State is the state of the SSH tunnel",
+          "enum": [
+            "Created",
+            "Deleted",
+            "Failed"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    },
+    "v1VsphereCloudDatacenter": {
+      "description": "Vsphere datacenter",
+      "properties": {
+        "computeClusters": {
+          "items": {
+            "$ref": "#/$defs/v1VsphereComputeCluster"
+          },
+          "type": "array"
+        },
+        "folders": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1VsphereComputeCluster": {
+      "description": "Vsphere compute cluster",
+      "properties": {
+        "datastores": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "name": {
+          "type": "string"
+        },
+        "networks": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "resourcePools": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    }
+  }
+}

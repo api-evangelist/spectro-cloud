@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-sso-logins-schema.json",
+  "title": "v1SsoLogins",
+  "description": "Describes the allowed sso logins",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-auth-api-openapi.yml#/components/schemas/v1SsoLogins",
+  "items": {
+    "$ref": "#/$defs/v1SsoLogin"
+  },
+  "type": "array",
+  "uniqueItems": true,
+  "$defs": {
+    "v1SsoLogin": {
+      "description": "Describes the allowed sso login details",
+      "properties": {
+        "displayName": {
+          "description": "Describes the display name for the sso login",
+          "type": "string"
+        },
+        "logo": {
+          "description": "Describes the url path for the sso login",
+          "type": "string"
+        },
+        "name": {
+          "description": "Describes the processed name for the sso login",
+          "type": "string"
+        },
+        "redirectUri": {
+          "description": "Describes the sso login url for the authentication",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-pack-readme-schema.json",
+  "title": "v1PackReadme",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-packs-api-openapi.yml#/components/schemas/v1PackReadme",
+  "properties": {
+    "readme": {
+      "description": "Readme describes the documentation of the specified pack",
+      "type": "string"
+    }
+  }
+}

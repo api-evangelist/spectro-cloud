@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-login-response-schema.json",
+  "title": "v1LoginResponse",
+  "description": "Returns the allowed login method and information with the organization details",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-auth-api-openapi.yml#/components/schemas/v1LoginResponse",
+  "properties": {
+    "appEnv": {
+      "description": "Describes the env type. Possible values [ saas, self-hosted, quick-start, enterprise, airgap]",
+      "type": "string"
+    },
+    "authType": {
+      "description": "Describes the default mode of authentication. Possible values [password, sso]",
+      "enum": [
+        "password",
+        "sso"
+      ],
+      "type": "string"
+    },
+    "orgName": {
+      "description": "Organization name.",
+      "type": "string"
+    },
+    "redirectUrl": {
+      "description": "Describes the default redirect Url for authentication. If authType is sso, it will have tenant configured saml/oidc idp url else it will be users organization url",
+      "type": "string",
+      "x-omitempty": false
+    },
+    "rootDomain": {
+      "description": "Describes the domain url on which the saas is available",
+      "type": "string"
+    },
+    "securityMode": {
+      "description": "Describes which security mode is enabled",
+      "type": "string"
+    },
+    "ssoLogins": {
+      "$ref": "#/$defs/v1SsoLogins",
+      "description": "Just Inside. Describes the allowed social logins"
+    },
+    "totalTenants": {
+      "description": "Describes the total number of tenant present in the system",
+      "format": "int64",
+      "type": "number"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1SsoLogin": {
+      "description": "Describes the allowed sso login details",
+      "properties": {
+        "displayName": {
+          "description": "Describes the display name for the sso login",
+          "type": "string"
+        },
+        "logo": {
+          "description": "Describes the url path for the sso login",
+          "type": "string"
+        },
+        "name": {
+          "description": "Describes the processed name for the sso login",
+          "type": "string"
+        },
+        "redirectUri": {
+          "description": "Describes the sso login url for the authentication",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SsoLogins": {
+      "description": "Describes the allowed sso logins",
+      "items": {
+        "$ref": "#/$defs/v1SsoLogin"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  }
+}

@@ -1,0 +1,623 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-spectro-custom-cluster-entity-schema.json",
+  "title": "v1SpectroCustomClusterEntity",
+  "description": "Custom cluster request payload for create and update",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-spectroclusters-api-openapi.yml#/components/schemas/v1SpectroCustomClusterEntity",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMetaInputEntity"
+    },
+    "spec": {
+      "properties": {
+        "cloudAccountUid": {
+          "description": "Cloud account uid to be used for cluster provisioning",
+          "type": "string"
+        },
+        "cloudConfig": {
+          "$ref": "#/$defs/v1CustomClusterConfig"
+        },
+        "clusterConfig": {
+          "$ref": "#/$defs/v1CustomClusterConfigEntity",
+          "description": "General cluster configuration like patching settings, namespace resource allocation, rbac"
+        },
+        "clusterTemplate": {
+          "$ref": "#/$defs/v1ClusterTemplateRef"
+        },
+        "clusterType": {
+          "$ref": "#/$defs/v1ClusterType"
+        },
+        "machinepoolconfig": {
+          "items": {
+            "$ref": "#/$defs/v1CustomMachinePoolConfigEntity"
+          },
+          "type": "array"
+        },
+        "profiles": {
+          "description": "Cluster profile references that specify which profiles to apply to the cluster. Supports overriding pack values and variables. When template references are used, pack values cannot be overridden as they are retrieved from the template's pre-configured definitions.",
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterProfileEntity"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "cloudType",
+        "cloudAccountUid",
+        "cloudConfig"
+      ],
+      "type": "object"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ClusterLocation": {
+      "description": "Cluster location information",
+      "properties": {
+        "countryCode": {
+          "description": "country code for cluster location",
+          "type": "string"
+        },
+        "countryName": {
+          "description": "country name for cluster location",
+          "type": "string"
+        },
+        "geoLoc": {
+          "$ref": "#/$defs/v1GeolocationLatlong"
+        },
+        "regionCode": {
+          "description": "region code for cluster location",
+          "type": "string"
+        },
+        "regionName": {
+          "description": "region name for cluster location",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterNamespaceResourceAllocation": {
+      "description": "Cluster namespace resource allocation",
+      "properties": {
+        "cpuCores": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "gpuConfig": {
+          "$ref": "#/$defs/v1GpuConfig"
+        },
+        "memoryMiB": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        }
+      }
+    },
+    "v1ClusterNamespaceResourceInputEntity": {
+      "description": "Cluster Namespace resource definition",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/v1ObjectMetaUpdateEntity"
+        },
+        "spec": {
+          "$ref": "#/$defs/v1ClusterNamespaceSpec"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterNamespaceSpec": {
+      "description": "Cluster namespace spec",
+      "properties": {
+        "isRegex": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "relatedObject": {
+          "$ref": "#/$defs/v1RelatedObject"
+        },
+        "resourceAllocation": {
+          "$ref": "#/$defs/v1ClusterNamespaceResourceAllocation"
+        }
+      }
+    },
+    "v1ClusterRbacBinding": {
+      "description": "Cluster RBAC binding",
+      "properties": {
+        "namespace": {
+          "type": "string"
+        },
+        "role": {
+          "$ref": "#/$defs/v1ClusterRoleRef"
+        },
+        "subjects": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterRbacSubjects"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "type": {
+          "enum": [
+            "RoleBinding",
+            "ClusterRoleBinding"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRbacInputEntity": {
+      "description": "Cluster RBAC role binding defintion",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/v1ObjectMetaUpdateEntity"
+        },
+        "spec": {
+          "$ref": "#/$defs/v1ClusterRbacSpec"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRbacSpec": {
+      "description": "Cluster RBAC spec",
+      "properties": {
+        "bindings": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterRbacBinding"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "isSystem": {
+          "default": false,
+          "description": "Set to true when the binding is created automatically by the system, rather than manually by the user",
+          "type": "boolean"
+        },
+        "relatedObject": {
+          "$ref": "#/$defs/v1RelatedObject"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRbacSubjects": {
+      "description": "Cluster role ref",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "User",
+            "Group",
+            "ServiceAccount"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterResourcesEntity": {
+      "properties": {
+        "namespaces": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterNamespaceResourceInputEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "rbacs": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterRbacInputEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterRoleRef": {
+      "description": "Cluster role ref",
+      "properties": {
+        "kind": {
+          "enum": [
+            "Role",
+            "ClusterRole"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterTemplateRef": {
+      "description": "Cluster template configuration to launch a cluster from a template.",
+      "properties": {
+        "uid": {
+          "description": "Uid of the cluster template from which the cluster is created. When a cluster is launched using a template, the packs configuration is automatically derived from the template and does not need to be set manually.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterType": {
+      "default": "PureManage",
+      "enum": [
+        "PureManage",
+        "PureAttach",
+        "PureAdopt"
+      ],
+      "type": "string"
+    },
+    "v1CustomClusterConfig": {
+      "description": "Cluster level configuration for Custom cloud and applicable for all the machine pools",
+      "properties": {
+        "values": {
+          "description": "YAML string for Cluster and CloudCluster",
+          "type": "string"
+        }
+      },
+      "required": [
+        "values"
+      ],
+      "type": "object"
+    },
+    "v1CustomClusterConfigEntity": {
+      "properties": {
+        "location": {
+          "$ref": "#/$defs/v1ClusterLocation"
+        },
+        "machineManagementConfig": {
+          "$ref": "#/$defs/v1MachineManagementConfig"
+        },
+        "resources": {
+          "$ref": "#/$defs/v1ClusterResourcesEntity"
+        },
+        "timezone": {
+          "description": "The timezone field is mandatory if cluster is deployed through template, else it is optional",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CustomMachinePoolBaseConfigEntity": {
+      "description": "Machine pool configuration for the custom cluster",
+      "properties": {
+        "additionalLabels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional labels to be part of the machine pool",
+          "type": "object"
+        },
+        "isControlPlane": {
+          "description": "Whether this pool is for control plane",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "taints": {
+          "description": "control plane or worker taints",
+          "items": {
+            "$ref": "#/$defs/v1Taint"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "useControlPlaneAsWorker": {
+          "description": "If IsControlPlane==true && useControlPlaneAsWorker==true, then will remove control plane taint this will not be used for worker pools",
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1CustomMachinePoolCloudConfigEntity": {
+      "properties": {
+        "values": {
+          "description": "Machine pool configuration as yaml content",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1CustomMachinePoolConfigEntity": {
+      "properties": {
+        "cloudConfig": {
+          "$ref": "#/$defs/v1CustomMachinePoolCloudConfigEntity"
+        },
+        "poolConfig": {
+          "$ref": "#/$defs/v1CustomMachinePoolBaseConfigEntity"
+        }
+      },
+      "required": [
+        "cloudConfig"
+      ],
+      "type": "object"
+    },
+    "v1GeolocationLatlong": {
+      "description": "Geolocation Latlong entity",
+      "properties": {
+        "latitude": {
+          "description": "Latitude of a resource",
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "longitude": {
+          "description": "Longitude of a resource",
+          "format": "float64",
+          "type": "number",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1GpuConfig": {
+      "description": "GPU configuration for resource allocation",
+      "properties": {
+        "limit": {
+          "description": "GPU resource limit",
+          "format": "int32",
+          "minimum": -1,
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "provider": {
+          "default": "nvidia",
+          "description": "GPU provider (only nvidia is supported currently)",
+          "enum": [
+            "nvidia"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "v1MachineManagementConfig": {
+      "properties": {
+        "osPatchConfig": {
+          "$ref": "#/$defs/v1OsPatchConfig",
+          "description": "OS patch config contains properties to patch node os with latest security packages. \nIf OsPatchConfig is not provided then node os will not be patched with latest security updates.\nNote: For edge based cluster (like edge-native type) the osPatchConfig is NOT applicable, the values will be ignored.\n"
+        }
+      },
+      "type": "object"
+    },
+    "v1ManifestRefUpdateEntity": {
+      "description": "Manifest update request payload",
+      "properties": {
+        "content": {
+          "description": "Manifest content in yaml",
+          "type": "string"
+        },
+        "name": {
+          "description": "Manifest name",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Manifest uid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "v1ObjectMetaInputEntity": {
+      "description": "ObjectMeta input entity for object creation",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMetaUpdateEntity": {
+      "description": "ObjectMeta update entity with uid as input",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1OsPatchConfig": {
+      "properties": {
+        "onDemandPatchAfter": {
+          "$ref": "#/$defs/v1Time",
+          "description": "OnDemandPatchAfter is the desired time for one time on-demand patch"
+        },
+        "patchOnBoot": {
+          "description": "PatchOnBoot indicates need to do patch when node first boot up, only once",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "rebootIfRequired": {
+          "description": "Reboot once the OS patch is applied",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "schedule": {
+          "description": "The schedule at which security patches will be applied to OS. Schedule should be in Cron format, see https://en.wikipedia.org/wiki/Cron for more help.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackType": {
+      "default": "spectro",
+      "enum": [
+        "spectro",
+        "helm",
+        "manifest",
+        "oci"
+      ],
+      "type": "string"
+    },
+    "v1PackValuesEntity": {
+      "description": "Pack values entity to refer the existing pack for the values override",
+      "properties": {
+        "manifests": {
+          "description": "Pack manifests are additional content as part of the profile",
+          "items": {
+            "$ref": "#/$defs/v1ManifestRefUpdateEntity"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Pack name",
+          "type": "string"
+        },
+        "tag": {
+          "description": "Pack version tag",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/v1PackType"
+        },
+        "values": {
+          "description": "Pack values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1RelatedObject": {
+      "description": "Object for which the resource is related",
+      "properties": {
+        "kind": {
+          "enum": [
+            "spectrocluster",
+            "machine",
+            "cloudconfig",
+            "clusterprofile",
+            "pack",
+            "appprofile",
+            "appdeployment",
+            "edgehost"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterProfileEntity": {
+      "description": "Cluster profile request payload",
+      "properties": {
+        "packValues": {
+          "description": "Cluster profile packs array",
+          "items": {
+            "$ref": "#/$defs/v1PackValuesEntity"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "replaceWithProfile": {
+          "description": "Cluster profile uid to be replaced with new profile",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Cluster profile uid",
+          "type": "string"
+        },
+        "variables": {
+          "items": {
+            "$ref": "#/$defs/v1SpectroClusterVariable"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1SpectroClusterVariable": {
+      "description": "Variable with value which will be used within the packs of cluster profile",
+      "properties": {
+        "name": {
+          "description": "Variable name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Actual value of the variable to be used within the cluster",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1Taint": {
+      "description": "Taint",
+      "properties": {
+        "effect": {
+          "enum": [
+            "NoSchedule",
+            "PreferNoSchedule",
+            "NoExecute"
+          ],
+          "type": "string"
+        },
+        "key": {
+          "description": "The taint key to be applied to a node",
+          "type": "string"
+        },
+        "timeAdded": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "value": {
+          "description": "The taint value corresponding to the taint key.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

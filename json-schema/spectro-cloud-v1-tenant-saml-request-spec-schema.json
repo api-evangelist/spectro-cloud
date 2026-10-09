@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-tenant-saml-request-spec-schema.json",
+  "title": "v1TenantSamlRequestSpec",
+  "description": "Tenant",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-tenants-api-openapi.yml#/components/schemas/v1TenantSamlRequestSpec",
+  "properties": {
+    "attributes": {
+      "items": {
+        "$ref": "#/$defs/v1TenantSamlSpecAttribute"
+      },
+      "type": "array"
+    },
+    "defaultTeams": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "federationMetadata": {
+      "type": "string"
+    },
+    "identityProvider": {
+      "type": "string"
+    },
+    "isSingleLogoutEnabled": {
+      "type": "boolean"
+    },
+    "isSsoEnabled": {
+      "type": "boolean"
+    },
+    "nameIdFormat": {
+      "type": "string"
+    },
+    "syncSsoTeams": {
+      "description": "When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved",
+      "type": "boolean"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1TenantSamlSpecAttribute": {
+      "properties": {
+        "attributeValue": {
+          "type": "string"
+        },
+        "mappedAttribute": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nameFormat": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

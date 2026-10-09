@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-system-resource-limits-schema.json",
+  "title": "v1SystemResourceLimits",
+  "description": "System resource limits. Supported resources keys are 'user','project','apiKey','team','role','cloudaccount','clusterprofile','workspace','registry','privategateway','location','certificate','macro','sshkey','alert','spectrocluster','edgehost'.",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-system-api-openapi.yml#/components/schemas/v1SystemResourceLimits",
+  "properties": {
+    "resources": {
+      "items": {
+        "$ref": "#/$defs/v1SystemResourceLimit"
+      },
+      "type": "array",
+      "uniqueItems": true
+    }
+  },
+  "$defs": {
+    "v1ResourceLimitType": {
+      "enum": [
+        "user",
+        "project",
+        "apiKey",
+        "team",
+        "role",
+        "cloudaccount",
+        "clusterprofile",
+        "workspace",
+        "registry",
+        "privategateway",
+        "location",
+        "certificate",
+        "macro",
+        "sshkey",
+        "alert",
+        "spectrocluster",
+        "edgehost",
+        "appprofile",
+        "appdeployment",
+        "edgetoken",
+        "clustergroup",
+        "filter",
+        "systemadmin",
+        "spcpolicy",
+        "clustertemplate"
+      ],
+      "type": "string"
+    },
+    "v1SystemResourceLimit": {
+      "properties": {
+        "kind": {
+          "$ref": "#/$defs/v1ResourceLimitType",
+          "type": "string",
+          "x-omitempty": false
+        },
+        "limit": {
+          "format": "int64",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "maxLimit": {
+          "format": "int64",
+          "type": "number",
+          "x-omitempty": false
+        }
+      }
+    }
+  }
+}

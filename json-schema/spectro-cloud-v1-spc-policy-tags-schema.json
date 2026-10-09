@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-spc-policy-tags-schema.json",
+  "title": "v1SpcPolicyTags",
+  "description": "Spc policy tags response",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-spcpolicies-api-openapi.yml#/components/schemas/v1SpcPolicyTags",
+  "properties": {
+    "tags": {
+      "description": "Array of spc policy tags",
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  },
+  "type": "object"
+}

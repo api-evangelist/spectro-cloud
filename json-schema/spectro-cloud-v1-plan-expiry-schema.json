@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-plan-expiry-schema.json",
+  "title": "v1PlanExpiry",
+  "description": "Plan expiry",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-plans-api-openapi.yml#/components/schemas/v1PlanExpiry",
+  "properties": {
+    "expiry": {
+      "$ref": "#/$defs/v1Time",
+      "description": "plan expiry time"
+    }
+  },
+  "required": [
+    "expiry"
+  ],
+  "$defs": {
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

@@ -1,5 +1,5 @@
 ---
-name: Manage Palette projects
+name: manage-projects
 description: Create and read Palette projects, the tenancy boundary that scopes clusters, profiles, and cloud accounts.
 api: openapi/spectro-cloud-palette-openapi.json
 operations:

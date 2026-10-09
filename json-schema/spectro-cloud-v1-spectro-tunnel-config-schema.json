@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-spectro-tunnel-config-schema.json",
+  "title": "v1SpectroTunnelConfig",
+  "description": "Spectro tunnel configuration",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edgehosts-api-openapi.yml#/components/schemas/v1SpectroTunnelConfig",
+  "properties": {
+    "remoteSsh": {
+      "default": "disabled",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "type": "string",
+      "x-omitempty": false
+    },
+    "remoteSshTempUser": {
+      "default": "disabled",
+      "enum": [
+        "enabled",
+        "disabled"
+      ],
+      "type": "string",
+      "x-omitempty": false
+    }
+  },
+  "type": "object"
+}

@@ -1,0 +1,398 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-app-deployment-schema.json",
+  "title": "v1AppDeployment",
+  "description": "Application deployment response",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeployment",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1AppDeploymentSpec"
+    },
+    "status": {
+      "$ref": "#/$defs/v1AppDeploymentStatus"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1AppDeploymentClusterRef": {
+      "description": "Application deployment cluster reference",
+      "properties": {
+        "deploymentClusterType": {
+          "description": "Application deployment source cluster type[ \"virtualCluster\", \"hostCluster\" ]",
+          "enum": [
+            "virtual",
+            "host"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "description": "Application deployment cluster name",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Application deployment cluster uid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentConfig": {
+      "description": "Application deployment config response",
+      "properties": {
+        "target": {
+          "$ref": "#/$defs/v1AppDeploymentTargetConfig"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentProfile": {
+      "description": "Application deployment profile",
+      "properties": {
+        "metadata": {
+          "$ref": "#/$defs/v1AppDeploymentProfileMeta"
+        },
+        "template": {
+          "$ref": "#/$defs/v1AppProfileTemplate"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentProfileMeta": {
+      "description": "Application deployment profile metadata",
+      "properties": {
+        "name": {
+          "description": "Application deployment profile name",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Application deployment profile uid",
+          "type": "string"
+        },
+        "version": {
+          "description": "Application deployment profile version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentSpec": {
+      "description": "Application deployment spec",
+      "properties": {
+        "config": {
+          "$ref": "#/$defs/v1AppDeploymentConfig"
+        },
+        "profile": {
+          "$ref": "#/$defs/v1AppDeploymentProfile"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentStatus": {
+      "description": "Application deployment status",
+      "properties": {
+        "appTiers": {
+          "description": "Application deployment tiers",
+          "items": {
+            "$ref": "#/$defs/v1ClusterPackStatus"
+          },
+          "type": "array"
+        },
+        "lifecycleStatus": {
+          "$ref": "#/$defs/v1LifecycleStatus"
+        },
+        "state": {
+          "description": "Application deployment state [ \"Pending\", \"Deploying\", \"Deployed\", \"Updating\" ]",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentTargetConfig": {
+      "description": "Application deployment target config response",
+      "properties": {
+        "clusterRef": {
+          "$ref": "#/$defs/v1AppDeploymentClusterRef"
+        },
+        "envRef": {
+          "$ref": "#/$defs/v1AppDeploymentTargetEnvironmentRef"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentTargetEnvironmentRef": {
+      "description": "Application deployment target environment reference",
+      "properties": {
+        "name": {
+          "description": "Application deployment target resource name",
+          "type": "string"
+        },
+        "type": {
+          "description": "Application deployment target resource type [ \"nestedCluster\", \"clusterGroup\" ]",
+          "type": "string"
+        },
+        "uid": {
+          "description": "Application deployment target resource uid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppProfileTemplate": {
+      "description": "Application profile template information",
+      "properties": {
+        "appTiers": {
+          "description": "Application profile tiers",
+          "items": {
+            "$ref": "#/$defs/v1AppTierRef"
+          },
+          "type": "array",
+          "uniqueItems": true
+        },
+        "registryRefs": {
+          "description": "Application profile registries reference",
+          "items": {
+            "$ref": "#/$defs/v1ObjectReference"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppTierRef": {
+      "description": "Application tier reference",
+      "properties": {
+        "name": {
+          "description": "Application tier name",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/$defs/v1AppTierType"
+        },
+        "uid": {
+          "description": "Application tier uid to uniquely identify the tier",
+          "type": "string"
+        },
+        "version": {
+          "description": "Application tier version",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppTierType": {
+      "default": "manifest",
+      "enum": [
+        "manifest",
+        "helm",
+        "operator-instance",
+        "container"
+      ],
+      "type": "string"
+    },
+    "v1ClusterCondition": {
+      "properties": {
+        "lastProbeTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "lastTransitionTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "message": {
+          "description": "Human-readable message indicating details about last transition.",
+          "type": "string"
+        },
+        "reason": {
+          "description": "Unique, one-word, CamelCase reason for the condition's last transition.",
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "status"
+      ],
+      "type": "object"
+    },
+    "v1ClusterPackManifestStatus": {
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/v1ClusterCondition"
+        },
+        "name": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterPackStatus": {
+      "properties": {
+        "condition": {
+          "$ref": "#/$defs/v1ClusterCondition"
+        },
+        "endTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "manifests": {
+          "items": {
+            "$ref": "#/$defs/v1ClusterPackManifestStatus"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "profileUid": {
+          "type": "string"
+        },
+        "services": {
+          "items": {
+            "$ref": "#/$defs/v1LoadBalancerService"
+          },
+          "type": "array"
+        },
+        "startTime": {
+          "$ref": "#/$defs/v1Time"
+        },
+        "type": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1LifecycleStatus": {
+      "properties": {
+        "msg": {
+          "description": "error or success msg of lifecycle",
+          "type": "string"
+        },
+        "status": {
+          "description": "lifecycle status",
+          "enum": [
+            "Pausing",
+            "Paused",
+            "Resuming",
+            "Running",
+            "Error"
+          ],
+          "type": "string"
+        }
+      }
+    },
+    "v1LoadBalancerService": {
+      "properties": {
+        "host": {
+          "description": "IP or Host from svc.Status.LoadBalancerStatus.Ingress",
+          "type": "string"
+        },
+        "name": {
+          "description": "name of the loadbalancer service",
+          "type": "string"
+        },
+        "ports": {
+          "description": "port this service exposed",
+          "items": {
+            "$ref": "#/$defs/v1ServicePort"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ServicePort": {
+      "properties": {
+        "port": {
+          "description": "The port that will be exposed by this service.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "protocol": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "port"
+      ],
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

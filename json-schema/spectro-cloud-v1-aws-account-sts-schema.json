@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-aws-account-sts-schema.json",
+  "title": "V1AwsAccountSts",
+  "description": "AWS cloud account sts",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clouds-api-openapi.yml#/components/schemas/V1AwsAccountSts",
+  "properties": {
+    "accountId": {
+      "description": "A 12-digit number, such as 123456789012, that uniquely identifies an AWS account",
+      "type": "string"
+    },
+    "externalId": {
+      "description": "It can be passed to the AssumeRole API of the STS. It can be used in the condition element in a role's trust policy, allowing the role to be assumed only when a certain value is present in the external ID",
+      "type": "string"
+    },
+    "partition": {
+      "$ref": "#/$defs/v1AwsPartition"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1AwsPartition": {
+      "default": "aws",
+      "description": "AWS accounts are scoped to a single partition. Allowed values [aws, aws-us-gov], Default values",
+      "enum": [
+        "aws",
+        "aws-us-gov"
+      ],
+      "type": "string"
+    }
+  }
+}

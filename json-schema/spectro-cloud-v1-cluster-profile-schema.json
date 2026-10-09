@@ -1,0 +1,433 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-profile-schema.json",
+  "title": "v1ClusterProfile",
+  "description": "ClusterProfile is the Schema for the clusterprofiles API",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-clusterprofiles-api-openapi.yml#/components/schemas/v1ClusterProfile",
+  "properties": {
+    "apiVersion": {
+      "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+      "type": "string"
+    },
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMeta"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1ClusterProfileSpec"
+    },
+    "status": {
+      "$ref": "#/$defs/v1ClusterProfileStatus"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1ClusterProfileSpec": {
+      "description": "ClusterProfileTemplate can be in draft mode, or published mode User only see the latest published template, and (or) the draft template User can apply either the draft version or the latest published version to a cluster when user create a draft version, just copy the Published template, increment the version, and keep changing the draft template without increment the draft version when user publish a draft, the version is fixed, and won't be able to make any modification on published template For each clusterprofile that has a published version, there will be a ClusterProfileArchive automatically created when user publish a draft, the published version will also be copied over to the corresponding ClusterProfileArchive it is just in case in the future for whatever reason we may want to expose earlier versions",
+      "properties": {
+        "draft": {
+          "$ref": "#/$defs/v1ClusterProfileTemplate"
+        },
+        "published": {
+          "$ref": "#/$defs/v1ClusterProfileTemplate"
+        },
+        "version": {
+          "type": "string"
+        },
+        "versions": {
+          "description": "Cluster profile's list of all the versions",
+          "items": {
+            "$ref": "#/$defs/v1ClusterProfileVersion"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterProfileStatus": {
+      "description": "ClusterProfileStatus defines the observed state of ClusterProfile",
+      "properties": {
+        "hasUserMacros": {
+          "description": "If it is true then profile pack values has a reference to user defined macros",
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "inUseClusterTemplates": {
+          "items": {
+            "$ref": "#/$defs/v1ProjectResourceReference"
+          },
+          "type": "array"
+        },
+        "inUseClusterUids": {
+          "description": "Deprecated. Use inUseClusters",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "inUseClusters": {
+          "items": {
+            "$ref": "#/$defs/v1ObjectResReference"
+          },
+          "type": "array"
+        },
+        "isPublished": {
+          "type": "boolean",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterProfileTemplate": {
+      "description": "ClusterProfileTemplate contains details of a clusterprofile definition",
+      "properties": {
+        "cloudType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "packServerRefs": {
+          "description": "PackServerRefs is only used on Hubble side it is reference to pack registry servers which PackRef belongs to in hubble, pack server is a top level object, so use a reference to point to it packs within a clusterprofile can come from different pack servers, so this is an array",
+          "items": {
+            "$ref": "#/$defs/v1ObjectReference"
+          },
+          "type": "array"
+        },
+        "packServerSecret": {
+          "description": "This secret is used only on Palette side use case is similar  to k8s image pull secret this single secret internally should contains all the pack servers in PackServerRefs if empty, means no credential is needed to access the pack server For spectro saas, Ally will set this field before pass to palette",
+          "type": "string"
+        },
+        "packs": {
+          "description": "Packs definitions here are final definitions. If ClonedFrom and ParamsOverwrite is present, then Packs are the final merge result of ClonedFrom and ParamsOverwrite So orchestration engine will just take the Packs and do the work, no need to worry about parameters merge",
+          "items": {
+            "$ref": "#/$defs/v1PackRef"
+          },
+          "type": "array"
+        },
+        "profileVersion": {
+          "description": "version start from 1.0.0, matching the index of ClusterProfileSpec.Versions[] will be used by clusterSpec to identify which version is applied to the cluster",
+          "type": "string"
+        },
+        "relatedObject": {
+          "$ref": "#/$defs/v1ObjectReference",
+          "description": "RelatedObject refers to the type of object(clustergroup, cluster or edgeHost) the cluster profile is associated with"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "description": "Deprecated. Use profileVersion",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "v1ClusterProfileVersion": {
+      "description": "Cluster profile with version",
+      "properties": {
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    },
+    "v1ObjectMeta": {
+      "description": "ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "creationTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "CreationTimestamp is a timestamp representing the server time when this object was created. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "deletionTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "DeletionTimestamp is RFC 3339 date and time at which this resource will be deleted. This field is set by the server when a graceful deletion is requested by the user, and is not directly settable by a client. The resource is expected to be deleted (no longer visible from resource lists, and not reachable by name) after the time in this field, once the finalizers list is empty. As long as the finalizers list contains items, deletion is blocked. Once the deletionTimestamp is set, this value may not be unset or be set further into the future, although it may be shortened or the resource may be deleted prior to this time. For example, a user may request that a pod is deleted in 30 seconds. The Kubelet will react by sending a graceful termination signal to the containers in the pod. After that 30 seconds, the Kubelet will send a hard termination signal (SIGKILL) to the container and after cleanup, remove the pod from the API. In the presence of network partitions, this object may still exist after this timestamp, until an administrator or automated process can determine the resource is fully terminated. If not set, graceful deletion of the object has not been requested.\n\nPopulated by the system when a graceful deletion is requested. Read-only. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "lastModifiedTimestamp": {
+          "$ref": "#/$defs/v1Time",
+          "description": "LastModifiedTimestamp is a timestamp representing the server time when this object was last modified. It is not guaranteed to be set in happens-before order across separate operations. Clients may not set this value. It is represented in RFC3339 form and is in UTC.\n\nPopulated by the system. Read-only. Null for lists. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID is the unique in time and space value for this object. It is typically generated by the server on successful creation of a resource and is not allowed to change on PUT operations.\n\nPopulated by the system. Read-only. More info: http://kubernetes.io/docs/user-guide/identifiers#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectReference": {
+      "description": "ObjectReference contains enough information to let you inspect or modify the referred object.",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1ObjectResReference": {
+      "description": "Object resource reference",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "projectUid": {
+          "type": "string"
+        },
+        "tenantUid": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1PackPreset": {
+      "description": "PackPreset defines the preset pack values",
+      "properties": {
+        "add": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "displayName": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "group": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "remove": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1PackRef": {
+      "description": "PackRef server/name:tag to point to a pack PackRef is used when construct a ClusterProfile PackSpec is used for UI to render the parameters form ClusterProfile will not know inner details of a pack ClusterProfile only contain pack name:tag, and the param values user entered for it",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is used to allow packref to add more arbitrary information one example is to add git reference for values.yaml",
+          "type": "object"
+        },
+        "digest": {
+          "description": "digest is used to specify the version should be installed by palette when pack upgrade available, change this digest to trigger upgrade",
+          "type": "string"
+        },
+        "inValidReason": {
+          "type": "string"
+        },
+        "isInvalid": {
+          "description": "pack is invalid when the associated tag is deleted from the registry",
+          "type": "boolean"
+        },
+        "layer": {
+          "enum": [
+            "kernel",
+            "os",
+            "k8s",
+            "cni",
+            "csi",
+            "addon"
+          ],
+          "type": "string"
+        },
+        "logo": {
+          "description": "path to the pack logo",
+          "type": "string"
+        },
+        "manifests": {
+          "items": {
+            "$ref": "#/$defs/v1ObjectReference"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "pack name",
+          "type": "string"
+        },
+        "packUid": {
+          "description": "PackUID is Hubble packUID, not palette Pack.UID It is used by Hubble only.",
+          "type": "string"
+        },
+        "params": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "params passed as env variables to be consumed at installation time",
+          "type": "object"
+        },
+        "presets": {
+          "items": {
+            "$ref": "#/$defs/v1PackPreset"
+          },
+          "type": "array"
+        },
+        "registryUid": {
+          "description": "pack registry uid",
+          "type": "string"
+        },
+        "schema": {
+          "items": {
+            "$ref": "#/$defs/v1PackSchema"
+          },
+          "type": "array"
+        },
+        "server": {
+          "description": "pack registry server or helm repo",
+          "type": "string"
+        },
+        "tag": {
+          "description": "pack tag",
+          "type": "string"
+        },
+        "type": {
+          "description": "type of the pack",
+          "enum": [
+            "spectro",
+            "helm",
+            "manifest",
+            "oci"
+          ],
+          "type": "string"
+        },
+        "values": {
+          "description": "values represents the values.yaml used as input parameters either Params OR Values should be used, not both If both applied at the same time, will only use Values",
+          "type": "string"
+        },
+        "version": {
+          "description": "pack version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "layer",
+        "name"
+      ],
+      "type": "object"
+    },
+    "v1PackSchema": {
+      "description": "PackSchema defines the schema definition, hints for the pack values",
+      "properties": {
+        "format": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "hints": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "listOptions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-omitempty": false
+        },
+        "name": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "readonly": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "regex": {
+          "type": "string",
+          "x-omitempty": false
+        },
+        "required": {
+          "type": "boolean",
+          "x-omitempty": false
+        },
+        "type": {
+          "type": "string",
+          "x-omitempty": false
+        }
+      },
+      "type": "object"
+    },
+    "v1ProjectResourceReference": {
+      "description": "Project-scoped resource reference",
+      "properties": {
+        "kind": {
+          "description": "Kind of the referenced resource",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the referenced resource",
+          "type": "string"
+        },
+        "projectUid": {
+          "description": "UID of the Project that scopes this resource",
+          "type": "string"
+        },
+        "uid": {
+          "description": "UID of the referenced resource",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "v1Time": {
+      "description": "Time is a wrapper around time.Time which supports correct marshaling to YAML and JSON.  Wrappers are provided for many of the factory methods that the time package offers.",
+      "format": "date-time",
+      "type": "string"
+    }
+  }
+}

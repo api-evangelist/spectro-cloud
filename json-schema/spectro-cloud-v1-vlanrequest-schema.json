@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-vlanrequest-schema.json",
+  "title": "v1VLANRequest",
+  "description": "VLAN interface request payload",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-edge-mgmt-api-openapi.yml#/components/schemas/v1VLANRequest",
+  "type": "object",
+  "required": [
+    "parentName",
+    "parentType",
+    "vlanID"
+  ],
+  "properties": {
+    "gateway": {
+      "description": "Gateway IP address",
+      "type": "string"
+    },
+    "ip": {
+      "description": "IP address (required for static type)",
+      "type": "string"
+    },
+    "mtu": {
+      "description": "MTU for the VLAN interface",
+      "type": "integer",
+      "format": "int64"
+    },
+    "nameservers": {
+      "description": "DNS nameservers",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "parentName": {
+      "description": "Parent interface name (NIC or Bond)",
+      "type": "string"
+    },
+    "parentType": {
+      "description": "Type of parent interface (nic or bond)",
+      "type": "string",
+      "enum": [
+        "nic",
+        "bond"
+      ]
+    },
+    "subnet": {
+      "description": "Subnet mask (required for static type)",
+      "type": "string"
+    },
+    "type": {
+      "description": "Network configuration type. Default is dhcp.",
+      "type": "string",
+      "enum": [
+        "dhcp",
+        "static"
+      ]
+    },
+    "vlanID": {
+      "description": "VLAN ID (1-4094)",
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-cluster-groups-developer-credit-usage-schema.json",
+  "title": "v1ClusterGroupsDeveloperCreditUsage",
+  "description": "Cluster group resource allocated and usage information",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-cluster-groups-api-openapi.yml#/components/schemas/v1ClusterGroupsDeveloperCreditUsage",
+  "properties": {
+    "allocatedCredit": {
+      "$ref": "#/$defs/v1DeveloperCredit"
+    },
+    "usedCredit": {
+      "$ref": "#/$defs/v1DeveloperCredit"
+    }
+  },
+  "$defs": {
+    "v1DeveloperCredit": {
+      "description": "Credits allocated for each tenant/user",
+      "properties": {
+        "cpu": {
+          "description": "cpu in cores",
+          "format": "int32",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "memoryGiB": {
+          "description": "memory in GiB",
+          "format": "int32",
+          "type": "number",
+          "x-omitempty": false
+        },
+        "storageGiB": {
+          "description": "storage in GiB",
+          "format": "int32",
+          "type": "integer",
+          "x-omitempty": false
+        },
+        "virtualClustersLimit": {
+          "description": "number of active virtual clusters",
+          "format": "int32",
+          "type": "number",
+          "x-omitempty": false
+        }
+      }
+    }
+  }
+}

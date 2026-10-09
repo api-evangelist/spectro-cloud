@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-user-kubectl-session-schema.json",
+  "title": "v1UserKubectlSession",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-users-api-openapi.yml#/components/schemas/v1UserKubectlSession",
+  "properties": {
+    "clusterUid": {
+      "type": "string"
+    },
+    "creationTime": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean"
+    },
+    "podIp": {
+      "type": "string"
+    },
+    "podName": {
+      "type": "string"
+    },
+    "port": {
+      "type": "string"
+    },
+    "projectUid": {
+      "type": "string"
+    },
+    "sessionUid": {
+      "type": "string"
+    },
+    "shellyCluster": {
+      "type": "string"
+    },
+    "tenantClusterEndpoint": {
+      "type": "string"
+    },
+    "userName": {
+      "type": "string"
+    },
+    "userUid": {
+      "type": "string"
+    }
+  },
+  "type": "object"
+}

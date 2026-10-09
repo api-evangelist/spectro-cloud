@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-app-deployment-virtual-cluster-entity-schema.json",
+  "title": "v1AppDeploymentVirtualClusterEntity",
+  "description": "Application deployment virtual cluster request payload",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-app-deployments-api-openapi.yml#/components/schemas/v1AppDeploymentVirtualClusterEntity",
+  "properties": {
+    "metadata": {
+      "$ref": "#/$defs/v1ObjectMetaInputEntity"
+    },
+    "spec": {
+      "$ref": "#/$defs/v1AppDeploymentVirtualClusterSpec"
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1AppDeploymentProfileEntity": {
+      "description": "Application deployment profile request payload",
+      "properties": {
+        "appProfileUid": {
+          "description": "Application deployment profile uid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "appProfileUid"
+      ],
+      "type": "object"
+    },
+    "v1AppDeploymentVirtualClusterConfigEntity": {
+      "description": "Application deployment virtual cluster config",
+      "properties": {
+        "targetSpec": {
+          "$ref": "#/$defs/v1AppDeploymentVirtualClusterTargetSpec"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentVirtualClusterSpec": {
+      "description": "Application deployment virtual cluster spec",
+      "properties": {
+        "config": {
+          "$ref": "#/$defs/v1AppDeploymentVirtualClusterConfigEntity"
+        },
+        "profile": {
+          "$ref": "#/$defs/v1AppDeploymentProfileEntity"
+        }
+      },
+      "type": "object"
+    },
+    "v1AppDeploymentVirtualClusterTargetSpec": {
+      "description": "Application deployment virtual cluster target spec",
+      "properties": {
+        "clusterUid": {
+          "description": "Application deployment virtual cluster uid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "clusterUid"
+      ],
+      "type": "object"
+    },
+    "v1ObjectMetaInputEntity": {
+      "description": "ObjectMeta input entity for object creation",
+      "properties": {
+        "annotations": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Annotations is an unstructured key value map stored with a resource that may be set by external tools to store and retrieve arbitrary metadata. They are not queryable and should be preserved when modifying objects. More info: http://kubernetes.io/docs/user-guide/annotations",
+          "type": "object"
+        },
+        "labels": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Map of string keys and values that can be used to organize and categorize (scope and select) objects. May match selectors of replication controllers and services. More info: http://kubernetes.io/docs/user-guide/labels",
+          "type": "object"
+        },
+        "name": {
+          "description": "Name must be unique within a namespace. Is required when creating resources, although some resources may allow a client to request the generation of an appropriate name automatically. Name is primarily intended for creation idempotence and configuration definition. Cannot be updated. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

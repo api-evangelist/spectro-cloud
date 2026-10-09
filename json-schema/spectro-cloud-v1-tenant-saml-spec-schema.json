@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/spectro-cloud/main/json-schema/spectro-cloud-v1-tenant-saml-spec-schema.json",
+  "title": "v1TenantSamlSpec",
+  "description": "Tenant",
+  "x-generated": "2026-10-04",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/spectro-cloud-tenants-api-openapi.yml#/components/schemas/v1TenantSamlSpec",
+  "properties": {
+    "acsUrl": {
+      "type": "string"
+    },
+    "attributes": {
+      "items": {
+        "$ref": "#/$defs/v1TenantSamlSpecAttribute"
+      },
+      "type": "array"
+    },
+    "audienceUrl": {
+      "description": "same as entity id",
+      "type": "string"
+    },
+    "certificate": {
+      "description": "certificate for slo",
+      "type": "string"
+    },
+    "defaultTeams": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "entityId": {
+      "type": "string"
+    },
+    "federationMetadata": {
+      "type": "string"
+    },
+    "identityProvider": {
+      "type": "string"
+    },
+    "isSingleLogoutEnabled": {
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "isSsoEnabled": {
+      "type": "boolean",
+      "x-omitempty": false
+    },
+    "issuer": {
+      "description": "same as entity id",
+      "type": "string"
+    },
+    "nameIdFormat": {
+      "type": "string"
+    },
+    "serviceProviderMetadata": {
+      "type": "string"
+    },
+    "singleLogoutUrl": {
+      "description": "slo url",
+      "type": "string",
+      "x-omitempty": false
+    },
+    "syncSsoTeams": {
+      "description": "When syncSsoTeams is set to true, all the teams from the OIDC configuration are pulled and saved in palette whereas when set to false, only the teams which are part of palette are pulled and saved",
+      "type": "boolean",
+      "x-omitempty": false
+    }
+  },
+  "type": "object",
+  "$defs": {
+    "v1TenantSamlSpecAttribute": {
+      "properties": {
+        "attributeValue": {
+          "type": "string"
+        },
+        "mappedAttribute": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "nameFormat": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}
